@@ -1,0 +1,1 @@
+{"mode":"debug","l":2,"t":"429 inspiegabili","case":"max_tokens = 8000, risposte reali di circa 150 token. Le metriche mostrano pochi token consumati ma arrivano 429.","opts":["Il servizio è guasto","Il prompt è in italiano","La quota stima prompt + max_tokens all'arrivo: abbassa max_tokens","Servono più thread"],"c":2,"why":"Budget consumato dai parametri.","id":437}

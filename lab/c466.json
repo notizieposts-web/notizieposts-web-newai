@@ -1,0 +1,1 @@
+{"mode":"debug","l":1,"t":"Categorie con l'accento","case":"Una categoria del classificatore si chiama \"Fattura_Società\" e dà problemi.","opts":["Servono esempi etichettati","Nei nomi di categoria vanno usati solo caratteri ASCII","Le categorie devono essere in inglese","Il nome è troppo corto"],"c":1,"why":"La guida: solo ASCII nei nomi di categoria.","id":466}

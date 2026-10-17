@@ -1,0 +1,1 @@
+{"mode":"debug","l":1,"t":"Interrogare troppo spesso","case":"Il codice chiede lo stato di ogni operazione ogni 200 millisecondi e riceve 429.","opts":["Interroga al massimo ogni due secondi e rispetta retry-after","Disattiva la confidenza","Usa il modello nano","Aumenta i thread"],"c":0,"why":"Attesa crescente e retry-after.","id":439}

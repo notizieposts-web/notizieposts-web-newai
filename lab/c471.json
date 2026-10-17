@@ -1,0 +1,1 @@
+{"mode":"debug","l":2,"t":"Metodo extract sull'audio","case":"Un analizzatore audio ha il campo \"Esito\" con method extract e non si comporta come previsto.","opts":["L'audio è troppo lungo","extract è supportato solo per i documenti: usa classify","Serve il video","Manca la trascrizione"],"c":1,"why":"Per l'audio: classify o generate.","id":471}
