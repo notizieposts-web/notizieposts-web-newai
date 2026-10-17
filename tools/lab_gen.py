@@ -367,7 +367,7 @@ scen('Contratti con verifiche su allegati', 3, '5.000 contratti al mese, 12 pagi
      {'pages': 60000, 'ext': 5, 'ctx': 3, 'tin': 2600, 'tout': 600, 'pin': 2, 'pout': 8}, [WF(), MOD(), FIG(), CONF()], forbid=[('wf', 1, 'Le verifiche incrociate su contratto e allegati sono il caso d\'uso della modalità agentica: l\'analizzatore standard non le fa.'), ('model', 2, 'Per il ragionamento su dieci condizioni il team ha misurato che il nano non basta: almeno il mini.')])
 scen('Catalogo prodotti con foto', 2, '20.000 pagine di schede prodotto con molte immagini. A te servono solo codice, prezzo e disponibilità: le foto non interessano.',
      {'pages': 20000, 'ext': 5, 'ctx': 1, 'tin': 2600, 'tout': 600, 'pin': 2, 'pout': 8}, [FIG(), METH(), MOD(), CONF()])
-scen('Archivio misto con molti PDF nativi', 2, '80.000 pagine al mese: il 40% arriva come PDF nativi o allegati Word, il resto scansionato con tabelle.',
+scen('Archivio misto con molti allegati Office', 2, '80.000 pagine al mese: il 40% arriva come allegati Word, Excel ed email (formati digitali), il resto come scansioni con tabelle.',
      {'pages': 80000, 'ext': 5, 'ctx': 1, 'tin': 2600, 'tout': 180, 'pin': 0.4, 'pout': 1.6}, [METER(5, 3.2), CONF(), ROUTE(.25)], forbid=[('conf', 2, 'Gli importi passano in automatico solo con confidenza: almeno sui campi critici.')])
 scen('Posta in arrivo con tanto "altro"', 1, '30.000 pagine: il 35% sono pubblicità, solleciti e lettere che vanno solo archiviate.',
      {'pages': 30000, 'ext': 5, 'ctx': 1, 'tin': 2600, 'tout': 180, 'pin': 2, 'pout': 8}, [ROUTE(.35), MOD()])

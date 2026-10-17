@@ -2,9 +2,7 @@
 import sys, os, json, random, asyncio, email.utils, datetime as dt
 from email.message import EmailMessage
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lab_gen import CH
 
-root = sys.argv[1]; out = os.path.join(root, 'lab'); os.makedirs(out, exist_ok=True)
 EXT = {'pdf': 'pdf', 'xlsx': 'xlsx', 'docx': 'docx', 'pptx': 'pptx', 'eml': 'eml', 'png': 'png', 'vtt': 'vtt'}
 PDFCSS = '''<style>body{margin:0;font:15px/1.6 "DejaVu Serif",Georgia,serif;color:#121A2B}.paper{padding:28px 34px}
 .dh{margin-bottom:10px}.dr{text-align:right;margin-bottom:10px;padding-top:10px;border-top:1px solid #D3D9E6}table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
@@ -67,19 +65,25 @@ def png(f, path, seed):
     im = im.filter(ImageFilter.GaussianBlur(0.6)).rotate(f['rot'], expand=True, fillcolor=210)
     im.convert('RGB').save(path, optimize=True)
 
-man = {}; pdf_items = []
-for c in CH:
-    if c['mode'] != 'estrai': continue
-    f = c.get('_file') or {'kind': 'pdf'}; ext = EXT[f['kind']]; name = 's%d.%s' % (c['id'], ext); path = os.path.join(out, name)
-    if f['kind'] == 'pdf': pdf_items.append((c, path))
-    elif f['kind'] == 'xlsx': xlsx(f, path)
-    elif f['kind'] == 'docx': docx(f, path)
-    elif f['kind'] == 'pptx': pptx(f, path)
-    elif f['kind'] == 'eml': eml(f, path)
-    elif f['kind'] == 'png': png(f, path, c['id'])
-    elif f['kind'] == 'vtt': open(path, 'w', encoding='utf-8').write(f['text'])
-    man[c['id']] = name
-pdfs(pdf_items)
-man = {k: {'f': 'lab/' + v, 'kb': max(1, round(os.path.getsize(os.path.join(out, v)) / 1024))} for k, v in man.items()}
-json.dump(man, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lab_manifest.json'), 'w'))
-print('file', len(man), 'MB', round(sum(os.path.getsize(os.path.join(out, x)) for x in os.listdir(out)) / 1e6, 1))
+def main(root):
+    from lab_gen import CH
+    out = os.path.join(root, 'lab'); os.makedirs(out, exist_ok=True)
+    man = {}; pdf_items = []
+    for c in CH:
+        if c['mode'] != 'estrai': continue
+        f = c.get('_file') or {'kind': 'pdf'}; ext = EXT[f['kind']]; name = 's%d.%s' % (c['id'], ext); path = os.path.join(out, name)
+        if f['kind'] == 'pdf': pdf_items.append((c, path))
+        elif f['kind'] == 'xlsx': xlsx(f, path)
+        elif f['kind'] == 'docx': docx(f, path)
+        elif f['kind'] == 'pptx': pptx(f, path)
+        elif f['kind'] == 'eml': eml(f, path)
+        elif f['kind'] == 'png': png(f, path, c['id'])
+        elif f['kind'] == 'vtt': open(path, 'w', encoding='utf-8').write(f['text'])
+        man[c['id']] = name
+    pdfs(pdf_items)
+    man = {k: {'f': 'lab/' + v, 'kb': max(1, round(os.path.getsize(os.path.join(out, v)) / 1024))} for k, v in man.items()}
+    json.dump(man, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lab_manifest.json'), 'w'))
+    print('file', len(man), 'MB', round(sum(os.path.getsize(os.path.join(out, x)) for x in os.listdir(out)) / 1e6, 1))
+
+if __name__ == '__main__':
+    main(sys.argv[1])

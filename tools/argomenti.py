@@ -18,7 +18,9 @@ GUIDES = [
 ]
 try:
     from lab_gen import CH as _CH
-    GUIDES[2]['n'] = '%d sfide' % len(_CH)
+    import glob as _g, json as _j
+    _np = sum(len(_j.load(open(_f, encoding='utf-8'))['sfide']) for _f in _g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lab_daily', 'packs', '*.json')))
+    GUIDES[2]['n'] = '%d sfide' % (len(_CH) + _np)
 except Exception:
     pass
 try:

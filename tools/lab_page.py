@@ -8,6 +8,13 @@ for c in CH:
     c.pop('_file', None)
     m = MAN.get(str(c['id']))
     if m: c['dl'] = m['f']; c['dlkb'] = m['kb']
+import glob as _glob
+PACKS = []
+for _p in sorted(_glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lab_daily', 'packs', '*.json'))):
+    _d = json.load(open(_p, encoding='utf-8')); PACKS.append(_d)
+    for _i, _c in enumerate(_d['sfide']):
+        _c['o'] = -(_d['livello'] * 1000) + _i; CH.append(_c)
+LAST = PACKS[-1] if PACKS else None
 
 root = sys.argv[1]
 eds = graph.data(root)
@@ -61,6 +68,14 @@ a.pbtn{display:inline-flex;align-items:center;text-decoration:none}
 .paper .vt p{margin:5px 0}.paper .vt .tc{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#4E5A72}
 .paper .im{text-align:center}.paper .im img{max-width:100%;height:auto;border:1px solid #D3D9E6}.paper details.ocr{margin-top:8px}.paper details.ocr summary{cursor:pointer;font-weight:700;min-height:32px}.paper details.ocr pre{white-space:pre-wrap;font-size:13px}
 .paper.show details.ocr{}
+.paper .wd .h,.paper .rep .h,.paper .bdoc .h{font-weight:700;font-size:15px}
+.paper .cmt{display:block;margin:.4rem 0 .4rem 1rem;padding:.4rem .6rem;border-left:4px solid #A34E08;background:#FFF5D1;font-size:13px;border-radius:0 8px 8px 0}
+.paper figure.chart{margin:.6rem 0;max-width:440px}.paper .notes{font-size:13px;background:#F1F3F8;border:1px solid #D3D9E6;border-radius:8px;padding:.5rem .7rem}
+.paper .slide.wide{grid-column:1/-1;aspect-ratio:auto}.paper .slide table{font-size:11px;margin:4px 0}
+.paper .pb{text-align:center;color:#4E5A72;font-size:12px;border-top:2px dashed #C9D1E0;padding-top:6px}
+.paper .bundle{display:grid;gap:12px}.paper .bdoc{border:1px solid #C9D1E0;border-radius:6px;padding:8px 10px;overflow-x:auto}
+.paper .bdoc td,.paper .bdoc th,.paper .rep td,.paper .rep th,.paper .wd td,.paper .wd th{white-space:normal;padding-right:.6rem}.paper .bdoc table,.paper .wd table,.paper .rep table{font-size:13px;table-layout:fixed;width:100%!important;min-width:0!important}.paper .bdoc td,.paper .bdoc th{overflow-wrap:anywhere}
+.newday{margin-top:1rem;padding:1rem 1.2rem;border:2px solid var(--violet);border-radius:18px;background:var(--surface)}.newday ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0 0}
 .task h3{font-size:1.2rem;margin:.3rem 0 .5rem}
 .frow{display:grid;grid-template-columns:minmax(0,1fr);gap:.25rem;padding:.7rem 0;border-bottom:1px solid var(--line)}
 .frow label{font-weight:700}.frow label code{font-size:.95rem}.frow .fmt{font-size:.85rem;color:var(--muted)}
@@ -125,6 +140,12 @@ VERO = ('<section class="ch" id="vero"><div class="ch-head"><div class="kicker">
         '<li><b>Attenzione ai token</b>: i campi generativi usano la distribuzione del modello che colleghi in Foundry, e quei token si pagano a parte (dal credito, finché c\'è). <code>prebuilt-read</code> e <code>prebuilt-layout</code> non usano modelli linguistici: sono il modo più economico per fare le prime prove.</li>'
         '<li><b>Da dove partire</b>: Content Understanding Studio per provare gli analizzatori senza codice, oppure la CU CLI del Content Understanding Toolkit su una cartella di file di esempio. I documenti scaricabili del Laboratorio sono fatti apposta: dati inventati, nessun dato reale.</li></ul>'
         '<p class="note">Fonti: Microsoft Azure, account gratuito; Microsoft Learn, tutorial Content Understanding con Logic Apps e guida ai prezzi.</p></div></section>')
+NEWDAY = ''
+if LAST:
+    _first = {}
+    for _c in LAST['sfide']: _first.setdefault(_c['mode'], _c['id'])
+    NEWDAY = ('<div class="newday"><p style="margin:0;font-weight:700">🆕 Sfide del giorno %s · livello %d</p><p style="margin:.3rem 0 0">Ogni giorno 10 nuove sfide per modalità, più difficili del giorno prima: documenti con commenti, tabelle, grafici, note e pacchetti di più file.</p><ul>' % (LAST['giorno'][8:10] + '/' + LAST['giorno'][5:7], LAST['livello']) +
+              ''.join('<li><a class="chip" href="%s#s%d">%s %s</a></li>' % (PAGES[m], _first[m], ic, lab) for m, ic, lab, d in MODES if m in _first) + '</ul></div>')
 TOAST = '<div class="toast" id="toast" role="status" aria-live="polite"></div>'
 JS = r'''<script id="lab-js">(function(){
 var META=__META__,IDX=__IDX__,PAGES=__PAGES__,PAGE=__PAGE__,MODES=__MODES__,LV=[[0,'Apprendista'],[150,'Lettore'],[400,'Analista'],[800,'Ingegnere'],[1500,'Architetto'],[2500,'Maestro'],[4000,'Leggenda']],LN={1:'Media',2:'Alta',3:'Estrema'};
@@ -266,7 +287,7 @@ def page(fname, pg, title, hero_html, body_html, meta):
     open(os.path.join(root, fname), 'w', encoding='utf-8').write(h); return len(h)
 sizes = {}
 sizes['azure-laboratorio.html'] = page('azure-laboratorio.html', 'hub', 'Laboratorio Content Understanding', hero,
-    '<section class="ch" id="gioco" style="padding-top:2.5rem"><div class="ch-head"><div class="kicker"><span class="chip guide">Partita</span></div><h2>La tua partita</h2><p class="lead">Scegli una modalità: ognuna ha la sua pagina, e punti e progressi valgono in tutte.</p></div>' + GBAR + '<div class="acts2" id="lreset"></div>' + store.backup_html('l') + store.mysol_html('l') + modes_nav(None) + '</section>' + RULES + VERO + TOAST, [])
+    '<section class="ch" id="gioco" style="padding-top:2.5rem"><div class="ch-head"><div class="kicker"><span class="chip guide">Partita</span></div><h2>La tua partita</h2><p class="lead">Scegli una modalità: ognuna ha la sua pagina, e punti e progressi valgono in tutte.</p></div>' + GBAR + NEWDAY + '<div class="acts2" id="lreset"></div>' + store.backup_html('l') + store.mysol_html('l') + modes_nav(None) + '</section>' + RULES + VERO + TOAST, [])
 for m, ic, lab, d in MODES:
     meta = [{k: c[k] for k in ('id', 't', 'l', 'fmt', 'o') if k in c} for c in CH if c['mode'] == m]
     hh = ('<header class="hero"><div><div class="meta"><span class="chip guide">Laboratorio</span><span class="chip">%s</span></div><h1 style="margin-top:1.2rem">%s %s</h1><p class="sub">%s <a href="azure-laboratorio.html#regole">Regole e punti</a>.</p></div>%s</header>'

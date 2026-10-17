@@ -238,19 +238,19 @@ def t_av_costi():
                 '%s × (1 − 0,10) $ = <b>%s</b>. Il video costa dieci volte tanto perché porta 3.600 fotogrammi per ora.' % (it(h), money(a)), 'P4', a=round(a, 2), u='$')
 
 def t_contatore():
-    cases = [('una fattura in PDF nativo (digitale)', 0), ('un allegato Word da email', 0), ('un foglio Excel', 0), ('una pagina HTML', 0), ('un\'email .msg', 0), ('una presentazione PowerPoint', 0),
+    cases = [('un file di testo .txt', 0), ('un allegato Word da email', 0), ('un foglio Excel', 0), ('una pagina HTML', 0), ('un\'email .msg', 0), ('una presentazione PowerPoint', 0),
              ('una scansione TIFF di cui serve solo il testo', 1), ('una foto di uno scontrino, solo OCR', 1), ('un PDF scansionato analizzato con prebuilt-read', 1),
              ('un PDF scansionato con tabelle da ricostruire', 2), ('una scansione analizzata con prebuilt-layout', 2), ('una fattura scansionata con prebuilt-invoice', 2)]
     for i, (d, c) in enumerate(cases):
         for ver in range(3):
             q = ['Su quale contatore di estrazione cade %s?', 'Quale contatore applica il servizio a %s, indipendentemente dall\'analizzatore scelto?', 'Il tuo lotto contiene %s. Che contatore paghi?'][ver] % d
-            add('costi', 2, 'La regola del contatore', q, 'Il servizio "addebita in base al lavoro svolto su ogni pagina, non all\'analizzatore": i formati digitali vanno su Minimal, le immagini su Basic se serve solo l\'OCR, su Standard se serve l\'impaginazione (tabelle comprese). Qui: <b>%s</b>.' % ['Minimal', 'Basic', 'Standard'][c],
+            add('costi', 2, 'La regola del contatore', q, 'Il servizio "addebita in base al lavoro svolto su ogni pagina, non all\'analizzatore": i formati digitali (Word, Excel, PowerPoint, HTML, testo, email) vanno su Minimal; PDF e immagini su Basic se serve solo l\'OCR, su Standard se serve l\'impaginazione (tabelle comprese). Qui: <b>%s</b>.' % ['Minimal', 'Basic', 'Standard'][c],
                 'P15', k='mcq', o=['Minimal', 'Basic', 'Standard'], c=c)
     r = random.Random(14)
     for i in range(20):
         tot = r.randint(20, 200) * 1000; dig = r.choice([0.2, 0.25, 0.33, 0.4, 0.5])
         a = tot * (1 - dig)
-        add('costi', 2, 'Pagine digitali che escono dallo Standard', 'Su %s pagine al mese, il %d%% arriva in realtà come PDF nativi o allegati Word. Quante pagine restano sul contatore Standard?' % (it(tot), round(dig * 100)),
+        add('costi', 2, 'Pagine digitali che escono dallo Standard', 'Su %s pagine al mese, il %d%% arriva in realtà come allegati Word, Excel o email (formati digitali). Quante pagine restano sul contatore Standard?' % (it(tot), round(dig * 100)),
             'Le pagine digitali vanno su Minimal: %s × (1 − %s) = <b>%s pagine</b> restano su Standard.' % (it(tot), it(dig, 2), it(a)), 'P15', a=a, u='pagine', tol=tot * 0.003)
 
 # ---------------------------------------------------------------- PIPELINE

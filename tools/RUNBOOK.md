@@ -69,3 +69,20 @@ Template: `tools/mail_template_teaser.html` (sfondo bianco, contrasti verificati
 ## Altre pagine
 
 - `azure.html` (guida per tema), `azure-esercizi.html` (palestra), `azure-laboratorio.html` + `lab-*.html` (gioco): si rigenerano con `guida.py`, `esercizi_page.py`, `lab_page.py`. Il Laboratorio e la Palestra non vanno toccati in un'edizione normale.
+
+## Sfide quotidiane del Laboratorio (operazione delle 8:10)
+
+Ogni giorno si aggiungono 50 sfide (10 per modalità) con complessità crescente: livello k = giorni dal 2026-10-17 + 1. Il generatore è `tools/lab_daily.py` (documenti Word con commenti, tabelle, grafici, note e testo nascosto; Excel con celle unite, righe e fogli nascosti e grafici; PowerPoint con grafici nativi e note del relatore; PDF con tabelle su più pagine; pacchetti ordine-bolla-fattura; schemi da correggere, conti da tagliare, audit e guasti multipli).
+
+```bash
+pip install --break-system-packages python-docx openpyxl python-pptx matplotlib >/dev/null
+git pull --rebase origin main
+python3 tools/lab_daily.py .                 # crea tools/lab_daily/packs/<oggi>.json e i file in lab/ (idempotente)
+python3 tools/argomenti.py . && python3 tools/lab_page.py .
+python3 tools/inject.py *.html edizioni/*.html
+MINID=<primo id nuovo> python3 tools/labtest2.py .   # deve stampare "fails [] 0"
+python3 tools/audit3.py "$(pwd)"            # 0 violazioni
+git add -A && git -c user.name="notizieposts-web" -c user.email="notizieposts@gmail.com" commit -m "Laboratorio: sfide del giorno <data>" && git pull --rebase origin main && git push origin main
+```
+
+Se un test fallisce, correggi il generatore (non le singole sfide) e rigenera il pacchetto del giorno cancellando `tools/lab_daily/packs/<oggi>.json` e i file `lab/s<id>.*` che aveva creato.

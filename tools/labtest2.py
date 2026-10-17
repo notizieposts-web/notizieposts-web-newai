@@ -4,7 +4,9 @@ import sys
 R=sys.argv[1] if len(sys.argv)>1 else '.'
 srv=subprocess.Popen(['python3','-m','http.server','8766'],cwd=R,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL); time.sleep(1)
 PAGES={'estrai':'lab-estrai.html','ottimizza':'lab-ottimizza.html','costi':'lab-costi.html','vuln':'lab-vulnerabilita.html','debug':'lab-debug.html'}
+import os
 CH=[json.load(open(f)) for f in glob.glob(R+'/lab/c*.json')]; CH.sort(key=lambda c:c['id'])
+if os.environ.get('MINID'): CH=[c for c in CH if c['id']>=int(os.environ['MINID'])]
 async def m():
   async with async_playwright() as p:
     b=await p.chromium.launch(); pg=await b.new_page(viewport={'width':1280,'height':1000}); err=[]; pg.on('pageerror',lambda e:err.append(str(e)))
