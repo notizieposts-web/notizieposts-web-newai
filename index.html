@@ -175,7 +175,36 @@ footer{border-top:1px solid var(--line);margin-top:4rem;padding:2rem 1.2rem 3rem
 .dash{stroke-dasharray:6 6;animation:dash 1.5s linear infinite}
 @keyframes dash{to{stroke-dashoffset:-24}}
 </style>
-<style id="edx-css">.topics{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem;margin:.55rem 0 0;padding:0}.topics li{margin:0}.edmore summary{cursor:pointer;font-weight:600;color:var(--muted);min-height:24px}.edcard h3 a{text-decoration:none}.edcard h3 a:hover{text-decoration:underline}</style><script id="a11y-theme">try{var t=localStorage.getItem('radar-theme');if(t=='light'||t=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script><style id="a11y">
+<style id="edx-css">.topics{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem;margin:.55rem 0 0;padding:0}.topics li{margin:0}.edmore summary{cursor:pointer;font-weight:600;color:var(--muted);min-height:24px}.edcard h3 a{text-decoration:none}.edcard h3 a:hover{text-decoration:underline}</style><style id="egraph-css">
+.gwrap{display:grid;grid-template-columns:minmax(0,1fr) 18rem;gap:1rem;margin-top:1.5rem;align-items:start}
+@media (max-width:900px){.gwrap{grid-template-columns:minmax(0,1fr)}}
+.gcanvas{padding:.5rem!important;overflow-x:auto}
+@media (max-width:700px){#egraph{min-width:640px}.gcanvas::after{content:'Scorri di lato per vedere tutta la mappa';display:block;font-size:.8rem;color:var(--muted);padding:.2rem .6rem}}
+#egraph{width:100%;height:auto;display:block;touch-action:manipulation}
+#egraph .edge{stroke:var(--line);stroke-width:1.4;transition:stroke .15s,opacity .15s}
+#egraph .edge.on{stroke:var(--violet);stroke-width:2.6}
+#egraph .node{cursor:pointer;outline:none}
+#egraph .node .ring{fill:none;stroke:var(--violet);stroke-width:3;opacity:0}
+#egraph .node:focus-visible .ring,#egraph .node.sel .ring{opacity:1}
+#egraph .ed circle.b{fill:var(--violet)}
+#egraph .ed text{fill:var(--bg);font:700 13px var(--head,system-ui);pointer-events:none}
+#egraph .pr rect.b{fill:var(--surface);stroke:var(--ink);stroke-width:1.5}
+#egraph .pr text{fill:var(--ink);font:700 12px var(--head,system-ui);pointer-events:none}
+#egraph .pr.on rect.b{fill:var(--violet);stroke:var(--violet)}#egraph .pr.on text{fill:var(--bg)}
+#egraph.focus .edge:not(.on){opacity:.35}
+#egraph.focus .ed:not(.on):not(.sel) circle.b{fill:var(--soft);stroke:var(--line);stroke-width:1.5}
+#egraph.focus .ed:not(.on):not(.sel) text{fill:var(--ink)}
+.glegend{display:flex;gap:1rem;padding:.3rem .6rem .2rem;font-size:.8rem;color:var(--muted)}
+.glegend i{display:inline-block;width:12px;height:12px;margin-right:.35rem;vertical-align:-1px;border-radius:50%;background:var(--violet)}
+.glegend i.lg-pr{border-radius:4px;background:var(--surface);border:1.5px solid var(--ink)}
+.gpanel h3{font-size:1.05rem;margin:.3rem 0 .4rem}.gpanel p{margin:.3rem 0;font-size:.93rem}
+.gpanel ul{list-style:none;padding:0;margin:.5rem 0 0;display:flex;flex-wrap:wrap;gap:.35rem}
+.gpanel button.chip{border:0;cursor:pointer;min-height:24px}
+.gpanel .gbtn{display:inline-flex;align-items:center;min-height:32px;margin-top:.6rem;padding:.35rem .85rem;border-radius:999px;background:var(--violet);color:var(--bg);font-weight:700;text-decoration:none}
+.gtext{margin-top:1rem}.gtext summary{cursor:pointer;font-weight:600;min-height:24px}
+.edfilter{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin:1rem 0 0;font-size:.92rem}
+.edfilter button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:.3rem .8rem;min-height:32px;cursor:pointer;font-weight:600}
+</style><script id="a11y-theme">try{var t=localStorage.getItem('radar-theme');if(t=='light'||t=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script><style id="a11y">
 /* Strato accessibilita' WCAG 2.2 AA */
 /* palette armonica: viola 240, ciano 190, ambra 26, magenta 336; testo AA su ogni sfondo */
 :root:not([data-theme="dark"]){--violet:#4B4BF5;--violet-soft:#ECECFE;--teal:#0A6A7C;--teal-soft:#E0F2F5;--sun:#A34E08;--sun-soft:#FDF0E1;--red:#C2185B;--red-soft:#FCE7EF}
@@ -226,7 +255,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <nav class="nav" aria-label="Sezioni">
   <div class="nav-in">
     <a class="brand" href="./" aria-label="Radar AI, tutte le edizioni"><svg class="logo-mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="9" fill="var(--violet)"/><path d="M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z" fill="var(--bg)" opacity=".28"/><g fill="none" stroke="var(--bg)" stroke-linecap="round"><circle cx="16" cy="16" r="10.5" stroke-width="2" opacity=".6"/><circle cx="16" cy="16" r="5.6" stroke-width="2" opacity=".85"/><path d="M16 16 L25.1 10.75" stroke-width="2.4"/></g><circle cx="16" cy="16" r="2.3" fill="var(--bg)"/><circle cx="22.6" cy="21.4" r="2.2" fill="var(--bg)"/></svg><span class="logo-word">Radar<span class="logo-ai">AI</span></span></a>
-    <div class="links" id="links">
+    <div class="links" id="links"><a href="#mappa">Mappa</a>
       <a href="#edizioni">Edizioni</a><a href="#notizie">Tutte le notizie</a><a href="#rubrica">Rubrica Azure</a><a href="#esperimenti">Esperimenti</a><a href="#correzioni">Correzioni</a>
     </div>
   </div>
@@ -239,13 +268,23 @@ code,pre{white-space:pre-wrap;word-break:break-word}
     <h1 style="margin-top:1.2rem">Archivio Radar AI: tutto quello che hai ricevuto, in una pagina</h1>
     <p class="sub">Ogni edizione con la sua data, le notizie che conteneva e il link alla pagina interattiva. Sotto, l'indice di tutte le notizie in ordine di uscita, filtrabile per tema, la raccolta delle puntate della rubrica Azure, gli esperimenti e le correzioni fatte strada facendo.</p>
   </div>
-  <svg class="radar" viewBox="0 0 400 400" role="img" aria-label="Archivio">
+  <svg class="radar" viewBox="0 0 400 400" aria-hidden="true">
     <circle cx="200" cy="200" r="180" fill="var(--surface)" stroke="var(--line)"/>
     <g id="arcsvg" font-family="Sora" font-size="11" font-weight="700"></g>
   </svg>
 </header>
 
 <main id="contenuto" tabindex="-1" class="wrap">
+
+<section class="ch" id="mappa" style="padding-top:2.5rem">
+  <div class="ch-head"><div class="kicker"><span class="chip topic">Mappa</span></div><h2>Come sono collegate le edizioni</h2><p class="lead">Ogni cerchio numerato è un'edizione; ogni etichetta è un protagonista che compare in più di un'edizione. Tocca o seleziona un nodo per vedere i collegamenti e il riassunto; tocca un protagonista per filtrare la lista qui sotto.</p></div>
+  <div class="gwrap">
+    <div class="card gcanvas"><svg id="egraph" viewBox="0 0 900 560" role="group" aria-label="Mappa delle edizioni e dei protagonisti condivisi"></svg>
+      <div class="glegend" aria-hidden="true"><span><i class="lg-ed"></i>Edizione</span><span><i class="lg-pr"></i>Protagonista condiviso</span></div></div>
+    <aside class="card gpanel" id="gpanel" aria-live="polite"></aside>
+  </div>
+  <details class="gtext"><summary>Vista testuale dei collegamenti</summary><ul id="gtextlist"></ul></details>
+</section>
 
 <section class="ch" id="edizioni">
   <div class="ch-head"><h2>Le edizioni, in ordine</h2><p class="lead">Tocca il titolo per aprire la pagina interattiva di ogni numero. Le prime due email di settembre non avevano una pagina.</p></div>
@@ -349,8 +388,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
   var EDX={"": {"c": ["Jev", "CMU", "Azure"], "t": "Modelli che decidono senza scrivere, e quanto costano", "d": "Cosa sono i modelli decisionali, cosa dice il primo paper indipendente su Jev e quanto costa far leggere documenti ad Azure e AWS."}, "edizioni/02.html": {"c": ["Settembre", "Architetture", "TypeSafe", "CMU", "Jev", "Stanford", "Inception", "World Labs", "NVIDIA", "OpenAI", "Laboratori", "Costi"], "t": "Settembre 2026: l'AI impara a decidere senza scrivere", "d": "Trenta giorni in un numero: Jev e i suoi cloni, i modelli a diffusione, Atlas per lo spazio 3D, il DevDay di OpenAI e i costi a confronto."}, "edizioni/03.html": {"c": ["Gemini", "OpenAI", "Meta", "Laboratori", "Costi"], "t": "Gemini 4 Argon arriva, GPT-6.1 Astra si ferma", "d": "Google torna in testa ma per pochi; OpenAI blocca un modello per sicurezza; Meta propone modelli che riordinano da soli il proprio contesto."}, "edizioni/04.html": {"c": ["Cloudflare", "Benchmark", "Confronto"], "t": "Cloudflare lancia Clef, decisionale con pesi aperti", "d": "Il primo modello di Cloudflare sfida Jev; come leggere un \"vince 7 benchmark su 10\"; e quale modello decisionale scegliere."}, "edizioni/05.html": {"c": ["Amazon", "Open source", "Guardrail"], "t": "Un modello decisionale che gira sul portatile", "d": "Strands Decider 2B di un ingegnere Amazon, i quattro livelli di \"open source\" e un controllore che chiede il permesso prima di agire."}, "edizioni/06.html": {"c": ["Sapien", "IBM", "Praxa"], "t": "Tre paper scomodi su agenti e proattività", "d": "Regole che cambiano mentre l'agente lavora, cosa cerca un agente proattivo secondo IBM, e una correzione su come leggere i numeri."}, "edizioni/07.html": {"c": ["Google", "Azure"], "t": "Google porta i chip AI in orbita", "d": "Project Suncatcher mette un piccolo data center nello spazio. Nasce la rubrica su Azure Content Understanding: tempi, costi, volumi."}, "edizioni/08.html": {"c": ["Moonshot", "Azure"], "t": "Kimi K2.8, il quasi K3 aperto a tutti", "d": "Moonshot apre il suo modello più grande finora. In Azure, le leve nascoste che fanno salire o scendere il costo di ogni documento."}, "edizioni/09.html": {"c": ["OpenAI", "Azure"], "t": "OpenAI accusa la distillazione del suo modello", "d": "Cosa si sa della campagna attribuita a persone legate a Moonshot. In Azure, perché conviene smistare i documenti prima di leggerli."}, "edizioni/10.html": {"c": ["Microsoft", "Azure"], "t": "Microsoft rifà Copilot con un agente che ha un badge", "d": "Copilot Home, Code e Autopilot: un agente con identità aziendale propria. In Azure, come si lavora con audio e video."}, "edizioni/11.html": {"c": ["Aleph Alpha", "MoE", "Azure"], "t": "Aleph Alpha regala all'Europa un modello sovrano", "d": "Kolibri e le sue cautele, perché 78 miliardi di parametri costano come 3, e quando scegliere Content Understanding o Document Intelligence."}, "edizioni/12.html": {"c": ["Pi", "Cambridge", "Azure"], "t": "Pi 1.0 e i campi invisibili visti dallo spazio", "d": "Un'imbracatura per agenti usata da centinaia di migliaia di persone, il modello di Cambridge per le colture, e la modalità agentica di Azure."}, "edizioni/13.html": {"c": ["Gemini", "Anthropic", "Azure"], "t": "Gemini gratis si riduce, Anthropic forma le persone", "d": "Dal 9 ottobre il Gemini gratuito ha solo il modello piccolo; una scuola da 100 milioni; gli elementi che non vedi in un documento."}, "edizioni/14.html": {"c": ["Synopsys", "Azure"], "t": "OpenAI e Synopsys insegnano all'AI a progettare chip", "d": "Un modello che usa i programmi dei progettisti di chip. In Azure: richieste in parallelo, code e cosa fare quando il servizio è saturo."}, "edizioni/15.html": {"c": ["Audizione", "Laboratori", "Azure"], "t": "New York ascolta chi accusa i laboratori di AI", "d": "Cosa è stato detto e ammesso all'audizione, l'ente con cui tre laboratori vorrebbero regolarsi da soli, e dove finiscono i dati in Azure."}, "edizioni/16.html": {"c": ["ChatGPT", "Azure"], "t": "La filigrana invisibile nei testi di ChatGPT", "d": "Come funziona textGrain e perché l'AI Act la rende urgente. In Azure: metriche, log e allarmi per osservare il servizio mentre lavora."}, "edizioni/17.html": {"c": ["Mistral", "Reflection", "Azure"], "t": "Mistral e Reflection: due giganti aperti in due giorni", "d": "Un trilione di parametri addestrati in Europa e Beam benedetto da NVIDIA. In Azure, la lista di controllo completa prima di partire."}, "edizioni/18.html": {"c": ["Wikimedia", "GPT-6", "Azure"], "t": "Gli agenti di OpenAI su Wikimedia, con le prove", "d": "Cosa hanno fatto davvero gli agenti, GPT-6 aperto a tutti, cinque piste verificate e tre puntate Azure: qualità, tre cloud, un caso completo."}, "edizioni/19.html": {"c": ["Decisionali", "Memento", "Incidenti", "Anthropic", "Azure"], "t": "I modelli decisionali diventano un mercato", "d": "Due nuovi arrivi e 870 milioni per Jev, Memento 3 che scrive le regole del mondo, quattro incidenti di agenti e la missione cyber di Anthropic."}, "edizioni/20.html": {"c": ["Meta", "Anthropic", "Hardware", "Ricerca", "Azure"], "t": "Meta torna alla frontiera con Muse Wonder", "d": "Il modello migliore non si compra a consumo; quanto manca all'AI che si replica; la settimana del ferro; ricerca e pratica sugli agenti."}, "edizioni/21.html": {"c": ["Gemini", "Valutatori", "Codice", "Robot", "Azure"], "t": "Gemini 4 Argon per tutti, a metà prezzo", "d": "Un milione di token anche in uscita; la lettera dei 400 e il veto ai valutatori; il codice scritto dagli agenti; i robot che agiscono prima."}, "edizioni/22.html": {"c": ["JPMorgan", "TasteVal", "OpenAI", "Privacy", "Azure"], "t": "JPMorgan chiude i conti agli agenti degli altri", "d": "Perché una banca dice no, il gusto della ricerca che raddoppia ogni tre mesi, il ritiro di GPT-4o e GPT-4.1, e le tracce che lasciamo."}, "edizioni/23.html": {"c": ["NVIDIA", "Gemini", "Meta", "FTC", "Azure"], "t": "Tre modi di mettere un agente in gabbia", "d": "NVIDIA spegne le istruzioni nascoste, Perplexity apre la sua sandbox, quattro agenti finiscono Minecraft, e i regolatori chiedono i registri."}};
   $('edlist').innerHTML=ED.map(function(e,i){var x=EDX[e[3]]||{};var ch=(x.c||[]).map(function(c){return '<li class="chip topic">'+c+'</li>'}).join('');var tt=x.t||e[1];var h=e[3]?'<a href="'+e[3]+'">'+tt+'</a>':tt;return '<article class="card edcard" style="margin-bottom:1rem"><div class="kicker"><span class="chip date">'+e[0]+'</span><span class="chip">Edizione '+(i+1)+'</span></div>'+(ch?'<ul class="topics" aria-label="Protagonisti">'+ch+'</ul>':'')+'<h3 style="font-size:1.2rem;margin:.5rem 0 .35rem">'+h+'</h3>'+'<p style="margin:0 0 .5rem">'+(x.d||'')+'</p>'+'<details class="edmore"><summary>Tutto il contenuto</summary><p style="margin:.5rem 0 0"><b>'+e[1]+'.</b> '+e[2]+'</p></details></article>'}).reverse().join('');
 
-  var arc='';ED.forEach(function(e,i){var a=-Math.PI/2+i*(2*Math.PI/ED.length);var x=200+Math.cos(a)*120,y=200+Math.sin(a)*120;arc+='<circle cx="'+x+'" cy="'+y+'" r="16" fill="'+(i%2?'var(--violet)':'var(--teal)')+'"/><text x="'+x+'" y="'+(y+4)+'" text-anchor="middle" fill="#fff">'+(i+1)+'</text>'});
-  arc+='<text x="200" y="195" text-anchor="middle" fill="var(--ink)" font-size="13">23 edizioni</text><text x="200" y="213" text-anchor="middle" fill="var(--muted)" font-size="11" font-weight="500">1–14 ottobre 2026</text>';$('arcsvg').innerHTML=arc;
+  $('arcsvg').innerHTML='<g transform="translate(80 80) scale(7.5)"><rect width="32" height="32" rx="9" fill="var(--violet)"/><path d="M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z" fill="var(--bg)" opacity=".28"/><g fill="none" stroke="var(--bg)" stroke-linecap="round"><circle cx="16" cy="16" r="10.5" stroke-width="2" opacity=".6"/><circle cx="16" cy="16" r="5.6" stroke-width="2" opacity=".85"/><path d="M16 16 L25.1 10.75" stroke-width="2.4"/></g><circle cx="16" cy="16" r="2.3" fill="var(--bg)"/><circle cx="22.6" cy="21.4" r="2.2" fill="var(--bg)"/></g>';
 
   var N=[
     ['1 set','Claude Fable 5.1 e Mythos 5.1 (Anthropic)','Grandi modelli','Settembre'],
@@ -498,6 +536,80 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 })();
 </script>
 
+<script id="egraph-js">
+(function(){
+  var ED=[{"n": 1, "d": "1 ott, sera", "u": "", "t": "Modelli che decidono senza scrivere, e quanto costano", "s": "Cosa sono i modelli decisionali, cosa dice il primo paper indipendente su Jev e quanto costa far leggere documenti ad Azure e AWS.", "c": ["Jev", "CMU", "Azure"]}, {"n": 2, "d": "1 ott, sera", "u": "edizioni/02.html", "t": "Settembre 2026: l'AI impara a decidere senza scrivere", "s": "Trenta giorni in un numero: Jev e i suoi cloni, i modelli a diffusione, Atlas per lo spazio 3D, il DevDay di OpenAI e i costi a confronto.", "c": ["Settembre", "Architetture", "TypeSafe", "CMU", "Jev", "Stanford", "Inception", "World Labs", "NVIDIA", "OpenAI", "Laboratori", "Costi"]}, {"n": 3, "d": "2 ott, notte", "u": "edizioni/03.html", "t": "Gemini 4 Argon arriva, GPT-6.1 Astra si ferma", "s": "Google torna in testa ma per pochi; OpenAI blocca un modello per sicurezza; Meta propone modelli che riordinano da soli il proprio contesto.", "c": ["Gemini", "OpenAI", "Meta", "Laboratori", "Costi"]}, {"n": 4, "d": "2 ott, 12:30", "u": "edizioni/04.html", "t": "Cloudflare lancia Clef, decisionale con pesi aperti", "s": "Il primo modello di Cloudflare sfida Jev; come leggere un \"vince 7 benchmark su 10\"; e quale modello decisionale scegliere.", "c": ["Cloudflare", "Benchmark", "Confronto"]}, {"n": 5, "d": "2 ott, 17:30", "u": "edizioni/05.html", "t": "Un modello decisionale che gira sul portatile", "s": "Strands Decider 2B di un ingegnere Amazon, i quattro livelli di \"open source\" e un controllore che chiede il permesso prima di agire.", "c": ["Amazon", "Open source", "Guardrail"]}, {"n": 6, "d": "2 ott, sera", "u": "edizioni/06.html", "t": "Tre paper scomodi su agenti e proattività", "s": "Regole che cambiano mentre l'agente lavora, cosa cerca un agente proattivo secondo IBM, e una correzione su come leggere i numeri.", "c": ["Sapien", "IBM", "Praxa"]}, {"n": 7, "d": "3 ott, mattina", "u": "edizioni/07.html", "t": "Google porta i chip AI in orbita", "s": "Project Suncatcher mette un piccolo data center nello spazio. Nasce la rubrica su Azure Content Understanding: tempi, costi, volumi.", "c": ["Google", "Azure"]}, {"n": 8, "d": "3 ott, mezzogiorno", "u": "edizioni/08.html", "t": "Kimi K2.8, il quasi K3 aperto a tutti", "s": "Moonshot apre il suo modello più grande finora. In Azure, le leve nascoste che fanno salire o scendere il costo di ogni documento.", "c": ["Moonshot", "Azure"]}, {"n": 9, "d": "3 ott, pomeriggio", "u": "edizioni/09.html", "t": "OpenAI accusa la distillazione del suo modello", "s": "Cosa si sa della campagna attribuita a persone legate a Moonshot. In Azure, perché conviene smistare i documenti prima di leggerli.", "c": ["OpenAI", "Azure"]}, {"n": 10, "d": "4 ott, mattina", "u": "edizioni/10.html", "t": "Microsoft rifà Copilot con un agente che ha un badge", "s": "Copilot Home, Code e Autopilot: un agente con identità aziendale propria. In Azure, come si lavora con audio e video.", "c": ["Microsoft", "Azure"]}, {"n": 11, "d": "4 ott, pomeriggio", "u": "edizioni/11.html", "t": "Aleph Alpha regala all'Europa un modello sovrano", "s": "Kolibri e le sue cautele, perché 78 miliardi di parametri costano come 3, e quando scegliere Content Understanding o Document Intelligence.", "c": ["Aleph Alpha", "MoE", "Azure"]}, {"n": 12, "d": "4 ott, sera", "u": "edizioni/12.html", "t": "Pi 1.0 e i campi invisibili visti dallo spazio", "s": "Un'imbracatura per agenti usata da centinaia di migliaia di persone, il modello di Cambridge per le colture, e la modalità agentica di Azure.", "c": ["Pi", "Cambridge", "Azure"]}, {"n": 13, "d": "5 ott, mattina", "u": "edizioni/13.html", "t": "Gemini gratis si riduce, Anthropic forma le persone", "s": "Dal 9 ottobre il Gemini gratuito ha solo il modello piccolo; una scuola da 100 milioni; gli elementi che non vedi in un documento.", "c": ["Gemini", "Anthropic", "Azure"]}, {"n": 14, "d": "5 ott, pomeriggio", "u": "edizioni/14.html", "t": "OpenAI e Synopsys insegnano all'AI a progettare chip", "s": "Un modello che usa i programmi dei progettisti di chip. In Azure: richieste in parallelo, code e cosa fare quando il servizio è saturo.", "c": ["Synopsys", "Azure"]}, {"n": 15, "d": "5 ott, sera", "u": "edizioni/15.html", "t": "New York ascolta chi accusa i laboratori di AI", "s": "Cosa è stato detto e ammesso all'audizione, l'ente con cui tre laboratori vorrebbero regolarsi da soli, e dove finiscono i dati in Azure.", "c": ["Audizione", "Laboratori", "Azure"]}, {"n": 16, "d": "6 ott, sera", "u": "edizioni/16.html", "t": "La filigrana invisibile nei testi di ChatGPT", "s": "Come funziona textGrain e perché l'AI Act la rende urgente. In Azure: metriche, log e allarmi per osservare il servizio mentre lavora.", "c": ["ChatGPT", "Azure"]}, {"n": 17, "d": "7 ott", "u": "edizioni/17.html", "t": "Mistral e Reflection: due giganti aperti in due giorni", "s": "Un trilione di parametri addestrati in Europa e Beam benedetto da NVIDIA. In Azure, la lista di controllo completa prima di partire.", "c": ["Mistral", "Reflection", "Azure"]}, {"n": 18, "d": "8 ott, sera", "u": "edizioni/18.html", "t": "Gli agenti di OpenAI su Wikimedia, con le prove", "s": "Cosa hanno fatto davvero gli agenti, GPT-6 aperto a tutti, cinque piste verificate e tre puntate Azure: qualità, tre cloud, un caso completo.", "c": ["Wikimedia", "GPT-6", "Azure"]}, {"n": 19, "d": "11 ott, mattina", "u": "edizioni/19.html", "t": "I modelli decisionali diventano un mercato", "s": "Due nuovi arrivi e 870 milioni per Jev, Memento 3 che scrive le regole del mondo, quattro incidenti di agenti e la missione cyber di Anthropic.", "c": ["Decisionali", "Memento", "Incidenti", "Anthropic", "Azure"]}, {"n": 20, "d": "13 ott", "u": "edizioni/20.html", "t": "Meta torna alla frontiera con Muse Wonder", "s": "Il modello migliore non si compra a consumo; quanto manca all'AI che si replica; la settimana del ferro; ricerca e pratica sugli agenti.", "c": ["Meta", "Anthropic", "Hardware", "Ricerca", "Azure"]}, {"n": 21, "d": "14 ott", "u": "edizioni/21.html", "t": "Gemini 4 Argon per tutti, a metà prezzo", "s": "Un milione di token anche in uscita; la lettera dei 400 e il veto ai valutatori; il codice scritto dagli agenti; i robot che agiscono prima.", "c": ["Gemini", "Valutatori", "Codice", "Robot", "Azure"]}, {"n": 22, "d": "14 ott, pomeriggio", "u": "edizioni/22.html", "t": "JPMorgan chiude i conti agli agenti degli altri", "s": "Perché una banca dice no, il gusto della ricerca che raddoppia ogni tre mesi, il ritiro di GPT-4o e GPT-4.1, e le tracce che lasciamo.", "c": ["JPMorgan", "TasteVal", "OpenAI", "Privacy", "Azure"]}, {"n": 23, "d": "17 ott", "u": "edizioni/23.html", "t": "Tre modi di mettere un agente in gabbia", "s": "NVIDIA spegne le istruzioni nascoste, Perplexity apre la sua sandbox, quattro agenti finiscono Minecraft, e i regolatori chiedono i registri.", "c": ["NVIDIA", "Gemini", "Meta", "FTC", "Azure"]}];
+  var svg=document.getElementById('egraph');if(!svg)return;
+  var NS='http://www.w3.org/2000/svg',W=900,H=560;
+  /* protagonisti condivisi da almeno due edizioni */
+  var cnt={};ED.forEach(function(e){e.c.forEach(function(c){cnt[c]=(cnt[c]||0)+1})});
+  var P=Object.keys(cnt).filter(function(c){return cnt[c]>1}).sort(function(a,b){return cnt[b]-cnt[a]});
+  var nodes=[],links=[],byId={};
+  ED.forEach(function(e,i){var a=i/ED.length*Math.PI*2-Math.PI/2;var n={id:'e'+e.n,k:'ed',e:e,x:W/2+Math.cos(a)*240,y:H/2+Math.sin(a)*200,r:17};nodes.push(n);byId[n.id]=n;});
+  P.forEach(function(c,i){var a=i/P.length*Math.PI*2;var n={id:'p'+i,k:'pr',c:c,x:W/2+Math.cos(a)*90,y:H/2+Math.sin(a)*70,r:10+6*Math.min(cnt[c],6)};nodes.push(n);byId['P:'+c]=n;});
+  ED.forEach(function(e){e.c.forEach(function(c){if(byId['P:'+c])links.push({s:byId['e'+e.n],t:byId['P:'+c]})})});
+  /* layout a forze, deterministico */
+  for(var it=0;it<420;it++){
+    var al=1-it/420;
+    for(var i=0;i<nodes.length;i++)for(var j=i+1;j<nodes.length;j++){var a=nodes[i],b=nodes[j],dx=b.x-a.x,dy=b.y-a.y,d2=dx*dx+dy*dy+0.01,d=Math.sqrt(d2),min=(a.k==='pr'?44:24)+(b.k==='pr'?44:24),f=(2600/d2)*al;if(d<min)f+= (min-d)*0.08;dx/=d;dy/=d;a.x-=dx*f;a.y-=dy*f;b.x+=dx*f;b.y+=dy*f;}
+    links.forEach(function(l){var dx=l.t.x-l.s.x,dy=l.t.y-l.s.y,d=Math.sqrt(dx*dx+dy*dy)||1,f=(d-110)*0.02*al;dx/=d;dy/=d;l.s.x+=dx*f;l.s.y+=dy*f;l.t.x-=dx*f;l.t.y-=dy*f;});
+    nodes.forEach(function(n){n.x+=(W/2-n.x)*0.004*al;n.y+=(H/2-n.y)*0.006*al;var m=n.k==='pr'?56:24;n.x=Math.max(m,Math.min(W-m,n.x));n.y=Math.max(26,Math.min(H-26,n.y));});
+  }
+  /* adatta il disegno allo spazio disponibile */
+  var minX=1e9,minY=1e9,maxX=-1e9,maxY=-1e9;nodes.forEach(function(n){var w=n.k==='pr'?n.c.length*4+24:22;minX=Math.min(minX,n.x-w);maxX=Math.max(maxX,n.x+w);minY=Math.min(minY,n.y-22);maxY=Math.max(maxY,n.y+22);});
+  svg.setAttribute('viewBox',(minX-10).toFixed(0)+' '+(minY-10).toFixed(0)+' '+(maxX-minX+20).toFixed(0)+' '+(maxY-minY+20).toFixed(0));
+  function el(t,a){var x=document.createElementNS(NS,t);for(var k in a)x.setAttribute(k,a[k]);return x}
+  var gE=el('g',{'aria-hidden':'true'}),gN=el('g',{});svg.appendChild(gE);svg.appendChild(gN);
+  links.forEach(function(l){l.el=el('line',{x1:l.s.x,y1:l.s.y,x2:l.t.x,y2:l.t.y,'class':'edge'});gE.appendChild(l.el)});
+  nodes.forEach(function(n){
+    var g=el('g',{'class':'node '+n.k,tabindex:'0',role:'button',transform:'translate('+n.x.toFixed(1)+','+n.y.toFixed(1)+')'});
+    if(n.k==='ed'){g.setAttribute('aria-label','Edizione '+n.e.n+', '+n.e.d+': '+n.e.t);g.appendChild(el('circle',{r:n.r+5,'class':'ring'}));g.appendChild(el('circle',{r:n.r,'class':'b'}));var t=el('text',{'text-anchor':'middle',dy:'4.5'});t.textContent=n.e.n;g.appendChild(t);}
+    else{var w=n.c.length*7.6+22;g.setAttribute('aria-label',n.c+', in '+cnt[n.c]+' edizioni');g.appendChild(el('rect',{x:-w/2-5,y:-18,width:w+10,height:36,rx:18,'class':'ring'}));g.appendChild(el('rect',{x:-w/2,y:-13,width:w,height:26,rx:13,'class':'b'}));var t2=el('text',{'text-anchor':'middle',dy:'4'});t2.textContent=n.c;g.appendChild(t2);}
+    n.el=g;gN.appendChild(g);
+    g.addEventListener('click',function(){select(n,true)});
+    g.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();select(n,true)}});
+    g.addEventListener('mouseenter',function(){highlight(n)});g.addEventListener('mouseleave',function(){highlight(cur)});
+    g.addEventListener('focus',function(){highlight(n)});
+  });
+  var cur=null,panel=document.getElementById('gpanel');
+  function neighbors(n){return links.filter(function(l){return l.s===n||l.t===n})}
+  function highlight(n){
+    svg.classList.toggle('focus',!!n);
+    nodes.forEach(function(m){m.el.classList.remove('on')});links.forEach(function(l){l.el.classList.remove('on')});
+    if(!n)return;n.el.classList.add('on');
+    neighbors(n).forEach(function(l){l.el.classList.add('on');l.s.el.classList.add('on');l.t.el.classList.add('on');});
+  }
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function select(n,user){
+    if(cur)cur.el.classList.remove('sel');cur=n;n.el.classList.add('sel');highlight(n);
+    if(n.k==='ed'){var e=n.e;
+      var rel={};e.c.forEach(function(c){ED.forEach(function(o){if(o!==e&&o.c.indexOf(c)>=0)rel[o.n]=(rel[o.n]||[]).concat(c)})});
+      var rl=Object.keys(rel).sort(function(a,b){return b-a});
+      panel.innerHTML='<span class="chip date">'+esc(e.d)+'</span> <span class="chip">Edizione '+e.n+'</span><h3>'+esc(e.t)+'</h3><p>'+esc(e.s)+'</p>'
+        +(e.c.length?'<ul aria-label="Protagonisti">'+e.c.map(function(c){return '<li><button type="button" class="chip topic" data-p="'+esc(c)+'">'+esc(c)+'</button></li>'}).join('')+'</ul>':'')
+        +(rl.length?'<p><b>Collegata a</b> '+rl.length+' edizioni: '+rl.slice(0,8).map(function(k){return 'n. '+k+' ('+rel[k].join(', ')+')'}).join('; ')+(rl.length>8?'…':'')+'.</p>':'<p>Nessun protagonista in comune con altre edizioni.</p>')
+        +(e.u?'<a class="gbtn" href="'+e.u+'">Apri l\'edizione '+e.n+'</a>':'<p class="note">Solo email, senza pagina.</p>');
+    }else{var list=ED.filter(function(o){return o.c.indexOf(n.c)>=0}).sort(function(a,b){return b.n-a.n});
+      panel.innerHTML='<span class="chip topic">'+esc(n.c)+'</span><h3>'+esc(n.c)+' in '+list.length+' edizioni</h3><ul aria-label="Edizioni">'+list.map(function(o){return '<li><a class="chip" href="'+(o.u||'#edizioni')+'">n. '+o.n+' · '+esc(o.d)+'</a></li>'}).join('')+'</ul><button type="button" class="gbtn" data-filter="'+esc(n.c)+'">Mostra solo queste nella lista</button>';
+    }
+    panel.querySelectorAll('[data-p]').forEach(function(b){b.onclick=function(){var p=byId['P:'+b.dataset.p];if(p){select(p,true);p.el.focus()}else filter(b.dataset.p)}});
+    panel.querySelectorAll('[data-filter]').forEach(function(b){b.onclick=function(){filter(b.dataset.filter)}});
+  }
+  /* filtro della lista delle edizioni */
+  function filter(c){
+    var list=document.getElementById('edlist');if(!list)return;var shown=0;
+    list.querySelectorAll('article.edcard').forEach(function(a){var ok=!c||[].some.call(a.querySelectorAll('.topics li'),function(li){return li.textContent===c});a.hidden=!ok;if(ok)shown++;});
+    var bar=document.getElementById('edfilter');
+    if(!bar){bar=document.createElement('div');bar.id='edfilter';bar.className='edfilter';bar.setAttribute('aria-live','polite');list.parentNode.insertBefore(bar,list);}
+    if(c){bar.innerHTML='<span>Edizioni con <b>'+esc(c)+'</b>: '+shown+'</span><button type="button">Mostra tutte</button>';bar.querySelector('button').onclick=function(){filter(null)};document.getElementById('edizioni').scrollIntoView();}
+    else bar.innerHTML='';
+  }
+  /* alternativa testuale */
+  var tl=document.getElementById('gtextlist');
+  if(tl)tl.innerHTML=P.map(function(c){var l=ED.filter(function(o){return o.c.indexOf(c)>=0}).map(function(o){return o.n});return '<li><b>'+esc(c)+'</b>: edizioni '+l.join(', ')+'</li>'}).join('');
+  select(byId['e'+ED[ED.length-1].n],false);
+})();
+</script>
 <script id="a11y-js">
 (function(){
   /* nomi accessibili per i controlli dei widget */
