@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Radar AI · 7 ottobre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F6FB; --surface:#FFFFFF; --soft:#E9EDF7; --ink:#121A2B; --muted:#56627A; --line:#D8DEEA;
+  --violet:#4B4BF5; --violet-soft:#E6E6FF; --teal:#0E9F9E; --teal-soft:#DDF5F4; --sun:#F2B705; --sun-soft:#FFF5D1; --red:#D9463B;
+  --head:"Sora","Segoe UI",system-ui,sans-serif; --body:"Inter","Segoe UI",system-ui,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+    --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+  --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7}
+a{color:var(--violet)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+h1,h2,h3{font-family:var(--head);line-height:1.12;margin:0}
+p{margin:0 0 1rem}
+img,svg{max-width:100%}
+
+/* NAV */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:72rem;margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem}
+.brand{font-family:var(--head);font-weight:800;white-space:nowrap}
+.links{display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;flex:1}
+.links::-webkit-scrollbar{display:none}
+.links a{font-family:var(--head);font-size:.82rem;font-weight:600;text-decoration:none;color:var(--muted);padding:.35rem .7rem;border-radius:999px;white-space:nowrap}
+.links a.on{background:var(--ink);color:var(--bg)}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;background:var(--violet);width:0}
+
+/* HERO */
+.hero{max-width:72rem;margin:0 auto;padding:3.5rem 1.2rem 2rem;display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800;letter-spacing:-.03em}
+.hero .sub{font-size:1.15rem;color:var(--muted);margin-top:1.2rem;max-width:34rem}
+.meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem}
+.chip{font-family:var(--head);font-size:.78rem;font-weight:600;padding:.3rem .7rem;border-radius:999px;background:var(--soft);color:var(--ink)}
+.chip.date{background:var(--violet-soft);color:var(--violet)}
+.radar{aspect-ratio:1;width:100%;max-width:26rem;justify-self:center}
+.sweep{transform-origin:200px 200px;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.blip{animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.radar{max-width:18rem}}
+
+/* SECTIONS */
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.2rem}
+section.ch{padding:4.5rem 0 1rem;border-top:1px solid var(--line)}
+.ch-head{max-width:48rem}
+.kicker{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+.ch h2{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em}
+.lead{font-size:1.2rem;color:var(--muted);margin-top:1rem}
+.grid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.5rem;margin-top:2.2rem;align-items:start}
+.grid2 .stick{position:sticky;top:84px}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.grid2 .stick{position:static}}
+.prose p{max-width:38rem}
+.prose h3{font-size:1.2rem;margin:1.8rem 0 .7rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.4rem}
+.card h3{font-size:1.05rem;margin-bottom:.8rem}
+.example{background:var(--teal-soft);border-radius:14px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.example b:first-child{font-family:var(--head);color:var(--teal);display:block;margin-bottom:.3rem}
+.paper{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:12px;padding:1rem 1.2rem;margin:1.4rem 0}
+.paper .ic{font-size:1.5rem;line-height:1}
+.src{font-family:var(--head);font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:6px;background:var(--soft);color:var(--muted);vertical-align:middle;white-space:nowrap}
+.src.p{background:var(--teal-soft);color:var(--teal)}
+.src.u{background:var(--violet-soft);color:var(--violet)}
+.sources{font-size:.88rem;color:var(--muted);margin-top:1rem}
+.sources a{margin-right:.4rem}
+
+/* curiosity */
+details.q{background:var(--sun-soft);border-radius:14px;padding:1rem 1.2rem;margin:1.6rem 0;max-width:38rem}
+details.q summary{cursor:pointer;font-family:var(--head);font-weight:700;list-style:none;display:flex;gap:.7rem;align-items:flex-start}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::before{content:"?";flex:none;display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--sun);color:#1a1300;font-weight:800}
+details.q summary::after{content:"Scopri";margin-left:auto;font-size:.75rem;font-weight:600;color:var(--muted);padding-top:.25rem}
+details.q[open] summary::after{content:"Chiudi"}
+details.q p{margin:.8rem 0 0}
+
+/* buttons */
+.btn{font-family:var(--head);font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.55rem 1rem;border-radius:999px;cursor:pointer}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0}
+.note{font-size:.84rem;color:var(--muted)}
+
+/* timeline */
+.tl{position:relative;margin:2.4rem 0 1rem;overflow-x:auto;padding-bottom:.5rem}
+.tl-in{position:relative;min-width:44rem;height:120px}
+.tl-line{position:absolute;left:1rem;right:1rem;top:60px;height:3px;background:var(--line);border-radius:2px}
+.tl-dot{position:absolute;top:60px;width:20px;height:20px;margin:-8px 0 0 -10px;border-radius:50%;border:3px solid var(--bg);background:var(--violet);cursor:pointer;padding:0;transition:transform .2s}
+.tl-dot.n{background:var(--sun)}
+.tl-dot[aria-pressed="true"]{transform:scale(1.5)}
+.tl-day{position:absolute;top:88px;transform:translateX(-50%);font-family:var(--head);font-size:.72rem;color:var(--muted)}
+.tl-card{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center}
+.tl-date{font-family:var(--head);font-weight:800;font-size:2.6rem;line-height:1;color:var(--violet);text-align:center}
+.tl-date small{display:block;font-size:.8rem;font-weight:600;color:var(--muted)}
+
+/* bars */
+.pbar{margin:.9rem 0}
+.pbar .lab{display:flex;justify-content:space-between;font-family:var(--head);font-size:.88rem;font-weight:600}
+.pbar .tr{height:12px;background:var(--soft);border-radius:6px;overflow:hidden;margin-top:.35rem}
+.pbar .fi{height:100%;width:0;background:var(--violet);border-radius:6px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.mail{background:var(--soft);border-radius:12px;padding:.9rem 1rem;font-style:italic;margin:.8rem 0}
+
+/* race */
+.lane{margin:1rem 0}
+.lane .nm{font-family:var(--head);font-weight:700;font-size:.9rem;margin-bottom:.4rem;display:flex;justify-content:space-between}
+.words{display:flex;flex-wrap:wrap;gap:.35rem;min-height:2.4rem}
+.w{font-family:var(--head);font-size:.85rem;padding:.35rem .6rem;border-radius:8px;background:var(--soft);color:var(--muted);transition:background .3s,color .3s}
+.w.on{background:var(--violet);color:#fff}
+.w.d{background:var(--teal);color:#fff}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.4rem 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem;text-align:center}
+.stat strong{display:block;font-family:var(--head);font-size:1.8rem;color:var(--violet)}
+.stat span{font-size:.82rem;color:var(--muted)}
+@media (max-width:560px){.stats{grid-template-columns:1fr}}
+
+/* calc */
+.calc label{display:flex;justify-content:space-between;font-family:var(--head);font-weight:600;font-size:.9rem;margin-top:1rem}
+.calc input{width:100%;accent-color:var(--violet)}
+.cbar{display:grid;grid-template-columns:9.5rem 1fr 5.5rem;gap:.6rem;align-items:center;font-size:.85rem;margin:.5rem 0}
+.cbar .tr{height:14px;background:var(--soft);border-radius:7px;overflow:hidden}
+.cbar .fi{height:100%;background:var(--violet);border-radius:7px;transition:width .4s}
+.cbar .fi.t{background:var(--teal)}
+.cbar b{text-align:right;font-family:var(--head)}
+
+/* table */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.92rem}
+th,td{text-align:left;padding:.7rem .6rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--head);font-size:.8rem;color:var(--muted)}
+td:first-child{font-family:var(--head);font-weight:700;white-space:nowrap}
+
+/* cards grid */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:1rem;margin-top:2rem}
+.sig{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.2rem}
+.sig h3{font-size:1.02rem;margin:.6rem 0 .5rem}
+.sig p{font-size:.93rem;margin:0}
+
+/* quiz */
+.quiz .qq{margin:1.4rem 0}
+.quiz .qq p{font-family:var(--head);font-weight:700}
+.opts{display:grid;gap:.5rem}
+.opt{text-align:left;font-family:var(--body);font-size:.95rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.7rem 1rem;border-radius:12px;cursor:pointer}
+.opt.ok{border-color:var(--teal);background:var(--teal-soft)}
+.opt.ko{border-color:var(--red)}
+.fb{font-size:.9rem;color:var(--muted);margin-top:.4rem;min-height:1.2rem}
+.score{font-family:var(--head);font-weight:800;font-size:1.2rem}
+
+/* prompt */
+pre.prompt{white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.3rem;font-family:var(--body);font-size:.92rem;line-height:1.6;max-height:28rem;overflow:auto}
+footer{border-top:1px solid var(--line);margin-top:4rem;padding:2rem 1.2rem 3rem;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* svg anim helpers */
+.float{animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.orbit{transform-origin:200px 170px;animation:spin 14s linear infinite}
+.dash{stroke-dasharray:6 6;animation:dash 1.5s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Capitoli">
+  <div class="nav-in">
+    <span class="brand">📡 Radar AI</span>
+    <div class="links" id="links">
+      <a href="#chonk">Mistral Large 4</a><a href="#beam">Beam</a><a href="#azure">Azure: la lista</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+    </div>
+  </div>
+  <div class="progress" id="prog"></div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="meta"><span class="chip date">Edizione del 7 ottobre 2026</span><span class="chip">Dall'edizione del 6 ottobre</span><span class="chip">Solo notizie nuove</span><span class="chip">Rubrica Azure: undicesima puntata, la lista di controllo</span></div>
+    <h1 style="margin-top:1.2rem">Un trilione di parametri "fatti in Europa", un secondo gigante aperto in due giorni, e la lista di controllo che chiude il primo ciclo della rubrica Azure</h1>
+    <p class="sub">Ieri Mistral ha messo in anteprima il suo modello più grande di sempre, addestrato da zero in due mesi nei propri data center europei, con i pesi promessi per il 27 ottobre. Il giorno prima, negli Stati Uniti, Reflection AI aveva presentato Beam, un altro gigante a pesi aperti. Due lanci che raccontano la stessa cosa: la gara dei modelli aperti non è più solo cinese. Poi la rubrica Azure arriva all'undicesima puntata e fa una cosa diversa: raccoglie dieci puntate in una lista di controllo da usare prima di ogni progetto, con un contatore che ti dice a che punto sei.</p>
+  </div>
+  <svg class="radar" viewBox="0 0 400 400" role="img" aria-label="Un modello da un trilione di parametri con 49 miliardi attivi">
+    <circle cx="200" cy="200" r="180" fill="var(--surface)" stroke="var(--line)"/>
+    <g id="chonkhero"></g>
+    <text x="200" y="345" text-anchor="middle" font-family="Sora" font-size="10" fill="var(--muted)">1.000 cubetti: un trilione di parametri. In giallo i 49 miliardi al lavoro per ogni token.</text>
+  </svg>
+</header>
+
+<main class="wrap">
+
+<section class="ch" id="chonk">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">Anteprima pubblica dal 6 ottobre 2026</span><span class="chip">Pesi aperti promessi per il 27 ottobre</span><span class="src u">ufficiale (annuncio e scheda del modello)</span><span class="src">stampa</span><span class="chip">Benchmark dichiarati dal produttore, non verificati</span></div>
+    <h2>Mistral Large 4, "le Chonk": un trilione di parametri addestrati in due mesi in Europa</h2>
+    <p class="lead">Il laboratorio parigino torna alla frontiera dei modelli aperti con un modello a miscela di esperti, nativamente multimodale, addestrato su circa 4.000 GPU nei propri data center. E lo vende, prima di tutto, come sovranità.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>I numeri, dalla scheda ufficiale</h3>
+      <p>Lunedì 6 ottobre Mistral ha aperto l'anteprima pubblica di <b>Mistral Large 4</b>, abbreviato ML4 e soprannominato, con un'autoironia ormai celebre, "le Chonk". È un modello a miscela di esperti, come Kolibri dell'edizione del 4 ottobre, ma in una classe di dimensioni diversa: circa un trilione di parametri totali, 1,05 per la precisione, con 49 miliardi attivi per ogni token, 52 contando gli strati di ingresso e uscita. Un codificatore visivo da 1,6 miliardi di parametri lo rende nativamente multimodale: testo e immagini in ingresso. La finestra di contesto dichiarata è di un milione di token, e vale l'avvertenza letta per Kolibri: il limite ammesso non è la lunghezza di addestramento, che Mistral non ha ancora dettagliato.</p>
+      <p>Addestrato da zero in circa due mesi su un numero di GPU NVIDIA Grace Blackwell che le fonti indicano tra 3.800 e 4.000, nei data center europei di Mistral che servono anche l'anteprima, con un assorbimento intorno ai 10 megawatt. I dati di addestramento coprono più di 160 lingue, incluse tutte quelle ufficiali dell'Unione, italiano compreso: è il primo modello di questa newsletter per cui la nostra lingua è dichiaratamente di prima classe. Mistral lo definisce il primo traguardo della tabella di marcia finanziata dal suo round da 3 miliardi di euro, che descrive come il più grande mai raccolto da un'azienda tecnologica europea.</p>
+      <h3>Cosa puoi fare oggi, e cosa dal 27</h3>
+      <p>Oggi il modello si usa solo tramite l'API di Mistral, a 1,36 dollari per milione di token in ingresso e 4,18 in uscita, in più regioni, inclusa una distribuzione gestita da Mistral da cima a fondo in Europa sotto legge europea. Mistral passerà le prossime tre settimane a testarlo in condizioni reali e a continuare l'addestramento con rinforzo prima di fissare la versione finale; i pesi arriveranno il 27 ottobre, in formati quantizzati FP8 e FP4. Per i team di sicurezza e per i governi è previsto l'uso in cloud privato e in locale, e una versione con meno restrizioni e più funzioni per la cybersicurezza rispetto all'API pubblica, lo stesso schema di Gemini 4 Argon con il programma Fairwind.</p>
+      <h3>I benchmark, con la cautela di sempre</h3>
+      <p>Mistral dichiara risultati competitivi con GLM-5.3, DeepSeek-V4-Pro e GPT-6 Astra su programmazione, finanza, diritto e visione, con visione e cybersicurezza indicate come punti di forza, e si definisce il sistema a pesi aperti più potente fuori dalla Cina. Sono numeri del produttore su un modello che non è ancora scaricabile: nessuno ha potuto verificarli, e l'azienda stessa promette altri risultati, dettagli sull'addestramento e sui test di sicurezza prima del 27. Un'analisi indipendente fa invece un conto che vale la pena ripetere: a due byte per parametro, 1,05 trilioni di parametri sono circa 2,1 terabyte di pesi grezzi. I 49 miliardi attivi dicono quanto calcolo serve per ogni token; i 2,1 terabyte dicono quanta memoria serve per tenere il modello in piedi, e la lezione sull'ospedale con i reparti dell'edizione del 4 ottobre vale qui moltiplicata per tredici.</p>
+      <div class="example"><b>Esempio pratico: cosa significa "sovranità" in un contratto</b>Un'azienda italiana regolata, una banca o un'utility, può oggi usare ML4 tramite l'API nella regione europea, con i dati sotto legge europea; dal 27 ottobre può scaricare i pesi e farlo girare nel proprio data center, senza che nessuna richiesta esca. Le dieci domande della lista di sovranità dell'edizione del 4 ottobre trovano risposte diverse nei due casi: con l'API, l'elaborazione è in Europa ma il servizio può essere interrotto dal fornitore; con i pesi in casa, nessuno può spegnerlo, ma servono i server per 2 terabyte di modello, quantizzazione compresa, e un team che lo gestisca. Non c'è una risposta giusta: c'è la risposta del tuo ufficio rischi.</div>
+      <details class="q"><summary>Perché "due mesi" e "4.000 GPU" sono numeri importanti?</summary>
+      <p>Perché descrivono un budget. Una rassegna stima che sia due o tre volte meno calcolo di quello usato dai laboratori cinesi per modelli comparabili, e i 10 megawatt per due mesi corrispondono a circa 14 gigawattora: un mio calcolo di ordine di grandezza, non un dato di Mistral, che equivale al consumo annuo di qualche migliaio di famiglie italiane. Se i benchmark reggeranno alla verifica, significa che la frontiera dei modelli aperti si può raggiungere con un budget da azienda europea ben finanziata, non solo da gigante. Se non reggeranno, il budget spiegherà perché.</p></details>
+      <details class="q"><summary>Un modello da 2 terabyte è "aperto" per davvero, se quasi nessuno può farlo girare?</summary>
+      <p>È aperto nel senso dei pesi, e lo sarà con licenza da verificare il 27. Ma la scala di apertura dell'edizione del 2 ottobre aveva una dimensione implicita che qui diventa esplicita: la praticabilità. Kolibri gira su un server da 80 GB; ML4 richiede, anche quantizzato, una macchina con più acceleratori, e un'analisi parla di quattro GPU. Per un ministero o una grande banca è alla portata; per una PMI, no. L'apertura dei pesi democratizza il controllo, non il costo.</p></details>
+      <details class="q"><summary>Perché Mistral pubblica l'API tre settimane prima dei pesi?</summary>
+      <p>Per tre ragioni che l'azienda dichiara o lascia intendere. Raccogliere uso reale e continuare il rinforzo prima di congelare la versione finale: i pesi, una volta pubblicati, non si ritirano. Costruire domanda per il servizio a pagamento prima che il modello sia scaricabile gratis. E, come ha fatto Google con Argon, dare alle versioni per la cybersicurezza un periodo controllato. È lo stesso schema di Reflection, nel capitolo successivo: annuncio ora, pesi "questo mese".</p></details>
+      <details class="q"><summary>"Tutte le lingue ufficiali dell'Unione": cosa cambia per chi lavora in italiano?</summary>
+      <p>Potenzialmente molto, ed è la domanda da verificare per prima. Un modello addestrato con l'italiano come lingua di prima classe dovrebbe fare meno errori di lingua, di cultura e di diritto rispetto a uno che lo ha "visto per caso". Ma "160 lingue nei dati" non dice quanto italiano c'era, né quanto bene lo parla. L'unico test che conta è il tuo: le cinque domande del laboratorio del 5 ottobre, in italiano, sui tuoi documenti.</p></details>
+      <p class="sources">Fonti: <a href="https://venturebeat.com/technology/mistral-debuts-large-4-le-chonk-a-1-trillion-parameter-text-output-model-with-high-benchmarks-planned-for-open-weights-release">VentureBeat</a> <span class="src">stampa</span> · <a href="https://thenextweb.com/news/mistral-releases-large-4-a-1-trillion-parameter-open-weight-ai-model">TNW</a> <span class="src">stampa</span> · <a href="https://www.testingcatalog.com/mistral-launches-large-4-preview-with-1-t-parameters/">TestingCatalog, con la documentazione del modello</a> <span class="src">stampa</span> · <a href="https://www.techbooky.com/mistral-large-4-puts-a-1-trillion-parameter-model-in-public-preview/">TechBooky</a> <span class="src">stampa</span> · <a href="https://kingy.ai/blog/mistral-large-4-specs-benchmarks-pricing/">Kingy, i conti sulla memoria</a> <span class="src">terze parti</span> · <a href="https://alphasignal.ai/news/mistral-ai-s-mistral-large-4-packs-1-trillion-parameters-into-4-gpus">AlphaSignal</a> <span class="src">terze parti</span> · <a href="https://daily.dev/posts/mistral-releases-large-4-a-1-trillion-parameter-open-weight-ai-model-g2w2sdvpi">daily.dev</a> <span class="src">terze parti</span></p>
+    </div>
+    <div class="stick card">
+      <h3>Calcolo e memoria non sono la stessa cosa</h3>
+      <p class="note" style="margin-top:0">Tre modelli a esperti di questa newsletter: quanto lavorano per token e quanto spazio occupano.</p>
+      <div id="moecmp"></div>
+      <p class="note">Memoria stimata a 2 byte per parametro (BF16); le versioni quantizzate FP8 e FP4 dimezzano e dividono per quattro. Fonti: schede dei modelli e analisi citate.</p>
+      <h3 style="margin-top:1.4rem">Quanta energia per addestrarlo?</h3>
+      <label for="mw" style="font-family:var(--head);font-weight:600;font-size:.9rem;display:flex;justify-content:space-between">Potenza (MW) <output id="mwo"></output></label><input id="mw" type="range" min="1" max="100" step="1" value="10" style="width:100%;accent-color:var(--violet)">
+      <label for="days" style="font-family:var(--head);font-weight:600;font-size:.9rem;display:flex;justify-content:space-between">Giorni di addestramento <output id="dayso"></output></label><input id="days" type="range" min="10" max="180" step="5" value="60" style="width:100%;accent-color:var(--violet)">
+      <div class="stats" style="grid-template-columns:1fr 1fr;margin:.8rem 0 0"><div class="stat"><strong id="gwh">–</strong><span>gigawattora</span></div><div class="stat"><strong id="fam">–</strong><span>famiglie italiane per un anno (circa)</span></div></div>
+      <p class="note">Stima mia di ordine di grandezza: 2.700 kWh l'anno per famiglia. Serve a dare un'idea, non a misurare.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="beam">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">5 ottobre 2026</span><span class="src">stampa (TechCrunch)</span><span class="chip">Pesi e dettagli tecnici promessi "questo mese"; benchmark non verificati</span></div>
+    <h2>Beam di Reflection AI: il secondo gigante aperto in due giorni, con la benedizione di NVIDIA</h2>
+    <p class="lead">Mezzo trilione di parametri, 23 miliardi attivi, e la promessa di fare quanto i migliori modelli cinesi con tre o quattro volte meno calcolo. Il modello di business si chiama "fabbrica di AI".</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>Domenica 5 ottobre, il giorno prima di Mistral, Reflection AI ha presentato <b>Beam</b>, il suo primo modello di frontiera a pesi aperti, confermando le anticipazioni di Axios del fine settimana. I numeri: 501 miliardi di parametri, 23 miliardi attivi, ancora una miscela di esperti. Le prestazioni dichiarate, non verificate in modo indipendente, lo metterebbero alla pari di GLM-5.2 di Z.ai sui benchmark di ragionamento avanzato, sopra i principali modelli aperti occidentali di oggi, usando tre o quattro volte meno calcolo in inferenza. Reflection lo chiama un "modello da lavoro" per aziende, settore pubblico e sviluppatori, e promette pesi e dettagli tecnici completi entro il mese, con distribuzione tramite i grandi cloud e integrazioni nelle librerie aperte fin dal lancio.</p>
+      <p>Il dettaglio che spiega tutto è l'investitore: NVIDIA, il cui amministratore delegato sostiene da tempo l'idea delle "fabbriche di AI". È esattamente il prodotto che Reflection propone: permettere a istituzioni di costruire il proprio sistema di AI locale e personalizzato, addestrando i modelli di Reflection sui propri dati riservati. Una visione che, nota TechCrunch, giova anche a NVIDIA, perché quelle fabbriche girerebbero sulle sue GPU. TechCrunch indica come possibile rivale Inkling, il modello aperto di Thinking Machines Lab di luglio.</p>
+      <div class="example"><b>Esempio pratico: cosa vuol dire "fabbrica di AI"</b>Un ospedale universitario ha vent'anni di cartelle, referti e protocolli che non possono uscire. Una fabbrica di AI, nel senso di Reflection, è un pacchetto di modello aperto, strumenti di addestramento e hardware con cui l'ospedale produce in casa un modello che parla la sua lingua clinica, lo aggiorna quando cambiano i protocolli e non dipende da nessuno per farlo girare. È l'idea di Kolibri e di Strands portata alla scala di un intero ente, ed è il motivo per cui questi modelli vengono annunciati insieme a "integrazioni nelle librerie aperte": la fabbrica deve essere montabile.</div>
+      <details class="q"><summary>Due giganti aperti in due giorni: coincidenza o strategia?</summary>
+      <p>Entrambe. La coincidenza è nel calendario; la strategia è nel contesto. I modelli aperti più forti del 2026 sono stati finora cinesi, GLM, DeepSeek, Kimi, e per un'azienda o un governo occidentale costruirci sopra pone le domande di sovranità e di sicurezza viste in queste edizioni. Mistral e Reflection propongono la stessa risposta da due continenti: un modello aperto "di casa", e si confrontano apertamente con i modelli cinesi nei benchmark dichiarati. Nel mese in cui tre laboratori chiusi discutono un ente di autoregolazione che, temono i critici, potrebbe escludere i modelli aperti, non è un dettaglio.</p></details>
+      <details class="q"><summary>Perché entrambi promettono i pesi "questo mese" invece di pubblicarli subito?</summary>
+      <p>Perché l'annuncio e i pesi servono a due scopi diversi. L'annuncio fissa la posizione nella classifica dell'attenzione, che in questo settore dura giorni; i pesi, una volta fuori, sono irreversibili e vanno sistemati bene: versione finale, licenza, formati quantizzati, test di sicurezza. Il rischio per chi legge è confondere i due momenti: oggi esistono due annunci e un'API; i modelli aperti, con la loro licenza e la loro scheda, esisteranno quando potrai scaricarli. Questa newsletter tornerà sull'argomento in quei giorni.</p></details>
+      <p class="sources">Fonti: <a href="https://techcrunch.com/2026/10/05/reflection-debuts-beam-a-open-weight-ai-model-to-rival-chinese-models-at-lower-compute-cost/">TechCrunch</a> <span class="src">stampa</span></p>
+    </div>
+    <div class="stick card">
+      <h3>I giganti aperti del mese</h3>
+      <div class="tbl"><table style="min-width:0;font-size:.85rem"><thead><tr><th>Modello</th><th>Totale</th><th>Attivi</th><th>Pesi</th></tr></thead><tbody>
+        <tr><td>Kimi K3</td><td>2,8 T</td><td>n.d.</td><td>luglio</td></tr>
+        <tr><td>Mistral Large 4</td><td>1,05 T</td><td>49 B</td><td>27 ottobre</td></tr>
+        <tr><td>Beam</td><td>501 B</td><td>23 B</td><td>ottobre</td></tr>
+        <tr><td>Kolibri</td><td>78 B</td><td>3,46 B</td><td>disponibili</td></tr>
+      </tbody></table></div>
+      <p class="note">Solo Kimi K3 e Kolibri sono scaricabili oggi. Per gli altri due esistono un annuncio e, per Mistral, un'API.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="azure">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip">Rubrica fissa, undicesima puntata</span><span class="chip date">Sintesi delle dieci puntate, 3–6 ottobre 2026</span><span class="src u">ufficiale</span></div>
+    <h2>Azure Content Understanding: la lista di controllo completa, prima di ogni progetto</h2>
+    <p class="lead">Dieci puntate in quaranta domande, divise per fase. Spunta quelle a cui sai rispondere: il contatore ti dice dove sei esposto. Ogni voce rimanda alla puntata in cui trovi la spiegazione.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>Come usarla</h3>
+      <p>Questa non è una lista di cose da fare, è una lista di domande a cui saper rispondere prima di inviare il primo lotto. Alcune hanno una risposta tecnica, altre una risposta organizzativa, e per alcune la risposta giusta è "non ancora, e lo sappiamo". Il valore sta nel contatore: una lista con trenta "sì" e dieci "non so" ti dice esattamente dove andare a leggere, o chi chiamare. Ho messo le domande nell'ordine in cui un progetto le incontra: dimensionare, progettare, proteggere, osservare.</p>
+      <h3>Le dieci regole che non invecchiano</h3>
+      <p>Se dovessi tenere una sola frase per puntata, sarebbero queste. Prima: la quota è una velocità, non una scorta, e mille pagine al minuto sono cento minuti per centomila pagine. Seconda: la confidenza raddoppia i token e si accende per campo. Terza: classifica prima di estrarre, e prevedi sempre "altro". Quarta: se ti serve il parlato, manda l'audio. Quinta: moduli standard a Document Intelligence, documenti vari a Content Understanding, locale solo nei contenitori. Sesta: la modalità agentica costa il triplo di contestualizzazione e non sostituisce la revisione umana. Settima: il servizio vede firme, metadati e grafici, e i metadati possono contenere nomi. Ottava: la quota di token si stima su prompt più max_tokens, e dieci thread che partono insieme sono una raffica. Nona: la residenza dei dati si decide nella distribuzione del modello, non nel servizio. Decima: accendi i log il giorno in cui crei la risorsa.</p>
+      <div class="example"><b>Esempio pratico: la riunione di avvio</b>Porta la lista a chi deve dimensionare, a chi scrive il software e a chi risponde della conformità. Fate il contatore insieme, una volta: le domande senza risposta sono l'ordine del giorno. Nella mia esperienza di queste dieci puntate, le tre che restano più spesso senza risposta sono il tipo di distribuzione del modello (geografia, zona dati o globale), il valore di max_tokens, e chi conserva l'oggetto usage per ogni documento. Sono anche le tre che costano di più quando si scoprono dopo.</div>
+      <details class="q"><summary>Perché una lista di domande e non una lista di impostazioni?</summary>
+      <p>Perché le impostazioni cambiano a ogni versione dell'API, come hai visto con gli esempi etichettati tra la 2025-11-01 e la 2026-06-01-preview, mentre le domande restano: "dove viene elaborato il mio documento?" sarà una buona domanda anche tra due anni, quando il parametro per rispondere si chiamerà in un altro modo. Una lista di domande invecchia bene; una lista di parametri invecchia in sei mesi.</p></details>
+      <details class="q"><summary>Cosa manca ancora alla rubrica?</summary>
+      <p>Tre cose che le prossime puntate potrebbero coprire: casi reali con numeri veri di clienti anonimi, il confronto con i servizi equivalenti di AWS e Google dentro un progetto misto, e la parte di valutazione della qualità, cioè come misurare se i campi estratti sono giusti, con quale campione e quale soglia. Se ne vuoi una in particolare, dimmelo: la rubrica è tua.</p></details>
+      <p class="sources">Le fonti di ciascuna voce sono nelle puntate collegate; l'indice delle puntate è nell'archivio.</p>
+    </div>
+    <div class="stick card">
+      <h3>La lista di controllo</h3>
+      <div class="stats" style="grid-template-columns:1fr 1fr;margin:0 0 .8rem"><div class="stat"><strong id="ckdone">0</strong><span>risposte sicure</span></div><div class="stat"><strong id="ckleft">40</strong><span>da chiarire</span></div></div>
+      <div id="cklist" style="max-height:28rem;overflow:auto"></div>
+      <p id="cknote" class="note" style="color:var(--ink)"></p>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="lab">
+  <div class="ch-head"><div class="kicker"><span class="chip">Laboratorio</span></div><h2>Prova tu</h2></div>
+  <div class="prose" style="margin-top:2rem">
+    <h3 style="font-size:1.3rem">1. Il test dell'italiano (Mistral Large 4)</h3>
+    <p>Mistral dichiara l'italiano tra le lingue di addestramento. L'unico modo di saperlo è provare, e il confronto si può fare con qualsiasi coppia di modelli.</p>
+  </div>
+  <div class="card"><pre class="prompt" id="m1">Rispondi in italiano, con precisione giuridica e senza inventare riferimenti: un cliente chiede se può recedere da un contratto di fornitura di servizi concluso online. Spiega quali sono i punti da verificare nel contratto e nella normativa italiana sui contratti a distanza, usando i termini tecnici corretti in italiano, e segnala esplicitamente ogni punto su cui non sei sicuro e consiglieresti di consultare un professionista.</pre><button class="btn copy" data-c="m1">Copia</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Cosa osservare:</b> i termini tecnici (recesso, diritto di ripensamento, contratto a distanza) sono quelli giusti o traduzioni letterali dall'inglese? Le incertezze sono dichiarate o nascoste? Fai valutare le risposte di due modelli da un terzo, in italiano, con la griglia dell'edizione del 5 ottobre. Un modello con l'italiano "di prima classe" si riconosce più dalla naturalezza dei termini che dalla correttezza dei fatti.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">2. La fabbrica di AI, su carta (Beam)</h3>
+    <p>Prima di credere a una "fabbrica di AI", disegnala. Chiedi a un assistente la distinta base.</p>
+  </div>
+  <div class="card"><pre class="prompt" id="m2">Un ente pubblico vuole costruire in casa un sistema di AI basato su un modello aperto da 500 miliardi di parametri (23 attivi), da adattare ai propri documenti riservati e da far girare senza che nulla esca. Scrivi la distinta base: hardware necessario per servire il modello (stima la memoria a 2 byte per parametro e poi con quantizzazione a 8 e 4 bit), competenze del team, dati da preparare, come si adatta il modello senza riaddestrarlo da zero, come si aggiorna quando esce una versione nuova, cosa si misura per sapere se funziona, e i tre rischi principali. Dichiara ogni ipotesi numerica.</pre><button class="btn copy" data-c="m2">Copia</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Cosa osservare:</b> se la memoria stimata è "23 miliardi × 2 byte", l'assistente ha confuso attivi e totali: la lezione dell'ospedale. Il numero giusto parte da 500 miliardi.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">3. Il contatore della lista, con il tuo team (Azure)</h3>
+    <p>Stampa o condividi la lista di controllo e fatela compilare separatamente a tre persone: chi dimensiona, chi sviluppa, chi risponde della conformità. Poi confrontate: le domande su cui le tre risposte divergono sono i veri punti aperti del progetto, più ancora di quelle a cui nessuno sa rispondere.</p>
+  </div>
+</section>
+
+<section class="ch" id="segnali">
+  <div class="ch-head"><div class="kicker"><span class="chip">Da tenere d'occhio</span></div><h2>Segnali emergenti e recuperi</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">pista</span><h3>Aplomb 1: un altro modello decisionale, multimodale</h3><p>Una rassegna segnala che EmpirioLabs ha presentato Aplomb 1, un modello decisionale aperto da 5,3 miliardi di parametri, multimodale, con pesi e scheda in arrivo a ottobre sotto Apache 2.0. Se confermato, la categoria aperta da Jev conta ormai sei famiglie. Fonte unica, da verificare. <a href="https://aiweekly.co/ai-news-today">AI Weekly</a> <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">recupero: 1° ottobre</span><h3>Microsoft AI: due modelli di sintesi vocale e uno di trascrizione</h3><p>Un registro dei rilasci con date dei produttori segnala che il 1° ottobre Microsoft AI ha pubblicato due modelli di sintesi vocale e un modello di trascrizione in streaming, lo stesso giorno di Clef e Strands. Mi erano sfuggiti: li segno per completezza, con la scheda da leggere. <a href="https://www.digitalapplied.com/blog/ai-model-releases-october-2026-tracker">Registro dei rilasci di ottobre</a> <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">2 ottobre</span><h3>Bilibili: un modello di traduzione a esperti</h3><p>Lo stesso registro indica che il team Index di Bilibili ha pubblicato l'anteprima di un modello di traduzione da 35 miliardi di parametri totali e 3 attivi. Un'altra miscela di esperti, stavolta specializzata. <a href="https://www.digitalapplied.com/blog/ai-model-releases-october-2026-tracker">Registro dei rilasci di ottobre</a> <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">ottobre</span><h3>Meta: sei articoli di matematica scritti con un modello</h3><p>Meta AI ha pubblicato sei articoli di matematica firmati insieme a matematici umani, usando Muse Spark 1.1 e 1.2 in modalità di ragionamento attraverso la normale interfaccia di chat. Il punto interessante non è il modello, è l'interfaccia: nessuno strumento speciale. <a href="https://aiweekly.co/ai-news-today">AI Weekly</a> <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">7 ottobre</span><h3>openTPU: un acceleratore progettato dall'AI</h3><p>In cima alle notizie del giorno, un progetto su GitHub che fa girare modelli come Qwen3 su un acceleratore per FPGA progettato con l'aiuto dell'AI. Dopo GPT-Synopsys, un'altra prova che l'AI che progetta hardware non è solo una partnership tra giganti. <a href="https://aiweekly.co/ai-news-today">AI Weekly</a> <span class="src">terze parti</span></p></div>
+  </div>
+</section>
+
+<section class="ch" id="novita">
+  <div class="ch-head"><div class="kicker"><span class="chip">Rispetto all'edizione del 6 ottobre</span></div><h2>Cosa è cambiato, e cosa ho escluso</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">nuovo</span><h3>Mistral Large 4 e Beam</h3><p>Due giganti aperti annunciati in due giorni; i pesi arriveranno in ottobre, e la newsletter ci tornerà.</p></div>
+    <div class="sig"><span class="chip date">rubrica</span><h3>Azure, undicesima puntata</h3><p>La lista di controllo completa delle prime dieci, con contatore.</p></div>
+    <div class="sig"><span class="chip date">recuperi</span><h3>1° e 2 ottobre</h3><p>I modelli vocali di Microsoft AI e il traduttore di Bilibili, sfuggiti alle edizioni del 2 ottobre.</p></div>
+  </div>
+  <div class="prose" style="margin-top:2rem">
+    <p><b>Escluso.</b> I benchmark dettagliati di ML4 e Beam, citati ma non messi in tabella finché i pesi non saranno scaricabili e qualcuno li avrà verificati. Un paper sul campionamento "a potenza" per modelli matematici, troppo specialistico. E le voci sulla quantizzazione di ML4 oltre quanto dichiarato da Mistral.</p>
+  </div>
+</section>
+
+<section class="ch" id="quiz">
+  <div class="ch-head"><div class="kicker"><span class="chip">Mettiti alla prova</span></div><h2>Cinque domande</h2></div>
+  <div class="card quiz" id="quizbox" style="margin-top:2rem"></div>
+</section>
+
+<section class="ch" id="fonti">
+  <div class="ch-head"><h2>Fonti di questa edizione</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="src">stampa</span><h3>Testate</h3><p><a href="https://venturebeat.com/technology/mistral-debuts-large-4-le-chonk-a-1-trillion-parameter-text-output-model-with-high-benchmarks-planned-for-open-weights-release">VentureBeat</a> · <a href="https://thenextweb.com/news/mistral-releases-large-4-a-1-trillion-parameter-open-weight-ai-model">TNW</a> · <a href="https://www.testingcatalog.com/mistral-launches-large-4-preview-with-1-t-parameters/">TestingCatalog</a> · <a href="https://www.techbooky.com/mistral-large-4-puts-a-1-trillion-parameter-model-in-public-preview/">TechBooky</a> · <a href="https://techcrunch.com/2026/10/05/reflection-debuts-beam-a-open-weight-ai-model-to-rival-chinese-models-at-lower-compute-cost/">TechCrunch</a></p></div>
+    <div class="sig"><span class="src">terze parti</span><h3>Da verificare</h3><p><a href="https://kingy.ai/blog/mistral-large-4-specs-benchmarks-pricing/">Kingy</a> · <a href="https://alphasignal.ai/news/mistral-ai-s-mistral-large-4-packs-1-trillion-parameters-into-4-gpus">AlphaSignal</a> · <a href="https://daily.dev/posts/mistral-releases-large-4-a-1-trillion-parameter-open-weight-ai-model-g2w2sdvpi">daily.dev</a> · <a href="https://aiweekly.co/ai-news-today">AI Weekly</a> · <a href="https://www.digitalapplied.com/blog/ai-model-releases-october-2026-tracker">Registro dei rilasci di ottobre</a></p></div>
+    <div class="sig"><span class="src u">ufficiale</span><h3>Documentazione</h3><p>Le fonti Microsoft Learn di ciascuna voce della lista sono nelle dieci puntate collegate, raccolte nell'<a href="../index.html">archivio</a>.</p></div>
+  </div>
+</section>
+
+</main>
+<footer>Radar AI · edizione del 7 ottobre 2026 · preparata da Claude.<br>I benchmark dichiarati dai produttori non sono verificati; le stime energetiche sono di ordine di grandezza.</footer>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id)}
+  var links=[].slice.call(document.querySelectorAll('#links a'));var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function onScroll(){var h=document.documentElement;$('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';var cur=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<140)cur=i});links.forEach(function(a,i){a.classList.toggle('on',i===cur&&window.scrollY>200)})}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  /* hero grid 40x25 = 1000 cubes, 49 yellow */
+  var g='',n=0;for(var r=0;r<25;r++)for(var c=0;c<40;c++){var x=60+c*7,y=90+r*8;var on=n<49;n++;g+='<rect x="'+x+'" y="'+y+'" width="6" height="7" rx="1" fill="'+(on?'var(--sun)':'var(--soft)')+'"/>'}
+  $('chonkhero').innerHTML=g;
+
+  /* moe compare */
+  var MM=[['Kolibri',78.1,3.46],['Beam',501,23],['Mistral Large 4',1050,49]];
+  $('moecmp').innerHTML=MM.map(function(m){var mem=m[1]*2;return '<div style="padding:.5rem 0;border-bottom:1px solid var(--line)"><b style="font-family:var(--head);font-size:.9rem">'+m[0]+'</b><div class="cbar" style="grid-template-columns:7rem 1fr 5rem;margin:.3rem 0"><span style="font-size:.8rem">attivi / token</span><div class="tr"><div class="fi t" style="width:'+Math.max(1,m[2]/49*100)+'%"></div></div><b>'+m[2].toString().replace('.',',')+' B</b></div><div class="cbar" style="grid-template-columns:7rem 1fr 5rem;margin:.3rem 0"><span style="font-size:.8rem">memoria BF16</span><div class="tr"><div class="fi" style="width:'+Math.max(1,mem/2100*100)+'%"></div></div><b>'+(mem>=1000?(mem/1000).toFixed(1).replace('.',',')+' TB':Math.round(mem)+' GB')+'</b></div></div>'}).join('');
+
+  /* energy */
+  function en(){var mw=+$('mw').value,d=+$('days').value;$('mwo').textContent=mw+' MW';$('dayso').textContent=d;var gwh=mw*24*d/1000;$('gwh').textContent=gwh.toFixed(1).replace('.',',');$('fam').textContent=Math.round(gwh*1e6/2700).toLocaleString('it-IT')}
+  $('mw').oninput=en;$('days').oninput=en;en();
+
+  /* checklist */
+  var CK=[['Dimensionare',['So quante pagine, immagini, ore di audio e video elaborerò al mese (p.1)','Ho calcolato il tempo minimo con la quota: pagine ÷ 1.000 al minuto, ore ÷ 4 al minuto (p.1)','Uso la modalità asincrona per i file oltre 5 pagine o 10 MB (p.1)','So come il servizio conta le pagine: 3.000 caratteri, fogli Excel anche nascosti, diapositive (p.1)','Ho spezzato audio e video sotto le 2 ore o 300 MB e invio per riferimento a Blob Storage (p.4)','Mando solo l\'audio quando mi serve il parlato (p.4)','Ho verificato i TPM assegnati alla singola distribuzione del modello, non solo alla sottoscrizione (p.8)','Ho calcolato le richieste al minuto come TPM ÷ (prompt + max_tokens) (p.8)','Ho impostato max_tokens al minimo necessario e best_of a 1 (p.8)','Ho calcolato quante chiamate tenere in volo dalla latenza misurata (p.8)']],
+    ['Progettare',['Ho scelto tra Document Intelligence e Content Understanding con la tabella ufficiale (p.5)','Classifico prima di estrarre, con una categoria "altro" (p.3)','Uso enableSegment per i PDF con più documenti e allowInPageSegments quando serve (p.3, p.7)','Ogni campo ha il metodo giusto: extract, classify, generate (p.2)','La confidenza è attiva solo sui campi che un umano deve poter verificare (p.2)','L\'analisi delle figure è accesa solo dove mi servono i grafici in dati (p.2, p.7)','Ho deciso se la modalità agentica serve davvero, e dove basta l\'estrazione più un controllo nel software (p.6)','So quale tariffa di contestualizzazione pagherò: standard, avanzata o agentica (p.2, p.6)','Ho scelto il modello generativo più piccolo che supera il mio test di qualità (p.1)','I totali e le verifiche semplici li fa il mio software, non il modello (p.2)']],
+    ['Proteggere',['So in quale regione è la risorsa e di che tipo è la distribuzione del modello: geografia, zona dati o globale (p.9)','Uso processingLocation per i passaggi di sola lettura e impaginazione (p.9)','Il mio processo recupera e cancella i risultati entro le 24 ore (p.9)','Non uso il riconoscimento dei volti senza informativa e base giuridica (p.9)','So come vengono trattati gli esempi etichettati nella versione dell\'API che uso (p.2, p.9)','Ho deciso cosa fare con i nomi nei metadati estratti (p.7)','Mi autentico con identità gestite, senza chiavi nel codice (p.9)','Ho una procedura per gli incidenti: cosa registrare, chi avvisare, entro quanto (ed. 5 ott)','Ho letto la pagina ufficiale su dati e privacy e la ricontrollo ogni trimestre (p.9)','Ho verificato le condizioni di uso delle anteprime prima di metterle in produzione (p.6)']],
+    ['Osservare',['Ho un cruscotto con pagine, token e 429 al minuto accanto alle quote (p.10)','I log RequestResponse e Audit sono instradati dal giorno della creazione (p.10)','Ho un allarme sui 429, uno all\'85% della quota e uno sulla latenza (p.10)','Salvo l\'oggetto usage di ogni analisi con l\'identificativo del documento (p.2, p.10)','Misuro la latenza anche dal lato client con una chiave di correlazione (p.10)','Rispetto retry-after e uso attese esponenziali con jitter, senza ripetizioni doppie (p.8)','Distanzio le partenze per non concentrarle nello stesso secondo (p.8)','So riconoscere i quattro tipi di 429 dal messaggio e dalle intestazioni (p.8)','Ho un campione di verifica della qualità con la mia soglia di confidenza (p.2, ed. 3 ott)','Ho registrato chi è il proprietario umano dei risultati del processo (ed. 4 ott)']]];
+  var html='';CK.forEach(function(sec,si){html+='<p style="font-family:var(--head);font-weight:700;margin:.8rem 0 .3rem">'+sec[0]+'</p>';sec[1].forEach(function(q,qi){html+='<label style="display:flex;gap:.5rem;align-items:flex-start;font-size:.86rem;padding:.3rem 0;border-bottom:1px solid var(--line)"><input type="checkbox" data-s="'+si+'" style="accent-color:var(--violet);margin-top:.2rem"> '+q+'</label>'})});
+  $('cklist').innerHTML=html;
+  function ck(){var all=document.querySelectorAll('#cklist input');var done=[].filter.call(all,function(c){return c.checked}).length;$('ckdone').textContent=done;$('ckleft').textContent=all.length-done;var per=[0,0,0,0];[].forEach.call(all,function(c){if(!c.checked)per[+c.dataset.s]++});var worst=per.indexOf(Math.max.apply(null,per));
+    $('cknote').textContent=done===all.length?'Tutte: porta la lista alla prossima riunione di avvio.':'La fase più scoperta è "'+CK[worst][0]+'" con '+per[worst]+' domande aperte: parti da lì.'}
+  [].forEach.call(document.querySelectorAll('#cklist input'),function(c){c.onchange=ck});ck();
+
+  /* copy */
+  [].forEach.call(document.querySelectorAll('.copy'),function(b){b.style.marginTop='.6rem';b.onclick=function(){var t=$(b.dataset.c).textContent;var o=b.textContent;
+    function sel(){var r=document.createRange();r.selectNodeContents($(b.dataset.c));var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Testo selezionato: copialo'}
+    try{navigator.clipboard.writeText(t).then(function(){b.textContent='Copiato ✓';setTimeout(function(){b.textContent=o},1500)},sel)}catch(e){sel()}}});
+
+  /* quiz */
+  var Q=[["Quanti parametri sono attivi per token in Mistral Large 4?",["1 trilione","49 miliardi (52 con gli strati di ingresso e uscita)","1,6 miliardi"],1,"Esatto: e 1,05 trilioni in memoria, circa 2,1 TB a 2 byte per parametro."],
+    ["Quando saranno disponibili i pesi di Mistral Large 4?",["Sono già scaricabili","Il 27 ottobre, in FP8 e FP4","Mai: è un modello chiuso"],1,"Giusto: oggi esiste un'API in anteprima."],
+    ["Cosa propone Reflection AI con le 'fabbriche di AI'?",["Un servizio cloud","Permettere a istituzioni di costruire un sistema locale addestrando i modelli di Reflection sui propri dati","Un chip"],1,"Corretto, con il sostegno di NVIDIA, le cui GPU farebbero girare quelle fabbriche."],
+    ["Secondo la rubrica, la quota di Content Understanding è…",["Una scorta che si accumula","Una velocità massima: i minuti non usati non si recuperano","Un limite giornaliero"],1,"Esatto: 100.000 pagine sono almeno 100 minuti."],
+    ["Quali sono le tre domande che restano più spesso senza risposta, secondo la rubrica?",["Il prezzo, il modello, la regione","Il tipo di distribuzione del modello, il valore di max_tokens, chi conserva l'oggetto usage","Il formato dei file, la lingua, il fuso orario"],1,"Proprio così: e sono le tre che costano di più quando si scoprono dopo."]];
+  var sc=0,an=0;$('quizbox').innerHTML=Q.map(function(q,i){return '<div class="qq"><p>'+(i+1)+'. '+q[0]+'</p><div class="opts">'+q[1].map(function(o,j){return '<button class="opt" data-q="'+i+'" data-o="'+j+'">'+o+'</button>'}).join('')+'</div><div class="fb" id="fb'+i+'"></div></div>'}).join('')+'<p class="score" id="score"></p>';
+  [].forEach.call(document.querySelectorAll('.quiz .opt'),function(b){b.onclick=function(){var qi=+b.dataset.q,oi=+b.dataset.o,q=Q[qi];var g=document.querySelectorAll('.quiz .opt[data-q="'+qi+'"]');if(g[0].disabled)return;[].forEach.call(g,function(x){x.disabled=true;if(+x.dataset.o===q[2])x.classList.add('ok')});
+    if(oi===q[2]){sc++;$('fb'+qi).textContent=q[3]}else{b.classList.add('ko');$('fb'+qi).textContent='Non proprio. '+q[3]}if(++an===Q.length)$('score').textContent='Hai risposto bene a '+sc+' domande su '+Q.length+'.'}});
+})();
+</script>
+
+</body>
+</html>

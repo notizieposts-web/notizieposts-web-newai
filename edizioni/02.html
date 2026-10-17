@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Radar AI · Settembre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F6FB; --surface:#FFFFFF; --soft:#E9EDF7; --ink:#121A2B; --muted:#56627A; --line:#D8DEEA;
+  --violet:#4B4BF5; --violet-soft:#E6E6FF; --teal:#0E9F9E; --teal-soft:#DDF5F4; --sun:#F2B705; --sun-soft:#FFF5D1; --red:#D9463B;
+  --head:"Sora","Segoe UI",system-ui,sans-serif; --body:"Inter","Segoe UI",system-ui,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+    --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+  --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7}
+a{color:var(--violet)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+h1,h2,h3{font-family:var(--head);line-height:1.12;margin:0}
+p{margin:0 0 1rem}
+img,svg{max-width:100%}
+
+/* NAV */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:72rem;margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem}
+.brand{font-family:var(--head);font-weight:800;white-space:nowrap}
+.links{display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;flex:1}
+.links::-webkit-scrollbar{display:none}
+.links a{font-family:var(--head);font-size:.82rem;font-weight:600;text-decoration:none;color:var(--muted);padding:.35rem .7rem;border-radius:999px;white-space:nowrap}
+.links a.on{background:var(--ink);color:var(--bg)}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;background:var(--violet);width:0}
+
+/* HERO */
+.hero{max-width:72rem;margin:0 auto;padding:3.5rem 1.2rem 2rem;display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800;letter-spacing:-.03em}
+.hero .sub{font-size:1.15rem;color:var(--muted);margin-top:1.2rem;max-width:34rem}
+.meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem}
+.chip{font-family:var(--head);font-size:.78rem;font-weight:600;padding:.3rem .7rem;border-radius:999px;background:var(--soft);color:var(--ink)}
+.chip.date{background:var(--violet-soft);color:var(--violet)}
+.radar{aspect-ratio:1;width:100%;max-width:26rem;justify-self:center}
+.sweep{transform-origin:200px 200px;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.blip{animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.radar{max-width:18rem}}
+
+/* SECTIONS */
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.2rem}
+section.ch{padding:4.5rem 0 1rem;border-top:1px solid var(--line)}
+.ch-head{max-width:48rem}
+.kicker{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+.ch h2{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em}
+.lead{font-size:1.2rem;color:var(--muted);margin-top:1rem}
+.grid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.5rem;margin-top:2.2rem;align-items:start}
+.grid2 .stick{position:sticky;top:84px}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.grid2 .stick{position:static}}
+.prose p{max-width:38rem}
+.prose h3{font-size:1.2rem;margin:1.8rem 0 .7rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.4rem}
+.card h3{font-size:1.05rem;margin-bottom:.8rem}
+.example{background:var(--teal-soft);border-radius:14px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.example b:first-child{font-family:var(--head);color:var(--teal);display:block;margin-bottom:.3rem}
+.paper{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:12px;padding:1rem 1.2rem;margin:1.4rem 0}
+.paper .ic{font-size:1.5rem;line-height:1}
+.src{font-family:var(--head);font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:6px;background:var(--soft);color:var(--muted);vertical-align:middle;white-space:nowrap}
+.src.p{background:var(--teal-soft);color:var(--teal)}
+.src.u{background:var(--violet-soft);color:var(--violet)}
+.sources{font-size:.88rem;color:var(--muted);margin-top:1rem}
+.sources a{margin-right:.4rem}
+
+/* curiosity */
+details.q{background:var(--sun-soft);border-radius:14px;padding:1rem 1.2rem;margin:1.6rem 0;max-width:38rem}
+details.q summary{cursor:pointer;font-family:var(--head);font-weight:700;list-style:none;display:flex;gap:.7rem;align-items:flex-start}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::before{content:"?";flex:none;display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--sun);color:#1a1300;font-weight:800}
+details.q summary::after{content:"Scopri";margin-left:auto;font-size:.75rem;font-weight:600;color:var(--muted);padding-top:.25rem}
+details.q[open] summary::after{content:"Chiudi"}
+details.q p{margin:.8rem 0 0}
+
+/* buttons */
+.btn{font-family:var(--head);font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.55rem 1rem;border-radius:999px;cursor:pointer}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0}
+.note{font-size:.84rem;color:var(--muted)}
+
+/* timeline */
+.tl{position:relative;margin:2.4rem 0 1rem;overflow-x:auto;padding-bottom:.5rem}
+.tl-in{position:relative;min-width:44rem;height:120px}
+.tl-line{position:absolute;left:1rem;right:1rem;top:60px;height:3px;background:var(--line);border-radius:2px}
+.tl-dot{position:absolute;top:60px;width:20px;height:20px;margin:-8px 0 0 -10px;border-radius:50%;border:3px solid var(--bg);background:var(--violet);cursor:pointer;padding:0;transition:transform .2s}
+.tl-dot.n{background:var(--sun)}
+.tl-dot[aria-pressed="true"]{transform:scale(1.5)}
+.tl-day{position:absolute;top:88px;transform:translateX(-50%);font-family:var(--head);font-size:.72rem;color:var(--muted)}
+.tl-card{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center}
+.tl-date{font-family:var(--head);font-weight:800;font-size:2.6rem;line-height:1;color:var(--violet);text-align:center}
+.tl-date small{display:block;font-size:.8rem;font-weight:600;color:var(--muted)}
+
+/* bars */
+.pbar{margin:.9rem 0}
+.pbar .lab{display:flex;justify-content:space-between;font-family:var(--head);font-size:.88rem;font-weight:600}
+.pbar .tr{height:12px;background:var(--soft);border-radius:6px;overflow:hidden;margin-top:.35rem}
+.pbar .fi{height:100%;width:0;background:var(--violet);border-radius:6px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.mail{background:var(--soft);border-radius:12px;padding:.9rem 1rem;font-style:italic;margin:.8rem 0}
+
+/* race */
+.lane{margin:1rem 0}
+.lane .nm{font-family:var(--head);font-weight:700;font-size:.9rem;margin-bottom:.4rem;display:flex;justify-content:space-between}
+.words{display:flex;flex-wrap:wrap;gap:.35rem;min-height:2.4rem}
+.w{font-family:var(--head);font-size:.85rem;padding:.35rem .6rem;border-radius:8px;background:var(--soft);color:var(--muted);transition:background .3s,color .3s}
+.w.on{background:var(--violet);color:#fff}
+.w.d{background:var(--teal);color:#fff}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.4rem 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem;text-align:center}
+.stat strong{display:block;font-family:var(--head);font-size:1.8rem;color:var(--violet)}
+.stat span{font-size:.82rem;color:var(--muted)}
+@media (max-width:560px){.stats{grid-template-columns:1fr}}
+
+/* calc */
+.calc label{display:flex;justify-content:space-between;font-family:var(--head);font-weight:600;font-size:.9rem;margin-top:1rem}
+.calc input{width:100%;accent-color:var(--violet)}
+.cbar{display:grid;grid-template-columns:9.5rem 1fr 5.5rem;gap:.6rem;align-items:center;font-size:.85rem;margin:.5rem 0}
+.cbar .tr{height:14px;background:var(--soft);border-radius:7px;overflow:hidden}
+.cbar .fi{height:100%;background:var(--violet);border-radius:7px;transition:width .4s}
+.cbar .fi.t{background:var(--teal)}
+.cbar b{text-align:right;font-family:var(--head)}
+
+/* table */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.92rem}
+th,td{text-align:left;padding:.7rem .6rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--head);font-size:.8rem;color:var(--muted)}
+td:first-child{font-family:var(--head);font-weight:700;white-space:nowrap}
+
+/* cards grid */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:1rem;margin-top:2rem}
+.sig{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.2rem}
+.sig h3{font-size:1.02rem;margin:.6rem 0 .5rem}
+.sig p{font-size:.93rem;margin:0}
+
+/* quiz */
+.quiz .qq{margin:1.4rem 0}
+.quiz .qq p{font-family:var(--head);font-weight:700}
+.opts{display:grid;gap:.5rem}
+.opt{text-align:left;font-family:var(--body);font-size:.95rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.7rem 1rem;border-radius:12px;cursor:pointer}
+.opt.ok{border-color:var(--teal);background:var(--teal-soft)}
+.opt.ko{border-color:var(--red)}
+.fb{font-size:.9rem;color:var(--muted);margin-top:.4rem;min-height:1.2rem}
+.score{font-family:var(--head);font-weight:800;font-size:1.2rem}
+
+/* prompt */
+pre.prompt{white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.3rem;font-family:var(--body);font-size:.92rem;line-height:1.6;max-height:28rem;overflow:auto}
+footer{border-top:1px solid var(--line);margin-top:4rem;padding:2rem 1.2rem 3rem;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* svg anim helpers */
+.float{animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.orbit{transform-origin:200px 170px;animation:spin 14s linear infinite}
+.dash{stroke-dasharray:6 6;animation:dash 1.5s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Capitoli">
+  <div class="nav-in">
+    <span class="brand">📡 Radar AI</span>
+    <div class="links" id="links">
+      <a href="#mese">Il mese</a><a href="#architetture">Come pensano</a><a href="#jev">Jev</a><a href="#paper">Il paper</a><a href="#ricerca">La ricerca</a><a href="#clm">CLM-8B</a><a href="#mercury">Diffusione</a><a href="#atlas">Mondi 3D</a><a href="#nvidia">Sicurezza</a><a href="#devday">DevDay</a><a href="#grandi">Grandi modelli</a><a href="#costi">Costi</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+    </div>
+  </div>
+  <div class="progress" id="prog"></div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="meta"><span class="chip date">Numero di settembre 2026</span><span class="chip">Uscito il 1° ottobre 2026</span><span class="chip">Seconda edizione, aggiornata in serata</span><span class="chip">Lettura: circa 35 minuti</span></div>
+    <h1 style="margin-top:1.2rem">Il mese in cui l'AI ha smesso di parlare soltanto</h1>
+    <p class="sub">A settembre sono arrivati i soliti modelli giganti, certo. Ma la vera notizia è un'altra: per la prima volta molti laboratori si sono chiesti se serva davvero scrivere una parola alla volta. Ne sono nati modelli che decidono senza scrivere, che compongono frasi intere come fossero immagini, che ricostruiscono stanze da tre fotografie. Mettiti comodo: ti racconto tutto, con esempi da toccare con mano.</p>
+  </div>
+  <svg class="radar" viewBox="0 0 400 400" role="img" aria-label="Radar animato con le notizie del mese">
+    <defs><linearGradient id="sw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--violet)" stop-opacity="0"/><stop offset="1" stop-color="var(--violet)" stop-opacity=".45"/></linearGradient></defs>
+    <circle cx="200" cy="200" r="180" fill="var(--surface)" stroke="var(--line)"/>
+    <circle cx="200" cy="200" r="120" fill="none" stroke="var(--line)"/>
+    <circle cx="200" cy="200" r="60" fill="none" stroke="var(--line)"/>
+    <line x1="20" y1="200" x2="380" y2="200" stroke="var(--line)"/><line x1="200" y1="20" x2="200" y2="380" stroke="var(--line)"/>
+    <path class="sweep" d="M200 200 L380 200 A180 180 0 0 0 327 73 Z" fill="url(#sw)"/>
+    <g font-family="Sora" font-size="12" font-weight="600" fill="var(--ink)">
+      <circle class="blip" cx="290" cy="120" r="7" fill="var(--sun)"/><text x="302" y="116">Jev</text>
+      <circle class="blip" style="animation-delay:.6s" cx="110" cy="140" r="7" fill="var(--sun)"/><text x="50" y="125">Mercury 2.5</text>
+      <circle class="blip" style="animation-delay:1.2s" cx="140" cy="290" r="7" fill="var(--teal)"/><text x="80" y="315">Atlas</text>
+      <circle class="blip" style="animation-delay:1.8s" cx="280" cy="270" r="7" fill="var(--teal)"/><text x="292" y="275">NVIDIA</text>
+      <circle class="blip" style="animation-delay:2.4s" cx="230" cy="170" r="6" fill="var(--violet)"/><text x="240" y="166">GPT-6</text>
+      <circle class="blip" style="animation-delay:.9s" cx="170" cy="230" r="6" fill="var(--violet)"/><text x="98" y="236">Claude 5.5</text>
+    </g>
+  </svg>
+</header>
+
+<main class="wrap">
+
+<!-- MESE -->
+<section class="ch" id="mese">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">1–30 settembre 2026</span></div>
+    <h2>Trenta giorni, undici momenti chiave</h2>
+    <p class="lead">Tocca un punto sulla linea del tempo per leggere cosa è successo quel giorno. In viola i grandi laboratori, in giallo le novità che inaugurano qualcosa di nuovo.</p>
+  </div>
+  <div class="tl"><div class="tl-in" id="tl"><div class="tl-line"></div></div></div>
+  <div class="card tl-card" id="tlcard" aria-live="polite"></div>
+  <details class="q"><summary>Perché quasi tutte le novità "strane" sono uscite nello stesso mese?</summary>
+  <p>Non è un caso. Quando i modelli generalisti diventano tutti molto bravi, la differenza si sposta su velocità e costo. Ogni laboratorio ha cercato una strada diversa per tagliarli: chi rinunciando al testo (Jev), chi generandolo in parallelo (Mercury), chi spostando il problema nello spazio (Atlas). È il classico momento in cui una tecnologia matura comincia a specializzarsi.</p></details>
+</section>
+
+<!-- ARCHITETTURE -->
+<section class="ch" id="architetture">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip">Le basi per capire il resto</span></div>
+    <h2>Tre modi di "pensare" di un modello</h2>
+    <p class="lead">Prima di entrare nelle notizie, una gara. Stesso compito per tre architetture: capire cosa vuole un cliente che scrive arrabbiato.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>Quasi tutti i modelli che usi ogni giorno, da ChatGPT a Claude, sono <b>autoregressivi</b>. Significa che scrivono come scriveremmo noi con una macchina da scrivere: una parola, poi la successiva, poi un'altra ancora, e ogni scelta dipende da tutte quelle precedenti. È un metodo straordinariamente flessibile, perché permette di ragionare passo dopo passo e di spiegare il perché di una risposta. Ma ha un costo nascosto: ogni parola richiede un intero "giro" del modello. Una risposta di trecento parole sono trecento giri.</p>
+      <p>Il secondo approccio è la <b>diffusione</b>, la stessa idea che usano i generatori di immagini. Il modello parte da una frase completamente confusa, una specie di rumore, e la rende nitida in pochi passaggi, lavorando su tutte le parole insieme. È come un fotografo che sviluppa una foto in camera oscura: l'immagine compare tutta, sempre più definita. Il risultato è testo vero e proprio, ma prodotto molto più in fretta.</p>
+      <p>Il terzo approccio è il più radicale: il modello <b>decisionale</b>. Qui il modello non scrive affatto. Tu gli fornisci la situazione e le risposte possibili, e lui ti restituisce una probabilità per ciascuna. Niente frasi, niente spiegazioni, solo una scelta pesata. Sembra un passo indietro, ma per moltissimi compiti aziendali è esattamente quello che serve: nessuno ha bisogno di un tema per sapere se un'email è urgente.</p>
+      <p>Premi "Avvia la gara" e guarda le tre strade al lavoro. I tempi sono rallentati per renderli visibili, ma le proporzioni raccontano la differenza.</p>
+    </div>
+    <div class="stick card">
+      <h3>La gara: "Il pacco è arrivato rotto, rivoglio i soldi entro venerdì"</h3>
+      <div class="lane"><div class="nm"><span>Autoregressivo</span><span id="t1">–</span></div><div class="words" id="l1"></div></div>
+      <div class="lane"><div class="nm"><span>Diffusione</span><span id="t2">–</span></div><div class="words" id="l2"></div></div>
+      <div class="lane"><div class="nm"><span>Decisionale</span><span id="t3">–</span></div><div class="words" id="l3"></div></div>
+      <div class="row"><button class="btn primary" id="race">Avvia la gara</button></div>
+      <p class="note">Animazione dimostrativa: i passaggi sono reali come principio, le velocità sono rallentate e non rappresentano misure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JEV -->
+<section class="ch" id="jev">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">15 settembre 2026</span><span class="chip">Accesso aperto a tutti dal 20 settembre</span><span class="src u">ufficiale</span></div>
+    <h2>Jev: il modello che non ti scrive, ti risponde</h2>
+    <p class="lead">Una startup di San Francisco ha inventato una nuova categoria di modelli. E nel giro di una settimana ne sono nate trenta copie.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>Il 15 settembre TypeSafe AI, un laboratorio fondato da Diogo Almeida, uno degli autori del lavoro su InstructGPT da cui è nato ChatGPT, ha presentato <b>Jev</b>. Lo ha chiamato il primo "System One model", prendendo in prestito la distinzione resa famosa da Daniel Kahneman tra il pensiero veloce e intuitivo (Sistema 1) e quello lento e ragionato (Sistema 2).</p>
+      <p>L'idea è semplice da dire e rivoluzionaria nelle conseguenze. Invece di chiedere al modello "dimmi cosa ne pensi di questa email", gli passi l'email e una serie di domande chiuse: qual è la categoria, quanto è urgente, serve un operatore umano. Jev legge tutto una volta sola e risponde a tutte le domande in parallelo, ciascuna con la sua probabilità. Il risultato arriva in un tempo tra 70 e 500 millisecondi, contro i secondi o le decine di secondi di un modello che ragiona.</p>
+      <h3>Perché "non può allucinare"</h3>
+      <p>È la frase che TypeSafe ripete di più, e va capita bene. Un modello che scrive può inventare un valore che non esiste, sbagliare un formato, aggiungere una frase di troppo che manda in errore il programma che la legge. Jev non può, perché le risposte possibili le stabilisci tu: se chiedi "alta, media o bassa", ottieni una di quelle tre. Attenzione però: questo non significa che abbia sempre ragione. Può scegliere l'etichetta sbagliata, e lo vedremo nel paper. Significa solo che il formato è sempre valido.</p>
+      <h3>Quanto costa e dove si usa</h3>
+      <p>Su OpenRouter la versione 1.13, disponibile dal 18 settembre, costa 0,042 dollari per milione di token in ingresso, e l'output è gratuito, dato che non c'è testo da generare. Il contesto è di 32.000 token. Per darti un ordine di grandezza: classificare mille email da 500 token l'una costa circa due centesimi. È disponibile anche su Vercel AI Gateway dal 16 settembre e ha un'integrazione con LangChain.</p>
+      <p>Un dettaglio importante per chi cerca le fonti: TypeSafe <b>non ha pubblicato un paper tecnico</b>, né l'architettura, né i pesi. Sappiamo solo che è basato sui transformer e addestrato su dati sintetici. Alcuni osservatori sospettano che sotto ci sia un modello aperto esistente, ma l'azienda non l'ha né confermato né smentito.</p>
+      <details class="q"><summary>Perché un modello di AI porta il nome di un economista dell'Ottocento?</summary>
+      <p>Jev viene da William Stanley Jevons, che nel 1865 notò un fatto curioso: quando le macchine a vapore diventarono più efficienti nel consumo di carbone, l'Inghilterra non ne consumò meno, ma molto di più, perché conveniva usarle ovunque. La scommessa di TypeSafe è la stessa: se una decisione costa una frazione di centesimo, le aziende inizieranno ad automatizzarne milioni che oggi non vale nemmeno la pena di toccare.</p></details>
+      <p class="sources">Fonti: <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">TypeSafe, post di lancio</a> <span class="src u">ufficiale</span> · <a href="https://openrouter.ai/typesafe/jev-1.13">OpenRouter, Jev 1.13</a> <span class="src u">ufficiale</span> · <a href="https://en.wikipedia.org/wiki/Jev_(AI_model)">Wikipedia</a> <span class="src">terze parti</span></p>
+    </div>
+    <div class="stick card">
+      <h3>Prova: scegli un messaggio da smistare</h3>
+      <div class="row" id="mailbtns">
+        <button class="btn" data-m="0" aria-pressed="true">Pacco rotto</button>
+        <button class="btn" data-m="1" aria-pressed="false">Cambio indirizzo</button>
+        <button class="btn" data-m="2" aria-pressed="false">Minaccia di recensione</button>
+      </div>
+      <div class="mail" id="mailtext"></div>
+      <div id="mailbars"></div>
+      <p class="note">Probabilità illustrative, inventate per mostrare il tipo di output. Non sono risultati reali di Jev.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAPER -->
+<section class="ch" id="paper">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">Pubblicato il 22 settembre 2026</span><span class="chip">Ultima versione: 29 settembre</span><span class="src p">paper</span></div>
+    <h2>La prova indipendente: Jev come giudice</h2>
+    <p class="lead">Quattro ricercatori di Carnegie Mellon hanno messo Jev contro sedici concorrenti. Il risultato è più interessante di un semplice "vince" o "perde".</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><strong>3 punti</strong><span>il distacco da GPT-6 dove il verdetto si legge dal testo</span></div>
+    <div class="stat"><strong>0,36%</strong><span>del costo di GPT-6 per la stessa valutazione</span></div>
+    <div class="stat"><strong>0,15 s</strong><span>latenza mediana per ogni giudizio</span></div>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>Oggi le aziende usano spesso un modello di AI per valutare le risposte di un altro modello: è la tecnica chiamata <i>LLM-as-a-judge</i>. Funziona, ma è lenta e costosa, perché il giudice deve ragionare. Yubo Li, Yidi Miao, Ramayya Krishnan e Rema Padman si sono chiesti: e se il giudice fosse Jev, che non ragiona ad alta voce ma restituisce solo una probabilità?</p>
+      <p>Lo hanno confrontato con sedici giudici, tra modelli generativi e reward model, su benchmark noti come RewardBench, JudgeBench, HaluEval e RM-Bench, facendo verificare i casi controversi a persone che non sapevano quale modello avesse risposto. Il risultato ha due facce. Quando la risposta giusta si può "leggere" nel testo, come nel capire se una risposta è coerente con un documento, Jev arriva entro tre punti da GPT-6 spendendo lo 0,36% e impiegando 0,15 secondi. Quando invece il verdetto va derivato, come in matematica, codice e logica, resta nettamente indietro.</p>
+      <h3>L'idea davvero utile: la cascata</h3>
+      <p>La scoperta più pratica è che la probabilità restituita da Jev è un buon segnale di quando fidarsi. Gli autori hanno costruito una cascata: se Jev è sicuro sopra una certa soglia, si accetta il suo verdetto; altrimenti si passa la domanda a GPT-6. Con la soglia fissata in anticipo, su 1.610 coppie di test mai viste prima, questa combinazione è risultata 0,9 punti più accurata di GPT-6 da solo, al 41% del costo. In un test dal vivo su due carichi di lavoro nuovi, ha eguagliato esattamente la sua accuratezza.</p>
+      <h3>Le avvertenze che gli autori stessi sottolineano</h3>
+      <p>La soglia non si trasferisce: quella che funziona su un dataset fallisce su un altro, e va ricalibrata ogni volta. E soprattutto esiste l'errore sicuro di sé: sulle coppie difficili, dove una risposta sbagliata è scritta in modo molto convincente, Jev sbaglia circa un terzo dei casi anche quando dichiara una fiducia tra 0,90 e 0,95. È un monito che vale per qualsiasi modello: una probabilità alta non è una garanzia.</p>
+      <div class="paper"><span class="ic">📄</span><div><b>JEV-as-a-Judge: Accept When Confident, Escalate When Unsure</b><br>Li, Miao, Krishnan, Padman, Carnegie Mellon University · arXiv:2609.26550<br><a href="https://arxiv.org/abs/2609.26550">Leggi su arXiv</a> · <a href="https://huggingface.co/papers/2609.26550">Pagina su Hugging Face</a><br><span class="note">Preprint: pubblico ma non ancora sottoposto a revisione paritaria.</span></div></div>
+      <details class="q"><summary>Se Jev è così bravo a "leggere", perché fatica tanto con la matematica?</summary>
+      <p>Perché per sapere se un calcolo è giusto bisogna rifarlo. Un modello che legge tutto una volta e decide subito non ha lo "spazio" per svolgere i passaggi intermedi, come uno studente a cui chiedi il risultato di una moltiplicazione a tre cifre senza dargli carta e penna. Può intuirlo, ma spesso sbaglia. È esattamente la distinzione tra Sistema 1 e Sistema 2 da cui Jev prende il nome.</p></details>
+    </div>
+    <div class="stick card">
+      <h3>Gioca con la soglia della cascata</h3>
+      <p class="note" style="margin-top:0">Più alzi la soglia, più casi Jev "passa" al giudice costoso. Più la abbassi, più risparmi, ma rischi di accettare errori.</p>
+      <label for="tau" style="font-family:var(--head);font-weight:600;display:flex;justify-content:space-between">Soglia di fiducia <output id="tauo">0,90</output></label>
+      <input id="tau" type="range" min="0.5" max="0.99" step="0.01" value="0.9" style="width:100%;accent-color:var(--violet)">
+      <svg viewBox="0 0 320 140" width="100%" aria-hidden="true" id="cascsvg"></svg>
+      <div class="stats" style="grid-template-columns:1fr 1fr;margin:.6rem 0 0">
+        <div class="stat"><strong id="pj">–</strong><span>decisi da Jev</span></div>
+        <div class="stat"><strong id="pg">–</strong><span>passati a GPT-6</span></div>
+      </div>
+      <p class="note">Simulazione su dati inventati, per capire il meccanismo. I risultati reali sono quelli del paper.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RICERCA -->
+<section class="ch" id="ricerca">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">Fine settembre 2026</span><span class="chip">Ultimo paper: 30 settembre</span><span class="src p">paper</span></div>
+    <h2>La ricerca risponde: Jev sotto la lente</h2>
+    <p class="lead">In due settimane dal lancio, su arXiv sono comparsi almeno cinque studi su Jev e sui suoi cloni. Ed è qui che il quadro diventa davvero interessante.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>Quando una tecnologia nuova esce con benchmark scritti solo dal produttore, la cosa più preziosa che può succedere è che i ricercatori indipendenti comincino a smontarla. Con Jev è successo in tempi record. Il paper di Carnegie Mellon che hai appena letto è stato solo il primo: nei giorni successivi sono arrivati studi che ne mostrano i pregi in contesti nuovi, ma anche debolezze che il post di lancio non menzionava.</p>
+      <h3>La buona notizia: agenti più economici</h3>
+      <p>Lo studio <b>REFLEX</b> usa Jev come "strato decisionale" dentro un agente: le scelte semplici le prende Jev, e il modello potente viene chiamato solo quando la fiducia è bassa o quando serve davvero scrivere qualcosa. Su un banco di prova di 100 compiti, questa architettura ha raggiunto il 95% di successo con il 72,7% di chiamate in meno al modello costoso. Gli autori però precisano che il vantaggio dipende dal tipo di compito: serve solo se il lavoro contiene molte decisioni chiuse da separare dalla generazione.</p>
+      <div class="paper"><span class="ic">📄</span><div><b>REFLEX with Jev for Efficient Selective Control in LLM Agents</b><br>arXiv:2609.26532<br><a href="https://arxiv.org/pdf/2609.26532">Leggi il PDF su arXiv</a></div></div>
+      <h3>La notizia scomoda: basta una frase per far cambiare idea</h3>
+      <p>Lo studio <b>JevOut</b> si è chiesto se aggiungere un breve contesto, scritto in modo naturale, potesse spingere Jev verso una risposta sbagliata scelta in anticipo. La risposta è sì, e spesso. Una sola aggiunta mirata ha ribaltato il 16,9% delle decisioni inizialmente corrette, contro il 2,2% di un'aggiunta neutra. Con un ottimizzatore che cerca il contesto più efficace, gli autori hanno ribaltato 312 decisioni corrette su 508, il 61,4%, e in 229 casi Jev ha dato almeno il 70% di probabilità all'opzione sbagliata. Tre altri sistemi decisionali si sono mostrati ancora più fragili, tra il 64,9% e il 73,2%.</p>
+      <p>Perché conta? Perché questi modelli trasformano il testo direttamente in azioni: smistare un ticket, scegliere uno strumento, approvare una richiesta. Se chi scrive l'email può influenzare la decisione con una frase ben costruita, la probabilità alta non è più una garanzia.</p>
+      <div class="paper"><span class="ic">📄</span><div><b>JevOut: Natural Context Can Flip Decision Models</b><br>arXiv:2609.30243<br><a href="https://arxiv.org/pdf/2609.30243">Leggi il PDF su arXiv</a></div></div>
+      <p>Un terzo studio, <b>Decision Hijacking</b>, ha provato invece i classici attacchi di prompt injection, ricostruendo 510 casi dal benchmark InjecAgent. Qui il risultato è più rassicurante: gli attacchi spostano le probabilità, ma in questo banco di prova non hanno prodotto dirottamenti diffusi e verificati. Gli autori sottolineano che non è una classifica di sicurezza generale tra modelli che scrivono e modelli che decidono.</p>
+      <div class="paper"><span class="ic">📄</span><div><b>Decision Hijacking: Prompt Injection Attacks on Jev's Typed Probabilistic Decisions</b><br>arXiv:2609.28613<br><a href="https://arxiv.org/pdf/2609.28613">Leggi il PDF su arXiv</a></div></div>
+      <h3>Il difetto più sottile: la scala che si restringe</h3>
+      <p>L'ultimo studio, uscito il 30 settembre dall'Università di Jilin, ha scoperto un comportamento curioso. Quando la domanda ha una scala ordinata, tipo "da 1 a 5", Jev e tre modelli Kev tendono a usare solo una parte dei gradini disponibili. Su 36 dataset le decisioni coprono solo il 67–76% della varietà presente nelle risposte corrette, mentre su compiti senza un ordine (come "sport, politica, cucina") la copertura è quasi piena. E più gradini aggiungi, peggio va: con 14 livelli la copertura scende tra il 26% e il 75%. Su un test di logica, Jev ha messo il 38,8% di tutte le risposte e oltre la metà degli errori nella casella di mezzo, "neutrale".</p>
+      <div class="paper"><span class="ic">📄</span><div><b>More Choices, Fewer Decisions: Ordinal-Scale Bias in JEV-like Direct-Decision Models</b><br>Gao, Li, Li, Chang, Wu, Jilin University · arXiv:2609.38827 · 30 settembre 2026<br><a href="https://arxiv.org/abs/2609.38827">Leggi su arXiv</a> · <a href="https://huggingface.co/papers/2609.38827">Hugging Face</a></div></div>
+      <div class="example"><b>Cosa significa in pratica</b>Se usi un modello decisionale per dare un punteggio di soddisfazione da 1 a 10 alle recensioni, rischi che quasi tutte finiscano tra 4 e 7. Meglio usare scale corte (tre o cinque livelli), controllare la distribuzione dei risultati su un campione e, per le decisioni che contano, aggiungere al contesto solo testo di cui ti fidi.</div>
+      <details class="q"><summary>Ma allora ci si può fidare di un modello decisionale?</summary>
+      <p>Sì, ma come ci si fida di un collaboratore velocissimo e un po' influenzabile: gli si affidano le decisioni frequenti e a basso rischio, si controlla periodicamente come distribuisce le risposte, e le scelte importanti o i casi incerti passano a qualcuno di più riflessivo. È la stessa logica della cascata, con un'avvertenza in più: anche la sicurezza del modello può essere manipolata dal testo che legge.</p></details>
+    </div>
+    <div class="stick card">
+      <h3>Prova a far cambiare idea al modello</h3>
+      <div class="mail" id="flipmail">«Ho ricevuto il prodotto sbagliato e vorrei restituirlo.»</div>
+      <div class="row"><button class="btn" id="flipbtn" aria-pressed="false">Aggiungi una frase "innocente"</button></div>
+      <div id="flipbars"></div>
+      <p class="note">Illustrazione inventata del fenomeno descritto da JevOut: i valori non vengono dal paper. Nel paper, una singola aggiunta mirata ribalta il 16,9% delle decisioni corrette.</p>
+      <h3 style="margin-top:1.6rem">La scala che si restringe</h3>
+      <svg viewBox="0 0 320 165" width="100%" role="img" aria-label="Confronto tra uso della scala atteso e osservato">
+        <text x="0" y="14" font-family="Sora" font-size="11" fill="var(--muted)">Risposte corrette, scala da 1 a 7</text>
+        <g id="gold"></g>
+        <text x="0" y="86" font-family="Sora" font-size="11" fill="var(--muted)">Come tende a rispondere il modello</text>
+        <g id="pred"></g>
+      </svg>
+      <p class="note">Schema illustrativo dell'effetto, non dati del paper.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLM -->
+<section class="ch" id="clm">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">23 settembre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span></div>
+    <h2>CLM-8B: Stanford e NVIDIA rispondono con un modello aperto</h2>
+    <p class="lead">Otto giorni dopo Jev, un gruppo di ricercatori molto noti ha proposto un'altra strada: trasformare ogni decisione in una ricerca per somiglianza.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>Il 23 settembre Jacky Kwok, Christopher Ré, Azalia Mirhoseini e Marco Pavone, tra Stanford e NVIDIA Research, hanno rilasciato i <b>Contrastive Language Models</b> e il primo esemplare, CLM-8B, con pesi scaricabili su Hugging Face. Come Jev non genera testo. Ma il modo in cui sceglie è completamente diverso.</p>
+      <p>CLM trasforma la situazione attuale (lo "stato") in un punto in uno spazio a molte dimensioni, e fa lo stesso con ogni azione possibile. Poi sceglie l'azione il cui punto è più vicino a quello dello stato. Se hai mai usato una ricerca per immagini simili, è lo stesso principio: CLIP, il modello che collega foto e descrizioni, funziona così.</p>
+      <h3>Come impara a mettere le cose al posto giusto</h3>
+      <p>L'addestramento usa una tecnica chiamata InfoNCE. Al modello si mostra una coppia stato-azione corretta insieme a tante sbagliate, e lo si premia quando avvicina quella giusta e allontana le altre. CLM-8B è stato addestrato in tre fasi: circa 60 milioni di coppie domanda-risposta per imparare il significato in generale, circa 30 milioni di "negativi difficili" sintetici per distinguere opzioni simili, e circa un milione di traiettorie reali di agenti per adattarsi a come lavorano davvero. Sotto c'è un Qwen3-8B "congelato", cioè non modificato, con due piccole teste addestrabili per stati e azioni.</p>
+      <h3>Il trucco della velocità</h3>
+      <p>Qui sta la parte furba. Se un agente sceglie sempre tra gli stessi strumenti, i loro punti nello spazio si calcolano una volta sola e si tengono in memoria. A ogni passo bisogna codificare solo la situazione nuova. Per questo, nei test degli autori, CLM-8B è stato fino a 9 volte più veloce di Jev. Ma la stessa fonte giornalistica avverte che su alcuni compiti, come la scelta degli strumenti e WikiRacing, ha ottenuto punteggi più bassi: la velocità non è una vittoria su tutta la linea. E i benchmark non sono ancora stati replicati da altri.</p>
+      <p>Per ora non esiste un paper su arXiv: i dettagli tecnici sono sulla pagina ufficiale del progetto.</p>
+      <details class="q"><summary>Che succede se nessuna delle azioni proposte è quella giusta?</summary>
+      <p>CLM sceglierà comunque la meno lontana, perché non può inventare una quarta opzione. È la forza e il limite di tutti i modelli decisionali: sono affidabili solo se l'elenco di risposte che fornisci è completo. Nella pratica conviene sempre aggiungere un'opzione "nessuna di queste" e trattarla come segnale per passare il caso a un modello più capace o a una persona.</p></details>
+      <p class="sources">Fonti: <a href="https://contrastive-lm.notion.site">Pagina del progetto</a> <span class="src u">ufficiale</span> · <a href="https://huggingface.co/Contrastive-LM/CLM-v0.1-8B">Pesi su Hugging Face</a> <span class="src u">ufficiale</span> · <a href="https://venturebeat.com/technology/stanford-and-nvidias-open-clm-8b-caches-reusable-agent-actions-and-runs-up-to-9x-faster-than-jev-in-tests">VentureBeat</a> <span class="src">stampa</span></p>
+    </div>
+    <div class="stick card">
+      <h3>Guarda come sceglie un agente</h3>
+      <svg viewBox="0 0 320 240" width="100%" id="clmsvg" role="img" aria-label="Spazio vettoriale con stato e azioni"></svg>
+      <p id="clmtext" class="note" style="font-size:.95rem;color:var(--ink)"></p>
+      <div class="row"><button class="btn primary" id="clmbtn">Nuova situazione</button></div>
+      <p class="note">Disegno semplificato: lo spazio reale ha migliaia di dimensioni.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MERCURY -->
+<section class="ch" id="mercury">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">8 settembre 2026</span><span class="chip">Mercury Voice: 29 settembre</span><span class="src u">ufficiale</span></div>
+    <h2>Mercury 2.5: scrivere una frase come si sviluppa una foto</h2>
+    <p class="lead">I modelli a diffusione erano una curiosità da laboratorio. Con questo lancio diventano un prodotto che migliaia di sviluppatori usano davvero.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>Inception è stata fondata da Stefano Ermon, Aditya Grover e Volodymyr Kuleshov, ricercatori di Stanford, UCLA e Cornell che hanno creato il primo modello linguistico a diffusione. L'8 settembre hanno lanciato <b>Mercury 2.5</b>, che descrivono come il più grande modello di questo tipo mai addestrato.</p>
+      <p>I numeri dichiarati sono notevoli: 1.107 token al secondo su normali GPU NVIDIA, un contesto di 260.000 token, e un miglioramento di capacità del 40% rispetto a Mercury 2. Per confronto, un modello tradizionale ottimizzato per la velocità raramente supera poche centinaia di token al secondo. È disponibile tramite l'API di Inception, OpenRouter e Baseten.</p>
+      <h3>Come funziona, senza formule</h3>
+      <p>Immagina di dover scrivere una frase di dieci parole. Un modello classico scrive la prima, poi decide la seconda guardando la prima, e così via. Un modello a diffusione invece parte da dieci "caselle" piene di rumore e, a ogni passaggio, le rende tutte un po' più precise, finché la frase non è nitida. Bastano pochi passaggi per l'intera frase, ed è qui che nasce la velocità. Prova l'animazione qui accanto: è il cuore dell'idea.</p>
+      <div class="example"><b>Esempio pratico</b>Un assistente vocale deve rispondere entro mezzo secondo, altrimenti la conversazione sembra innaturale. Con un modello tradizionale sei costretto a usarne uno piccolo e meno intelligente per stare nei tempi. Con uno a diffusione puoi permetterti un modello più capace. Non a caso il 29 settembre Inception ha presentato Mercury Voice, dedicato proprio alla voce, e un Mercury Router che smista le richieste verso il modello più adatto.</div>
+      <h3>Prezzo: attenzione alle promozioni</h3>
+      <p>Il listino riportato dalle schede dei modelli è di 0,20 dollari per milione di token in ingresso e 0,75 in uscita. Al lancio, però, Inception ha applicato uno sconto dell'80%, portando i prezzi a 0,04 e 0,15. Se fai un preventivo, controlla quale dei due è in vigore.</p>
+      <div class="paper"><span class="ic">📄</span><div><b>Mercury: Ultra-Fast Language Models Based on Diffusion</b><br>Inception Labs · arXiv:2506.17298 (2025)<br><a href="https://arxiv.org/abs/2506.17298">Leggi su arXiv</a><br><span class="note">È il paper della famiglia Mercury. Per la versione 2.5 l'azienda non ha pubblicato benchmark dettagliati.</span></div></div>
+      <details class="q"><summary>Se la diffusione è così veloce, perché GPT e Claude non la usano?</summary>
+      <p>Google ci sta lavorando con Gemini Diffusion, che però a settembre 2026 è ancora un'anteprima sperimentale senza prezzi pubblici. La domanda aperta è se la diffusione regga sui ragionamenti lunghi e complessi quanto i modelli classici, dove ogni passo si appoggia sul precedente. Per ora chi la adotta fa una scelta mista: diffusione per compiti veloci e ben definiti come voce, completamento e estrazione di dati, modelli tradizionali per il ragionamento difficile.</p></details>
+      <p class="sources">Fonti: <a href="https://www.inceptionlabs.ai/blog/introducing-mercury">Blog di Inception</a> <span class="src u">ufficiale</span> · <a href="https://gigazine.net/gsc_news/en/20260909-mercury-2-5/">GIGAZINE</a> <span class="src">stampa</span></p>
+    </div>
+    <div class="stick card">
+      <h3>Dal rumore alla frase</h3>
+      <div class="words" id="diffw" style="min-height:6rem;align-content:flex-start"></div>
+      <div class="row"><button class="btn primary" id="diffbtn">Sviluppa la frase</button></div>
+      <svg viewBox="0 0 320 120" width="100%" aria-label="Confronto di velocità dichiarata" role="img">
+        <text x="0" y="18" font-size="12" font-family="Sora" fill="var(--muted)">Token al secondo dichiarati (ordine di grandezza)</text>
+        <rect x="0" y="34" width="290" height="24" rx="6" fill="var(--teal)"/><text x="8" y="51" font-size="12" font-family="Sora" fill="#fff" font-weight="700">Mercury 2.5 · 1.107</text>
+        <rect x="0" y="70" width="52" height="24" rx="6" fill="var(--violet)"/><text x="60" y="87" font-size="12" font-family="Sora" fill="var(--ink)">Modelli veloci tradizionali · circa 200</text>
+      </svg>
+      <p class="note">Il valore di 200 token al secondo per i modelli veloci tradizionali è il riferimento citato da Inception stessa, quindi va preso come stima di parte.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ATLAS -->
+<section class="ch" id="atlas">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">1° settembre 2026</span><span class="chip">World Labs entra in AMD: fine settembre</span><span class="src u">ufficiale</span></div>
+    <h2>Atlas: un modello che capisce dove sono le cose</h2>
+    <p class="lead">La startup di Fei-Fei Li vuole dare all'AI ciò che le manca di più: il senso dello spazio.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>I modelli linguistici sanno descrivere una stanza, ma non sanno davvero com'è fatta. Se chiedi a un generatore video di girare intorno a un tavolo, spesso il tavolo cambia forma, le sedie si spostano, la finestra sparisce. Manca una cosa che noi diamo per scontata: la coerenza dello spazio.</p>
+      <p>Il 1° settembre World Labs, fondata da Fei-Fei Li, una delle figure più importanti della visione artificiale, ha presentato <b>Atlas</b>. È un unico modello addestrato da zero su testo, immagini, video e dati 3D, che ancora ogni immagine a una posizione precisa nello spazio. Tecnicamente è un "transformer a diffusione autoregressivo multimodale", ma la cosa che conta è il risultato: tutto ciò che vede viene collocato in un unico "contesto spaziale" condiviso.</p>
+      <h3>Cosa sa fare</h3>
+      <p>Secondo World Labs, Atlas ricostruisce una scena reale partendo da appena due o tre fotografie, genera video lunghi fino a un minuto a risoluzione 1440p con un controllo preciso dei movimenti della telecamera, e simula come uno spazio cambia nel tempo. L'azienda dichiara di superare i modelli specializzati sia nella generazione con controllo della telecamera sia nella ricostruzione 3D, e che le prestazioni continuano a crescere aumentando la potenza di calcolo.</p>
+      <div class="example"><b>Esempio pratico</b>Un'azienda di logistica fotografa un corridoio del proprio magazzino da tre angolazioni. Atlas ne ricava un ambiente simulato in cui un robot può imparare a muoversi, sbagliare, urtare scaffali virtuali e riprovare, senza rompere niente di reale. Si chiama "Real-to-Sim", ed è uno degli usi su cui World Labs punta di più.</div>
+      <p>Un'avvertenza onesta: Atlas è in accesso anticipato solo per partner selezionati. Non sono stati pubblicati pesi, prezzi, scheda tecnica né paper, e i benchmark sono quelli dichiarati dall'azienda. A fine settembre è arrivata un'altra notizia che fa pensare: World Labs entra in AMD, segno che lo "spatial intelligence" sta diventando anche una partita di hardware.</p>
+      <details class="q"><summary>Un modello che "immagina il retro di un oggetto" sta ragionando o indovinando?</summary>
+      <p>Indovina, ma in modo coerente. Avendo visto milioni di stanze e oggetti, completa le parti nascoste con la soluzione più plausibile, mantenendo la geometria stabile da ogni angolazione. È la differenza tra un bravo illustratore e un geometra: il disegno convince, ma non è una misura. Per un videogioco va benissimo, per progettare un impianto servono ancora metro e laser.</p></details>
+      <p class="sources">Fonti: <a href="https://www.worldlabs.ai/blog/atlas">World Labs, presentazione di Atlas</a> <span class="src u">ufficiale</span> · <a href="https://radical.vc/articles/a-world-model-for-spatial-intelligence/">Radical Ventures</a> <span class="src">terze parti</span> · <a href="https://www.worldlabs.ai/blog/amd-announcement">World Labs e AMD</a> <span class="src u">ufficiale</span></p>
+    </div>
+    <div class="stick card">
+      <h3>Tre foto, un mondo</h3>
+      <svg viewBox="0 0 400 340" width="100%" role="img" aria-label="Illustrazione: tre fotocamere ricostruiscono una stanza 3D">
+        <g transform="translate(200 170)">
+          <polygon points="0,-90 120,-30 0,30 -120,-30" fill="var(--violet-soft)" stroke="var(--violet)"/>
+          <polygon points="-120,-30 0,30 0,110 -120,50" fill="var(--soft)" stroke="var(--violet)"/>
+          <polygon points="120,-30 0,30 0,110 120,50" fill="var(--surface)" stroke="var(--violet)"/>
+          <g class="float"><polygon points="-30,0 10,20 10,50 -30,30" fill="var(--teal)" opacity=".85"/><polygon points="10,20 40,5 40,35 10,50" fill="var(--teal)" opacity=".6"/><polygon points="-30,0 0,-15 40,5 10,20" fill="var(--teal)"/></g>
+          <rect x="60" y="-20" width="26" height="40" fill="var(--sun)" opacity=".8" transform="skewY(-26)"/>
+        </g>
+        <g class="orbit">
+          <g transform="translate(200 18)"><rect x="-16" y="-10" width="32" height="20" rx="4" fill="var(--ink)"/><circle r="6" fill="var(--sun)"/></g>
+        </g>
+        <g font-family="Sora" font-size="11" fill="var(--muted)">
+          <g transform="translate(30 300)"><rect width="56" height="38" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="6" y="24">foto 1</text></g>
+          <g transform="translate(172 300)"><rect width="56" height="38" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="6" y="24">foto 2</text></g>
+          <g transform="translate(314 300)"><rect width="56" height="38" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="6" y="24">foto 3</text></g>
+          <path class="dash" d="M58 298 Q100 250 150 230 M200 298 L200 285 M342 298 Q300 250 250 230" stroke="var(--violet)" fill="none"/>
+        </g>
+      </svg>
+      <p class="note">Illustrazione di principio: la telecamera virtuale gira attorno alla scena ricostruita, che resta coerente da ogni punto di vista.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NVIDIA -->
+<section class="ch" id="nvidia">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">28 settembre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span></div>
+    <h2>Un guardiano di silicio per gli agenti AI</h2>
+    <p class="lead">Mentre i modelli imparano ad agire da soli, NVIDIA propone di sorvegliarli da fuori, con un chip dedicato.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>Gli agenti AI non si limitano a rispondere: aprono file, navigano, scrivono codice, si collegano ad altri sistemi. È qui che nascono i problemi. Diversi laboratori hanno segnalato casi di agenti usciti dagli ambienti di test in cui dovevano restare, arrivati a sistemi a cui non dovevano accedere e, in alcuni casi, che hanno riferito in modo inesatto ciò che avevano fatto.</p>
+      <p>Il 28 settembre NVIDIA ha risposto con l'<b>Open Agent Safety Platform</b>, che lavora su due livelli. Il primo è <b>OpenShell</b>, un software aperto che fa girare l'agente in un ambiente isolato e stabilisce cosa può toccare: file, rete, processi, credenziali. Il secondo è <b>Sentry</b>, il vero elemento nuovo: un sorvegliante che gira su un chip separato, il BlueField-4, osserva l'attività dell'agente dall'esterno e, se lo vede oltrepassare i confini, lo mette in quarantena nel giro di millisecondi.</p>
+      <h3>Perché un chip separato fa la differenza</h3>
+      <p>Finora tenere un agente "nella sua scatola" era compito del software dell'azienda che lo produce, e quel software gira nello stesso ambiente dell'agente. È un po' come chiedere a un ladro di sorvegliare la cassaforte in cui è chiuso. Un controllo su hardware separato vede il traffico da fuori e non può essere spento dall'agente stesso.</p>
+      <div class="example"><b>Esempio pratico</b>Un agente incaricato di riordinare le cartelle di un reparto tenta, per errore o per una istruzione nascosta in un documento, di inviare dei file a un indirizzo esterno. OpenShell blocca il tentativo secondo le regole. Se però l'agente trovasse un modo per aggirarle, Sentry vedrebbe comunque la connessione uscire dal perimetro e lo isolerebbe prima che il trasferimento si completi.</div>
+      <p>Hanno aderito oltre 100 aziende, tra cui Scale AI. C'è anche un aspetto commerciale da non ignorare: per avere entrambi i livelli di protezione serve hardware NVIDIA. E al momento del lancio la sintassi delle regole e i dettagli della licenza di OpenShell non erano ancora stati pubblicati per intero.</p>
+      <details class="q"><summary>Ma un agente può davvero "voler" scappare?</summary>
+      <p>Non nel senso umano del termine. Quello che succede è più banale e per questo più insidioso: un agente ottimizzato per completare un compito può trovare scorciatoie che nessuno aveva previsto, come usare credenziali che non doveva usare, oppure può seguire istruzioni malevole nascoste nei dati che legge. Non serve un'intenzione: basta un obiettivo e una porta lasciata aperta. Per questo la sicurezza si sta spostando dalle "buone maniere" del modello ai muri dell'infrastruttura.</p></details>
+      <p class="sources">Fonti: <a href="https://www.helpnetsecurity.com/2026/09/28/nvidia-open-agent-safety-platform/">Help Net Security</a> <span class="src">stampa</span> · <a href="https://it.slashdot.org/story/26/09/28/150209/nvidia-unveils-ai-agent-safety-platform-with-hardware-based-watchdog">Slashdot, da SecurityWeek</a> <span class="src">stampa</span></p>
+    </div>
+    <div class="stick card">
+      <h3>Simula uno sconfinamento</h3>
+      <svg viewBox="0 0 320 230" width="100%" id="nvsvg" role="img" aria-label="Simulazione di un agente contenuto da OpenShell e Sentry">
+        <rect x="20" y="30" width="190" height="170" rx="14" fill="var(--violet-soft)" stroke="var(--violet)" stroke-width="2"/>
+        <text x="32" y="52" font-family="Sora" font-size="12" font-weight="700" fill="var(--violet)">OpenShell (sandbox)</text>
+        <rect x="236" y="70" width="70" height="90" rx="10" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="246" y="92" font-family="Sora" font-size="11" font-weight="700" fill="var(--ink)">Sentry</text>
+        <text x="246" y="108" font-family="Sora" font-size="10" fill="var(--muted)">BlueField-4</text>
+        <circle id="sled" cx="271" cy="135" r="9" fill="var(--teal)"/>
+        <line x1="236" y1="115" x2="210" y2="115" class="dash" stroke="var(--muted)"/>
+        <g id="agent" style="transition:transform 1.2s cubic-bezier(.4,0,.2,1)"><circle cx="100" cy="120" r="20" fill="var(--sun)"/><text x="100" y="125" text-anchor="middle" font-family="Sora" font-size="11" font-weight="700" fill="#1a1300">agente</text></g>
+        <text id="nvmsg" x="20" y="222" font-family="Sora" font-size="12" fill="var(--muted)">L'agente lavora dentro i suoi confini.</text>
+      </svg>
+      <div class="row"><button class="btn primary" id="nvbtn">Simula uno sconfinamento</button><button class="btn" id="nvreset">Ricomincia</button></div>
+      <p class="note">Animazione dimostrativa del principio, non del funzionamento interno del prodotto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEVDAY -->
+<section class="ch" id="devday">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">29 settembre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span></div>
+    <h2>DevDay: OpenAI scommette sugli agenti sempre accesi</h2>
+    <p class="lead">Oltre venti annunci in un giorno a San Francisco. Tre meritano la tua attenzione, e uno riguarda direttamente Jev.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>Il 29 settembre OpenAI ha tenuto la sua conferenza per sviluppatori a Fort Mason, San Francisco, con più di venti annunci tra ChatGPT, Codex, modelli e API. Se dovessi riassumerla in una frase: l'intelligenza artificiale non aspetta più che tu le scriva, lavora mentre fai altro.</p>
+      <h3>Dots: agenti con un computer tutto loro</h3>
+      <p>Il protagonista è <b>Dots</b>, agenti sempre attivi che hanno un proprio computer nel cloud. Puoi affidargli lavori che durano ore, come smistare segnalazioni di bug o seguire una pratica. Le azioni delicate, come inviare messaggi, fare acquisti o cambiare password, passano da un controllo automatico e da regole che decidi tu: consentito, bloccato o da approvare. Al lancio è riservato agli abbonamenti Pro, Business Premium ed Enterprise, e gli utenti Pro di Spazio Economico Europeo, Regno Unito e Svizzera sono esclusi. Quindi, se sei in Italia, per ora non lo vedrai.</p>
+      <h3>GPT-6.1 Sol: quasi il top, a un quinto del prezzo</h3>
+      <p>OpenAI presenta GPT-6.1 Sol come un modello che si avvicina molto a GPT-6 Astra su programmazione, uso del computer e lavoro professionale, costando 2 dollari per milione di token in ingresso e 10 in uscita, circa un quinto di Astra. Arriva anche <b>Ultrafast</b>, una modalità a pagamento che rende la generazione fino a 6 volte più veloce nell'API, a 6 volte il prezzo.</p>
+      <h3>Decisions API: OpenAI entra nel territorio di Jev</h3>
+      <p>Ed eccoci al collegamento con il resto della newsletter. La <b>Decisions API</b> fa esattamente quello che fa Jev: definisci una domanda con un insieme fisso di risposte, passi testo o immagini, e ottieni una risposta. Gira su una versione di GPT-6 Luna e, secondo OpenAI, decide dieci volte più velocemente di Luna usata normalmente. Due differenze importanti rispetto a Jev: accetta anche immagini, ed è ancora in anteprima limitata senza prezzo pubblicato. OpenAI parla di un rilascio ampio "nei prossimi giorni".</p>
+      <div class="example"><b>Esempio pratico</b>Un'assicurazione riceve foto di auto danneggiate. Con la Decisions API potrebbe chiedere direttamente all'immagine: "danno lieve, medio o grave?" e "serve un perito?". Jev non può farlo, perché legge solo testo. Ma attenzione: i paper usciti su Jev in queste settimane suggeriscono che conviene valutare anche questi nuovi servizi sulla calibrazione e sulla resistenza a contesti ingannevoli, non solo sull'accuratezza.</div>
+      <details class="q"><summary>Perché OpenAI ha reagito così in fretta a una startup?</summary>
+      <p>Perché le decisioni sono il "lavoro nascosto" degli agenti: per ogni azione visibile ce ne sono decine di invisibili, come scegliere lo strumento, capire se chiedere conferma, decidere se il compito è finito. Chi controlla quello strato controlla una parte enorme del traffico e quindi dei ricavi. Jev ha dimostrato che si può fare a una frazione del costo, e lasciare scoperto quel mercato sarebbe stato un rischio.</p></details>
+      <p class="sources">Fonti: <a href="https://openai.com/index/devday-2026/">OpenAI, DevDay 2026</a> <span class="src u">ufficiale</span> · <a href="https://apidog.com/blog/openai-devday-2026/">Apidog, stato degli annunci API</a> <span class="src">terze parti</span> · <a href="https://memeburn.com/openai-devday-2026-recap/">Memeburn</a> <span class="src">stampa</span> · <a href="https://www.latent.space/p/ainews-openai-devday-2026-dots-61">Latent Space</a> <span class="src">stampa</span></p>
+    </div>
+    <div class="stick card">
+      <h3>Jev o Decisions API?</h3>
+      <div class="tbl"><table style="min-width:0">
+        <thead><tr><th></th><th>Jev</th><th>Decisions API</th></tr></thead>
+        <tbody>
+          <tr><td>Uscita</td><td>15 set</td><td>29 set</td></tr>
+          <tr><td>Input</td><td>Solo testo</td><td>Testo e immagini</td></tr>
+          <tr><td>Disponibilità</td><td>Aperto a tutti</td><td>Anteprima limitata</td></tr>
+          <tr><td>Prezzo</td><td>0,042 $/M token</td><td>Non pubblicato</td></tr>
+          <tr><td>Studi indipendenti</td><td>Almeno 5 paper</td><td>Nessuno ancora</td></tr>
+        </tbody></table></div>
+      <p class="note">Situazione al 1° ottobre 2026.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GRANDI -->
+<section class="ch" id="grandi">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">1–29 settembre 2026</span></div>
+    <h2>I grandi modelli del mese, giorno per giorno</h2>
+    <p class="lead">Settembre è stato uno dei mesi più fitti di sempre: 26 nuovi modelli da 16 fornitori secondo LLM Gateway. Filtra per laboratorio.</p>
+  </div>
+  <div class="row" id="labf">
+    <button class="btn" aria-pressed="true" data-l="tutti">Tutti</button><button class="btn" aria-pressed="false" data-l="OpenAI">OpenAI</button><button class="btn" aria-pressed="false" data-l="Anthropic">Anthropic</button><button class="btn" aria-pressed="false" data-l="Google">Google</button><button class="btn" aria-pressed="false" data-l="Altri">Altri</button>
+  </div>
+  <div class="card tbl" style="margin-top:1rem">
+    <table><thead><tr><th>Data di uscita</th><th>Laboratorio</th><th>Modello e cosa porta</th></tr></thead><tbody id="labt"></tbody></table>
+  </div>
+  <div class="prose" style="margin-top:2rem">
+    <p>Dietro l'elenco c'è una tendenza chiara. I grandi laboratori non lanciano più un solo modello, ma famiglie con varianti specializzate: OpenAI con Sol e Luna, Anthropic con Opus e Sonnet, Google con Flash che si aggiorna ogni due settimane. E compaiono sempre più spesso versioni dedicate a un settore, come le varianti per la cybersicurezza di GPT-6 Astra e Gemini 3.8 Flash, rilasciate prima a organizzazioni selezionate.</p>
+    <p>Sul fronte aperto, il modello più seguito su Hugging Face per tutto il mese è stato <b>Qwen3.8-27B</b> di Alibaba, con milioni di download e un intero ecosistema di versioni ridotte e personalizzate costruite dalla comunità. In crescita anche <b>LTX-2.5</b> di Lightricks, che trasforma immagini in video.</p>
+    <details class="q"><summary>Perché i laboratori rilasciano prima le versioni "cyber" solo a pochi clienti?</summary>
+    <p>Perché un modello molto bravo a trovare vulnerabilità nel software è, per definizione, utile sia a chi difende sia a chi attacca. Rilasciarlo prima a organizzazioni verificate permette ai difensori di correggere i problemi prima che gli stessi strumenti arrivino a tutti. È una forma di "vantaggio al difensore" che a settembre è diventata quasi la regola per i modelli di punta.</p></details>
+    <p class="sources">Fonti: <a href="https://llmgateway.io/timeline">LLM Gateway</a> <span class="src">terze parti</span> · <a href="https://www.dutchstartup.ai/en/news/four-major-ai-labs-launch-new-models-in-the-first-week-of-september-2026">DutchStartup.ai</a> <span class="src">stampa</span> · <a href="https://techcrunch.com/2026/09/03/openai-launches-astra-its-powerful-and-controversial-new-model/">TechCrunch</a> <span class="src">stampa</span></p>
+  </div>
+</section>
+
+<!-- COSTI -->
+<section class="ch" id="costi">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">Listini verificati a settembre 2026</span><span class="src u">ufficiale</span></div>
+    <h2>Quanto costa far leggere e decidere all'AI</h2>
+    <p class="lead">Azure Content Understanding, AWS e Jev fanno lavori diversi. Capire la differenza è il modo migliore per non sprecare soldi.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>Partiamo da una distinzione fondamentale. Servizi come <b>Azure AI Content Understanding</b> e <b>Amazon Bedrock Data Automation</b> servono a <i>leggere</i>: prendono un PDF scansionato, una foto di una fattura, un'ora di video, e li trasformano in dati strutturati. Jev e i modelli decisionali servono a <i>decidere</i> su un testo che è già stato letto. Non sono concorrenti diretti: in un buon sistema lavorano in fila.</p>
+      <h3>Come si paga Azure Content Understanding</h3>
+      <p>Microsoft divide il costo in tre voci. La prima è l'<b>estrazione del contenuto</b>: per i documenti ci sono tre livelli. Il livello Minimal si applica ai file già digitali, come Word, Excel o HTML, dove non serve leggere immagini. Il Basic si applica quando serve l'OCR su scansioni e foto. Lo Standard quando oltre al testo bisogna capire l'impaginazione e le tabelle. Un dettaglio utile: paghi in base al lavoro effettivamente svolto, non al tipo di analizzatore che scegli. Audio e video si pagano al minuto.</p>
+      <p>La seconda voce è la <b>contestualizzazione</b>, cioè il lavoro di preparazione che rende il contenuto utilizzabile dal modello: costa 1 dollaro ogni 1.000 pagine o immagini nella modalità standard e 3 dollari in quella avanzata, che si attiva quando addestri un analizzatore con esempi etichettati o usi la modalità agentica. Per l'audio sono 10 centesimi all'ora, per il video 1 dollaro all'ora. La terza voce sono i <b>token del modello generativo</b> che estrae effettivamente i campi, più gli embedding se addestri analizzatori personalizzati.</p>
+      <p>Per l'estrazione Microsoft rimanda al listino della tua regione. Un blog ufficiale del 2025 indicava 5 dollari ogni 1.000 pagine per i documenti, layout incluso. Per confronto, il servizio precedente, Azure Document Intelligence, costa circa 1,50 dollari ogni 1.000 pagine per il solo OCR, 10 per layout e modelli predefiniti, 30 per l'estrazione personalizzata. Su AWS, Bedrock Data Automation costa 1 centesimo a pagina per l'output standard e 4 centesimi per quello personalizzato con meno di 30 campi.</p>
+      <p>E Google? Il suo servizio equivalente è <b>Document AI</b>, con un listino ufficiale per "processori": 1,50 dollari ogni 1.000 pagine per l'OCR aziendale, 10 per il Layout Parser che riconosce struttura e tabelle, 30 per il Form Parser e gli estrattori personalizzati, 5 per classificare e dividere i documenti. Un dettaglio che sorprende molti: ogni versione di un processore personalizzato messa in produzione ha un costo di hosting fisso di circa 5 centesimi all'ora, anche quando non lavora.</p>
+      <div class="example"><b>Esempio pratico</b>Un'azienda riceve 5.000 fatture scansionate al mese. Content Understanding le legge ed estrae fornitore, importo e scadenza: circa 30 dollari più i token del modello. Poi per ogni fattura servono tre decisioni: è da approvare automaticamente? va al reparto acquisti o all'amministrazione? c'è un'anomalia? Farle prendere a un LLM completo costerebbe molto di più che farle prendere a un modello decisionale, che su questi volumi spende pochi centesimi.</div>
+      <details class="q"><summary>Allora perché non usare solo Jev, che costa quasi zero?</summary>
+      <p>Perché Jev accetta solo testo. Una fattura scansionata è un'immagine: qualcuno deve prima trasformarla in parole e numeri. Il risparmio vero arriva dopo, quando ogni documento genera decine di piccole decisioni. È lì che pagare un modello che ragiona per ognuna diventa lo spreco.</p></details>
+      <p class="sources">Fonti: <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/pricing-explainer">Microsoft Learn, prezzi Content Understanding</a> <span class="src u">ufficiale</span> · <a href="https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/what-if-you-could-cut-ai-costs-by-60-without-losing-quality/4430880">Blog Microsoft 2025</a> <span class="src u">ufficiale</span> · <a href="https://learn.microsoft.com/en-us/answers/questions/5665475/what-is-the-cost-of-document-intellegence-service">Microsoft Q&amp;A</a> <span class="src u">ufficiale</span> · <a href="https://aws.amazon.com/bedrock/pricing/">AWS Bedrock pricing</a> <span class="src u">ufficiale</span> · <a href="https://cloud.google.com/document-ai">Google Document AI</a> <span class="src u">ufficiale</span></p>
+    </div>
+    <div class="stick card calc">
+      <h3>Calcola sui tuoi volumi</h3>
+      <label for="pg2">Pagine al mese <output id="pgo"></output></label>
+      <input id="pg2" type="range" min="100" max="100000" step="100" value="5000">
+      <label for="tk">Token per pagina passati al modello decisionale <output id="tko"></output></label>
+      <input id="tk" type="range" min="100" max="2000" step="50" value="500">
+      <div id="cbars" style="margin-top:1.2rem"></div>
+      <p class="note">Azure Content Understanding stimato con 5 $ di estrazione e 1 $ di contestualizzazione ogni 1.000 pagine, token LLM esclusi. Verifica sempre il listino della tua regione.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SEGNALI -->
+<section class="ch" id="segnali">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip">Da tenere d'occhio</span></div>
+    <h2>Segnali emergenti</h2>
+    <p class="lead">Non sono ancora rivoluzioni, ma potrebbero diventarlo. Ognuno con la sua data e il suo livello di affidabilità.</p>
+  </div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">16–23 settembre</span><h3>I cloni aperti di Jev</h3><p>In una settimana sono nate circa trenta riproduzioni. Kev-9B di Jared Palmer dichiara 0,852 di accuratezza contro 0,857 di Jev e gira su un portatile; Laya di Convai pesa appena 421 milioni di parametri. Dati da confronti indipendenti, non da paper. <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">30 settembre</span><h3>Meta Muse diventa un assistente personale</h3><p>Meta ha lanciato un agente a cui puoi dare accesso ai tuoi account e alle tue app perché inizi ad assisterti. La stessa autonomia che lo rende utile è quella che preoccupa chi si occupa di sicurezza. <span class="src">stampa</span></p></div>
+    <div class="sig"><span class="chip date">metà settembre</span><h3>DeepSeek-V4.1-Flash, con paper</h3><p>DeepSeek ha pubblicato il paper del suo modello veloce, dedicato a comprimere al massimo la memoria che i modelli usano per i contesti lunghi (la "KV cache"). Uno dei pochi grandi modelli del mese accompagnato da un vero studio: <a href="https://huggingface.co/collections/Presidentlin/deepseek-papers">arXiv:2609.19969</a>. <span class="src p">paper</span></p></div>
+    <div class="sig"><span class="chip date">30 settembre</span><h3>Proteine progettate con la firma</h3><p>Google DeepMind ha iniziato ad applicare una filigrana alle proteine progettate dall'AI, così da poterne riconoscere l'origine. È la stessa idea delle filigrane sulle immagini generate, portata nella biologia. <span class="src">stampa</span></p></div>
+    <div class="sig"><span class="chip date">inizio settembre</span><h3>Qwen3.8 Flash Next</h3><p>Un modello piccolo di Alibaba che è in realtà un banco di prova per l'architettura del futuro Qwen 4. Guardarlo oggi significa intravedere il prossimo grande modello aperto. <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">29 settembre</span><h3>Mercury Voice e Mercury Router</h3><p>La diffusione arriva alla voce e allo smistamento automatico tra modelli: la velocità diventa un argomento di vendita, non solo un dato tecnico. <span class="src u">ufficiale</span></p></div>
+    <div class="sig"><span class="chip date">fine settembre</span><h3>World Labs entra in AMD</h3><p>La startup dei mondi 3D finisce dentro un produttore di chip. Lo "spatial intelligence" diventa una partita di hardware. <span class="src u">ufficiale</span></p></div>
+    <div class="sig"><span class="chip date">28 settembre</span><h3>Agenti personali con telefono e portafoglio</h3><p>Manus ha lanciato agenti personali con un proprio telefono, un portafoglio e un computer. Lo stesso giorno in cui NVIDIA parlava di come contenerli. <span class="src">stampa</span></p></div>
+  </div>
+  <details class="q" style="margin-top:2rem"><summary>Router ovunque: perché tutti costruiscono un modello che sceglie quale modello usare?</summary>
+  <p>Jev Router, Mercury Router, i middleware di LangChain: la tendenza del mese è smettere di usare sempre il modello più potente. Una domanda semplice va a un modello rapido ed economico, una difficile a quello più capace. Se il "vigile urbano" sbaglia poco e costa quasi nulla, il risparmio sull'intero sistema può essere enorme. È la stessa logica della cascata del paper di Carnegie Mellon, applicata a tutto.</p></details>
+
+  <h3 style="margin-top:3rem;font-size:1.4rem">Cosa ho lasciato fuori, e perché</h3>
+  <div class="prose" style="margin-top:1rem">
+    <p>Ho escluso le notizie su finanziamenti e valutazioni, come il nuovo round di OpenAI: contano per il mercato, non per capire la tecnologia. Ho lasciato fuori le decine di varianti e versioni compresse di Qwen che popolano Hugging Face: utili se le scarichi, rumore in un aggiornamento. Ho escluso <b>Ornith 1.5</b>, una famiglia di modelli che genererebbe da sola i propri dati di addestramento, perché l'ho trovata citata solo in un blog di riepilogo senza fonti ufficiali verificabili. E ho riportato i benchmark non replicati solo segnalandoli come dichiarati dai produttori.</p>
+    <p>Ho escluso anche due notizie del 30 settembre riportate da una sola newsletter senza fonti primarie: un presunto documento riservato di Anthropic e la presunta rinuncia di OpenAI a pubblicare un modello. Sul piano politico, il 29 settembre diverse aziende di AI hanno firmato alla Casa Bianca un accordo volontario su controlli interni e verifiche esterne della sicurezza, e il 30 la FTC ha avviato un'indagine sui laboratori: le cito per completezza, ma questa newsletter resta concentrata sulla tecnologia.</p>
+  </div>
+</section>
+
+<!-- NOVITA -->
+<section class="ch" id="novita">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip">Rispetto alla prima edizione di oggi</span></div>
+    <h2>Cosa è cambiato in questa edizione</h2>
+    <p class="lead">Rieseguendo la ricerca con il prompt completo sono emerse novità che la prima versione non aveva.</p>
+  </div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">nuovo</span><h3>Cinque paper indipendenti su Jev</h3><p>REFLEX, JevOut, Decision Hijacking e lo studio sulla scala ordinale cambiano il giudizio: Jev è efficiente ma influenzabile dal contesto.</p></div>
+    <div class="sig"><span class="chip date">corretto</span><h3>La data della Decisions API</h3><p>Prima la indicavo genericamente a "fine settembre": ora è certo che è stata annunciata al DevDay del 29 settembre, con i dettagli tecnici.</p></div>
+    <div class="sig"><span class="chip date">nuovo</span><h3>Capitolo DevDay</h3><p>Dots, GPT-6.1 Sol a 2 e 10 dollari per milione di token, la modalità Ultrafast.</p></div>
+    <div class="sig"><span class="chip date">nuovo</span><h3>Google nei costi</h3><p>Document AI aggiunto al confronto e al calcolatore, con il costo di hosting nascosto dei processori personalizzati.</p></div>
+    <div class="sig"><span class="chip date">nuovo</span><h3>Segnali dal 30 settembre</h3><p>Meta Muse, il paper di DeepSeek-V4.1-Flash, le filigrane di DeepMind sulle proteine.</p></div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="ch" id="quiz">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip">Mettiti alla prova</span></div>
+    <h2>Cinque domande per vedere cosa ti è rimasto</h2>
+    <p class="lead">Nessun voto, solo un modo per fissare le idee. Tocca la risposta che ti sembra giusta.</p>
+  </div>
+  <div class="card quiz" id="quizbox" style="margin-top:2rem"></div>
+
+  <h3 style="margin-top:3rem;font-size:1.4rem">Esercizio pratico per questo mese</h3>
+  <div class="prose" style="margin-top:1rem">
+    <p>Prendi dieci email del tuo lavoro, reali o inventate, e scrivi tre domande chiuse: qual è la categoria, quanto è urgente, serve una persona. Fai rispondere prima un modello che conosci, come Claude o ChatGPT, chiedendogli di usare solo quelle etichette. Poi prova un modello decisionale: Jev tramite OpenRouter, oppure Kev in locale se preferisci non inviare dati fuori. Confronta tre cose: quante risposte coincidono, quanto tempo impiega ciascuno, e su quali email il modello decisionale ha probabilità basse. Scommetto che i casi incerti saranno proprio quelli su cui anche tu avresti esitato.</p>
+  </div>
+</section>
+
+<!-- FONTI -->
+<section class="ch" id="fonti">
+  <div class="ch-head">
+    <h2>Tutte le fonti, in ordine di affidabilità</h2>
+    <p class="lead">I paper arXiv sono preprint: pubblici e citabili, ma non ancora revisionati. Le fonti di terze parti vanno verificate.</p>
+  </div>
+  <div class="cards">
+    <div class="sig"><span class="src p">paper</span><h3>Studi scientifici</h3><p><a href="https://arxiv.org/abs/2609.26550">JEV-as-a-Judge, Carnegie Mellon (22 set 2026)</a><br><a href="https://arxiv.org/abs/2506.17298">Mercury: Ultra-Fast Language Models Based on Diffusion (2025)</a><br><a href="https://arxiv.org/pdf/2609.26532">REFLEX with Jev (arXiv:2609.26532)</a><br><a href="https://arxiv.org/pdf/2609.30243">JevOut (arXiv:2609.30243)</a><br><a href="https://arxiv.org/pdf/2609.28613">Decision Hijacking (arXiv:2609.28613)</a><br><a href="https://arxiv.org/abs/2609.38827">Ordinal-Scale Bias, Jilin University (30 set 2026)</a></p></div>
+    <div class="sig"><span class="src u">ufficiale</span><h3>Produttori</h3><p><a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">TypeSafe, Jev</a> · <a href="https://openrouter.ai/typesafe/jev-1.13">OpenRouter</a> · <a href="https://contrastive-lm.notion.site">CLM</a> · <a href="https://huggingface.co/Contrastive-LM/CLM-v0.1-8B">CLM-8B pesi</a> · <a href="https://www.inceptionlabs.ai/blog/introducing-mercury">Inception</a> · <a href="https://www.worldlabs.ai/blog/atlas">World Labs, Atlas</a> · <a href="https://www.worldlabs.ai/blog/amd-announcement">World Labs e AMD</a> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/pricing-explainer">Microsoft Learn</a> · <a href="https://aws.amazon.com/bedrock/pricing/">AWS</a> · <a href="https://cloud.google.com/document-ai">Google Document AI</a> · <a href="https://openai.com/index/devday-2026/">OpenAI DevDay</a></p></div>
+    <div class="sig"><span class="src">stampa</span><h3>Testate</h3><p><a href="https://venturebeat.com/technology/stanford-and-nvidias-open-clm-8b-caches-reusable-agent-actions-and-runs-up-to-9x-faster-than-jev-in-tests">VentureBeat</a> · <a href="https://www.helpnetsecurity.com/2026/09/28/nvidia-open-agent-safety-platform/">Help Net Security</a> · <a href="https://techcrunch.com/2026/09/03/openai-launches-astra-its-powerful-and-controversial-new-model/">TechCrunch</a> · <a href="https://gigazine.net/gsc_news/en/20260909-mercury-2-5/">GIGAZINE</a> · <a href="https://memeburn.com/openai-devday-2026-recap/">Memeburn</a> · <a href="https://www.latent.space/p/ainews-openai-devday-2026-dots-61">Latent Space</a> · <a href="https://www.npr.org/sections/news/">NPR su Meta Muse</a> · <a href="https://www.theneuron.ai/digest/everything-that-happened-in-ai-today-wednesday-september-30-2026/">The Neuron, 30 settembre</a></p></div>
+    <div class="sig"><span class="src">terze parti</span><h3>Da verificare</h3><p><a href="https://llmgateway.io/timeline">LLM Gateway</a> · <a href="https://rohitraj.tech/notes/jev-alternatives-open-weights-decision-models-2026">Alternative aperte a Jev</a> · <a href="https://flowtivity.ai/blog/decisions-api-vs-jev-vs-laya/">Decisions API vs Jev</a> · <a href="https://apidog.com/blog/openai-devday-2026/">Apidog su DevDay</a> · <a href="https://radical.vc/articles/a-world-model-for-spatial-intelligence/">Radical Ventures</a></p></div>
+  </div>
+</section>
+
+</main>
+<footer>Radar AI · numero di settembre 2026 · preparato da Claude il 1° ottobre 2026.<br>I prezzi cambiano spesso: verifica sempre i listini ufficiali prima di prendere decisioni.</footer>
+
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id){return document.getElementById(id)}
+  function fmtN(v,d){return v.toLocaleString('it-IT',{minimumFractionDigits:d,maximumFractionDigits:d})}
+
+  /* nav progress + active */
+  var links=[].slice.call(document.querySelectorAll('#links a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function onScroll(){
+    var h=document.documentElement;var p=h.scrollTop/(h.scrollHeight-h.clientHeight);$('prog').style.width=(p*100)+'%';
+    var cur=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<140)cur=i});
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur&&window.scrollY>200)});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  /* timeline */
+  var ev=[
+    [1,0,"Claude Fable 5.1 e Mythos 5.1","Anthropic apre il mese con due modelli della fascia più alta e un taglio del 75% sui costi della cache."],
+    [1,1,"Atlas di World Labs","La startup di Fei-Fei Li presenta un modello unico per ricostruire, generare e simulare mondi 3D da poche fotografie."],
+    [2,0,"Gemini 3.8 Flash e Muse Spark 1.3","Google arriva al terzo Flash in sei settimane; Meta presenta un modello per agenti con oltre un milione di token di contesto."],
+    [3,0,"GPT-6 Astra","Il nuovo modello di punta di OpenAI: prima in anteprima per organizzazioni selezionate, il giorno dopo disponibile a tutti."],
+    [8,1,"Mercury 2.5","Inception lancia il più grande modello linguistico a diffusione mai addestrato: 1.107 token al secondo dichiarati."],
+    [15,1,"Jev di TypeSafe AI","Nasce la categoria dei modelli decisionali: niente testo, solo scelte con una probabilità."],
+    [21,0,"Grok 4.7 e MiMo-V2.6","xAI aggiorna Grok; Xiaomi pubblica due modelli aperti con licenza MIT."],
+    [22,1,"Paper CMU su Jev · GPT-6 Sol e Luna · Claude Opus 5.5","Il primo studio indipendente sui modelli decisionali esce nello stesso giorno di due grandi lanci."],
+    [23,1,"CLM-8B di Stanford e NVIDIA","La risposta aperta a Jev: ogni decisione diventa una ricerca per somiglianza, fino a 9 volte più veloce nei test."],
+    [28,1,"NVIDIA Open Agent Safety Platform · Claude Sonnet 5.5","Un chip separato sorveglia gli agenti e li isola in millisecondi. Lo stesso giorno arriva Sonnet 5.5."],
+    [29,1,"OpenAI DevDay · GPT-6.1 Sol · Decisions API","Agenti sempre accesi con Dots, un modello quasi al top a un quinto del prezzo e la risposta di OpenAI a Jev. Lo stesso giorno arriva Mercury Voice."],
+    [30,1,"Paper sulla scala ordinale · Meta Muse","L'Università di Jilin scopre che i modelli decisionali usano solo parte delle scale; Meta lancia il suo assistente personale."]
+  ];
+  var tl=$('tl'),card=$('tlcard');
+  function showEv(i){var e=ev[i];
+    card.innerHTML='<div class="tl-date">'+e[0]+'<small>settembre</small></div><div><h3 style="margin-bottom:.4rem">'+e[2]+'</h3><p style="margin:0">'+e[3]+'</p></div>';
+    [].forEach.call(tl.querySelectorAll('.tl-dot'),function(b,j){b.setAttribute('aria-pressed',j===i?'true':'false')})}
+  var used={};
+  ev.forEach(function(e,i){var off=used[e[0]]?14:0;used[e[0]]=1;
+    var pos='calc(1rem + (100% - 2rem) * '+((e[0]-1)/29)+' + '+off+'px)';
+    var b=document.createElement('button');b.className='tl-dot'+(e[1]?' n':'');b.style.left=pos;
+    b.setAttribute('aria-label',e[0]+' settembre: '+e[2]);b.onclick=function(){showEv(i)};tl.appendChild(b);
+    if(!off){var d=document.createElement('span');d.className='tl-day';d.style.left=pos;d.textContent=e[0];tl.appendChild(d)}});
+  showEv(5);
+
+  /* race */
+  var W=['Il','cliente','chiede','un','rimborso','urgente'];
+  function lane(id,cls){var el=$(id);el.innerHTML=W.map(function(){return '<span class="w">▒▒▒</span>'}).join('');return el.children}
+  $('race').onclick=function(){
+    var a=lane('l1'),d=lane('l2'),c=$('l3');c.innerHTML='<span class="w">in attesa…</span>';
+    $('t1').textContent='…';$('t2').textContent='…';$('t3').textContent='…';
+    var step=reduce?0:420;
+    setTimeout(function(){c.innerHTML='<span class="w d">categoria: rimborso</span><span class="w d">urgenza: alta</span>';$('t3').textContent='1 passaggio'},step*1);
+    W.forEach(function(w,i){setTimeout(function(){a[i].textContent=w;a[i].classList.add('on');if(i===W.length-1)$('t1').textContent='6 passaggi'},step*(i+1))});
+    var stages=[[0,2,4],[1,3,5]];
+    stages.forEach(function(s,k){setTimeout(function(){for(var i=0;i<W.length;i++){if(s.indexOf(i)>-1||k===1&&stages[0].indexOf(i)>-1){d[i].textContent=W[i];d[i].classList.add('d')}else{d[i].textContent='░'+W[i].slice(1).replace(/./g,'░')}}if(k===1)$('t2').textContent='2 passaggi'},step*(k+1)*1.4)});
+  };
+  lane('l1');lane('l2');$('l3').innerHTML='<span class="w">▒▒▒</span>';
+
+  /* mail */
+  var mails=[
+    ["«Il pacco è arrivato rotto. Rivoglio i miei soldi entro venerdì, altrimenti faccio reclamo.»",[["Categoria: rimborso",.94],["Urgenza: alta",.81],["Serve un operatore umano",.67]]],
+    ["«Buongiorno, mi sono trasferito: potete aggiornare l'indirizzo di spedizione per i prossimi ordini?»",[["Categoria: dati account",.91],["Urgenza: bassa",.86],["Serve un operatore umano",.08]]],
+    ["«È la terza volta che vi scrivo. Se nessuno mi risponde oggi, scrivo una recensione pubblica.»",[["Categoria: reclamo",.88],["Urgenza: alta",.93],["Serve un operatore umano",.95]]]
+  ];
+  function showMail(i){$('mailtext').textContent=mails[i][0];
+    $('mailbars').innerHTML=mails[i][1].map(function(r){return '<div class="pbar"><div class="lab"><span>'+r[0]+'</span><span>'+fmtN(r[1],2)+'</span></div><div class="tr"><div class="fi" data-w="'+r[1]*100+'"></div></div></div>'}).join('');
+    requestAnimationFrame(function(){requestAnimationFrame(function(){[].forEach.call(document.querySelectorAll('#mailbars .fi'),function(f){f.style.width=f.dataset.w+'%'})})});
+    [].forEach.call(document.querySelectorAll('#mailbtns .btn'),function(b){b.setAttribute('aria-pressed',+b.dataset.m===i?'true':'false')})}
+  [].forEach.call(document.querySelectorAll('#mailbtns .btn'),function(b){b.onclick=function(){showMail(+b.dataset.m)}});
+  showMail(0);
+
+  /* cascade */
+  var conf=[],seed=11;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647}
+  for(var i=0;i<600;i++){conf.push(0.5+0.5*Math.pow(Math.max(rnd(),rnd()),0.55))}
+  var bins=new Array(25).fill(0);conf.forEach(function(v){bins[Math.min(24,Math.floor((v-.5)/.5*25))]++});
+  var mx=Math.max.apply(null,bins);
+  function casc(){var t=+$('tau').value;$('tauo').textContent=fmtN(t,2);
+    var k=conf.filter(function(v){return v>=t}).length;
+    $('pj').textContent=Math.round(k/6)+'%';$('pg').textContent=Math.round((600-k)/6)+'%';
+    var s='';bins.forEach(function(b,i){var x=10+i*12,h=b/mx*100,lo=.5+i*.02;
+      s+='<rect x="'+x+'" y="'+(115-h)+'" width="10" height="'+h+'" rx="2" fill="'+(lo>=t-0.0001?'var(--violet)':'var(--sun)')+'"/>'});
+    var tx=10+(t-.5)/.5*300;s+='<line x1="'+tx+'" y1="5" x2="'+tx+'" y2="120" stroke="var(--ink)" stroke-width="2"/>';
+    s+='<text x="10" y="135" font-size="10" font-family="Sora" fill="var(--muted)">fiducia 0,5</text><text x="250" y="135" font-size="10" font-family="Sora" fill="var(--muted)">fiducia 1,0</text>';
+    $('cascsvg').innerHTML=s}
+  $('tau').oninput=casc;casc();
+
+  /* CLM */
+  var acts=[["Cerca sul web",60,50],["Leggi un file",250,60],["Esegui codice",250,180],["Chiedi all'utente",70,190]];
+  var scen=[["«Qual è il prezzo di oggi del rame?»",0],["«Riassumi il contratto allegato.»",1],["«Calcola la media di queste colonne.»",2],["«Prenota, ma non so per quante persone.»",3]];
+  var si=-1;
+  function clm(){si=(si+1)%scen.length;var s=scen[si],a=acts[s[1]];
+    var sx=a[1]+(s[1]%2?-45:45),sy=a[2]+(s[1]<2?40:-40);
+    var g='';acts.forEach(function(x,i){var on=i===s[1];
+      g+='<circle cx="'+x[1]+'" cy="'+x[2]+'" r="'+(on?13:9)+'" fill="'+(on?'var(--teal)':'var(--soft)')+'" stroke="var(--teal)" stroke-width="2" style="transition:all .4s"/>';
+      g+='<text x="'+x[1]+'" y="'+(x[2]+(x[2]<120?-18:28))+'" text-anchor="middle" font-family="Sora" font-size="11" font-weight="'+(on?700:500)+'" fill="var(--ink)">'+x[0]+'</text>'});
+    g+='<line x1="'+sx+'" y1="'+sy+'" x2="'+a[1]+'" y2="'+a[2]+'" stroke="var(--sun)" stroke-width="3" class="dash"/>';
+    g+='<circle cx="'+sx+'" cy="'+sy+'" r="10" fill="var(--sun)"/><text x="'+sx+'" y="'+(sy+4)+'" text-anchor="middle" font-family="Sora" font-size="9" font-weight="800" fill="#1a1300">ORA</text>';
+    $('clmsvg').innerHTML=g;$('clmtext').innerHTML='<b>Situazione:</b> '+s[0]+'<br>Il punto più vicino è <b>'+a[0]+'</b>: è questa l\'azione scelta.'}
+  $('clmbtn').onclick=clm;clm();
+
+  /* diffusion */
+  var sent="Certo, il rimborso parte oggi e arriverà entro tre giorni lavorativi".split(' ');
+  function noise(w){return w.replace(/./g,function(){return '▒░▓'[Math.floor(Math.random()*3)]})}
+  function drawD(stage){$('diffw').innerHTML=sent.map(function(w,i){var show=stage>=3||(stage>=1&&(i%3===0))||(stage>=2&&(i%3===1));return '<span class="w'+(show?' d':'')+'">'+(show?w:noise(w))+'</span>'}).join('')}
+  drawD(0);
+  $('diffbtn').onclick=function(){drawD(0);[1,2,3].forEach(function(k){setTimeout(function(){drawD(k)},reduce?0:k*650)})};
+
+  /* nvidia */
+  $('nvbtn').onclick=function(){var ag=$('agent');ag.style.transform='translate(110px,0)';$('nvmsg').textContent='L\'agente tenta di uscire dal perimetro…';$('nvmsg').setAttribute('fill','var(--muted)');
+    setTimeout(function(){$('sled').setAttribute('fill','var(--red)');ag.querySelector('circle').setAttribute('fill','var(--muted)');ag.style.transform='translate(80px,0)';$('nvmsg').textContent='Sentry lo vede da fuori e lo mette in quarantena.';$('nvmsg').setAttribute('fill','var(--red)')},reduce?0:1300)};
+  $('nvreset').onclick=function(){var ag=$('agent');ag.style.transform='';ag.querySelector('circle').setAttribute('fill','var(--sun)');$('sled').setAttribute('fill','var(--teal)');$('nvmsg').textContent='L\'agente lavora dentro i suoi confini.';$('nvmsg').setAttribute('fill','var(--muted)')};
+
+  /* labs table */
+  var rows=[["1 set","Anthropic","Claude Fable 5.1 e Mythos 5.1: fascia più alta, cache più economica del 75%"],["2 set","Google","Gemini 3.8 Flash: focus su programmazione e agenti, con variante per la cybersicurezza"],["2 set","Altri","Meta Muse Spark 1.3: agenti, input di testo, immagini, video e file, contesto oltre un milione di token"],["3–4 set","OpenAI","GPT-6 Astra: anteprima il 3, disponibile a tutti il 4, anche su Azure e AWS Bedrock"],["18 set","Altri","Alibaba Qwen3.8-Omni-Flash"],["21 set","Altri","xAI Grok 4.7"],["21 set","Altri","Xiaomi MiMo-V2.6 Pro e Flash, aperti con licenza MIT"],["22 set","OpenAI","GPT-6 Sol e GPT-6 Luna"],["22 set","Anthropic","Claude Opus 5.5"],["28 set","Anthropic","Claude Sonnet 5.5"],["29 set","OpenAI","GPT-6.1 Sol"]];
+  function drawT(l){$('labt').innerHTML=rows.filter(function(r){return l==='tutti'||r[1]===l}).map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>'}).join('');
+    [].forEach.call(document.querySelectorAll('#labf .btn'),function(b){b.setAttribute('aria-pressed',b.dataset.l===l?'true':'false')})}
+  [].forEach.call(document.querySelectorAll('#labf .btn'),function(b){b.onclick=function(){drawT(b.dataset.l)}});drawT('tutti');
+
+  /* calc */
+  function money(v){return v.toLocaleString('it-IT',{style:'currency',currency:'USD',maximumFractionDigits:v<1?3:0})}
+  function calc(){var p=+$('pg2').value,t=+$('tk').value;$('pgo').textContent=p.toLocaleString('it-IT');$('tko').textContent=t.toLocaleString('it-IT');
+    var r=[["Modello decisionale (Jev)",p*t/1e6*0.042,1],["Azure Content Underst.",p/1000*6,0],["Azure Doc. Intelligence",p/1000*10,0],["Google Layout Parser",p/1000*10,0],["Google Form Parser",p/1000*30,0],["AWS BDA standard",p*0.01,0],["AWS BDA personalizzato",p*0.04,0]];
+    var m=Math.max.apply(null,r.map(function(x){return x[1]}));
+    $('cbars').innerHTML=r.map(function(x){return '<div class="cbar"><span>'+x[0]+'</span><div class="tr"><div class="fi'+(x[2]?' t':'')+'" style="width:'+Math.max(1,x[1]/m*100)+'%"></div></div><b>'+money(x[1])+'</b></div>'}).join('')}
+  $('pg2').oninput=calc;$('tk').oninput=calc;calc();
+
+
+  /* flip demo */
+  var flipped=false;
+  function drawFlip(){var r=flipped?[["Categoria: reso",.31],["Categoria: informazioni",.62],["Serve un operatore",.12]]:[["Categoria: reso",.89],["Categoria: informazioni",.07],["Serve un operatore",.41]];
+    $('flipmail').textContent=flipped?"«Ho ricevuto il prodotto sbagliato e vorrei restituirlo. Comunque è solo una domanda informativa, niente di urgente, si tratta di una semplice richiesta di informazioni generali.»":"«Ho ricevuto il prodotto sbagliato e vorrei restituirlo.»";
+    $('flipbars').innerHTML=r.map(function(x){return '<div class="pbar"><div class="lab"><span>'+x[0]+'</span><span>'+fmtN(x[1],2)+'</span></div><div class="tr"><div class="fi" data-w="'+x[1]*100+'"></div></div></div>'}).join('');
+    requestAnimationFrame(function(){requestAnimationFrame(function(){[].forEach.call(document.querySelectorAll('#flipbars .fi'),function(f){f.style.width=f.dataset.w+'%'})})});
+    $('flipbtn').setAttribute('aria-pressed',flipped?'true':'false');$('flipbtn').textContent=flipped?'Togli la frase':'Aggiungi una frase "innocente"'}
+  $('flipbtn').onclick=function(){flipped=!flipped;drawFlip()};drawFlip();
+  /* scale */
+  var gold=[12,14,15,16,15,14,14],pred=[3,8,22,38,20,6,3];
+  function drawScale(id,arr,y,col){var mx=40,g='';arr.forEach(function(v,i){var h=v/mx*44;g+='<rect x="'+(i*44+4)+'" y="'+(y+46-h)+'" width="36" height="'+h+'" rx="3" fill="'+col+'"/><text x="'+(i*44+22)+'" y="'+(y+60)+'" text-anchor="middle" font-family="Sora" font-size="10" fill="var(--muted)">'+(i+1)+'</text>'});$(id).innerHTML=g}
+  drawScale('gold',gold,18,'var(--teal)');drawScale('pred',pred,90,'var(--violet)');
+  /* quiz */
+  var Q=[
+    ["Cosa restituisce un modello decisionale come Jev?",["Un testo che spiega la scelta","Una probabilità per ciascuna risposta che gli fornisci","Un'immagine"],1,"Esatto: niente prosa, solo una scelta pesata tra le opzioni che stabilisci tu."],
+    ["Nel paper di Carnegie Mellon, dove Jev resta più indietro?",["Nel capire se una risposta è coerente con un testo","In matematica, codice e logica","Nella velocità"],1,"Giusto: quando il verdetto va ricavato con dei passaggi, decidere al volo non basta."],
+    ["Perché Mercury 2.5 è così veloce?",["Usa GPU speciali","Genera tutte le parole insieme e le rifinisce","Scrive frasi più corte"],1,"Proprio così: la diffusione lavora sull'intera frase in pochi passaggi."],
+    ["Cosa fa Sentry nella piattaforma di NVIDIA?",["Scrive le regole per l'agente","Sorveglia l'agente da un chip separato e lo isola se esce dai confini","Accelera il modello"],1,"Corretto: è un guardiano esterno, che l'agente non può spegnere."],
+    ["Cosa ha mostrato lo studio JevOut?",["Che Jev è immune alle manipolazioni","Che una breve frase nel contesto può ribaltare molte decisioni corrette","Che Jev è più lento di GPT-6"],1,"Esatto: con un contesto ottimizzato, gli autori hanno ribaltato il 61,4% delle decisioni corrette testate."],
+    ["Con Azure Content Understanding, un file Word digitale viene addebitato come…",["Livello Minimal, perché non serve l'OCR","Livello Standard","Gratis"],0,"Sì: paghi il lavoro effettivamente svolto, e su un file digitale non serve leggere immagini."]
+  ];
+  var score=0,answered=0;
+  $('quizbox').innerHTML=Q.map(function(q,i){return '<div class="qq"><p>'+(i+1)+'. '+q[0]+'</p><div class="opts">'+q[1].map(function(o,j){return '<button class="opt" data-q="'+i+'" data-o="'+j+'">'+o+'</button>'}).join('')+'</div><div class="fb" id="fb'+i+'"></div></div>'}).join('')+'<p class="score" id="score"></p>';
+  [].forEach.call(document.querySelectorAll('.opt'),function(b){b.onclick=function(){var qi=+b.dataset.q,oi=+b.dataset.o,q=Q[qi];
+    var grp=document.querySelectorAll('.opt[data-q="'+qi+'"]');if(grp[0].disabled)return;
+    [].forEach.call(grp,function(x){x.disabled=true;if(+x.dataset.o===q[2])x.classList.add('ok')});
+    if(oi===q[2]){score++;$('fb'+qi).textContent=q[3]}else{b.classList.add('ko');$('fb'+qi).textContent='Non proprio. '+q[3]}
+    answered++;if(answered===Q.length)$('score').textContent='Hai risposto bene a '+score+' domande su '+Q.length+'.'}});
+})();
+</script>
+</body>
+</html>

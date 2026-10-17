@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Radar AI · 5 ottobre 2026, pomeriggio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F6FB; --surface:#FFFFFF; --soft:#E9EDF7; --ink:#121A2B; --muted:#56627A; --line:#D8DEEA;
+  --violet:#4B4BF5; --violet-soft:#E6E6FF; --teal:#0E9F9E; --teal-soft:#DDF5F4; --sun:#F2B705; --sun-soft:#FFF5D1; --red:#D9463B;
+  --head:"Sora","Segoe UI",system-ui,sans-serif; --body:"Inter","Segoe UI",system-ui,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+    --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+  --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7}
+a{color:var(--violet)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+h1,h2,h3{font-family:var(--head);line-height:1.12;margin:0}
+p{margin:0 0 1rem}
+img,svg{max-width:100%}
+
+/* NAV */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:72rem;margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem}
+.brand{font-family:var(--head);font-weight:800;white-space:nowrap}
+.links{display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;flex:1}
+.links::-webkit-scrollbar{display:none}
+.links a{font-family:var(--head);font-size:.82rem;font-weight:600;text-decoration:none;color:var(--muted);padding:.35rem .7rem;border-radius:999px;white-space:nowrap}
+.links a.on{background:var(--ink);color:var(--bg)}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;background:var(--violet);width:0}
+
+/* HERO */
+.hero{max-width:72rem;margin:0 auto;padding:3.5rem 1.2rem 2rem;display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800;letter-spacing:-.03em}
+.hero .sub{font-size:1.15rem;color:var(--muted);margin-top:1.2rem;max-width:34rem}
+.meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem}
+.chip{font-family:var(--head);font-size:.78rem;font-weight:600;padding:.3rem .7rem;border-radius:999px;background:var(--soft);color:var(--ink)}
+.chip.date{background:var(--violet-soft);color:var(--violet)}
+.radar{aspect-ratio:1;width:100%;max-width:26rem;justify-self:center}
+.sweep{transform-origin:200px 200px;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.blip{animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.radar{max-width:18rem}}
+
+/* SECTIONS */
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.2rem}
+section.ch{padding:4.5rem 0 1rem;border-top:1px solid var(--line)}
+.ch-head{max-width:48rem}
+.kicker{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+.ch h2{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em}
+.lead{font-size:1.2rem;color:var(--muted);margin-top:1rem}
+.grid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.5rem;margin-top:2.2rem;align-items:start}
+.grid2 .stick{position:sticky;top:84px}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.grid2 .stick{position:static}}
+.prose p{max-width:38rem}
+.prose h3{font-size:1.2rem;margin:1.8rem 0 .7rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.4rem}
+.card h3{font-size:1.05rem;margin-bottom:.8rem}
+.example{background:var(--teal-soft);border-radius:14px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.example b:first-child{font-family:var(--head);color:var(--teal);display:block;margin-bottom:.3rem}
+.paper{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:12px;padding:1rem 1.2rem;margin:1.4rem 0}
+.paper .ic{font-size:1.5rem;line-height:1}
+.src{font-family:var(--head);font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:6px;background:var(--soft);color:var(--muted);vertical-align:middle;white-space:nowrap}
+.src.p{background:var(--teal-soft);color:var(--teal)}
+.src.u{background:var(--violet-soft);color:var(--violet)}
+.sources{font-size:.88rem;color:var(--muted);margin-top:1rem}
+.sources a{margin-right:.4rem}
+
+/* curiosity */
+details.q{background:var(--sun-soft);border-radius:14px;padding:1rem 1.2rem;margin:1.6rem 0;max-width:38rem}
+details.q summary{cursor:pointer;font-family:var(--head);font-weight:700;list-style:none;display:flex;gap:.7rem;align-items:flex-start}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::before{content:"?";flex:none;display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--sun);color:#1a1300;font-weight:800}
+details.q summary::after{content:"Scopri";margin-left:auto;font-size:.75rem;font-weight:600;color:var(--muted);padding-top:.25rem}
+details.q[open] summary::after{content:"Chiudi"}
+details.q p{margin:.8rem 0 0}
+
+/* buttons */
+.btn{font-family:var(--head);font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.55rem 1rem;border-radius:999px;cursor:pointer}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0}
+.note{font-size:.84rem;color:var(--muted)}
+
+/* timeline */
+.tl{position:relative;margin:2.4rem 0 1rem;overflow-x:auto;padding-bottom:.5rem}
+.tl-in{position:relative;min-width:44rem;height:120px}
+.tl-line{position:absolute;left:1rem;right:1rem;top:60px;height:3px;background:var(--line);border-radius:2px}
+.tl-dot{position:absolute;top:60px;width:20px;height:20px;margin:-8px 0 0 -10px;border-radius:50%;border:3px solid var(--bg);background:var(--violet);cursor:pointer;padding:0;transition:transform .2s}
+.tl-dot.n{background:var(--sun)}
+.tl-dot[aria-pressed="true"]{transform:scale(1.5)}
+.tl-day{position:absolute;top:88px;transform:translateX(-50%);font-family:var(--head);font-size:.72rem;color:var(--muted)}
+.tl-card{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center}
+.tl-date{font-family:var(--head);font-weight:800;font-size:2.6rem;line-height:1;color:var(--violet);text-align:center}
+.tl-date small{display:block;font-size:.8rem;font-weight:600;color:var(--muted)}
+
+/* bars */
+.pbar{margin:.9rem 0}
+.pbar .lab{display:flex;justify-content:space-between;font-family:var(--head);font-size:.88rem;font-weight:600}
+.pbar .tr{height:12px;background:var(--soft);border-radius:6px;overflow:hidden;margin-top:.35rem}
+.pbar .fi{height:100%;width:0;background:var(--violet);border-radius:6px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.mail{background:var(--soft);border-radius:12px;padding:.9rem 1rem;font-style:italic;margin:.8rem 0}
+
+/* race */
+.lane{margin:1rem 0}
+.lane .nm{font-family:var(--head);font-weight:700;font-size:.9rem;margin-bottom:.4rem;display:flex;justify-content:space-between}
+.words{display:flex;flex-wrap:wrap;gap:.35rem;min-height:2.4rem}
+.w{font-family:var(--head);font-size:.85rem;padding:.35rem .6rem;border-radius:8px;background:var(--soft);color:var(--muted);transition:background .3s,color .3s}
+.w.on{background:var(--violet);color:#fff}
+.w.d{background:var(--teal);color:#fff}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.4rem 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem;text-align:center}
+.stat strong{display:block;font-family:var(--head);font-size:1.8rem;color:var(--violet)}
+.stat span{font-size:.82rem;color:var(--muted)}
+@media (max-width:560px){.stats{grid-template-columns:1fr}}
+
+/* calc */
+.calc label{display:flex;justify-content:space-between;font-family:var(--head);font-weight:600;font-size:.9rem;margin-top:1rem}
+.calc input{width:100%;accent-color:var(--violet)}
+.cbar{display:grid;grid-template-columns:9.5rem 1fr 5.5rem;gap:.6rem;align-items:center;font-size:.85rem;margin:.5rem 0}
+.cbar .tr{height:14px;background:var(--soft);border-radius:7px;overflow:hidden}
+.cbar .fi{height:100%;background:var(--violet);border-radius:7px;transition:width .4s}
+.cbar .fi.t{background:var(--teal)}
+.cbar b{text-align:right;font-family:var(--head)}
+
+/* table */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.92rem}
+th,td{text-align:left;padding:.7rem .6rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--head);font-size:.8rem;color:var(--muted)}
+td:first-child{font-family:var(--head);font-weight:700;white-space:nowrap}
+
+/* cards grid */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:1rem;margin-top:2rem}
+.sig{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.2rem}
+.sig h3{font-size:1.02rem;margin:.6rem 0 .5rem}
+.sig p{font-size:.93rem;margin:0}
+
+/* quiz */
+.quiz .qq{margin:1.4rem 0}
+.quiz .qq p{font-family:var(--head);font-weight:700}
+.opts{display:grid;gap:.5rem}
+.opt{text-align:left;font-family:var(--body);font-size:.95rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.7rem 1rem;border-radius:12px;cursor:pointer}
+.opt.ok{border-color:var(--teal);background:var(--teal-soft)}
+.opt.ko{border-color:var(--red)}
+.fb{font-size:.9rem;color:var(--muted);margin-top:.4rem;min-height:1.2rem}
+.score{font-family:var(--head);font-weight:800;font-size:1.2rem}
+
+/* prompt */
+pre.prompt{white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.3rem;font-family:var(--body);font-size:.92rem;line-height:1.6;max-height:28rem;overflow:auto}
+footer{border-top:1px solid var(--line);margin-top:4rem;padding:2rem 1.2rem 3rem;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* svg anim helpers */
+.float{animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.orbit{transform-origin:200px 170px;animation:spin 14s linear infinite}
+.dash{stroke-dasharray:6 6;animation:dash 1.5s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Capitoli">
+  <div class="nav-in">
+    <span class="brand">📡 Radar AI</span>
+    <div class="links" id="links">
+      <a href="#synopsys">GPT-Synopsys</a><a href="#azure">Azure: concorrenza</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+    </div>
+  </div>
+  <div class="progress" id="prog"></div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="meta"><span class="chip date">Edizione del 5 ottobre 2026, pomeriggio</span><span class="chip">Dall'edizione del mattino</span><span class="chip">Solo notizie nuove</span><span class="chip">Rubrica Azure: ottava puntata, speciale concorrenza</span></div>
+    <h1 style="margin-top:1.2rem">Un modello addestrato a usare gli strumenti dei progettisti di chip. E tutto quello che devi sapere su thread, code e sovraccarico in Azure</h1>
+    <p class="sub">Stamattina mi hai chiesto di ritrovare la puntata sul multithread e sulle richieste di sovraccarico. L'ho ritrovata, e ho fatto di più: questa edizione ha una rubrica Azure tutta dedicata alla concorrenza, con i numeri ufficiali di come il servizio decide di dirti "troppe richieste", quali sono i quattro tipi diversi di errore 429, e come si calcola quante chiamate puoi tenere aperte insieme. Prima, però, una notizia di fine settembre che mancava: OpenAI e Synopsys costruiscono un modello che non scrive codice, usa i programmi con cui si disegnano i microchip.</p>
+  </div>
+  <svg class="radar" viewBox="0 0 400 400" role="img" aria-label="Richieste in coda verso un servizio con quota">
+    <circle cx="200" cy="200" r="180" fill="var(--surface)" stroke="var(--line)"/>
+    <g id="qhero"></g>
+    <rect x="250" y="150" width="90" height="100" rx="12" fill="var(--violet-soft)" stroke="var(--violet)"/>
+    <text x="295" y="195" text-anchor="middle" font-family="Sora" font-size="11" font-weight="700" fill="var(--violet)">servizio</text>
+    <text x="295" y="212" text-anchor="middle" font-family="Sora" font-size="9" fill="var(--muted)">quota al minuto</text>
+    <text x="200" y="330" text-anchor="middle" font-family="Sora" font-size="10" fill="var(--muted)">In giallo le richieste accettate, in rosso i 429</text>
+  </svg>
+</header>
+
+<main class="wrap">
+
+<section class="ch" id="synopsys">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">Annunciato il 30 settembre 2026</span><span class="chip">Recupero: mancava dalle edizioni precedenti</span><span class="src u">ufficiale (comunicato)</span><span class="src">stampa</span><span class="chip">Nessun paper, nessun benchmark, nessuna data di disponibilità</span></div>
+    <h2>GPT-Synopsys: il modello che impara a usare i programmi dei progettisti di chip</h2>
+    <p class="lead">Non un assistente che scrive codice, ma un modello addestrato a essere "utente nativo esperto" degli strumenti con cui si disegna la maggior parte dei microchip del mondo. E un contratto in cui OpenAI guadagna solo se i chip migliorano davvero.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>Chi è Synopsys, e perché conta</h3>
+      <p>Synopsys è l'azienda i cui programmi di progettazione elettronica, i cosiddetti strumenti EDA, vengono usati per disegnare la grande maggioranza dei semiconduttori più avanzati del mondo. Non produce chip: produce il software senza cui i chip non si possono progettare né verificare. Se vuoi capire quanto sia centrale, pensa che quasi ogni acceleratore di cui abbiamo parlato in queste edizioni, da quelli nei data center di Google a quelli in orbita con Suncatcher, è passato da strumenti come i suoi.</p>
+      <h3>Cosa hanno annunciato</h3>
+      <p>Il 30 settembre, mercoledì, OpenAI e Synopsys hanno annunciato una partnership pluriennale per sviluppare <b>GPT-Synopsys</b>, un modello specializzato progettato per eseguire flussi di lavoro di progettazione dei semiconduttori usando gli strumenti EDA di Synopsys. La differenza rispetto a un assistente generico sta nel verbo: il modello è addestrato a <i>operare</i> gli strumenti. Gli ingegneri potranno delegare obiettivi di progetto, e il sistema farà girare gli strumenti, interpreterà i risultati, implementerà le modifiche e itererà fino a risultati verificati. Synopsys lo descrive come un modello che impara a essere un "utente nativo esperto" dei suoi strumenti, invece di un modello generale adattato alla progettazione di chip, addestrato sui flussi di lavoro reali di Synopsys e non su forum o articoli accademici.</p>
+      <p>Il modello girerà sull'infrastruttura di OpenAI, integrato con Synopsys.ai e con la piattaforma Autopilot di Synopsys, e, dettaglio che collega questa notizia al resto della settimana, è progettato per interoperare con i sistemi di imbracatura degli agenti dei clienti. Il servizio sarà venduto come pacchetto di calcolo, modello e licenze. I dati di progetto dei clienti non saranno usati per addestrare il modello, cifrati a riposo e in transito, con controlli configurabili di conservazione, audit e permessi.</p>
+      <h3>Il contratto, che è la parte più interessante</h3>
+      <p>Secondo i resoconti dell'evento per gli investitori in cui l'accordo è stato presentato, OpenAI paga a Synopsys una quota di abbonamento per l'addestramento, e le due aziende divideranno i ricavi in base a quanto il modello migliora i progetti dei chip dei clienti. Non "quanto viene usato": quanto migliora il risultato. È uno dei primi casi in cui il fornitore di un modello viene pagato sull'esito del lavoro, e non sui token. E c'è un'altra frase da sottolineare, dell'amministratore delegato di Synopsys: anche se il modello si prende sempre più lavoro di progettazione, le sue uscite continueranno a essere ricontrollate dagli strumenti di verifica tradizionali, basati su tecniche di calcolo convenzionali, per confermare se un chip funzionerà.</p>
+      <p>Cosa manca: l'annuncio non dà una data di disponibilità generale, nessun risultato numerico, nessun prezzo, nessuna percentuale di divisione dei ricavi. E lo stesso giorno Synopsys ha firmato un accordo separato con Amazon, che non è identificata come cliente di GPT-Synopsys.</p>
+      <div class="example"><b>Esempio pratico: cosa fa un modello "operatore di strumenti"</b>Un progettista chiede: "riduci il consumo di questo blocco del 10% senza aumentare l'area più del 2%". Oggi: settimane di tentativi, ogni tentativo è una corsa di uno strumento che dura ore, e la lettura dei risultati richiede esperienza. Con un modello operatore: il modello lancia lo strumento, legge il rapporto, capisce quale parametro ha fatto la differenza, cambia, rilancia, e si ferma quando l'obiettivo è raggiunto, o quando capisce che non è raggiungibile. Poi, e qui sta la lezione, il risultato passa comunque dagli strumenti deterministici che dicono se il chip funziona. Il generativo esplora, il deterministico certifica.</div>
+      <details class="q"><summary>Perché "usare gli strumenti" è diverso da "scrivere codice"?</summary>
+      <p>Perché il codice è testo, e i modelli sono bravissimi col testo. Uno strumento EDA, invece, è un programma con decine di parametri, file di configurazione, rapporti di migliaia di righe e tempi di esecuzione di ore. Imparare a usarlo bene significa sapere quale parametro muovere, come leggere un rapporto, quando fermarsi: conoscenza che sta nei flussi di lavoro reali, non nei manuali. Addestrare un modello su quei flussi, cosa che solo chi possiede gli strumenti può fare, è il vero asset di questo accordo. È la stessa logica di Pi e delle imbracature: il valore non è nel cervello, è in come il cervello è collegato alle mani.</p></details>
+      <details class="q"><summary>Pagare in base al miglioramento del chip: è un modello che vedremo altrove?</summary>
+      <p>Probabilmente sì, dove il risultato è misurabile. Un chip ha metriche oggettive: consumo, area, frequenza, resa. Un contratto può dire "ti pago in base a quanto queste migliorano". Dove il risultato è soggettivo, come un testo o una consulenza, è molto più difficile. Aspettati contratti "a risultato" prima nell'ingegneria, nella logistica e nella finanza quantitativa, dove c'è un numero da battere, e molto dopo nei servizi creativi.</p></details>
+      <details class="q"><summary>Perché Synopsys tiene la verifica tradizionale nel processo, se il modello è così bravo?</summary>
+      <p>Per lo stesso motivo per cui Microsoft dice che la modalità agentica non sostituisce la revisione umana e per cui Document Intelligence resta accanto a Content Understanding: un sistema generativo può essere convincente e sbagliato, e un chip sbagliato costa decine di milioni e mesi. Gli strumenti di verifica convenzionali sono lenti ma dimostrano, non stimano. È il principio "il generativo esplora, il deterministico certifica", che a questo punto hai visto in tre settori diversi in una settimana.</p></details>
+      <details class="q"><summary>I dati di progetto "non usati per addestrare": basta come garanzia?</summary>
+      <p>È necessario, non sufficiente. Un progetto di chip è tra i segreti industriali più preziosi che esistano, e un modello ospitato dal fornitore significa che quei dati passano da server altrui, cifrati ma presenti. Le domande giuste sono quelle della lista di sovranità dell'edizione del 4 ottobre: dove avviene l'elaborazione, chi può accedere, per quanto tempo restano, chi risponde. Che l'annuncio parli di controlli configurabili di conservazione, audit e permessi dice che i clienti le stanno già facendo.</p></details>
+      <p class="sources">Fonti: <a href="https://www.hpcwire.com/aiwire/2026/10/02/synopsys-and-openai-partner-to-develop-specialized-ai-model-for-chip-design/">AIwire, dal comunicato</a> <span class="src u">ufficiale</span> · <a href="https://uk.investing.com/news/stock-market-news/synopsys-openai-partner-on-ai-model-for-chip-design-93CH-4890205">Investing.com</a> <span class="src">stampa</span> · <a href="https://www.rdworldonline.com/openai-and-synopsys-plan-a-specialized-model-for-chip-design/">R&amp;D World</a> <span class="src">stampa</span> · <a href="https://www.business-standard.com/technology/artificial-intelligence/gpt-synopsys-openai-synopsys-team-up-to-build-gpt-model-for-ai-powered-chip-design-126100100428_1.html">Business Standard</a> <span class="src">stampa</span> · <a href="https://finance.biggo.com/news/0489ec00-9784-4a4a-9224-18303ae7e5cc">BigGo Finance, sul contratto</a> <span class="src">terze parti</span> · <a href="https://byteiota.com/gpt-synopsys-openai-and-synopsys-build-an-ai-chip-designer/">ByteIota</a> <span class="src">terze parti</span></p>
+    </div>
+    <div class="stick card">
+      <h3>Il ciclo di un modello operatore</h3>
+      <svg viewBox="0 0 320 300" width="100%" role="img" aria-label="Ciclo: obiettivo, strumento, rapporto, modifica, verifica">
+        <g font-family="Sora" font-size="10" font-weight="700" text-anchor="middle">
+          <rect x="110" y="20" width="100" height="36" rx="8" fill="var(--sun)"/><text x="160" y="42" fill="#1a1300">Obiettivo</text>
+          <rect x="200" y="100" width="100" height="36" rx="8" fill="var(--violet-soft)" stroke="var(--violet)"/><text x="250" y="122" fill="var(--violet)">Lancia lo strumento</text>
+          <rect x="200" y="180" width="100" height="36" rx="8" fill="var(--violet-soft)" stroke="var(--violet)"/><text x="250" y="202" fill="var(--violet)">Legge il rapporto</text>
+          <rect x="20" y="180" width="100" height="36" rx="8" fill="var(--violet-soft)" stroke="var(--violet)"/><text x="70" y="202" fill="var(--violet)">Modifica i parametri</text>
+          <g class="float"><rect x="90" y="250" width="140" height="36" rx="8" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="2"/><text x="160" y="272" fill="var(--teal)">Verifica deterministica ✓</text></g>
+        </g>
+        <path d="M180 56 L230 100 M250 136 L250 180 M200 198 L120 198 M70 180 L130 136 L200 118 M160 216 L160 250" stroke="var(--muted)" stroke-width="2" fill="none" class="dash"/>
+        <text x="160" y="150" text-anchor="middle" font-family="Sora" font-size="9" fill="var(--muted)">itera finché l'obiettivo è raggiunto</text>
+      </svg>
+      <p class="note">Ricostruzione del flusso descritto nell'annuncio: il modello esplora, gli strumenti convenzionali certificano.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="azure">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip">Rubrica fissa, ottava puntata: speciale concorrenza</span><span class="chip date">Documentazione consultata il 5 ottobre 2026</span><span class="src u">ufficiale</span></div>
+    <h2>Thread, code e sovraccarico: come Azure decide di dirti "troppe richieste"</h2>
+    <p class="lead">Nella prima puntata avevo dato le regole generali. Questa volta entriamo nel meccanismo: come viene calcolata la quota, perché puoi ricevere un 429 anche sotto il limite, i quattro tipi di 429 che hanno rimedi diversi, e come stimare quante chiamate tenere aperte insieme.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>I due rubinetti, ancora</h3>
+      <p>Content Understanding ha la sua quota, 1.000 pagine e 3.000 operazioni al minuto, ma per ogni campo generativo chiama il modello che hai distribuito in Foundry, e quel modello ha una quota sua, espressa in <b>token al minuto</b> (TPM) e <b>richieste al minuto</b> (RPM). Quasi tutti i problemi di "lentezza misteriosa" che la rubrica ha citato, come il caso delle analisi oltre i due minuti, nascono dal secondo rubinetto. Questa puntata è tutta su quello.</p>
+      <h3>Come il servizio conta i token, e perché non è come li paghi</h3>
+      <p>Quando assegni TPM a una distribuzione, imposti insieme TPM e RPM. Ma la quota di token non si basa sui token che effettivamente consumi: si basa su una stima fatta al momento in cui la richiesta arriva, che include il testo del prompt, il parametro <code>max_tokens</code> e il parametro <code>best_of</code>. La stima viene aggiunta a un contatore che si azzera ogni minuto; raggiunto il limite, le richieste successive ricevono 429 fino al reset. Microsoft avverte che la stima è approssimativa, basata in parte sul conteggio dei caratteri, e che è comportamento atteso che il limite scatti prima di quanto un conteggio esatto farebbe pensare.</p>
+      <p>Qui sta la trappola più comune. Se ti aspetti risposte da 200 token ma imposti <code>max_tokens</code> a 4.000, ogni richiesta "prenota" 4.000 token della quota anche se poi ne usa 200. Con 100.000 TPM, sono 25 richieste al minuto invece di oltre 400. La regola ufficiale: imposta <code>max_tokens</code> al minimo che serve, lascia <code>best_of</code> a 1, accorcia i prompt.</p>
+      <h3>Perché ricevi 429 anche sotto il limite</h3>
+      <p>Il limite di richieste al minuto si aspetta che le richieste siano distribuite in modo uniforme nel minuto. Il servizio valuta il ritmo su finestre brevi, tipicamente di 1 o 10 secondi: se in quella finestra arrivano più richieste di quelle che il limite consentirebbe in proporzione, scatta il 429 fino alla finestra successiva. L'esempio ufficiale: con una distribuzione da 600 richieste al minuto, se il controllo è su intervalli di un secondo, scatta il limite ogni volta che arrivano più di 10 richieste in un secondo. Tradotto per chi scrive codice: dieci thread che partono insieme producono una raffica nello stesso secondo, e vengono respinti anche se in un minuto avresti potuto farne 600. Non è la quota, è la forma del traffico.</p>
+      <h3>I quattro tipi di 429, con rimedi diversi</h3>
+      <p>Non tutti i 429 hanno la stessa causa, e la documentazione li distingue. <b>Limite superato</b>: il messaggio dice che le richieste sono state limitate; rimedio, aumentare i TPM assegnati a quella distribuzione, ribilanciare la quota tra distribuzioni, o chiedere un aumento. <b>Capacità del sistema</b>: il messaggio parla di servizio temporaneamente incapace o di alta domanda; è spesso transitorio, si riprova dopo l'attesa indicata, e se persiste si valuta la capacità riservata. <b>Riduzione temporanea</b>: ricevi 429 ma la quota configurata non è cambiata, e l'intestazione <code>x-ratelimit-limit-tokens</code> mostra un valore più basso del tuo TPM; le distribuzioni standard condividono un pool, e quando la domanda si avvicina alla capacità il sistema riduce temporaneamente il tuo limite effettivo per proteggere tutti; di solito si risolve in qualche ora. <b>Budget consumato dai parametri</b>: il limite scatta ma le metriche di uso sono basse; è la trappola di <code>max_tokens</code> appena vista.</p>
+      <h3>Le intestazioni che ti dicono tutto in anticipo</h3>
+      <p>Ogni risposta include intestazioni con il limite di richieste e di token per minuto, quante ne restano, e il tempo al reset; i 429 includono <code>retry-after-ms</code> con l'attesa consigliata in millisecondi. Il consiglio ufficiale: monitora le intestazioni "remaining" e rallenta prima di ricevere il 429, invece di aspettarlo. È la differenza tra un autista che guarda il contachilometri e uno che aspetta la multa.</p>
+      <h3>Riprovare bene</h3>
+      <p>Usa <code>retry-after-ms</code> se c'è; altrimenti attesa esponenziale con un ritardo casuale, il "jitter", per evitare che tutti i client riprovino nello stesso istante, con un massimo di tentativi, per esempio da 5 a 10. Due avvertenze importanti: le richieste fallite contano comunque verso il limite al minuto, quindi rimandare senza attesa peggiora la situazione; e le librerie ufficiali hanno già la ripetizione automatica con attesa esponenziale, due tentativi di base, che si possono aumentare. Se usi una libreria di ripetizione tua, metti a zero i tentativi della libreria ufficiale, altrimenti ogni tuo tentativo ne genera altri due, e il traffico esplode proprio quando dovrebbe calare.</p>
+      <h3>Quanti thread, allora?</h3>
+      <p>La risposta ufficiale per la capacità riservata vale come metodo anche per quella standard: il numero di chiamate concorrenti che una distribuzione sostiene dipende dalla forma di ogni chiamata, dimensione del prompt, <code>max_tokens</code> e simili, e il servizio accetta chiamate finché l'utilizzo raggiunge il 100%. Per la capacità riservata c'è un calcolatore nel portale Foundry, nella pagina delle quote. Per quella standard, il ragionamento è aritmetico: con TPM e forma media della chiamata calcoli quante richieste al minuto reggi, e da lì, con la latenza media di una chiamata, quante possono essere in volo insieme. Il calcolatore qui accanto fa esattamente questo conto. E un controllo da fare prima di tutto: verifica i TPM assegnati alla <i>singola distribuzione</i>, non solo alla sottoscrizione; puoi avere quota approvata a livello di sottoscrizione e ricevere 429 perché non è assegnata alla distribuzione che riceve il traffico.</p>
+      <h3>Quando la quota standard non basta</h3>
+      <p>Le distribuzioni standard usano un pool condiviso: i 429 transitori occasionali sono comportamento atteso, non un difetto. Per i carichi che richiedono latenza prevedibile e capacità garantita, la via indicata è la capacità riservata (PTU), che usa un algoritmo "a secchio bucato" per tenere l'utilizzo sotto il 100% ammettendo qualche raffica, e restituisce 429 immediato con l'attesa quando è piena: non un errore, un segnale di gestione del traffico. Da lì, due strade: riprovare dopo l'attesa, o reindirizzare subito la richiesta a un'altra distribuzione, la soluzione a latenza più bassa, che una funzione di "spillover" può automatizzare. Esiste anche la quota dinamica, in anteprima, che permette a una distribuzione standard di usare più capacità quando ce n'è, senza mai scendere sotto il valore configurato.</p>
+      <div class="example"><b>Esempio pratico: 20.000 documenti in una notte, senza farsi strozzare</b>Distribuzione del modello: 300.000 TPM. Forma della chiamata: 3.000 token di prompt (la pagina e lo schema) più <code>max_tokens</code> 300 (i campi), non 4.000. Budget per richiesta: 3.300 token, quindi circa 90 richieste al minuto. Latenza media 4 secondi: 90 al minuto con 4 secondi l'una significa circa 6 chiamate in volo contemporaneamente. Imposti il tuo semaforo a 6 thread, non a 50, con una pausa tra una partenza e l'altra per non concentrarle nello stesso secondo. Leggi le intestazioni "remaining" e rallenti al 15% residuo. Sui 429 usi <code>retry-after-ms</code>. Tempo totale: 20.000 diviso 90, circa 3 ore e 40 minuti, prevedibili. Con 50 thread e <code>max_tokens</code> 4.000 avresti avuto una notte di 429 e un lotto incompleto all'alba.</div>
+      <details class="q"><summary>Più thread significa più veloce, no?</summary>
+      <p>Solo fino al punto in cui la quota è satura. Oltre, ogni thread in più produce 429, e i 429 contano verso il limite: stai spendendo quota per farti dire di no. Il numero giusto di thread è quello che tiene il servizio vicino al 100% senza superarlo, e si calcola, non si indovina. Dopo quel punto, l'unica cosa che accelera è più quota, o la capacità riservata.</p></details>
+      <details class="q"><summary>Perché le richieste fallite contano verso il limite?</summary>
+      <p>Perché il servizio deve comunque riceverle, valutarle e rispondere, e un cliente che insiste senza attendere sottrae capacità a tutti gli altri nel pool condiviso. Contarle è il modo per rendere costoso il comportamento che peggiora il problema. È anche il motivo per cui l'attesa esponenziale con jitter non è un consiglio di cortesia: senza, un lotto che riceve un 429 lo riceve mille volte di fila.</p></details>
+      <details class="q"><summary>Il 429 della capacità riservata "non è un errore": cosa vuol dire?</summary>
+      <p>Che è progettato così. Con la capacità riservata hai pagato un certo numero di unità; quando sono piene, il servizio preferisce dirtelo subito, con un'attesa precisa, piuttosto che mettere la tua richiesta in una coda nascosta e rallentare tutte le altre. Questo ti lascia la scelta: aspettare, o dirottare la richiesta altrove nel giro di millisecondi. Un rifiuto veloce e informativo vale più di un'accettazione lenta.</p></details>
+      <details class="q"><summary>Il "jitter" sembra un dettaglio: perché insistono tanto?</summary>
+      <p>Immagina cento client che ricevono un 429 nello stesso istante e riprovano tutti dopo esattamente due secondi: la raffica si ripresenta identica, e ricevono cento 429. È la "mandria tonante". Aggiungere un ritardo casuale a ciascuno sparge i tentativi nel tempo e trasforma la raffica in un flusso. È uno dei pochi casi in informatica in cui aggiungere caso rende il sistema più ordinato.</p></details>
+      <p class="sources">Fonti: <a href="https://learn.microsoft.com/azure/foundry/openai/how-to/quota#understanding-rate-limits">Microsoft Learn, gestire la quota e i limiti</a> <span class="src u">ufficiale</span> · <a href="https://learn.microsoft.com/azure/foundry/openai/how-to/quota#understanding-429-throttling-errors-and-what-to-do">Microsoft Learn, i tipi di 429</a> <span class="src u">ufficiale</span> · <a href="https://learn.microsoft.com/azure/ai-foundry/openai/concepts/provisioned-throughput#key-concepts">Microsoft Learn, capacità riservata</a> <span class="src u">ufficiale</span> · <a href="https://learn.microsoft.com/azure/foundry/openai/how-to/provisioned-get-started#handle-high-utilization">Microsoft Learn, gestire l'alta utilizzazione</a> <span class="src u">ufficiale</span> · <a href="https://learn.microsoft.com/azure/ai-foundry/openai/how-to/dynamic-quota">Microsoft Learn, quota dinamica</a> <span class="src u">ufficiale</span> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/service-limits">Microsoft Learn, limiti di Content Understanding</a> <span class="src u">ufficiale</span></p>
+    </div>
+    <div class="stick card calc">
+      <h3>Quanti thread puoi tenere aperti?</h3>
+      <label for="c_tpm">Token al minuto della distribuzione <output id="c_tpmo"></output></label><input id="c_tpm" type="range" min="10000" max="2000000" step="10000" value="300000">
+      <label for="c_pr">Token di prompt per richiesta <output id="c_pro"></output></label><input id="c_pr" type="range" min="200" max="20000" step="100" value="3000">
+      <label for="c_mx">max_tokens impostato <output id="c_mxo"></output></label><input id="c_mx" type="range" min="50" max="8000" step="50" value="300">
+      <label for="c_lat">Latenza media di una chiamata (secondi) <output id="c_lato"></output></label><input id="c_lat" type="range" min="1" max="30" step="0.5" value="4">
+      <div class="stats" style="grid-template-columns:1fr 1fr;margin:1rem 0 0"><div class="stat"><strong id="c_rpm">–</strong><span>richieste al minuto sostenibili</span></div><div class="stat"><strong id="c_thr">–</strong><span>chiamate in volo (thread)</span></div></div>
+      <p id="c_note" class="note" style="color:var(--ink)"></p>
+      <p class="note">Stima aritmetica dal metodo ufficiale: la quota conta prompt + max_tokens, non i token effettivi. La latenza reale va misurata.</p>
+      <h3 style="margin-top:1.4rem">La raffica nello stesso secondo</h3>
+      <label for="b_rpm">Limite: richieste al minuto <output id="b_rpmo"></output></label><input id="b_rpm" type="range" min="60" max="1200" step="60" value="600">
+      <label for="b_th">Thread che partono insieme <output id="b_tho"></output></label><input id="b_th" type="range" min="1" max="60" step="1" value="25">
+      <svg viewBox="0 0 320 70" width="100%" id="burstsvg" role="img" aria-label="Richieste accettate e respinte nella finestra di un secondo"></svg>
+      <p id="b_note" class="note" style="color:var(--ink)"></p>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="lab">
+  <div class="ch-head"><div class="kicker"><span class="chip">Laboratorio</span></div><h2>Prova tu</h2></div>
+  <div class="prose" style="margin-top:2rem">
+    <h3 style="font-size:1.3rem">1. Fai progettare il semaforo, poi fallo rompere</h3>
+    <p>Chiedi a un assistente di scrivere la politica di concorrenza per un lotto, con i vincoli ufficiali di questa puntata. Poi chiedigli di trovare i tre modi in cui il suo stesso piano produrrà 429.</p>
+  </div>
+  <div class="card"><pre class="prompt" id="h1">Devo elaborare 20.000 documenti con un modello in Azure Foundry. La distribuzione ha 300.000 token al minuto. Ogni richiesta ha un prompt di circa 3.000 token e risposte di circa 250 token. Vincoli ufficiali: la quota conta prompt + max_tokens (non i token effettivi); il limite di richieste al minuto è valutato su finestre di 1-10 secondi, quindi le raffiche nello stesso secondo producono 429 anche sotto il limite; le richieste fallite contano verso il limite; i 429 includono retry-after-ms; le librerie ufficiali hanno già 2 tentativi automatici. Progetta: valore di max_tokens, numero di chiamate concorrenti, distanza tra le partenze, politica di ripetizione con attesa esponenziale e jitter, uso delle intestazioni x-ratelimit-remaining-*, durata stimata. Poi elenca tre modi in cui il tuo stesso piano potrebbe comunque produrre 429, e come li riconosceresti dal messaggio e dalle intestazioni.</pre><button class="btn copy" data-c="h1">Copia</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Cosa osservare:</b> se propone 50 thread, o max_tokens a 4.000 "per sicurezza", o una ripetizione immediata senza attesa, ha mancato tre lezioni della puntata. Se nella seconda parte cita la riduzione temporanea del pool condiviso e la quota non assegnata alla singola distribuzione, ha letto bene.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">2. La mandria tonante, con un foglio di calcolo</h3>
+    <p>Apri un foglio di calcolo. Nella colonna A metti 100 client che ricevono un 429 al secondo 0 e riprovano tutti dopo 2 secondi fissi: conta quanti arrivano nello stesso secondo (tutti). Nella colonna B dai a ciascuno un ritardo di 2 secondi più un numero casuale tra 0 e 2 (funzione CASUALE): conta quanti arrivano in ciascun secondo. La colonna B è il jitter. Vedrai la raffica diventare un flusso con una formula sola.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">3. Leggi le intestazioni del tuo servizio</h3>
+    <p>Se hai accesso a una distribuzione Azure, fai una singola chiamata e stampa le intestazioni della risposta: <code>x-ratelimit-limit-tokens</code>, <code>x-ratelimit-remaining-tokens</code>, <code>x-ratelimit-reset-tokens</code>. Confronta il limite con i TPM che credevi di avere: se è più basso, stai vivendo una riduzione temporanea del pool condiviso, o la quota non è assegnata a quella distribuzione. È il controllo da cinque minuti che risparmia notti intere.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">4. Il modello operatore in miniatura (GPT-Synopsys)</h3>
+    <p>Dai a un assistente un "finto strumento": una funzione che tu simuli a mano, per esempio "calcola il consumo di un circuito dati tre parametri", a cui rispondi tu con numeri inventati ma coerenti. Chiedigli di raggiungere un obiettivo muovendo i parametri e chiamando lo strumento, una chiamata per messaggio, senza indovinare. Conta quante chiamate gli servono e se si ferma quando l'obiettivo è raggiunto. È il ciclo esplora-leggi-modifica dell'annuncio, con te nel ruolo dello strumento EDA.</p>
+  </div>
+</section>
+
+<section class="ch" id="segnali">
+  <div class="ch-head"><div class="kicker"><span class="chip">Da tenere d'occhio</span></div><h2>Segnali emergenti e aggiornamenti</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">aggiornamento</span><h3>World Labs in AMD: 8,2 miliardi di dollari</h3><p>Nelle edizioni di settembre avevo riportato che World Labs "entra in AMD" senza cifre. Una rassegna settimanale di sicurezza riporta che AMD ha acquisito World Labs per 8,2 miliardi di dollari, come primo passo per competere con NVIDIA anche sul software dei modelli del mondo. Cifra da una sola fonte secondaria. <a href="https://enterprisetimes.co.uk/2026/10/05/security-and-ai-news-from-the-week-beginning-28-september-2026">Enterprise Times</a> <span class="src">stampa</span></p></div>
+    <div class="sig"><span class="chip date">4 ottobre</span><h3>DeepSeek-V4.1-Flash arriva sui gateway</h3><p>Una classifica lo segnala come "rilasciato il 4 ottobre", ma è la data in cui un fornitore lo ha aggiunto a un gateway API: il modello e il suo paper erano di metà settembre, come riportato nel numero di settembre. Un esempio di come le date "di rilascio" dei cataloghi vadano sempre verificate. <a href="https://llmgateway.io/timeline">LLM Gateway</a> <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">pista</span><h3>Atria Dawn Preview (Shanghai AI Laboratory)</h3><p>Compare in un catalogo di modelli come unica uscita recente del laboratorio di Shanghai. Non ho trovato una fonte che dica cosa sia: resta una pista per la prossima edizione. <a href="https://llm-stats.com/llm-updates">LLM Stats</a> <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">settimana scorsa</span><h3>Il SOC "agentico"</h3><p>La stessa rassegna di sicurezza nota che i fornitori di centri operativi di sicurezza stanno riprogettando i flussi di lavoro per minacce "a velocità di macchina" e per agenti autonomi sempre più complessi. La sorveglianza degli agenti, vista con NVIDIA e con Classie, diventa una categoria anche per chi difende. <a href="https://enterprisetimes.co.uk/2026/10/05/security-and-ai-news-from-the-week-beginning-28-september-2026">Enterprise Times</a> <span class="src">stampa</span></p></div>
+  </div>
+</section>
+
+<section class="ch" id="novita">
+  <div class="ch-head"><div class="kicker"><span class="chip">Rispetto all'edizione del mattino</span></div><h2>Cosa è cambiato, e cosa ho escluso</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">recupero</span><h3>GPT-Synopsys</h3><p>Annuncio del 30 settembre che mancava: il primo "modello operatore di strumenti" della newsletter, con un contratto pagato sul risultato.</p></div>
+    <div class="sig"><span class="chip date">rubrica</span><h3>Azure, ottava puntata</h3><p>Lo speciale sulla concorrenza che avevi chiesto: quota stimata, finestre di 1-10 secondi, i quattro tipi di 429, intestazioni, ripetizione con jitter, capacità riservata, e due calcolatori.</p></div>
+    <div class="sig"><span class="chip date">aggiornamento</span><h3>World Labs e AMD</h3><p>Aggiunta la cifra dell'acquisizione, da una sola fonte secondaria.</p></div>
+  </div>
+  <div class="prose" style="margin-top:2rem">
+    <p><b>Escluso.</b> Il contratto tra NVIDIA e Anthropic per oltre 180 miliardi di dollari di capacità di calcolo entro il 2028, e i ricavi e le perdite di Anthropic riportati dalla stessa rassegna: finanza, e cifre discordanti tra fonti (una dice 2,5 miliardi di ricavi, un'altra 4,59). L'acquisizione di Turso da parte di Supabase: infrastruttura per database, non AI. L'accordo separato Synopsys-Amazon, che non riguarda il modello.</p>
+  </div>
+</section>
+
+<section class="ch" id="quiz">
+  <div class="ch-head"><div class="kicker"><span class="chip">Mettiti alla prova</span></div><h2>Sei domande</h2></div>
+  <div class="card quiz" id="quizbox" style="margin-top:2rem"></div>
+</section>
+
+<section class="ch" id="fonti">
+  <div class="ch-head"><h2>Fonti di questa edizione</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="src u">ufficiale</span><h3>Documentazione e comunicati</h3><p><a href="https://learn.microsoft.com/azure/foundry/openai/how-to/quota">Microsoft Learn, quota e limiti</a> · <a href="https://learn.microsoft.com/azure/ai-foundry/openai/concepts/provisioned-throughput">Capacità riservata</a> · <a href="https://learn.microsoft.com/azure/foundry/openai/how-to/provisioned-get-started">Gestire l'alta utilizzazione</a> · <a href="https://learn.microsoft.com/azure/ai-foundry/openai/how-to/dynamic-quota">Quota dinamica</a> · <a href="https://www.hpcwire.com/aiwire/2026/10/02/synopsys-and-openai-partner-to-develop-specialized-ai-model-for-chip-design/">Comunicato Synopsys-OpenAI via AIwire</a></p></div>
+    <div class="sig"><span class="src">stampa</span><h3>Testate</h3><p><a href="https://uk.investing.com/news/stock-market-news/synopsys-openai-partner-on-ai-model-for-chip-design-93CH-4890205">Investing.com</a> · <a href="https://www.rdworldonline.com/openai-and-synopsys-plan-a-specialized-model-for-chip-design/">R&amp;D World</a> · <a href="https://www.business-standard.com/technology/artificial-intelligence/gpt-synopsys-openai-synopsys-team-up-to-build-gpt-model-for-ai-powered-chip-design-126100100428_1.html">Business Standard</a> · <a href="https://enterprisetimes.co.uk/2026/10/05/security-and-ai-news-from-the-week-beginning-28-september-2026">Enterprise Times</a></p></div>
+    <div class="sig"><span class="src">terze parti</span><h3>Da verificare</h3><p><a href="https://finance.biggo.com/news/0489ec00-9784-4a4a-9224-18303ae7e5cc">BigGo Finance</a> · <a href="https://byteiota.com/gpt-synopsys-openai-and-synopsys-build-an-ai-chip-designer/">ByteIota</a> · <a href="https://llmgateway.io/timeline">LLM Gateway</a> · <a href="https://llm-stats.com/llm-updates">LLM Stats</a></p></div>
+  </div>
+</section>
+
+</main>
+<footer>Radar AI · edizione del 5 ottobre 2026, pomeriggio · preparata da Claude.<br>I calcolatori sono stime dal metodo ufficiale: la latenza e la forma delle chiamate vanno misurate sui propri carichi.</footer>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id)}
+  var links=[].slice.call(document.querySelectorAll('#links a'));var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function onScroll(){var h=document.documentElement;$('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';var cur=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<140)cur=i});links.forEach(function(a,i){a.classList.toggle('on',i===cur&&window.scrollY>200)})}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  /* hero queue */
+  var q='';for(var i=0;i<18;i++){var x=60+(i%6)*30,y=160+Math.floor(i/6)*30;q+='<circle cx="'+x+'" cy="'+y+'" r="9" fill="'+(i<10?'var(--sun)':'var(--red)')+'" class="blip" style="animation-delay:'+(i*0.15)+'s"/>'}
+  q+='<text x="135" y="140" text-anchor="middle" font-family="Sora" font-size="10" fill="var(--muted)">18 richieste nello stesso secondo</text>';$('qhero').innerHTML=q;
+
+  /* concurrency calc */
+  function conc(){var tpm=+$('c_tpm').value,pr=+$('c_pr').value,mx=+$('c_mx').value,lat=+$('c_lat').value;
+    $('c_tpmo').textContent=tpm.toLocaleString('it-IT');$('c_pro').textContent=pr.toLocaleString('it-IT');$('c_mxo').textContent=mx.toLocaleString('it-IT');$('c_lato').textContent=lat.toString().replace('.',',')+' s';
+    var rpm=Math.floor(tpm/(pr+mx));var thr=Math.max(1,Math.floor(rpm*lat/60));
+    $('c_rpm').textContent=rpm.toLocaleString('it-IT');$('c_thr').textContent=thr;
+    var alt=Math.floor(tpm/(pr+Math.max(50,Math.round(mx/4))));
+    $('c_note').textContent='Con max_tokens a '+mx+' ogni richiesta prenota '+(pr+mx).toLocaleString('it-IT')+' token. Se le risposte reali sono molto più corte, abbassando max_tokens a '+Math.max(50,Math.round(mx/4))+' avresti circa '+alt.toLocaleString('it-IT')+' richieste al minuto.'}
+  ['c_tpm','c_pr','c_mx','c_lat'].forEach(function(id){$(id).oninput=conc});conc();
+
+  /* burst */
+  function burst(){var rpm=+$('b_rpm').value,th=+$('b_th').value;$('b_rpmo').textContent=rpm;$('b_tho').textContent=th;var ps=rpm/60;var ok=Math.min(th,Math.floor(ps));var s='';
+    for(var i=0;i<th;i++){s+='<circle cx="'+(10+(i%30)*10.3)+'" cy="'+(15+Math.floor(i/30)*22)+'" r="4" fill="'+(i<ok?'var(--sun)':'var(--red)')+'"/>'}
+    $('burstsvg').innerHTML=s;$('b_note').textContent=th<=ps?'Nella finestra di un secondo il limite proporzionale è '+Math.floor(ps)+': tutte accettate.':'Il limite proporzionale è circa '+Math.floor(ps)+' richieste al secondo: '+(th-ok)+' su '+th+' ricevono 429 pur restando ben sotto le '+rpm+' al minuto. Distanzia le partenze di almeno '+Math.ceil(1000/ps)+' ms.'}
+  ['b_rpm','b_th'].forEach(function(id){$(id).oninput=burst});burst();
+
+  /* copy */
+  [].forEach.call(document.querySelectorAll('.copy'),function(b){b.style.marginTop='.6rem';b.onclick=function(){var t=$(b.dataset.c).textContent;var o=b.textContent;
+    function sel(){var r=document.createRange();r.selectNodeContents($(b.dataset.c));var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Testo selezionato: copialo'}
+    try{navigator.clipboard.writeText(t).then(function(){b.textContent='Copiato ✓';setTimeout(function(){b.textContent=o},1500)},sel)}catch(e){sel()}}});
+
+  /* quiz */
+  var Q=[["Su cosa si basa la stima dei token per la quota al minuto?",["Sui token effettivamente consumati","Su prompt stimato + max_tokens + best_of, al momento in cui la richiesta arriva","Sul numero di caratteri della risposta"],1,"Esatto: per questo max_tokens troppo alto 'prenota' quota che non usi."],
+    ["Perché 25 thread che partono insieme ricevono 429 con un limite di 600 richieste al minuto?",["Perché 25 è più di 600","Perché il limite è valutato su finestre di 1-10 secondi: 600 al minuto sono 10 al secondo","Perché i thread sono vietati"],1,"Giusto: non è la quota, è la forma del traffico."],
+    ["Cosa indica un 429 con x-ratelimit-limit-tokens più basso dei TPM configurati?",["Un errore del tuo codice","Una riduzione temporanea del limite effettivo nel pool condiviso","Una fattura non pagata"],1,"Corretto: protettiva e temporanea, di solito si risolve in qualche ora."],
+    ["Le richieste fallite con 429 contano verso il limite?",["No","Sì: rimandare senza attesa peggiora il throttling","Solo le prime dieci"],1,"Esatto: per questo l'attesa esponenziale con jitter è obbligatoria, non cortese."],
+    ["Come viene pagato il modello GPT-Synopsys secondo i resoconti?",["A token","Con una quota di addestramento più ricavi divisi in base a quanto migliora i chip dei clienti","Con licenza annuale fissa"],1,"Proprio così: uno dei primi contratti 'a risultato' per un modello."],
+    ["Cosa succede alle uscite di GPT-Synopsys prima che un chip venga prodotto?",["Vengono accettate direttamente","Vengono ricontrollate dagli strumenti di verifica deterministici tradizionali","Vengono pubblicate su arXiv"],1,"Esatto: il generativo esplora, il deterministico certifica."]];
+  var sc=0,an=0;$('quizbox').innerHTML=Q.map(function(q,i){return '<div class="qq"><p>'+(i+1)+'. '+q[0]+'</p><div class="opts">'+q[1].map(function(o,j){return '<button class="opt" data-q="'+i+'" data-o="'+j+'">'+o+'</button>'}).join('')+'</div><div class="fb" id="fb'+i+'"></div></div>'}).join('')+'<p class="score" id="score"></p>';
+  [].forEach.call(document.querySelectorAll('.opt'),function(b){b.onclick=function(){var qi=+b.dataset.q,oi=+b.dataset.o,q=Q[qi];var g=document.querySelectorAll('.opt[data-q="'+qi+'"]');if(g[0].disabled)return;[].forEach.call(g,function(x){x.disabled=true;if(+x.dataset.o===q[2])x.classList.add('ok')});
+    if(oi===q[2]){sc++;$('fb'+qi).textContent=q[3]}else{b.classList.add('ko');$('fb'+qi).textContent='Non proprio. '+q[3]}if(++an===Q.length)$('score').textContent='Hai risposto bene a '+sc+' domande su '+Q.length+'.'}});
+})();
+</script>
+
+</body>
+</html>

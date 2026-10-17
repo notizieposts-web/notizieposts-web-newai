@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Radar AI · 3 ottobre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F6FB; --surface:#FFFFFF; --soft:#E9EDF7; --ink:#121A2B; --muted:#56627A; --line:#D8DEEA;
+  --violet:#4B4BF5; --violet-soft:#E6E6FF; --teal:#0E9F9E; --teal-soft:#DDF5F4; --sun:#F2B705; --sun-soft:#FFF5D1; --red:#D9463B;
+  --head:"Sora","Segoe UI",system-ui,sans-serif; --body:"Inter","Segoe UI",system-ui,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+    --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+  --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7}
+a{color:var(--violet)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+h1,h2,h3{font-family:var(--head);line-height:1.12;margin:0}
+p{margin:0 0 1rem}
+img,svg{max-width:100%}
+
+/* NAV */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:72rem;margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem}
+.brand{font-family:var(--head);font-weight:800;white-space:nowrap}
+.links{display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;flex:1}
+.links::-webkit-scrollbar{display:none}
+.links a{font-family:var(--head);font-size:.82rem;font-weight:600;text-decoration:none;color:var(--muted);padding:.35rem .7rem;border-radius:999px;white-space:nowrap}
+.links a.on{background:var(--ink);color:var(--bg)}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;background:var(--violet);width:0}
+
+/* HERO */
+.hero{max-width:72rem;margin:0 auto;padding:3.5rem 1.2rem 2rem;display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800;letter-spacing:-.03em}
+.hero .sub{font-size:1.15rem;color:var(--muted);margin-top:1.2rem;max-width:34rem}
+.meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem}
+.chip{font-family:var(--head);font-size:.78rem;font-weight:600;padding:.3rem .7rem;border-radius:999px;background:var(--soft);color:var(--ink)}
+.chip.date{background:var(--violet-soft);color:var(--violet)}
+.radar{aspect-ratio:1;width:100%;max-width:26rem;justify-self:center}
+.sweep{transform-origin:200px 200px;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.blip{animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.radar{max-width:18rem}}
+
+/* SECTIONS */
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.2rem}
+section.ch{padding:4.5rem 0 1rem;border-top:1px solid var(--line)}
+.ch-head{max-width:48rem}
+.kicker{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+.ch h2{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em}
+.lead{font-size:1.2rem;color:var(--muted);margin-top:1rem}
+.grid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.5rem;margin-top:2.2rem;align-items:start}
+.grid2 .stick{position:sticky;top:84px}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.grid2 .stick{position:static}}
+.prose p{max-width:38rem}
+.prose h3{font-size:1.2rem;margin:1.8rem 0 .7rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.4rem}
+.card h3{font-size:1.05rem;margin-bottom:.8rem}
+.example{background:var(--teal-soft);border-radius:14px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.example b:first-child{font-family:var(--head);color:var(--teal);display:block;margin-bottom:.3rem}
+.paper{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:12px;padding:1rem 1.2rem;margin:1.4rem 0}
+.paper .ic{font-size:1.5rem;line-height:1}
+.src{font-family:var(--head);font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:6px;background:var(--soft);color:var(--muted);vertical-align:middle;white-space:nowrap}
+.src.p{background:var(--teal-soft);color:var(--teal)}
+.src.u{background:var(--violet-soft);color:var(--violet)}
+.sources{font-size:.88rem;color:var(--muted);margin-top:1rem}
+.sources a{margin-right:.4rem}
+
+/* curiosity */
+details.q{background:var(--sun-soft);border-radius:14px;padding:1rem 1.2rem;margin:1.6rem 0;max-width:38rem}
+details.q summary{cursor:pointer;font-family:var(--head);font-weight:700;list-style:none;display:flex;gap:.7rem;align-items:flex-start}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::before{content:"?";flex:none;display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--sun);color:#1a1300;font-weight:800}
+details.q summary::after{content:"Scopri";margin-left:auto;font-size:.75rem;font-weight:600;color:var(--muted);padding-top:.25rem}
+details.q[open] summary::after{content:"Chiudi"}
+details.q p{margin:.8rem 0 0}
+
+/* buttons */
+.btn{font-family:var(--head);font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.55rem 1rem;border-radius:999px;cursor:pointer}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0}
+.note{font-size:.84rem;color:var(--muted)}
+
+/* timeline */
+.tl{position:relative;margin:2.4rem 0 1rem;overflow-x:auto;padding-bottom:.5rem}
+.tl-in{position:relative;min-width:44rem;height:120px}
+.tl-line{position:absolute;left:1rem;right:1rem;top:60px;height:3px;background:var(--line);border-radius:2px}
+.tl-dot{position:absolute;top:60px;width:20px;height:20px;margin:-8px 0 0 -10px;border-radius:50%;border:3px solid var(--bg);background:var(--violet);cursor:pointer;padding:0;transition:transform .2s}
+.tl-dot.n{background:var(--sun)}
+.tl-dot[aria-pressed="true"]{transform:scale(1.5)}
+.tl-day{position:absolute;top:88px;transform:translateX(-50%);font-family:var(--head);font-size:.72rem;color:var(--muted)}
+.tl-card{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center}
+.tl-date{font-family:var(--head);font-weight:800;font-size:2.6rem;line-height:1;color:var(--violet);text-align:center}
+.tl-date small{display:block;font-size:.8rem;font-weight:600;color:var(--muted)}
+
+/* bars */
+.pbar{margin:.9rem 0}
+.pbar .lab{display:flex;justify-content:space-between;font-family:var(--head);font-size:.88rem;font-weight:600}
+.pbar .tr{height:12px;background:var(--soft);border-radius:6px;overflow:hidden;margin-top:.35rem}
+.pbar .fi{height:100%;width:0;background:var(--violet);border-radius:6px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.mail{background:var(--soft);border-radius:12px;padding:.9rem 1rem;font-style:italic;margin:.8rem 0}
+
+/* race */
+.lane{margin:1rem 0}
+.lane .nm{font-family:var(--head);font-weight:700;font-size:.9rem;margin-bottom:.4rem;display:flex;justify-content:space-between}
+.words{display:flex;flex-wrap:wrap;gap:.35rem;min-height:2.4rem}
+.w{font-family:var(--head);font-size:.85rem;padding:.35rem .6rem;border-radius:8px;background:var(--soft);color:var(--muted);transition:background .3s,color .3s}
+.w.on{background:var(--violet);color:#fff}
+.w.d{background:var(--teal);color:#fff}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.4rem 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem;text-align:center}
+.stat strong{display:block;font-family:var(--head);font-size:1.8rem;color:var(--violet)}
+.stat span{font-size:.82rem;color:var(--muted)}
+@media (max-width:560px){.stats{grid-template-columns:1fr}}
+
+/* calc */
+.calc label{display:flex;justify-content:space-between;font-family:var(--head);font-weight:600;font-size:.9rem;margin-top:1rem}
+.calc input{width:100%;accent-color:var(--violet)}
+.cbar{display:grid;grid-template-columns:9.5rem 1fr 5.5rem;gap:.6rem;align-items:center;font-size:.85rem;margin:.5rem 0}
+.cbar .tr{height:14px;background:var(--soft);border-radius:7px;overflow:hidden}
+.cbar .fi{height:100%;background:var(--violet);border-radius:7px;transition:width .4s}
+.cbar .fi.t{background:var(--teal)}
+.cbar b{text-align:right;font-family:var(--head)}
+
+/* table */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.92rem}
+th,td{text-align:left;padding:.7rem .6rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--head);font-size:.8rem;color:var(--muted)}
+td:first-child{font-family:var(--head);font-weight:700;white-space:nowrap}
+
+/* cards grid */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:1rem;margin-top:2rem}
+.sig{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.2rem}
+.sig h3{font-size:1.02rem;margin:.6rem 0 .5rem}
+.sig p{font-size:.93rem;margin:0}
+
+/* quiz */
+.quiz .qq{margin:1.4rem 0}
+.quiz .qq p{font-family:var(--head);font-weight:700}
+.opts{display:grid;gap:.5rem}
+.opt{text-align:left;font-family:var(--body);font-size:.95rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.7rem 1rem;border-radius:12px;cursor:pointer}
+.opt.ok{border-color:var(--teal);background:var(--teal-soft)}
+.opt.ko{border-color:var(--red)}
+.fb{font-size:.9rem;color:var(--muted);margin-top:.4rem;min-height:1.2rem}
+.score{font-family:var(--head);font-weight:800;font-size:1.2rem}
+
+/* prompt */
+pre.prompt{white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.3rem;font-family:var(--body);font-size:.92rem;line-height:1.6;max-height:28rem;overflow:auto}
+footer{border-top:1px solid var(--line);margin-top:4rem;padding:2rem 1.2rem 3rem;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* svg anim helpers */
+.float{animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.orbit{transform-origin:200px 170px;animation:spin 14s linear infinite}
+.dash{stroke-dasharray:6 6;animation:dash 1.5s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Capitoli">
+  <div class="nav-in">
+    <span class="brand">📡 Radar AI</span>
+    <div class="links" id="links">
+      <a href="#sun">Suncatcher</a><a href="#azure">Azure CU</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+    </div>
+  </div>
+  <div class="progress" id="prog"></div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="meta"><span class="chip date">Edizione del 3 ottobre 2026, mattina</span><span class="chip">Dall'edizione serale del 2 ottobre</span><span class="chip">Solo notizie nuove</span><span class="chip">Nuova rubrica fissa: Azure Content Understanding</span></div>
+    <h1 style="margin-top:1.2rem">Quattro chip di Google sono in orbita. E una rubrica nuova per chi deve far leggere migliaia di documenti all'AI</h1>
+    <p class="sub">La notizia del giorno sta a 500 chilometri sopra la tua testa: il 1° ottobre Google ha messo in orbita un satellite con quattro TPU per capire se un giorno i data center potranno stare nello spazio. Da questa edizione, poi, parte una rubrica fissa su Azure Content Understanding: limiti, trucchi per risparmiare e per elaborare volumi enormi senza farsi strozzare dal servizio. Con domande ed esercizi, come sempre.</p>
+  </div>
+  <svg class="radar" viewBox="0 0 400 400" role="img" aria-label="Satellite in orbita attorno alla Terra">
+    <circle cx="200" cy="200" r="180" fill="var(--surface)" stroke="var(--line)"/>
+    <circle cx="200" cy="200" r="70" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="2"/>
+    <text x="200" y="206" text-anchor="middle" font-family="Sora" font-size="13" font-weight="700" fill="var(--teal)">Terra</text>
+    <circle cx="200" cy="200" r="140" fill="none" stroke="var(--line)" stroke-dasharray="4 6"/>
+    <g class="orbit" style="transform-origin:200px 200px;animation-duration:10s"><g transform="translate(200 60)"><rect x="-14" y="-8" width="28" height="16" rx="3" fill="var(--ink)"/><rect x="-34" y="-5" width="18" height="10" fill="var(--violet)"/><rect x="16" y="-5" width="18" height="10" fill="var(--violet)"/><circle class="blip" r="4" fill="var(--sun)"/></g></g>
+    <g class="float"><circle cx="330" cy="70" r="26" fill="var(--sun)"/><text x="330" y="75" text-anchor="middle" font-family="Sora" font-size="11" font-weight="700" fill="#1a1300">sole</text></g>
+    <text x="200" y="372" text-anchor="middle" font-family="Sora" font-size="11" fill="var(--muted)">Project Suncatcher, prototipo in orbita dal 1° ottobre 2026</text>
+  </svg>
+</header>
+
+<main class="wrap">
+
+<section class="ch" id="sun">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">Lancio e primo contatto: 1° ottobre 2026</span><span class="chip">Annuncio della missione: 24 settembre</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="src p">paper</span></div>
+    <h2>Project Suncatcher: il primo data center in orbita è grande come un frigorifero</h2>
+    <p class="lead">Quattro TPU, un modello Gemma che gira un quarto d'ora alla volta, e una domanda da miliardi: conviene davvero portare il calcolo nello spazio?</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <p>Il 1° ottobre, dalla base di Vandenberg in California, un Falcon 9 di SpaceX ha portato in orbita, nella missione condivisa Transporter-18, un satellite costruito da Planet per Google. A bordo ci sono quattro Tensor Processing Unit, i chip che Google progetta per l'intelligenza artificiale e che già riempiono i suoi data center sulla Terra. La sera stessa Google ha confermato il contatto: il satellite funziona come previsto.</p>
+      <p>Non è un data center: è un prototipo, e Google lo dice con chiarezza. Project Suncatcher è un "moonshot" di ricerca a lungo termine per capire se lo spazio potrà un giorno ospitare infrastrutture di apprendimento automatico su larga scala. Il lavoro teorico era stato presentato a novembre 2025; il 24 settembre l'azienda aveva annunciato il lancio; ora, per la prima volta, i chip sono davvero lassù.</p>
+      <h3>Perché lo spazio, e perché proprio adesso</h3>
+      <p>L'argomento è l'energia. In certe orbite un pannello solare riceve luce quasi continua e fino a otto volte più intensa di quella che arriva a terra, senza notte, senza nuvole, senza atmosfera. I data center terrestri, intanto, si scontrano con reti elettriche al limite e con comunità che non vogliono nuove centrali vicino a casa. L'idea di Google è una costellazione di satelliti, ciascuno con decine di TPU, che si parlano con collegamenti laser. Il prossimo passo, previsto per il 2027, sono due satelliti in orbita per testare proprio quel collegamento.</p>
+      <h3>Il vero nemico non è la radiazione: è il calore</h3>
+      <p>Qui sta la parte più istruttiva. Tutti pensano che il problema dei chip nello spazio sia la radiazione, e Google l'ha studiata: ha bombardato le sue TPU Trillium con un fascio di protoni in laboratorio. Ma il limite pratico è un altro. Nel vuoto il calore non si disperde per convezione, non c'è aria che lo porti via: si può solo irradiare, e irradiare è lento. Per questo i quattro chip faranno girare una versione di Gemma, il modello aperto di Google, per quindici minuti alla volta, rispondendo a domande semplici, perché oltre non riescono a smaltire il calore. Un data center che lavora a intervalli di un quarto d'ora non è ancora un data center.</p>
+      <div class="example"><b>Esempio pratico: cosa misurano nelle prossime settimane</b>Tre cose, dice il responsabile del progetto Travis Beals. Se i chip hanno retto il lancio, in cui possono subire accelerazioni da 50 a 100 g (il satellite è stato scosso sui tre assi per simularlo). Se reggono la radiazione e gli sbalzi termici dell'orbita. E se comunicano in modo affidabile con le stazioni a terra. Solo dopo queste risposte ha senso parlare di costi.</div>
+      <h3>E i conti?</h3>
+      <p>Un analista di Gartner ha detto che il concetto non ha senso economico, e Google stessa parla di un orizzonte lungo. Lanciare un chilogrammo in orbita costa ancora migliaia di dollari, e un chip lassù non si ripara. La scommessa è che i costi di lancio continuino a scendere e che l'energia a terra continui a salire. Insieme al lancio, secondo TechTimes, Google ha pubblicato un articolo sottoposto a revisione paritaria sulla rivista Joule con la base scientifica della missione.</p>
+      <details class="q"><summary>Se la luce è otto volte più forte, perché i chip non possono lavorare otto volte di più?</summary>
+      <p>Perché l'energia in entrata è solo metà del problema: l'altra metà è l'energia in uscita. Ogni watt che un chip consuma diventa calore, e nello spazio quel calore può lasciare il satellite solo per irraggiamento, attraverso radiatori che devono essere grandi e rivolti verso il buio. Più potenza vuoi, più superficie radiante ti serve, e la superficie pesa. Prova il simulatore qui accanto: è il motivo dei quindici minuti.</p></details>
+      <details class="q"><summary>Perché un modello aperto come Gemma e non Gemini?</summary>
+      <p>Perché su quattro chip che devono fermarsi ogni quarto d'ora serve qualcosa di piccolo e autosufficiente, che non dipenda da un data center a terra. Gemma esiste in versioni leggere e i pesi sono pubblici, quindi può girare interamente a bordo. È la stessa logica dei modelli decisionali da 2 miliardi di parametri delle edizioni precedenti: quando le risorse sono il limite, vince il modello che ci sta.</p></details>
+      <details class="q"><summary>Cosa succede quando un chip in orbita si rompe?</summary>
+      <p>Niente: resta rotto. Non esiste un tecnico che sale a sostituirlo, e un satellite difettoso diventa un detrito. Per questo il progetto parla di costellazioni con molti satelliti e chip ridondanti, come i dischi di un server che continua a funzionare se uno si guasta. E per questo la prima cosa da testare è la sopravvivenza al lancio, non la velocità di calcolo.</p></details>
+      <p class="sources">Fonti: <a href="https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-prototype/">Blog di Google, 1° ottobre</a> <span class="src u">ufficiale</span> · <a href="https://www.wvxu.org/news-from-npr/2026-10-01/google-launches-project-suncatcher-a-step-towards-ai-data-centers-in-space">NPR</a> <span class="src">stampa</span> · <a href="https://www.techtimes.com/articles/328482/20261002/google-project-suncatcher-reaches-orbit-cooling-not-radiation-now-defines-mission.htm">TechTimes</a> <span class="src">stampa</span> · <a href="https://www.digitimes.com/news/a20261002VL205/google-satellite-ai-chip-data-center-hardware.html">DigiTimes</a> <span class="src">stampa</span> · <a href="https://runtimewire.com/article/google-project-suncatcher-tpu-satellite-orbit">Runtime Wire</a> <span class="src">terze parti</span> · <a href="https://techmymoney.com/2026/10/02/project-suncatcher-prototype-satellite-in-orbit/">TechMyMoney</a> <span class="src">terze parti</span></p>
+    </div>
+    <div class="stick card">
+      <h3>Il bilancio del calore</h3>
+      <p class="note" style="margin-top:0">Nel vuoto il calore se ne va solo per irraggiamento. Scegli quanta potenza chiedi ai chip e guarda quanto durano prima di dover fare pausa.</p>
+      <label for="pw" style="font-family:var(--head);font-weight:600;display:flex;justify-content:space-between">Potenza richiesta <output id="pwo"></output></label>
+      <input id="pw" type="range" min="1" max="10" step="1" value="4" style="width:100%;accent-color:var(--violet)">
+      <svg viewBox="0 0 320 120" width="100%" role="img" aria-label="Confronto tra calore prodotto e calore smaltito">
+        <text x="0" y="16" font-family="Sora" font-size="11" fill="var(--muted)">Calore prodotto</text><rect id="hin" x="0" y="22" width="120" height="18" rx="4" fill="var(--red)"/>
+        <text x="0" y="66" font-family="Sora" font-size="11" fill="var(--muted)">Calore che il radiatore smaltisce</text><rect x="0" y="72" width="90" height="18" rx="4" fill="var(--teal)"/>
+        <text id="hlab" x="0" y="112" font-family="Sora" font-size="12" font-weight="700" fill="var(--ink)"></text>
+      </svg>
+      <p class="note">Simulazione illustrativa del principio, non i dati reali del satellite. Il "quarto d'ora" è il valore riportato da NPR.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="azure">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip">Rubrica fissa, prima puntata</span><span class="chip date">Documentazione consultata il 3 ottobre 2026</span><span class="src u">ufficiale</span></div>
+    <h2>Azure Content Understanding: tempi, costi e volumi</h2>
+    <p class="lead">Quando devi far leggere all'AI migliaia di documenti, le regole del servizio contano più del modello. Ecco quelle che decidono quanto paghi e quanto aspetti, con i numeri ufficiali di Microsoft.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>Prima regola: sapere quanto grande è il tubo</h3>
+      <p>La quota standard del servizio è di 1.000 pagine o immagini al minuto, 4 ore di audio o video al minuto e 3.000 operazioni al minuto. Sembra tanto, ma 1.000 pagine al minuto significano che un lotto di 100.000 pagine impiega almeno un'ora e quaranta minuti, qualunque cosa tu faccia. Se spingi di più ricevi errori 429, "troppe richieste", e l'unica via è chiedere un aumento ad Azure, cosa che non costa nulla ma richiede tempo e una storia d'uso credibile.</p>
+      <h3>Seconda regola: sincrono per gli assaggi, asincrono per il lavoro vero</h3>
+      <p>Il servizio ha due modalità. Quella sincrona ti risponde subito, ma solo per file fino a 10 MB e 5 pagine: se mandi un documento di venti pagine, elabora le prime cinque e ignora il resto, a meno che tu non indichi un intervallo di pagine. Quella asincrona accetta fino a 200 MB e 300 pagine per file: invii il documento, ricevi un codice di operazione e poi chiedi il risultato. Per qualsiasi elaborazione massiva è l'unica strada sensata, ed è anche il punto in cui si commettono più errori.</p>
+      <h3>Terza regola: non martellare per avere il risultato</h3>
+      <p>L'errore classico è chiedere ogni mezzo secondo "è pronto?". Microsoft raccomanda di non interrogare più di una volta ogni due secondi per operazione, e la risposta contiene un'intestazione retry-after con il tempo da aspettare. Con molte operazioni in coda, usa un'attesa crescente (2, 5, 13, 34 secondi) e non aumentare il carico di colpo: passare da 10 a 40 richieste al secondo produce 429 anche se la quota giornaliera è lontana. Un caso reale su Microsoft Q&amp;A: analisi oltre i due minuti con una quota da 300.000 token al minuto, perché troppi documenti inviati insieme finivano in coda sul modello generativo. Rimedio: lotti più piccoli, una pausa anche di 100 millisecondi tra le richieste, e controllare "throttled calls" e latenza in Azure Monitor.</p>
+      <h3>Quarta regola: le pagine non sono quelle che pensi</h3>
+      <p>Il servizio fattura "a pagina", ma per i file che non hanno pagine usa equivalenze che è bene conoscere. Testo ed email: 3.000 caratteri valgono una pagina, arrotondando per eccesso. Fogli Excel: ogni foglio è una pagina, e contano anche i fogli nascosti. PowerPoint: ogni diapositiva è una pagina. Word: la paginazione nativa. Un file Excel con tre schede di dati e trenta di appoggio nascoste ti costa trentatré pagine. Prova il calcolatore qui accanto.</p>
+      <h3>Quinta regola: il modello generativo lo scegli tu</h3>
+      <p>Content Understanding si collega ai modelli di Foundry per la parte generativa, e la lista è lunga: GPT-5.5, 5.4, 5.4-mini, 5.2, 5.1, 5, 5-mini, 5-nano, 4.1 e le sue versioni mini e nano, 4o e 4o-mini. Molte aziende usano il modello più grande per abitudine. Per estrarre dieci campi da una fattura, un modello mini o nano di solito basta, costa una frazione ed è più veloce. La regola: parti dal più piccolo, misura la qualità su un campione, sali solo se serve.</p>
+      <h3>Sesta regola: audio e video hanno soglie nascoste</h3>
+      <p>L'audio è accettato fino a 1 GB e 4 ore, ma la trascrizione è "sostanzialmente più veloce" sotto i 300 MB o le 2 ore: spezza i file lunghi. Il video viene analizzato a circa un fotogramma al secondo, con tutti i fotogrammi ridotti a 512×512 pixel: caricare un video in 4K non migliora il risultato, costa solo banda e tempo di caricamento. Caricando direttamente nel corpo della richiesta il limite è 200 MB e 30 minuti; con un riferimento a un file su Blob Storage si arriva a 4 GB e 2 ore.</p>
+      <div class="example"><b>Esempio pratico: 50.000 fatture scansionate al mese</b>Con la quota standard servono almeno 50 minuti di elaborazione pura, da distribuire in modo uniforme invece che in un unico picco. Modalità asincrona, con un'attesa iniziale di due secondi e crescente, e un massimo di richieste concorrenti scelto dopo un test. Livello di estrazione Standard solo se servono le tabelle, altrimenti Basic. Contestualizzazione standard, 1 dollaro ogni 1.000 pagine. Modello generativo mini o nano per i campi semplici. E l'oggetto <code>usage</code> nella risposta registrato per ogni documento, perché è l'unico modo per sapere dove va il budget.</div>
+      <details class="q"><summary>Perché Microsoft non ti dice quale modello usa "sotto" il servizio?</summary>
+      <p>In realtà, in Content Understanding, lo scegli tu tra quelli di Foundry, ed è una differenza importante rispetto ai servizi precedenti, dove il modello era un dettaglio interno gestito da Microsoft. Questo significa che la lentezza o il costo dipendono anche dalla capacità che hai assegnato al tuo deployment del modello: una quota di token al minuto troppo bassa sul modello strozza il servizio anche se la quota di pagine è ampia. Sono due rubinetti diversi, e vanno aperti entrambi.</p></details>
+      <details class="q"><summary>Un foglio Excel nascosto costa quanto uno visibile: è un errore o una scelta?</summary>
+      <p>È una scelta coerente: il servizio deve leggere anche i fogli nascosti, perché potrebbero contenere i dati che ti servono, e il lavoro lo fa comunque. La conseguenza pratica è che conviene pulire i file prima di inviarli: un piccolo script che rimuove le schede inutili può dimezzare il conto su archivi di fogli di calcolo.</p></details>
+      <details class="q"><summary>Se la quota è "al minuto", posso recuperare i minuti in cui non ho usato nulla?</summary>
+      <p>No. La quota è una velocità massima, non una scorta. Mille pagine al minuto non usate nelle ore notturne non si accumulano per il giorno dopo. Per questo per i lotti enormi la strategia è l'opposto dell'istinto: non "tutto insieme di notte", ma un flusso costante e regolare, il più vicino possibile al limite senza superarlo.</p></details>
+      <p class="sources">Fonti: <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/service-limits">Microsoft Learn, quote e limiti</a> <span class="src u">ufficiale</span> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/pricing-explainer">Microsoft Learn, prezzi</a> <span class="src u">ufficiale</span> · <a href="https://learn.microsoft.com/azure/ai-services/document-intelligence/service-limits?view=doc-intel-4.0.0">Document Intelligence, buone pratiche contro il throttling</a> <span class="src u">ufficiale</span> · <a href="https://learn.microsoft.com/answers/a/12265184">Microsoft Q&amp;A, caso di lentezza</a> <span class="src u">ufficiale</span></p>
+    </div>
+    <div class="stick card calc">
+      <h3>Quante pagine ti fattura davvero?</h3>
+      <label for="c_txt">Caratteri di testo o email <output id="c_txto"></output></label><input id="c_txt" type="range" min="0" max="300000" step="3000" value="45000">
+      <label for="c_xls">Fogli Excel (anche nascosti) <output id="c_xlso"></output></label><input id="c_xls" type="range" min="0" max="100" step="1" value="12">
+      <label for="c_ppt">Diapositive PowerPoint <output id="c_ppto"></output></label><input id="c_ppt" type="range" min="0" max="300" step="1" value="40">
+      <label for="c_pdf">Pagine PDF scansionate <output id="c_pdfo"></output></label><input id="c_pdf" type="range" min="0" max="5000" step="10" value="500">
+      <div class="stats" style="grid-template-columns:1fr 1fr;margin:1rem 0 0"><div class="stat"><strong id="c_pages">–</strong><span>pagine fatturate</span></div><div class="stat"><strong id="c_time">–</strong><span>tempo minimo con la quota standard</span></div></div>
+      <p class="note">Equivalenze dalla documentazione ufficiale; il tempo minimo è calcolato a 1.000 pagine al minuto.</p>
+      <h3 style="margin-top:1.5rem">Il simulatore del throttling</h3>
+      <label for="rps">Pagine inviate al minuto <output id="rpso"></output></label><input id="rps" type="range" min="100" max="3000" step="100" value="800">
+      <div class="pbar"><div class="lab"><span>Quota usata</span><span id="rpsp"></span></div><div class="tr"><div class="fi" id="rpsbar"></div></div></div>
+      <p id="rpstext" class="note" style="color:var(--ink);font-size:.92rem"></p>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="lab">
+  <div class="ch-head"><div class="kicker"><span class="chip">Laboratorio</span></div><h2>Prova tu</h2></div>
+  <div class="prose" style="margin-top:2rem">
+    <h3 style="font-size:1.3rem">1. Fai i conti dell'orbita (Suncatcher)</h3>
+    <p>Un esercizio di "ragionamento con i numeri" da fare con un assistente, utile anche per vedere se ragiona bene o inventa. Incolla:</p>
+  </div>
+  <div class="card"><pre class="prompt" id="x1">Un satellite riceve dal Sole circa 1.360 watt per metro quadrato, senza notte né nuvole. A terra, in media su un anno, un pannello riceve circa 170 watt per metro quadrato. Un chip da data center consuma circa 700 watt. Nel vuoto il calore si smaltisce solo per irraggiamento: un radiatore a 60 °C disperde circa 700 watt per metro quadrato di superficie rivolta allo spazio. Calcola: quanti metri quadrati di pannello servono per alimentare quattro chip, quanti metri quadrati di radiatore per raffreddarli, e spiega perché il radiatore e non il pannello è il collo di bottiglia. Mostra ogni passaggio e dichiara ogni ipotesi.</pre><button class="btn copy" data-c="x1">Copia</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Cosa osservare:</b> i numeri sono ordini di grandezza plausibili, non dati del satellite. Il risultato atteso è che il radiatore richieda una superficie comparabile al pannello, e che il problema cresca col calore da smaltire. Se l'assistente "dimentica" il radiatore o gli assegna un metro quadrato senza spiegare, ha indovinato invece di calcolare.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">2. Scrivi la politica di invio per un lotto da 100.000 pagine (Azure)</h3>
+    <p>Chiedi a un assistente di progettare la strategia di invio, dandogli i vincoli reali del servizio. Poi controlla tu tre cose: rispetta la quota al minuto? usa l'asincrono? gestisce i 429 con attesa crescente?</p>
+  </div>
+  <div class="card"><pre class="prompt" id="x2">Devo elaborare 100.000 pagine di PDF scansionati con Azure Content Understanding. Vincoli ufficiali: massimo 1.000 pagine al minuto e 3.000 operazioni al minuto; modalità sincrona solo fino a 5 pagine e 10 MB, asincrona fino a 300 pagine e 200 MB per file; non interrogare lo stato di un'operazione più di una volta ogni 2 secondi, rispettando l'intestazione retry-after; evitare picchi improvvisi di richieste; in caso di errore 429 attendere con tempi crescenti. Progetta il piano di invio: dimensione dei lotti, numero di richieste concorrenti, strategia di attesa, gestione degli errori, durata totale stimata, e quali metriche di Azure Monitor controllare. Indica anche come scegliere tra estrazione Basic e Standard e quale modello generativo useresti per estrarre 8 campi semplici, motivando il costo.</pre><button class="btn copy" data-c="x2">Copia</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Cosa osservare:</b> la durata minima corretta è 100 minuti. Se l'assistente propone di "inviare tutto in parallelo" o stima 10 minuti, non ha capito che la quota è una velocità, non una scorta.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">3. Caccia ai fogli nascosti</h3>
+    <p>Prendi un file Excel vero del tuo lavoro. Fai clic destro su una scheda e scegli "Scopri": quanti fogli nascosti ci sono? Moltiplica per il numero di file simili che manderesti al servizio. È il costo che stavi per pagare per leggere schede di appoggio che nessuno guarda. Se usi uno script, chiedi all'assistente di scriverne uno che rimuova i fogli nascosti prima dell'invio.</p>
+  </div>
+</section>
+
+<section class="ch" id="segnali">
+  <div class="ch-head"><div class="kicker"><span class="chip">Da tenere d'occhio</span></div><h2>Segnali emergenti</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">2 ottobre</span><h3>Il lancio difficile di GPT-6.1 Sol</h3><p>Secondo una rassegna quotidiana, OpenAI ha programmato un azzeramento dei limiti d'uso per tutti gli account a pagamento, come scusa per la lentezza del modello nei primi giorni dopo il 29 settembre. Lezione per chi usa i modelli in produzione: i giorni dopo un lancio sono i peggiori per migrare. <a href="https://x.com/NeoAIForecast/article/2105966638927397167">Rassegna su X</a> <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">2027</span><h3>Due satelliti e un laser</h3><p>Il prossimo test di Suncatcher: due satelliti in orbita che si parlano con collegamenti laser ad alta banda. È il passaggio da "un chip sopravvive" a "una costellazione calcola insieme". <a href="https://www.wvxu.org/news-from-npr/2026-10-01/google-launches-project-suncatcher-a-step-towards-ai-data-centers-in-space">NPR</a> <span class="src">stampa</span></p></div>
+  </div>
+</section>
+
+<section class="ch" id="novita">
+  <div class="ch-head"><div class="kicker"><span class="chip">Rispetto all'edizione serale del 2 ottobre</span></div><h2>Cosa è cambiato, e cosa ho escluso</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">nuovo</span><h3>Rubrica Azure Content Understanding</h3><p>Da questa edizione in poi, in ogni numero: limiti, costi e consigli per volumi grandi, con domande ed esercizi.</p></div>
+    <div class="sig"><span class="chip date">nuovo</span><h3>Suncatcher</h3><p>Primo capitolo "hardware" della newsletter: i chip in orbita.</p></div>
+  </div>
+  <div class="prose" style="margin-top:2rem">
+    <p><b>Escluso.</b> L'indagine della procura generale della California su OpenAI per l'incidente Hugging Face: circola come notizia di questi giorni, ma è stata riportata da Politico il 4 settembre, quindi non è nuova; la segnalo solo se arriverà un atto formale con data certa. Le voci su ricercatori di sicurezza usciti da OpenAI e sui chip dei robot Tesla: riportate da una sola rassegna, senza fonte primaria. E i riepiloghi "di ottobre" sul DevDay, che non aggiungono fatti.</p>
+  </div>
+</section>
+
+<section class="ch" id="quiz">
+  <div class="ch-head"><div class="kicker"><span class="chip">Mettiti alla prova</span></div><h2>Quattro domande</h2></div>
+  <div class="card quiz" id="quizbox" style="margin-top:2rem"></div>
+</section>
+
+<section class="ch" id="fonti">
+  <div class="ch-head"><h2>Fonti di questa edizione</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="src u">ufficiale</span><h3>Produttori e documentazione</h3><p><a href="https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-prototype/">Google, Suncatcher in orbita</a> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/service-limits">Microsoft Learn, limiti</a> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/pricing-explainer">Microsoft Learn, prezzi</a> · <a href="https://learn.microsoft.com/azure/ai-services/document-intelligence/service-limits?view=doc-intel-4.0.0">Document Intelligence, throttling</a> · <a href="https://learn.microsoft.com/answers/a/12265184">Microsoft Q&amp;A</a></p></div>
+    <div class="sig"><span class="src">stampa</span><h3>Testate</h3><p><a href="https://www.wvxu.org/news-from-npr/2026-10-01/google-launches-project-suncatcher-a-step-towards-ai-data-centers-in-space">NPR</a> · <a href="https://www.techtimes.com/articles/328482/20261002/google-project-suncatcher-reaches-orbit-cooling-not-radiation-now-defines-mission.htm">TechTimes</a> · <a href="https://www.digitimes.com/news/a20261002VL205/google-satellite-ai-chip-data-center-hardware.html">DigiTimes</a></p></div>
+    <div class="sig"><span class="src">terze parti</span><h3>Da verificare</h3><p><a href="https://runtimewire.com/article/google-project-suncatcher-tpu-satellite-orbit">Runtime Wire</a> · <a href="https://techmymoney.com/2026/10/02/project-suncatcher-prototype-satellite-in-orbit/">TechMyMoney</a> · <a href="https://x.com/NeoAIForecast/article/2105966638927397167">Rassegna su X</a></p></div>
+  </div>
+</section>
+
+</main>
+<footer>Radar AI · edizione del 3 ottobre 2026, mattina · preparata da Claude.<br>Verifica sempre i listini e i limiti ufficiali prima di dimensionare un progetto.</footer>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id)}
+  var links=[].slice.call(document.querySelectorAll('#links a'));var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function onScroll(){var h=document.documentElement;$('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';var cur=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<140)cur=i});links.forEach(function(a,i){a.classList.toggle('on',i===cur&&window.scrollY>200)})}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  /* heat */
+  function heat(){var p=+$('pw').value;$('pwo').textContent=p+' unità';$('hin').setAttribute('width',p*30);
+    var ratio=3/p;var t=ratio>=1?'Regime continuo: il radiatore tiene il passo.':'Il calore si accumula: i chip possono lavorare circa '+Math.max(5,Math.round(60*ratio))+' minuti, poi devono fermarsi a raffreddare.';
+    $('hlab').textContent=t}
+  $('pw').oninput=heat;heat();
+
+  /* pages calc */
+  function pages(){var t=+$('c_txt').value,x=+$('c_xls').value,p=+$('c_ppt').value,d=+$('c_pdf').value;
+    $('c_txto').textContent=t.toLocaleString('it-IT');$('c_xlso').textContent=x;$('c_ppto').textContent=p;$('c_pdfo').textContent=d.toLocaleString('it-IT');
+    var tot=Math.ceil(t/3000)+x+p+d;$('c_pages').textContent=tot.toLocaleString('it-IT');var m=tot/1000;$('c_time').textContent=m<1?'meno di 1 min':m<60?Math.ceil(m)+' min':(Math.floor(m/60)+' h '+Math.ceil(m%60)+' min')}
+  ['c_txt','c_xls','c_ppt','c_pdf'].forEach(function(id){$(id).oninput=pages});pages();
+
+  /* throttling */
+  function thr(){var r=+$('rps').value;$('rpso').textContent=r.toLocaleString('it-IT');var p=r/1000*100;$('rpsp').textContent=Math.round(p)+'%';$('rpsbar').style.width=Math.min(100,p)+'%';$('rpsbar').style.background=p>100?'var(--red)':p>85?'var(--sun)':'var(--teal)';
+    $('rpstext').textContent=p>100?'Oltre la quota: circa '+Math.round((r-1000)/r*100)+'% delle richieste riceverà un errore 429 e andrà ripetuta, allungando i tempi invece di accorciarli.':p>85?'Vicino al limite: funziona, ma un picco improvviso produce 429. Aumenta gradualmente.':'Sotto la quota: stai usando il '+Math.round(p)+'% della capacità. Un lotto da 100.000 pagine impiega circa '+Math.ceil(100000/r)+' minuti.'}
+  $('rps').oninput=thr;thr();
+
+  /* copy */
+  [].forEach.call(document.querySelectorAll('.copy'),function(b){b.style.marginTop='.6rem';b.onclick=function(){var t=$(b.dataset.c).textContent;var o=b.textContent;
+    function sel(){var r=document.createRange();r.selectNodeContents($(b.dataset.c));var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Testo selezionato: copialo'}
+    try{navigator.clipboard.writeText(t).then(function(){b.textContent='Copiato ✓';setTimeout(function(){b.textContent=o},1500)},sel)}catch(e){sel()}}});
+
+  /* quiz */
+  var Q=[["Qual è il limite pratico principale per i chip del satellite Suncatcher?",["La radiazione","Il calore, che nel vuoto si smaltisce solo per irraggiamento","La mancanza di luce"],1,"Esatto: per questo Gemma gira un quarto d'ora alla volta."],
+    ["Un file Excel con 2 fogli visibili e 30 nascosti viene fatturato come…",["2 pagine","32 pagine","1 pagina"],1,"Giusto: ogni foglio è una pagina, nascosti compresi. Pulisci i file prima di inviarli."],
+    ["Quanto tempo minimo richiedono 100.000 pagine con la quota standard di Content Understanding?",["10 minuti","100 minuti","10 ore"],1,"Proprio così: 1.000 pagine al minuto è una velocità massima, non una scorta."],
+    ["Quale modalità usi per un PDF da 80 pagine?",["Sincrona","Asincrona","Entrambe funzionano"],1,"Corretto: la sincrona si ferma a 5 pagine e 10 MB; oltre serve l'asincrona."]];
+  var sc=0,an=0;$('quizbox').innerHTML=Q.map(function(q,i){return '<div class="qq"><p>'+(i+1)+'. '+q[0]+'</p><div class="opts">'+q[1].map(function(o,j){return '<button class="opt" data-q="'+i+'" data-o="'+j+'">'+o+'</button>'}).join('')+'</div><div class="fb" id="fb'+i+'"></div></div>'}).join('')+'<p class="score" id="score"></p>';
+  [].forEach.call(document.querySelectorAll('.opt'),function(b){b.onclick=function(){var qi=+b.dataset.q,oi=+b.dataset.o,q=Q[qi];var g=document.querySelectorAll('.opt[data-q="'+qi+'"]');if(g[0].disabled)return;[].forEach.call(g,function(x){x.disabled=true;if(+x.dataset.o===q[2])x.classList.add('ok')});
+    if(oi===q[2]){sc++;$('fb'+qi).textContent=q[3]}else{b.classList.add('ko');$('fb'+qi).textContent='Non proprio. '+q[3]}if(++an===Q.length)$('score').textContent='Hai risposto bene a '+sc+' domande su '+Q.length+'.'}});
+})();
+</script>
+
+</body>
+</html>

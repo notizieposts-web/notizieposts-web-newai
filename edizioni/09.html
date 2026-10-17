@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Radar AI · 3 ottobre 2026, pomeriggio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F6FB; --surface:#FFFFFF; --soft:#E9EDF7; --ink:#121A2B; --muted:#56627A; --line:#D8DEEA;
+  --violet:#4B4BF5; --violet-soft:#E6E6FF; --teal:#0E9F9E; --teal-soft:#DDF5F4; --sun:#F2B705; --sun-soft:#FFF5D1; --red:#D9463B;
+  --head:"Sora","Segoe UI",system-ui,sans-serif; --body:"Inter","Segoe UI",system-ui,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+    --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+  --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7}
+a{color:var(--violet)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+h1,h2,h3{font-family:var(--head);line-height:1.12;margin:0}
+p{margin:0 0 1rem}
+img,svg{max-width:100%}
+
+/* NAV */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:72rem;margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem}
+.brand{font-family:var(--head);font-weight:800;white-space:nowrap}
+.links{display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;flex:1}
+.links::-webkit-scrollbar{display:none}
+.links a{font-family:var(--head);font-size:.82rem;font-weight:600;text-decoration:none;color:var(--muted);padding:.35rem .7rem;border-radius:999px;white-space:nowrap}
+.links a.on{background:var(--ink);color:var(--bg)}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;background:var(--violet);width:0}
+
+/* HERO */
+.hero{max-width:72rem;margin:0 auto;padding:3.5rem 1.2rem 2rem;display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800;letter-spacing:-.03em}
+.hero .sub{font-size:1.15rem;color:var(--muted);margin-top:1.2rem;max-width:34rem}
+.meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem}
+.chip{font-family:var(--head);font-size:.78rem;font-weight:600;padding:.3rem .7rem;border-radius:999px;background:var(--soft);color:var(--ink)}
+.chip.date{background:var(--violet-soft);color:var(--violet)}
+.radar{aspect-ratio:1;width:100%;max-width:26rem;justify-self:center}
+.sweep{transform-origin:200px 200px;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.blip{animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.radar{max-width:18rem}}
+
+/* SECTIONS */
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.2rem}
+section.ch{padding:4.5rem 0 1rem;border-top:1px solid var(--line)}
+.ch-head{max-width:48rem}
+.kicker{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+.ch h2{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em}
+.lead{font-size:1.2rem;color:var(--muted);margin-top:1rem}
+.grid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.5rem;margin-top:2.2rem;align-items:start}
+.grid2 .stick{position:sticky;top:84px}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.grid2 .stick{position:static}}
+.prose p{max-width:38rem}
+.prose h3{font-size:1.2rem;margin:1.8rem 0 .7rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.4rem}
+.card h3{font-size:1.05rem;margin-bottom:.8rem}
+.example{background:var(--teal-soft);border-radius:14px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.example b:first-child{font-family:var(--head);color:var(--teal);display:block;margin-bottom:.3rem}
+.paper{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:12px;padding:1rem 1.2rem;margin:1.4rem 0}
+.paper .ic{font-size:1.5rem;line-height:1}
+.src{font-family:var(--head);font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:6px;background:var(--soft);color:var(--muted);vertical-align:middle;white-space:nowrap}
+.src.p{background:var(--teal-soft);color:var(--teal)}
+.src.u{background:var(--violet-soft);color:var(--violet)}
+.sources{font-size:.88rem;color:var(--muted);margin-top:1rem}
+.sources a{margin-right:.4rem}
+
+/* curiosity */
+details.q{background:var(--sun-soft);border-radius:14px;padding:1rem 1.2rem;margin:1.6rem 0;max-width:38rem}
+details.q summary{cursor:pointer;font-family:var(--head);font-weight:700;list-style:none;display:flex;gap:.7rem;align-items:flex-start}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::before{content:"?";flex:none;display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--sun);color:#1a1300;font-weight:800}
+details.q summary::after{content:"Scopri";margin-left:auto;font-size:.75rem;font-weight:600;color:var(--muted);padding-top:.25rem}
+details.q[open] summary::after{content:"Chiudi"}
+details.q p{margin:.8rem 0 0}
+
+/* buttons */
+.btn{font-family:var(--head);font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.55rem 1rem;border-radius:999px;cursor:pointer}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0}
+.note{font-size:.84rem;color:var(--muted)}
+
+/* timeline */
+.tl{position:relative;margin:2.4rem 0 1rem;overflow-x:auto;padding-bottom:.5rem}
+.tl-in{position:relative;min-width:44rem;height:120px}
+.tl-line{position:absolute;left:1rem;right:1rem;top:60px;height:3px;background:var(--line);border-radius:2px}
+.tl-dot{position:absolute;top:60px;width:20px;height:20px;margin:-8px 0 0 -10px;border-radius:50%;border:3px solid var(--bg);background:var(--violet);cursor:pointer;padding:0;transition:transform .2s}
+.tl-dot.n{background:var(--sun)}
+.tl-dot[aria-pressed="true"]{transform:scale(1.5)}
+.tl-day{position:absolute;top:88px;transform:translateX(-50%);font-family:var(--head);font-size:.72rem;color:var(--muted)}
+.tl-card{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center}
+.tl-date{font-family:var(--head);font-weight:800;font-size:2.6rem;line-height:1;color:var(--violet);text-align:center}
+.tl-date small{display:block;font-size:.8rem;font-weight:600;color:var(--muted)}
+
+/* bars */
+.pbar{margin:.9rem 0}
+.pbar .lab{display:flex;justify-content:space-between;font-family:var(--head);font-size:.88rem;font-weight:600}
+.pbar .tr{height:12px;background:var(--soft);border-radius:6px;overflow:hidden;margin-top:.35rem}
+.pbar .fi{height:100%;width:0;background:var(--violet);border-radius:6px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.mail{background:var(--soft);border-radius:12px;padding:.9rem 1rem;font-style:italic;margin:.8rem 0}
+
+/* race */
+.lane{margin:1rem 0}
+.lane .nm{font-family:var(--head);font-weight:700;font-size:.9rem;margin-bottom:.4rem;display:flex;justify-content:space-between}
+.words{display:flex;flex-wrap:wrap;gap:.35rem;min-height:2.4rem}
+.w{font-family:var(--head);font-size:.85rem;padding:.35rem .6rem;border-radius:8px;background:var(--soft);color:var(--muted);transition:background .3s,color .3s}
+.w.on{background:var(--violet);color:#fff}
+.w.d{background:var(--teal);color:#fff}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.4rem 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem;text-align:center}
+.stat strong{display:block;font-family:var(--head);font-size:1.8rem;color:var(--violet)}
+.stat span{font-size:.82rem;color:var(--muted)}
+@media (max-width:560px){.stats{grid-template-columns:1fr}}
+
+/* calc */
+.calc label{display:flex;justify-content:space-between;font-family:var(--head);font-weight:600;font-size:.9rem;margin-top:1rem}
+.calc input{width:100%;accent-color:var(--violet)}
+.cbar{display:grid;grid-template-columns:9.5rem 1fr 5.5rem;gap:.6rem;align-items:center;font-size:.85rem;margin:.5rem 0}
+.cbar .tr{height:14px;background:var(--soft);border-radius:7px;overflow:hidden}
+.cbar .fi{height:100%;background:var(--violet);border-radius:7px;transition:width .4s}
+.cbar .fi.t{background:var(--teal)}
+.cbar b{text-align:right;font-family:var(--head)}
+
+/* table */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.92rem}
+th,td{text-align:left;padding:.7rem .6rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--head);font-size:.8rem;color:var(--muted)}
+td:first-child{font-family:var(--head);font-weight:700;white-space:nowrap}
+
+/* cards grid */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:1rem;margin-top:2rem}
+.sig{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.2rem}
+.sig h3{font-size:1.02rem;margin:.6rem 0 .5rem}
+.sig p{font-size:.93rem;margin:0}
+
+/* quiz */
+.quiz .qq{margin:1.4rem 0}
+.quiz .qq p{font-family:var(--head);font-weight:700}
+.opts{display:grid;gap:.5rem}
+.opt{text-align:left;font-family:var(--body);font-size:.95rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.7rem 1rem;border-radius:12px;cursor:pointer}
+.opt.ok{border-color:var(--teal);background:var(--teal-soft)}
+.opt.ko{border-color:var(--red)}
+.fb{font-size:.9rem;color:var(--muted);margin-top:.4rem;min-height:1.2rem}
+.score{font-family:var(--head);font-weight:800;font-size:1.2rem}
+
+/* prompt */
+pre.prompt{white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.3rem;font-family:var(--body);font-size:.92rem;line-height:1.6;max-height:28rem;overflow:auto}
+footer{border-top:1px solid var(--line);margin-top:4rem;padding:2rem 1.2rem 3rem;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* svg anim helpers */
+.float{animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.orbit{transform-origin:200px 170px;animation:spin 14s linear infinite}
+.dash{stroke-dasharray:6 6;animation:dash 1.5s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Capitoli">
+  <div class="nav-in">
+    <span class="brand">📡 Radar AI</span>
+    <div class="links" id="links">
+      <a href="#distill">Distillazione</a><a href="#azure">Azure CU</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+    </div>
+  </div>
+  <div class="progress" id="prog"></div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="meta"><span class="chip date">Edizione del 3 ottobre 2026, pomeriggio</span><span class="chip">Dall'edizione di mezzogiorno</span><span class="chip">Solo notizie nuove</span><span class="chip">Rubrica Azure: terza puntata</span></div>
+    <h1 style="margin-top:1.2rem">Quando un modello "ruba" il ragionamento di un altro. E come insegnare ad Azure a smistare prima di leggere</h1>
+    <p class="sub">A mezzogiorno ti ho raccontato Kimi K2.8 di Moonshot AI. Poche ore dopo ho trovato l'altra faccia della stessa storia: il 30 settembre OpenAI ha dichiarato di aver fermato una campagna per estrarre il ragionamento nascosto dei suoi modelli, e ne attribuisce il nucleo a persone legate proprio a Moonshot. È l'occasione per capire cos'è la distillazione, perché i laboratori la temono, e perché tu la fai già senza saperlo. Poi la rubrica Azure: classificare e smistare i documenti prima di estrarre, che è il modo più sottovalutato per risparmiare.</p>
+  </div>
+  <svg class="radar" viewBox="0 0 400 400" role="img" aria-label="Distillazione: da un modello grande a uno piccolo">
+    <circle cx="200" cy="200" r="180" fill="var(--surface)" stroke="var(--line)"/>
+    <g font-family="Sora" font-size="12" font-weight="700" text-anchor="middle">
+      <circle cx="130" cy="170" r="70" fill="var(--violet-soft)" stroke="var(--violet)"/><text x="130" y="165" fill="var(--violet)">Modello</text><text x="130" y="182" fill="var(--violet)">grande</text>
+      <g class="float"><circle cx="290" cy="230" r="38" fill="var(--teal-soft)" stroke="var(--teal)"/><text x="290" y="227" fill="var(--teal)">Modello</text><text x="290" y="242" fill="var(--teal)">piccolo</text></g>
+      <path d="M195 190 Q240 170 255 215" stroke="var(--sun)" stroke-width="4" fill="none" class="dash"/>
+      <text x="230" y="150" fill="var(--muted)" font-size="11">risposte e ragionamenti</text>
+      <text x="200" y="340" fill="var(--muted)" font-size="11" font-weight="500">La distillazione: imparare dalle risposte di un altro modello</text>
+    </g>
+  </svg>
+</header>
+
+<main class="wrap">
+
+<section class="ch" id="distill">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip date">Dichiarazione di OpenAI: 30 settembre 2026</span><span class="chip">Campagna: 1–28 luglio 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Nessun paper, nessuna prova tecnica pubblicata</span></div>
+    <h2>Distillazione avversaria: OpenAI accusa persone legate a Moonshot AI</h2>
+    <p class="lead">Sedicimila richieste in due giorni, quindicimila utenti sospetti, una falla chiusa. E un'accusa fatta senza mostrare le prove.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>Prima: cos'è la distillazione, e perché la fai anche tu</h3>
+      <p>La distillazione è una tecnica normale e rispettabile dell'apprendimento automatico: si prende un modello grande e bravo, gli si fanno fare migliaia di esempi, e si usano quegli esempi per addestrare un modello più piccolo, che impara a imitarlo. Il piccolo non diventa intelligente quanto il grande, ma su un compito preciso può arrivargli vicino costando una frazione. Ricordi i modelli decisionali da 2 miliardi di parametri? Molti nascono così. E se hai mai chiesto a un assistente di scriverti venti esempi di risposte corrette per poi usarli come guida, hai fatto una distillazione in miniatura.</p>
+      <p>Il problema nasce quando la fai sui modelli di un concorrente, su scala industriale, contro le condizioni d'uso, e cercando di estrarre non solo le risposte ma anche il <b>ragionamento protetto</b>: i passaggi intermedi che un modello che "pensa" produce prima di rispondere, e che i laboratori tengono nascosti perché sono la parte più preziosa da imitare. OpenAI la chiama distillazione avversaria.</p>
+      <h3>Cosa dice OpenAI di aver visto</h3>
+      <p>Il 30 settembre OpenAI ha pubblicato un post in cui racconta di aver notato un'attività a basso livello dal 1° luglio, cresciuta fino al 24 e 25 luglio, quando ha osservato 16.000 richieste da 4.000 utenti con lo stesso schema di estrazione. Il 28 luglio gli utenti sospetti erano saliti a 15.000 e la campagna è stata, nelle sue parole, completamente interrotta. OpenAI precisa cosa non è successo: nessuna violazione della crittografia o dei database. Gli operatori manipolavano le interazioni con i modelli per far affiorare il ragionamento normalmente nascosto. Tra le contromisure c'è la chiusura di una via che permetteva, a chi possedeva il ragionamento cifrato di un altro utente, di "rigiocarlo" per recuperarne il contenuto: un ricercatore esterno aveva segnalato una vulnerabilità simile ad agosto.</p>
+      <h3>L'attribuzione, e perché va letta con attenzione</h3>
+      <p>OpenAI attribuisce un "nucleo" dell'attività a individui associati a Moonshot AI, lo sviluppatore di Kimi, aggiungendo che non è chiaro se tutti gli operatori provenissero da un unico attore. Ma, come nota CyberScoop, il post non cita alcuna prova tecnica né il ragionamento dietro l'attribuzione. Moonshot non ha rilasciato dichiarazioni. Non è il primo caso: a settembre Anthropic aveva accusato Moonshot di inoltrare di nascosto le richieste dei suoi utenti a Claude e mostrarne le risposte come fossero di Kimi. E Google e funzionari statunitensi avevano mosso accuse simili ad altri laboratori cinesi. La tendenza nuova è che i grandi laboratori ora fanno i nomi, invece di trattare l'estrazione come una violazione anonima dei termini di servizio.</p>
+      <div class="example"><b>Esempio pratico: come si riconosce una distillazione dal traffico</b>Un utente normale fa domande diverse, a orari umani, con errori di battitura e cambi di argomento. Una campagna di estrazione produce migliaia di richieste strutturalmente simili, che "specchiano" lo stesso schema, da account creati in blocco, spesso con la stessa sintassi che spinge il modello a esporre i passaggi intermedi. Chi gestisce un'API con un modello di valore oggi fa quello che OpenAI descrive: limiti di velocità, raggruppamento comportamentale degli account, e chiusura delle "porte laterali" che riespongono il ragionamento.</div>
+      <details class="q"><summary>Se la distillazione è così efficace, perché i laboratori non la vietano del tutto nei contratti?</summary>
+      <p>La vietano, nelle condizioni d'uso. Ma un divieto contrattuale ferma le aziende che rispettano i contratti, non quelle che creano quindicimila account fittizi. Per questo la vera difesa è tecnica: nascondere il ragionamento, cifrarlo quando viene restituito, e analizzare il traffico. C'è poi un paradosso: gli stessi laboratori pubblicano modelli "distillati" dei propri modelli grandi, perché la distillazione fatta in casa è il modo più economico per produrre le versioni mini e nano che tu paghi meno.</p></details>
+      <details class="q"><summary>Perché il "ragionamento protetto" vale più della risposta?</summary>
+      <p>Perché la risposta è una foto, il ragionamento è il film. Da una risposta giusta un modello piccolo impara il risultato; dai passaggi impara il metodo, cioè la cosa che generalizza a problemi nuovi. È lo stesso motivo per cui un buon insegnante mostra i passaggi e non solo la soluzione. Ed è il motivo per cui i modelli che ragionano restituiscono spesso solo un riassunto del proprio pensiero.</p></details>
+      <details class="q"><summary>Un modello aperto come Kimi K3 è più o meno esposto alla distillazione?</summary>
+      <p>Più esposto, per definizione: se i pesi sono pubblici, chiunque può farlo generare quanto vuole, in locale, senza limiti di traffico e senza che nessuno se ne accorga. Chi pubblica i pesi accetta questo rischio in cambio di adozione e reputazione. Il che rende la vicenda ancora più ironica: il laboratorio accusato di distillare dai modelli chiusi è lo stesso che regala il modello aperto più grande del mondo.</p></details>
+      <p class="sources">Fonti: <a href="https://cyberscoop.com/openai-moonshot-ai-model-distillation-attack/">CyberScoop</a> <span class="src">stampa</span> · <a href="https://www.scworld.com/brief/openai-disrupts-ai-model-distillation-attack-linked-to-chinas-moonshot-ai">SC World</a> <span class="src">stampa</span> · <a href="https://www.theinformation.com/briefings/openai-accuses-moonshot-distillation-campaign">The Information</a> <span class="src">stampa</span> · <a href="https://www.infosectoday.io/openai-disrupts-reasoning-extraction-campaign-linked-to-moonshot-ai-associates">InfoSec Today</a> <span class="src">stampa</span> · <a href="https://www.resultsense.com/news/2026-10-01-openai-moonshot-distillation-campaign/">ResultSense</a> <span class="src">terze parti</span> · <a href="https://cellcog.ai/blog/openai-moonshot-distillation/">CellCog</a> <span class="src">terze parti</span></p>
+    </div>
+    <div class="stick card">
+      <h3>La curva della campagna, secondo OpenAI</h3>
+      <svg viewBox="0 0 320 200" width="100%" role="img" aria-label="Crescita degli utenti sospetti a luglio 2026">
+        <g font-family="Sora" font-size="10" fill="var(--muted)">
+          <line x1="40" y1="20" x2="40" y2="160" stroke="var(--line)"/><line x1="40" y1="160" x2="300" y2="160" stroke="var(--line)"/>
+          <text x="48" y="178">1 lug</text><text x="170" y="178">24–25 lug</text><text x="255" y="178">28 lug</text>
+          <text x="0" y="24">15k</text><text x="0" y="98">4k</text><text x="0" y="164">0</text>
+        </g>
+        <path d="M45 158 C 120 156, 160 140, 190 100 L 265 30" stroke="var(--violet)" stroke-width="3" fill="none"/>
+        <circle cx="190" cy="100" r="6" fill="var(--sun)"/><circle cx="265" cy="30" r="6" fill="var(--red)"/>
+        <text x="130" y="88" font-family="Sora" font-size="10" fill="var(--ink)">16.000 richieste da 4.000 utenti</text>
+        <text x="200" y="22" font-family="Sora" font-size="10" fill="var(--ink)">15.000 utenti, poi lo stop</text>
+      </svg>
+      <p class="note">Ricostruzione dai numeri dichiarati da OpenAI; la forma della curva tra i punti è illustrativa.</p>
+      <h3 style="margin-top:1.4rem">Cosa cambia per chi usa i modelli</h3>
+      <ul class="clean" style="font-size:.93rem">
+        <li>Il ragionamento dei modelli resterà nascosto o riassunto: è una scelta difensiva, non solo di prodotto.</li>
+        <li>Le API con limiti di velocità più severi e controlli alla registrazione sono una conseguenza diretta.</li>
+        <li>Chi distilla in casa, per i propri usi e dai modelli che ha licenza di usare, continua a poterlo fare: leggi le condizioni d'uso del tuo fornitore.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="azure">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip">Rubrica fissa, terza puntata</span><span class="chip date">Documentazione consultata il 3 ottobre 2026</span><span class="src u">ufficiale</span></div>
+    <h2>Azure Content Understanding: smistare prima di leggere</h2>
+    <p class="lead">Le prime due puntate hanno parlato di quote e di schema. Oggi del passaggio che molti saltano: classificare i documenti e mandarli all'analizzatore giusto, invece di far leggere tutto a tutti.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>Il problema del lotto misto</h3>
+      <p>Nella vita reale i documenti non arrivano ordinati. Una cartella di scansioni contiene fatture, contratti, bolle, email stampate e qualche foglio che nessuno sa cosa sia. Spesso arrivano addirittura dentro un unico PDF da duecento pagine, perché qualcuno ha messo tutto nello scanner con l'alimentatore automatico. L'istinto è costruire un analizzatore "universale" con tutti i campi possibili e passargli ogni pagina. È il modo più costoso e meno preciso di lavorare: ogni documento paga per campi che non lo riguardano, e il modello si confonde cercando un IBAN in un contratto.</p>
+      <h3>Cosa offre il servizio</h3>
+      <p>Content Understanding permette di creare flussi di classificazione personalizzati che categorizzano il contenuto e lo instradano all'analizzatore giusto. Funziona in due passi. Primo, un <b>classificatore</b>: definisci le categorie con un nome e una descrizione, e il servizio usa quelle definizioni per classificare i file in ingresso. Non servono esempi etichettati per iniziare: bastano descrizioni chiare. Il parametro <code>enableSegment</code> decide se il classificatore divide i file che contengono più documenti in segmenti, oppure tratta il file come un unico documento. È la risposta al PDF da duecento pagine: il servizio trova i confini tra un documento e l'altro.</p>
+      <p>Secondo, l'<b>instradamento</b>: a ogni categoria assegni un analizzatore, predefinito come <code>prebuilt-invoice</code> o costruito da te con lo schema di quella categoria. Il classificatore identifica il tipo di documento e lo manda all'analizzatore che estrae i campi pensati per quel tipo. Tutto in un'unica pipeline, e tutto provabile nello Studio prima di scrivere codice: carichi un campione, definisci le regole di instradamento, premi "Run analysis" e vedi il risultato.</p>
+      <h3>Perché conviene, in numeri</h3>
+      <p>La classificazione costa token del modello e contestualizzazione, e l'instradamento aggiunge i costi dell'analizzatore di destinazione: è scritto nella pagina dei prezzi. Sembra un costo in più, ma guarda cosa toglie. Con lo schema universale, ogni pagina paga tutti i campi; con lo smistamento, una fattura paga solo i campi della fattura, un contratto solo i suoi, e la categoria "altro" paga quasi nulla, perché non viene estratto niente. Più i tipi di documento sono diversi tra loro, più lo smistamento vince. Il calcolatore qui accanto mostra il meccanismo.</p>
+      <div class="example"><b>Esempio pratico: la posta in arrivo di un ufficio acquisti</b>Categorie: "fattura fornitore" (instradata a un analizzatore con 8 campi extract), "contratto" (12 campi, confidenza su date e importi), "conferma d'ordine" (5 campi), "altro" (nessun analizzatore: solo estrazione del testo per l'archivio). Con <code>enableSegment</code> attivo, un PDF di scansioni miste viene spezzato nei singoli documenti e ognuno segue la sua strada. Il risultato è una pipeline sola, invece di quattro, e un costo per pagina che dipende da cosa è la pagina.</div>
+      <h3>Tre accorgimenti</h3>
+      <p>Le descrizioni delle categorie sono il tuo "prompt": scrivile come spiegheresti a un nuovo collega come riconoscere il documento, con gli indizi visibili ("contiene la parola fattura e un totale", "ha due firme in fondo"). Metti sempre una categoria "altro" o "non classificabile", per la stessa ragione vista con i modelli decisionali: senza, il servizio forza tutto in una casella. E misura la confusione tra categorie simili, per esempio tra fattura e conferma d'ordine, su un campione reale prima di andare in produzione.</p>
+      <details class="q"><summary>Il classificatore e il modello decisionale di Jev sono la stessa cosa?</summary>
+      <p>Concettualmente sì: entrambi scelgono tra categorie fisse. La differenza è dove stanno e cosa vedono. Jev decide su testo già estratto, in millisecondi; il classificatore di Azure lavora sul documento grezzo, scansioni comprese, dentro la stessa pipeline che poi estrae i campi. Se hai già un modello decisionale nel tuo sistema, puoi usarlo dopo l'estrazione del testo; se vuoi una sola pipeline con il minimo di codice, il classificatore nativo è più semplice.</p></details>
+      <details class="q"><summary>Perché "segmentare" un PDF è più difficile di quanto sembri?</summary>
+      <p>Perché i confini tra documenti non sono scritti da nessuna parte. Una fattura di tre pagine seguita da un contratto di dieci è, per lo scanner, un unico flusso di tredici immagini. Il servizio deve capire dove finisce un documento guardando intestazioni, numeri di pagina, cambi di impaginazione. È un compito in cui gli errori costano: un segmento sbagliato manda metà contratto all'analizzatore delle fatture. Per questo conviene testare la segmentazione sui propri lotti, e per i casi critici mettere un separatore fisico, anche solo un foglio con un codice a barre, tra un documento e l'altro.</p></details>
+      <details class="q"><summary>Posso iniziare senza esempi etichettati e aggiungerli dopo?</summary>
+      <p>Sì, ed è la sequenza consigliabile: parti con nomi e descrizioni, misura dove sbaglia, e solo per le categorie confuse aggiungi esempi etichettati, ricordando dalla puntata precedente che l'addestramento con esempi fa scattare la contestualizzazione avanzata e, a seconda della versione dell'API, può aggiungere token a ogni analisi. Gli esempi sono un investimento: va fatto dove rende.</p></details>
+      <p class="sources">Fonti: <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/how-to/classification-content-understanding-studio">Microsoft Learn, classificare e instradare</a> <span class="src u">ufficiale</span> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/pricing-explainer">Microsoft Learn, prezzi</a> <span class="src u">ufficiale</span> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/overview">Microsoft Learn, panoramica</a> <span class="src u">ufficiale</span></p>
+    </div>
+    <div class="stick card calc">
+      <h3>Universale o smistato? (1.000 documenti misti)</h3>
+      <label for="s_inv">Fatture <output id="s_invo"></output></label><input id="s_inv" type="range" min="0" max="1000" step="10" value="600">
+      <label for="s_con">Contratti <output id="s_cono"></output></label><input id="s_con" type="range" min="0" max="1000" step="10" value="250">
+      <p class="note" style="margin:.3rem 0 0">Il resto è "altro": <output id="s_alt"></output></p>
+      <div id="sbars" style="margin-top:1rem"></div>
+      <p class="note">Ipotesi didattiche per documento: estrazione 0,5 cent per tutti; schema universale 25 campi ≈ 2,5 cent di token; fattura 8 campi ≈ 0,8 cent; contratto 12 campi con confidenza ≈ 2,4 cent; classificazione ≈ 0,3 cent; "altro" paga solo estrazione. Non è un listino.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="lab">
+  <div class="ch-head"><div class="kicker"><span class="chip">Laboratorio</span></div><h2>Prova tu</h2></div>
+  <div class="prose" style="margin-top:2rem">
+    <h3 style="font-size:1.3rem">1. La distillazione in miniatura, con due chat</h3>
+    <p>Puoi vedere con i tuoi occhi cosa significa distillare, in modo del tutto lecito: usi lo stesso assistente in due chat, una come "maestro" e una come "allievo", su un compito ristretto. L'esperimento mostra quanto gli esempi di un modello migliorino un modello che li riceve, e perché il ragionamento conta più della risposta.</p>
+  </div>
+  <div class="card"><pre class="prompt" id="d1">Sei il MAESTRO. Scrivi 15 esempi di email di clienti di un negozio online, variate per tono e difficoltà, e per ciascuna indica: categoria (rimborso, informazioni, reclamo, cambio dati, altro), urgenza (alta, media, bassa) e, in due righe, il ragionamento che porta a quelle etichette. Formatta come elenco numerato.</pre><button class="btn copy" data-c="d1">Copia: il maestro</button></div>
+  <div class="card" style="margin-top:.8rem"><pre class="prompt" id="d2">Sei l'ALLIEVO. Ecco 15 esempi già classificati con il ragionamento [incolla qui l'elenco del maestro]. Impara da questi e poi classifica le 5 email che ti manderò, indicando categoria, urgenza e ragionamento con lo stesso stile.</pre><button class="btn copy" data-c="d2">Copia: l'allievo</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Il confronto:</b> apri una terza chat senza esempi e dalle le stesse 5 email. L'allievo con gli esempi è più coerente? Poi ripeti l'esperimento dando all'allievo solo le etichette del maestro, senza il ragionamento: di solito la qualità cala. È la differenza tra copiare la risposta e imparare il metodo, e il motivo per cui i laboratori proteggono il ragionamento più delle risposte.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">2. Scrivi le descrizioni delle categorie come se parlassi a un nuovo collega (Azure)</h3>
+    <p>Le descrizioni sono il cuore del classificatore. Falle scrivere a un assistente, poi mettile alla prova con documenti ambigui.</p>
+  </div>
+  <div class="card"><pre class="prompt" id="d3">Devo classificare documenti scansionati di un ufficio acquisti con Azure Content Understanding, che usa nome e descrizione delle categorie per classificare. Scrivi nome e descrizione (massimo 3 righe) per queste categorie: fattura fornitore, contratto, conferma d'ordine, nota di credito, altro. Ogni descrizione deve elencare indizi visibili e distintivi (parole chiave, struttura, firme, totali) e dire esplicitamente cosa la distingue dalla categoria più simile. Poi scrivi 5 descrizioni brevi di documenti ambigui (per esempio una conferma d'ordine con un totale) e indica in quale categoria dovrebbero finire e perché.</pre><button class="btn copy" data-c="d3">Copia</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Cosa osservare:</b> se le descrizioni dicono solo "documento che attesta un acquisto", sono inutili: il classificatore ha bisogno di indizi. Le cinque ambiguità ti danno già il campione di test da usare nello Studio.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">3. Il PDF misto: trova i confini tu, poi confronta</h3>
+    <p>Prendi tre o quattro documenti diversi del tuo lavoro e uniscili in un unico PDF. Prima di darlo a qualsiasi strumento, scrivi su un foglio dove, secondo te, finisce un documento e inizia l'altro, e quali indizi hai usato. Poi, nello Studio di Content Understanding o con un assistente a cui descrivi le pagine, confronta i confini trovati con i tuoi. Dove la macchina sbaglia è esattamente dove serve un separatore fisico.</p>
+  </div>
+</section>
+
+<section class="ch" id="segnali">
+  <div class="ch-head"><div class="kicker"><span class="chip">Da tenere d'occhio</span></div><h2>Segnali emergenti</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">2 ottobre</span><h3>Figure AI ritira il robot F.02</h3><p>Figure ha annunciato la dismissione del suo umanoide di seconda generazione. Un segnale di quanto in fretta si consumano le generazioni hardware nella robotica: il tempo tra un modello e il successivo si accorcia come per i modelli linguistici. <a href="https://www.figure.ai/news/f-02-decommission">Figure AI</a> <span class="src u">ufficiale</span></p></div>
+    <div class="sig"><span class="chip date">2–3 ottobre</span><h3>OpenAI si separa da tre ricercatori di sicurezza</h3><p>Secondo il Wall Street Journal, confermato da un portavoce, tre membri del team di sicurezza hanno lasciato l'azienda per aver gestito informazioni riservate fuori dalle procedure, condividendole con un'organizzazione esterna di sicurezza dell'AI. Lo segnalo perché tocca il tema della settimana, chi controlla i controllori, senza entrare nei nomi. <a href="https://thehackernews.com/">The Hacker News</a> <span class="src">stampa</span></p></div>
+    <div class="sig"><span class="chip date">3 ottobre</span><h3>Un benchmark sulla ricerca "sporca" per agenti</h3><p>Su Hacker News un test di recupero delle informazioni per agenti su conoscenza aziendale reale e disordinata: il tipo di valutazione che manca quando si parla di RAG. <a href="https://news.ycombinator.com/">Hacker News</a> <span class="src">terze parti</span></p></div>
+  </div>
+</section>
+
+<section class="ch" id="novita">
+  <div class="ch-head"><div class="kicker"><span class="chip">Rispetto all'edizione di mezzogiorno</span></div><h2>Cosa è cambiato, e cosa ho escluso</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">nuovo</span><h3>La distillazione</h3><p>Il post di OpenAI del 30 settembre completa il quadro su Moonshot aperto a mezzogiorno con Kimi K2.8.</p></div>
+    <div class="sig"><span class="chip date">rubrica</span><h3>Azure, terza puntata</h3><p>Classificazione, segmentazione e instradamento: il calcolatore "universale o smistato".</p></div>
+  </div>
+  <div class="prose" style="margin-top:2rem">
+    <p><b>Escluso.</b> FLUX 3 di Black Forest Labs, comparso su Hacker News in questi giorni: è stato annunciato il 23 luglio, e la disponibilità della versione per immagini non ha una data verificata. Un progetto chiamato "Pi 1.0", molto votato su Hacker News, di cui non ho trovato una fonte che spieghi cosa sia: resta una pista. Le notizie finanziarie, come il contratto di noleggio da 45 miliardi di dollari citato dalle rassegne.</p>
+  </div>
+</section>
+
+<section class="ch" id="quiz">
+  <div class="ch-head"><div class="kicker"><span class="chip">Mettiti alla prova</span></div><h2>Quattro domande</h2></div>
+  <div class="card quiz" id="quizbox" style="margin-top:2rem"></div>
+</section>
+
+<section class="ch" id="fonti">
+  <div class="ch-head"><h2>Fonti di questa edizione</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="src u">ufficiale</span><h3>Produttori e documentazione</h3><p><a href="https://learn.microsoft.com/azure/ai-services/content-understanding/how-to/classification-content-understanding-studio">Microsoft Learn, classificazione</a> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/pricing-explainer">Microsoft Learn, prezzi</a> · <a href="https://www.figure.ai/news/f-02-decommission">Figure AI</a></p></div>
+    <div class="sig"><span class="src">stampa</span><h3>Testate</h3><p><a href="https://cyberscoop.com/openai-moonshot-ai-model-distillation-attack/">CyberScoop</a> · <a href="https://www.scworld.com/brief/openai-disrupts-ai-model-distillation-attack-linked-to-chinas-moonshot-ai">SC World</a> · <a href="https://www.theinformation.com/briefings/openai-accuses-moonshot-distillation-campaign">The Information</a> · <a href="https://www.infosectoday.io/openai-disrupts-reasoning-extraction-campaign-linked-to-moonshot-ai-associates">InfoSec Today</a> · <a href="https://thehackernews.com/">The Hacker News</a></p></div>
+    <div class="sig"><span class="src">terze parti</span><h3>Da verificare</h3><p><a href="https://www.resultsense.com/news/2026-10-01-openai-moonshot-distillation-campaign/">ResultSense</a> · <a href="https://cellcog.ai/blog/openai-moonshot-distillation/">CellCog</a> · <a href="https://github.com/kouweizhu/agents-radar/issues/316">Rassegna Hacker News</a></p></div>
+  </div>
+</section>
+
+</main>
+<footer>Radar AI · edizione del 3 ottobre 2026, pomeriggio · preparata da Claude.<br>Le stime di costo sono didattiche: verifica sempre il listino della tua regione.</footer>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id)}
+  var links=[].slice.call(document.querySelectorAll('#links a'));var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function onScroll(){var h=document.documentElement;$('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';var cur=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<140)cur=i});links.forEach(function(a,i){a.classList.toggle('on',i===cur&&window.scrollY>200)})}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  /* routing calc */
+  function money(v){return v.toLocaleString('it-IT',{style:'currency',currency:'USD',maximumFractionDigits:2})}
+  function rc(){var inv=+$('s_inv').value,con=+$('s_con').value;if(inv+con>1000){con=1000-inv;$('s_con').value=con}var alt=1000-inv-con;
+    $('s_invo').textContent=inv;$('s_cono').textContent=con;$('s_alt').textContent=alt;
+    var ext=1000*0.005;var uni=ext+1000*0.025;var sm=ext+1000*0.003+inv*0.008+con*0.024;
+    var m=Math.max(uni,sm);
+    $('sbars').innerHTML=[['Schema universale',uni,0],['Classifica e smista',sm,1]].map(function(r){return '<div class="cbar"><span>'+r[0]+'</span><div class="tr"><div class="fi'+(r[2]?' t':'')+'" style="width:'+Math.max(1,r[1]/m*100)+'%"></div></div><b>'+money(r[1])+'</b></div>'}).join('')+'<p class="note">Risparmio stimato: '+Math.round((1-sm/uni)*100)+'%. Cresce quando aumentano i documenti "altro" e quelli con pochi campi.</p>'}
+  ['s_inv','s_con'].forEach(function(id){$(id).oninput=rc});rc();
+
+  /* copy */
+  [].forEach.call(document.querySelectorAll('.copy'),function(b){b.style.marginTop='.6rem';b.onclick=function(){var t=$(b.dataset.c).textContent;var o=b.textContent;
+    function sel(){var r=document.createRange();r.selectNodeContents($(b.dataset.c));var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Testo selezionato: copialo'}
+    try{navigator.clipboard.writeText(t).then(function(){b.textContent='Copiato ✓';setTimeout(function(){b.textContent=o},1500)},sel)}catch(e){sel()}}});
+
+  /* quiz */
+  var Q=[["Cos'è la distillazione avversaria secondo OpenAI?",["Violare la crittografia di un modello","Usare in modo sistematico e non autorizzato le risposte o il ragionamento di un modello per addestrarne un altro","Copiare i pesi di un modello"],1,"Esatto: nessuna violazione di crittografia o database, ma interazioni manipolate per far affiorare il ragionamento."],
+    ["Cosa manca nel post di OpenAI, secondo CyberScoop?",["La data della campagna","Le prove tecniche dell'attribuzione a Moonshot","Il numero di utenti coinvolti"],1,"Giusto: numeri e date ci sono, le prove dell'attribuzione no."],
+    ["A cosa serve enableSegment nel classificatore di Azure?",["A velocizzare l'OCR","A dividere un file che contiene più documenti in segmenti da classificare separatamente","A ridurre i token"],1,"Corretto: è la risposta al PDF da duecento pagine uscito dallo scanner."],
+    ["Perché conviene smistare prima di estrarre?",["Perché la classificazione è gratuita","Perché ogni documento paga solo i campi del suo tipo, e la categoria 'altro' paga quasi nulla","Perché evita l'estrazione del testo"],1,"Proprio così: la classificazione ha un costo, ma toglie i campi inutili da ogni pagina."]];
+  var sc=0,an=0;$('quizbox').innerHTML=Q.map(function(q,i){return '<div class="qq"><p>'+(i+1)+'. '+q[0]+'</p><div class="opts">'+q[1].map(function(o,j){return '<button class="opt" data-q="'+i+'" data-o="'+j+'">'+o+'</button>'}).join('')+'</div><div class="fb" id="fb'+i+'"></div></div>'}).join('')+'<p class="score" id="score"></p>';
+  [].forEach.call(document.querySelectorAll('.opt'),function(b){b.onclick=function(){var qi=+b.dataset.q,oi=+b.dataset.o,q=Q[qi];var g=document.querySelectorAll('.opt[data-q="'+qi+'"]');if(g[0].disabled)return;[].forEach.call(g,function(x){x.disabled=true;if(+x.dataset.o===q[2])x.classList.add('ok')});
+    if(oi===q[2]){sc++;$('fb'+qi).textContent=q[3]}else{b.classList.add('ko');$('fb'+qi).textContent='Non proprio. '+q[3]}if(++an===Q.length)$('score').textContent='Hai risposto bene a '+sc+' domande su '+Q.length+'.'}});
+})();
+</script>
+
+</body>
+</html>
