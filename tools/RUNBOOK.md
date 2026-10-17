@@ -60,7 +60,7 @@ NN=24                                  # numero della nuova edizione (ultima + 1
    git add -A && git -c user.name="notizieposts-web" -c user.email="notizieposts@gmail.com" commit -m "Edizione NN: <titolo>" && git push origin main
    ```
    Attendi il deploy: `gh api "repos/notizieposts-web/notizieposts-web-newai/actions/runs?per_page=1"` finché lo SHA del commit risulta `completed success`.
-7. **Stato per l'invio**: scrivi `tools/ultima.json` con `{"n": NN, "data": "AAAA-MM-GG", "titolo": "...", "descrizione": "...", "chips": [...], "statistiche": [[valore, etichetta], x3], "items": [[emoji, protagonista, titolo, testo], ...], "domanda": "..."}` e includilo nel commit. Serve all'operazione di invio delle 8:45.
+7. **Stato per l'invio**: scrivi `tools/ultima.json` con `{"n": NN, "data": "AAAA-MM-GG", "titolo": "...", "descrizione": "...", "chips": [...], "statistiche": [[valore, etichetta], x3], "items": [[emoji, protagonista, titolo, testo], ...], "domanda": "..."}` e includilo nel commit. Serve all'operazione di invio delle 9:00 (preparazione alle 8:40).
 
 ## Email (invio)
 
