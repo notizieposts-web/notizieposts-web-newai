@@ -195,6 +195,16 @@ table{display:block;max-width:100%;overflow-x:auto}
 .src,.chip{white-space:normal!important;max-width:100%;overflow-wrap:anywhere}
 .prose,.sig,.card,.example,p,li,summary{overflow-wrap:anywhere}
 code,pre{white-space:pre-wrap;word-break:break-word}
+.nav-in{flex-direction:column!important;align-items:stretch!important;gap:.35rem!important;padding:.55rem 1.2rem .5rem!important}
+.nav .brand{display:inline-flex;align-items:center;gap:.4rem;font-size:1.05rem;color:var(--ink);text-decoration:none;align-self:flex-start;min-height:24px}
+.nav .brand:hover{color:var(--violet)}
+.links-row{position:relative;display:flex;align-items:center;gap:.25rem;min-width:0}
+.links-row .links{flex:1;min-width:0;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18px,#000 calc(100% - 18px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 18px,#000 calc(100% - 18px),transparent 100%);padding:2px 18px}
+.links-row .links a{scroll-snap-align:start}
+.nav-arrow{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.05rem;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0}
+.links-row.can-scroll .nav-arrow{display:inline-flex}
+.nav-arrow:disabled{opacity:.35;cursor:default}
+@media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
 </style>
@@ -203,7 +213,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <a class="skip-link" href="#contenuto">Salta al contenuto</a>
 <nav class="nav" aria-label="Capitoli">
   <div class="nav-in">
-    <span class="brand">📡 Radar AI</span>
+    <a class="brand" href="../" aria-label="Radar AI, tutte le edizioni">📡 Radar AI</a>
     <div class="links" id="links">
       <a href="#distill">Distillazione</a><a href="#azure">Azure CU</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
     </div>
@@ -453,7 +463,18 @@ code,pre{white-space:pre-wrap;word-break:break-word}
       el.style.setProperty('color',ratio(dark,bg)>=ratio(light,bg)?'#121A2B':'#FFFFFF','important');
     });
   }
-  var t;function all(){nameControls();live();scrollables();fixContrast();}
+  /* menu a due righe: logo sopra, capitoli sotto, scorrevoli con frecce */
+  function navRow(){
+    var links=document.querySelector('.nav .links');if(!links||links.parentElement.classList.contains('links-row'))return;
+    var row=document.createElement('div');row.className='links-row';links.parentNode.insertBefore(row,links);
+    function btn(dir,lab,ch){var b=document.createElement('button');b.type='button';b.className='nav-arrow';b.setAttribute('aria-label',lab);b.innerHTML='<span aria-hidden="true">'+ch+'</span>';b.onclick=function(){links.scrollBy({left:dir*links.clientWidth*0.7,behavior:'smooth'})};return b;}
+    var l=btn(-1,'Capitoli precedenti','\u2039'),r=btn(1,'Capitoli successivi','\u203A');
+    row.appendChild(l);row.appendChild(links);row.appendChild(r);
+    function upd(){var over=links.scrollWidth>links.clientWidth+4;row.classList.toggle('can-scroll',over);l.disabled=links.scrollLeft<4;r.disabled=links.scrollLeft+links.clientWidth>=links.scrollWidth-4;}
+    links.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
+    var last=null;setInterval(function(){var on=links.querySelector('a.on');if(on&&on!==last){last=on;var lr=links.getBoundingClientRect(),ar=on.getBoundingClientRect();if(ar.left<lr.left+20||ar.right>lr.right-20)links.scrollTo({left:on.offsetLeft-links.clientWidth/2+on.offsetWidth/2,behavior:'smooth'});}},400);
+  }
+  var t;function all(){navRow();nameControls();live();scrollables();fixContrast();}
   function soon(){clearTimeout(t);t=setTimeout(function(){mo.disconnect();fixContrast();nameControls();mo.observe(document.body,{childList:true,subtree:true});},120);}
   var mo=new MutationObserver(soon);
   function start(){all();mo.observe(document.body,{childList:true,subtree:true});
