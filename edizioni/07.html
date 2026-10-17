@@ -206,6 +206,9 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .links-row.can-scroll .nav-arrow{display:inline-flex}
 .nav-arrow:disabled{opacity:.35;cursor:default}
 @media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
+.chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
+:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
 </style>
@@ -216,7 +219,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
   <div class="nav-in">
     <a class="brand" href="../" aria-label="Radar AI, tutte le edizioni">📡 Radar AI</a>
     <div class="links" id="links">
-      <a href="#sun">Suncatcher</a><a href="#azure">Azure CU</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+      <a href="#sun">Google</a><a href="#azure">Azure</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Novità</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
     </div>
   </div>
   <div class="progress" id="prog"></div>
@@ -243,7 +246,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="sun">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">Lancio e primo contatto: 1° ottobre 2026</span><span class="chip">Annuncio della missione: 24 settembre</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="src p">paper</span></div>
+    <div class="kicker"><span class="chip topic">Google</span><span class="chip date">Lancio e primo contatto: 1° ottobre 2026</span><span class="chip">Annuncio della missione: 24 settembre</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="src p">paper</span></div>
     <h2>Project Suncatcher: il primo data center in orbita è grande come un frigorifero</h2>
     <p class="lead">Quattro TPU, un modello Gemma che gira un quarto d'ora alla volta, e una domanda da miliardi: conviene davvero portare il calcolo nello spazio?</p>
   </div>
@@ -283,7 +286,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="azure">
   <div class="ch-head">
-    <div class="kicker"><span class="chip">Rubrica fissa, prima puntata</span><span class="chip date">Documentazione consultata il 3 ottobre 2026</span><span class="src u">ufficiale</span></div>
+    <div class="kicker"><span class="chip topic">Azure</span><span class="chip">Rubrica fissa, prima puntata</span><span class="chip date">Documentazione consultata il 3 ottobre 2026</span><span class="src u">ufficiale</span></div>
     <h2>Azure Content Understanding: tempi, costi e volumi</h2>
     <p class="lead">Quando devi far leggere all'AI migliaia di documenti, le regole del servizio contano più del modello. Ecco quelle che decidono quanto paghi e quanto aspetti, con i numeri ufficiali di Microsoft.</p>
   </div>

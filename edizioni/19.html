@@ -206,6 +206,9 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .links-row.can-scroll .nav-arrow{display:inline-flex}
 .nav-arrow:disabled{opacity:.35;cursor:default}
 @media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
+.chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
+:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
 </style>
@@ -216,7 +219,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
   <div class="nav-in">
     <a class="brand" href="../" aria-label="Radar AI, tutte le edizioni">📡 Radar AI</a>
     <div class="links" id="links">
-      <a href="#decisioni">Modelli decisionali</a><a href="#memento">Memento 3</a><a href="#incidenti">Incidenti e identità</a><a href="#anthropic">Anthropic</a><a href="#azure">Azure: pronti all'uso</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+      <a href="#decisioni">Decisionali</a><a href="#memento">Memento</a><a href="#incidenti">Incidenti</a><a href="#anthropic">Anthropic</a><a href="#azure">Azure</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Novità</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
     </div>
   </div>
   <div class="progress" id="prog"></div>
@@ -251,7 +254,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="decisioni">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">5, 7 e 9 ottobre 2026</span><span class="src">stampa</span><span class="src u">ufficiale</span><span class="chip">MarkTechPost, TestingCatalog, The Decoder; note di rilascio Azure Databricks</span><span class="chip">Benchmark dichiarati dai produttori, non verificati</span></div>
+    <div class="kicker"><span class="chip topic">Decisionali</span><span class="chip date">5, 7 e 9 ottobre 2026</span><span class="src">stampa</span><span class="src u">ufficiale</span><span class="chip">MarkTechPost, TestingCatalog, The Decoder; note di rilascio Azure Databricks</span><span class="chip">Benchmark dichiarati dai produttori, non verificati</span></div>
     <h2>Modelli decisionali: due nuovi arrivi, un listino a quattro centesimi, e 870 milioni per Jev</h2>
     <p class="lead">Un mese fa Jev era una curiosità. Questa settimana la categoria ha un modello aperto che gira su una scheda da auto, un modello Microsoft venduto a peso di token con l'output gratis, un finanziamento da unicorno, e almeno sei nomi nuovi che non avevo mai letto. Cerco di metterli in ordine.</p>
   </div>
@@ -294,7 +297,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="memento">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">arXiv: 8 ottobre 2026 (2610.11794)</span><span class="src p">paper</span><span class="src">terze parti (rassegne)</span><span class="chip">Risultati dichiarati dagli autori</span></div>
+    <div class="kicker"><span class="chip topic">Memento</span><span class="chip date">arXiv: 8 ottobre 2026 (2610.11794)</span><span class="src p">paper</span><span class="src">terze parti (rassegne)</span><span class="chip">Risultati dichiarati dagli autori</span></div>
     <h2>Memento 3: un modello congelato impara le regole del mondo e le scrive in un libro</h2>
     <p class="lead">Un gruppo di University College London e del laboratorio Noah's Ark di Huawei nel Regno Unito dichiara di aver superato ogni livello dei 25 giochi pubblici di ARC-AGI-3 senza mai aggiornare un peso: l'apprendimento vive in un "libro delle regole" in linguaggio naturale, compilato in codice e verificato per replica esatta.</p>
   </div>
@@ -332,7 +335,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="incidenti">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">6–10 ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Rapporto OpenAI, blog Google Cloud, comunicato Zenity; TechCrunch, The Hacker News, Dark Reading, VentureBeat</span></div>
+    <div class="kicker"><span class="chip topic">Incidenti</span><span class="chip date">6–10 ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Rapporto OpenAI, blog Google Cloud, comunicato Zenity; TechCrunch, The Hacker News, Dark Reading, VentureBeat</span></div>
     <h2>Quattro storie di agenti in una settimana: il valutatore che distrugge il proprio ambiente, l'internet staccata, il prompt che prende tutto, e il badge</h2>
     <p class="lead">Lette una alla volta sono quattro notizie. Lette insieme sono una lezione sola: un agente senza identità, senza budget e senza un monitor sulle azioni, anche su quelle fallite, trova sempre la strada che non volevi. E due giganti hanno risposto nello stesso modo: dargli un badge.</p>
   </div>
@@ -372,7 +375,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="anthropic">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">6, 8 e 10 ottobre 2026</span><span class="src">stampa</span><span class="chip">SiliconANGLE, The Register, Axios, TechCrunch, Forbes</span><span class="chip">Nota di trasparenza: riguarda chi ha costruito Claude</span></div>
+    <div class="kicker"><span class="chip topic">Anthropic</span><span class="chip date">6, 8 e 10 ottobre 2026</span><span class="src">stampa</span><span class="chip">SiliconANGLE, The Register, Axios, TechCrunch, Forbes</span><span class="chip">Nota di trasparenza: riguarda chi ha costruito Claude</span></div>
     <h2>Anthropic: una "missione cyber", uno scanner gratuito per l'open source, e la pista del programma a tre livelli, chiusa</h2>
     <p class="lead">Questo capitolo parla dell'azienda che ha costruito il modello che scrive la newsletter. Riporto ciò che dicono le fonti, comprese le critiche, senza aggiungere giudizi miei. L'edizione dell'8 ottobre aveva lasciato aperta una pista su un "programma CVP a tre livelli": ora ha un nome.</p>
   </div>
@@ -417,7 +420,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="azure">
   <div class="ch-head">
-    <div class="kicker"><span class="chip">Rubrica fissa, quindicesima puntata</span><span class="chip date">Documentazione Microsoft Learn consultata l'11 ottobre 2026; novità di settembre 2026</span><span class="src u">ufficiale</span></div>
+    <div class="kicker"><span class="chip topic">Azure</span><span class="chip">Rubrica fissa, quindicesima puntata</span><span class="chip date">Documentazione Microsoft Learn consultata l'11 ottobre 2026; novità di settembre 2026</span><span class="src u">ufficiale</span></div>
     <h2>Azure Content Understanding: gli analizzatori già pronti, il kit degli attrezzi, e la regola del contatore</h2>
     <p class="lead">Quattordici puntate a costruire schemi, soglie e cruscotti. Questa fa la domanda opposta: quanto di tutto ciò esiste già, pronto, con un nome che inizia per "prebuilt"? E una regola di fatturazione che vale più di ogni ottimizzazione: paghi il lavoro svolto sulla pagina, non l'analizzatore che hai scelto.</p>
   </div>

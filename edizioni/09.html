@@ -206,6 +206,9 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .links-row.can-scroll .nav-arrow{display:inline-flex}
 .nav-arrow:disabled{opacity:.35;cursor:default}
 @media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
+.chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
+:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
 </style>
@@ -216,7 +219,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
   <div class="nav-in">
     <a class="brand" href="../" aria-label="Radar AI, tutte le edizioni">📡 Radar AI</a>
     <div class="links" id="links">
-      <a href="#distill">Distillazione</a><a href="#azure">Azure CU</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+      <a href="#distill">OpenAI</a><a href="#azure">Azure</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Novità</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
     </div>
   </div>
   <div class="progress" id="prog"></div>
@@ -244,7 +247,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="distill">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">Dichiarazione di OpenAI: 30 settembre 2026</span><span class="chip">Campagna: 1–28 luglio 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Nessun paper, nessuna prova tecnica pubblicata</span></div>
+    <div class="kicker"><span class="chip topic">OpenAI</span><span class="chip date">Dichiarazione di OpenAI: 30 settembre 2026</span><span class="chip">Campagna: 1–28 luglio 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Nessun paper, nessuna prova tecnica pubblicata</span></div>
     <h2>Distillazione avversaria: OpenAI accusa persone legate a Moonshot AI</h2>
     <p class="lead">Sedicimila richieste in due giorni, quindicimila utenti sospetti, una falla chiusa. E un'accusa fatta senza mostrare le prove.</p>
   </div>
@@ -292,7 +295,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="azure">
   <div class="ch-head">
-    <div class="kicker"><span class="chip">Rubrica fissa, terza puntata</span><span class="chip date">Documentazione consultata il 3 ottobre 2026</span><span class="src u">ufficiale</span></div>
+    <div class="kicker"><span class="chip topic">Azure</span><span class="chip">Rubrica fissa, terza puntata</span><span class="chip date">Documentazione consultata il 3 ottobre 2026</span><span class="src u">ufficiale</span></div>
     <h2>Azure Content Understanding: smistare prima di leggere</h2>
     <p class="lead">Le prime due puntate hanno parlato di quote e di schema. Oggi del passaggio che molti saltano: classificare i documenti e mandarli all'analizzatore giusto, invece di far leggere tutto a tutti.</p>
   </div>

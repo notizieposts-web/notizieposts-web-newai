@@ -206,6 +206,9 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .links-row.can-scroll .nav-arrow{display:inline-flex}
 .nav-arrow:disabled{opacity:.35;cursor:default}
 @media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
+.chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
+:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
 </style>
@@ -216,7 +219,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
   <div class="nav-in">
     <a class="brand" href="../" aria-label="Radar AI, tutte le edizioni">📡 Radar AI</a>
     <div class="links" id="links">
-      <a href="#strands">Strands Decider</a><a href="#aperto">Quanto è aperto</a><a href="#gate">Il cancello</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+      <a href="#strands">Amazon</a><a href="#aperto">Open source</a><a href="#gate">Guardrail</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Novità</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
     </div>
   </div>
   <div class="progress" id="prog"></div>
@@ -243,7 +246,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="strands">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">1° ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Nessun paper, ma codice e dati di addestramento pubblici</span></div>
+    <div class="kicker"><span class="chip topic">Amazon</span><span class="chip date">1° ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Nessun paper, ma codice e dati di addestramento pubblici</span></div>
     <h2>Strands Decider 2B: il modello decisionale che gira sul tuo portatile</h2>
     <p class="lead">Due miliardi di parametri, risposte in circa un decimo di secondo, pesi e script di addestramento pubblici. È il progetto personale di uno degli ingegneri più noti di Amazon.</p>
   </div>
@@ -284,7 +287,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="aperto">
   <div class="ch-head">
-    <div class="kicker"><span class="chip">Il concetto della settimana</span></div>
+    <div class="kicker"><span class="chip topic">Open source</span><span class="chip">Il concetto della settimana</span></div>
     <h2>"Open source" non è una parola sola: quattro livelli di apertura</h2>
     <p class="lead">Jev, Clef e Strands si dicono tutti, in qualche modo, aperti. Non lo sono allo stesso modo. Tocca i nomi e guarda cosa è davvero pubblico.</p>
   </div>
@@ -310,7 +313,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="gate">
   <div class="ch-head">
-    <div class="kicker"><span class="chip">Un'idea che collega tre edizioni</span></div>
+    <div class="kicker"><span class="chip topic">Guardrail</span><span class="chip">Un'idea che collega tre edizioni</span></div>
     <h2>Il cancello: dove si incontrano Strands, Astra e NVIDIA</h2>
     <p class="lead">Un piccolo modello che risponde "sì, puoi" o "no, fermati" prima di ogni azione. Sembra poco, ma è la risposta più concreta vista finora al problema che ha fermato GPT-6.1 Astra.</p>
   </div>

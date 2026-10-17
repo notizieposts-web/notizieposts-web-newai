@@ -206,6 +206,9 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .links-row.can-scroll .nav-arrow{display:inline-flex}
 .nav-arrow:disabled{opacity:.35;cursor:default}
 @media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
+.chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
+:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
 </style>
@@ -216,7 +219,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
   <div class="nav-in">
     <a class="brand" href="../" aria-label="Radar AI, tutte le edizioni">📡 Radar AI</a>
     <div class="links" id="links">
-      <a href="#clef">Clef</a><a href="#bench">Benchmark</a><a href="#scegli">Quale scegliere</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#escluso">Escluso</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+      <a href="#clef">Cloudflare</a><a href="#bench">Benchmark</a><a href="#scegli">Confronto</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#escluso">Esclusi</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
     </div>
   </div>
   <div class="progress" id="prog"></div>
@@ -245,7 +248,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="clef">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">1° ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Nessun paper</span></div>
+    <div class="kicker"><span class="chip topic">Cloudflare</span><span class="chip date">1° ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Nessun paper</span></div>
     <h2>Clef e Clef-flash: i primi modelli fatti in casa da Cloudflare</h2>
     <p class="lead">Rispondono con probabilità invece che con testo, leggono anche immagini e video, e si possono scaricare gratis.</p>
   </div>
@@ -292,7 +295,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="bench">
   <div class="ch-head">
-    <div class="kicker"><span class="chip">Leggere i benchmark</span><span class="src u">dati dichiarati dal produttore</span></div>
+    <div class="kicker"><span class="chip topic">Benchmark</span><span class="chip">Leggere i benchmark</span><span class="src u">dati dichiarati dal produttore</span></div>
     <h2>"Vince 7 benchmark su 10": come leggere davvero questi numeri</h2>
     <p class="lead">Cloudflare dichiara che un modello Clef è primo in 7 test decisionali su 10. È vero secondo i suoi dati. Ma dentro la sua stessa tabella c'è una lezione più interessante.</p>
   </div>
@@ -318,7 +321,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="scegli">
   <div class="ch-head">
-    <div class="kicker"><span class="chip">Strumento</span></div>
+    <div class="kicker"><span class="chip topic">Confronto</span><span class="chip">Strumento</span></div>
     <h2>Jev, Clef o Decisions API: quale fa per te?</h2>
     <p class="lead">Rispondi a tre domande e vedi quale modello decisionale si adatta meglio, con il perché.</p>
   </div>

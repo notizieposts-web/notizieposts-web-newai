@@ -206,6 +206,9 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .links-row.can-scroll .nav-arrow{display:inline-flex}
 .nav-arrow:disabled{opacity:.35;cursor:default}
 @media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
+.chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
+:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
 </style>
@@ -216,7 +219,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
   <div class="nav-in">
     <a class="brand" href="../" aria-label="Radar AI, tutte le edizioni">📡 Radar AI</a>
     <div class="links" id="links">
-      <a href="#mese">Il mese</a><a href="#architetture">Come pensano</a><a href="#jev">Jev</a><a href="#paper">Il paper</a><a href="#ricerca">La ricerca</a><a href="#clm">CLM-8B</a><a href="#mercury">Diffusione</a><a href="#atlas">Mondi 3D</a><a href="#nvidia">Sicurezza</a><a href="#devday">DevDay</a><a href="#grandi">Grandi modelli</a><a href="#costi">Costi</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+      <a href="#mese">Settembre</a><a href="#architetture">Architetture</a><a href="#jev">TypeSafe</a><a href="#paper">CMU</a><a href="#ricerca">Jev</a><a href="#clm">Stanford</a><a href="#mercury">Inception</a><a href="#atlas">World Labs</a><a href="#nvidia">NVIDIA</a><a href="#devday">OpenAI</a><a href="#grandi">Laboratori</a><a href="#costi">Costi</a><a href="#segnali">Segnali</a><a href="#novita">Novità</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
     </div>
   </div>
   <div class="progress" id="prog"></div>
@@ -251,7 +254,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- MESE -->
 <section class="ch" id="mese">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">1–30 settembre 2026</span></div>
+    <div class="kicker"><span class="chip topic">Settembre</span><span class="chip date">1–30 settembre 2026</span></div>
     <h2>Trenta giorni, undici momenti chiave</h2>
     <p class="lead">Tocca un punto sulla linea del tempo per leggere cosa è successo quel giorno. In viola i grandi laboratori, in giallo le novità che inaugurano qualcosa di nuovo.</p>
   </div>
@@ -264,7 +267,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- ARCHITETTURE -->
 <section class="ch" id="architetture">
   <div class="ch-head">
-    <div class="kicker"><span class="chip">Le basi per capire il resto</span></div>
+    <div class="kicker"><span class="chip topic">Architetture</span><span class="chip">Le basi per capire il resto</span></div>
     <h2>Tre modi di "pensare" di un modello</h2>
     <p class="lead">Prima di entrare nelle notizie, una gara. Stesso compito per tre architetture: capire cosa vuole un cliente che scrive arrabbiato.</p>
   </div>
@@ -289,7 +292,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- JEV -->
 <section class="ch" id="jev">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">15 settembre 2026</span><span class="chip">Accesso aperto a tutti dal 20 settembre</span><span class="src u">ufficiale</span></div>
+    <div class="kicker"><span class="chip topic">TypeSafe</span><span class="chip date">15 settembre 2026</span><span class="chip">Accesso aperto a tutti dal 20 settembre</span><span class="src u">ufficiale</span></div>
     <h2>Jev: il modello che non ti scrive, ti risponde</h2>
     <p class="lead">Una startup di San Francisco ha inventato una nuova categoria di modelli. E nel giro di una settimana ne sono nate trenta copie.</p>
   </div>
@@ -323,7 +326,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- PAPER -->
 <section class="ch" id="paper">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">Pubblicato il 22 settembre 2026</span><span class="chip">Ultima versione: 29 settembre</span><span class="src p">paper</span></div>
+    <div class="kicker"><span class="chip topic">CMU</span><span class="chip date">Pubblicato il 22 settembre 2026</span><span class="chip">Ultima versione: 29 settembre</span><span class="src p">paper</span></div>
     <h2>La prova indipendente: Jev come giudice</h2>
     <p class="lead">Quattro ricercatori di Carnegie Mellon hanno messo Jev contro sedici concorrenti. Il risultato è più interessante di un semplice "vince" o "perde".</p>
   </div>
@@ -362,7 +365,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- RICERCA -->
 <section class="ch" id="ricerca">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">Fine settembre 2026</span><span class="chip">Ultimo paper: 30 settembre</span><span class="src p">paper</span></div>
+    <div class="kicker"><span class="chip topic">Jev</span><span class="chip date">Fine settembre 2026</span><span class="chip">Ultimo paper: 30 settembre</span><span class="src p">paper</span></div>
     <h2>La ricerca risponde: Jev sotto la lente</h2>
     <p class="lead">In due settimane dal lancio, su arXiv sono comparsi almeno cinque studi su Jev e sui suoi cloni. Ed è qui che il quadro diventa davvero interessante.</p>
   </div>
@@ -406,7 +409,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- CLM -->
 <section class="ch" id="clm">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">23 settembre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span></div>
+    <div class="kicker"><span class="chip topic">Stanford</span><span class="chip date">23 settembre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span></div>
     <h2>CLM-8B: Stanford e NVIDIA rispondono con un modello aperto</h2>
     <p class="lead">Otto giorni dopo Jev, un gruppo di ricercatori molto noti ha proposto un'altra strada: trasformare ogni decisione in una ricerca per somiglianza.</p>
   </div>
@@ -436,7 +439,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- MERCURY -->
 <section class="ch" id="mercury">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">8 settembre 2026</span><span class="chip">Mercury Voice: 29 settembre</span><span class="src u">ufficiale</span></div>
+    <div class="kicker"><span class="chip topic">Inception</span><span class="chip date">8 settembre 2026</span><span class="chip">Mercury Voice: 29 settembre</span><span class="src u">ufficiale</span></div>
     <h2>Mercury 2.5: scrivere una frase come si sviluppa una foto</h2>
     <p class="lead">I modelli a diffusione erano una curiosità da laboratorio. Con questo lancio diventano un prodotto che migliaia di sviluppatori usano davvero.</p>
   </div>
@@ -471,7 +474,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- ATLAS -->
 <section class="ch" id="atlas">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">1° settembre 2026</span><span class="chip">World Labs entra in AMD: fine settembre</span><span class="src u">ufficiale</span></div>
+    <div class="kicker"><span class="chip topic">World Labs</span><span class="chip date">1° settembre 2026</span><span class="chip">World Labs entra in AMD: fine settembre</span><span class="src u">ufficiale</span></div>
     <h2>Atlas: un modello che capisce dove sono le cose</h2>
     <p class="lead">La startup di Fei-Fei Li vuole dare all'AI ciò che le manca di più: il senso dello spazio.</p>
   </div>
@@ -515,7 +518,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- NVIDIA -->
 <section class="ch" id="nvidia">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">28 settembre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span></div>
+    <div class="kicker"><span class="chip topic">NVIDIA</span><span class="chip date">28 settembre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span></div>
     <h2>Un guardiano di silicio per gli agenti AI</h2>
     <p class="lead">Mentre i modelli imparano ad agire da soli, NVIDIA propone di sorvegliarli da fuori, con un chip dedicato.</p>
   </div>
@@ -553,7 +556,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- DEVDAY -->
 <section class="ch" id="devday">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">29 settembre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span></div>
+    <div class="kicker"><span class="chip topic">OpenAI</span><span class="chip date">29 settembre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span></div>
     <h2>DevDay: OpenAI scommette sugli agenti sempre accesi</h2>
     <p class="lead">Oltre venti annunci in un giorno a San Francisco. Tre meritano la tua attenzione, e uno riguarda direttamente Jev.</p>
   </div>
@@ -590,7 +593,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- GRANDI -->
 <section class="ch" id="grandi">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">1–29 settembre 2026</span></div>
+    <div class="kicker"><span class="chip topic">Laboratori</span><span class="chip date">1–29 settembre 2026</span></div>
     <h2>I grandi modelli del mese, giorno per giorno</h2>
     <p class="lead">Settembre è stato uno dei mesi più fitti di sempre: 26 nuovi modelli da 16 fornitori secondo LLM Gateway. Filtra per laboratorio.</p>
   </div>
@@ -612,7 +615,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 <!-- COSTI -->
 <section class="ch" id="costi">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">Listini verificati a settembre 2026</span><span class="src u">ufficiale</span></div>
+    <div class="kicker"><span class="chip topic">Costi</span><span class="chip date">Listini verificati a settembre 2026</span><span class="src u">ufficiale</span></div>
     <h2>Quanto costa far leggere e decidere all'AI</h2>
     <p class="lead">Azure Content Understanding, AWS e Jev fanno lavori diversi. Capire la differenza è il modo migliore per non sprecare soldi.</p>
   </div>

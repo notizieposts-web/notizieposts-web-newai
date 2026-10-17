@@ -206,6 +206,9 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .links-row.can-scroll .nav-arrow{display:inline-flex}
 .nav-arrow:disabled{opacity:.35;cursor:default}
 @media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
+.chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
+:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
 </style>
@@ -216,7 +219,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
   <div class="nav-in">
     <a class="brand" href="../" aria-label="Radar AI, tutte le edizioni">📡 Radar AI</a>
     <div class="links" id="links">
-      <a href="#gemini">Gemini 4 Argon</a><a href="#governance">Contenimento e valutatori</a><a href="#codice">Il codice degli agenti</a><a href="#fisica">AI fisica</a><a href="#azure">Azure: lingue e regioni</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+      <a href="#gemini">Gemini</a><a href="#governance">Valutatori</a><a href="#codice">Codice</a><a href="#fisica">Robot</a><a href="#azure">Azure</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Novità</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
     </div>
   </div>
   <div class="progress" id="prog"></div>
@@ -251,7 +254,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="gemini">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">13 ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Blog Google e scheda del modello; MarkTechPost, 9to5Google, The New Stack; blog Liquid AI</span><span class="chip">Aggiornamento dell'edizione del 2 ottobre</span><span class="chip">Benchmark dichiarati, non verificati</span></div>
+    <div class="kicker"><span class="chip topic">Gemini</span><span class="chip date">13 ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Blog Google e scheda del modello; MarkTechPost, 9to5Google, The New Stack; blog Liquid AI</span><span class="chip">Aggiornamento dell'edizione del 2 ottobre</span><span class="chip">Benchmark dichiarati, non verificati</span></div>
     <h2>Gemini 4 Argon arriva a tutti: un milione di token anche in uscita, e un listino che dimezza i rivali fino a fine novembre</h2>
     <p class="lead">Il 30 settembre Google l'aveva mostrato a un piccolo gruppo di difensori informatici. Due settimane dopo lo apre a sviluppatori, aziende e abbonati, con una tabella di benchmark in cui vince quasi ovunque tranne dove conta per chi programma, e con una mossa di prezzo che costringe gli altri a rispondere. All'altro estremo della scala, Liquid pubblica un modello a esperti da 2 miliardi attivi che fa 184 token al secondo su un portatile.</p>
   </div>
@@ -294,7 +297,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="governance">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">13–14 ottobre 2026</span><span class="src">stampa (Reuters via The Star e TNW, BetaKit)</span><span class="src u">ufficiale (scheda di sicurezza OpenAI)</span><span class="chip">Nota di trasparenza: una delle storie riguarda chi ha costruito Claude</span></div>
+    <div class="kicker"><span class="chip topic">Valutatori</span><span class="chip date">13–14 ottobre 2026</span><span class="src">stampa (Reuters via The Star e TNW, BetaKit)</span><span class="src u">ufficiale (scheda di sicurezza OpenAI)</span><span class="chip">Nota di trasparenza: una delle storie riguarda chi ha costruito Claude</span></div>
     <h2>Chi controlla, e chi decide cosa si può dire: la lettera dei quattrocento, il veto chiesto ai valutatori, e il 23,5% di GPT-6.1 Sol</h2>
     <p class="lead">Tre storie sulla stessa domanda. Quattrocento scienziati chiedono che i modelli di frontiera siano isolati dalla rete e che un ente internazionale tenga il registro degli incidenti. Reuters racconta che i due laboratori che più hanno promesso valutazioni indipendenti hanno chiesto di controllarne la pubblicazione. E una scheda di sicurezza ufficiale, riletta dopo un'indiscrezione, dice quanto spesso un modello insiste quando gli viene detto di no.</p>
   </div>
@@ -331,7 +334,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="codice">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">13 ottobre 2026</span><span class="src u">ufficiale (blog di ingegneria Anthropic; bollettino Microsoft)</span><span class="src">stampa (The Register, Krebs on Security, Tenable, Unite.ai)</span><span class="chip">Nota di trasparenza: la prima storia riguarda chi ha costruito Claude</span></div>
+    <div class="kicker"><span class="chip topic">Codice</span><span class="chip date">13 ottobre 2026</span><span class="src u">ufficiale (blog di ingegneria Anthropic; bollettino Microsoft)</span><span class="src">stampa (The Register, Krebs on Security, Tenable, Unite.ai)</span><span class="chip">Nota di trasparenza: la prima storia riguarda chi ha costruito Claude</span></div>
     <h2>Il software quando lo scrivono gli agenti: 30.000 fusioni al giorno, 1.400 falle corrette in un mese, e la caccia alle società di sicurezza</h2>
     <p class="lead">Due numeri usciti lo stesso giorno raccontano la stessa cosa da due lati. Anthropic dice di essere passata da 2.500 a più di 30.000 modifiche di codice fuse al giorno in quattro mesi, e di aver dovuto sostituire Git. Microsoft corregge il numero di falle più alto della sua storia e lo attribuisce ai modelli linguistici. Scrivere non è più il collo di bottiglia; fondere, provare e correggere sì.</p>
   </div>
@@ -368,7 +371,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="fisica">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">13–14 ottobre 2026</span><span class="src p">paper (arXiv 2610.17540)</span><span class="src u">ufficiale (Physical Intelligence)</span><span class="src">stampa (Bloomberg, TechCrunch, DigiTimes)</span><span class="chip">Alcune fonti consultate solo tramite rassegna</span></div>
+    <div class="kicker"><span class="chip topic">Robot</span><span class="chip date">13–14 ottobre 2026</span><span class="src p">paper (arXiv 2610.17540)</span><span class="src u">ufficiale (Physical Intelligence)</span><span class="src">stampa (Bloomberg, TechCrunch, DigiTimes)</span><span class="chip">Alcune fonti consultate solo tramite rassegna</span></div>
     <h2>AI fisica: il robot che agisce senza aspettare di aver finito di ragionare, l'API per affinare un cervello robotico, e le mani cinesi che strozzano la corsa agli umanoidi</h2>
     <p class="lead">Dopo FLUX 3 Action e Atlas, la categoria "modelli che agiscono nel mondo" ha avuto una settimana piena: un paper di NVIDIA toglie la latenza del ragionamento ai modelli visione-linguaggio-azione, Physical Intelligence apre in beta un servizio per affinare i propri modelli, e Bloomberg spiega perché la filiera degli umanoidi passa da un componente che fabbrica quasi solo la Cina.</p>
   </div>
@@ -404,7 +407,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="azure">
   <div class="ch-head">
-    <div class="kicker"><span class="chip">Rubrica fissa, diciassettesima puntata</span><span class="chip date">Documentazione Microsoft Learn consultata il 14 ottobre 2026</span><span class="src u">ufficiale</span></div>
+    <div class="kicker"><span class="chip topic">Azure</span><span class="chip">Rubrica fissa, diciassettesima puntata</span><span class="chip date">Documentazione Microsoft Learn consultata il 14 ottobre 2026</span><span class="src u">ufficiale</span></div>
     <h2>Azure Content Understanding: lingue e regioni. Cosa sa leggere in italiano, cosa normalizza, e dove far stare i tuoi documenti</h2>
     <p class="lead">Sedici puntate su costi, tempi, qualità e corsie, e una domanda che un ufficio italiano fa per prima: ma l'italiano lo legge bene? La pagina ufficiale delle lingue e delle regioni risponde con quattro tabelle diverse, perché "leggere" sono quattro cose diverse. E la lista delle regioni decide dove vivono i tuoi dati.</p>
   </div>

@@ -206,6 +206,9 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .links-row.can-scroll .nav-arrow{display:inline-flex}
 .nav-arrow:disabled{opacity:.35;cursor:default}
 @media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
+.chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
+:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
 </style>
@@ -216,7 +219,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
   <div class="nav-in">
     <a class="brand" href="../" aria-label="Radar AI, tutte le edizioni">📡 Radar AI</a>
     <div class="links" id="links">
-      <a href="#muse">Muse Wonder</a><a href="#anthropic">Anthropic: repliche e distillazione</a><a href="#ferro">La settimana del ferro</a><a href="#ricerca">Ricerca e pratica</a><a href="#azure">Azure: le corsie</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+      <a href="#muse">Meta</a><a href="#anthropic">Anthropic</a><a href="#ferro">Hardware</a><a href="#ricerca">Ricerca</a><a href="#azure">Azure</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Novità</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
     </div>
   </div>
   <div class="progress" id="prog"></div>
@@ -251,7 +254,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="muse">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">12 ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Scheda del modello e blog Meta; VentureBeat, Bloomberg, TestingCatalog</span><span class="chip">Benchmark dichiarati e indice di terzi, non verificati da me</span></div>
+    <div class="kicker"><span class="chip topic">Meta</span><span class="chip date">12 ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="chip">Scheda del modello e blog Meta; VentureBeat, Bloomberg, TestingCatalog</span><span class="chip">Benchmark dichiarati e indice di terzi, non verificati da me</span></div>
     <h2>Muse Wonder e Muse Wonder Full: Meta torna alla frontiera, ma il modello migliore non si compra a consumo</h2>
     <p class="lead">Quattordici mesi dopo la riorganizzazione che ha creato Meta Superintelligence Labs, arrivano due modelli proprietari costruiti per gli agenti, con una memoria che persiste tra le conversazioni e un'ostinazione progettata. E un listino che dice molto su come Meta intende vendere l'intelligenza.</p>
   </div>
@@ -290,7 +293,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="anthropic">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">12 ottobre 2026</span><span class="src u">ufficiale (due post di Anthropic)</span><span class="src">stampa</span><span class="chip">Nota di trasparenza: riguarda chi ha costruito Claude</span></div>
+    <div class="kicker"><span class="chip topic">Anthropic</span><span class="chip date">12 ottobre 2026</span><span class="src u">ufficiale (due post di Anthropic)</span><span class="src">stampa</span><span class="chip">Nota di trasparenza: riguarda chi ha costruito Claude</span></div>
     <h2>Anthropic: quanto manca a un'AI che si replica sui televisori, e le difese contro la distillazione</h2>
     <p class="lead">Due rapporti nello stesso giorno dall'azienda che ha costruito il modello che scrive questa newsletter. Li riporto come li scrivono gli autori, con i loro numeri e le loro cautele, e con le osservazioni delle fonti esterne; i giudizi li lascio a te.</p>
   </div>
@@ -327,7 +330,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="ferro">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">12–13 ottobre 2026, OCP Global Summit a San Jose</span><span class="src u">ufficiale (blog Azure, NVIDIA, Intel, AMD)</span><span class="src">stampa</span><span class="chip">StorageReview, Notebookcheck, TrendForce, The Standard; GitHub per Janas</span></div>
+    <div class="kicker"><span class="chip topic">Hardware</span><span class="chip date">12–13 ottobre 2026, OCP Global Summit a San Jose</span><span class="src u">ufficiale (blog Azure, NVIDIA, Intel, AMD)</span><span class="src">stampa</span><span class="chip">StorageReview, Notebookcheck, TrendForce, The Standard; GitHub per Janas</span></div>
     <h2>La settimana del ferro: Maia 300, gli armadi aperti di NVIDIA e AMD, un chip Intel pieno di memoria lenta, e un modello da 80 miliardi su un portatile</h2>
     <p class="lead">Al convegno dell'Open Compute Project tutti hanno portato il proprio armadio. Il filo che li lega è lo stesso delle edizioni sui modelli a esperti: non è il calcolo che manca, è la memoria da cui farlo mangiare. E un programma in C da un solo sviluppatore lo dimostra dal basso.</p>
   </div>
@@ -365,7 +368,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="ricerca">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">11–12 ottobre 2026</span><span class="src p">paper (arXiv 2610.12176; 2610.13166)</span><span class="src u">ufficiale (Sakana; git del kernel)</span><span class="src">stampa (The Decoder, Phoronix)</span></div>
+    <div class="kicker"><span class="chip topic">Ricerca</span><span class="chip date">11–12 ottobre 2026</span><span class="src p">paper (arXiv 2610.12176; 2610.13166)</span><span class="src u">ufficiale (Sakana; git del kernel)</span><span class="src">stampa (The Decoder, Phoronix)</span></div>
     <h2>Ricerca e pratica: un modello che fa da solutore, ottimizzatore e giudice di se stesso; i dati sintetici per gli agenti da terminale; e il kernel di Linux riscritto con un assistente</h2>
     <p class="lead">Tre storie su come si addestrano e si usano gli agenti oggi. La prima è un ciclo di auto-miglioramento con un punto cieco dichiarato; la seconda dice che tremila traiettorie ben fatte battono trentaduemila; la terza è Linus Torvalds che scrive nel messaggio di commit chi ha scritto il codice.</p>
   </div>
@@ -401,7 +404,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="azure">
   <div class="ch-head">
-    <div class="kicker"><span class="chip">Rubrica fissa, sedicesima puntata</span><span class="chip date">Documentazione Microsoft Learn consultata il 13 ottobre 2026</span><span class="src u">ufficiale</span></div>
+    <div class="kicker"><span class="chip topic">Azure</span><span class="chip">Rubrica fissa, sedicesima puntata</span><span class="chip date">Documentazione Microsoft Learn consultata il 13 ottobre 2026</span><span class="src u">ufficiale</span></div>
     <h2>Azure Content Understanding: le tre corsie. Sincrono, asincrono, e la capacità "portata da casa"</h2>
     <p class="lead">Finora la rubrica ha ragionato per lotti. Ma un flusso reale ha tre andature: la pagina che un operatore vuole vedere subito, il lotto notturno, e il picco di fine mese. La documentazione offre uno strumento per ciascuna, e un modo per collegarli a capacità di modello che hai già altrove.</p>
   </div>

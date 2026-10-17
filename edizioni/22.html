@@ -212,6 +212,9 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .links-row.can-scroll .nav-arrow{display:inline-flex}
 .nav-arrow:disabled{opacity:.35;cursor:default}
 @media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
+.chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
+:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
 </style>
@@ -222,7 +225,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
   <div class="nav-in">
     <a class="brand" href="../" aria-label="Radar AI, tutte le edizioni">📡 Radar AI</a>
     <div class="links" id="links">
-      <a href="#agenti">Le chiavi agli agenti</a><a href="#gusto">Il gusto della ricerca</a><a href="#ritiri">Il calendario dei ritiri</a><a href="#dati">Le tracce che lasciamo</a><a href="#azure">Azure: chi può fare cosa</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Cosa è cambiato</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+      <a href="#agenti">JPMorgan</a><a href="#gusto">TasteVal</a><a href="#ritiri">OpenAI</a><a href="#dati">Privacy</a><a href="#azure">Azure</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Novità</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
     </div>
   </div>
   <div class="progress" id="prog"></div>
@@ -257,7 +260,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="agenti">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">13 ottobre 2026</span><span class="chip">paper del 2, 6 e 9 ottobre</span><span class="src p">paper</span><span class="src">stampa</span><span class="src">terze parti</span><span class="chip">CNBC, Quartz, Crypto Briefing; arXiv 2610.13886, 2610.03448, 2610.07967; Tech Times</span><span class="chip">I tre paper sono recuperi</span></div>
+    <div class="kicker"><span class="chip topic">JPMorgan</span><span class="chip date">13 ottobre 2026</span><span class="chip">paper del 2, 6 e 9 ottobre</span><span class="src p">paper</span><span class="src">stampa</span><span class="src">terze parti</span><span class="chip">CNBC, Quartz, Crypto Briefing; arXiv 2610.13886, 2610.03448, 2610.07967; Tech Times</span><span class="chip">I tre paper sono recuperi</span></div>
     <h2>Le chiavi di casa agli agenti: la banca che dice no, e la ricerca che spiega perché</h2>
     <p class="lead">JPMorgan non vieta gli agenti: li usa, e ne sta provando uno che sposta i soldi dei clienti. Vieta gli agenti degli altri, quando chiedono di scrivere invece che di leggere. Tre paper usciti nelle due settimane prima mostrano che quella linea non è paura, è ingegneria: il danno nasce dalla combinazione, i filtri non si trasferiscono, e la pressione spinge all'inganno.</p>
   </div>
@@ -311,7 +314,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="gusto">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">6 e 8 ottobre 2026</span><span class="chip">ripreso il 12 ottobre da Import AI 476</span><span class="src p">paper</span><span class="src u">ufficiale</span><span class="src">terze parti</span><span class="chip">TasteVal, arXiv 2610.06824; Humanity's Sixth Sense, Scale AI ed Elorian</span><span class="chip">Nota di trasparenza</span></div>
+    <div class="kicker"><span class="chip topic">TasteVal</span><span class="chip date">6 e 8 ottobre 2026</span><span class="chip">ripreso il 12 ottobre da Import AI 476</span><span class="src p">paper</span><span class="src u">ufficiale</span><span class="src">terze parti</span><span class="chip">TasteVal, arXiv 2610.06824; Humanity's Sixth Sense, Scale AI ed Elorian</span><span class="chip">Nota di trasparenza</span></div>
     <h2>Il gusto della ricerca raddoppia ogni tre mesi, ma i modelli non vedono se una catena è tesa</h2>
     <p class="lead">Due misure uscite a due giorni di distanza, che conviene leggere insieme. La prima dice che il miglior modello progetta e interpreta esperimenti di machine learning con meno della metà del calcolo dei migliori esperti umani. La seconda che lo stesso tipo di modello sbaglia quasi metà delle domande visive che una persona risolve senza pensarci.</p>
   </div>
@@ -360,7 +363,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="ritiri">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">14 ottobre 2026</span><span class="chip">annunci del 1° ottobre, mai riportati qui</span><span class="src u">ufficiale</span><span class="chip">Pagina delle deprecazioni di OpenAI; calendario dei ritiri di Microsoft Foundry</span></div>
+    <div class="kicker"><span class="chip topic">OpenAI</span><span class="chip date">14 ottobre 2026</span><span class="chip">annunci del 1° ottobre, mai riportati qui</span><span class="src u">ufficiale</span><span class="chip">Pagina delle deprecazioni di OpenAI; calendario dei ritiri di Microsoft Foundry</span></div>
     <h2>GPT-4o e GPT-4.1 lasciano l'API di OpenAI il 14 gennaio. Su Azure il calendario è un altro</h2>
     <p class="lead">Una notizia di servizio, ma di quelle che fermano un sistema in produzione. Oggi OpenAI ha fissato la data in cui i modelli più usati della generazione GPT-4 smetteranno di rispondere nella sua API. Chi usa gli stessi modelli su Azure ha date diverse, e chi usa Content Understanding deve guardare la distribuzione su cui girano i suoi analizzatori.</p>
   </div>
@@ -394,7 +397,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="dati">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">12 e 13 ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="src">terze parti</span><span class="chip">Dipartimento di Giustizia USA; Business Insider e Forbes (via rassegne); DigitalOcean</span></div>
+    <div class="kicker"><span class="chip topic">Privacy</span><span class="chip date">12 e 13 ottobre 2026</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="src">terze parti</span><span class="chip">Dipartimento di Giustizia USA; Business Insider e Forbes (via rassegne); DigitalOcean</span></div>
     <h2>Le tracce che lasciamo agli assistenti: un'accusa costruita sui prompt, le chat aziendali in vendita, gli agenti che registrano ogni passo</h2>
     <p class="lead">Tre notizie di questi due giorni, molto diverse, hanno in comune una cosa che si tende a dimenticare: tutto ciò che diciamo a un assistente o scriviamo al lavoro è un registro, e i registri hanno una seconda vita.</p>
   </div>
@@ -432,7 +435,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 
 <section class="ch" id="azure">
   <div class="ch-head">
-    <div class="kicker"><span class="chip date">Rubrica fissa, diciottesima puntata</span><span class="chip">Documentazione consultata il 14 ottobre 2026</span><span class="src u">ufficiale</span></div>
+    <div class="kicker"><span class="chip topic">Azure</span><span class="chip date">Rubrica fissa, diciottesima puntata</span><span class="chip">Documentazione consultata il 14 ottobre 2026</span><span class="src u">ufficiale</span></div>
     <h2>Azure Content Understanding: chi può fare cosa. Ruoli, reti, chiavi, copie e cancellazioni</h2>
     <p class="lead">Un'edizione sulle chiavi date agli agenti merita una rubrica sulle chiavi del servizio. Tre ruoli già pronti che separano chi analizza da chi costruisce, la rete privata, la cifratura con chiavi tue, la copia di un analizzatore fra risorse e perfino fra tenant, e la chiamata che cancella i risultati prima delle 24 ore.</p>
   </div>
