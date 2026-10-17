@@ -175,7 +175,7 @@ footer{border-top:1px solid var(--line);margin-top:4rem;padding:2rem 1.2rem 3rem
 .dash{stroke-dasharray:6 6;animation:dash 1.5s linear infinite}
 @keyframes dash{to{stroke-dashoffset:-24}}
 </style>
-<style id="a11y">
+<script id="a11y-theme">try{var t=localStorage.getItem('radar-theme');if(t=='light'||t=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script><style id="a11y">
 /* Strato accessibilita' WCAG 2.2 AA */
 /* palette armonica: viola 240, ciano 190, ambra 26, magenta 336; testo AA su ogni sfondo */
 :root:not([data-theme="dark"]){--violet:#4B4BF5;--violet-soft:#ECECFE;--teal:#0A6A7C;--teal-soft:#E0F2F5;--sun:#A34E08;--sun-soft:#FDF0E1;--red:#C2185B;--red-soft:#FCE7EF}
@@ -212,6 +212,11 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
 :root[data-theme="dark"] .chip.topic{color:#0E1424!important}
+:root[data-theme="light"]{--bg:#FFFFFF;--surface:#FFFFFF;--soft:#F1F3F8;--line:#D3D9E6;--ink:#121A2B;--muted:#4E5A72}
+:root[data-theme="light"] .card,:root[data-theme="light"] .sig,:root[data-theme="light"] .stat{border:1px solid var(--line)}
+.nav-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.theme-btn{display:inline-flex;align-items:center;gap:.4rem;min-height:32px;padding:.3rem .75rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 .8rem var(--head,system-ui);cursor:pointer}
+.theme-btn:hover{border-color:var(--violet)}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
 </style>
@@ -685,7 +690,20 @@ code,pre{white-space:pre-wrap;word-break:break-word}
     links.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
     var last=null;setInterval(function(){var on=links.querySelector('a.on');if(on&&on!==last){last=on;var lr=links.getBoundingClientRect(),ar=on.getBoundingClientRect();if(ar.left<lr.left+20||ar.right>lr.right-20)links.scrollTo({left:on.offsetLeft-links.clientWidth/2+on.offsetWidth/2,behavior:'smooth'});}},400);
   }
-  var t;function all(){navRow();nameControls();live();scrollables();fixContrast();}
+  /* selettore del tema: automatico, chiaro (bianco), scuro */
+  function themeToggle(){
+    var brand=document.querySelector('.nav .brand');if(!brand||document.querySelector('.theme-btn'))return;
+    var top=document.createElement('div');top.className='nav-top';brand.parentNode.insertBefore(top,brand);top.appendChild(brand);
+    var b=document.createElement('button');b.type='button';b.className='theme-btn';top.appendChild(b);
+    var modes=['auto','light','dark'],lab={auto:['\uD83C\uDF13','Automatico'],light:['\u2600\uFE0F','Chiaro'],dark:['\uD83C\uDF19','Scuro']};
+    function cur(){var t=document.documentElement.getAttribute('data-theme');return t==='light'||t==='dark'?t:'auto';}
+    function paint(){var m=cur();b.innerHTML='<span aria-hidden="true">'+lab[m][0]+'</span> '+lab[m][1];b.setAttribute('aria-label','Tema: '+lab[m][1]+'. Cambia tema');}
+    b.onclick=function(){var m=modes[(modes.indexOf(cur())+1)%3];if(m==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',m);
+      try{if(m==='auto')localStorage.removeItem('radar-theme');else localStorage.setItem('radar-theme',m);}catch(e){}
+      paint();document.querySelectorAll('[style*="color"]').forEach(function(e){if(e.style.getPropertyPriority('color')==='important')e.style.removeProperty('color')});setTimeout(fixContrast,30);};
+    paint();
+  }
+  var t;function all(){themeToggle();navRow();nameControls();live();scrollables();fixContrast();}
   function soon(){clearTimeout(t);t=setTimeout(function(){mo.disconnect();fixContrast();nameControls();mo.observe(document.body,{childList:true,subtree:true});},120);}
   var mo=new MutationObserver(soon);
   function start(){all();mo.observe(document.body,{childList:true,subtree:true});
