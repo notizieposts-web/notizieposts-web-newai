@@ -177,9 +177,10 @@ footer{border-top:1px solid var(--line);margin-top:4rem;padding:2rem 1.2rem 3rem
 </style>
 <style id="a11y">
 /* Strato accessibilita' WCAG 2.2 AA */
-:root:not([data-theme="dark"]){--teal:#0A6B6A;--sun:#7A5900;--red:#B3261E}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--violet:#A5A5FF;--teal:#3CCFCB;--red:#FF8F85}}
-:root[data-theme="dark"]{--violet:#A5A5FF;--teal:#3CCFCB;--red:#FF8F85}
+/* palette armonica: viola 240, ciano 190, ambra 26, magenta 336; testo AA su ogni sfondo */
+:root:not([data-theme="dark"]){--violet:#4B4BF5;--violet-soft:#ECECFE;--teal:#0A6A7C;--teal-soft:#E0F2F5;--sun:#A34E08;--sun-soft:#FDF0E1;--red:#C2185B;--red-soft:#FCE7EF}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--violet:#A5A5FF;--violet-soft:#25265A;--teal:#5FC7D9;--teal-soft:#0F3440;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#F27BA8;--red-soft:#3D1A2A}}
+:root[data-theme="dark"]{--violet:#A5A5FF;--violet-soft:#25265A;--teal:#5FC7D9;--teal-soft:#0F3440;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#F27BA8;--red-soft:#3D1A2A}
 html{scroll-padding-top:6rem}
 :focus{scroll-margin-top:6rem;scroll-margin-bottom:2rem}
 :focus-visible{outline:3px solid var(--violet)!important;outline-offset:2px!important;border-radius:4px}
