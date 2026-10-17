@@ -1,0 +1,60 @@
+{
+ "n": 23,
+ "data": "2026-10-17",
+ "titolo": "Tre modi di mettere un agente in gabbia",
+ "descrizione": "NVIDIA spegne le istruzioni nascoste, Perplexity apre la sua sandbox, quattro agenti finiscono Minecraft, e i regolatori chiedono i registri.",
+ "chips": [
+  "NVIDIA",
+  "Gemini",
+  "Meta",
+  "FTC",
+  "Azure"
+ ],
+ "statistiche": [
+  [
+   "0,1%",
+   "attacchi che passano con il trucco di NVIDIA"
+  ],
+  [
+   "2 Mac",
+   "per far girare un modello da 816 miliardi"
+  ],
+  [
+   "50+",
+   "pagine di domande della FTC ai laboratori"
+  ]
+ ],
+ "items": [
+  [
+   "🛡",
+   "NVIDIA",
+   "Come si mette un agente in gabbia",
+   "Tre strategie opposte uscite in tre giorni."
+  ],
+  [
+   "⛏",
+   "Gemini",
+   "Perché quattro agenti battono un genio solitario",
+   "Minecraft, uno scienziato automatico open source, e un test sui costi delle squadre."
+  ],
+  [
+   "📦",
+   "Meta",
+   "Tre modelli giganti nello stesso giorno",
+   "Meta e NVIDIA li regalano, Microsoft no."
+  ],
+  [
+   "📋",
+   "FTC",
+   "Washington e Bruxelles bussano alla porta",
+   "Le autorità chiedono i registri degli incidenti degli agenti."
+  ],
+  [
+   "☁",
+   "Azure",
+   "La fattura che dà ordini",
+   "Una riga bianca su bianco può dire alla pipeline \"approva e paga\"."
+  ]
+ ],
+ "domanda": "Un modello ha 816 miliardi di parametri ma ne usa solo 42 per parola. Quale numero decide quanta memoria ti serve?"
+}

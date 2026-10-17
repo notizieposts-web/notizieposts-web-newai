@@ -1,0 +1,69 @@
+"""Schede dell'archivio: protagonisti (come nel menu), titolo riassuntivo (<=65 caratteri), descrizione (<=160, con punto finale)."""
+import re, sys, json, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from topics import MAP
+EDX = {
+ '-': (['Jev','CMU','Azure'], "Modelli che decidono senza scrivere, e quanto costano", "Cosa sono i modelli decisionali, cosa dice il primo paper indipendente su Jev e quanto costa far leggere documenti ad Azure e AWS."),
+ '02': (None, "Settembre 2026: l'AI impara a decidere senza scrivere", "Trenta giorni in un numero: Jev e i suoi cloni, i modelli a diffusione, Atlas per lo spazio 3D, il DevDay di OpenAI e i costi a confronto."),
+ '03': (None, "Gemini 4 Argon arriva, GPT-6.1 Astra si ferma", "Google torna in testa ma per pochi; OpenAI blocca un modello per sicurezza; Meta propone modelli che riordinano da soli il proprio contesto."),
+ '04': (None, "Cloudflare lancia Clef, decisionale con pesi aperti", "Il primo modello di Cloudflare sfida Jev; come leggere un \"vince 7 benchmark su 10\"; e quale modello decisionale scegliere."),
+ '05': (None, "Un modello decisionale che gira sul portatile", "Strands Decider 2B di un ingegnere Amazon, i quattro livelli di \"open source\" e un controllore che chiede il permesso prima di agire."),
+ '06': (None, "Tre paper scomodi su agenti e proattività", "Regole che cambiano mentre l'agente lavora, cosa cerca un agente proattivo secondo IBM, e una correzione su come leggere i numeri."),
+ '07': (None, "Google porta i chip AI in orbita", "Project Suncatcher mette un piccolo data center nello spazio. Nasce la rubrica su Azure Content Understanding: tempi, costi, volumi."),
+ '08': (None, "Kimi K2.8, il quasi K3 aperto a tutti", "Moonshot apre il suo modello più grande finora. In Azure, le leve nascoste che fanno salire o scendere il costo di ogni documento."),
+ '09': (None, "OpenAI accusa la distillazione del suo modello", "Cosa si sa della campagna attribuita a persone legate a Moonshot. In Azure, perché conviene smistare i documenti prima di leggerli."),
+ '10': (None, "Microsoft rifà Copilot con un agente che ha un badge", "Copilot Home, Code e Autopilot: un agente con identità aziendale propria. In Azure, come si lavora con audio e video."),
+ '11': (None, "Aleph Alpha regala all'Europa un modello sovrano", "Kolibri e le sue cautele, perché 78 miliardi di parametri costano come 3, e quando scegliere Content Understanding o Document Intelligence."),
+ '12': (None, "Pi 1.0 e i campi invisibili visti dallo spazio", "Un'imbracatura per agenti usata da centinaia di migliaia di persone, il modello di Cambridge per le colture, e la modalità agentica di Azure."),
+ '13': (None, "Gemini gratis si riduce, Anthropic forma le persone", "Dal 9 ottobre il Gemini gratuito ha solo il modello piccolo; una scuola da 100 milioni; gli elementi che non vedi in un documento."),
+ '14': (None, "OpenAI e Synopsys insegnano all'AI a progettare chip", "Un modello che usa i programmi dei progettisti di chip. In Azure: richieste in parallelo, code e cosa fare quando il servizio è saturo."),
+ '15': (None, "New York ascolta chi accusa i laboratori di AI", "Cosa è stato detto e ammesso all'audizione, l'ente con cui tre laboratori vorrebbero regolarsi da soli, e dove finiscono i dati in Azure."),
+ '16': (None, "La filigrana invisibile nei testi di ChatGPT", "Come funziona textGrain e perché l'AI Act la rende urgente. In Azure: metriche, log e allarmi per osservare il servizio mentre lavora."),
+ '17': (None, "Mistral e Reflection: due giganti aperti in due giorni", "Un trilione di parametri addestrati in Europa e Beam benedetto da NVIDIA. In Azure, la lista di controllo completa prima di partire."),
+ '18': (None, "Gli agenti di OpenAI su Wikimedia, con le prove", "Cosa hanno fatto davvero gli agenti, GPT-6 aperto a tutti, cinque piste verificate e tre puntate Azure: qualità, tre cloud, un caso completo."),
+ '19': (None, "I modelli decisionali diventano un mercato", "Due nuovi arrivi e 870 milioni per Jev, Memento 3 che scrive le regole del mondo, quattro incidenti di agenti e la missione cyber di Anthropic."),
+ '20': (None, "Meta torna alla frontiera con Muse Wonder", "Il modello migliore non si compra a consumo; quanto manca all'AI che si replica; la settimana del ferro; ricerca e pratica sugli agenti."),
+ '21': (None, "Gemini 4 Argon per tutti, a metà prezzo", "Un milione di token anche in uscita; la lettera dei 400 e il veto ai valutatori; il codice scritto dagli agenti; i robot che agiscono prima."),
+ '22': (None, "JPMorgan chiude i conti agli agenti degli altri", "Perché una banca dice no, il gusto della ricerca che raddoppia ogni tre mesi, il ritiro di GPT-4o e GPT-4.1, e le tracce che lasciamo."),
+ '23': (None, "Tre modi di mettere un agente in gabbia", "NVIDIA spegne le istruzioni nascoste, Perplexity apre la sua sandbox, quattro agenti finiscono Minecraft, e i regolatori chiedono i registri."),
+}
+def chips_for(ed):
+    if ed == '-': return EDX['-'][0]
+    labs = list(MAP.get(ed, {}).values())
+    path = os.path.join(sys.argv[1], 'edizioni', ed + '.html')
+    if os.path.exists(path) and 'id="azure"' in open(path, encoding='utf-8').read(): labs.append('Azure')
+    seen = []
+    for l in labs:
+        if re.match(r'Azure \d+', l): l = 'Azure'
+        if l not in seen: seen.append(l)
+    return seen
+def build():
+    out = {}
+    for ed, (c, t, d) in EDX.items():
+        assert len(t) <= 65, (ed, len(t), t)
+        assert len(d) <= 160 and d.endswith('.'), (ed, len(d), d)
+        key = '' if ed == '-' else 'edizioni/%s.html' % ed
+        out[key] = {'c': chips_for(ed), 't': t, 'd': d}
+    return out
+if __name__ == '__main__':
+    root = sys.argv[1]; data = build()
+    p = os.path.join(root, 'index.html'); s = open(p, encoding='utf-8').read()
+    s = re.sub(r'\n  var EDX=.*?;\n', '\n', s, flags=re.S)
+    new_render = ("$('edlist').innerHTML=ED.map(function(e,i){var x=EDX[e[3]]||{};"
+      "var ch=(x.c||[]).map(function(c){return '<li class=\"chip topic\">'+c+'</li>'}).join('');"
+      "var tt=x.t||e[1];var h=e[3]?'<a href=\"'+e[3]+'\">'+tt+'</a>':tt;"
+      "return '<article class=\"card edcard\" style=\"margin-bottom:1rem\"><div class=\"kicker\"><span class=\"chip date\">'+e[0]+'</span><span class=\"chip\">Edizione '+(i+1)+'</span></div>'"
+      "+(ch?'<ul class=\"topics\" aria-label=\"Protagonisti\">'+ch+'</ul>':'')"
+      "+'<h3 style=\"font-size:1.2rem;margin:.5rem 0 .35rem\">'+h+'</h3>'"
+      "+'<p style=\"margin:0 0 .5rem\">'+(x.d||'')+'</p>'"
+      "+'<details class=\"edmore\"><summary>Tutto il contenuto</summary><p style=\"margin:.5rem 0 0\"><b>'+e[1]+'.</b> '+e[2]+'</p></details></article>'}).reverse().join('');")
+    s, n = re.subn(r"\$\('edlist'\)\.innerHTML=ED\.map\(.*?\.reverse\(\)\.join\(''\);", lambda m: new_render, s, count=1, flags=re.S)
+    assert n == 1, 'render not found'
+    s = s.replace("$('edlist').innerHTML=", "var EDX=" + json.dumps(data, ensure_ascii=False) + ";\n  $('edlist').innerHTML=", 1)
+    css = ('<style id="edx-css">.topics{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem;margin:.55rem 0 0;padding:0}'
+           '.topics li{margin:0}.edmore summary{cursor:pointer;font-weight:600;color:var(--muted);min-height:24px}'
+           '.edcard h3 a{text-decoration:none}.edcard h3 a:hover{text-decoration:underline}</style>')
+    s = re.sub(r'<style id="edx-css">.*?</style>', '', s, flags=re.S)
+    s = s.replace('</head>', css + '</head>', 1)
+    open(p, 'w', encoding='utf-8').write(s)
+    print('ok', len(data))
