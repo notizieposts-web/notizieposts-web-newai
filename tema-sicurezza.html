@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sicurezza · Radar AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F6FB; --surface:#FFFFFF; --soft:#E9EDF7; --ink:#121A2B; --muted:#56627A; --line:#D8DEEA;
+  --violet:#4B4BF5; --violet-soft:#E6E6FF; --teal:#0E9F9E; --teal-soft:#DDF5F4; --sun:#F2B705; --sun-soft:#FFF5D1; --red:#D9463B;
+  --head:"Sora","Segoe UI",system-ui,sans-serif; --body:"Inter","Segoe UI",system-ui,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+    --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+  --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7}
+a{color:var(--violet)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+h1,h2,h3{font-family:var(--head);line-height:1.12;margin:0}
+p{margin:0 0 1rem}
+img,svg{max-width:100%}
+
+/* NAV */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:72rem;margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem}
+.brand{font-family:var(--head);font-weight:800;white-space:nowrap}
+.links{display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;flex:1}
+.links::-webkit-scrollbar{display:none}
+.links a{font-family:var(--head);font-size:.82rem;font-weight:600;text-decoration:none;color:var(--muted);padding:.35rem .7rem;border-radius:999px;white-space:nowrap}
+.links a.on{background:var(--ink);color:var(--bg)}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;background:var(--violet);width:0}
+
+/* HERO */
+.hero{max-width:72rem;margin:0 auto;padding:3.5rem 1.2rem 2rem;display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800;letter-spacing:-.03em}
+.hero .sub{font-size:1.15rem;color:var(--muted);margin-top:1.2rem;max-width:34rem}
+.meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem}
+.chip{font-family:var(--head);font-size:.78rem;font-weight:600;padding:.3rem .7rem;border-radius:999px;background:var(--soft);color:var(--ink)}
+.chip.date{background:var(--violet-soft);color:var(--violet)}
+.radar{aspect-ratio:1;width:100%;max-width:26rem;justify-self:center}
+.sweep{transform-origin:200px 200px;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.blip{animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.radar{max-width:18rem}}
+
+/* SECTIONS */
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.2rem}
+section.ch{padding:4.5rem 0 1rem;border-top:1px solid var(--line)}
+.ch-head{max-width:48rem}
+.kicker{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+.ch h2{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em}
+.lead{font-size:1.2rem;color:var(--muted);margin-top:1rem}
+.grid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.5rem;margin-top:2.2rem;align-items:start}
+.grid2 .stick{position:sticky;top:84px}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.grid2 .stick{position:static}}
+.prose p{max-width:38rem}
+.prose h3{font-size:1.2rem;margin:1.8rem 0 .7rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.4rem}
+.card h3{font-size:1.05rem;margin-bottom:.8rem}
+.example{background:var(--teal-soft);border-radius:14px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.example b:first-child{font-family:var(--head);color:var(--teal);display:block;margin-bottom:.3rem}
+.paper{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:12px;padding:1rem 1.2rem;margin:1.4rem 0}
+.paper .ic{font-size:1.5rem;line-height:1}
+.src{font-family:var(--head);font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:6px;background:var(--soft);color:var(--muted);vertical-align:middle;white-space:nowrap}
+.src.p{background:var(--teal-soft);color:var(--teal)}
+.src.u{background:var(--violet-soft);color:var(--violet)}
+.sources{font-size:.88rem;color:var(--muted);margin-top:1rem}
+.sources a{margin-right:.4rem}
+
+/* curiosity */
+details.q{background:var(--sun-soft);border-radius:14px;padding:1rem 1.2rem;margin:1.6rem 0;max-width:38rem}
+details.q summary{cursor:pointer;font-family:var(--head);font-weight:700;list-style:none;display:flex;gap:.7rem;align-items:flex-start}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::before{content:"?";flex:none;display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--sun);color:#1a1300;font-weight:800}
+details.q summary::after{content:"Scopri";margin-left:auto;font-size:.75rem;font-weight:600;color:var(--muted);padding-top:.25rem}
+details.q[open] summary::after{content:"Chiudi"}
+details.q p{margin:.8rem 0 0}
+
+/* buttons */
+.btn{font-family:var(--head);font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.55rem 1rem;border-radius:999px;cursor:pointer}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0}
+.note{font-size:.84rem;color:var(--muted)}
+
+/* timeline */
+.tl{position:relative;margin:2.4rem 0 1rem;overflow-x:auto;padding-bottom:.5rem}
+.tl-in{position:relative;min-width:44rem;height:120px}
+.tl-line{position:absolute;left:1rem;right:1rem;top:60px;height:3px;background:var(--line);border-radius:2px}
+.tl-dot{position:absolute;top:60px;width:20px;height:20px;margin:-8px 0 0 -10px;border-radius:50%;border:3px solid var(--bg);background:var(--violet);cursor:pointer;padding:0;transition:transform .2s}
+.tl-dot.n{background:var(--sun)}
+.tl-dot[aria-pressed="true"]{transform:scale(1.5)}
+.tl-day{position:absolute;top:88px;transform:translateX(-50%);font-family:var(--head);font-size:.72rem;color:var(--muted)}
+.tl-card{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center}
+.tl-date{font-family:var(--head);font-weight:800;font-size:2.6rem;line-height:1;color:var(--violet);text-align:center}
+.tl-date small{display:block;font-size:.8rem;font-weight:600;color:var(--muted)}
+
+/* bars */
+.pbar{margin:.9rem 0}
+.pbar .lab{display:flex;justify-content:space-between;font-family:var(--head);font-size:.88rem;font-weight:600}
+.pbar .tr{height:12px;background:var(--soft);border-radius:6px;overflow:hidden;margin-top:.35rem}
+.pbar .fi{height:100%;width:0;background:var(--violet);border-radius:6px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.mail{background:var(--soft);border-radius:12px;padding:.9rem 1rem;font-style:italic;margin:.8rem 0}
+
+/* race */
+.lane{margin:1rem 0}
+.lane .nm{font-family:var(--head);font-weight:700;font-size:.9rem;margin-bottom:.4rem;display:flex;justify-content:space-between}
+.words{display:flex;flex-wrap:wrap;gap:.35rem;min-height:2.4rem}
+.w{font-family:var(--head);font-size:.85rem;padding:.35rem .6rem;border-radius:8px;background:var(--soft);color:var(--muted);transition:background .3s,color .3s}
+.w.on{background:var(--violet);color:#fff}
+.w.d{background:var(--teal);color:#fff}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.4rem 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem;text-align:center}
+.stat strong{display:block;font-family:var(--head);font-size:1.8rem;color:var(--violet)}
+.stat span{font-size:.82rem;color:var(--muted)}
+@media (max-width:560px){.stats{grid-template-columns:1fr}}
+
+/* calc */
+.calc label{display:flex;justify-content:space-between;font-family:var(--head);font-weight:600;font-size:.9rem;margin-top:1rem}
+.calc input{width:100%;accent-color:var(--violet)}
+.cbar{display:grid;grid-template-columns:9.5rem 1fr 5.5rem;gap:.6rem;align-items:center;font-size:.85rem;margin:.5rem 0}
+.cbar .tr{height:14px;background:var(--soft);border-radius:7px;overflow:hidden}
+.cbar .fi{height:100%;background:var(--violet);border-radius:7px;transition:width .4s}
+.cbar .fi.t{background:var(--teal)}
+.cbar b{text-align:right;font-family:var(--head)}
+
+/* table */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.92rem}
+th,td{text-align:left;padding:.7rem .6rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--head);font-size:.8rem;color:var(--muted)}
+td:first-child{font-family:var(--head);font-weight:700;white-space:nowrap}
+
+/* cards grid */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:1rem;margin-top:2rem}
+.sig{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.2rem}
+.sig h3{font-size:1.02rem;margin:.6rem 0 .5rem}
+.sig p{font-size:.93rem;margin:0}
+
+/* quiz */
+.quiz .qq{margin:1.4rem 0}
+.quiz .qq p{font-family:var(--head);font-weight:700}
+.opts{display:grid;gap:.5rem}
+.opt{text-align:left;font-family:var(--body);font-size:.95rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.7rem 1rem;border-radius:12px;cursor:pointer}
+.opt.ok{border-color:var(--teal);background:var(--teal-soft)}
+.opt.ko{border-color:var(--red)}
+.fb{font-size:.9rem;color:var(--muted);margin-top:.4rem;min-height:1.2rem}
+.score{font-family:var(--head);font-weight:800;font-size:1.2rem}
+
+/* prompt */
+pre.prompt{white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.3rem;font-family:var(--body);font-size:.92rem;line-height:1.6;max-height:28rem;overflow:auto}
+footer{border-top:1px solid var(--line);margin-top:4rem;padding:2rem 1.2rem 3rem;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* svg anim helpers */
+.float{animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.orbit{transform-origin:200px 170px;animation:spin 14s linear infinite}
+.dash{stroke-dasharray:6 6;animation:dash 1.5s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+
+select:focus-visible{outline:3px solid var(--violet)}
+@media (max-width:900px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.stat{min-width:0}code{overflow-wrap:anywhere;word-break:break-all}.stat strong{overflow-wrap:anywhere}
+@media (max-width:560px){.stats.keep3{grid-template-columns:repeat(3,minmax(0,1fr))!important}.stats.keep3 .stat{padding:.6rem .3rem}.stats.keep3 strong{font-size:1.05rem!important}}
+.stat span{display:block}
+</style>
+
+<script id="a11y-theme">try{var t=localStorage.getItem('radar-theme');if(t=='light'||t=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script><style id="a11y">
+/* Strato accessibilita' WCAG 2.2 AA */
+/* palette armonica: viola 240, ciano 190, ambra 26, magenta 336; testo AA su ogni sfondo */
+:root:not([data-theme="dark"]){--violet:#4B4BF5;--violet-soft:#ECECFE;--teal:#0A6A7C;--teal-soft:#E0F2F5;--sun:#A34E08;--sun-soft:#FDF0E1;--red:#C2185B;--red-soft:#FCE7EF}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--violet:#A5A5FF;--violet-soft:#25265A;--teal:#5FC7D9;--teal-soft:#0F3440;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#F27BA8;--red-soft:#3D1A2A}}
+:root[data-theme="dark"]{--violet:#A5A5FF;--violet-soft:#25265A;--teal:#5FC7D9;--teal-soft:#0F3440;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#F27BA8;--red-soft:#3D1A2A}
+html{scroll-padding-top:6rem}
+:focus{scroll-margin-top:6rem;scroll-margin-bottom:2rem}
+:focus-visible{outline:3px solid var(--violet)!important;outline-offset:2px!important;border-radius:4px}
+.skip-link{position:absolute;left:1rem;top:-100px;z-index:10000;background:var(--ink);color:var(--bg)!important;padding:.75rem 1.1rem;border-radius:10px;font-weight:700;text-decoration:none}
+.skip-link:focus{top:1rem}
+.tl-dot{width:24px!important;height:24px!important;margin:-10px 0 0 -12px!important}
+.tl-in{min-width:60rem!important}
+.nav .links a,.btn,.opt,button,select,summary{min-height:24px}
+input[type=range]{min-height:24px}
+.grid2>*,.cards>*,.stats>*{min-width:0}
+@media (max-width:900px){.grid2{grid-template-columns:minmax(0,1fr)!important}}
+table{display:block;max-width:100%;overflow-x:auto}
+.src,.chip{white-space:normal!important;max-width:100%;overflow-wrap:anywhere}
+.prose,.sig,.card,.example,p,li,summary{overflow-wrap:anywhere}
+code,pre{white-space:pre-wrap;word-break:break-word}
+.nav-in{flex-direction:column!important;align-items:stretch!important;gap:.35rem!important;padding:.55rem 1.2rem .5rem!important}
+.nav .brand{display:inline-flex;align-items:center;gap:.4rem;font-size:1.05rem;color:var(--ink);text-decoration:none;align-self:flex-start;min-height:24px}
+.nav .brand:hover{color:var(--violet)}
+.links-row{position:relative;display:flex;align-items:center;gap:.25rem;min-width:0}
+.links-row .links{flex:1;min-width:0;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scroll-padding-inline:4px;padding:2px 4px}
+.links-row.fade-r .links{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent 100%);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent 100%)}
+.links-row.fade-l .links{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px);mask-image:linear-gradient(90deg,transparent 0,#000 28px)}
+.links-row.fade-l.fade-r .links{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%)}
+.links-row .links a{scroll-snap-align:start}
+.nav-arrow{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.05rem;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0}
+.links-row.can-scroll .nav-arrow{display:inline-flex}
+.nav-arrow:disabled{opacity:.35;cursor:default}
+@media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
+.chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
+:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
+:root[data-theme="light"]{--bg:#FFFFFF;--surface:#FFFFFF;--soft:#F1F3F8;--line:#D3D9E6;--ink:#121A2B;--muted:#4E5A72}
+:root[data-theme="light"] .card,:root[data-theme="light"] .sig,:root[data-theme="light"] .stat{border:1px solid var(--line)}
+.nav-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.theme-btn{display:inline-flex;align-items:center;gap:.4rem;min-height:32px;padding:.3rem .75rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 .8rem var(--head,system-ui);cursor:pointer}
+.theme-btn:hover{border-color:var(--violet)}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
+.nav .brand{gap:.55rem!important}.logo-mark{flex:none;display:block}.logo-word{font-family:var(--head,system-ui);font-weight:800;font-size:1.12rem;letter-spacing:-.02em;color:var(--ink);line-height:1}.logo-ai{margin-left:.18em;padding:.12em .32em;border-radius:.35em;background:var(--violet);color:var(--bg);font-size:.78em;letter-spacing:.02em;vertical-align:.08em}.nav .brand:hover .logo-word{color:var(--violet)}.nav .brand:hover .logo-ai{color:var(--bg)}</style><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234B4BF5'/%3E%3Cpath d='M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z' fill='%23fff' opacity='.28'/%3E%3Cg fill='none' stroke='%23fff' stroke-linecap='round'%3E%3Ccircle cx='16' cy='16' r='10.5' stroke-width='2' opacity='.6'/%3E%3Ccircle cx='16' cy='16' r='5.6' stroke-width='2' opacity='.85'/%3E%3Cpath d='M16 16 L25.1 10.75' stroke-width='2.4'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='2.3' fill='%23fff'/%3E%3Ccircle cx='22.6' cy='21.4' r='2.2' fill='%23fff'/%3E%3C/svg%3E">
+</head>
+<style id="arg-css">
+.nav .links a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.argrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,17rem),1fr));gap:1rem;margin-top:1.4rem}
+.argcard{display:flex;flex-direction:column;gap:.45rem;padding:1.2rem 1.25rem!important;text-decoration:none;color:var(--ink)}
+a.argcard:hover{border-color:var(--violet)}
+.argcard h3{font-size:1.15rem;margin:.1rem 0}.argcard p{margin:0;font-size:.95rem;color:var(--muted)}
+.argcard .meta2{font-size:.85rem;color:var(--muted);margin-top:auto;padding-top:.3rem}
+.chips{list-style:none;padding:0;margin:.2rem 0 0;display:flex;flex-wrap:wrap;gap:.35rem}
+.chips li{display:flex}
+.chip.theme{background:var(--sun-soft)!important;color:var(--ink)!important;border:1px solid var(--sun)!important}
+.chip.guide{background:var(--teal-soft)!important;color:var(--ink)!important;border:1px solid var(--teal)!important}
+a.chip{text-decoration:none;min-height:24px;display:inline-flex;align-items:center}
+a.chip:hover{outline:2px solid var(--violet);outline-offset:1px}
+.edrow{margin-top:1rem;max-width:52rem}.edrow h3{font-size:1.2rem;margin:.5rem 0 .35rem}.edrow h3 a{color:var(--ink)}
+.edrow p{margin:.2rem 0 .5rem}
+.side2{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,18rem),1fr));gap:1rem;margin-top:1.4rem}
+.side2 h3{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 .5rem}
+@media (max-width:860px){.hero .radar{display:none}}
+</style></head>
+<body>
+<a class="skip-link" href="#contenuto">Salta al contenuto</a>
+<nav class="nav" aria-label="Argomenti"><div class="nav-in"><a class="brand" href="./" aria-label="Radar AI, tutte le edizioni"><svg class="logo-mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="9" fill="var(--violet)"/><path d="M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z" fill="var(--bg)" opacity=".28"/><g fill="none" stroke="var(--bg)" stroke-linecap="round"><circle cx="16" cy="16" r="10.5" stroke-width="2" opacity=".6"/><circle cx="16" cy="16" r="5.6" stroke-width="2" opacity=".85"/><path d="M16 16 L25.1 10.75" stroke-width="2.4"/></g><circle cx="16" cy="16" r="2.3" fill="var(--bg)"/><circle cx="22.6" cy="21.4" r="2.2" fill="var(--bg)"/></svg><span class="logo-word">Radar<span class="logo-ai">AI</span></span></a><div class="links" id="links"><a href="argomenti.html">Argomenti</a><a href="azure.html">Azure</a><a href="tema-sicurezza.html" aria-current="page" class="on">Sicurezza</a><a href="tema-grandi-modelli.html">Grandi modelli</a><a href="tema-costi.html">Costi</a><a href="tema-ricerca.html">Ricerca</a><a href="tema-pesi-aperti.html">Pesi aperti</a><a href="tema-decisionali.html">Decisionali</a><a href="tema-regole.html">Regole</a><a href="tema-hardware.html">Hardware</a><a href="tema-valutazione.html">Valutazione</a></div></div><div class="progress" id="prog"></div></nav><header class="hero"><div><div class="meta"><span class="chip theme">Tema</span><span class="chip date">14 edizioni</span></div><h1 style="margin-top:1.2rem">Sicurezza</h1><p class="sub">Attacchi, difese e controlli su agenti e modelli: dalle istruzioni nascoste alle sandbox.</p></div><svg class="radar" viewBox="0 0 400 400" aria-hidden="true"><g transform="translate(80 80) scale(7.5)"><rect width="32" height="32" rx="9" fill="var(--violet)"/><path d="M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z" fill="var(--bg)" opacity=".28"/><g fill="none" stroke="var(--bg)" stroke-linecap="round"><circle cx="16" cy="16" r="10.5" stroke-width="2" opacity=".6"/><circle cx="16" cy="16" r="5.6" stroke-width="2" opacity=".85"/><path d="M16 16 L25.1 10.75" stroke-width="2.4"/></g><circle cx="16" cy="16" r="2.3" fill="var(--bg)"/><circle cx="22.6" cy="21.4" r="2.2" fill="var(--bg)"/></g></svg></header><main id="contenuto" tabindex="-1" class="wrap"><section class="ch" id="edizioni" style="padding-top:2.5rem"><div class="ch-head"><div class="kicker"><span class="chip theme">Sicurezza</span></div><h2>Le edizioni su questo tema</h2><p class="lead">Dalla più recente. Tocca il titolo per aprire l'edizione.</p></div><div class="side2"><div class="card"><h3>Temi vicini</h3><ul class="chips" aria-label="Temi vicini"><li><a class="chip theme" href="tema-ricerca.html">Ricerca</a></li><li><a class="chip theme" href="tema-grandi-modelli.html">Grandi modelli</a></li><li><a class="chip theme" href="tema-costi.html">Costi</a></li><li><a class="chip theme" href="tema-regole.html">Regole</a></li><li><a class="chip theme" href="tema-decisionali.html">Decisionali</a></li><li><a class="chip theme" href="tema-pesi-aperti.html">Pesi aperti</a></li><li><a class="chip theme" href="tema-hardware.html">Hardware</a></li><li><a class="chip theme" href="tema-valutazione.html">Valutazione</a></li></ul></div><div class="card"><h3>Protagonisti ricorrenti</h3><ul class="chips" aria-label="Protagonisti ricorrenti"><li><span class="chip topic">Azure</span></li><li><span class="chip topic">OpenAI</span></li><li><span class="chip topic">Gemini</span></li><li><span class="chip topic">Meta</span></li><li><span class="chip topic">NVIDIA</span></li><li><span class="chip topic">Anthropic</span></li></ul></div><div class="card"><h3>Guide collegate</h3><ul class="chips" aria-label="Guide collegate"><li><a class="chip guide" href="azure.html">Azure Content Understanding</a></li></ul></div></div><article class="card edrow"><div class="kicker"><span class="chip date">17 ott</span><span class="chip">Edizione 23</span></div><h3><a href="edizioni/23.html">Tre modi di mettere un agente in gabbia</a></h3><p>NVIDIA spegne le istruzioni nascoste, Perplexity apre la sua sandbox, quattro agenti finiscono Minecraft, e i regolatori chiedono i registri.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">NVIDIA</span></li><li><span class="chip topic">Gemini</span></li><li><span class="chip topic">Meta</span></li><li><span class="chip topic">FTC</span></li><li><span class="chip topic">Azure</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li><li><a class="chip theme" href="tema-pesi-aperti.html">Pesi aperti</a></li><li><a class="chip theme" href="tema-regole.html">Regole</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">14 ott, pomeriggio</span><span class="chip">Edizione 22</span></div><h3><a href="edizioni/22.html">JPMorgan chiude i conti agli agenti degli altri</a></h3><p>Perché una banca dice no, il gusto della ricerca che raddoppia ogni tre mesi, il ritiro di GPT-4o e GPT-4.1, e le tracce che lasciamo.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">JPMorgan</span></li><li><span class="chip topic">TasteVal</span></li><li><span class="chip topic">OpenAI</span></li><li><span class="chip topic">Privacy</span></li><li><span class="chip topic">Azure</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li><li><a class="chip theme" href="tema-ricerca.html">Ricerca</a></li><li><a class="chip theme" href="tema-grandi-modelli.html">Grandi modelli</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">14 ott</span><span class="chip">Edizione 21</span></div><h3><a href="edizioni/21.html">Gemini 4 Argon per tutti, a metà prezzo</a></h3><p>Un milione di token anche in uscita; la lettera dei 400 e il veto ai valutatori; il codice scritto dagli agenti; i robot che agiscono prima.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">Gemini</span></li><li><span class="chip topic">Valutatori</span></li><li><span class="chip topic">Codice</span></li><li><span class="chip topic">Robot</span></li><li><span class="chip topic">Azure</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-grandi-modelli.html">Grandi modelli</a></li><li><a class="chip theme" href="tema-regole.html">Regole</a></li><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li><li><a class="chip theme" href="tema-costi.html">Costi</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">13 ott</span><span class="chip">Edizione 20</span></div><h3><a href="edizioni/20.html">Meta torna alla frontiera con Muse Wonder</a></h3><p>Il modello migliore non si compra a consumo; quanto manca all&#x27;AI che si replica; la settimana del ferro; ricerca e pratica sugli agenti.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">Meta</span></li><li><span class="chip topic">Anthropic</span></li><li><span class="chip topic">Hardware</span></li><li><span class="chip topic">Ricerca</span></li><li><span class="chip topic">Azure</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-grandi-modelli.html">Grandi modelli</a></li><li><a class="chip theme" href="tema-hardware.html">Hardware</a></li><li><a class="chip theme" href="tema-ricerca.html">Ricerca</a></li><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">11 ott, mattina</span><span class="chip">Edizione 19</span></div><h3><a href="edizioni/19.html">I modelli decisionali diventano un mercato</a></h3><p>Due nuovi arrivi e 870 milioni per Jev, Memento 3 che scrive le regole del mondo, quattro incidenti di agenti e la missione cyber di Anthropic.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">Decisionali</span></li><li><span class="chip topic">Memento</span></li><li><span class="chip topic">Incidenti</span></li><li><span class="chip topic">Anthropic</span></li><li><span class="chip topic">Azure</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-decisionali.html">Decisionali</a></li><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li><li><a class="chip theme" href="tema-ricerca.html">Ricerca</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">8 ott, sera</span><span class="chip">Edizione 18</span></div><h3><a href="edizioni/18.html">Gli agenti di OpenAI su Wikimedia, con le prove</a></h3><p>Cosa hanno fatto davvero gli agenti, GPT-6 aperto a tutti, cinque piste verificate e tre puntate Azure: qualità, tre cloud, un caso completo.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">Wikimedia</span></li><li><span class="chip topic">GPT-6</span></li><li><span class="chip topic">Azure</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li><li><a class="chip theme" href="tema-grandi-modelli.html">Grandi modelli</a></li><li><a class="chip theme" href="tema-costi.html">Costi</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">5 ott, sera</span><span class="chip">Edizione 15</span></div><h3><a href="edizioni/15.html">New York ascolta chi accusa i laboratori di AI</a></h3><p>Cosa è stato detto e ammesso all&#x27;audizione, l&#x27;ente con cui tre laboratori vorrebbero regolarsi da soli, e dove finiscono i dati in Azure.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">Audizione</span></li><li><span class="chip topic">Laboratori</span></li><li><span class="chip topic">Azure</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-regole.html">Regole</a></li><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">4 ott, sera</span><span class="chip">Edizione 12</span></div><h3><a href="edizioni/12.html">Pi 1.0 e i campi invisibili visti dallo spazio</a></h3><p>Un&#x27;imbracatura per agenti usata da centinaia di migliaia di persone, il modello di Cambridge per le colture, e la modalità agentica di Azure.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">Pi</span></li><li><span class="chip topic">Cambridge</span></li><li><span class="chip topic">Azure</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li><li><a class="chip theme" href="tema-ricerca.html">Ricerca</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">4 ott, mattina</span><span class="chip">Edizione 10</span></div><h3><a href="edizioni/10.html">Microsoft rifà Copilot con un agente che ha un badge</a></h3><p>Copilot Home, Code e Autopilot: un agente con identità aziendale propria. In Azure, come si lavora con audio e video.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">Microsoft</span></li><li><span class="chip topic">Azure</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">3 ott, pomeriggio</span><span class="chip">Edizione 9</span></div><h3><a href="edizioni/09.html">OpenAI accusa la distillazione del suo modello</a></h3><p>Cosa si sa della campagna attribuita a persone legate a Moonshot. In Azure, perché conviene smistare i documenti prima di leggerli.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">OpenAI</span></li><li><span class="chip topic">Azure</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li><li><a class="chip theme" href="tema-grandi-modelli.html">Grandi modelli</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">2 ott, sera</span><span class="chip">Edizione 6</span></div><h3><a href="edizioni/06.html">Tre paper scomodi su agenti e proattività</a></h3><p>Regole che cambiano mentre l&#x27;agente lavora, cosa cerca un agente proattivo secondo IBM, e una correzione su come leggere i numeri.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">Sapien</span></li><li><span class="chip topic">IBM</span></li><li><span class="chip topic">Praxa</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li><li><a class="chip theme" href="tema-ricerca.html">Ricerca</a></li><li><a class="chip theme" href="tema-valutazione.html">Valutazione</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">2 ott, 17:30</span><span class="chip">Edizione 5</span></div><h3><a href="edizioni/05.html">Un modello decisionale che gira sul portatile</a></h3><p>Strands Decider 2B di un ingegnere Amazon, i quattro livelli di &quot;open source&quot; e un controllore che chiede il permesso prima di agire.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">Amazon</span></li><li><span class="chip topic">Open source</span></li><li><span class="chip topic">Guardrail</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-decisionali.html">Decisionali</a></li><li><a class="chip theme" href="tema-pesi-aperti.html">Pesi aperti</a></li><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">2 ott, notte</span><span class="chip">Edizione 3</span></div><h3><a href="edizioni/03.html">Gemini 4 Argon arriva, GPT-6.1 Astra si ferma</a></h3><p>Google torna in testa ma per pochi; OpenAI blocca un modello per sicurezza; Meta propone modelli che riordinano da soli il proprio contesto.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">Gemini</span></li><li><span class="chip topic">OpenAI</span></li><li><span class="chip topic">Meta</span></li><li><span class="chip topic">Laboratori</span></li><li><span class="chip topic">Costi</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-grandi-modelli.html">Grandi modelli</a></li><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li><li><a class="chip theme" href="tema-ricerca.html">Ricerca</a></li><li><a class="chip theme" href="tema-costi.html">Costi</a></li></ul></article><article class="card edrow"><div class="kicker"><span class="chip date">1 ott, sera</span><span class="chip">Edizione 2</span></div><h3><a href="edizioni/02.html">Settembre 2026: l&#x27;AI impara a decidere senza scrivere</a></h3><p>Trenta giorni in un numero: Jev e i suoi cloni, i modelli a diffusione, Atlas per lo spazio 3D, il DevDay di OpenAI e i costi a confronto.</p><ul class="chips" aria-label="Protagonisti"><li><span class="chip topic">Settembre</span></li><li><span class="chip topic">Architetture</span></li><li><span class="chip topic">TypeSafe</span></li><li><span class="chip topic">CMU</span></li><li><span class="chip topic">Jev</span></li><li><span class="chip topic">Stanford</span></li><li><span class="chip topic">Inception</span></li><li><span class="chip topic">World Labs</span></li><li><span class="chip topic">NVIDIA</span></li><li><span class="chip topic">OpenAI</span></li><li><span class="chip topic">Laboratori</span></li><li><span class="chip topic">Costi</span></li></ul><ul class="chips" aria-label="Temi"><li><a class="chip theme" href="tema-decisionali.html">Decisionali</a></li><li><a class="chip theme" href="tema-grandi-modelli.html">Grandi modelli</a></li><li><a class="chip theme" href="tema-sicurezza.html">Sicurezza</a></li><li><a class="chip theme" href="tema-costi.html">Costi</a></li><li><a class="chip theme" href="tema-ricerca.html">Ricerca</a></li></ul></article></section></main><footer>Radar AI · preparata da Claude (Anthropic). Quando una notizia riguarda Anthropic, lo trovi segnalato nella pagina.</footer><script id="arg-js">(function(){var p=document.getElementById('prog');function f(){var h=document.documentElement;if(p)p.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%';}window.addEventListener('scroll',f,{passive:true});f();
+var on=document.querySelector('.nav .links a[aria-current]');if(on)setTimeout(function(){var l=on.parentElement;l.scrollLeft=on.offsetLeft-l.clientWidth/2+on.offsetWidth/2},50);})();</script>
+<script id="a11y-js">
+(function(){
+  /* nomi accessibili per i controlli dei widget */
+  function nameControls(){
+    document.querySelectorAll('input,select,textarea').forEach(function(el,i){
+      if(el.type==='hidden'||el.getAttribute('aria-label')||el.getAttribute('aria-labelledby'))return;
+      if(el.id&&document.querySelector('label[for="'+el.id+'"]'))return;
+      if(el.closest('label'))return;
+      var lab=null,p=el.previousElementSibling;
+      while(p&&!lab){if(p.tagName==='LABEL')lab=p;else if(p.querySelector&&p.querySelector('label'))lab=p.querySelector('label:last-of-type');p=lab?null:p.previousElementSibling;}
+      var txt='';
+      if(lab){var c=lab.cloneNode(true);c.querySelectorAll('output').forEach(function(o){o.remove()});txt=c.textContent.trim();if(!el.id)el.id='a11y-ctl-'+i;if(!lab.htmlFor)lab.htmlFor=el.id;}
+      if(!txt){var card=el.closest('.card,.sig,section');var h=card&&card.querySelector('h3,h2');txt=h?h.textContent.trim():'Controllo interattivo';}
+      el.setAttribute('aria-label',txt);
+    });
+  }
+  /* annunci dei risultati dinamici */
+  function live(){
+    document.querySelectorAll('[id$="out"],[id^="fb"],#score,.tl-card,[id$="note"],[id$="res"]').forEach(function(el){if(!el.hasAttribute('aria-live'))el.setAttribute('aria-live','polite')});
+  }
+  /* regioni scorrevoli raggiungibili da tastiera */
+  function scrollables(){
+    document.querySelectorAll('body *').forEach(function(el){
+      var s=getComputedStyle(el);if(!/(auto|scroll)/.test(s.overflowY+s.overflowX))return;
+      if(el.scrollHeight<=el.clientHeight+2&&el.scrollWidth<=el.clientWidth+2)return;
+      if(el.matches('.links,.tl,.tl-in')&&el.querySelector('a,button'))return;
+      if(!el.hasAttribute('tabindex')){el.setAttribute('tabindex','0');if(!el.getAttribute('role'))el.setAttribute('role','region');if(!el.getAttribute('aria-label')){var h=el.closest('.card,section');h=h&&h.querySelector('h3,h2');el.setAttribute('aria-label',h?h.textContent.trim():'Area scorrevole');}}
+    });
+  }
+  /* contrasto: corregge il testo che resta sotto 4,5:1 (3:1 se grande) */
+  function rgb(s){var m=s.match(/rgba?\(([^)]+)\)/);if(!m)return null;var p=m[1].split(',').map(parseFloat);return {r:p[0],g:p[1],b:p[2],a:p.length>3?p[3]:1};}
+  function lum(c){return [c.r,c.g,c.b].map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)}).reduce(function(a,v,i){return a+v*[0.2126,0.7152,0.0722][i]},0);}
+  function ratio(a,b){var x=lum(a),y=lum(b);return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05);}
+  function bgOf(el){while(el&&el.nodeType===1){var s=getComputedStyle(el);if(s.backgroundImage&&s.backgroundImage!=='none'&&!/gradient/.test(s.backgroundImage))return null;var c=rgb(s.backgroundColor);if(c&&c.a>0.9)return c;el=el.parentElement;}return rgb(getComputedStyle(document.body).backgroundColor)||{r:255,g:255,b:255,a:1};}
+  function fixContrast(){
+    var ink=rgb(getComputedStyle(document.body).color);
+    document.querySelectorAll('body *').forEach(function(el){
+      if(el.closest('svg')||el.classList.contains('skip-link'))return;
+      var has=false;for(var n=el.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&n.textContent.trim()){has=true;break;}}
+      if(!has)return;var s=getComputedStyle(el);if(s.visibility==='hidden'||s.display==='none')return;
+      var fg=rgb(s.color),bg=bgOf(el);if(!fg||!bg)return;
+      var size=parseFloat(s.fontSize),bold=parseInt(s.fontWeight)>=700,large=size>=24||(bold&&size>=18.66);
+      var need=large?3:4.5;if(ratio(fg,bg)>=need)return;
+      var dark={r:18,g:26,b:43,a:1},light={r:255,g:255,b:255,a:1};
+      el.style.setProperty('color',ratio(dark,bg)>=ratio(light,bg)?'#121A2B':'#FFFFFF','important');
+    });
+  }
+  /* menu a due righe: logo sopra, capitoli sotto, scorrevoli con frecce */
+  function navRow(){
+    var links=document.querySelector('.nav .links');if(!links||links.parentElement.classList.contains('links-row'))return;
+    var row=document.createElement('div');row.className='links-row';links.parentNode.insertBefore(row,links);
+    function btn(dir,lab,ch){var b=document.createElement('button');b.type='button';b.className='nav-arrow';b.setAttribute('aria-label',lab);b.innerHTML='<span aria-hidden="true">'+ch+'</span>';b.onclick=function(){links.scrollBy({left:dir*links.clientWidth*0.7,behavior:'smooth'})};return b;}
+    var l=btn(-1,'Capitoli precedenti','\u2039'),r=btn(1,'Capitoli successivi','\u203A');
+    row.appendChild(l);row.appendChild(links);row.appendChild(r);
+    function upd(){var over=links.scrollWidth>links.clientWidth+4;row.classList.toggle('can-scroll',over);var atL=links.scrollLeft<=10,atR=links.scrollLeft+links.clientWidth>=links.scrollWidth-10;l.disabled=atL;r.disabled=atR;row.classList.toggle('fade-l',over&&!atL);row.classList.toggle('fade-r',over&&!atR);}
+    links.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
+    var last=null;setInterval(function(){var on=links.querySelector('a.on');if(on&&on!==last){last=on;var lr=links.getBoundingClientRect(),ar=on.getBoundingClientRect();if(ar.left<lr.left+20||ar.right>lr.right-20)links.scrollTo({left:on.offsetLeft-links.clientWidth/2+on.offsetWidth/2,behavior:'smooth'});}},400);
+  }
+  /* selettore del tema: automatico, chiaro (bianco), scuro */
+  function themeToggle(){
+    var brand=document.querySelector('.nav .brand');if(!brand||document.querySelector('.theme-btn'))return;
+    var top=document.createElement('div');top.className='nav-top';brand.parentNode.insertBefore(top,brand);top.appendChild(brand);
+    var b=document.createElement('button');b.type='button';b.className='theme-btn';top.appendChild(b);
+    var modes=['auto','light','dark'],lab={auto:['\uD83C\uDF13','Automatico'],light:['\u2600\uFE0F','Chiaro'],dark:['\uD83C\uDF19','Scuro']};
+    function cur(){var t=document.documentElement.getAttribute('data-theme');return t==='light'||t==='dark'?t:'auto';}
+    function paint(){var m=cur();b.innerHTML='<span aria-hidden="true">'+lab[m][0]+'</span> '+lab[m][1];b.setAttribute('aria-label','Tema: '+lab[m][1]+'. Cambia tema');}
+    b.onclick=function(){var m=modes[(modes.indexOf(cur())+1)%3];if(m==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',m);
+      try{if(m==='auto')localStorage.removeItem('radar-theme');else localStorage.setItem('radar-theme',m);}catch(e){}
+      paint();document.querySelectorAll('[style*="color"]').forEach(function(e){if(e.style.getPropertyPriority('color')==='important')e.style.removeProperty('color')});setTimeout(fixContrast,30);};
+    paint();
+  }
+  var t;function all(){themeToggle();navRow();nameControls();live();scrollables();fixContrast();}
+  function soon(){clearTimeout(t);t=setTimeout(function(){mo.disconnect();fixContrast();nameControls();mo.observe(document.body,{childList:true,subtree:true});},120);}
+  var mo=new MutationObserver(soon);
+  function start(){all();mo.observe(document.body,{childList:true,subtree:true});
+    if(window.matchMedia)matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){document.querySelectorAll('[style*="color"]').forEach(function(e){if(e.style.getPropertyPriority('color')==='important')e.style.removeProperty('color')});fixContrast();});}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
+</script>
+</body>
+</html>
