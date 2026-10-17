@@ -738,7 +738,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
   var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
   function onScroll(){
     var h=document.documentElement;var p=h.scrollTop/(h.scrollHeight-h.clientHeight);$('prog').style.width=(p*100)+'%';
-    var cur=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<140)cur=i});
+    var cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<140)cur=i});
     links.forEach(function(a,i){a.classList.toggle('on',i===cur&&window.scrollY>200)});
   }
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
