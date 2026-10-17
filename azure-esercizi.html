@@ -359,7 +359,7 @@ document.querySelectorAll('[data-g]').forEach(function(b){b.onclick=function(){s
 var tq;$('pq').addEventListener('input',function(){clearTimeout(tq);tq=setTimeout(function(){st.q=$('pq').value;st.page=1;render()},200)});
 $('phide').onchange=function(){st.hide=this.checked;st.page=1;render()};
 $('prand').onclick=function(){var L=list();if(!L.length)return;var e=L[Math.floor(Math.random()*L.length)],i=L.indexOf(e);st.page=Math.floor(i/PER)+1;render();var el=$('ex'+e.id);if(el){el.scrollIntoView({block:'start'});var f=el.querySelector('input');if(f)f.focus({preventScroll:true})}};
-$('preset').onclick=function(){if(confirm('Azzerare tutti i progressi salvati in questo browser?')){done={};save();render()}};
+function resInit(){var b=$('preset');b.textContent='Azzera i progressi';delete b.dataset.ask;var x=$('pres2');if(x)x.remove();b.onclick=function(){b.dataset.ask='1';b.textContent='Sì, azzera tutto';b.insertAdjacentHTML('afterend','<button type="button" class="fbtn" id="pres2">Annulla</button>');$('pres2').onclick=function(){resInit();b.focus()};b.onclick=function(){done={};save();resInit();render();b.focus();}}}resInit();
 if(location.hash&&/^#ex\d+$/.test(location.hash)){var id=+location.hash.slice(3),i=EX.findIndex(function(x){return x.id===id});if(i>=0)st.page=Math.floor(i/PER)+1}
 render();
 })();</script>
