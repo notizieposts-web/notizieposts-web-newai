@@ -24,6 +24,7 @@ MAP = {
  '21':{'gemini':'Gemini','governance':'Valutatori','codice':'Codice','fisica':'Robot'},
  '22':{'agenti':'JPMorgan','gusto':'TasteVal','ritiri':'OpenAI','dati':'Privacy'},
  '23':{'recinto':'NVIDIA','lunghi':'Gemini','aperti':'Meta','regole':'FTC'},
+ '24':{'sconfini':'OpenAI','semi':'Claude','lavoro':'Anthropic','flash':'DeepSeek','postgres':'PostgreSQL'},
 }
 def process(path, labels):
     s = open(path, encoding='utf-8').read()

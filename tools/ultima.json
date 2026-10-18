@@ -1,60 +1,21 @@
 {
- "n": 23,
- "data": "2026-10-17",
- "titolo": "Tre modi di mettere un agente in gabbia",
- "descrizione": "NVIDIA spegne le istruzioni nascoste, Perplexity apre la sua sandbox, quattro agenti finiscono Minecraft, e i regolatori chiedono i registri.",
- "chips": [
-  "NVIDIA",
-  "Gemini",
-  "Meta",
-  "FTC",
-  "Azure"
- ],
+ "n": 24,
+ "data": "2026-10-18",
+ "titolo": "Agenti fuori dal recinto e un enigma del 1997 risolto",
+ "descrizione": "OpenAI e il CERT-In contano gli agenti sconfinati, Claude spiega i semi delle curve NIST, DeepSeek scende a 20 centesimi a compito e Postgres 19 slitta.",
+ "chips": ["OpenAI", "Claude", "Anthropic", "DeepSeek", "PostgreSQL", "Azure"],
  "statistiche": [
-  [
-   "0,1%",
-   "attacchi che passano con il trucco di NVIDIA"
-  ],
-  [
-   "2 Mac",
-   "per far girare un modello da 816 miliardi"
-  ],
-  [
-   "50+",
-   "pagine di domande della FTC ai laboratori"
-  ]
+  ["19", "incidenti nel registro pubblico di OpenAI"],
+  ["6 a 1", "ore di agente per ora umana in Anthropic"],
+  ["0,20 $", "a compito per DeepSeek Flash 1017 su DeepSWE"]
  ],
  "items": [
-  [
-   "🛡",
-   "NVIDIA",
-   "Come si mette un agente in gabbia",
-   "Tre strategie opposte uscite in tre giorni."
-  ],
-  [
-   "⛏",
-   "Gemini",
-   "Perché quattro agenti battono un genio solitario",
-   "Minecraft, uno scienziato automatico open source, e un test sui costi delle squadre."
-  ],
-  [
-   "📦",
-   "Meta",
-   "Tre modelli giganti nello stesso giorno",
-   "Meta e NVIDIA li regalano, Microsoft no."
-  ],
-  [
-   "📋",
-   "FTC",
-   "Washington e Bruxelles bussano alla porta",
-   "Le autorità chiedono i registri degli incidenti degli agenti."
-  ],
-  [
-   "☁",
-   "Azure",
-   "La fattura che dà ordini",
-   "Una riga bianca su bianco può dire alla pipeline \"approva e paga\"."
-  ]
+  ["🚧", "OpenAI", "Il giorno in cui si sono contati gli agenti fuori dal recinto", "Quattro incidenti in più, un allarme in India, chiavi rubate."],
+  ["🔐", "Claude", "I semi delle curve NIST erano un orologio del 1997", "E circuiti quantistici con 17 volte meno porte."],
+  ["👥", "Anthropic", "Sei ore di agente per ogni ora umana", "Meno junior, più supervisione: l'attenzione è il collo di bottiglia."],
+  ["💸", "DeepSeek", "77% su DeepSWE a meno di venti centesimi", "E un modello decisionale da 4 miliardi che risponde in 44 ms."],
+  ["🐘", "PostgreSQL", "PostgreSQL 19 slitta a novembre", "La revisione con l'AI trova più difetti di quanti se ne correggano."],
+  ["☁", "Azure", "Lo schema dei campi", "Descrizioni che il modello capisce, e il metodo giusto per ogni campo."]
  ],
- "domanda": "Un modello ha 816 miliardi di parametri ma ne usa solo 42 per parola. Quale numero decide quanta memoria ti serve?"
+ "domanda": "Se un programma genera un numero \"casuale\" partendo dall'ora corrente, quanti tentativi servono per indovinarlo sapendo il giorno?"
 }

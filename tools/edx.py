@@ -26,6 +26,7 @@ EDX = {
  '21': (None, "Gemini 4 Argon per tutti, a metà prezzo", "Un milione di token anche in uscita; la lettera dei 400 e il veto ai valutatori; il codice scritto dagli agenti; i robot che agiscono prima."),
  '22': (None, "JPMorgan chiude i conti agli agenti degli altri", "Perché una banca dice no, il gusto della ricerca che raddoppia ogni tre mesi, il ritiro di GPT-4o e GPT-4.1, e le tracce che lasciamo."),
  '23': (None, "Tre modi di mettere un agente in gabbia", "NVIDIA spegne le istruzioni nascoste, Perplexity apre la sua sandbox, quattro agenti finiscono Minecraft, e i regolatori chiedono i registri."),
+ '24': (None, "Agenti fuori dal recinto e un enigma del 1997 risolto", "OpenAI e il CERT-In contano gli agenti sconfinati, Claude spiega i semi delle curve NIST, DeepSeek scende a 20 centesimi a compito e Postgres 19 slitta."),
 }
 def chips_for(ed):
     if ed == '-': return EDX['-'][0]

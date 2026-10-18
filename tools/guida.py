@@ -21,6 +21,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
  (17,'21','azure','produzione','Lingue e regioni'),
  (18,'22','azure','sicurezza','Chi può fare cosa: ruoli, rete, chiavi'),
  (19,'23','azure','sicurezza','I documenti avvelenati'),
+ (20,'24','azure','qualita','Lo schema dei campi: descrizioni e metodi'),
 ]
 GROUPS = [
  ('costi','Costi','Costi e prestazioni','Quanto costa, quanto ci mette, e come pagare meno a parità di risultato.'),
