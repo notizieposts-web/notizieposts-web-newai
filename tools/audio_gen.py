@@ -33,7 +33,11 @@ def azure(paras, wavdir):
                 code = getattr(e, 'code', None)
                 if code in (429, 500, 502, 503, 504) and attempt < 5:
                     time.sleep(10 * (attempt + 1)); continue
-                raise SystemExit('Azure Speech errore %s sul paragrafo %d' % (code or e, i + 1))
+                hint = {401: 'chiave rifiutata: controlla AZURE_SPEECH_KEY e che AZURE_SPEECH_REGION sia l\'area della risorsa',
+                        400: 'richiesta rifiutata: controlla il nome della voce e la velocita',
+                        403: 'accesso negato dalla risorsa'}.get(code, '')
+                raise SystemExit('::error::Azure Speech errore %s sul paragrafo %d (area %s, voce %s) %s'
+                                 % (code or type(e).__name__, i + 1, region, voice, hint))
         f = os.path.join(wavdir, '%03d.wav' % i); open(f, 'wb').write(data); files.append(f)
         time.sleep(3.2)  # livello gratuito F0: massimo 20 richieste al minuto
     return files
