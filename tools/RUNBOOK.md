@@ -93,6 +93,15 @@ Se un test fallisce, correggi il generatore (non le singole sfide) e rigenera il
 
 ## Audio (voce e chiave)
 
-- Generatore: `tools/audio_gen.py`. Con il secret `AZURE_SPEECH_KEY` usa Azure Speech (variabili del repository facoltative: `AZURE_SPEECH_REGION`, predefinita `westeurope`; `AZURE_SPEECH_VOICE`, predefinita `it-IT-IsabellaNeural`; `AZURE_SPEECH_RATE`, predefinita `-8%`). Senza secret usa la voce locale Kokoro (Sara).
-- **La chiave Azure non va mai scritta nel repository, nei file, nei commit o nelle email**: vive solo in Settings → Secrets and variables → Actions. Risorsa consigliata: Speech nel livello gratuito F0 (0,5 milioni di caratteri al mese; oltre la quota il servizio si ferma, non addebita).
+- **Dove vive l'audio**: solo nelle Release di GitHub (`audio-NN` → `radar-ai-NN.mp3`), mai nel repository né nel sito. Così non pesa sui limiti di GitHub Pages e non va allegato alle email: si linka.
+- Generatore: `tools/audio_gen.py`. Con il secret `AZURE_SPEECH_KEY` usa Azure Speech, altrimenti la voce locale Kokoro (Sara).
+- Configurazione attuale (variabili del repository, Settings → Secrets and variables → Actions → Variables):
+  - `AZURE_SPEECH_REGION` = `northeurope` (la risorsa F0 è in North Europe: West Europe non accettava nuovi clienti). Se manca, il generatore usa `westeurope`.
+  - `AZURE_SPEECH_VOICE` = `it-IT-IsabellaMultilingualNeural` (scelta il 18 ottobre 2026 tra Isabella, Diego e Isabella Multilingual).
+  - `AZURE_SPEECH_RATE` = `-8%`. La Multilingual è più svelta delle altre (~135 parole/minuto a -8% contro ~115): se serve più calma, `-15%`.
+  - `AZURE_SPEECH_ENDPOINT` esiste ma il generatore non la usa.
+- **La chiave Azure non va mai scritta nel repository, nei file, nei commit, nei log o nelle email**: vive solo nel secret `AZURE_SPEECH_KEY`. Risorsa: Speech (Servizi voce) nel livello gratuito F0, 0,5 milioni di caratteri al mese; oltre la quota il servizio si ferma, non addebita. Un'edizione consuma circa 8.000 caratteri.
 - Rigenerare un audio: Actions → "Audio dell'edizione" → Run workflow, con il numero e `rigenera = si`.
+- Provare altre voci o velocità: Actions → "Campioni voce" → Run workflow (voci separate da virgola, velocità, paragrafi). I campioni finiscono nella pre-release `audio-campioni`. Senza chiave il workflow si ferma.
+- Verifica: il commento nei metadati dell'MP3 riporta motore, area, voce e velocità usate (`ffprobe -show_entries format_tags=comment radar-ai-NN.mp3`). Gli errori Azure compaiono come annotazioni del run (codice, area, voce; mai la chiave).
+- Nel testo `tools/audio/NN.txt` la durata annunciata va stimata a circa 145 parole al minuto con la voce attuale (l'edizione 24, 1.260 parole, dura 8 minuti e mezzo).
