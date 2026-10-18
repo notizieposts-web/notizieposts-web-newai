@@ -13,7 +13,7 @@ def paragraphs(path):
 
 def azure(paras, wavdir):
     import urllib.request
-    key = os.environ['AZURE_SPEECH_KEY']; region = os.environ.get('AZURE_SPEECH_REGION', 'westeurope')
+    key = os.environ['AZURE_SPEECH_KEY']; region = (os.environ.get('AZURE_SPEECH_REGION') or 'westeurope').strip().lower()
     voice = os.environ.get('AZURE_SPEECH_VOICE') or 'it-IT-IsabellaNeural'
     rate = os.environ.get('AZURE_SPEECH_RATE') or '-8%'
     url = 'https://%s.tts.speech.microsoft.com/cognitiveservices/v1' % region
