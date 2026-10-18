@@ -63,7 +63,8 @@ def main():
     with tempfile.TemporaryDirectory() as d:
         files = azure(paras, d) if os.environ.get('AZURE_SPEECH_KEY') else kokoro(paras, d)
         if os.environ.get('AZURE_SPEECH_KEY'):
-            info = 'Azure %s %s %s' % ((os.environ.get('AZURE_SPEECH_REGION') or 'northeurope').strip().lower(),
+            src = 'variabile' if (os.environ.get('AZURE_SPEECH_REGION') or '').strip() else 'predefinita'
+            info = 'Azure %s (%s) %s %s' % ((os.environ.get('AZURE_SPEECH_REGION') or 'northeurope').strip().lower(), src,
                                        os.environ.get('AZURE_SPEECH_VOICE') or 'it-IT-IsabellaNeural',
                                        os.environ.get('AZURE_SPEECH_RATE') or '-8%')
         else:
