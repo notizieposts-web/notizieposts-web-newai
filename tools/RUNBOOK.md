@@ -45,6 +45,7 @@ NN=24                                  # numero della nuova edizione (ultima + 1
    ```bash
    python3 tools/topics.py .
    python3 tools/edx.py .
+   python3 tools/audio_page.py .
    python3 tools/graph.py .
    python3 tools/guida.py .
    python3 tools/argomenti.py .
@@ -94,6 +95,7 @@ Se un test fallisce, correggi il generatore (non le singole sfide) e rigenera il
 ## Audio (voce e chiave)
 
 - **Dove vive l'audio**: solo nelle Release di GitHub (`audio-NN` → `radar-ai-NN.mp3`), mai nel repository né nel sito. Così non pesa sui limiti di GitHub Pages e non va allegato alle email: si linka.
+- **Sul sito**: `tools/audio_page.py` mette in ogni edizione che ha `tools/audio/NN.txt` un blocco "Ascolta l'edizione" nell'intestazione (lettore con `preload="none"`, che non scarica nulla finché non si preme play, pulsante "Scarica l'MP3" e link a tutti gli audio), e `tools/edx.py` aggiunge il chip "🎧 Audio" nell'archivio. Il file resta nella Release. Il blocco è verificato con audit3 e reflow (WCAG 2.2 AA, 0 violazioni): non cambiarne colori o dimensioni senza rifare gli audit.
 - Generatore: `tools/audio_gen.py`. Con il secret `AZURE_SPEECH_KEY` usa Azure Speech, altrimenti la voce locale Kokoro (Sara).
 - Configurazione attuale (variabili del repository, Settings → Secrets and variables → Actions → Variables):
   - `AZURE_SPEECH_REGION` = `northeurope` (la risorsa F0 è in North Europe: West Europe non accettava nuovi clienti). Se manca o arriva vuota, il generatore usa comunque `northeurope`.

@@ -53,17 +53,21 @@ if __name__ == '__main__':
     new_render = ("$('edlist').innerHTML=ED.map(function(e,i){var x=EDX[e[3]]||{};"
       "var ch=(x.c||[]).map(function(c){return '<li class=\"chip topic\">'+c+'</li>'}).join('');"
       "var tt=x.t||e[1];var h=e[3]?'<a href=\"'+e[3]+'\">'+tt+'</a>':tt;"
-      "return '<article class=\"card edcard\" style=\"margin-bottom:1rem\"><div class=\"kicker\"><span class=\"chip date\">'+e[0]+'</span><span class=\"chip\">Edizione '+(i+1)+'</span></div>'"
+      "return '<article class=\"card edcard\" style=\"margin-bottom:1rem\"><div class=\"kicker\"><span class=\"chip date\">'+e[0]+'</span><span class=\"chip\">Edizione '+(i+1)+'</span>'+(AUD.indexOf(e[3])>=0?'<a class=\"chip audio-chip\" href=\"'+e[3]+'#audio-title\"><span aria-hidden=\"true\">&#127911;</span> Audio</a>':'')+'</div>'"
       "+(ch?'<ul class=\"topics\" aria-label=\"Protagonisti\">'+ch+'</ul>':'')"
       "+'<h3 style=\"font-size:1.2rem;margin:.5rem 0 .35rem\">'+h+'</h3>'"
       "+'<p style=\"margin:0 0 .5rem\">'+(x.d||'')+'</p>'"
       "+'<details class=\"edmore\"><summary>Tutto il contenuto</summary><p style=\"margin:.5rem 0 0\"><b>'+e[1]+'.</b> '+e[2]+'</p></details></article>'}).reverse().join('');")
     s, n = re.subn(r"\$\('edlist'\)\.innerHTML=ED\.map\(.*?\.reverse\(\)\.join\(''\);", lambda m: new_render, s, count=1, flags=re.S)
     assert n == 1, 'render not found'
-    s = s.replace("$('edlist').innerHTML=", "var EDX=" + json.dumps(data, ensure_ascii=False) + ";\n  $('edlist').innerHTML=", 1)
+    import glob
+    aud = sorted('edizioni/%s.html' % os.path.splitext(os.path.basename(f))[0] for f in glob.glob(os.path.join(root, 'tools/audio/*.txt')))
+    s = re.sub(r'\n  var AUD=.*?;\n', '\n', s, flags=re.S)
+    s = s.replace("$('edlist').innerHTML=", "var EDX=" + json.dumps(data, ensure_ascii=False) + ";\n  var AUD=" + json.dumps(aud) + ";\n  $('edlist').innerHTML=", 1)
     css = ('<style id="edx-css">.topics{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem;margin:.55rem 0 0;padding:0}'
            '.topics li{margin:0}.edmore summary{cursor:pointer;font-weight:600;color:var(--muted);min-height:24px}'
-           '.edcard h3 a{text-decoration:none}.edcard h3 a:hover{text-decoration:underline}</style>')
+           '.edcard h3 a{text-decoration:none}.edcard h3 a:hover{text-decoration:underline}'
+           '.audio-chip{display:inline-flex;align-items:center;min-height:24px;text-decoration:none;color:var(--ink)}.audio-chip:hover{text-decoration:underline}</style>')
     s = re.sub(r'<style id="edx-css">.*?</style>', '', s, flags=re.S)
     s = s.replace('</head>', css + '</head>', 1)
     open(p, 'w', encoding='utf-8').write(s)
