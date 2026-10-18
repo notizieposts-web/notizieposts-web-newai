@@ -96,7 +96,7 @@ Se un test fallisce, correggi il generatore (non le singole sfide) e rigenera il
 - **Dove vive l'audio**: solo nelle Release di GitHub (`audio-NN` → `radar-ai-NN.mp3`), mai nel repository né nel sito. Così non pesa sui limiti di GitHub Pages e non va allegato alle email: si linka.
 - Generatore: `tools/audio_gen.py`. Con il secret `AZURE_SPEECH_KEY` usa Azure Speech, altrimenti la voce locale Kokoro (Sara).
 - Configurazione attuale (variabili del repository, Settings → Secrets and variables → Actions → Variables):
-  - `AZURE_SPEECH_REGION` = `northeurope` (la risorsa F0 è in North Europe: West Europe non accettava nuovi clienti). Se manca, il generatore usa `westeurope`.
+  - `AZURE_SPEECH_REGION` = `northeurope` (la risorsa F0 è in North Europe: West Europe non accettava nuovi clienti). Se manca o arriva vuota, il generatore usa comunque `northeurope`.
   - `AZURE_SPEECH_VOICE` = `it-IT-IsabellaMultilingualNeural` (scelta il 18 ottobre 2026 tra Isabella, Diego e Isabella Multilingual).
   - `AZURE_SPEECH_RATE` = `-8%`. La Multilingual è più svelta delle altre (~135 parole/minuto a -8% contro ~115): se serve più calma, `-15%`.
   - `AZURE_SPEECH_ENDPOINT` esiste ma il generatore non la usa.

@@ -13,7 +13,7 @@ def paragraphs(path):
 
 def azure(paras, wavdir):
     import urllib.request
-    key = os.environ['AZURE_SPEECH_KEY']; region = (os.environ.get('AZURE_SPEECH_REGION') or 'westeurope').strip().lower()
+    key = os.environ['AZURE_SPEECH_KEY']; region = (os.environ.get('AZURE_SPEECH_REGION') or 'northeurope').strip().lower()
     voice = os.environ.get('AZURE_SPEECH_VOICE') or 'it-IT-IsabellaNeural'
     rate = os.environ.get('AZURE_SPEECH_RATE') or '-8%'
     url = 'https://%s.tts.speech.microsoft.com/cognitiveservices/v1' % region
@@ -63,7 +63,7 @@ def main():
     with tempfile.TemporaryDirectory() as d:
         files = azure(paras, d) if os.environ.get('AZURE_SPEECH_KEY') else kokoro(paras, d)
         if os.environ.get('AZURE_SPEECH_KEY'):
-            info = 'Azure %s %s %s' % ((os.environ.get('AZURE_SPEECH_REGION') or 'westeurope').strip().lower(),
+            info = 'Azure %s %s %s' % ((os.environ.get('AZURE_SPEECH_REGION') or 'northeurope').strip().lower(),
                                        os.environ.get('AZURE_SPEECH_VOICE') or 'it-IT-IsabellaNeural',
                                        os.environ.get('AZURE_SPEECH_RATE') or '-8%')
         else:
