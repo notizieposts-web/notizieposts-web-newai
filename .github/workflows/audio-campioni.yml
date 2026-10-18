@@ -1,0 +1,88 @@
+name: Campioni voce
+
+# Genera brevi campioni di un'edizione con piu' voci Azure, per scegliere la voce.
+# Li pubblica nella pre-release "audio-campioni" (radar-ai-campione-<voce>.mp3).
+# Richiede il secret AZURE_SPEECH_KEY: senza chiave si ferma (non usa Kokoro).
+
+on:
+  workflow_dispatch:
+    inputs:
+      n:
+        description: "Numero dell'edizione da cui prendere il testo"
+        required: false
+        default: "24"
+      voci:
+        description: "Voci Azure separate da virgola"
+        required: false
+        default: "it-IT-IsabellaNeural,it-IT-DiegoNeural,it-IT-IsabellaMultilingualNeural"
+      velocita:
+        description: "Velocita' (es. -8%)"
+        required: false
+        default: "-8%"
+      paragrafi:
+        description: "Quanti paragrafi leggere (circa 45 secondi con 4)"
+        required: false
+        default: "4"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: audio
+  cancel-in-progress: false
+
+jobs:
+  campioni:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HAS_KEY: ${{ secrets.AZURE_SPEECH_KEY != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Controlli
+        env:
+          N: ${{ github.event.inputs.n }}
+          VOCI: ${{ github.event.inputs.voci }}
+          RATE: ${{ github.event.inputs.velocita }}
+          P: ${{ github.event.inputs.paragrafi }}
+        run: |
+          if [ "$HAS_KEY" != "true" ]; then echo "::error::Manca il secret AZURE_SPEECH_KEY"; exit 1; fi
+          [[ "$N" =~ ^[0-9]+$ ]] && test -f "tools/audio/$N.txt" || { echo "::error::Edizione non valida"; exit 1; }
+          [[ "$RATE" =~ ^[+-]?[0-9]{1,2}%$ ]] || { echo "::error::Velocita' non valida (es. -8%)"; exit 1; }
+          [[ "$P" =~ ^[0-9]{1,2}$ ]] || { echo "::error::Numero di paragrafi non valido"; exit 1; }
+          for v in ${VOCI//,/ }; do
+            [[ "$v" =~ ^[a-z]{2}-[A-Z]{2}-[A-Za-z0-9:]+$ ]] || { echo "::error::Nome voce non valido: $v"; exit 1; }
+          done
+          python3 -c "import sys;p=[x.strip() for x in open('tools/audio/$N.txt',encoding='utf-8').read().split('\n\n') if x.strip()];open('campione.txt','w',encoding='utf-8').write('\n\n'.join(p[:int(sys.argv[1])]))" "$P"
+          echo "Caratteri per voce: $(wc -m < campione.txt)"
+
+      - name: Strumenti
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null
+
+      - name: Genera i campioni
+        env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: ${{ vars.AZURE_SPEECH_REGION }}
+          AZURE_SPEECH_RATE: ${{ github.event.inputs.velocita }}
+          VOCI: ${{ github.event.inputs.voci }}
+        run: |
+          mkdir -p campioni
+          for v in ${VOCI//,/ }; do
+            nome=$(echo "$v" | sed 's/^[a-z]*-[A-Z]*-//; s/Neural$//; s/:/-/' | tr 'A-Z' 'a-z')
+            AZURE_SPEECH_VOICE="$v" python3 tools/audio_gen.py campione.txt "campioni/radar-ai-campione-$nome.mp3" "campione $v"
+          done
+          ls -la campioni
+
+      - name: Pubblica nella pre-release audio-campioni
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view audio-campioni >/dev/null 2>&1; then
+            gh release create audio-campioni --prerelease --title "Radar AI · campioni voce" \
+              --notes "Campioni brevi per scegliere la voce Azure dell'audio. Non e' un'edizione."
+          fi
+          gh release upload audio-campioni campioni/*.mp3 --clobber
+          for f in campioni/*.mp3; do
+            echo "https://github.com/${GITHUB_REPOSITORY}/releases/download/audio-campioni/$(basename "$f")"
+          done
