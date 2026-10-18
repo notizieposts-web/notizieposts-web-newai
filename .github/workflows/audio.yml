@@ -1,0 +1,94 @@
+name: Audio dell'edizione
+
+on:
+  push:
+    branches: [main]
+    paths: ['tools/audio/*.txt']
+  workflow_dispatch:
+    inputs:
+      n:
+        description: "Numero dell'edizione (vuoto = l'ultima)"
+        required: false
+      rigenera:
+        description: "Sostituisci l'audio se esiste già (si/no)"
+        required: false
+        default: "no"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: audio
+  cancel-in-progress: false
+
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      HAS_KEY: ${{ secrets.AZURE_SPEECH_KEY != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Quale edizione
+        id: ed
+        env:
+          N_IN: ${{ github.event.inputs.n }}
+        run: |
+          N="$N_IN"
+          if [ -z "$N" ]; then N=$(ls tools/audio/*.txt | sed 's#.*/##; s#\.txt##' | sort -n | tail -1); fi
+          test -f "tools/audio/$N.txt"
+          echo "n=$N" >> "$GITHUB_OUTPUT"
+          DATA=$(python3 -c "import json;d=json.load(open('tools/ultima.json'));print(d['data'] if str(d['n'])=='$N' else '')")
+          echo "data=$DATA" >> "$GITHUB_OUTPUT"
+
+      - name: Esiste già?
+        id: chk
+        env:
+          GH_TOKEN: ${{ github.token }}
+          N: ${{ steps.ed.outputs.n }}
+          RIG: ${{ github.event.inputs.rigenera }}
+        run: |
+          if gh release view "audio-$N" --json assets -q '.assets[].name' 2>/dev/null | grep -qx "radar-ai-$N.mp3" && [ "$RIG" != "si" ]; then
+            echo "skip=1" >> "$GITHUB_OUTPUT"; echo "Audio già pubblicato."
+          else
+            echo "skip=0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Strumenti
+        if: steps.chk.outputs.skip == '0'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null
+          pip install -q numpy sherpa-onnx
+
+      - name: Voce locale (solo se manca la chiave Azure)
+        if: steps.chk.outputs.skip == '0' && env.HAS_KEY != 'true'
+        run: |
+          curl -sL -o k.tar.bz2 https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-multi-lang-v1_0.tar.bz2
+          tar xjf k.tar.bz2 && rm k.tar.bz2
+
+      - name: Genera l'MP3
+        if: steps.chk.outputs.skip == '0'
+        env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: ${{ vars.AZURE_SPEECH_REGION }}
+          AZURE_SPEECH_VOICE: ${{ vars.AZURE_SPEECH_VOICE }}
+          AZURE_SPEECH_RATE: ${{ vars.AZURE_SPEECH_RATE }}
+          KOKORO_DIR: kokoro-multi-lang-v1_0
+          N: ${{ steps.ed.outputs.n }}
+        run: python3 tools/audio_gen.py "tools/audio/$N.txt" "radar-ai-$N.mp3" "edizione $N"
+
+      - name: Pubblica nella Release
+        if: steps.chk.outputs.skip == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          N: ${{ steps.ed.outputs.n }}
+          DATA: ${{ steps.ed.outputs.data }}
+        run: |
+          if gh release view "audio-$N" >/dev/null 2>&1; then
+            gh release upload "audio-$N" "radar-ai-$N.mp3" --clobber
+          else
+            gh release create "audio-$N" "radar-ai-$N.mp3" --title "Radar AI $N · audio" \
+              --notes "Versione audio dell'edizione $N ${DATA}. Pagina: https://notizieposts-web.github.io/notizieposts-web-newai/edizioni/$N.html"
+          fi
+          echo "https://github.com/${GITHUB_REPOSITORY}/releases/download/audio-$N/radar-ai-$N.mp3"

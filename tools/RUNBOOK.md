@@ -34,6 +34,7 @@ NN=24                                  # numero della nuova edizione (ultima + 1
 
 1. **Ricerca** (WebSearch/WebFetch): notizie dalle ultime 24–48 ore non ancora coperte. Annota data, fonte, tipo.
 2. **Scrivi** `edizioni/$NN.html`.
+   - **Testo audio** `tools/audio/$NN.txt`: la versione da ascoltare, 6–8 minuti (circa 7.000–8.000 caratteri). Paragrafi separati da una riga vuota; frasi brevi, tono da conduttore; niente codice, URL, tabelle, simboli ($, %, →): scrivi "dollari", "per cento"; i numeri grandi in parole. Apertura con data e titolo, le storie principali, un riassunto della puntata Azure, la domanda del giorno con la risposta, chiusura con il rimando alla pagina. Nota di trasparenza parlata se si parla di Anthropic o Claude. Va nello stesso commit dell'edizione.
 3. **Archivio**:
    - `index.html`: aggiungi in fondo all'array `var ED=[...]` la riga `['GG mese, fascia','Titolo','riassunto lungo dei contenuti…','edizioni/NN.html']` (stesso formato delle righe esistenti).
    - `tools/topics.py`: aggiungi in `MAP` la voce `'NN': {'idcapitolo':'Protagonista', ...}` per i capitoli di notizie.
@@ -60,11 +61,14 @@ NN=24                                  # numero della nuova edizione (ultima + 1
    git add -A && git -c user.name="notizieposts-web" -c user.email="notizieposts@gmail.com" commit -m "Edizione NN: <titolo>" && git push origin main
    ```
    Attendi il deploy: `gh api "repos/notizieposts-web/notizieposts-web-newai/actions/runs?per_page=1"` finché lo SHA del commit risulta `completed success`.
+   Il push di `tools/audio/$NN.txt` avvia anche il workflow **Audio dell'edizione** (`.github/workflows/audio.yml`): crea l'MP3 e lo pubblica nella Release `audio-$NN` (file `radar-ai-$NN.mp3`). Gli audio stanno **solo nelle Release**, mai nel repository né sul sito: così non pesano sul limite di 1 GB di GitHub Pages. Controlla che il run finisca `success`; se fallisce, l'edizione resta valida e l'email parte senza il blocco audio.
 7. **Stato per l'invio**: scrivi `tools/ultima.json` con `{"n": NN, "data": "AAAA-MM-GG", "titolo": "...", "descrizione": "...", "chips": [...], "statistiche": [[valore, etichetta], x3], "items": [[emoji, protagonista, titolo, testo], ...], "domanda": "..."}` e includilo nel commit. Serve all'operazione di invio delle 9:00 (preparazione alle 8:40).
 
 ## Email (invio)
 
 Template: `tools/mail_template_teaser.html` (sfondo bianco, contrasti verificati anche con l'inversione della modalità scura di Gmail). Sostituisci: data, chip dei protagonisti, titolo, descrizione, tre statistiche, le voci "Dentro trovi" (pillola protagonista + titolo + testo), la domanda del giorno, i link all'edizione (`edizioni/NN.html`) e all'archivio (radice del sito), il numero totale di edizioni. L'email è un **invito alla lettura**, non il contenuto completo. Invia con il connettore Gmail (`send_message` con `htmlBody`), mittente notizieposts@gmail.com.
+
+**Blocco audio.** Prima di inviare, verifica che esista `https://github.com/notizieposts-web/notizieposts-web-newai/releases/download/audio-NN/radar-ai-NN.mp3` (per esempio `curl -sIL -o /dev/null -w '%{http_code}'` deve dare 200, oppure la Release `audio-NN` deve avere quel file). Se esiste, tieni il blocco tra `<!-- AUDIO -->` e `<!-- /AUDIO -->` con il link aggiornato; se non esiste ancora, toglilo e invia lo stesso. Non allegare l'MP3 all'email: il connettore Gmail non regge file di qualche MB.
 
 ## Altre pagine
 
@@ -86,3 +90,9 @@ git add -A && git -c user.name="notizieposts-web" -c user.email="notizieposts@gm
 ```
 
 Se un test fallisce, correggi il generatore (non le singole sfide) e rigenera il pacchetto del giorno cancellando `tools/lab_daily/packs/<oggi>.json` e i file `lab/s<id>.*` che aveva creato.
+
+## Audio (voce e chiave)
+
+- Generatore: `tools/audio_gen.py`. Con il secret `AZURE_SPEECH_KEY` usa Azure Speech (variabili del repository facoltative: `AZURE_SPEECH_REGION`, predefinita `westeurope`; `AZURE_SPEECH_VOICE`, predefinita `it-IT-IsabellaNeural`; `AZURE_SPEECH_RATE`, predefinita `-8%`). Senza secret usa la voce locale Kokoro (Sara).
+- **La chiave Azure non va mai scritta nel repository, nei file, nei commit o nelle email**: vive solo in Settings → Secrets and variables → Actions. Risorsa consigliata: Speech nel livello gratuito F0 (0,5 milioni di caratteri al mese; oltre la quota il servizio si ferma, non addebita).
+- Rigenerare un audio: Actions → "Audio dell'edizione" → Run workflow, con il numero e `rigenera = si`.
