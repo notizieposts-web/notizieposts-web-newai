@@ -19,7 +19,7 @@ def azure(paras, wavdir):
     url = 'https://%s.tts.speech.microsoft.com/cognitiveservices/v1' % region
     files = []
     for i, p in enumerate(paras):
-        pause = '900ms' if len(p) < 90 else '600ms'
+        pause = '2500ms' if p.rstrip().endswith('?') else ('900ms' if len(p) < 90 else '600ms')
         ssml = ('<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="it-IT">'
                 '<voice name="%s"><prosody rate="%s">%s</prosody><break time="%s"/></voice></speak>'
                 % (voice, rate, html.escape(p, quote=False), pause))
@@ -51,7 +51,7 @@ def kokoro(paras, wavdir):
     tts = sherpa_onnx.OfflineTts(cfg); files = []
     for i, p in enumerate(paras):
         a = tts.generate(p, sid=35, speed=0.92)  # 35 = if_sara
-        pause = 0.9 if len(p) < 90 else 0.6
+        pause = 2.5 if p.rstrip().endswith('?') else (0.9 if len(p) < 90 else 0.6)
         x = np.concatenate([np.array(a.samples, dtype=np.float32), np.zeros(int(a.sample_rate * pause), dtype=np.float32)])
         f = os.path.join(wavdir, '%03d.wav' % i); w = wave.open(f, 'wb'); w.setnchannels(1); w.setsampwidth(2)
         w.setframerate(a.sample_rate); w.writeframes((np.clip(x, -1, 1) * 32767).astype('int16').tobytes()); w.close(); files.append(f)
