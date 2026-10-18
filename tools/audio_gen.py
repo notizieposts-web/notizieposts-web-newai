@@ -62,11 +62,17 @@ def main():
     paras = paragraphs(src)
     with tempfile.TemporaryDirectory() as d:
         files = azure(paras, d) if os.environ.get('AZURE_SPEECH_KEY') else kokoro(paras, d)
+        if os.environ.get('AZURE_SPEECH_KEY'):
+            info = 'Azure %s %s %s' % ((os.environ.get('AZURE_SPEECH_REGION') or 'westeurope').strip().lower(),
+                                       os.environ.get('AZURE_SPEECH_VOICE') or 'it-IT-IsabellaNeural',
+                                       os.environ.get('AZURE_SPEECH_RATE') or '-8%')
+        else:
+            info = 'Kokoro if_sara 0.92'
         lst = os.path.join(d, 'list.txt'); open(lst, 'w').write(''.join("file '%s'\n" % f for f in files))
         subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', lst,
                         '-af', 'loudnorm=I=-16:TP=-1.5', '-ac', '1', '-ar', '24000', '-b:a', '48k',
                         '-id3v2_version', '3', '-metadata', 'title=Radar AI · ' + label,
-                        '-metadata', 'artist=Radar AI', '-metadata', 'album=Radar AI', out], check=True)
+                        '-metadata', 'artist=Radar AI', '-metadata', 'comment=' + info, '-metadata', 'album=Radar AI', out], check=True)
     print('ok', out, 'azure' if os.environ.get('AZURE_SPEECH_KEY') else 'kokoro')
 
 if __name__ == '__main__':
