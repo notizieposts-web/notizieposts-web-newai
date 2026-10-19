@@ -1,21 +1,60 @@
 {
- "n": 24,
- "data": "2026-10-18",
- "titolo": "Agenti fuori dal recinto e un enigma del 1997 risolto",
- "descrizione": "OpenAI e il CERT-In contano gli agenti sconfinati, Claude spiega i semi delle curve NIST, DeepSeek scende a 20 centesimi a compito e Postgres 19 slitta.",
- "chips": ["OpenAI", "Claude", "Anthropic", "DeepSeek", "PostgreSQL", "Azure"],
+ "n": 25,
+ "data": "2026-10-19",
+ "titolo": "Il fondo del 5%, le banche chiuse e i conti di Nscale",
+ "descrizione": "Anthropic promette azioni al bene pubblico, Schwab blocca gli agenti che spostano soldi, Nscale vale la metà per gli investitori e il MIT legge i cristalli.",
+ "chips": [
+  "Anthropic",
+  "Schwab",
+  "Nscale",
+  "MIT",
+  "Azure"
+ ],
  "statistiche": [
-  ["19", "incidenti nel registro pubblico di OpenAI"],
-  ["6 a 1", "ore di agente per ora umana in Anthropic"],
-  ["0,20 $", "a compito per DeepSeek Flash 1017 su DeepSWE"]
+  [
+   "5% + 2%",
+   "delle azioni al fondo di Anthropic, a tappe"
+  ],
+  [
+   "75% e 28%",
+   "del lavoro all'AI nel 2030: dipendenti e americani"
+  ],
+  [
+   "16–19 mld",
+   "la valutazione chiesta a Nscale, contro 30"
+  ]
  ],
  "items": [
-  ["🚧", "OpenAI", "Il giorno in cui si sono contati gli agenti fuori dal recinto", "Quattro incidenti in più, un allarme in India, chiavi rubate."],
-  ["🔐", "Claude", "I semi delle curve NIST erano un orologio del 1997", "E circuiti quantistici con 17 volte meno porte."],
-  ["👥", "Anthropic", "Sei ore di agente per ogni ora umana", "Meno junior, più supervisione: l'attenzione è il collo di bottiglia."],
-  ["💸", "DeepSeek", "77% su DeepSWE a meno di venti centesimi", "E un modello decisionale da 4 miliardi che risponde in 44 ms."],
-  ["🐘", "PostgreSQL", "PostgreSQL 19 slitta a novembre", "La revisione con l'AI trova più difetti di quanti se ne correggano."],
-  ["☁", "Azure", "Lo schema dei campi", "Descrizioni che il modello capisce, e il metodo giusto per ogni campo."]
+  [
+   "🤝",
+   "Anthropic",
+   "Il 5% delle azioni a un fondo per il bene pubblico",
+   "E il divario delle aspettative: 75% contro 28%."
+  ],
+  [
+   "🏦",
+   "Schwab",
+   "Le banche chiudono la porta agli agenti",
+   "Leggere sì, muovere soldi no. Amazon conferma il blocco di Muse."
+  ],
+  [
+   "⚡",
+   "Nscale",
+   "Gli investitori chiedono metà prezzo",
+   "Otto sedute in calo per i chip, e tre centrali nucleari riaccese."
+  ],
+  [
+   "💎",
+   "MIT",
+   "Un modello che vede i cristalli in 3D",
+   "Le descrizioni sintetiche insegnano la geometria."
+  ],
+  [
+   "☁",
+   "Azure",
+   "La vita di un analizzatore",
+   "Nomi con la versione, prova prima del cambio, modello fissato."
+  ]
  ],
- "domanda": "Se un programma genera un numero \"casuale\" partendo dall'ora corrente, quanti tentativi servono per indovinarlo sapendo il giorno?"
+ "domanda": "Un fondo riceve il 5% delle azioni più il 2% per ogni aumento del 50% del valore oltre la soglia: se il valore raddoppia, qual è la quota massima?"
 }

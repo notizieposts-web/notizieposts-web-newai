@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Radar AI · 19 ottobre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F6FB; --surface:#FFFFFF; --soft:#E9EDF7; --ink:#121A2B; --muted:#56627A; --line:#D8DEEA;
+  --violet:#4B4BF5; --violet-soft:#E6E6FF; --teal:#0E9F9E; --teal-soft:#DDF5F4; --sun:#F2B705; --sun-soft:#FFF5D1; --red:#D9463B;
+  --head:"Sora","Segoe UI",system-ui,sans-serif; --body:"Inter","Segoe UI",system-ui,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+    --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1424; --surface:#161E33; --soft:#1E2840; --ink:#E8ECF6; --muted:#A3AEC6; --line:#2B3654;
+  --violet:#8C8CFF; --violet-soft:#25265A; --teal:#3CCFCB; --teal-soft:#123a3c; --sun:#FFCE3D; --sun-soft:#3a3010; --red:#FF7A6E;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7}
+a{color:var(--violet)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+h1,h2,h3{font-family:var(--head);line-height:1.12;margin:0}
+p{margin:0 0 1rem}
+img,svg{max-width:100%}
+
+/* NAV */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:72rem;margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem}
+.brand{font-family:var(--head);font-weight:800;white-space:nowrap}
+.links{display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;flex:1}
+.links::-webkit-scrollbar{display:none}
+.links a{font-family:var(--head);font-size:.82rem;font-weight:600;text-decoration:none;color:var(--muted);padding:.35rem .7rem;border-radius:999px;white-space:nowrap}
+.links a.on{background:var(--ink);color:var(--bg)}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;background:var(--violet);width:0}
+
+/* HERO */
+.hero{max-width:72rem;margin:0 auto;padding:3.5rem 1.2rem 2rem;display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800;letter-spacing:-.03em}
+.hero .sub{font-size:1.15rem;color:var(--muted);margin-top:1.2rem;max-width:34rem}
+.meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem}
+.chip{font-family:var(--head);font-size:.78rem;font-weight:600;padding:.3rem .7rem;border-radius:999px;background:var(--soft);color:var(--ink)}
+.chip.date{background:var(--violet-soft);color:var(--violet)}
+.radar{aspect-ratio:1;width:100%;max-width:26rem;justify-self:center}
+.sweep{transform-origin:200px 200px;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.blip{animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.radar{max-width:18rem}}
+
+/* SECTIONS */
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.2rem}
+section.ch{padding:4.5rem 0 1rem;border-top:1px solid var(--line)}
+.ch-head{max-width:48rem}
+.kicker{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+.ch h2{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em}
+.lead{font-size:1.2rem;color:var(--muted);margin-top:1rem}
+.grid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.5rem;margin-top:2.2rem;align-items:start}
+.grid2 .stick{position:sticky;top:84px}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.grid2 .stick{position:static}}
+.prose p{max-width:38rem}
+.prose h3{font-size:1.2rem;margin:1.8rem 0 .7rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.4rem}
+.card h3{font-size:1.05rem;margin-bottom:.8rem}
+.example{background:var(--teal-soft);border-radius:14px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.example b:first-child{font-family:var(--head);color:var(--teal);display:block;margin-bottom:.3rem}
+.paper{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:12px;padding:1rem 1.2rem;margin:1.4rem 0}
+.paper .ic{font-size:1.5rem;line-height:1}
+.src{font-family:var(--head);font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:6px;background:var(--soft);color:var(--muted);vertical-align:middle;white-space:nowrap}
+.src.p{background:var(--teal-soft);color:var(--teal)}
+.src.u{background:var(--violet-soft);color:var(--violet)}
+.sources{font-size:.88rem;color:var(--muted);margin-top:1rem}
+.sources a{margin-right:.4rem}
+
+/* curiosity */
+details.q{background:var(--sun-soft);border-radius:14px;padding:1rem 1.2rem;margin:1.6rem 0;max-width:38rem}
+details.q summary{cursor:pointer;font-family:var(--head);font-weight:700;list-style:none;display:flex;gap:.7rem;align-items:flex-start}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::before{content:"?";flex:none;display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--sun);color:#1a1300;font-weight:800}
+details.q summary::after{content:"Scopri";margin-left:auto;font-size:.75rem;font-weight:600;color:var(--muted);padding-top:.25rem}
+details.q[open] summary::after{content:"Chiudi"}
+details.q p{margin:.8rem 0 0}
+
+/* buttons */
+.btn{font-family:var(--head);font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.55rem 1rem;border-radius:999px;cursor:pointer}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0}
+.note{font-size:.84rem;color:var(--muted)}
+
+/* timeline */
+.tl{position:relative;margin:2.4rem 0 1rem;overflow-x:auto;padding-bottom:.5rem}
+.tl-in{position:relative;min-width:44rem;height:120px}
+.tl-line{position:absolute;left:1rem;right:1rem;top:60px;height:3px;background:var(--line);border-radius:2px}
+.tl-dot{position:absolute;top:60px;width:20px;height:20px;margin:-8px 0 0 -10px;border-radius:50%;border:3px solid var(--bg);background:var(--violet);cursor:pointer;padding:0;transition:transform .2s}
+.tl-dot.n{background:var(--sun)}
+.tl-dot[aria-pressed="true"]{transform:scale(1.5)}
+.tl-day{position:absolute;top:88px;transform:translateX(-50%);font-family:var(--head);font-size:.72rem;color:var(--muted)}
+.tl-card{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center}
+.tl-date{font-family:var(--head);font-weight:800;font-size:2.6rem;line-height:1;color:var(--violet);text-align:center}
+.tl-date small{display:block;font-size:.8rem;font-weight:600;color:var(--muted)}
+
+/* bars */
+.pbar{margin:.9rem 0}
+.pbar .lab{display:flex;justify-content:space-between;font-family:var(--head);font-size:.88rem;font-weight:600}
+.pbar .tr{height:12px;background:var(--soft);border-radius:6px;overflow:hidden;margin-top:.35rem}
+.pbar .fi{height:100%;width:0;background:var(--violet);border-radius:6px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.mail{background:var(--soft);border-radius:12px;padding:.9rem 1rem;font-style:italic;margin:.8rem 0}
+
+/* race */
+.lane{margin:1rem 0}
+.lane .nm{font-family:var(--head);font-weight:700;font-size:.9rem;margin-bottom:.4rem;display:flex;justify-content:space-between}
+.words{display:flex;flex-wrap:wrap;gap:.35rem;min-height:2.4rem}
+.w{font-family:var(--head);font-size:.85rem;padding:.35rem .6rem;border-radius:8px;background:var(--soft);color:var(--muted);transition:background .3s,color .3s}
+.w.on{background:var(--violet);color:#fff}
+.w.d{background:var(--teal);color:#fff}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.4rem 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem;text-align:center}
+.stat strong{display:block;font-family:var(--head);font-size:1.8rem;color:var(--violet)}
+.stat span{font-size:.82rem;color:var(--muted)}
+@media (max-width:560px){.stats{grid-template-columns:1fr}}
+
+/* calc */
+.calc label{display:flex;justify-content:space-between;font-family:var(--head);font-weight:600;font-size:.9rem;margin-top:1rem}
+.calc input{width:100%;accent-color:var(--violet)}
+.cbar{display:grid;grid-template-columns:9.5rem 1fr 5.5rem;gap:.6rem;align-items:center;font-size:.85rem;margin:.5rem 0}
+.cbar .tr{height:14px;background:var(--soft);border-radius:7px;overflow:hidden}
+.cbar .fi{height:100%;background:var(--violet);border-radius:7px;transition:width .4s}
+.cbar .fi.t{background:var(--teal)}
+.cbar b{text-align:right;font-family:var(--head)}
+
+/* table */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.92rem}
+th,td{text-align:left;padding:.7rem .6rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--head);font-size:.8rem;color:var(--muted)}
+td:first-child{font-family:var(--head);font-weight:700;white-space:nowrap}
+
+/* cards grid */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:1rem;margin-top:2rem}
+.sig{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.2rem}
+.sig h3{font-size:1.02rem;margin:.6rem 0 .5rem}
+.sig p{font-size:.93rem;margin:0}
+
+/* quiz */
+.quiz .qq{margin:1.4rem 0}
+.quiz .qq p{font-family:var(--head);font-weight:700}
+.opts{display:grid;gap:.5rem}
+.opt{text-align:left;font-family:var(--body);font-size:.95rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.7rem 1rem;border-radius:12px;cursor:pointer}
+.opt.ok{border-color:var(--teal);background:var(--teal-soft)}
+.opt.ko{border-color:var(--red)}
+.fb{font-size:.9rem;color:var(--muted);margin-top:.4rem;min-height:1.2rem}
+.score{font-family:var(--head);font-weight:800;font-size:1.2rem}
+
+/* prompt */
+pre.prompt{white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.3rem;font-family:var(--body);font-size:.92rem;line-height:1.6;max-height:28rem;overflow:auto}
+footer{border-top:1px solid var(--line);margin-top:4rem;padding:2rem 1.2rem 3rem;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* svg anim helpers */
+.float{animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.orbit{transform-origin:200px 170px;animation:spin 14s linear infinite}
+.dash{stroke-dasharray:6 6;animation:dash 1.5s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+
+select:focus-visible{outline:3px solid var(--violet)}
+@media (max-width:900px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.stat{min-width:0}code{overflow-wrap:anywhere;word-break:break-all}.stat strong{overflow-wrap:anywhere}
+@media (max-width:560px){.stats.keep3{grid-template-columns:repeat(3,minmax(0,1fr))!important}.stats.keep3 .stat{padding:.6rem .3rem}.stats.keep3 strong{font-size:1.05rem!important}}
+.stat span{display:block}
+</style>
+<style id="audio-css">.audio-box{margin-top:1.4rem;padding:1rem 1.1rem;border:1px solid var(--line);border-radius:16px;background:var(--surface);max-width:34rem}.audio-box h2{font-size:1.05rem;margin:0 0 .3rem;color:var(--ink)}.audio-box p{margin:0;color:var(--muted);font-size:.95rem}.audio-box audio{display:block;width:100%;min-height:44px;margin:.75rem 0 .6rem}.audio-links{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}.audio-links a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--ink)}.audio-links a.audio-dl{padding:0 1rem;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none}.audio-links a.audio-dl:hover{text-decoration:underline}</style><script id="a11y-theme">try{var t=localStorage.getItem('radar-theme');if(t=='light'||t=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script><style id="a11y">
+/* Strato accessibilita' WCAG 2.2 AA */
+/* palette armonica: viola 240, ciano 190, ambra 26, magenta 336; testo AA su ogni sfondo */
+:root:not([data-theme="dark"]){--violet:#4B4BF5;--violet-soft:#ECECFE;--teal:#0A6A7C;--teal-soft:#E0F2F5;--sun:#A34E08;--sun-soft:#FDF0E1;--red:#C2185B;--red-soft:#FCE7EF}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--violet:#A5A5FF;--violet-soft:#25265A;--teal:#5FC7D9;--teal-soft:#0F3440;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#F27BA8;--red-soft:#3D1A2A}}
+:root[data-theme="dark"]{--violet:#A5A5FF;--violet-soft:#25265A;--teal:#5FC7D9;--teal-soft:#0F3440;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#F27BA8;--red-soft:#3D1A2A}
+html{scroll-padding-top:6rem}
+:focus{scroll-margin-top:6rem;scroll-margin-bottom:2rem}
+:focus-visible{outline:3px solid var(--violet)!important;outline-offset:2px!important;border-radius:4px}
+.skip-link{position:absolute;left:1rem;top:-100px;z-index:10000;background:var(--ink);color:var(--bg)!important;padding:.75rem 1.1rem;border-radius:10px;font-weight:700;text-decoration:none}
+.skip-link:focus{top:1rem}
+.tl-dot{width:24px!important;height:24px!important;margin:-10px 0 0 -12px!important}
+.tl-in{min-width:60rem!important}
+.nav .links a,.btn,.opt,button,select,summary{min-height:24px}
+input[type=range]{min-height:24px}
+.grid2>*,.cards>*,.stats>*{min-width:0}
+@media (max-width:900px){.grid2{grid-template-columns:minmax(0,1fr)!important}}
+table{display:block;max-width:100%;overflow-x:auto}
+.src,.chip{white-space:normal!important;max-width:100%;overflow-wrap:anywhere}
+.prose,.sig,.card,.example,p,li,summary{overflow-wrap:anywhere}
+code,pre{white-space:pre-wrap;word-break:break-word}
+.nav-in{flex-direction:column!important;align-items:stretch!important;gap:.35rem!important;padding:.55rem 1.2rem .5rem!important}
+.nav .brand{display:inline-flex;align-items:center;gap:.4rem;font-size:1.05rem;color:var(--ink);text-decoration:none;align-self:flex-start;min-height:24px}
+.nav .brand:hover{color:var(--violet)}
+.links-row{position:relative;display:flex;align-items:center;gap:.25rem;min-width:0}
+.links-row .links{flex:1;min-width:0;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scroll-padding-inline:4px;padding:2px 4px}
+.links-row.fade-r .links{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent 100%);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent 100%)}
+.links-row.fade-l .links{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px);mask-image:linear-gradient(90deg,transparent 0,#000 28px)}
+.links-row.fade-l.fade-r .links{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%)}
+.links-row .links a{scroll-snap-align:start}
+.nav-arrow{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.05rem;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0}
+.links-row.can-scroll .nav-arrow{display:inline-flex}
+.nav-arrow:disabled{opacity:.35;cursor:default}
+@media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
+.chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
+:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
+:root[data-theme="light"]{--bg:#FFFFFF;--surface:#FFFFFF;--soft:#F1F3F8;--line:#D3D9E6;--ink:#121A2B;--muted:#4E5A72}
+:root[data-theme="light"] .card,:root[data-theme="light"] .sig,:root[data-theme="light"] .stat{border:1px solid var(--line)}
+.nav-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.nav-actions{display:flex;align-items:center;gap:.5rem;position:relative}
+.menu-btn{display:inline-flex;align-items:center;gap:.45rem;min-height:36px;padding:.35rem .95rem;border-radius:999px;border:1.5px solid var(--violet);background:var(--violet);color:var(--bg);font:700 .85rem var(--head,system-ui);cursor:pointer}
+.menu-btn:hover{filter:brightness(1.08)}.menu-btn[aria-expanded="true"]{background:var(--ink);border-color:var(--ink)}
+.menu-btn .bars{display:inline-block;width:14px;height:10px;background:linear-gradient(currentColor 0 0) 0 0/100% 2px no-repeat,linear-gradient(currentColor 0 0) 0 50%/100% 2px no-repeat,linear-gradient(currentColor 0 0) 0 100%/100% 2px no-repeat}
+.topicmenu{position:absolute;top:calc(100% + .5rem);right:0;z-index:9500;width:min(22rem,calc(100vw - 2rem));max-height:min(70vh,34rem);overflow:auto;padding:.6rem;border-radius:18px;border:1px solid var(--line);background:var(--surface);box-shadow:0 18px 50px rgba(10,14,30,.22)}
+.topicmenu[hidden]{display:none}
+.topicmenu p{margin:.6rem .6rem .3rem;font:700 .72rem var(--head,system-ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.topicmenu ul{list-style:none;margin:0;padding:0}
+.topicmenu a{display:flex;justify-content:space-between;align-items:center;gap:.6rem;min-height:40px;padding:.45rem .7rem;border-radius:12px;color:var(--ink);text-decoration:none;font-weight:600}
+.topicmenu a:hover,.topicmenu a:focus-visible{background:var(--soft)}
+.topicmenu a[aria-current="page"]{background:var(--violet);color:var(--bg)}
+.topicmenu a .tn{white-space:nowrap;font-weight:500;font-size:.8rem;color:var(--muted)}.topicmenu a[aria-current="page"] .tn{color:var(--bg)}
+.topicmenu a.all{border:1.5px solid var(--violet);margin:.2rem 0 .3rem}
+.topicmenu .dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:.55rem;vertical-align:0}
+.topicmenu .dot.theme{background:var(--sun-soft);border:1.5px solid var(--sun)}.topicmenu .dot.guide{background:var(--teal-soft);border:1.5px solid var(--teal)}
+@media (max-width:480px){.theme-btn .tlab{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+.theme-btn{display:inline-flex;align-items:center;gap:.4rem;min-height:32px;padding:.3rem .75rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 .8rem var(--head,system-ui);cursor:pointer}
+.theme-btn:hover{border-color:var(--violet)}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
+.nav .brand{gap:.55rem!important}.logo-mark{flex:none;display:block}.logo-word{font-family:var(--head,system-ui);font-weight:800;font-size:1.12rem;letter-spacing:-.02em;color:var(--ink);line-height:1}.logo-ai{margin-left:.18em;padding:.12em .32em;border-radius:.35em;background:var(--violet);color:var(--bg);font-size:.78em;letter-spacing:.02em;vertical-align:.08em}.nav .brand:hover .logo-word{color:var(--violet)}.nav .brand:hover .logo-ai{color:var(--bg)}</style><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234B4BF5'/%3E%3Cpath d='M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z' fill='%23fff' opacity='.28'/%3E%3Cg fill='none' stroke='%23fff' stroke-linecap='round'%3E%3Ccircle cx='16' cy='16' r='10.5' stroke-width='2' opacity='.6'/%3E%3Ccircle cx='16' cy='16' r='5.6' stroke-width='2' opacity='.85'/%3E%3Cpath d='M16 16 L25.1 10.75' stroke-width='2.4'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='2.3' fill='%23fff'/%3E%3Ccircle cx='22.6' cy='21.4' r='2.2' fill='%23fff'/%3E%3C/svg%3E">
+<script id="a11y-menu">window.RADAR_MENU={base:"../",items:[{"u": "argomenti.html", "l": "Tutti gli argomenti", "k": "all"}, {"u": "azure.html", "l": "Azure Content Understanding", "k": "guide", "n": "19 puntate"}, {"u": "azure-esercizi.html", "l": "Palestra Content Understanding", "k": "guide", "n": "1.343 esercizi"}, {"u": "azure-laboratorio.html", "l": "Laboratorio Content Understanding", "k": "guide", "n": "807 sfide"}, {"u": "tema-sicurezza.html", "l": "Sicurezza", "k": "theme", "n": "16 edizioni"}, {"u": "tema-grandi-modelli.html", "l": "Grandi modelli", "k": "theme", "n": "12 edizioni"}, {"u": "tema-costi.html", "l": "Costi", "k": "theme", "n": "9 edizioni"}, {"u": "tema-ricerca.html", "l": "Ricerca", "k": "theme", "n": "9 edizioni"}, {"u": "tema-pesi-aperti.html", "l": "Pesi aperti", "k": "theme", "n": "7 edizioni"}, {"u": "tema-decisionali.html", "l": "Decisionali", "k": "theme", "n": "6 edizioni"}, {"u": "tema-regole.html", "l": "Regole", "k": "theme", "n": "5 edizioni"}, {"u": "tema-hardware.html", "l": "Hardware", "k": "theme", "n": "4 edizioni"}, {"u": "tema-valutazione.html", "l": "Valutazione", "k": "theme", "n": "2 edizioni"}]};</script>
+</head>
+<body>
+<a class="skip-link" href="#contenuto">Salta al contenuto</a>
+<nav class="nav" aria-label="Capitoli">
+  <div class="nav-in">
+    <a class="brand" href="../" aria-label="Radar AI, tutte le edizioni"><svg class="logo-mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="9" fill="var(--violet)"/><path d="M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z" fill="var(--bg)" opacity=".28"/><g fill="none" stroke="var(--bg)" stroke-linecap="round"><circle cx="16" cy="16" r="10.5" stroke-width="2" opacity=".6"/><circle cx="16" cy="16" r="5.6" stroke-width="2" opacity=".85"/><path d="M16 16 L25.1 10.75" stroke-width="2.4"/></g><circle cx="16" cy="16" r="2.3" fill="var(--bg)"/><circle cx="22.6" cy="21.4" r="2.2" fill="var(--bg)"/></svg><span class="logo-word">Radar<span class="logo-ai">AI</span></span></a>
+    <div class="links" id="links">
+      <a href="#fondo">Anthropic</a><a href="#banche">Schwab</a><a href="#nscale">Nscale</a><a href="#cristalli">MIT</a><a href="#azure">Azure</a><a href="#lab">Prova tu</a><a href="#segnali">Segnali</a><a href="#novita">Novità</a><a href="#quiz">Quiz</a><a href="#fonti">Fonti</a>
+    </div>
+  </div>
+  <div class="progress" id="prog"></div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="meta"><span class="chip date">Edizione del 19 ottobre 2026</span><span class="chip">Notizie dal 16 al 19 ottobre</span><span class="chip">Nuove, più due recuperi</span><span class="chip">Rubrica Azure: ventunesima puntata</span><span class="chip">Lettura: circa 28 minuti</span></div>
+    <h1 style="margin-top:1.2rem">Anthropic mette il 5% delle azioni in un fondo, le banche chiudono la porta agli agenti, e i conti dei data center tornano per terra</h1>
+    <p class="sub">Domenica Anthropic ha annunciato un fondo per il bene pubblico che riceve il 5% delle sue azioni e cresce se cresce l'azienda; due giorni prima aveva pubblicato un sondaggio in cui i suoi dipendenti si aspettano che l'AI faccia nel 2030 il 75% del loro lavoro, contro il 28% dei lavoratori americani. Venerdì Schwab ha detto di bloccare ogni settimana decine di agenti che provano a muovere i soldi dei clienti, e Amazon ha confermato il muro contro Muse di Meta: leggere sì, agire no. Sul fronte del ferro, gli investitori chiedono a Nscale di quotarsi a 16-19 miliardi invece di 30, l'indice dei chip scende per l'ottava seduta di fila e Washington presta 4,4 miliardi per riaccendere tre centrali nucleari. Dalla ricerca, un modello del MIT che collega i cristalli in tre dimensioni alle parole. La rubrica Azure è sulla vita di un analizzatore: come cambiarlo senza fermare niente.</p><!-- AUDIO-PLAYER --><section class="audio-box" aria-labelledby="audio-title"><h2 id="audio-title"><span aria-hidden="true">&#127911;</span> Ascolta l'edizione</h2><p>Versione audio, circa 9 minuti, con voce sintetica. Segue la pagina capitolo per capitolo, con una domanda di riflessione alla fine di ognuno; il testo completo è questa pagina.</p><audio controls preload="none" src="https://github.com/notizieposts-web/notizieposts-web-newai/releases/download/audio-25/radar-ai-25.mp3" aria-label="Versione audio dell'edizione 25"><a href="https://github.com/notizieposts-web/notizieposts-web-newai/releases/download/audio-25/radar-ai-25.mp3">Scarica la versione audio (MP3)</a></audio><p class="audio-links"><a class="audio-dl" href="https://github.com/notizieposts-web/notizieposts-web-newai/releases/download/audio-25/radar-ai-25.mp3" download>Scarica l'MP3</a><a href="https://github.com/notizieposts-web/notizieposts-web-newai/releases">Tutti gli audio</a></p></section><!-- /AUDIO-PLAYER -->
+  </div>
+  <svg class="radar" viewBox="0 0 400 400" role="img" aria-label="I temi dell'edizione">
+    <circle cx="200" cy="200" r="180" fill="var(--surface)" stroke="var(--line)"/>
+    <g font-family="Sora" font-size="10" font-weight="700" text-anchor="middle">
+      <g class="float"><circle cx="200" cy="80" r="42" fill="var(--violet)" opacity=".9"/><text x="200" y="77" fill="#fff">5% + 2%</text><text x="200" y="91" fill="#fff" font-size="9" font-weight="500">il fondo di Anthropic</text></g>
+      <g class="float" style="animation-delay:.4s"><circle cx="312" cy="150" r="40" fill="var(--red)" opacity=".85"/><text x="312" y="147" fill="#fff">leggere sì</text><text x="312" y="161" fill="#fff" font-size="9" font-weight="500">agire no</text></g>
+      <g class="float" style="animation-delay:.8s"><circle cx="290" cy="282" r="40" fill="var(--sun-soft)" stroke="var(--sun)"/><text x="290" y="279" fill="var(--ink)">30 o 16</text><text x="290" y="293" fill="var(--ink)" font-size="9" font-weight="500">miliardi per Nscale</text></g>
+      <g class="float" style="animation-delay:1.2s"><circle cx="110" cy="282" r="40" fill="var(--teal-soft)" stroke="var(--teal)"/><text x="110" y="279" fill="var(--teal)">cristalli 3D</text><text x="110" y="293" fill="var(--teal)" font-size="9" font-weight="500">e parole, al MIT</text></g>
+      <g class="float" style="animation-delay:1.6s"><circle cx="88" cy="150" r="40" fill="var(--soft)" stroke="var(--line)"/><text x="88" y="147" fill="var(--ink)">Azure p.21</text><text x="88" y="161" fill="var(--muted)" font-size="9" font-weight="500">le versioni</text></g>
+      <circle cx="200" cy="200" r="26" fill="var(--ink)"/><text x="200" y="197" fill="var(--bg)" font-size="9">19 ott</text><text x="200" y="209" fill="var(--bg)" font-size="8" font-weight="500">2026</text>
+    </g>
+  </svg>
+</header>
+
+<main id="contenuto" tabindex="-1" class="wrap">
+
+<section class="ch" id="periodo" style="padding-top:2.5rem">
+  <div class="ch-head"><div class="kicker"><span class="chip">16–19 ottobre</span></div><h2>Il periodo in breve</h2><p class="lead">Un fine settimana lungo, con due recuperi di venerdì. Tocca un momento sulla linea del tempo; in giallo i giorni con le notizie principali.</p></div>
+  <div class="tl"><div class="tl-in" id="tlin"><div class="tl-line"></div></div></div>
+  <div class="card tl-card"><div class="tl-date" id="tld">16<small>ottobre</small></div><div><h3 id="tlt" style="font-size:1.1rem;margin-bottom:.4rem"></h3><p id="tlx" style="margin:0"></p></div></div>
+</section>
+
+<section class="ch" id="fondo">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip topic">Anthropic</span><span class="chip date">18 ottobre 2026 (fondo); 16 ottobre (sondaggio e proposta di legge)</span><span class="src u">ufficiale</span><span class="src">stampa</span><span class="src">terze parti</span><span class="chip">Anthropic; Al Jazeera e AP; Politico via Reuters</span><span class="chip">Nota di trasparenza</span></div>
+    <h2>Anthropic promette il 5% delle sue azioni a un fondo per il bene pubblico, e misura quanto i suoi dipendenti si aspettano più di tutti gli altri</h2>
+    <p class="lead">Tre notizie su Anthropic in tre giorni, che conviene leggere insieme. Un fondo che cresce se cresce l'azienda. Un sondaggio che mostra quanto chi costruisce l'AI ne prevede l'effetto sul lavoro, molto più del resto del paese. E una proposta di legge portata in silenzio al Congresso. Il filo: un'azienda che si prepara a valere molto di più e prova a dire in anticipo cosa farà con quel valore.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>Prima la trasparenza</h3>
+      <p>Questo capitolo parla di Anthropic, e questa edizione è preparata da Claude, un modello di Anthropic. Riporto quello che dicono la pagina ufficiale, il rapporto di ricerca e la stampa, con i limiti che le fonti stesse indicano, senza giudizi di merito sull'azienda.</p>
+      <h3>Il fondo: 5% subito, 2% in più per ogni salto di valore</h3>
+      <p>Domenica <b>18 ottobre</b> Anthropic ha annunciato l'<b>Anthropic Public Benefit Fund</b>. Il meccanismo è semplice da dire: il fondo riceve il <b>5% delle azioni</b> dell'azienda, se gli azionisti approvano. Poi, a discrezione del consiglio di amministrazione, riceve un altro <b>2% per ogni aumento del 50%</b> del valore dell'azienda oltre una soglia di partenza. La soglia non è stata resa nota: Anthropic dice che struttura, governo e tappe di valore saranno pubblicati "nei prossimi mesi".</p>
+      <p>Il fondo è una <b>società a responsabilità limitata posseduta interamente</b> da Anthropic, non una fondazione di beneficenza nel senso fiscale americano (la cosiddetta 501(c)(3)). La scelta, spiega l'azienda, lascia più libertà su come donare: grandi contributi a enti non profit tradizionali, distribuzioni dirette a gruppi di persone, e "approcci più audaci" agli scossoni del mercato del lavoro. Un divieto è scritto in chiaro: quelle azioni <b>non possono finanziare attività di lobby né donazioni politiche</b>, negli Stati Uniti o altrove. Il fondo si aggiunge ai 200 milioni di dollari già promessi per studiare gli effetti dell'AI sul lavoro.</p>
+      <p>C'è poi il conto complessivo. I cofondatori hanno promesso fin dall'inizio l'80% delle proprie azioni; un programma aziendale raddoppia le donazioni di azioni dei dipendenti, e circa metà del personale vi partecipa. Sommando tutto, Anthropic stima che circa il <b>20% delle sue azioni</b> sia destinato al bene pubblico, più le quote a tappe del fondo. La stampa, da Al Jazeera all'Associated Press, collega l'annuncio alla possibile quotazione in borsa dell'azienda: è una lettura dei giornali, non una dichiarazione di Anthropic.</p>
+      <div class="example"><b>Esempio pratico: come cresce la quota con il valore</b>Immagina che la soglia di partenza sia 100 (in qualunque unità). Se l'azienda arriva a 150, il valore è salito del 50%: il consiglio può aggiungere il 2%, e il fondo passa dal 5% al 7%. A 200 il valore è salito del 100%, cioè due volte il 50%: il fondo può arrivare al 9%. Attenzione a due dettagli. Primo, ogni aggiunta è "a discrezione": non è automatica. Secondo, nessuno sa ancora se il 50% si conta sulla soglia iniziale o su ogni tappa precedente; nel calcolatore qui a fianco puoi provare entrambe le letture.</div>
+      <h3>Il sondaggio: 75% contro 28%</h3>
+      <p>Il <b>16 ottobre</b>, un giorno dopo le altre ricerche di cui abbiamo parlato ieri, l'Anthropic Institute ha pubblicato "The AI Expectations Gap", il divario delle aspettative. Ha messo a confronto <b>10.980 adulti americani</b>, intervistati da Morning Consult dall'11 al 23 agosto e pesati per essere rappresentativi, con <b>1.334 dipendenti</b> di Anthropic, sondati dal 9 al 12 agosto. Domanda centrale: che parte del tuo lavoro attuale potrà fare l'AI nel 2030?</p>
+      <p>I dipendenti rispondono in media il <b>75% delle loro ore</b>; i lavoratori americani il <b>28%</b>. Solo un lavoratore su venti si aspetta l'80% o più. Sulla scoperta da premio Nobel fatta da un'AI entro il 2030, ci crede il 39% degli adulti (44% in un secondo giro di settembre) contro il 91% dei dipendenti. E sul tempo risparmiato oggi: il 26% degli adulti che usano l'AI al lavoro dice che un compito richiede un quarto del tempo o meno, contro il 59% dei dipendenti.</p>
+      <p>Gli autori fanno anche un passo in più: inseriscono le risposte in un loro modello economico. Chi si aspetta che l'AI faccia meno di metà del proprio lavoro prevede una disoccupazione tra il 7 e l'8%; chi si aspetta l'80% o più arriva al 12,2%, con il tasso attuale al 4,2%. La crescita del prodotto interno nel 2030 implicita nelle risposte è del 5,4% per gli adulti e del 17,1% per i dipendenti.</p>
+      <p>I limiti li scrive il rapporto stesso, ed è giusto riportarli tutti: il campione degli adulti è un pannello online su adesione volontaria; quello dei dipendenti non è pesato e viene da una sola azienda; le risposte sono opinioni personali, non piani aziendali; chi usa molto l'AI potrebbe essere più ottimista proprio per questo; e gli autori lavorano per Anthropic, che ha un interesse nel tema.</p>
+      <h3>La proposta di legge portata in silenzio</h3>
+      <p>Venerdì <b>16 ottobre</b> Politico, citando tre persone, ha scritto che rappresentanti di Anthropic hanno presentato a parlamentari americani una bozza di legge sulla sicurezza dei modelli di frontiera; Reuters l'ha ripresa. Secondo una rassegna che cita Reuters, la bozza prevede valutatori indipendenti registrati presso il Dipartimento del Commercio, che dovrebbero segnalare un rischio imminente entro <b>72 ore</b> dalla fine di una valutazione, e una soglia di intervento per rischi prevedibili oltre <b>un miliardo di dollari</b> di danni o con morti o feriti gravi oltre le <b>50 persone</b>, su armi biologiche, attacchi informatici e modelli che sfuggono al controllo. <b>Non ho potuto leggere il testo integrale</b>: i dettagli vengono dalla rassegna, non dalla bozza. È una proposta, non una legge.</p>
+      <details class="q"><summary>Perché una società e non una fondazione?</summary><p>Una fondazione di beneficenza americana ha regole strette su cosa può finanziare e come, e vantaggi fiscali in cambio. Una società posseduta dall'azienda può fare cose che una fondazione non può, come pagare direttamente gruppi di lavoratori o investire. Il rovescio è che la garanzia sta tutta nelle regole interne: per questo conta il divieto di lobby e conta sapere, nei prossimi mesi, chi decide e con quali tappe.</p></details>
+      <details class="q"><summary>Il divario delle aspettative dimostra che i dipendenti hanno ragione?</summary><p>No. Il rapporto mostra un'associazione, non una causa: chi lavora ogni giorno con modelli avanzati si aspetta di più, ma potrebbe essere per esperienza diretta oppure per un ambiente che premia l'ottimismo. Il dato utile è un altro: due gruppi guardano lo stesso futuro con stime che differiscono di quasi tre volte. Chi deve pianificare, un'azienda o un governo, non può scegliere uno dei due numeri a caso.</p></details>
+      <details class="q"><summary>Cosa cambia per chi usa Claude oggi?</summary><p>Niente nell'immediato: il fondo riguarda la proprietà delle azioni, non i prodotti. Le due cose che si possono seguire sono la pubblicazione delle regole del fondo e il rapporto annuale sul beneficio pubblico che Anthropic dice di voler pubblicare.</p></details>
+    </div>
+    <div class="stick">
+      <div class="card">
+        <h3>La quota del fondo, se il valore sale</h3>
+        <p class="note" style="margin-top:0">Ipotesi: il consiglio aggiunge sempre il 2% quando può. La soglia è 100.</p>
+        <label class="note" for="fv" style="display:block;margin:.2rem 0">Valore dell'azienda rispetto alla soglia: <b id="fvo"></b></label>
+        <input id="fv" type="range" min="100" max="600" step="10" value="200" style="width:100%">
+        <div class="row" id="fmode" style="margin-top:.6rem"><button class="btn" data-m="0">50% sulla soglia</button><button class="btn" data-m="1">50% su ogni tappa</button></div>
+        <div id="fout" style="margin-top:.8rem" aria-live="polite"></div>
+      </div>
+      <div class="card" style="margin-top:1rem">
+        <h3>Quanto del proprio lavoro farà l'AI nel 2030</h3>
+        <div id="gapbars"></div>
+        <p class="note">Medie e quote dichiarate nel rapporto di Anthropic, agosto 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="banche">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip topic">Schwab</span><span class="chip date">16 ottobre 2026 (Schwab); 18 ottobre (il quadro)</span><span class="src">stampa</span><span class="src">terze parti</span><span class="chip">Bloomberg via The Next Web; OfficeChai; Forkast</span></div>
+    <h2>Schwab conta gli agenti che bloccava ogni settimana, e Amazon conferma il muro contro Muse: la rete si chiude agli assistenti degli altri</h2>
+    <p class="lead">Il 14 ottobre avevamo raccontato perché JPMorgan non lascia muovere soldi agli agenti esterni. Il fatto nuovo è che ora c'è una seconda grande banca con i numeri, e il quadro si allarga ai negozi e alle compagnie aeree. Il modello che sta emergendo è lo stesso ovunque: leggere sì, agire no, a meno che l'agente non sia il tuo.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>Schwab: decine di blocchi a settimana</h3>
+      <p>Venerdì <b>16 ottobre</b>, alla televisione di Bloomberg, l'amministratore delegato di Charles Schwab, Rick Wurster, ha detto che la società blocca gli agenti AI esterni non autorizzati che provano a <b>spostare soldi</b> dei clienti, compreso Muse, l'agente personale di Meta. Riceve un rapporto settimanale sui blocchi: sono "decine", nell'ordine delle dieci o venti alla settimana. La sua preoccupazione è concreta: clienti che consegnano la propria password a un agente perché agisca per loro. La domanda che fa è una sola: "chi ne risponde?".</p>
+      <p>Schwab non chiude del tutto. Offrirà un accesso in <b>sola lettura</b>: strumenti esterni potranno vedere i saldi e fare ricerche attraverso server MCP controllati dalla banca, ma non muovere denaro. E spinge il proprio assistente, Charley, annunciato il 30 settembre. Lo stesso schema di JPMorgan, dove Jamie Dimon aveva detto martedì 13 che non vuole "agenti fuori controllo, e potrebbero essere migliaia": dati visibili tramite fornitori come Plaid, nessun pagamento.</p>
+      <h3>Il quadro: Amazon, Delta, Yelp</h3>
+      <p>Il <b>18 ottobre</b> una ricostruzione di OfficeChai, che riprende TechCrunch e Bloomberg, mette in fila il resto. <b>Amazon</b> ha bloccato Muse a settembre e lo dice in chiaro: "l'accesso continuato di un agente AI non autorizzato viola le Condizioni d'uso"; aggiunge di aver chiesto prima a Meta di escludere Amazon.com. Nell'edizione del 14 ottobre questo blocco era tra le cose che non avevamo potuto verificare: ora c'è la frase dell'azienda. Alcuni utenti segnalano che anche l'agente di Grok non riesce a ordinare, ma Amazon non lo ha confermato. <b>Delta</b> non ha un blocco formale, ma dice di non avere "nessuna collaborazione né integrazione" con agenti di prenotazione esterni. <b>Yelp</b> vieta la raccolta automatica nei suoi termini, ma invece di chiudere fa pagare: ha accordi di licenza con OpenAI, Perplexity e altri.</p>
+      <div class="example"><b>Esempio pratico: lo stesso agente, quattro risposte</b>Chiedi al tuo agente: "Paga la bolletta, prenota il volo per Milano, ordina le cartucce, trova una pizzeria aperta". In banca può leggere il saldo ma non pagare. Su Delta il tentativo di prenotare può fallire senza un messaggio chiaro. Su Amazon, se l'agente è Muse, viene respinto. Su Yelp funziona se l'azienda che ha costruito l'agente paga la licenza. Quattro compiti, quattro regole diverse, e nessuna scritta nel prompt: dipende da chi ha fatto l'agente e da quali accordi ha. È il motivo per cui un agente "generale" oggi sembra a volte inaffidabile.</div>
+      <h3>Perché tutti scelgono "leggere sì, agire no"</h3>
+      <p>Le ragioni dichiarate sono tre. La <b>responsabilità</b>: se un agente sbaglia un bonifico con la password del cliente, la banca non sa chi ha dato l'ordine. La <b>sicurezza</b>: una password consegnata a un servizio esterno è una password in più che può uscire, e MCP stesso ha avuto falle corrette da Google, JPMorgan e altri. Il <b>valore</b>: chi possiede la relazione con il cliente vuole che passi dal proprio assistente, non da quello di un altro. Negli Stati Uniti la responsabilità degli agenti è ancora in discussione al Congresso, e i regolatori americani ed europei stanno facendo domande alle banche.</p>
+      <details class="q"><summary>Che differenza c'è tra un agente con la mia password e un accesso in sola lettura via MCP?</summary><p>Con la password l'agente è te: può fare tutto quello che puoi fare tu, e la banca non lo distingue. Con un accesso dedicato, la banca sa che sta parlando con un programma, decide quali dati mostrargli e può revocarlo senza toccare la tua password. È la differenza tra dare le chiavi di casa e dare al vicino il permesso di guardare dalla finestra.</p></details>
+      <details class="q"><summary>Gli agenti diventeranno inutili se tutti chiudono?</summary><p>Più probabilmente diventeranno "di casa": ogni servizio offrirà il proprio agente o un canale autorizzato a pagamento, come fa Yelp. Il rischio, per chi usa gli agenti, è finire con dieci assistenti diversi invece di uno. Il segnale da guardare è se nasceranno regole comuni per autorizzare un agente esterno, come oggi esistono per i pagamenti.</p></details>
+    </div>
+    <div class="stick">
+      <div class="card">
+        <h3>Cosa può fare un agente esterno, oggi</h3>
+        <p class="note" style="margin-top:0">Scegli un servizio: le regole dichiarate o riportate.</p>
+        <div class="row" id="svbtn"></div>
+        <div id="svout" style="margin-top:.8rem" aria-live="polite"></div>
+      </div>
+      <div class="card" style="margin-top:1rem">
+        <h3>Il tuo agente: lettura o azione?</h3>
+        <p class="note" style="margin-top:0">Spunta le azioni che oggi gli lasci fare da solo.</p>
+        <div id="act"></div>
+        <p class="note" id="actn" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="nscale">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip topic">Nscale</span><span class="chip date">16–18 ottobre 2026</span><span class="src">stampa</span><span class="src">terze parti</span><span class="chip">Bloomberg via PYMNTS; Northeast Times; AI Weekly</span></div>
+    <h2>Nscale chiede 30 miliardi, gli investitori ne offrono la metà: il fine settimana in cui i conti dell'infrastruttura AI sono tornati per terra</h2>
+    <p class="lead">Tre notizie dallo stesso lato del mercato: la borsa dei chip che scende per l'ottava seduta di fila, una società di nuvole per l'AI che deve rivedere il prezzo prima di quotarsi, e lo Stato americano che presta miliardi per riaccendere centrali nucleari spente. Insieme dicono una cosa semplice: l'AI ha bisogno di ferro ed energia, e il ferro e l'energia costano.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>Nscale: da 30 a 16–19 miliardi</h3>
+      <p>Domenica <b>18 ottobre</b> Bloomberg, ripresa da PYMNTS, ha scritto che alcuni investitori di <b>Nscale</b>, la società britannica di calcolo per l'AI sostenuta da NVIDIA, chiedono di abbassare il prezzo della quotazione alla borsa di New York: l'azienda punta a circa <b>30 miliardi di dollari</b>, alcuni sostenitori vorrebbero una forchetta tra <b>16 e 19 miliardi</b>. Nscale aveva chiesto la quotazione il 18 settembre e sta ancora rispondendo alle osservazioni della SEC; non ha iniziato la promozione formale e nessuna decisione è presa.</p>
+      <p>Le ragioni citate: Microsoft ha annunciato che esce da un accordo per un data center con Nscale, per ritardi legati all'energia disponibile; il crollo dei piani di quotazione dell'australiana Firmus; e un clima peggiorato perché il denaro costa di più e i ritorni a lungo termine sono incerti. Secondo una rassegna che riassume Bloomberg, gli investitori guardano anche al sito norvegese, a 6,4 megawatt contro un obiettivo di 30 e con sei mesi di ritardo, e al fatto che solo il 2,5% circa di un portafoglio ordini da 103,4 miliardi sarebbe già attivo. Questi due numeri non li ho trovati nella fonte primaria: li riporto come dati di terze parti.</p>
+      <h3>Il mercato: otto sedute in calo</h3>
+      <p>Nella seduta di venerdì 16 ottobre l'indice dei semiconduttori di Philadelphia ha perso il <b>3,83%</b>, a 11.137 punti: l'ottavo calo di fila. In testa alle perdite i produttori di memorie: Seagate meno 7,5%, Western Digital e SanDisk meno 6,9%, SK Hynix meno 6,6%, Micron meno 5,6%. CoreWeave, la più grande delle "neocloud", ha perso intorno al 12%. Una rassegna riporta un'analisi di The Information secondo cui, delle centinaia di neocloud nate in due anni, ne sopravviveranno tra sette e dieci, con NVIDIA che offre credito più facile e aiuto sui siti. I numeri di borsa vengono da rassegne, non da un listino ufficiale.</p>
+      <div class="example"><b>Esempio pratico: perché un ritardo sull'energia pesa sulla valutazione</b>Una neocloud guadagna affittando ore di GPU. Se un sito doveva avere 30 megawatt e ne ha 6,4, può accendere circa un quinto delle macchine promesse. I contratti firmati restano, ma i ricavi arrivano dopo, e intanto gli interessi sui debiti per comprare le GPU corrono. Chi compra le azioni paga per i ricavi futuri: se arrivano un anno dopo e il denaro costa di più, quel futuro vale meno oggi. Per questo gli investitori guardano ai megawatt accesi più che al portafoglio ordini.</div>
+      <h3>Il nucleare riacceso per i data center</h3>
+      <p>Lo stesso fine settimana il Dipartimento dell'Energia americano ha messo a disposizione prestiti fino a <b>4,4 miliardi di dollari</b> per riaccendere tre centrali chiuse: Crane, cioè Three Mile Island in Pennsylvania, Palisades in Michigan e Duane Arnold in Iowa. Insieme fanno <b>2,25 gigawatt</b>, abbastanza, secondo il Northeast Times, per circa due milioni di case e aziende. Per Duane Arnold, NextEra e Google puntano alla ripartenza entro l'inizio del 2029; una rassegna indica marzo 2027 per Palisades e un contratto di Microsoft per Crane. La notizia è riportata dalla stampa il 17 e il 18 ottobre.</p>
+      <details class="q"><summary>Il calo dei chip vuol dire che la corsa all'AI rallenta?</summary><p>Non necessariamente. Otto sedute dicono che gli investitori pagano meno per gli stessi utili attesi, soprattutto perché il denaro costa di più. La domanda di calcolo può continuare a crescere mentre le valutazioni scendono: è già successo con la fibra ottica nei primi anni Duemila, quando la rete serviva davvero ma molte società che l'avevano costruita a debito fallirono.</p></details>
+      <details class="q"><summary>Cosa c'entra una centrale nucleare con un modello linguistico?</summary><p>Un grande campus di addestramento consuma centinaia di megawatt, giorno e notte. Il nucleare dà energia costante senza emissioni dirette, e una centrale già costruita si riaccende prima di quanto se ne costruisca una nuova. Per i laboratori il problema oggi non è comprare GPU, ma trovare dove attaccarle alla rete.</p></details>
+    </div>
+    <div class="stick">
+      <div class="card">
+        <h3>Il prezzo di Nscale</h3>
+        <div id="nsbars"></div>
+        <p class="note">Miliardi di dollari. Serie C di marzo e richiesta della quotazione: Bloomberg via rassegne; forchetta degli investitori: Bloomberg via PYMNTS.</p>
+      </div>
+      <div class="card" style="margin-top:1rem">
+        <h3>Quante GPU accende un megawatt</h3>
+        <p class="note" style="margin-top:0">Ipotesi didattica: circa 1,8 kW per GPU di fascia alta, compresi raffreddamento e rete. Non è un dato di Nscale.</p>
+        <label class="note" for="mw" style="display:block;margin:.2rem 0">Megawatt accesi: <b id="mwo"></b></label>
+        <input id="mw" type="range" min="1" max="100" step="0.1" value="6.4" style="width:100%">
+        <label class="note" for="mwt" style="display:block;margin:.6rem 0 .2rem">Megawatt promessi: <b id="mwto"></b></label>
+        <input id="mwt" type="range" min="1" max="100" step="1" value="30" style="width:100%">
+        <div id="mwout" style="margin-top:.8rem" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="cristalli">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip topic">MIT</span><span class="chip date">18 ottobre 2026</span><span class="src p">paper</span><span class="src u">ufficiale</span><span class="chip">MIT News; Nature Communications</span></div>
+    <h2>Un modello che vede i cristalli in tre dimensioni e li collega alle parole: al MIT le descrizioni sintetiche insegnano la geometria</h2>
+    <p class="lead">Una notizia di ricerca fuori dai grandi laboratori, e con una lezione che vale anche fuori dalla chimica. Per insegnare a un modello a collegare una struttura alle parole non bastavano gli articoli scientifici: è servito scrivere, con un altro modello, descrizioni nuove e più complete. Il testo giusto conta più del testo vero.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>Il problema</h3>
+      <p>Più del 90% dei solidi inorganici è cristallino: atomi disposti in uno schema che si ripete nello spazio. Molti modelli per la scienza dei materiali leggono solo testo, cioè la formula chimica e quello che ne dicono gli articoli. Ma due materiali con la stessa formula possono avere strutture diverse e proprietà diversissime: il carbonio è grafite o diamante a seconda di come stanno gli atomi. Un modello che non vede la geometria non può accorgersene.</p>
+      <h3>La soluzione: abbinare struttura e racconto</h3>
+      <p>Il <b>18 ottobre</b> il MIT ha presentato un lavoro pubblicato su <b>Nature Communications</b>, "Scaling multimodal materials representation learning with synthetic narratives", guidato da <b>Ju Li</b> con il primo autore <b>Yang Jeong Park</b>, Mayank Kumaran, Chia-Wei Hsu ed <b>Elsa Olivetti</b>. È un modello multimodale che abbina la <b>struttura atomica in 3D</b> di un cristallo a una <b>descrizione in linguaggio naturale</b>.</p>
+      <p>Il passaggio chiave è da dove vengono le descrizioni. I ricercatori le hanno <b>generate</b>, partendo da articoli sperimentali e banche dati di calcolo, in modo che ogni struttura avesse un racconto completo: composizione, struttura, proprietà, lavorazione, possibili applicazioni. Poi hanno addestrato il modello con l'<b>apprendimento contrastivo</b>: avvicinare nello spazio interno la struttura e la sua descrizione giusta, allontanare le coppie sbagliate. Il risultato che sorprende: la versione addestrata sulle descrizioni sintetiche ha imparato a collegare geometria e testo; quella addestrata solo sul testo degli articoli <b>no</b>.</p>
+      <div class="example"><b>Esempio pratico: perché il testo "vero" non bastava</b>Pensa a un articolo che parla di un elettrolita per batterie. Probabilmente dice quanto conduce, come è stato sintetizzato, e magari cita la formula. Raramente descrive la forma della cella, la coordinazione degli atomi, i canali in cui si muovono gli ioni: per gli autori sono dettagli ovvi o già in una tabella. Un modello che impara solo da quei testi non ha mai visto la geometria scritta a parole. Le descrizioni sintetiche la dicono sempre, in modo uniforme, per ogni struttura. È lo stesso principio della rubrica Azure di ieri: una descrizione completa e coerente guida un modello più di una descrizione "autentica" ma lacunosa.</div>
+      <h3>Cosa ha trovato</h3>
+      <p>Data una domanda in linguaggio naturale su una proprietà, il modello trova materiali cristallini che la hanno e supera un modello di confronto. Messo alla prova sugli <b>elettroliti solidi per batterie al litio</b>, tra i suoi primi risultati ha indicato materiali che altri gruppi avevano già segnalato, in modo indipendente, come promettenti. Gli autori dicono che il metodo potrebbe valere per tutta la grande famiglia dei solidi cristallini.</p>
+      <p>I limiti da tenere presenti: il comunicato non dà i numeri delle prove di confronto, e "ritrovare candidati già noti" è una buona verifica ma non una scoperta. Il vero esame sarà un materiale nuovo, suggerito dal modello e confermato in laboratorio.</p>
+      <details class="q"><summary>Cos'è l'apprendimento contrastivo, detto semplice?</summary><p>È imparare per confronto. Mostri al modello molte coppie: questa struttura con la sua descrizione, questa struttura con la descrizione di un'altra. Il modello impara a dare un punteggio alto alle coppie giuste e basso a quelle sbagliate. Alla fine struttura e testo vivono nello stesso spazio: puoi cercare una struttura scrivendo una frase, come cerchi una foto scrivendo "spiaggia al tramonto".</p></details>
+      <details class="q"><summary>Usare testi generati da un modello per addestrarne un altro non è rischioso?</summary><p>Sì, se i testi inventano. Qui sono costruiti a partire da banche dati e articoli, e servono a dire per esteso cose già note per ogni struttura. Il rischio è che errori della generazione finiscano nel modello: per questo la prova sugli elettroliti, con candidati confermati da altri, è importante.</p></details>
+    </div>
+    <div class="stick">
+      <div class="card">
+        <h3>Abbina la frase alla struttura</h3>
+        <p class="note" style="margin-top:0">Un gioco che imita il confronto contrastivo, con punteggi di esempio inventati. Scegli una descrizione.</p>
+        <div class="row" id="crbtn"></div>
+        <div id="crout" style="margin-top:.8rem" aria-live="polite"></div>
+      </div>
+      <div class="card" style="margin-top:1rem">
+        <h3>Cosa contiene una descrizione sintetica</h3>
+        <div id="crlist"></div>
+        <p class="note">Le cinque parti indicate dal MIT. Tocca per vedere un esempio inventato.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="azure">
+  <div class="ch-head">
+    <div class="kicker"><span class="chip topic">Azure</span><span class="chip date">Rubrica fissa · ventunesima puntata</span><span class="src u">ufficiale</span><span class="chip">Microsoft Learn: migrazione dalla preview alla GA, riferimento degli analizzatori, creare un analizzatore</span></div>
+    <h2>Azure Content Understanding: la vita di un analizzatore. Nomi con la versione, sostituzioni senza fermi, e il modello da fissare</h2>
+    <p class="lead">Ieri abbiamo scritto lo schema dei campi. Oggi la domanda che arriva il giorno dopo il primo rilascio: come lo cambio senza rompere chi lo usa? Un analizzatore non si modifica come un file: si crea, si prova, si sostituisce. Ecco come farlo senza fermare la pipeline e senza sorprese sui costi.</p>
+  </div>
+  <div class="grid2">
+    <div class="prose">
+      <h3>Un analizzatore è una configurazione con un nome</h3>
+      <p>Secondo il riferimento di Microsoft Learn, un analizzatore definisce quattro cose: che contenuto elabora, cosa estrae, come struttura l'uscita e quali modelli AI usa. Si crea con una richiesta <code>PUT</code> su <code>/contentunderstanding/analyzers/{analyzerId}</code>, con la versione GA <code>2025-11-01</code>. La risposta è <b>201 Created</b> con un'intestazione <code>Operation-Location</code>: la creazione è <b>asincrona</b>, e l'analizzatore è pronto solo quando l'operazione risponde <code>"status": "succeeded"</code>. Una pipeline che crea e usa subito un analizzatore nello stesso passo può fallire per questo: aspetta l'esito.</p>
+      <h3>Il nome non si riusa: mettici la versione</h3>
+      <p>La guida alla migrazione dice una cosa che vale per ogni cambiamento importante: per aggiornare un analizzatore conviene leggere la definizione con <code>GET</code>, modificarla e <b>creare un analizzatore nuovo</b> con un altro nome (l'esempio usa il suffisso <code>_updated</code>), perché per riusare lo stesso nome bisogna prima <b>cancellare</b> quello esistente. Cancellare e ricreare con lo stesso nome vuol dire un intervallo in cui l'analizzatore non c'è, e nessuna via di ritorno se il nuovo va peggio.</p>
+      <p>Il consiglio pratico, che discende da qui: dai agli analizzatori <b>nomi con la versione</b> (<code>fatture-v3</code>, <code>fatture-v4</code>) e tieni nel codice o nella configurazione un solo punto che dice quale versione usare. Cambiare versione diventa cambiare una riga, e tornare indietro anche. Il vecchio si cancella solo quando il nuovo ha lavorato abbastanza. Per piccoli ritocchi esiste anche l'operazione di aggiornamento delle proprietà (<code>updateAnalyzer</code> negli SDK), ma per schema e modelli la strada sicura resta la versione nuova.</p>
+      <div class="example"><b>Esempio pratico: il cambio di versione di un lunedì</b>Hai <code>fatture-v3</code> in produzione, 40.000 documenti al mese. Vuoi aggiungere il campo "Codice CIG". Leggi v3 con GET, aggiungi il campo, crei <code>fatture-v4</code> con PUT e aspetti "succeeded". Prendi il tuo insieme di prova, per esempio 200 fatture con i valori giusti già controllati, e le analizzi con v3 e con v4. Confronti campo per campo: i campi vecchi devono restare uguali o migliorare, quello nuovo deve essere giusto in una quota che hai deciso prima. Se va bene, cambi la riga di configurazione da v3 a v4. Tieni v3 per qualche settimana. Costo della prova: 400 analisi, cioè l'1% di un mese, che ti risparmia di scoprire un errore su 40.000.</div>
+      <h3>Il modello: della risorsa o dell'analizzatore</h3>
+      <p>Con la GA ogni analizzatore personalizzato ha un oggetto <code>models</code> con il modello di completamento e quello di embedding (l'esempio della documentazione indica <code>gpt-5.2</code> e <code>text-embedding-3-large</code>), e la risorsa ha dei modelli predefiniti, impostati con una richiesta <code>PATCH</code> su <code>/contentunderstanding/defaults</code>. La differenza conta nella vita dell'analizzatore. Se lo schema si appoggia ai predefiniti della risorsa, chi cambia il predefinito cambia il comportamento di tutti gli analizzatori in un colpo. Se il modello è scritto nell'analizzatore, un cambio di modello è un cambio di versione, e passa dalla stessa prova di tutti gli altri. Per la produzione conviene la seconda: il modello fa parte della versione.</p>
+      <h3>La migrazione dalla preview, che è un caso particolare</h3>
+      <p>Chi ha analizzatori creati con le versioni preview deve fare tre cose, secondo Microsoft Learn: impostare <code>baseAnalyzerId</code> a uno dei quattro valori supportati (<code>prebuilt-document</code>, <code>prebuilt-audio</code>, <code>prebuilt-video</code>, <code>prebuilt-image</code>), perché la vecchia proprietà <code>Scenario</code> è deprecata; aggiungere l'oggetto <code>models</code>; e ricordare che confidenza e ancoraggio dei campi ora sono facoltativi, e tornano solo con <code>estimateFieldSourceAndConfidence</code> a true. Cambiano anche le chiamate: <code>analyze</code> accetta solo file per URL, dentro un array <code>inputs</code> che nella GA ha un solo elemento; per mandare il file nel corpo serve <code>analyzeBinary</code>. E i dati etichettati diventano un tipo di <code>knowledgeSources</code>, che sostituisce <code>TrainingData</code>. La versione <code>2026-06-01-preview</code> serve solo per le funzioni in anteprima, come la modalità agentica, ed è senza accordo sul livello di servizio.</p>
+      <h3>Tempi, costi e volumi</h3>
+      <p>Tre regole pratiche per chi lavora in grande. <b>Prova su un campione, non sul flusso</b>: la prova di una versione costa quanto le analisi che fai, quindi un insieme di prova di qualche centinaio di documenti basta e costa poco rispetto al mese. <b>Non rianalizzare l'archivio per abitudine</b>: un cambio di versione vale per i documenti nuovi; rianalizza i vecchi solo se il campo nuovo serve davvero anche su di loro, e fallo a lotti fuori dalle ore di punta. <b>Scrivi la versione nel risultato</b>: salva accanto a ogni estrazione il nome dell'analizzatore che l'ha prodotta. Quando tra sei mesi qualcuno chiederà perché un campo è vuoto su metà delle fatture di marzo, la risposta sarà in quella colonna.</p>
+      <details class="q"><summary>Posso tenere due versioni attive insieme?</summary><p>Sì: sono due analizzatori distinti nella stessa risorsa. Puoi mandare a v4 una parte dei documenti e il resto a v3, e confrontare. Ricorda però i limiti della risorsa sul numero di analizzatori e sulle richieste contemporanee: due versioni in parallelo dividono la stessa capacità.</p></details>
+      <details class="q"><summary>Se Microsoft ritira un modello, i miei analizzatori smettono di funzionare?</summary><p>Il modello indicato nell'analizzatore deve corrispondere a una distribuzione disponibile nella tua risorsa Foundry. Quando un modello viene ritirato serve una versione nuova dell'analizzatore con un modello supportato, da provare come ogni altra versione. Tieni d'occhio l'elenco dei modelli supportati nei limiti del servizio, e il calendario dei ritiri di cui abbiamo parlato nell'edizione del 14 ottobre.</p></details>
+      <details class="q"><summary>Cancellare un analizzatore cancella anche i risultati già prodotti?</summary><p>I risultati che hai salvato nel tuo sistema restano tuoi. Quelli conservati dal servizio hanno una loro durata e si possono cancellare a parte, come abbiamo visto nella puntata su ruoli e cancellazioni. Per questo conviene sempre salvare l'uscita, insieme al nome della versione, appena l'analisi finisce.</p></details>
+    </div>
+    <div class="stick">
+      <div class="card">
+        <h3>Cosa vuoi cambiare?</h3>
+        <p class="note" style="margin-top:0">Scegli un cambiamento: la strada consigliata.</p>
+        <label class="note" for="lc" style="display:block;margin:.2rem 0 .3rem">Cambiamento</label>
+        <select id="lc" style="width:100%;font:inherit;padding:.5rem;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)"></select>
+        <div id="lcout" style="margin-top:.8rem" aria-live="polite"></div>
+      </div>
+      <div class="card" style="margin-top:1rem">
+        <h3>Quanto costa provare una versione</h3>
+        <label class="note" for="lv_m" style="display:block;margin:.2rem 0">Documenti al mese in produzione: <b id="lv_mo"></b></label>
+        <input id="lv_m" type="range" min="1000" max="500000" step="1000" value="40000" style="width:100%">
+        <label class="note" for="lv_t" style="display:block;margin:.6rem 0 .2rem">Documenti nell'insieme di prova: <b id="lv_to"></b></label>
+        <input id="lv_t" type="range" min="50" max="2000" step="50" value="200" style="width:100%">
+        <div id="lvout" style="margin-top:.8rem" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="lab">
+  <div class="ch-head"><div class="kicker"><span class="chip">Laboratorio</span></div><h2>Prova tu: cinque esperimenti</h2></div>
+  <div class="prose" style="margin-top:2rem">
+    <h3 style="font-size:1.3rem">1. Le regole di un fondo, scritte prima</h3>
+    <p>Il fondo di Anthropic ha regole ancora da pubblicare. Prova a scriverle tu con un assistente, e guarda dove le scelte diventano difficili.</p>
+  </div>
+  <div class="card"><pre class="prompt" id="l1">Un'azienda crea un fondo che possiede il 5% delle sue azioni, più il 2% per ogni aumento del 50% del valore oltre una soglia, a discrezione del consiglio. Il fondo non può fare lobby né donazioni politiche.
+Scrivi in una tabella le regole di governo che mancano: (1) chi decide come spendere; (2) chi controlla chi decide; (3) come si calcola la soglia e se il 50% vale sulla soglia o su ogni tappa; (4) quando il consiglio può dire no all'aggiunta del 2%; (5) cosa si pubblica ogni anno.
+Per ogni regola proponi due alternative e scrivi chi ci guadagna e chi ci perde con ciascuna.</pre><button class="btn copy" data-c="l1">Copia</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Cosa osservare:</b> la riga (4). Una promessa "a discrezione" vale quanto le regole che dicono quando la discrezione si può usare.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">2. Il tuo divario delle aspettative</h3>
+    <p>Fai la domanda del sondaggio a te e a un collega che usa poco l'AI, poi confrontate le risposte con un assistente.</p>
+  </div>
+  <div class="card"><pre class="prompt" id="l2">Ti descrivo il mio lavoro in cinque attività, con le ore settimanali di ciascuna:
+1. [attività] – [ore]
+2. [attività] – [ore]
+3. [attività] – [ore]
+4. [attività] – [ore]
+5. [attività] – [ore]
+Per ognuna stima che percentuale potrebbe fare un sistema AI nel 2030, con una stima bassa e una alta, e spiega in una riga cosa la rende facile o difficile da automatizzare. Alla fine calcola la percentuale pesata sulle ore. Non darmi una sola cifra: dammi la forchetta.</pre><button class="btn copy" data-c="l2">Copia</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Cosa osservare:</b> se la tua forchetta sta più vicina al 28% dei lavoratori americani o al 75% dei dipendenti di Anthropic, e quale attività sposta di più il risultato.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">3. La tabella dei permessi del tuo agente</h3>
+    <p>Prendi le regole delle banche e applicale all'agente che usi tu, anche solo un assistente con accesso alla posta.</p>
+  </div>
+  <div class="card"><pre class="prompt" id="l3">Uso un assistente AI che ha accesso a: [elenca: posta, calendario, documenti, conto, acquisti…].
+Fai una tabella con tre colonne: azione possibile; "sola lettura" o "azione"; cosa succede di peggio se l'assistente sbaglia o viene ingannato da un messaggio malevolo.
+Poi indica, per ogni azione, se tenerla automatica, chiedermi conferma ogni volta, o toglierla. Usa la regola delle banche americane: leggere sì, muovere soldi no, salvo conferma esplicita.</pre><button class="btn copy" data-c="l3">Copia</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Cosa osservare:</b> quante azioni "irreversibili" (inviare, pagare, cancellare) sono oggi automatiche senza che tu lo abbia deciso.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">4. Un mini confronto contrastivo con le parole</h3>
+    <p>Per capire l'idea del MIT non serve un laboratorio: basta chiedere a un assistente di abbinare descrizioni a oggetti, prima con descrizioni povere e poi complete.</p>
+  </div>
+  <div class="card"><pre class="prompt" id="l4">Ecco quattro materiali: grafite, diamante, sale da cucina (cloruro di sodio), quarzo.
+Prima prova: abbina ciascuna di queste descrizioni povere al materiale giusto e dai una confidenza da 0 a 100: (a) "fatto di carbonio"; (b) "fatto di carbonio"; (c) "contiene sodio"; (d) "contiene silicio".
+Seconda prova: rifai l'abbinamento con descrizioni complete che includono composizione, struttura (strati, rete tetraedrica, reticolo cubico…), una proprietà e un uso. Scrivi tu le descrizioni complete.
+Confronta le confidenze delle due prove e spiega perché cambiano.</pre><button class="btn copy" data-c="l4">Copia</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Cosa osservare:</b> nella prima prova (a) e (b) sono indistinguibili, come grafite e diamante con la sola formula. È lo stesso problema che il MIT ha risolto con le descrizioni sintetiche.</p>
+    <h3 style="font-size:1.3rem;margin-top:2rem">5. Una nuova versione di un analizzatore, senza fermi</h3>
+    <p>I comandi per il cambio di versione descritto nella rubrica Azure. Sostituisci endpoint e nomi; la chiave tienila in una variabile d'ambiente, mai nel file.</p>
+  </div>
+  <div class="card"><pre class="prompt" id="l5">EP="https://&lt;tua-risorsa&gt;.services.ai.azure.com"
+V="api-version=2025-11-01"
+H="Ocp-Apim-Subscription-Key: $CU_KEY"
+
+# 1. leggi la versione in produzione e salvala
+curl -s "$EP/contentunderstanding/analyzers/fatture-v3?$V" -H "$H" &gt; v3.json
+
+# 2. crea v4 da un file modificato (nuovo campo, models fissato)
+curl -i -X PUT "$EP/contentunderstanding/analyzers/fatture-v4?$V" \
+  -H "$H" -H "Content-Type: application/json" -d @v4.json
+# copia l'indirizzo dell'intestazione Operation-Location
+
+# 3. aspetta che la creazione finisca
+until curl -s "$OP" -H "$H" | grep -q '"succeeded"'; do sleep 5; done
+
+# 4. analizza lo stesso documento di prova con v3 e v4 e confronta i campi
+for A in fatture-v3 fatture-v4; do
+  curl -i -X POST "$EP/contentunderstanding/analyzers/$A:analyze?$V" \
+    -H "$H" -H "Content-Type: application/json" \
+    -d '{"inputs":[{"url":"https://&lt;tuo-archivio&gt;/prova-001.pdf"}]}'
+done</pre><button class="btn copy" data-c="l5">Copia</button></div>
+  <div class="prose" style="margin-top:1rem">
+    <p><b>Cosa osservare:</b> che il passo 4 parta solo dopo "succeeded", e che i campi già esistenti diano lo stesso valore nelle due versioni. Ripeti il passo 4 sul tuo insieme di prova, poi cambia la riga di configurazione. Cancella <code>fatture-v3</code> con una richiesta DELETE solo dopo qualche settimana senza problemi.</p>
+  </div>
+</section>
+
+<section class="ch" id="segnali">
+  <div class="ch-head"><div class="kicker"><span class="chip">Da tenere d'occhio</span></div><h2>Otto segnali dal 16 al 19 ottobre</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">18 ottobre</span><h3>Tre modelli "aurora" compaiono nell'API di OpenAI</h3><p>Gli identificativi aurora-red-alpha, aurora-green-alpha e aurora-blue-alpha sono stati segnalati su X da Lisan al Gaib e rilanciati da Andrew Curran. OpenAI non li ha annunciati, e non c'è prova che siano richiamabili: meglio non costruirci sopra. <a href="https://runtimewire.com/article/three-new-aurora-model-names-pop-up-in-openai-s-api">RuntimeWire</a> <span class="src">stampa</span></p></div>
+    <div class="sig"><span class="chip date">19 ottobre</span><h3>Tsinghua: TreeOPSD batte GRPO sulla ricerca profonda</h3><p>Su Qwen3-30B-A3B-Thinking il metodo supera GRPO di 4,97 punti di corrispondenza esatta in media su BrowseComp, GAIA e xbench, senza un critico appreso. Numeri dichiarati dagli autori. <a href="https://huggingface.co/papers/2610.23181">Hugging Face Papers</a> <span class="src p">paper</span></p></div>
+    <div class="sig"><span class="chip date">18 ottobre</span><h3>Rivian progetta un chip a 5 nanometri e i suoi modelli</h3><p>L'amministratore delegato RJ Scaringe dice che il chip per la guida autonoma è co-progettato con Arm e TSMC, e che Rivian vuole dare in licenza architettura e software AI ad altri costruttori. <a href="https://techcrunch.com/2026/10/18/techcrunch-mobility-rivians-next-act">TechCrunch</a> <span class="src">stampa</span></p></div>
+    <div class="sig"><span class="chip date">18 ottobre</span><h3>World ID per gli agenti, presentato a Money20/20</h3><p>Tools for Humanity lancia una suite per banche con un'app, World ID per Zoom e World ID for Agents, per legare un agente a una persona verificata. Nessuna banca indicata come cliente, nessun prezzo. <a href="https://aiweekly.co/ai-news-today">AI Weekly, da The Block</a> <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">17 ottobre</span><h3>British Airways vieta le riprese nascoste con gli occhiali di Meta</h3><p>La compagnia ha esteso le condizioni di trasporto: filmare personale o vicini di posto con occhiali intelligenti può portare al rifiuto dell'imbarco. Sarebbe la prima grande compagnia a nominarli nel contratto. <a href="https://aiweekly.co/ai-news-today">AI Weekly, da Live and Let's Fly</a> <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">17 ottobre</span><h3>158 organizzazioni coreane chiedono ad Anthropic i libri usati</h3><p>L'appello "No Books, No AI" della società degli editori coreani, firmato anche da Han Kang, chiede di rendere noti i libri coreani usati per l'addestramento. Notizia su Anthropic, riportata da una testata di settore. <a href="https://thenewpublishingstandard.com/2026/10/17/korean-publishers-ai-compensation-appeal/">The New Publishing Standard</a> <span class="src">stampa</span></p></div>
+    <div class="sig"><span class="chip date">19 ottobre</span><h3>Cina: esportazioni di circuiti integrati più 136%</h3><p>Il prodotto cinese è cresciuto del 4,5% nel terzo trimestre; secondo la rassegna le esportazioni di circuiti integrati sono salite del 136%, a 45 miliardi di dollari. Dati dell'istituto di statistica riportati da terzi. <a href="https://aiweekly.co/ai-news-today">AI Weekly, da Startup Fortune</a> <span class="src">terze parti</span></p></div>
+    <div class="sig"><span class="chip date">18 ottobre</span><h3>Prezzi decisi dagli algoritmi al supermercato: i clienti diffidano</h3><p>L'Associated Press racconta le etichette digitali sugli scaffali di Walmart e altre catene; proposte di legge in almeno 30 stati. Walmart: "diamo il prezzo al prodotto, non alla persona". <a href="https://www.ksat.com/business/2026/10/18/consumer-apprehension-grows-as-us-retailers-adopt-ai-assisted-pricing-tools">KSAT, da AP</a> <span class="src">stampa</span></p></div>
+  </div>
+</section>
+
+<section class="ch" id="novita">
+  <div class="ch-head"><div class="kicker"><span class="chip">Rispetto all'edizione del 18 ottobre</span></div><h2>Cosa è cambiato, e cosa ho escluso</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="chip date">nuovo</span><h3>Fondo, banche, infrastruttura, cristalli</h3><p>Il fondo per il bene pubblico di Anthropic; Schwab e il quadro dei blocchi agli agenti; la valutazione di Nscale, il calo dei chip e il nucleare riacceso; il modello del MIT per i cristalli.</p></div>
+    <div class="sig"><span class="chip date">recupero</span><h3>Due notizie di venerdì 16</h3><p>Il sondaggio "The AI Expectations Gap" e la proposta di legge riportata da Politico erano uscite lo stesso giorno delle ricerche di ieri; le racconto oggi, accanto al fondo.</p></div>
+    <div class="sig"><span class="chip date">fatto nuovo</span><h3>Il blocco di Amazon su Muse</h3><p>Il 14 ottobre era tra le cose non verificate; ora c'è la frase di Amazon sulle Condizioni d'uso, riportata il 18. E alla posizione di JPMorgan si aggiunge quella di Schwab, con i numeri.</p></div>
+    <div class="sig"><span class="chip date">rubrica</span><h3>Azure, ventunesima puntata</h3><p>Il ciclo di vita di un analizzatore: creazione asincrona, nomi con la versione, prova prima del cambio, modello fissato, migrazione dalla preview.</p></div>
+  </div>
+  <div class="prose" style="margin-top:2rem">
+    <p><b>Escluso.</b> Il robot umanoide di OpenAI con la dimostrazione nel 2027: la frase di Sam Altman è di metà settembre, non nuova. La truffa a Fideuram con la voce clonata: i fatti sono di settembre. L'agente di Warcraft III addestrato su una sola scheda grafica: il risultato contro l'intelligenza "insane" del gioco non compare nel repository, che riporta solo scontri contro avversari scritti a mano. Beam di Reflection e GLM-5.3, già nelle edizioni precedenti o con date non verificate. Il nuovo data center di Anthropic in Nuova Scozia e lo scenario di Jack Clark, già nei segnali di ieri. La raccolta di fondi di Benchmark e la pubblicità mirata in ChatGPT: mercati e una notizia del 15 senza fatti nuovi. <b>Da verificare:</b> i dettagli della proposta di legge di Anthropic (72 ore, un miliardo, 50 persone) e i numeri del sito norvegese di Nscale vengono da rassegne; i dati di borsa da rassegne, non da un listino.</p>
+  </div>
+</section>
+
+<section class="ch" id="quiz">
+  <div class="ch-head"><div class="kicker"><span class="chip">Mettiti alla prova</span></div><h2>Otto domande</h2></div>
+  <div class="card quiz" id="quizbox" style="margin-top:2rem"></div>
+</section>
+
+<section class="ch" id="fonti">
+  <div class="ch-head"><h2>Fonti di questa edizione</h2></div>
+  <div class="cards">
+    <div class="sig"><span class="src p">paper</span><h3>Ricerca</h3><p><a href="https://news.mit.edu/2026/giving-ai-crystal-clear-view-of-materials-world-1018">"Scaling multimodal materials representation learning with synthetic narratives", Nature Communications (presentazione MIT)</a> · <a href="https://anthropic.com/research/ai-expectations-gap">The AI Expectations Gap, Anthropic Institute</a> · <a href="https://huggingface.co/papers/2610.23181">TreeOPSD, Hugging Face Papers</a></p></div>
+    <div class="sig"><span class="src u">ufficiale</span><h3>Produttori, enti e documentazione</h3><p><a href="https://www.anthropic.com/news/public-benefit-fund">Anthropic, Investing in the public benefit</a> · <a href="https://news.mit.edu/2026/giving-ai-crystal-clear-view-of-materials-world-1018">MIT News</a> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/how-to/migration-preview-to-ga">Migrare dalla preview alla GA</a> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/concepts/analyzer-reference">Riferimento degli analizzatori</a> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/tutorial/create-custom-analyzer">Creare un analizzatore personalizzato</a> · <a href="https://learn.microsoft.com/azure/ai-services/content-understanding/glossary">Glossario</a> · <a href="https://learn.microsoft.com/java/api/com.azure.ai.contentunderstanding.contentunderstandingclient?view=azure-java-stable">SDK Java, updateAnalyzer</a></p></div>
+    <div class="sig"><span class="src">stampa</span><h3>Testate</h3><p><a href="https://www.aljazeera.com/economy/2026/10/19/anthropic-says-it-will-commit-5-of-shares-to-public-benefit-fund">Al Jazeera</a> · <a href="https://www.click2houston.com/business/2026/10/18/anthropic-commits-5-of-its-stock-to-a-new-public-benefit-fund/">AP via Click2Houston</a> · <a href="https://thedailyguardian.com/business/anthropic-quietly-pitches-its-own-ai-safety-bill-to-lawmakers-politico-reports-2-766716/">Reuters su Politico, via The Daily Guardian</a> · <a href="https://www.bloomberg.com/news/articles/2026-10-16/us-banks-block-ai-agents-attempting-to-move-money-for-customers">Bloomberg, banche e agenti</a> · <a href="https://thenextweb.com/news/schwab-blocks-ai-agents-meta-muse">The Next Web</a> · <a href="https://officechai.com/ai/amazon-jpmorgan-schwab-and-delta-are-all-blocking-ai-agents-heres-why/">OfficeChai</a> · <a href="https://www.pymnts.com/news/investment-tracker/ipo/2026/nscale-investors-seek-lower-ipo-target-amid-ai-related-concerns/">PYMNTS su Bloomberg, Nscale</a> · <a href="https://northeasttimes.com/2026/10/18/federal-loans-of-up-to-4-4-billion-aim-to-restart-three-closed-nuclear-plants/">Northeast Times</a> · <a href="https://runtimewire.com/article/three-new-aurora-model-names-pop-up-in-openai-s-api">RuntimeWire</a> · <a href="https://techcrunch.com/2026/10/18/techcrunch-mobility-rivians-next-act">TechCrunch</a> · <a href="https://thenewpublishingstandard.com/2026/10/17/korean-publishers-ai-compensation-appeal/">The New Publishing Standard</a> · <a href="https://www.ksat.com/business/2026/10/18/consumer-apprehension-grows-as-us-retailers-adopt-ai-assisted-pricing-tools">KSAT, da AP</a></p></div>
+    <div class="sig"><span class="src">terze parti</span><h3>Rassegne e newsletter</h3><p><a href="https://aiweekly.co/ai-news-today">AI Weekly, notizie del giorno</a> · <a href="https://aiweekly.co/alerts/nscale-ipo-pushback-investors-urge-16b-19b-vs-30b-target">AI Weekly, Nscale</a> · <a href="https://aidapted.ro/en/articles/ai-news-october-18-2026/">AIdapted, 18 ottobre</a> · <a href="https://forkast.news/schwab-and-jpmorgan-block-unauthorized-ai-agents-from-moving-money-as-private-ordering-reaches-financial-core/">Forkast</a> · <a href="https://aitoolly.com/ai-news/2026-10-18">AIToolly, 18 ottobre</a></p></div>
+  </div>
+</section>
+
+</main>
+<footer>Radar AI · edizione del 19 ottobre 2026 · preparata da Claude (Anthropic).<br>I benchmark e i risultati dei paper sono quelli dichiarati dagli autori e dalle aziende, non verificati da me. Un capitolo e un segnale riguardano Anthropic e sono riportati dalle fonti, senza giudizi di merito; il sondaggio di Anthropic non ha, a oggi, verifiche indipendenti pubblicate. I dati di borsa vengono da rassegne. Le impostazioni di Azure vanno ricontrollate sulla documentazione della tua versione prima di metterle in produzione.</footer>
+
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id)}
+  function it(n,d){return n.toLocaleString('it-IT',{minimumFractionDigits:d||0,maximumFractionDigits:d||0})}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  var links=[].slice.call(document.querySelectorAll('#links a'));var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function onScroll(){var h=document.documentElement;$('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';var cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<140)cur=i});links.forEach(function(a,i){a.classList.toggle('on',i===cur&&window.scrollY>200)})}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  function press(sel,attr,i){[].forEach.call(document.querySelectorAll(sel),function(b){b.setAttribute('aria-pressed',+b.dataset[attr]===i?'true':'false')})}
+
+  /* timeline */
+  var T=[[16,"Il venerdì delle due banche e del sondaggio","Schwab dice a Bloomberg che blocca ogni settimana decine di agenti che provano a muovere soldi. Anthropic pubblica il sondaggio sul divario delle aspettative; Politico rivela la sua bozza di legge. L'indice dei chip perde il 3,83%, ottavo calo di fila.",true],
+    [17,"Nucleare e occhiali","Riportati i prestiti fino a 4,4 miliardi per riaccendere tre centrali. British Airways vieta le riprese nascoste con gli occhiali intelligenti; 158 organizzazioni coreane scrivono ad Anthropic."],
+    [18,"Il fondo e il prezzo di Nscale","Anthropic annuncia il fondo per il bene pubblico con il 5% delle azioni. Bloomberg: gli investitori chiedono a Nscale 16-19 miliardi invece di 30. Il MIT presenta il modello per i cristalli; Amazon conferma il blocco di Muse; compaiono i modelli aurora.",true],
+    [19,"Lunedì","La Cina pubblica il prodotto del terzo trimestre, con le esportazioni di chip in forte crescita; Tsinghua pubblica TreeOPSD."]];
+  var tl=$('tlin');T.forEach(function(e,i){var x=10+i*(80/(T.length-1));var b=document.createElement('button');b.className='tl-dot'+(e[3]?' n':'');b.style.left=x+'%';b.setAttribute('aria-label',e[0]+' ottobre');b.onclick=function(){show(i)};tl.appendChild(b);var d=document.createElement('div');d.className='tl-day';d.style.left=x+'%';d.textContent=e[0]+' ott';tl.appendChild(d)});
+  function show(i){var e=T[i];$('tld').innerHTML=e[0]+'<small>ottobre</small>';$('tlt').textContent=e[1];$('tlx').textContent=e[2];[].forEach.call(tl.querySelectorAll('.tl-dot'),function(b,j){b.setAttribute('aria-pressed',i===j?'true':'false')})}
+  show(0);
+
+  function bars(el,rows,max,fmt,w){el.innerHTML=rows.map(function(r){return '<div class="cbar" style="grid-template-columns:'+(w||'9rem')+' 1fr 4.2rem;margin:.35rem 0"><span style="font-size:.82rem">'+r[0]+'</span><div class="tr"><div class="fi" style="width:'+Math.max(1,r[1]/max*100)+'%'+(r[2]?';background:'+r[2]:'')+'"></div></div><b>'+fmt(r[1])+'</b></div>'}).join('')}
+
+  /* fondo */
+  var fm=0;
+  function fondo(){var v=+$('fv').value;$('fvo').textContent=it(v);var steps=0;
+    if(fm===0){steps=Math.floor((v/100-1)/0.5+1e-9)}else{var t=100;while(t*1.5<=v+1e-9){t*=1.5;steps++}}
+    var q=5+2*steps;
+    $('fout').innerHTML='<div class="stats" style="grid-template-columns:1fr 1fr;margin:0"><div class="stat"><strong style="font-size:1.25rem;color:var(--violet)">'+it(q)+'%</strong><span>quota massima del fondo</span></div><div class="stat"><strong style="font-size:1.25rem">'+it(steps)+'</strong><span>aggiunte del 2% possibili</span></div></div><p class="note" style="margin:.5rem 0 0">'+(fm===0?'Ogni 50% in più si conta sulla soglia: 150, 200, 250…':'Ogni 50% si conta sulla tappa precedente: 150, 225, 337,5…')+' Le aggiunte sono a discrezione del consiglio.</p>';press('#fmode .btn','m',fm)}
+  $('fv').oninput=fondo;[].forEach.call(document.querySelectorAll('#fmode .btn'),function(b){b.onclick=function(){fm=+b.dataset.m;fondo()}});fondo();
+  bars($('gapbars'),[['Dipendenti, media delle ore',75,'var(--violet)'],['Lavoratori USA, media',28,'var(--sun)'],['Nobel AI entro il 2030, dipendenti',91,'var(--violet)'],['Nobel AI entro il 2030, adulti',39,'var(--sun)']],100,function(v){return it(v)+'%'},'11rem');
+
+  /* banche */
+  var SV=[['Schwab','Leggere: sì, con server MCP controllati dalla banca (in arrivo).','Muovere soldi: no. Blocchi settimanali "a decine", Muse compreso.','Alternativa della casa: Charley, annunciato il 30 settembre.'],
+    ['JPMorgan','Leggere: sì, tramite fornitori come Plaid.','Pagare o fare bonifici: no. Dimon: niente "agenti fuori controllo".','Lo avevamo raccontato il 14 ottobre: ora è una linea comune con Schwab.'],
+    ['Amazon','Comprare con Muse: no, bloccato da settembre.','Motivo dichiarato: viola le Condizioni d\'uso.','Segnalato anche Grok, non confermato da Amazon.'],
+    ['Delta','Prenotare con un agente esterno: spesso fallisce.','Nessun blocco formale, ma "nessuna collaborazione né integrazione".','La compagnia dice di "valutare attivamente" la tecnologia.'],
+    ['Yelp','Raccolta automatica: vietata dai termini.','Accesso: a pagamento, con licenze a OpenAI, Perplexity e altri.','Il modello "non chiudo, faccio pagare".']];
+  $('svbtn').innerHTML=SV.map(function(s,i){return '<button class="btn" data-s="'+i+'">'+s[0]+'</button>'}).join('');
+  function sv(i){var s=SV[i];$('svout').innerHTML='<p style="margin:0 0 .5rem;font-size:.9rem;border-left:3px solid var(--teal);padding-left:.6rem">'+s[1]+'</p><p style="margin:0 0 .5rem;font-size:.9rem;border-left:3px solid var(--red);padding-left:.6rem">'+s[2]+'</p><p class="note" style="margin:0">'+s[3]+'</p>';press('#svbtn .btn','s',i)}
+  [].forEach.call(document.querySelectorAll('#svbtn .btn'),function(b){b.onclick=function(){sv(+b.dataset.s)}});sv(0);
+  var AC=[['Leggere la posta',0],['Leggere il saldo del conto',0],['Proporre una risposta in bozza',0],['Inviare una email a nome tuo',1],['Accettare un invito in calendario',1],['Comprare online',1],['Fare un bonifico o pagare una bolletta',1],['Cancellare file o messaggi',1]];
+  $('act').innerHTML=AC.map(function(a,i){return '<label style="display:flex;gap:.6rem;align-items:flex-start;margin:.45rem 0;font-size:.92rem;cursor:pointer"><input type="checkbox" data-k="'+i+'" style="margin-top:.3rem;accent-color:var(--violet)"> <span>'+a[0]+'</span></label>'}).join('');
+  function act(){var on=[].filter.call(document.querySelectorAll('#act input'),function(x){return x.checked}).map(function(x){return AC[+x.dataset.k]});var w=on.filter(function(a){return a[1]}).length;
+    $('actn').textContent=on.length?(w?w+' azioni che cambiano qualcosa nel mondo sono automatiche. Con la regola delle banche, chiederebbero una conferma.':'Solo lettura: è la regola delle banche.'):'Nessuna azione automatica.'}
+  [].forEach.call(document.querySelectorAll('#act input'),function(x){x.onchange=act});act();
+
+  /* nscale */
+  bars($('nsbars'),[['Serie C, marzo',14.6],['Forchetta investitori, minimo',16,'var(--sun)'],['Forchetta investitori, massimo',19,'var(--sun)'],['Obiettivo della quotazione',30,'var(--violet)']],35,function(v){return it(v,1)},'11rem');
+  function mw(){var a=+$('mw').value,t=+$('mwt').value;$('mwo').textContent=it(a,1);$('mwto').textContent=it(t);var g=Math.round(a*1000/1.8),gt=Math.round(t*1000/1.8),p=t?a/t*100:0;
+    $('mwout').innerHTML='<div class="stats" style="grid-template-columns:1fr 1fr;margin:0"><div class="stat"><strong style="font-size:1.2rem">'+it(g)+'</strong><span>GPU accese, circa</span></div><div class="stat"><strong style="font-size:1.2rem;color:'+(p<50?'var(--red)':'var(--teal)')+'">'+it(Math.min(p,999))+'%</strong><span>della capacità promessa</span></div></div><p class="note" style="margin:.5rem 0 0">Promesse: circa '+it(gt)+' GPU. La differenza sono ricavi rimandati.</p>'}
+  ['mw','mwt'].forEach(function(id){$(id).oninput=mw});mw();
+
+  /* cristalli */
+  var CR=[['"Strati di carbonio che scivolano, conduce elettricità"',[['Grafite',0.91],['Diamante',0.22],['Quarzo',0.08]]],
+    ['"Rete tetraedrica di carbonio, durissimo, isolante"',[['Diamante',0.89],['Grafite',0.27],['Quarzo',0.31]]],
+    ['"Tetraedri di silicio e ossigeno, piezoelettrico"',[['Quarzo',0.87],['Diamante',0.19],['Grafite',0.05]]],
+    ['"Fatto di carbonio" (descrizione povera)',[['Grafite',0.52],['Diamante',0.51],['Quarzo',0.04]]]];
+  $('crbtn').innerHTML=CR.map(function(c,i){return '<button class="btn" data-c="'+i+'">'+['Strati','Rete','Tetraedri','Povera'][i]+'</button>'}).join('');
+  function cr(i){var c=CR[i];$('crout').innerHTML='<p style="margin:0 0 .4rem;font-size:.9rem">'+c[0]+'</p>';var d=document.createElement('div');$('crout').appendChild(d);bars(d,c[1].map(function(r,j){return [r[0],r[1]*100,j===0?'var(--violet)':null]}),100,function(v){return it(v/100,2)},'6rem');
+    if(i===3){$('crout').insertAdjacentHTML('beforeend','<p class="note" style="margin:.4rem 0 0">Con la sola composizione, grafite e diamante sono quasi pari: manca la geometria.</p>')}press('#crbtn .btn','c',i)}
+  [].forEach.call(document.querySelectorAll('#crbtn .btn'),function(b){b.onclick=function(){cr(+b.dataset.c)}});cr(0);
+  var CL=[['Composizione','Litio, lantanio, zirconio e ossigeno.'],['Struttura','Reticolo cubico con canali tridimensionali tra i siti del litio.'],['Proprietà','Conduce ioni di litio a temperatura ambiente, isola gli elettroni.'],['Lavorazione','Sintetizzato allo stato solido e drogato per stabilizzare la fase cubica.'],['Applicazioni','Elettrolita solido per batterie al litio.']];
+  $('crlist').innerHTML=CL.map(function(c,i){return '<details class="q" style="margin:.35rem 0"><summary>'+c[0]+'</summary><p>'+c[1]+'</p></details>'}).join('');
+
+  /* azure: ciclo di vita */
+  var LC=[['Aggiungere un campo allo schema','Versione nuova','Leggi la definizione con GET, aggiungi il campo, crea fatture-v(N+1) con PUT, aspetta "succeeded", prova sul tuo insieme di controllo, poi cambia la riga di configurazione.'],
+    ['Migliorare la descrizione di un campo','Versione nuova','Anche un ritocco di testo cambia le risposte del modello: va provato come uno schema nuovo, confrontando le confidenze prima e dopo.'],
+    ['Cambiare il modello di completamento','Versione nuova, con models fissato','Scrivi il modello nell\'oggetto models dell\'analizzatore, non affidarti ai predefiniti della risorsa: così il cambio è una versione e passa dalla prova.'],
+    ['Cambiare i predefiniti della risorsa','Attenzione: tocca tutti','Un PATCH su /defaults cambia il comportamento di ogni analizzatore che non ha models proprio. Fallo solo dopo aver fissato i modelli negli analizzatori in produzione.'],
+    ['Passare da un analizzatore preview alla GA','Versione nuova, con tre modifiche','baseAnalyzerId a prebuilt-document (o audio, video, image), oggetto models, estimateFieldSourceAndConfidence se ti servono confidenza e ancoraggio. Nel codice: inputs per URL, analyzeBinary per i file nel corpo.'],
+    ['Riusare lo stesso nome','Solo dopo DELETE','Il nome si libera cancellando l\'analizzatore: c\'è un intervallo senza servizio e nessun ritorno indietro. Meglio i nomi con la versione.']];
+  $('lc').innerHTML=LC.map(function(l,i){return '<option value="'+i+'">'+l[0]+'</option>'}).join('');
+  function lc(){var l=LC[+$('lc').value];$('lcout').innerHTML='<p style="margin:0 0 .4rem"><b style="color:var(--violet)">'+l[1]+'</b></p><p style="margin:0;font-size:.9rem">'+l[2]+'</p>'}
+  $('lc').onchange=lc;lc();
+  function lv(){var m=+$('lv_m').value,t=+$('lv_t').value;$('lv_mo').textContent=it(m);$('lv_to').textContent=it(t);var c=t*2,p=m?c/m*100:0;
+    $('lvout').innerHTML='<div class="stats" style="grid-template-columns:1fr 1fr;margin:0"><div class="stat"><strong style="font-size:1.2rem">'+it(c)+'</strong><span>analisi per la prova (vecchia e nuova)</span></div><div class="stat"><strong style="font-size:1.2rem;color:var(--teal)">'+it(p,p<1?2:1)+'%</strong><span>del volume di un mese</span></div></div>'}
+  ['lv_m','lv_t'].forEach(function(id){$(id).oninput=lv});lv();
+
+  /* copy */
+  [].forEach.call(document.querySelectorAll('.copy'),function(b){b.style.marginTop='.6rem';b.onclick=function(){var t=$(b.dataset.c).textContent;var o=b.textContent;
+    function sel(){var r=document.createRange();r.selectNodeContents($(b.dataset.c));var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Testo selezionato: copialo'}
+    try{navigator.clipboard.writeText(t).then(function(){b.textContent='Copiato ✓';setTimeout(function(){b.textContent=o},1500)},sel)}catch(e){sel()}}});
+
+  /* quiz */
+  var Q=[["Quanta parte delle azioni di Anthropic riceve subito il nuovo fondo, se gli azionisti approvano?",["Il 20%","Il 5%","L'80%"],1,"Esatto: il 5%, più un 2% a discrezione del consiglio per ogni aumento del 50% del valore oltre una soglia."],
+    ["Cosa non possono finanziare le azioni del fondo?",["Ricerche sul mercato del lavoro","Donazioni a enti non profit","Lobby e donazioni politiche"],2,"Giusto: il divieto è scritto in chiaro, negli Stati Uniti e altrove."],
+    ["Nel sondaggio di Anthropic, che parte delle proprie ore si aspettano in media che l'AI faccia nel 2030 i lavoratori americani?",["Il 28%","Il 75%","Il 91%"],0,"Corretto: i dipendenti di Anthropic rispondono in media il 75%."],
+    ["Cosa offrirà Schwab agli agenti esterni?",["Pieno accesso con la password del cliente","Nessun accesso di alcun tipo","Sola lettura tramite server MCP controllati dalla banca"],2,"Esatto: vedere saldi e fare ricerche sì, muovere soldi no."],
+    ["Come tratta Yelp gli agenti esterni?",["Li lascia entrare tutti gratis","Fa pagare l'accesso con licenze sui dati","Li blocca senza eccezioni"],1,"Giusto: vieta la raccolta automatica nei termini, ma vende licenze a OpenAI, Perplexity e altri."],
+    ["Quale forchetta di valutazione chiedono a Nscale alcuni investitori, secondo Bloomberg?",["Tra 16 e 19 miliardi di dollari","Tra 30 e 35 miliardi","Tra 50 e 60 miliardi"],0,"Corretto: contro un obiettivo di circa 30 miliardi."],
+    ["Nel lavoro del MIT, quale versione del modello ha imparato a collegare geometria e testo?",["Quella addestrata solo sugli articoli","Quella senza testo","Quella addestrata su descrizioni sintetiche"],2,"Esatto: il testo degli articoli da solo non bastava."],
+    ["In Content Understanding, cosa serve per riusare il nome di un analizzatore esistente?",["Un PATCH su /defaults","Cancellarlo prima con DELETE","Cambiare la versione dell'API"],1,"Giusto: per questo conviene dare ai nomi una versione, come fatture-v4."]];
+  var scq=0,an=0;$('quizbox').innerHTML=Q.map(function(q,i){return '<div class="qq"><p>'+(i+1)+'. '+q[0]+'</p><div class="opts">'+q[1].map(function(o,j){return '<button class="opt" data-q="'+i+'" data-o="'+j+'">'+o+'</button>'}).join('')+'</div><div class="fb" id="fb'+i+'"></div></div>'}).join('')+'<p class="score" id="score"></p>';
+  [].forEach.call(document.querySelectorAll('.quiz .opt'),function(b){b.onclick=function(){var qi=+b.dataset.q,oi=+b.dataset.o,q=Q[qi];var g=document.querySelectorAll('.quiz .opt[data-q="'+qi+'"]');if(g[0].disabled)return;[].forEach.call(g,function(x){x.disabled=true;if(+x.dataset.o===q[2])x.classList.add('ok')});
+    if(oi===q[2]){scq++;$('fb'+qi).textContent=q[3]}else{b.classList.add('ko');$('fb'+qi).textContent='Non proprio. '+q[3]}if(++an===Q.length)$('score').textContent='Hai risposto bene a '+scq+' domande su '+Q.length+'.'}});
+})();
+</script>
+
+<script id="a11y-js">
+(function(){
+  /* nomi accessibili per i controlli dei widget */
+  function nameControls(){
+    document.querySelectorAll('input,select,textarea').forEach(function(el,i){
+      if(el.type==='hidden'||el.getAttribute('aria-label')||el.getAttribute('aria-labelledby'))return;
+      if(el.id&&document.querySelector('label[for="'+el.id+'"]'))return;
+      if(el.closest('label'))return;
+      var lab=null,p=el.previousElementSibling;
+      while(p&&!lab){if(p.tagName==='LABEL')lab=p;else if(p.querySelector&&p.querySelector('label'))lab=p.querySelector('label:last-of-type');p=lab?null:p.previousElementSibling;}
+      var txt='';
+      if(lab){var c=lab.cloneNode(true);c.querySelectorAll('output').forEach(function(o){o.remove()});txt=c.textContent.trim();if(!el.id)el.id='a11y-ctl-'+i;if(!lab.htmlFor)lab.htmlFor=el.id;}
+      if(!txt){var card=el.closest('.card,.sig,section');var h=card&&card.querySelector('h3,h2');txt=h?h.textContent.trim():'Controllo interattivo';}
+      el.setAttribute('aria-label',txt);
+    });
+  }
+  /* annunci dei risultati dinamici */
+  function live(){
+    document.querySelectorAll('[id$="out"],[id^="fb"],#score,.tl-card,[id$="note"],[id$="res"]').forEach(function(el){if(!el.hasAttribute('aria-live'))el.setAttribute('aria-live','polite')});
+  }
+  /* regioni scorrevoli raggiungibili da tastiera */
+  function scrollables(){
+    document.querySelectorAll('body *').forEach(function(el){
+      var s=getComputedStyle(el);if(!/(auto|scroll)/.test(s.overflowY+s.overflowX))return;
+      if(el.scrollHeight<=el.clientHeight+2&&el.scrollWidth<=el.clientWidth+2)return;
+      if(el.matches('.links,.tl,.tl-in')&&el.querySelector('a,button'))return;
+      if(!el.hasAttribute('tabindex')){el.setAttribute('tabindex','0');if(!el.getAttribute('role'))el.setAttribute('role','region');if(!el.getAttribute('aria-label')){var h=el.closest('.card,section');h=h&&h.querySelector('h3,h2');el.setAttribute('aria-label',h?h.textContent.trim():'Area scorrevole');}}
+    });
+  }
+  /* contrasto: corregge il testo che resta sotto 4,5:1 (3:1 se grande) */
+  function rgb(s){var m=s.match(/rgba?\(([^)]+)\)/);if(!m)return null;var p=m[1].split(',').map(parseFloat);return {r:p[0],g:p[1],b:p[2],a:p.length>3?p[3]:1};}
+  function lum(c){return [c.r,c.g,c.b].map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)}).reduce(function(a,v,i){return a+v*[0.2126,0.7152,0.0722][i]},0);}
+  function ratio(a,b){var x=lum(a),y=lum(b);return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05);}
+  function bgOf(el){while(el&&el.nodeType===1){var s=getComputedStyle(el);if(s.backgroundImage&&s.backgroundImage!=='none'&&!/gradient/.test(s.backgroundImage))return null;var c=rgb(s.backgroundColor);if(c&&c.a>0.9)return c;el=el.parentElement;}return rgb(getComputedStyle(document.body).backgroundColor)||{r:255,g:255,b:255,a:1};}
+  function fixContrast(){
+    var ink=rgb(getComputedStyle(document.body).color);
+    document.querySelectorAll('body *').forEach(function(el){
+      if(el.closest('svg')||el.classList.contains('skip-link'))return;
+      var has=false;for(var n=el.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&n.textContent.trim()){has=true;break;}}
+      if(!has)return;var s=getComputedStyle(el);if(s.visibility==='hidden'||s.display==='none')return;
+      var fg=rgb(s.color),bg=bgOf(el);if(!fg||!bg)return;
+      var size=parseFloat(s.fontSize),bold=parseInt(s.fontWeight)>=700,large=size>=24||(bold&&size>=18.66);
+      var need=large?3:4.5;if(ratio(fg,bg)>=need)return;
+      var dark={r:18,g:26,b:43,a:1},light={r:255,g:255,b:255,a:1};
+      el.style.setProperty('color',ratio(dark,bg)>=ratio(light,bg)?'#121A2B':'#FFFFFF','important');
+    });
+  }
+  /* menu a due righe: logo sopra, capitoli sotto, scorrevoli con frecce */
+  function navRow(){
+    var links=document.querySelector('.nav .links');if(!links||links.parentElement.classList.contains('links-row'))return;
+    var row=document.createElement('div');row.className='links-row';links.parentNode.insertBefore(row,links);
+    function btn(dir,lab,ch){var b=document.createElement('button');b.type='button';b.className='nav-arrow';b.setAttribute('aria-label',lab);b.innerHTML='<span aria-hidden="true">'+ch+'</span>';b.onclick=function(){links.scrollBy({left:dir*links.clientWidth*0.7,behavior:'smooth'})};return b;}
+    var l=btn(-1,'Capitoli precedenti','\u2039'),r=btn(1,'Capitoli successivi','\u203A');
+    row.appendChild(l);row.appendChild(links);row.appendChild(r);
+    function upd(){var over=links.scrollWidth>links.clientWidth+4;row.classList.toggle('can-scroll',over);var atL=links.scrollLeft<=10,atR=links.scrollLeft+links.clientWidth>=links.scrollWidth-10;l.disabled=atL;r.disabled=atR;row.classList.toggle('fade-l',over&&!atL);row.classList.toggle('fade-r',over&&!atR);}
+    links.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
+    var last=null;setInterval(function(){var on=links.querySelector('a.on');if(on&&on!==last){last=on;var lr=links.getBoundingClientRect(),ar=on.getBoundingClientRect();if(ar.left<lr.left+20||ar.right>lr.right-20)links.scrollTo({left:on.offsetLeft-links.clientWidth/2+on.offsetWidth/2,behavior:'smooth'});}},400);
+  }
+  /* selettore del tema: automatico, chiaro (bianco), scuro */
+  function themeToggle(){
+    var brand=document.querySelector('.nav .brand');if(!brand||document.querySelector('.theme-btn'))return;
+    var top=document.createElement('div');top.className='nav-top';brand.parentNode.insertBefore(top,brand);top.appendChild(brand);
+    var act=document.createElement('div');act.className='nav-actions';top.appendChild(act);
+    var b=document.createElement('button');b.type='button';b.className='theme-btn';act.appendChild(b);
+    var modes=['auto','light','dark'],lab={auto:['\uD83C\uDF13','Automatico'],light:['\u2600\uFE0F','Chiaro'],dark:['\uD83C\uDF19','Scuro']};
+    function cur(){var t=document.documentElement.getAttribute('data-theme');return t==='light'||t==='dark'?t:'auto';}
+    function paint(){var m=cur();b.innerHTML='<span aria-hidden="true">'+lab[m][0]+'</span> <span class="tlab">'+lab[m][1]+'</span>';b.setAttribute('aria-label','Tema: '+lab[m][1]+'. Cambia tema');}
+    b.onclick=function(){var m=modes[(modes.indexOf(cur())+1)%3];if(m==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',m);
+      try{if(m==='auto')localStorage.removeItem('radar-theme');else localStorage.setItem('radar-theme',m);}catch(e){}
+      paint();document.querySelectorAll('[style*="color"]').forEach(function(e){if(e.style.getPropertyPriority('color')==='important')e.style.removeProperty('color')});setTimeout(fixContrast,30);};
+    paint();
+  }
+  /* pulsante Argomenti: menu a comparsa con le pagine per tema */
+  function topicMenu(){
+    var M=window.RADAR_MENU,act=document.querySelector('.nav-actions');if(!M||!act||document.querySelector('.menu-btn'))return;
+    var here=location.pathname.split('/').pop()||'index.html';
+    function esc(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+    function li(i){var cur=(M.base==='./'&&here===i.u)?' aria-current="page"':'';return '<li><a href="'+M.base+i.u+'"'+cur+(i.k==='all'?' class="all"':'')+'><span>'+(i.k==='all'?'':'<span class="dot '+i.k+'" aria-hidden="true"></span>')+esc(i.l)+'</span>'+(i.n?'<span class="tn">'+esc(i.n)+'</span>':'')+'</a></li>'}
+    var b=document.createElement('button');b.type='button';b.className='menu-btn';b.id='menubtn';b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls','topicmenu');
+    b.innerHTML='<span class="bars" aria-hidden="true"></span>Argomenti';
+    var p=document.createElement('div');p.className='topicmenu';p.id='topicmenu';p.hidden=true;p.setAttribute('role','region');p.setAttribute('aria-label','Argomenti');
+    p.innerHTML='<ul>'+M.items.filter(function(i){return i.k==='all'}).map(li).join('')+'</ul><p>Guide</p><ul>'+M.items.filter(function(i){return i.k==='guide'}).map(li).join('')+'</ul><p>Temi</p><ul>'+M.items.filter(function(i){return i.k==='theme'}).map(li).join('')+'</ul>';
+    act.insertBefore(b,act.firstChild);act.appendChild(p);
+    function open(o){p.hidden=!o;b.setAttribute('aria-expanded',o?'true':'false');if(o){var f=p.querySelector('a');if(f)f.focus();}}
+    b.onclick=function(){open(p.hidden)};
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!p.hidden){open(false);b.focus();}});
+    document.addEventListener('click',function(e){if(!p.hidden&&!act.contains(e.target))open(false)});
+    p.addEventListener('focusout',function(e){if(e.relatedTarget&&!act.contains(e.relatedTarget))open(false)});
+  }
+  var t;function all(){themeToggle();topicMenu();navRow();nameControls();live();scrollables();fixContrast();}
+  function soon(){clearTimeout(t);t=setTimeout(function(){mo.disconnect();fixContrast();nameControls();mo.observe(document.body,{childList:true,subtree:true});},120);}
+  var mo=new MutationObserver(soon);
+  function start(){all();mo.observe(document.body,{childList:true,subtree:true});
+    if(window.matchMedia)matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){document.querySelectorAll('[style*="color"]').forEach(function(e){if(e.style.getPropertyPriority('color')==='important')e.style.removeProperty('color')});fixContrast();});}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
+</script>
+</body>
+</html>

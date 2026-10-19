@@ -1,0 +1,63 @@
+Radar AI. Edizione del 19 ottobre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: il fondo del cinque per cento, le banche chiuse agli agenti, e i conti di Nscale.
+
+Una nota prima di cominciare. Il primo capitolo di oggi parla di Anthropic, e questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti, con i limiti che le fonti stesse indicano.
+
+Il periodo in breve. Un fine settimana lungo, dal 16 al 19 ottobre. Venerdì due notizie che recuperiamo oggi, e le parole di Schwab sugli agenti. Domenica il fondo di Anthropic, i conti di Nscale e un modello del MIT per i cristalli.
+
+Capitolo uno. Anthropic, un fondo per il bene pubblico e il divario delle aspettative.
+
+Domenica 18 ottobre Anthropic ha annunciato un fondo che riceve il cinque per cento delle azioni dell'azienda, se gli azionisti approvano. Poi, a discrezione del consiglio di amministrazione, può ricevere un altro due per cento per ogni aumento del cinquanta per cento del valore dell'azienda oltre una soglia, che non è ancora stata resa nota. Il fondo è una società posseduta interamente da Anthropic, non una fondazione, e le sue azioni non possono finanziare lobby né donazioni politiche. Sommando le promesse dei cofondatori e il programma per i dipendenti, Anthropic stima che circa un quinto delle sue azioni sia destinato al bene pubblico. Le regole di governo arriveranno nei prossimi mesi.
+
+Due giorni prima l'azienda aveva pubblicato un sondaggio. Quasi undicimila adulti americani e milletrecento dipendenti di Anthropic hanno risposto alla stessa domanda: che parte del tuo lavoro potrà fare l'intelligenza artificiale nel 2030? I dipendenti rispondono in media il settantacinque per cento. I lavoratori americani il ventotto. Gli autori stessi avvertono: il campione dei dipendenti viene da una sola azienda, e loro lavorano per Anthropic.
+
+Sempre venerdì, Politico ha scritto che Anthropic ha portato in silenzio al Congresso una bozza di legge sulla sicurezza dei modelli di frontiera. I dettagli che circolano vengono da rassegne, non dal testo.
+
+Prova a chiederti: una promessa che vale solo "a discrezione del consiglio", quanto ti rassicura, e che cosa vorresti leggere nelle regole per crederci?
+
+Capitolo due. Schwab, e la rete che si chiude agli agenti degli altri.
+
+Venerdì 16 ottobre l'amministratore delegato di Charles Schwab ha detto a Bloomberg che la società blocca ogni settimana decine di agenti esterni che provano a spostare i soldi dei clienti, compreso Muse, l'agente di Meta. La sua domanda è semplice: se un agente sbaglia con la password del cliente, chi ne risponde? Schwab offrirà un accesso in sola lettura, attraverso canali controllati dalla banca. È la stessa linea di JPMorgan, di cui avevamo parlato il 14 ottobre.
+
+Il fatto nuovo è che il quadro si allarga. Amazon ha confermato di aver bloccato Muse a settembre, perché viola le sue condizioni d'uso. Delta dice di non avere accordi con agenti di prenotazione esterni. Yelp non chiude, ma fa pagare l'accesso a chi vuole i suoi dati. La regola che emerge è ovunque la stessa: leggere sì, agire no, a meno che l'agente non sia quello di casa.
+
+Nella pagina trovi un esempio su come lo stesso agente riceve quattro risposte diverse per quattro compiti, e un esperimento per fare la tabella dei permessi del tuo assistente.
+
+Prova a chiederti: quali azioni irreversibili, come inviare, pagare o cancellare, il tuo assistente fa oggi senza chiederti conferma?
+
+Capitolo tre. Nscale, e i conti dell'infrastruttura che tornano per terra.
+
+Domenica Bloomberg ha scritto che alcuni investitori di Nscale, la società britannica di calcolo per l'intelligenza artificiale sostenuta da NVIDIA, chiedono di quotarsi in borsa a una valutazione tra sedici e diciannove miliardi di dollari, invece dei trenta a cui punta l'azienda. Le ragioni citate: Microsoft è uscita da un accordo per un data center per ritardi legati all'energia, la quotazione saltata dell'australiana Firmus, e il denaro che costa di più.
+
+Venerdì l'indice dei semiconduttori di Philadelphia ha perso quasi il quattro per cento, all'ottava seduta di calo consecutiva, con i produttori di memorie in testa alle perdite. E lo stesso fine settimana il Dipartimento dell'Energia americano ha messo a disposizione prestiti fino a quattro miliardi e quattrocento milioni di dollari per riaccendere tre centrali nucleari chiuse, tra cui Three Mile Island, per un totale di due gigawatt e un quarto. L'intelligenza artificiale ha bisogno di ferro e di energia, e il ferro e l'energia costano.
+
+Nella pagina trovi un esempio su come un ritardo sull'energia pesa sul valore di una società, e un piccolo calcolatore tra megawatt e schede grafiche.
+
+Prova a chiederti: quando leggi che una società ha un portafoglio ordini di cento miliardi, quanto di quel numero è già acceso e sta producendo ricavi?
+
+Capitolo quattro. Il MIT, e un modello che vede i cristalli.
+
+Il 18 ottobre il MIT ha presentato un lavoro pubblicato su Nature Communications, guidato da Ju Li. È un modello che abbina la struttura in tre dimensioni di un cristallo a una descrizione in parole. Il punto chiave è da dove vengono le descrizioni: i ricercatori le hanno generate, partendo da articoli e banche dati, perché ogni struttura avesse un racconto completo, con composizione, forma, proprietà, lavorazione e usi. Il modello addestrato su quelle descrizioni ha imparato a collegare geometria e testo. Quello addestrato solo sul testo degli articoli, no.
+
+Messo alla prova sugli elettroliti solidi per le batterie al litio, ha indicato tra i primi risultati materiali che altri gruppi avevano già segnalato come promettenti. Il vero esame sarà un materiale nuovo, confermato in laboratorio.
+
+Nella pagina trovi un esempio sul perché il testo autentico non bastava, e un esperimento da fare con qualsiasi assistente per vedere la differenza tra una descrizione povera e una completa.
+
+Prova a chiederti: nei documenti che usi per istruire un assistente, quante cose ovvie per te non sono scritte da nessuna parte?
+
+Capitolo cinque. La rubrica Azure Content Understanding, ventunesima puntata: la vita di un analizzatore.
+
+Un analizzatore non si modifica come un file. Si crea con una richiesta, e la creazione è asincrona: è pronto solo quando l'operazione risponde che è riuscita. Il nome non si può riusare senza cancellare prima quello vecchio, e questo vuol dire un intervallo senza servizio e nessuna via di ritorno. Il consiglio è dare ai nomi una versione, per esempio fatture tre e fatture quattro, e tenere in un solo punto della configurazione quale versione usare. Ogni cambiamento, anche una descrizione riscritta, si prova su un insieme di documenti già controllati, confrontando la versione vecchia e la nuova, prima di cambiare quella riga.
+
+Il modello va scritto dentro l'analizzatore, non lasciato ai predefiniti della risorsa: così un cambio di modello diventa una versione nuova, provata come le altre. E chi viene dalle versioni di anteprima ha tre modifiche da fare, descritte nella pagina. Sui costi: una prova su duecento documenti, fatta con le due versioni, vale meno dell'uno per cento di un mese da quarantamila. E conviene salvare accanto a ogni risultato il nome della versione che l'ha prodotto.
+
+Prova a chiederti: se domani dovessi tornare alla versione di ieri della tua pipeline, quanto tempo ti servirebbe?
+
+I segnali da tenere d'occhio sono otto: tra questi, tre modelli misteriosi comparsi nell'interfaccia di OpenAI, il chip a cinque nanometri di Rivian, e British Airways che vieta le riprese nascoste con gli occhiali intelligenti. Li trovi tutti nella pagina, insieme alle fonti e al quiz.
+
+E ora la domanda del giorno. Un fondo riceve il cinque per cento delle azioni, più il due per cento ogni volta che il valore dell'azienda sale del cinquanta per cento oltre la soglia di partenza. Se il valore raddoppia, qual è la quota massima del fondo?
+
+La risposta: raddoppiare vuol dire salire del cento per cento, cioè due volte il cinquanta. Quindi due aggiunte del due per cento: la quota massima arriva al nove per cento. Sempre che il consiglio decida di aggiungerle, perché sono a sua discrezione.
+
+Questo era Radar AI del 19 ottobre. Nella pagina dell'edizione trovi gli esempi, i cinque esperimenti, gli otto segnali e tutte le fonti. Alla prossima.
