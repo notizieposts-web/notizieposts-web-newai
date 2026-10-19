@@ -146,7 +146,9 @@ def build(root):
         body = ('<section class="ch" id="edizioni" style="padding-top:2.5rem"><div class="ch-head"><div class="kicker"><span class="chip theme">%s</span></div><h2>Le edizioni su questo tema</h2>'
                 '<p class="lead">Dalla più recente. Tocca il titolo per aprire l\'edizione.</p></div>%s%s</section>') % (html.escape(t), side, ''.join(edrow(e) for e in lst))
         out[url] = page(head_from(root, t), NAV(url, eds), hero, body)
-    menu = [{'u': 'argomenti.html', 'l': 'Tutti gli argomenti', 'k': 'all'}] + \
+    _last = sorted(os.path.basename(f)[:-5] for f in __import__('glob').glob(os.path.join(root, 'edizioni', '*.html')))[-1]
+    menu = [{'u': 'index.html', 'l': 'Tutte le edizioni', 'k': 'all'}, {'u': 'edizioni/%s.html' % _last, 'l': 'Ultima edizione', 'k': 'all'},
+            {'u': 'argomenti.html', 'l': 'Tutti gli argomenti', 'k': 'all'}] + \
            [{'u': g['u'], 'l': g['title'], 'k': 'guide', 'n': g.get('n', '')} for g in GUIDES] + \
            [{'u': theme_url(t), 'l': t, 'k': 'theme', 'n': '%d edizioni' % cnt[t]} for t in ts]
     json.dump(menu, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'topics_menu.json'), 'w', encoding='utf-8'), ensure_ascii=False)

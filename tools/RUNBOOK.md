@@ -46,6 +46,7 @@ NN=24                                  # numero della nuova edizione (ultima + 1
    python3 tools/topics.py .
    python3 tools/edx.py .
    python3 tools/audio_page.py .
+   python3 tools/site_meta.py .
    python3 tools/graph.py .
    python3 tools/guida.py .
    python3 tools/argomenti.py .
@@ -67,9 +68,20 @@ NN=24                                  # numero della nuova edizione (ultima + 1
 
 ## Email (invio)
 
-Template: `tools/mail_template_teaser.html` (sfondo bianco, contrasti verificati anche con l'inversione della modalità scura di Gmail). Sostituisci: data, chip dei protagonisti, titolo, descrizione, tre statistiche, le voci "Dentro trovi" (pillola protagonista + titolo + testo), la domanda del giorno, i link all'edizione (`edizioni/NN.html`) e all'archivio (radice del sito), il numero totale di edizioni. L'email è un **invito alla lettura**, non il contenuto completo. Invia con il connettore Gmail (`send_message` con `htmlBody`), mittente notizieposts@gmail.com.
+**L'HTML dell'email si costruisce SOLO con lo script**, che parte dal modello `tools/mail_template_teaser.html` e da `tools/ultima.json`:
+
+```bash
+python3 tools/mail_build.py /tmp/mail.html                 # destinatari quotidiani
+python3 tools/mail_build.py /tmp/mail_prec.html --precedente   # destinatari a giorni alterni: aggiunge il link all'edizione precedente
+```
+
+Lo script stampa l'oggetto ("📡 Radar AI · " + titolo), inserisce il blocco audio solo se l'MP3 della Release esiste già, e **si ferma** se trova link non diretti. Invia il contenuto del file così com'è con il connettore Gmail (`send_message`, `htmlBody`), mittente notizieposts@gmail.com, un messaggio per destinatario. **Mai riusare l'HTML di un'email letta da Gmail** (`get_message`, `get_thread`): Gmail riscrive i link in `https://www.google.com/url?q=...` (chi apre si vede chiedere "vuoi essere reindirizzato?") e toglie gli sfondi. Il modello è un invito alla lettura, non il contenuto completo; se si cambia il modello, va riprovato lo script.
 
 **Blocco audio.** Prima di inviare, verifica che esista `https://github.com/notizieposts-web/notizieposts-web-newai/releases/download/audio-NN/radar-ai-NN.mp3` (`gh api repos/notizieposts-web/notizieposts-web-newai/releases/tags/audio-NN --jq '.assets[].name'` deve elencare `radar-ai-NN.mp3`; in alternativa `curl -sI -o /dev/null -w '%{http_code}'` senza `-L` deve dare 302: con `-L` alcuni proxy rispondono 401 anche se il file c'è). Se il file non c'è ma il run di "Audio dell'edizione" per NN è ancora in corso (`gh api 'repos/notizieposts-web/notizieposts-web-newai/actions/workflows/audio.yml/runs?per_page=1'`), aspetta fino a 10 minuti controllando ogni minuto. Nel blocco scrivi la durata reale arrotondata ("circa N minuti"; con `ffprobe` sul file o stimando 145 parole al minuto dal testo). Se esiste, tieni il blocco tra `<!-- AUDIO -->` e `<!-- /AUDIO -->` con il link aggiornato; se non esiste ancora, toglilo e invia lo stesso. Non allegare l'MP3 all'email: il connettore Gmail non regge file di qualche MB.
+
+## Metadati e servizi del sito (tools/site_meta.py)
+
+Segue Google Search Central (titoli e descrizioni unici, sitemap, dati strutturati Article), W3C/WAI (regola 2.4.5, più modi per trovare una pagina) e GitHub Pages (pagina 404). Ogni edizione riceve: titolo "Titolo · Radar AI, data", meta description (da `tools/edx.py`), canonical, Open Graph con immagine `img/og/NN.png` (generata con `tools/fonts/Inter-Bold.otf`, licenza OFL), JSON-LD `NewsArticle`, e in fondo la navigazione "Edizione precedente / Tutte le edizioni / Edizione successiva". Le altre pagine ricevono descrizione, canonical e Open Graph. Vengono rigenerati `feed.xml` (Atom: vale anche come sitemap delle edizioni), `sitemap.xml` (lastmod solo sulle edizioni, dove la data è certa) e `404.html`. Le date di pubblicazione stanno in `tools/site_dates.json` (una nuova edizione prende la data di `tools/ultima.json`). Il menu "Argomenti" di ogni pagina (generato da `tools/argomenti.py`) parte con "Tutte le edizioni" e "Ultima edizione". Un `robots.txt` non serve: per un sito di progetto GitHub Pages andrebbe nella radice del dominio, che non è nostra; la sitemap si dichiara in Search Console.
 
 ## Altre pagine
 
