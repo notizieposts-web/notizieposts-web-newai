@@ -68,10 +68,11 @@ def build(root, audio=None, precedente=False):
         return mo.group(1) + e(v) + mo.group(2) + e(l) + mo.group(3)
     t = re.sub(r'(<p style="margin:0;font-size:26px;font-weight:bold;color:#121A2B">).*?(</p><p style="margin:4px 0 0;font-size:13px;line-height:1.4;color:#2E3850">).*?(</p>)', rs, t)
     blocks = re.findall(r'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 (?:18|6)px">.*?</table>\n', t, flags=re.S)
-    tpl = blocks[0].replace('margin:0 0 6px', 'margin:0 0 18px', 1)
+    OUT6, OUT18 = 'cellspacing="0" style="margin:0 0 6px">', 'cellspacing="0" style="margin:0 0 18px">'
+    tpl = blocks[0].replace(OUT6, OUT18, 1)
     new = ''
     for i, (em, prot, tit, txt) in enumerate(u['items']):
-        b = tpl if i < len(u['items']) - 1 else tpl.replace('margin:0 0 18px', 'margin:0 0 6px', 1)
+        b = tpl if i < len(u['items']) - 1 else tpl.replace(OUT18, OUT6, 1)
         b = re.sub(r'(aria-hidden="true">).*?(</td>)', lambda mo: mo.group(1) + ents(em) + mo.group(2), b, count=1)
         b = re.sub(r'(letter-spacing:.04em;color:#121A2B">).*?(</span>)', lambda mo: mo.group(1) + e(prot) + mo.group(2), b, count=1)
         b = re.sub(r'(<h3[^>]*>).*?(</h3>)', lambda mo: mo.group(1) + e(tit) + mo.group(2), b, count=1)
