@@ -10,7 +10,7 @@ Variabili d'ambiente (dai secret e dalle variabili del repository, mai nei file)
   MAIL_DAILY           destinatari quotidiani, separati da virgola (secret)
   MAIL_ALTERNATE       destinatari a giorni alterni (secret)
   MAIL_ALTERNATE_START data di partenza dei giorni alterni, AAAA-MM-GG (variabile; predefinita 2026-10-19)
-  MAIL_TEST            destinatario delle prove (secret)
+  MAIL_TEST            destinatario delle prove (secret facoltativo; se manca, la prova va al mittente)
   MODE                 "tutti" (predefinito) o "prova"
 Gli indirizzi non vengono mai stampati: i log di un repository pubblico sono pubblici.
 """
@@ -63,7 +63,7 @@ def main():
     subject = '\U0001F4E1 Radar AI · ' + u['titolo']
     jobs = []
     if mode == 'prova':
-        jobs = [(a, html_std) for a in addrs('MAIL_TEST')]
+        jobs = [(a, html_std) for a in (addrs('MAIL_TEST') or [sender])]  # senza MAIL_TEST la prova va al mittente
         subject += ' (prova)'
     else:
         jobs = [(a, html_std) for a in addrs('MAIL_DAILY')]
