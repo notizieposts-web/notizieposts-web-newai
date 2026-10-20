@@ -12,15 +12,14 @@ GUIDES = [
  {'id': 'cu-ex', 'menu': 'Esercizi', 'c': 'Palestra Content Understanding', 'u': 'azure-esercizi.html', 'map': False,
   'title': 'Palestra Content Understanding', 'eds': list(range(7, 24)),
   's': 'Oltre mille esercizi a tre livelli, media, alta ed estrema, con verifica immediata e soluzione spiegata.', 'n': '%s esercizi'},
- {'id': 'cu-lab', 'menu': 'Laboratorio', 'c': 'Laboratorio Content Understanding', 'u': 'azure-laboratorio.html', 'map': False,
+ {'id': 'cu-lab', 'menu': 'Laboratorio', 'c': 'Laboratorio', 'u': 'azure-laboratorio.html', 'map': False,
   'title': 'Laboratorio Content Understanding', 'eds': list(range(7, 24)),
-  's': 'Il gioco pratico: estrai e trasforma da documenti veri, ottimizza prompt e schemi, taglia i costi, trova vulnerabilità e guasti.', 'n': 'sfide'},
+  's': 'Sfide quotidiane in stile HackerRank: estrai dai documenti scegliendo il metodo giusto, fai scrivere all\'agente le funzioni di trasformazione, confronta documenti con regole.', 'n': 'sfide'},
 ]
 try:
-    from lab_gen import CH as _CH
     import glob as _g, json as _j
-    _np = sum(len(_j.load(open(_f, encoding='utf-8'))['sfide']) for _f in _g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lab_daily', 'packs', '*.json')))
-    GUIDES[2]['n'] = '%d sfide' % (len(_CH) + _np)
+    _np = sum(len(_j.load(open(_f, encoding='utf-8'))['sfide']) for _f in _g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'arena', 'packs', '*.json')))
+    GUIDES[2]['n'] = '%d sfide' % _np
 except Exception:
     pass
 try:
