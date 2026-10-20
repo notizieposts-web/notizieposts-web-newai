@@ -1,0 +1,71 @@
+Radar AI. Edizione del 20 ottobre 2026. Questa è la versione da ascoltare: dura circa dieci minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: un hacker e i suoi agenti, Microsoft diffida, OpenAI accelera.
+
+Una nota prima di cominciare. Due capitoli di oggi toccano Anthropic e i suoi prodotti, e questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti, con i limiti che le fonti stesse indicano.
+
+Il periodo in breve. Domenica diciotto ottobre è uscita la notizia che Disney assumerà la maggior parte dei dipendenti di Character.AI. Lunedì diciannove è stato il giorno pieno: un rapporto su una campagna di attacchi condotta con gli agenti, i nuovi controlli di Microsoft sugli agenti aziendali, e il round accelerato di OpenAI. Martedì mattina, le rassegne hanno aggiunto qualche novità più piccola.
+
+Capitolo uno. Cairn, e l'hacker che ha mandato gli agenti a lavorare.
+
+Lunedì diciannove ottobre Snorre Fagerland, della società norvegese NorForge, ha pubblicato un rapporto che Reuters aveva visto in anteprima. Racconta una campagna partita il venticinque settembre. Un attaccante di lingua cinese ha usato Cairn, una piattaforma a codice aperto per far lavorare più agenti insieme. L'autore di Cairn dice che non era pensata per attaccare.
+
+Fagerland ha trovato in rete i pannelli di controllo lasciati esposti. Il gruppo principale aveva lanciato più di millecento progetti di attacco. Secondo Reuters, gli agenti hanno provato a entrare in più di milleduecento negozi online, in America, Canada, Giappone e Australia, e ci sono riusciti in più di cento. Cercavano di eseguire codice sul server e di lasciare un piccolo programma per tornare. Un attacco riuscito durava in media quasi ventitré ore.
+
+Il lavoratore era etichettato con un nome che, secondo NorForge, potrebbe indicare Claude Code con un modello economico di DeepSeek. È una lettura dell'etichetta, non una verifica.
+
+I conti: circa cinque dollari a tentativo, un successo su dieci, quindi circa cinquanta dollari per ogni intrusione riuscita. Cinquemila dollari in tutto. Reuters ha identificato alcune vittime, tra cui Deere, SharkNinja e un fornitore di Cummins: dicono di aver contenuto gli attacchi. Nei pannelli c'erano centinaia di credenziali, e l'undici per cento era ancora valido.
+
+Nella pagina trovi un esempio su un negozio online visto come bersaglio, e un calcolatore del costo per intrusione.
+
+Prova a chiederti: se un tentativo di attacco costa cinque dollari, quali difese del tuo sito reggono a mille tentativi pazienti?
+
+Capitolo due. Microsoft, e gli agenti trattati come dipendenti da sorvegliare.
+
+Lo stesso lunedì Microsoft ha presentato nuovi controlli dentro Microsoft 365 E7 e Project Perception. Ogni agente riceve un punteggio di rischio, aggiornato di continuo, che guarda quali dati può raggiungere e quanto le sue azioni si allontanano dal compito. Quando il punteggio sale, l'amministratore ha tre leve: togliere la scrittura e lasciare la sola lettura, chiedere l'approvazione di una persona per le azioni importanti, oppure spegnere l'agente.
+
+Arrivano anche i Guardian Agents, che indagano sul perché il rischio di un altro agente è cambiato. E Microsoft Defender passa da venticinque a sessanta tipi di agenti riconosciuti sui computer dei dipendenti, tra cui Claude Code, Codex e GitHub Copilot. Le funzioni sono in anteprima privata; la disponibilità più ampia è prevista a Ignite, dal diciassette al diciannove novembre.
+
+La frase che fa discutere è di Hayete Gallot, a capo della sicurezza di Microsoft: i modelli di frontiera, qualunque sia la loro origine, non sono affidabili. Non perché siano cattivi, ma perché sono imprevedibili. TechCrunch nota che Microsoft ha investito sia in OpenAI sia in Anthropic, e che ha interesse a vendere il controllo sugli agenti di tutti.
+
+Nella pagina trovi un esempio con un agente delle note spese, e una scala del rischio da provare.
+
+Prova a chiederti: per gli agenti che usi, sapresti dire in anticipo quale comportamento ti farebbe togliere loro il permesso di scrivere?
+
+Capitolo tre. OpenAI, e la corsa ai soldi prima della borsa di Anthropic.
+
+Lunedì Reuters, citando due persone informate, ha scritto che OpenAI vuole chiudere in fretta un round di circa trenta miliardi di dollari, a una valutazione oltre i millequattrocento miliardi. A marzo la valutazione era di ottocentocinquantadue miliardi. Al tavolo ci sarebbero SoftBank e il fondo di Abu Dhabi MGX. Il motivo principale: arrivare prima di Anthropic, che dovrebbe quotarsi a metà novembre e pesca negli stessi investitori.
+
+Su Anthropic, sempre secondo Reuters: sedici virgola otto miliardi di fatturato nel terzo trimestre, contro undici virgola sei nel secondo. L'azienda punterebbe a duemila miliardi di valutazione, alcuni investitori a millecinquecento. E c'è una disputa contabile: OpenAI conta i ricavi al netto della parte dei partner, e accusa Anthropic di contarli al lordo. Anthropic contesta.
+
+Nella pagina trovi un esempio sul multiplo dei ricavi, e un calcolatore per vedere come cambia tra netto e lordo.
+
+Prova a chiederti: quando leggi il fatturato di un'azienda, sai se è al netto o al lordo di quello che va ai partner?
+
+Capitolo quattro. HybridAgents, gli agenti che pensano in silenzio.
+
+Il tredici ottobre un gruppo guidato da Jiaru Zou e James Zou ha pubblicato su arXiv il paper Hybrid Reasoning Agents, segnalato dalle rassegne il diciannove. L'idea: un agente che alterna un ragionamento interno, fatto di vettori e non di parole, con il testo, che resta per usare gli strumenti e per lasciare tracce leggibili. Un componente leggero gestisce il passaggio, una memoria conserva il contesto, e due fasi di addestramento insegnano al modello quando pensare in silenzio e quando scrivere.
+
+I risultati dichiarati, su undici benchmark: più dieci virgola quattro per cento di prestazioni in media, tra il trentacinque e il cinquantacinque per cento di token in meno, risposte fino a quasi tre volte più veloci. Sono numeri degli autori, non ancora verificati da altri. Il codice è pubblico.
+
+Nella pagina trovi un esempio con un agente che cerca informazioni su un farmaco, e un calcolatore del risparmio.
+
+Prova a chiederti: preferiresti un agente più economico che pensa in modi che non leggi, o uno più caro che scrive ogni passaggio?
+
+Capitolo cinque. La rubrica Azure Content Understanding, ventiduesima puntata: i limiti del servizio.
+
+In sincrono un PDF può arrivare a dieci megabyte e cinque pagine; in asincrono a duecento megabyte e trecento pagine. Attenzione: se mandi in sincrono un documento più lungo, vengono lette solo le prime cinque pagine, senza un errore. Per Word, Excel, PowerPoint e testo il limite è in caratteri: trentamila in sincrono, dieci milioni in asincrono. Per la fatturazione, tremila caratteri di testo valgono una pagina, e ogni foglio Excel vale una pagina, anche quelli nascosti.
+
+L'audio è più veloce sotto i trecento megabyte o le due ore. Il video caricato nella richiesta si ferma a duecento megabyte e trenta minuti; da un archivio Blob arriva a quattro gigabyte e due ore. Uno schema può avere fino a mille campi. Una risorsa standard analizza fino a mille pagine al minuto. E dentro Azure AI Search, un documento che richiede più di cinque minuti va in timeout, ma viene addebitato lo stesso.
+
+Prova a chiederti: nel tuo archivio, quanti documenti superano le cinque pagine, e quanti fogli nascosti stai pagando senza saperlo?
+
+Prova tu. Nella pagina trovi cinque esperimenti: guardare il proprio sito con gli occhi di un agente che attacca, scrivere la scala di rischio per i propri agenti, calcolare un fatturato netto e lordo, misurare quanto costa far ragionare un modello per iscritto, e fare l'inventario di un archivio prima di mandarlo a Content Understanding.
+
+Otto segnali, in breve. Disney assumerà almeno sessanta dipendenti di Character.AI, che ha chiesto la protezione dal fallimento il tredici ottobre. Negli Stati Uniti gli annunci di lavoro nella sicurezza informatica calano di un quarto, mentre quelli per la sicurezza dell'AI crescono. Meta racconta Prometheus, il suo supercomputer da un gigawatt in Ohio. SemiAnalysis stima cinquanta gigawatt di nuovi data center nel duemilaventisette. MiniMax presenta M3.1 Flash. Amazon apre in beta TorchNeuron per i suoi chip. OpenAI migliora i modelli su COBOL e Fortran. E Anthropic offre scansioni di sicurezza gratuite ai progetti open source critici.
+
+E ora la domanda del giorno. Se un tentativo di attacco costa cinque dollari e va a segno una volta su dieci, quanto costa in media ogni intrusione riuscita?
+
+La risposta: cinquanta dollari. Servono in media dieci tentativi per un successo, e dieci per cinque fa cinquanta. È la stima di NorForge per la campagna con Cairn.
+
+Questo era Radar AI del 20 ottobre. Nella pagina dell'edizione trovi gli esempi, i cinque esperimenti, gli otto segnali, il quiz e tutte le fonti. Alla prossima.

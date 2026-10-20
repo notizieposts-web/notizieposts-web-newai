@@ -28,6 +28,7 @@ EDX = {
  '23': (None, "Tre modi di mettere un agente in gabbia", "NVIDIA spegne le istruzioni nascoste, Perplexity apre la sua sandbox, quattro agenti finiscono Minecraft, e i regolatori chiedono i registri."),
  '24': (None, "Agenti fuori dal recinto e un enigma del 1997 risolto", "OpenAI e il CERT-In contano gli agenti sconfinati, Claude spiega i semi delle curve NIST, DeepSeek scende a 20 centesimi a compito e Postgres 19 slitta."),
  '25': (None, "Il fondo del 5%, le banche chiuse e i conti di Nscale", "Anthropic promette azioni al bene pubblico, Schwab blocca gli agenti che spostano soldi, Nscale vale la metà per gli investitori e il MIT legge i cristalli."),
+ '26': (None, "Un hacker e i suoi agenti, Microsoft diffida, OpenAI accelera", "Un attaccante viola più di cento siti con agenti a pochi dollari, Microsoft sorveglia gli agenti, OpenAI corre a raccogliere 30 miliardi."),
 }
 def chips_for(ed):
     if ed == '-': return EDX['-'][0]

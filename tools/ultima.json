@@ -1,60 +1,60 @@
 {
- "n": 25,
- "data": "2026-10-19",
- "titolo": "Il fondo del 5%, le banche chiuse e i conti di Nscale",
- "descrizione": "Anthropic promette azioni al bene pubblico, Schwab blocca gli agenti che spostano soldi, Nscale vale la metà per gli investitori e il MIT legge i cristalli.",
+ "n": 26,
+ "data": "2026-10-20",
+ "titolo": "Un hacker e i suoi agenti, Microsoft diffida, OpenAI accelera",
+ "descrizione": "Un attaccante viola più di cento siti con agenti a pochi dollari, Microsoft sorveglia gli agenti, OpenAI corre a raccogliere 30 miliardi.",
  "chips": [
-  "Anthropic",
-  "Schwab",
-  "Nscale",
-  "MIT",
+  "Cairn",
+  "Microsoft",
+  "OpenAI",
+  "HybridAgents",
   "Azure"
  ],
  "statistiche": [
   [
-   "5% + 2%",
-   "delle azioni al fondo di Anthropic, a tappe"
+   "100+ su 1.200",
+   "siti violati da un solo attaccante con gli agenti"
   ],
   [
-   "75% e 28%",
-   "del lavoro all'AI nel 2030: dipendenti e americani"
+   "50 $",
+   "il costo stimato di ogni intrusione riuscita"
   ],
   [
-   "16–19 mld",
-   "la valutazione chiesta a Nscale, contro 30"
+   "30 mld",
+   "il round di OpenAI, a oltre 1.400 di valutazione"
   ]
  ],
  "items": [
   [
-   "🤝",
-   "Anthropic",
-   "Il 5% delle azioni a un fondo per il bene pubblico",
-   "E il divario delle aspettative: 75% contro 28%."
+   "🛡",
+   "Cairn",
+   "Un hacker solo e un esercito di agenti",
+   "Più di cento negozi violati, circa 50 dollari l'uno."
   ],
   [
-   "🏦",
-   "Schwab",
-   "Le banche chiudono la porta agli agenti",
-   "Leggere sì, muovere soldi no. Amazon conferma il blocco di Muse."
+   "🔒",
+   "Microsoft",
+   "Gli agenti trattati come dipendenti da sorvegliare",
+   "Punteggio di rischio, sola lettura, via libera umano, spegnimento."
   ],
   [
-   "⚡",
-   "Nscale",
-   "Gli investitori chiedono metà prezzo",
-   "Otto sedute in calo per i chip, e tre centrali nucleari riaccese."
+   "💰",
+   "OpenAI",
+   "Trenta miliardi prima della borsa di Anthropic",
+   "E la disputa sul fatturato netto o lordo."
   ],
   [
-   "💎",
-   "MIT",
-   "Un modello che vede i cristalli in 3D",
-   "Le descrizioni sintetiche insegnano la geometria."
+   "🧠",
+   "HybridAgents",
+   "Agenti che pensano in silenzio",
+   "Fino a metà dei token in meno, risposte più veloci."
   ],
   [
    "☁",
    "Azure",
-   "La vita di un analizzatore",
-   "Nomi con la versione, prova prima del cambio, modello fissato."
+   "I limiti del servizio",
+   "Pagine, megabyte, minuti e campi: come tagliare un lavoro grande."
   ]
  ],
- "domanda": "Un fondo riceve il 5% delle azioni più il 2% per ogni aumento del 50% del valore oltre la soglia: se il valore raddoppia, qual è la quota massima?"
+ "domanda": "Se un tentativo di attacco costa 5 dollari e va a segno una volta su dieci, quanto costa in media ogni intrusione riuscita?"
 }
