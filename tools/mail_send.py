@@ -1,4 +1,4 @@
-"""Radar AI: invia l'email dell'edizione via SMTP di Gmail (usato dal workflow "Invio email").
+"""Radar AI: invia l'email dell'edizione via SMTP di Gmail (usato dal workflow "Invio email" del repository privato radar-ai-invio).
 
 Perche' non il connettore Gmail: send_message fa passare l'HTML dal filtro di Gmail, che riscrive i link
 in https://www.google.com/url?q=... (chi apre vede "vuoi essere reindirizzato?") e toglie gli sfondi.
