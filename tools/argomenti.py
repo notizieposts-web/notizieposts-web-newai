@@ -5,15 +5,18 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import graph
 
 # Guide: pagine di approfondimento fatte a mano. 'eds' = edizioni collegate (per la mappa).
+import glob as _gg
+_LAST = max([int(os.path.splitext(os.path.basename(_f))[0]) for _f in _gg.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'edizioni', '*.html'))] or [23])
+_AZ = list(range(7, _LAST + 1))  # la rubrica Azure c'è in ogni edizione dalla 7
 GUIDES = [
  {'id': 'cu', 'menu': 'Azure', 'c': 'Guida Content Understanding', 'u': 'azure.html',
-  'title': 'Azure Content Understanding', 'eds': list(range(7, 24)),
+  'title': 'Azure Content Understanding', 'eds': _AZ,
   's': 'Tutte le puntate della rubrica fissa, ordinate per tema: costi, pipeline, qualità, sicurezza, produzione e casi reali.', 'n': '19 puntate'},
  {'id': 'cu-ex', 'menu': 'Esercizi', 'c': 'Palestra Content Understanding', 'u': 'azure-esercizi.html', 'map': False,
-  'title': 'Palestra Content Understanding', 'eds': list(range(7, 24)),
+  'title': 'Palestra Content Understanding', 'eds': _AZ,
   's': 'Oltre mille esercizi a tre livelli, media, alta ed estrema, con verifica immediata e soluzione spiegata.', 'n': '%s esercizi'},
  {'id': 'cu-lab', 'menu': 'Laboratorio', 'c': 'Laboratorio', 'u': 'azure-laboratorio.html', 'map': False,
-  'title': 'Laboratorio Content Understanding', 'eds': list(range(7, 24)),
+  'title': 'Laboratorio Content Understanding', 'eds': _AZ,
   's': 'Sfide quotidiane in stile HackerRank: estrai dai documenti scegliendo il metodo giusto, fai scrivere all\'agente le funzioni di trasformazione, confronta documenti con regole.', 'n': 'sfide'},
 ]
 try:

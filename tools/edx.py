@@ -52,7 +52,16 @@ if __name__ == '__main__':
     root = sys.argv[1]; data = build()
     p = os.path.join(root, 'index.html'); s = open(p, encoding='utf-8').read()
     s = re.sub(r'\n  var EDX=.*?;\n', '\n', s, flags=re.S)
-    new_render = ("$('edlist').innerHTML=ED.map(function(e,i){var x=EDX[e[3]]||{};"
+    # elenco ED: aggiunge le virgole mancanti tra le voci e controlla che ci sia una voce per ogni edizione
+    i = s.find('var ED=['); j = s.find('];', i)
+    blk = re.sub(r"(\.html'\])(\s*\n\s*\[')", r"\1,\2", s[i:j])
+    s = s[:i] + blk + s[j:]
+    import glob as _g
+    rows = re.findall(r"'(edizioni/\d+\.html)'\]", blk)
+    files = sorted('edizioni/' + os.path.basename(f) for f in _g.glob(os.path.join(root, 'edizioni', '*.html')))
+    if sorted(rows) != files or re.search(r"\]\s*\n\s*\['", blk):
+        raise SystemExit('Elenco ED di index.html non valido: voci %s, file %s' % (len(rows), len(files)))
+    new_render = ("$('edlist').innerHTML=ED.filter(Boolean).map(function(e,i){var x=EDX[e[3]]||{};"
       "var ch=(x.c||[]).map(function(c){return '<li class=\"chip topic\">'+c+'</li>'}).join('');"
       "var tt=x.t||e[1];var h=e[3]?'<a href=\"'+e[3]+'\">'+tt+'</a>':tt;"
       "return '<article class=\"card edcard\" style=\"margin-bottom:1rem\"><div class=\"kicker\"><span class=\"chip date\">'+e[0]+'</span><span class=\"chip\">Edizione '+(i+1)+'</span>'+(AUD.indexOf(e[3])>=0?'<a class=\"chip audio-chip\" href=\"'+e[3]+'#audio-title\"><span aria-hidden=\"true\">&#127911;</span> Audio</a>':'')+'</div>'"
@@ -60,7 +69,7 @@ if __name__ == '__main__':
       "+'<h3 style=\"font-size:1.2rem;margin:.5rem 0 .35rem\">'+h+'</h3>'"
       "+'<p style=\"margin:0 0 .5rem\">'+(x.d||'')+'</p>'"
       "+'<details class=\"edmore\"><summary>Tutto il contenuto</summary><p style=\"margin:.5rem 0 0\"><b>'+e[1]+'.</b> '+e[2]+'</p></details></article>'}).reverse().join('');")
-    s, n = re.subn(r"\$\('edlist'\)\.innerHTML=ED\.map\(.*?\.reverse\(\)\.join\(''\);", lambda m: new_render, s, count=1, flags=re.S)
+    s, n = re.subn(r"\$\('edlist'\)\.innerHTML=ED(?:\.filter\(Boolean\))?\.map\(.*?\.reverse\(\)\.join\(''\);", lambda m: new_render, s, count=1, flags=re.S)
     assert n == 1, 'render not found'
     import glob
     aud = sorted('edizioni/%s.html' % os.path.splitext(os.path.basename(f))[0] for f in glob.glob(os.path.join(root, 'tools/audio/*.txt')))
