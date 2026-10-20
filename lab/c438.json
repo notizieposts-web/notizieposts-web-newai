@@ -1,1 +1,0 @@
-{"mode":"debug","l":1,"t":"Risultati spariti","case":"Un lotto viene recuperato 3 giorni dopo il completamento: le operazioni non restituiscono più i risultati.","opts":["Il lotto non è mai partito","I risultati restano al massimo 24 ore","La chiave è cambiata","Serve il sincrono"],"c":1,"why":"Recupera entro 24 ore e salva nel tuo sistema.","id":438}

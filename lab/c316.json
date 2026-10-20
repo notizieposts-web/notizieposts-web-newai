@@ -1,1 +1,0 @@
-{"mode":"debug","l":1,"t":"Lo stato chiesto ogni 200 ms","case":"Il codice chiede lo stato dell'operazione ogni 200 millisecondi e riceve molti 429.","opts":["Interroga al massimo ogni due secondi e rispetta retry-after","Usa più thread","Il servizio è lento","Cambia modello"],"c":0,"why":"Attesa crescente e intestazione retry-after.","id":316}

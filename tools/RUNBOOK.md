@@ -87,24 +87,30 @@ Segue Google Search Central (titoli e descrizioni unici, sitemap, dati struttura
 
 ## Altre pagine
 
-- `azure.html` (guida per tema), `azure-esercizi.html` (palestra), `azure-laboratorio.html` + `lab-*.html` (gioco): si rigenerano con `guida.py`, `esercizi_page.py`, `lab_page.py`. Il Laboratorio e la Palestra non vanno toccati in un'edizione normale.
+- `azure.html` (guida per tema) e `azure-esercizi.html` (palestra) si rigenerano con `guida.py` ed `esercizi_page.py`. Il Laboratorio (`azure-laboratorio.html` + `lab-estrai.html`, `lab-trasforma.html`, `lab-confronta.html`, `lab-prova.html`) si rigenera con `arena_page.py`. Laboratorio e Palestra non vanno toccati in un'edizione normale.
 
 ## Sfide quotidiane del Laboratorio (operazione delle 8:10)
 
-Ogni giorno si aggiungono 50 sfide (10 per modalità) con complessità crescente: livello k = giorni dal 2026-10-17 + 1. Il generatore è `tools/lab_daily.py` (documenti Word con commenti, tabelle, grafici, note e testo nascosto; Excel con celle unite, righe e fogli nascosti e grafici; PowerPoint con grafici nativi e note del relatore; PDF con tabelle su più pagine; pacchetti ordine-bolla-fattura; schemi da correggere, conti da tagliare, audit e guasti multipli).
+Standard dal 2026-10-20 (giorno 1), stile HackerRank: l'obiettivo è imparare a usare bene agenti e Content Understanding, non programmare. Ogni giorno 30 sfide, 10 per percorso, con difficoltà mista: 4 Facili (20 punti), 4 Medie (40), 2 Difficili (80). Livello del giorno k = giorni dal 2026-10-20 + 1: tutte e tre le difficoltà crescono con k (più righe, più aliquote, più test nascosti, trappole).
+
+- 🔎 **Estrai**: fattura, scontrino, contratto, email. Per ogni campo valore (70%) e metodo (30%): extract, classify, oppure "estrai il dato grezzo e trasforma nel codice". Dopo la verifica: metodo e perché di ogni campo, schema CU con solo i campi da leggere.
+- 🧮 **Trasforma** ("Crea la funzione"): l'utente fa scrivere all'agente (modello gratuito nel browser o Gemini) la funzione `trasforma(input)`; gira in un Worker isolato (niente rete, 3 secondi). Test visibili 2-3 e nascosti 5-13. Famiglie: F piva, importo, data, nome; M scorporo IVA, scadenza, somma righe, IBAN; D multi-aliquota, fine mese, valuta, nota di credito. Dopo: confronto di costo con un campo generate, soluzione JS e Python.
+- 🔀 **Confronta**: F ordine + fattura; M three-way match ordine + DDT + fattura con tolleranza; D contratto (sconto, termini, penale) + DDT + fattura. Dopo: le regole in Python.
+
+Ogni sfida ha linee guida ("📋 Linee guida", cosa notare senza dare la risposta). Il generatore è deterministico (seme = data, percorso, posizione) e scarta i casi sul mezzo centesimo. Pacchetti in `tools/arena/packs/<data>.json`, sfide in `lab/a<id>.json`, PDF in `lab/a<id>-<n>.pdf`. Progressi dell'utente nel browser (`RStore` chiave `radar_arena`, codice di backup `ARENA1:`).
 
 ```bash
-pip install --break-system-packages python-docx openpyxl python-pptx matplotlib >/dev/null
 git pull --rebase origin main
-python3 tools/lab_daily.py .                 # crea tools/lab_daily/packs/<oggi>.json e i file in lab/ (idempotente)
-python3 tools/argomenti.py . && python3 tools/lab_page.py .
+python3 tools/arena_gen.py .                 # crea tools/arena/packs/<oggi>.json e i PDF in lab/ (idempotente, fuso Europe/Rome)
+python3 tools/argomenti.py . && python3 tools/arena_page.py . && python3 tools/site_meta.py .
 python3 tools/inject.py *.html edizioni/*.html
-MINID=<primo id nuovo> python3 tools/labtest2.py .   # deve stampare "fails [] 0"
+python3 tools/arenatest.py .                 # deve stampare "fails [] 0"
 python3 tools/audit3.py "$(pwd)"            # 0 violazioni
+python3 tools/reflow.py .                    # nessuna pagina oltre 320 px
 git add -A && git -c user.name="notizieposts-web" -c user.email="notizieposts@gmail.com" commit -m "Laboratorio: sfide del giorno <data>" && git pull --rebase origin main && git push origin main
 ```
 
-Se un test fallisce, correggi il generatore (non le singole sfide) e rigenera il pacchetto del giorno cancellando `tools/lab_daily/packs/<oggi>.json` e i file `lab/s<id>.*` che aveva creato.
+Se un test fallisce, correggi il generatore (`tools/arena_gen.py`, mai le singole sfide), cancella `tools/arena/packs/<oggi>.json` e i file `lab/a<id>*` di quel giorno, e rigenera.
 
 ## Audio (voce e chiave)
 

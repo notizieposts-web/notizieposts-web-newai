@@ -1,1 +1,0 @@
-{"mode":"debug","l":2,"t":"Il conto degli Excel","case":"Un file Excel con 3 fogli di dati costa come 23 pagine.","opts":["Excel si paga a carattere","Contano anche i fogli nascosti: ce ne sono 20","Ogni cella è una pagina","È un errore di fatturazione"],"c":1,"why":"Ogni foglio è una pagina, nascosti compresi.","id":461}
