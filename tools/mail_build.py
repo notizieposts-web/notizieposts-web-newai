@@ -50,58 +50,54 @@ def previous_title(root, n):
             return ed.get('t')
     return None
 
+MESI_L = [m.lower() for m in MESI]
+
+def reading_minutes(root, n):
+    """Minuti di lettura dell'edizione sul sito: parole del contenuto principale a 200 parole al minuto, arrotondati a 5."""
+    try:
+        h = open(os.path.join(root, 'edizioni', '%02d.html' % n), encoding='utf-8').read()
+        h = re.sub(r'(?s)<(script|style|nav|footer|header)\b.*?</\1>', ' ', h)
+        w = len(html.unescape(re.sub(r'<[^>]+>', ' ', h)).split())
+        return max(5, int(round(w / 200 / 5.0)) * 5)
+    except Exception:
+        return 30
+
+def block(t, name, fn):
+    """Sostituisce ogni <!-- NAME -->...<!-- /NAME --> con fn(contenuto)."""
+    return re.sub(r'(?s)<!-- %s -->(.*?)<!-- /%s -->' % (name, name), lambda m: fn(m.group(1)), t)
+
+def fill(t, d):
+    for k, v in d.items():
+        t = t.replace('{{%s}}' % k, v)
+    return t
+
 def build(root, audio=None, precedente=False):
     t = open(os.path.join(root, 'tools/mail_template_teaser.html'), encoding='utf-8').read()
     u = json.load(open(os.path.join(root, 'tools/ultima.json'), encoding='utf-8'))
     n = int(u['n'])
     y, m, d = u['data'].split('-')
-    # data in testa (qualunque data scritta nel modello)
-    t = re.sub(r'(RADAR AI &middot; )\d{1,2} [A-Z]+ \d{4}', lambda mo: mo.group(1) + '%d %s %s' % (int(d), MESI[int(m) - 1], y), t, count=1)
-    chip = ('<span style="display:inline-block;margin:0 6px 6px 0;padding:6px 12px;border-radius:999px;'
-            'border:1.5px solid #FFFFFF;font-size:13px;font-weight:bold;color:#FFFFFF">%s</span>')
-    t = re.sub(r'(<p style="margin:14px 0 0">).*?(</p><h1)', lambda mo: mo.group(1) + ''.join(chip % e(c) for c in u['chips']) + mo.group(2), t, count=1, flags=re.S)
-    t = re.sub(r'(<h1[^>]*>).*?(</h1>)', lambda mo: mo.group(1) + e(u['titolo']) + mo.group(2), t, count=1, flags=re.S)
-    t = re.sub(r'(</h1><p style="margin:12px 0 22px[^>]*>).*?(</p>)', lambda mo: mo.group(1) + e(u['descrizione']) + mo.group(2), t, count=1, flags=re.S)
-    st = iter(u['statistiche'])
-    def rs(mo):
-        v, l = next(st)
-        return mo.group(1) + e(v) + mo.group(2) + e(l) + mo.group(3)
-    t = re.sub(r'(<p style="margin:0;font-size:26px;font-weight:bold;color:#121A2B">).*?(</p><p style="margin:4px 0 0;font-size:13px;line-height:1.4;color:#2E3850">).*?(</p>)', rs, t)
-    blocks = re.findall(r'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 (?:18|6)px">.*?</table>\n', t, flags=re.S)
-    OUT6, OUT18 = 'cellspacing="0" style="margin:0 0 6px">', 'cellspacing="0" style="margin:0 0 18px">'
-    tpl = blocks[0].replace(OUT6, OUT18, 1)
-    new = ''
-    for i, (em, prot, tit, txt) in enumerate(u['items']):
-        b = tpl if i < len(u['items']) - 1 else tpl.replace(OUT18, OUT6, 1)
-        b = re.sub(r'(aria-hidden="true">).*?(</td>)', lambda mo: mo.group(1) + ents(em) + mo.group(2), b, count=1)
-        b = re.sub(r'(letter-spacing:.04em;color:#121A2B">).*?(</span>)', lambda mo: mo.group(1) + e(prot) + mo.group(2), b, count=1)
-        b = re.sub(r'(<h3[^>]*>).*?(</h3>)', lambda mo: mo.group(1) + e(tit) + mo.group(2), b, count=1)
-        b = re.sub(r'(<p style="margin:0;font-size:15px;line-height:1.55;color:#2E3850">).*?(</p>)', lambda mo: mo.group(1) + e(txt) + mo.group(2), b, count=1)
-        new += b
-    t = t[:t.index(blocks[0])] + new + t[t.index(blocks[-1]) + len(blocks[-1]):]
-    t = re.sub(r'(<p style="margin:0;font-size:17px;line-height:1.5;font-weight:bold;color:#121A2B">).*?(</p>)', lambda mo: mo.group(1) + e(u['domanda']) + mo.group(2), t, count=1, flags=re.S)
-    # audio
+    url_ed = '%sedizioni/%02d.html' % (SITE, n)
+    chips = [e(c) for c in u['chips']]
+    chips_txt = (', '.join(chips[:-1]) + ' e ' + chips[-1]) if len(chips) > 1 else ''.join(chips)
+    t = block(t, 'STAT', lambda b: ''.join(fill(b, {'STAT_V': e(v), 'STAT_L': e(l)}) for v, l in u['statistiche']))
+    t = block(t, 'ITEM', lambda b: ''.join(fill(b, {'IT_EMOJI': ents(em), 'IT_TEMA': e(prot), 'IT_TITOLO': e(tit), 'IT_TESTO': e(txt)}) for em, prot, tit, txt in u['items']))
     if audio is None:
         audio = audio_exists(n)
     if audio:
         txt = os.path.join(root, 'tools/audio/%d.txt' % n)
         mins = max(1, round(len(open(txt, encoding='utf-8').read().split()) / WPM)) if os.path.exists(txt) else None
-        t = re.sub(r'audio-\d+/radar-ai-\d+\.mp3', 'audio-%d/radar-ai-%d.mp3' % (n, n), t)
-        t = re.sub(r"La versione audio dell'edizione, circa [^.]*\.",
-                   "La versione audio dell'edizione" + (', circa %d minuti.' % mins if mins else '.'), t)
-        t = re.sub(r'<!-- AUDIO:[^>]*-->', '', t)
-        t = t.replace('<!-- /AUDIO -->', '')
+        t = block(t, 'AUDIO', lambda b: fill(b, {'MINUTI_AUDIO': (', circa %d minuti' % mins) if mins else '',
+                                                  'URL_AUDIO': '%s/releases/download/audio-%d/radar-ai-%d.mp3' % (REPO, n, n), 'URL_RELEASES': REPO + '/releases'}))
     else:
-        t = re.sub(r'<!-- AUDIO:.*?<!-- /AUDIO -->\n?', '', t, flags=re.S)
-    # link all'edizione e totale
-    t = re.sub(r'edizioni/\d+\.html', 'edizioni/%02d.html' % n if n < 10 else 'edizioni/%d.html' % n, t)
-    t = re.sub(r'Tutte le \d+ edizioni', 'Tutte le %d edizioni' % n, t)
+        t = block(t, 'AUDIO', lambda b: '')
     if precedente and n > 1:
         pt = previous_title(root, n) or ('Edizione %d' % (n - 1))
-        prev = ('<p style="margin:0 0 18px;font-size:15px;line-height:1.5;color:#2E3850">Ti sei perso l\'edizione precedente? '
-                '<a href="%sedizioni/%02d.html" target="_blank" rel="noopener" style="color:#121A2B;font-weight:bold;text-decoration:underline">%s</a></p>\n'
-                % (SITE, n - 1, e(pt)))
-        t = t.replace('<tr><td align="center" style="padding:28px 0 6px">\n', '<tr><td align="center" style="padding:28px 0 6px">\n' + prev, 1)
+        t = block(t, 'PRECEDENTE', lambda b: fill(b, {'URL_PREC': '%sedizioni/%02d.html' % (SITE, n - 1), 'N_PREC': str(n - 1), 'TITOLO_PREC': e(pt)}))
+    else:
+        t = block(t, 'PRECEDENTE', lambda b: '')
+    t = fill(t, {'TITOLO': e(u['titolo']), 'DESCRIZIONE': e(u['descrizione']), 'DOMANDA': e(u['domanda']), 'CHIPS': chips_txt,
+                 'N': str(n), 'DATA_LUNGA': '%d %s %s' % (int(d), MESI_L[int(m) - 1], y), 'URL_ED': url_ed,
+                 'URL_ED_TESTO': url_ed.replace('https://', ''), 'URL_SITO': SITE, 'MINUTI_LETTURA': str(reading_minutes(root, n))})
     check(t, n)
     return t, u
 
@@ -109,6 +105,9 @@ def check(t, n):
     bad = [h for h in re.findall(r'href="([^"]+)"', t) if not (h.startswith(SITE) or h.startswith(REPO + '/'))]
     if bad:
         raise SystemExit('Link non diretti nell\'email: %s' % bad[:3])
+    left = re.findall(r'\{\{[A-Z_]+\}\}', t)
+    if left:
+        raise SystemExit('Segnaposto non riempiti nell\'email: %s' % sorted(set(left)))
     if 'google.com/url' in t or 'safelinks' in t:
         raise SystemExit('Link riscritti trovati: costruisci l\'email solo dal modello.')
     if 'edizioni/%d.html' % n not in t and 'edizioni/%02d.html' % n not in t:
