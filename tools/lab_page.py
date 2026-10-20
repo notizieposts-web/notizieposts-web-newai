@@ -172,6 +172,12 @@ function num(v){v=String(v).trim().replace(/[\s$€%]/g,'');if(!v)return NaN;if(
 function fillSel(){if(!$('gsel'))return;var L=byMode(mode);$('gsel').innerHTML=L.map(function(c,i){return '<option value="'+c.id+'"'+(cur&&cur.id===c.id?' selected':'')+'>'+(S.done[c.id]!==undefined?'✓ ':'')+(i+1)+'. '+esc(c.t)+' · '+LN[c.l]+(c.fmt?' · '+c.fmt:'')+'</option>'}).join('')}
 function kick(c){var L=byMode(c.mode);return '<div class="kicker"><span class="chip">Sfida '+(L.findIndex(function(x){return x.id===c.id})+1)+' di '+L.length+'</span><span class="chip l'+c.l+'">'+LN[c.l]+'</span>'+(c.fmt?'<span class="chip fmt">.'+(c.dl?c.dl.split('.').pop():c.fmt)+'</span>':'')+(S.done[c.id]!==undefined?'<span class="chip done">✓ '+S.done[c.id]+' punti</span>':'')+'</div>'}
 /* ---------- ESTRAI */
+/* schema per il banco di prova: i campi che l'esercizio chiede, con formati e regole (non solo l'estrazione standard) */
+function exSchema(c){var F={},T={},n=0;(c.fields||[]).forEach(function(f){if(f.src&&!f.src.length)return;var d={description:f.fmt||''};
+    if(f.type==='num'){d.type='number';d.method='generate'}else if(f.type==='date'){d.type='date';d.method='generate'}else if(f.type==='enum'){d.type='string';d.method='classify';d.enum=f.opts}else{d.type='string';d.method='generate'}
+    F[f.label]=d;T[f.label]=f.ans;n++});if(!n)return null;
+  var tmp=document.createElement('div');tmp.innerHTML=c.task||'';
+  return {schema:JSON.stringify({description:'Campi richiesti dall\'esercizio',fieldSchema:{fields:F}},null,2),truth:T,rules:(tmp.textContent||'').trim()}}
 function rEstrai(c){
   var FL={pdf:'PDF',xlsx:'Excel',docx:'Word',pptx:'PowerPoint',eml:'Email',png:'Immagine',vtt:'Trascrizione audio'};
   var h='<div class="lgrid"><div><div class="paper" id="paper" tabindex="0" role="document" aria-label="Documento da analizzare, formato '+FL[c.fmt]+'">'+c.doc+'</div><div class="ptool">'+(c.dl?'<a class="pbtn" href="'+c.dl+'" download>⬇ Scarica il documento ('+c.dl.split('.').pop()+', '+c.dlkb+' KB)</a>':'')+(/class="(hid|hidsheet)/.test(c.doc)||c.fmt==='xlsx'?'<button type="button" class="pbtn" id="showhid" aria-pressed="false">👁 Mostra il contenuto nascosto (come lo legge il servizio)</button>':'')+'</div></div>';
@@ -183,7 +189,7 @@ function rEstrai(c){
   h+='<div class="acts2"><button type="submit" class="vbtn2">Verifica</button><button type="button" class="pbtn" id="ehint">💡 Suggerimento (−5)</button><button type="button" class="pbtn" id="esol">Mostra la soluzione</button></div><div class="acts2" id="eacts"></div></form><div class="out" id="eout"></div></div></div><div id="benchbox"></div>';
   $('stage').innerHTML=h;var a=att[c.id]={tries:0,ok:{},score:0,hints:0,closed:false};
   if(window.RadarBench)var sv=RSol.get('lab',c.id);if(sv&&sv.f&&!NOREST){c.fields.forEach(function(f,i){var el=document.getElementById('f'+c.id+'_'+i);if(el&&sv.f[i]!=null)el.value=sv.f[i]});$('esv').innerHTML=svNote(sv)}
-  RadarBench.mount($('benchbox'),{doc:function(){return c.ocr||RadarBench.h2t(c.doc)},schema:c.schema,truth:c.truth,trap:c.trap,savedSchema:sv&&sv.bench&&sv.bench.schema,savedSys:sv&&sv.bench&&sv.bench.sys,onSave:benchSave(c),title:'Banco di prova: fai estrarre questo documento a un modello gratuito'});
+  RadarBench.mount($('benchbox'),{doc:function(){return c.ocr||RadarBench.h2t(c.doc)},schema:c.schema,truth:c.truth,alt:exSchema(c),trap:c.trap,savedSchema:sv&&sv.bench&&sv.bench.schema,savedSys:sv&&sv.bench&&sv.bench.sys,onSave:benchSave(c),title:'Banco di prova: fai estrarre questo documento a un modello gratuito'});
   if($('showhid'))$('showhid').onclick=function(){var p=$('paper'),on=!p.classList.contains('show');p.classList.toggle('show',on);this.setAttribute('aria-pressed',on?'true':'false')};
   function val(f,i){return document.getElementById('f'+c.id+'_'+i).value}
   function right(f,v){if(f.type==='num'){var n=num(v);return !isNaN(n)&&Math.abs(n-f.ans)<=(f.tol!=null?f.tol:0.011)}
