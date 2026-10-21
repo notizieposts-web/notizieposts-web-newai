@@ -92,3 +92,26 @@ jobs:
               --notes "Versione audio dell'edizione $N ${DATA}. Pagina: https://notizieposts-web.github.io/notizieposts-web-newai/edizioni/$N.html"
           fi
           echo "https://github.com/${GITHUB_REPOSITORY}/releases/download/audio-$N/radar-ai-$N.mp3"
+
+      - name: Copia per il lettore del sito (ramo audio, ultime 30)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Le Release servono gli MP3 come application/octet-stream: Safari e iPhone non li riproducono.
+          # Il ramo orfano "audio" (un solo commit, sostituito ogni volta) tiene le ultime 30 copie,
+          # servite da jsDelivr come audio/mpeg. Mai nel ramo main né nel sito.
+          R="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          rm -rf /tmp/ramo-audio && mkdir /tmp/ramo-audio && cd /tmp/ramo-audio && git init -q
+          if git fetch -q --depth 1 "$R" audio 2>/dev/null; then git checkout -q FETCH_HEAD -- . ; fi
+          for N in $(ls "$GITHUB_WORKSPACE"/tools/audio/*.txt | sed 's#.*/##; s#\.txt##' | sort -n | tail -30); do
+            F="radar-ai-$N.mp3"
+            if [ -f "$GITHUB_WORKSPACE/$F" ]; then cp "$GITHUB_WORKSPACE/$F" .
+            elif [ ! -f "$F" ]; then gh release download "audio-$N" -R "$GITHUB_REPOSITORY" -p "$F" 2>/dev/null || echo "manca $F"; fi
+          done
+          ls radar-ai-*.mp3 2>/dev/null | sort -V | head -n -30 | xargs -r rm -f
+          printf 'Copie degli MP3 di Radar AI per il lettore del sito (ultime 30), servite da jsDelivr.\nGli originali sono nelle Release audio-NN.\n' > README.md
+          git add -A
+          git -c user.name="notizieposts-web" -c user.email="notizieposts@gmail.com" commit -qm "Audio per il lettore" || true
+          git push -qf "$R" HEAD:refs/heads/audio
+          for F in radar-ai-*.mp3; do curl -s -o /dev/null "https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@audio/$F" || true; done
+          ls -la radar-ai-*.mp3

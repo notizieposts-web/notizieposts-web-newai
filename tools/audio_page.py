@@ -2,7 +2,7 @@
 
 Uso: python3 tools/audio_page.py .
 
-Il file MP3 resta nella Release audio-NN di GitHub: la pagina contiene solo il lettore
+Il file MP3 originale resta nella Release audio-NN; il lettore lo prende dalla copia sul ramo "audio" via jsDelivr. La pagina contiene solo il lettore
 (preload="none", non scarica nulla finche' non si preme play) e il link di download.
 Il blocco va nell'intestazione, dopo il sommario (p.sub), tra <!-- AUDIO-PLAYER --> e <!-- /AUDIO-PLAYER -->.
 """
@@ -29,15 +29,19 @@ def minutes(txt):
 def block(n, mins):
     nn = '%02d' % n if n < 10 else str(n)
     url = '%s/releases/download/audio-%s/radar-ai-%s.mp3' % (REPO, nn, nn)
+    # Le Release servono l'MP3 come application/octet-stream "attachment": Safari e iPhone non lo riproducono.
+    # Il lettore usa prima la copia sul ramo "audio" servita da jsDelivr (audio/mpeg, Range, CORS), poi la Release.
+    play = 'https://cdn.jsdelivr.net/gh/notizieposts-web/notizieposts-web-newai@audio/radar-ai-%s.mp3' % nn
     return ('<!-- AUDIO-PLAYER --><section class="audio-box" aria-labelledby="audio-title">'
             '<h2 id="audio-title"><span aria-hidden="true">&#127911;</span> Ascolta l\'edizione</h2>'
             '<p>Versione audio, circa %d minuti, con voce sintetica. Segue la pagina capitolo per capitolo, '
             'con una domanda di riflessione alla fine di ognuno; il testo completo è questa pagina.</p>'
-            '<audio controls preload="none" src="%s" aria-label="Versione audio dell\'edizione %d">'
+            '<audio controls preload="none" aria-label="Versione audio dell\'edizione %d">'
+            '<source src="%s" type="audio/mpeg"><source src="%s" type="audio/mpeg">'
             '<a href="%s">Scarica la versione audio (MP3)</a></audio>'
             '<p class="audio-links"><a class="audio-dl" href="%s" download>Scarica l\'MP3</a>'
             '<a href="%s/releases">Tutti gli audio</a></p>'
-            '</section><!-- /AUDIO-PLAYER -->' % (mins, url, n, url, url, REPO))
+            '</section><!-- /AUDIO-PLAYER -->' % (mins, n, play, url, url, url, REPO))
 
 def main(root):
     done = []
