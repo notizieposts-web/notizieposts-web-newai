@@ -1,0 +1,25 @@
+name: Controllo audio
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/audio-check.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Intestazioni dei file audio
+        run: |
+          for N in 26 27; do
+            U="https://github.com/${GITHUB_REPOSITORY}/releases/download/audio-$N/radar-ai-$N.mp3"
+            echo "== $U"
+            curl -s -o /dev/null -D - -L -r 0-1023 "$U" | grep -iE '^(HTTP|location|content-type|content-disposition|accept-ranges|content-range|access-control)' | sed -E 's/(location: [^?]*)\?.*/\1?.../I'
+            J="https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main/img/og/$N.png"
+            echo "== $J"
+            curl -s -o /dev/null -D - -r 0-1023 "$J" | grep -iE '^(HTTP|content-type|accept-ranges|access-control)'
+          done
