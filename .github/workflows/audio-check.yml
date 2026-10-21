@@ -2,9 +2,6 @@ name: Controllo audio
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/audio-check.yml']
 
 permissions:
   contents: read
@@ -13,9 +10,10 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Il lettore riceve audio/mpeg?
         run: |
-          for N in $(seq 24 40); do
+          for N in $(ls tools/audio/*.txt | sed 's#.*/##; s#\.txt##' | sort -n | tail -30); do
             U="https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}@audio/radar-ai-$N.mp3"
             H=$(curl -s -o /dev/null -D - -r 0-1023 "$U")
             echo "$N $(echo "$H" | grep -iE '^(HTTP|content-type)' | tr -d '\r' | tr '\n' ' ')"
