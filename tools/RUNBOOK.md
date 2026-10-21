@@ -47,6 +47,15 @@ Ogni capitolo di notizie ha un riquadro `<div class="example"><b>Verifica</b>…
 
 **Smentite**: se una fonte primaria ufficiale smentisce o contesta una notizia (anche una data in un'edizione precedente), la smentita si pubblica sempre: nel capitolo della notizia, oppure, se riguarda un'edizione passata, in "Cosa è cambiato" con l'etichetta `smentita` e il link al capitolo originale.
 
+## Glossario (acronimi e termini tecnici)
+
+Il componente è fisso: stile e comportamento (clic, Invio/Spazio, Esc che chiude e riporta il fuoco, `aria-expanded`, pulsante "Chiudi") stanno in `tools/inject.py` e sono già passati da audit3 e reflow. **Non va riscritto né modificato in un'edizione**: le sessioni aggiungono solo i termini.
+
+1. Nella pagina marca la **prima** occorrenza di ogni acronimo o termine tecnico significativo (di norma 5–10 per edizione), dentro il testo dei capitoli, mai in titoli, menu, chip o nel codice: `<span class="gl" data-gl="mfu">MFU</span>`. Il testo visibile resta quello della frase.
+2. Se la chiave non esiste, aggiungila a `tools/glossario.json` (chiave minuscola, lettere, cifre e trattini): `"mfu": {"t": "MFU", "esteso": "Model FLOPs Utilization", "spiega": "...", "esempio": "..."}`. `esteso` solo per gli acronimi; `spiega` in italiano semplice, due frasi al massimo; `esempio` concreto, una o due frasi. Le voci valgono per tutte le edizioni: riusale, non duplicarle; correggile solo se sbagliate, verificandole su fonti ufficiali.
+3. `python3 tools/glossario.py .` genera pulsante e scheda (idempotente) e si ferma se manca una chiave.
+4. **Audio**: niente schede; ogni sigla si scioglie a voce alla prima menzione ("il TPU, il chip di Google per l'AI"). **Email**: nessun glossario (è un invito alla lettura costruito da `mail_build.py`, il modello non si tocca).
+
 ## Struttura di un'edizione
 
 Copia la struttura di `edizioni/23.html` (stesso `<head>`, stessi stili, stesso JavaScript in fondo). Capitoli: `<section class="ch" id="...">`, ciascuno con `.ch-head` (kicker con chip della data, `h2`, `p.lead`) e `<div class="grid2"><div class="prose">…</div><div class="stick">…strumento interattivo…</div></div>`. Il capitolo Azure ha `id="azure"`. Capitoli standard: `periodo`, 3–5 capitoli di notizie, `azure`, `lab`, `segnali`, `novita`, `quiz`, `fonti`.
@@ -79,6 +88,7 @@ NN=24                                  # numero della nuova edizione (ultima + 1
    python3 tools/graph.py .
    python3 tools/guida.py .
    python3 tools/argomenti.py .
+   python3 tools/glossario.py .     # si ferma se un termine marcato non è in tools/glossario.json
    python3 tools/inject.py *.html edizioni/*.html
    ```
 5. **Verifica**:

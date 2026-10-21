@@ -63,6 +63,10 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .theme-btn:hover{border-color:var(--violet)}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}html{scroll-behavior:auto!important}}
+.gl-btn{display:inline;font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-decoration:underline dotted var(--violet);text-decoration-thickness:2px;text-underline-offset:.2em;border-radius:3px}
+.gl-btn:hover{text-decoration-style:solid}.gl-btn[aria-expanded="true"]{background:var(--violet-soft);text-decoration-style:solid}
+.gl-tip{display:block;margin:.5rem 0 .8rem;padding:.75rem .95rem;border:1px solid var(--line);border-left:4px solid var(--violet);border-radius:12px;background:var(--surface);color:var(--ink);font-size:.95rem;line-height:1.55;font-weight:400;font-style:normal;text-align:left}
+.gl-tip[hidden]{display:none}.gl-tip .gl-ex{display:block;margin-top:.35rem}.gl-tip .gl-close{display:inline-flex;align-items:center;min-height:32px;margin-top:.5rem;padding:.2rem .8rem;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--ink);font:600 .82rem var(--head,system-ui);cursor:pointer}
 </style>"""
 JS = r"""<script id="a11y-js">
 (function(){
@@ -153,7 +157,18 @@ JS = r"""<script id="a11y-js">
     document.addEventListener('click',function(e){if(!p.hidden&&!act.contains(e.target))open(false)});
     p.addEventListener('focusout',function(e){if(e.relatedTarget&&!act.contains(e.relatedTarget))open(false)});
   }
-  var t;function all(){themeToggle();topicMenu();navRow();nameControls();live();scrollables();fixContrast();}
+  /* glossario: termini con scheda che si apre al clic, da tastiera e lettori di schermo */
+  function glossario(){
+    function close(b,focus){var t=document.getElementById(b.getAttribute('aria-controls'));if(!t)return;t.hidden=true;b.setAttribute('aria-expanded','false');if(focus)b.focus();}
+    document.addEventListener('click',function(e){
+      var b=e.target.closest&&e.target.closest('.gl-btn');
+      if(b){var t=document.getElementById(b.getAttribute('aria-controls'));if(!t)return;var o=b.getAttribute('aria-expanded')!=='true';t.hidden=!o;b.setAttribute('aria-expanded',o?'true':'false');return;}
+      var c=e.target.closest&&e.target.closest('.gl-close');
+      if(c){var g=c.closest('.gl');if(g)close(g.querySelector('.gl-btn'),true);}
+    });
+    document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;var g=document.activeElement&&document.activeElement.closest&&document.activeElement.closest('.gl');if(g){var b=g.querySelector('.gl-btn');if(b&&b.getAttribute('aria-expanded')==='true'){close(b,true);e.stopPropagation();}}},true);
+  }
+  var t;function all(){glossario();themeToggle();topicMenu();navRow();nameControls();live();scrollables();fixContrast();}
   function soon(){clearTimeout(t);t=setTimeout(function(){mo.disconnect();fixContrast();nameControls();mo.observe(document.body,{childList:true,subtree:true});},120);}
   var mo=new MutationObserver(soon);
   function start(){all();mo.observe(document.body,{childList:true,subtree:true});
