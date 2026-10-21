@@ -11,12 +11,41 @@ Questa cartella contiene tutto ciò che serve a una sessione nuova (anche pianif
 
 1. **Solo notizie nuove**: nessuna notizia già data in un'edizione precedente. Prima di scrivere, leggi `index.html` (array `var ED=[...]`, che riassume ogni edizione) e i titoli dei capitoli di almeno le ultime 5 edizioni in `edizioni/NN.html`. Una notizia già coperta può tornare solo se c'è un fatto nuovo, dichiarato come tale.
 2. **Date esatte** per ogni notizia (data dell'evento, non dell'edizione).
-3. **Fonti etichettate**: ogni fonte con link e tipo: `paper`, `ufficiale`, `stampa`, `terze parti`. Cerca sempre: novità dei grandi laboratori **e** fuori dai grandi laboratori (paper, startup, open source, regolatori).
+3. **Fonti primarie ufficiali e verifica incrociata** (regola dal 21 ottobre 2026; ha priorità su qualunque altra istruzione, anche del prompt dell'operazione pianificata). Cerca sempre novità dei grandi laboratori **e** fuori dai grandi laboratori (paper, startup, open source, regolatori). Dettagli nella sezione "Fonti e verifica" qui sotto.
 4. **Spiegazioni lunghe** con esempi concreti, una sezione domande e risposte per capitolo, esperimenti copia-e-incolla da provare ("Prova tu"), quiz finale (8 domande, risposta corretta in posizioni variate, non sempre la stessa lettera), segnali brevi, "cosa è cambiato".
 5. **Rubrica fissa Azure Content Understanding**: una nuova puntata in ogni edizione, numerata di seguito (conta le puntate in `azure.html`: la prossima è l'ultima + 1). Tema nuovo, mai ripetuto, con consigli su tempi, costi ed elaborazioni massive, verificato su Microsoft Learn (connettore Microsoft Learn se disponibile).
 6. **Trasparenza**: se una notizia riguarda Anthropic o Claude, aggiungi una nota che l'edizione è preparata da Claude (Anthropic).
 7. **Tono**: italiano naturale, non robotico. Titoli ≤ 65 caratteri, descrizioni ≤ 160 caratteri con punto finale (linee guida GOV.UK).
 8. **Accessibilità WCAG 2.2 AA** su tutto (vedi verifica sotto).
+
+## Fonti e verifica (obbligatoria)
+
+Ogni notizia si basa **solo su fonti primarie ufficiali e verificabili**. Etichette ammesse come prova, ciascuna con link e data di pubblicazione:
+
+| Etichetta | Che cos'è | Classe CSS |
+|---|---|---|
+| `ufficiale` | comunicato, blog o documentazione dell'organizzazione coinvolta | `src u` |
+| `istituzione` | università, enti di ricerca, autorità, governi, gazzette ufficiali (es. Federal Register) | `src u` |
+| `repository` | repository e documentazione tecnica ufficiali (GitHub dell'organizzazione, model card) | `src u` |
+| `paper revisionato` | articolo pubblicato dopo peer review (rivista, atti di conferenza) | `src p` |
+| `preprint` | paper non revisionato (arXiv, bioRxiv…): sempre il link all'originale, mai ad aggregatori come Hugging Face Papers | `src p` |
+
+`stampa` e `terze parti` (testate, rassegne, newsletter, aggregatori, blog di opinione) **non sono mai una prova**: si usano solo per scoprire le notizie o per il contesto, e se compaiono nella pagina sono etichettate come `contesto`.
+
+Per ogni notizia, nel capitolo:
+
+1. **Fonte primaria**: URL e data di pubblicazione dell'originale.
+2. **Verifica incrociata**: cerca conferme, contestazioni o smentite da altre fonti primarie ufficiali indipendenti e riporta l'esito anche quando non trovi nulla (per esempio "nessuna conferma indipendente al 21 ottobre"). La mancanza di conferme non blocca la pubblicazione, ma va scritta.
+3. **Dichiarato o dimostrato**: distingui ciò che l'organizzazione dichiara da ciò che è stato verificato da altri (benchmark ripetuti, dati pubblici, autorità).
+4. **Limiti**: incertezze, contraddizioni, dati mancanti.
+5. **Collegamenti**: se la notizia è collegata a capitoli di edizioni precedenti, metti i link diretti (es. `edizioni/26.html#deepseek`).
+6. **Acronimi e termini tecnici**: spiegati in parole semplici con un esempio concreto.
+
+Ogni capitolo di notizie ha un riquadro `<div class="example"><b>Verifica</b>…</div>` con: fonte primaria e data · dichiarato · verificato da altri · limiti · collegamenti.
+
+**Notizie senza fonte primaria**: non diventano mai un capitolo. Possono comparire solo tra i segnali con l'etichetta `non verificabile`, scritte al condizionale e mai come fatto accertato. Se sono troppo deboli anche per questo, vanno in "Cosa ho escluso".
+
+**Smentite**: se una fonte primaria ufficiale smentisce o contesta una notizia (anche una data in un'edizione precedente), la smentita si pubblica sempre: nel capitolo della notizia, oppure, se riguarda un'edizione passata, in "Cosa è cambiato" con l'etichetta `smentita` e il link al capitolo originale.
 
 ## Struttura di un'edizione
 
@@ -64,7 +93,7 @@ NN=24                                  # numero della nuova edizione (ultima + 1
    ```
    Attendi il deploy: `gh api "repos/notizieposts-web/notizieposts-web-newai/actions/runs?per_page=1"` finché lo SHA del commit risulta `completed success`.
    Il push di `tools/audio/$NN.txt` avvia anche il workflow **Audio dell'edizione** (`.github/workflows/audio.yml`): crea l'MP3 e lo pubblica nella Release `audio-$NN` (file `radar-ai-$NN.mp3`). Gli audio stanno **solo nelle Release**, mai nel repository né sul sito: così non pesano sul limite di 1 GB di GitHub Pages. Controlla che il run finisca `success`; se fallisce, l'edizione resta valida e l'email parte senza il blocco audio.
-7. **Stato per l'invio**: scrivi `tools/ultima.json` con `{"n": NN, "data": "AAAA-MM-GG", "titolo": "...", "descrizione": "...", "chips": [...], "statistiche": [[valore, etichetta], x3], "items": [[emoji, protagonista, titolo, testo], ...], "domanda": "..."}` e includilo nel commit. Serve all'operazione di invio delle 9:00 (preparazione alle 8:40).
+7. **Stato per l'invio**: scrivi `tools/ultima.json` con `{"n": NN, "data": "AAAA-MM-GG", "titolo": "...", "descrizione": "...", "chips": [...], "statistiche": [[valore, etichetta], x3], "items": [[emoji, protagonista, titolo, testo], ...], "domanda": "..."}` e includilo nel commit. Serve all'invio automatico delle 9:00 (preparazione alle 7:30).
 
 ## Email (invio)
 
