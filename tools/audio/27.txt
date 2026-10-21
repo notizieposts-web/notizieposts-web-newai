@@ -1,0 +1,75 @@
+Radar AI. Edizione del ventuno ottobre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: PyTorch sui chip di Google, il robot che sente la forza, DeepSeek fuori dagli uffici federali americani.
+
+Una nota prima di cominciare. Un capitolo di oggi cita Anthropic come contesto, e alcuni segnali riguardano Anthropic e Claude. Questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti, senza giudizi.
+
+Il periodo in breve. Lunedì diciannove ottobre il Dipartimento per la sicurezza interna americano ha messo in consultazione l'ordine su DeepSeek. Martedì venti è stato il giorno pieno: Google, Eka Robotics, la pubblicazione dell'ordine e la risposta di Pechino, un paper sui filtri di sicurezza. Mercoledì mattina, poche novità.
+
+Capitolo uno. Google e TorchTPU.
+
+Martedì venti ottobre, alla PyTorch Conference, Google Cloud ha reso a codice aperto TorchTPU. È il modo per far girare i programmi scritti in PyTorch, il linguaggio più usato per l'AI, sui TPU, i chip di Google. È stato sviluppato insieme alla squadra PyTorch di Meta. La promessa è che il codice che hai già giri con modifiche minime.
+
+Intorno c'è un ecosistema: gli strumenti più usati per servire e addestrare i modelli, Hugging Face, e una suite di agenti in anteprima che aiuta a migrare. Google dice di aver provato l'addestramento su ottomila chip Ironwood. Un cliente, Zenteiq, dichiara di essere passato da un miliardo e mezzo a quasi sei miliardi di token al giorno con mille chip. Sono numeri di Google e dei suoi clienti.
+
+Il giorno prima Amazon aveva fatto lo stesso con i suoi chip. Due grandi cloud attaccano il vero vantaggio di NVIDIA: il software scritto pensando a CUDA. Se PyTorch diventa indifferente al chip, la scelta si sposta su prezzo e disponibilità.
+
+Nella pagina trovi un esempio su una startup che prova un altro chip in un pomeriggio, e uno strumento per stimare quanti chip servono.
+
+Prova a chiederti: quanto è legato a un solo fornitore il software che usi ogni giorno, e quanto ti costerebbe cambiarlo?
+
+Capitolo due. Eka Robotics e la mano che sente la forza.
+
+Martedì venti ottobre TechCrunch ha raccontato il round di Eka Robotics: centocinquanta milioni di dollari, a una valutazione di un miliardo e quattrocentocinquanta milioni. I fondatori sono Pulkit Agrawal, professore al MIT, e Tuomas Haarnoja, che viene da Google DeepMind.
+
+Il loro modello si chiama visione, forza, azione. I robot più diffusi guardano e si muovono; questo misura anche quanto stringe e quanto oppone l'oggetto, con molti sensori di forza nella mano. Si addestra quasi tutto in simulazione. L'hardware costa meno di mille dollari.
+
+Eka dichiara circa millecinquecento oggetti all'ora, contro seicento di una persona, con prese riuscite più del novantacinque per cento delle volte. Un esperto indipendente ha visto il robot adattarsi a molti oggetti, ma resta prudente su durata e generalizzazione. Sono dati dell'azienda, raccontati solo dalla stampa.
+
+Nella pagina trovi un esempio su cosa vuol dire quel cinque per cento che va storto in un magazzino.
+
+Prova a chiederti: in un lavoro automatizzato, conta di più la velocità o quello che succede quando qualcosa va storto?
+
+Capitolo tre. DeepSeek fuori dalle agenzie federali americane.
+
+Ieri avevo lasciato questa notizia tra quelle da verificare. Ora c'è il testo ufficiale, pubblicato il venti ottobre sul Federal Register. Una nota: tra i motivi citati dalla stampa c'è la distillazione, e Anthropic dice di aver visto tentativi di DeepSeek di raccogliere le risposte di Claude.
+
+L'ordine del Dipartimento per la sicurezza interna fa due cose. Esclude i prodotti di DeepSeek dagli acquisti delle agenzie federali civili, e impone di togliere quelli già installati. La rimozione vale anche per i prodotti di terzi costruiti su DeepSeek, per esempio un'app che usa un suo modello al suo interno. Il motivo dichiarato è il rischio che i dati del governo diventino accessibili alle autorità cinesi. Le agenzie possono chiedere eccezioni.
+
+Lo stesso giorno la portavoce del ministero degli Esteri cinese, Mao Ning, ha detto che Pechino si oppone a politicizzare la tecnologia e difenderà le sue aziende.
+
+Nella pagina trovi un esempio su un fornitore che non sapeva di usare DeepSeek, e un piccolo test per capire se il tuo prodotto rientra.
+
+Prova a chiederti: sapresti elencare tutti i modelli di AI che usa il tuo prodotto, compresi quelli nascosti nei servizi di altri?
+
+Capitolo quattro. I guardrail e la regola nascosta.
+
+Un paper uscito su arXiv il diciotto ottobre, e rilanciato il venti, si intitola: la regola non è la capacità. Gli autori hanno addestrato lo stesso filtro di sicurezza con due definizioni diverse di contenuto pericoloso, su circa cinquantatremila richieste.
+
+Il risultato: su alcuni test il punteggio cambia moltissimo. Sul test del diritto d'autore va da zero a cento a seconda della regola, mentre la capacità di riconoscere i contenuti resta la stessa. Su altri test la regola pesa poco. E molte domande dei test erano già nei dati di addestramento: l'ottantotto per cento in uno, l'ottantadue in un altro. La proposta degli autori: ogni valutazione dichiari la regola usata e la contaminazione.
+
+Nella pagina trovi un esempio con due filtri e la stessa richiesta.
+
+Prova a chiederti: quando leggi che un sistema è più sicuro di un altro, sai con quale regola è stato misurato?
+
+Capitolo cinque. Azure Content Understanding, ventitreesima puntata: insegnare con gli esempi.
+
+Un analizzatore personalizzato può ricevere documenti già risolti, gli esempi etichettati. Il servizio li trasforma in vettori e, durante l'analisi, recupera quelli simili al documento in arrivo per guidare il modello. Vale solo per i documenti, e non per i campi generati.
+
+Il consiglio di Microsoft è chiaro: prima migliora le descrizioni dei campi, poi aggiungi esempi. Uno basta se i documenti si somigliano; altrimenti uno per ogni formato. Gli esempi non correggono gli errori di lettura del testo. Dopo averli aggiunti bisogna ricostruire l'analizzatore.
+
+I costi: aggiungere esempi costa token di embedding, circa millecinquecento per pagina, una volta sola. Ma con la versione stabile dell'API gli esempi recuperati entrano a ogni analisi, e aggiungono token di input su ogni documento. Con l'anteprima di giugno no, ma cambia la tariffa e non ci sono garanzie di servizio. Per questo si misura prima e dopo, su un insieme fisso di documenti.
+
+Prova a chiederti: il miglioramento che ottieni con un esempio vale il costo che paghi su ogni documento del mese?
+
+Il laboratorio. Nella pagina trovi cinque esperimenti: contare quanto il tuo codice è legato a CUDA, fare i conti di un robot in magazzino, l'inventario dei modelli nel tuo prodotto, etichettare dieci richieste con due regole diverse, e un analizzatore Content Understanding con esempi.
+
+I segnali. OpenAI compra Orchestra Bio, che fa agenti per lo sviluppo dei farmaci, e lancia in ChatGPT le chat chiuse con un PIN. Secondo il Wall Street Journal, i rapporti tra Anthropic e i suoi fornitori cloud si complicano, e secondo Bloomberg Eric Schmidt avrebbe circa l'uno per cento di Anthropic. SpaceX dice che l'AI vale più di metà dei suoi ricavi. Otter punto ai raccoglie trecentoventi milioni senza cedere quote. E due paper: uno usa grandi modelli per prevedere le risposte del cervello, l'altro mette alla prova gli agenti su progetti veri di ricerca operativa, dove Claude Code è il migliore ma resta sotto l'esperto umano.
+
+La domanda del giorno. Se un modello di filtro ottiene zero su un test con una regola e cento con un'altra, senza che cambi la sua capacità di riconoscere i contenuti, che cosa sta misurando quel test?
+
+Pensaci un momento.
+
+La risposta: misura soprattutto quale regola è stata usata per addestrare il filtro, non quanto il filtro sia bravo.
+
+È tutto per oggi. Nella pagina dell'edizione trovi esempi, strumenti interattivi, esperimenti, il quiz e tutte le fonti. Grazie per l'ascolto, e a domani con Radar AI.

@@ -1,60 +1,20 @@
 {
- "n": 26,
- "data": "2026-10-20",
- "titolo": "Un hacker e i suoi agenti, Microsoft diffida, OpenAI accelera",
- "descrizione": "Un attaccante viola più di cento siti con agenti a pochi dollari, Microsoft sorveglia gli agenti, OpenAI corre a raccogliere 30 miliardi.",
- "chips": [
-  "Cairn",
-  "Microsoft",
-  "OpenAI",
-  "HybridAgents",
-  "Azure"
- ],
+ "n": 27,
+ "data": "2026-10-21",
+ "titolo": "PyTorch sui TPU, il robot che sente la forza, DeepSeek bandita",
+ "descrizione": "Google apre TorchTPU, Eka raccoglie 150 milioni per una mano che sente la forza, Washington toglie DeepSeek dalle agenzie federali.",
+ "chips": ["Google", "Eka", "DeepSeek", "Guardrail", "Azure"],
  "statistiche": [
-  [
-   "100+ su 1.200",
-   "siti violati da un solo attaccante con gli agenti"
-  ],
-  [
-   "50 $",
-   "il costo stimato di ogni intrusione riuscita"
-  ],
-  [
-   "30 mld",
-   "il round di OpenAI, a oltre 1.400 di valutazione"
-  ]
+  ["4×", "i token al giorno di un cliente dopo il passaggio ai TPU"],
+  ["1.500", "oggetti all'ora dichiarati dalla mano di Eka"],
+  ["0–100", "lo stesso filtro, con due regole diverse"]
  ],
  "items": [
-  [
-   "🛡",
-   "Cairn",
-   "Un hacker solo e un esercito di agenti",
-   "Più di cento negozi violati, circa 50 dollari l'uno."
-  ],
-  [
-   "🔒",
-   "Microsoft",
-   "Gli agenti trattati come dipendenti da sorvegliare",
-   "Punteggio di rischio, sola lettura, via libera umano, spegnimento."
-  ],
-  [
-   "💰",
-   "OpenAI",
-   "Trenta miliardi prima della borsa di Anthropic",
-   "E la disputa sul fatturato netto o lordo."
-  ],
-  [
-   "🧠",
-   "HybridAgents",
-   "Agenti che pensano in silenzio",
-   "Fino a metà dei token in meno, risposte più veloci."
-  ],
-  [
-   "☁",
-   "Azure",
-   "I limiti del servizio",
-   "Pagine, megabyte, minuti e campi: come tagliare un lavoro grande."
-  ]
+  ["🔧", "Google", "PyTorch sui chip di Google, quasi senza modifiche", "TorchTPU a codice aperto, un giorno dopo la mossa di Amazon."],
+  ["🤖", "Eka", "Un robot che sente la forza vale 1,45 miliardi", "Visione, forza, azione: 150 milioni per la mano di Eka."],
+  ["🏛", "DeepSeek", "Fuori dalle agenzie federali americane", "Anche le app di terzi costruite su DeepSeek vanno tolte."],
+  ["🛡", "Guardrail", "I test di sicurezza misurano la regola", "Stesso filtro, punteggi da 0 a 100 a seconda della definizione."],
+  ["☁", "Azure", "Insegnare con gli esempi", "Quanti esempi etichettati, e quanto costano a ogni analisi."]
  ],
- "domanda": "Se un tentativo di attacco costa 5 dollari e va a segno una volta su dieci, quanto costa in media ogni intrusione riuscita?"
+ "domanda": "Se un filtro ottiene 0 su un test con una regola e 100 con un'altra, senza cambiare capacità, che cosa misura quel test?"
 }
