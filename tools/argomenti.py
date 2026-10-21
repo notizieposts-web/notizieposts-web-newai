@@ -19,6 +19,11 @@ GUIDES = [
   'title': 'Laboratorio Content Understanding', 'eds': _AZ,
   's': 'Sfide quotidiane in stile HackerRank: estrai dai documenti scegliendo il metodo giusto, fai scrivere all\'agente le funzioni di trasformazione, confronta documenti con regole.', 'n': 'sfide'},
 ]
+try:  # numero di puntate Azure letto da guida.py (EP), senza eseguirlo
+    _gs = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'guida.py'), encoding='utf-8').read()
+    GUIDES[0]['n'] = '%d puntate' % len(re.findall(r"^ \((\d+),'\d+',", _gs, re.M))
+except Exception:
+    pass
 try:
     import glob as _g, json as _j
     _np = sum(len(_j.load(open(_f, encoding='utf-8'))['sfide']) for _f in _g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'arena', 'packs', '*.json')))
@@ -115,9 +120,9 @@ def build(root):
     ts, cnt = themes(eds)
     out = {}
     # indice
-    hero = ('<header class="hero"><div><div class="meta"><span class="chip topic">Argomenti</span><span class="chip date">%d temi · %d guida</span></div>'
+    hero = ('<header class="hero"><div><div class="meta"><span class="chip topic">Argomenti</span><span class="chip date">%d temi · %d %s</span></div>'
             '<h1 style="margin-top:1.2rem">Argomenti: le edizioni raccolte per tema</h1>'
-            '<p class="sub">I temi cardine della mappa, ognuno con la sua pagina, e le guide di approfondimento. Il menu in alto resta lo stesso in tutte queste pagine.</p></div>%s</header>') % (len(ts), len(GUIDES), MARK)
+            '<p class="sub">I temi cardine della mappa, ognuno con la sua pagina, e le guide di approfondimento. Il menu in alto resta lo stesso in tutte queste pagine.</p></div>%s</header>') % (len(ts), len(GUIDES), 'guida' if len(GUIDES) == 1 else 'guide', MARK)
     body = '<section class="ch" id="guide" style="padding-top:2.5rem"><div class="ch-head"><div class="kicker"><span class="chip guide">Guide</span></div><h2>Guide di approfondimento</h2><p class="lead">Una rubrica intera, riordinata per tema, in una pagina sola.</p></div><div class="argrid">'
     for g in GUIDES:
         body += '<a class="card argcard" href="%s"><span><span class="chip guide">%s</span></span><h3>%s</h3><p>%s</p><span class="meta2">%s · edizioni dalla %d alla %d</span></a>' % (g['u'], g['menu'], g['title'], g['s'], g.get('n', ''), g['eds'][0], g['eds'][-1])

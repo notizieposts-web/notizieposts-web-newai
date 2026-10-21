@@ -56,7 +56,7 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .topicmenu a[aria-current="page"]{background:var(--violet);color:var(--bg)}
 .topicmenu a .tn{white-space:nowrap;font-weight:500;font-size:.8rem;color:var(--muted)}.topicmenu a[aria-current="page"] .tn{color:var(--bg)}
 .topicmenu a.all{border:1.5px solid var(--violet);margin:.2rem 0 .3rem}
-.topicmenu .dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:.55rem;vertical-align:0}
+.topicmenu a>span:first-child{display:flex;align-items:flex-start;gap:.55rem;min-width:0}.topicmenu .dot{flex:none;display:inline-block;width:10px;height:10px;border-radius:3px;margin-top:.42em}
 .topicmenu .dot.theme{background:var(--sun-soft);border:1.5px solid var(--sun)}.topicmenu .dot.guide{background:var(--teal-soft);border:1.5px solid var(--teal)}
 @media (max-width:480px){.theme-btn .tlab{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 .theme-btn{display:inline-flex;align-items:center;gap:.4rem;min-height:32px;padding:.3rem .75rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 .8rem var(--head,system-ui);cursor:pointer}

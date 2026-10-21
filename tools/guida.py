@@ -26,6 +26,13 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
  (22,'26','azure','costi','I limiti del servizio: pagine, file, campi'),
  (23,'27','azure','qualita','Insegnare con gli esempi etichettati'),
 ]
+import json as _json
+_MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']
+try:
+    _d = _json.load(open(os.path.join(root, 'tools', 'site_dates.json'), encoding='utf-8'))[max(EP, key=lambda e: e[0])[1]]
+    _y, _m, _g = _d.split('-'); _AGG = '%d %s %s' % (int(_g), _MESI[int(_m) - 1], _y)
+except Exception:
+    _AGG = 'ultima edizione'
 GROUPS = [
  ('costi','Costi','Costi e prestazioni','Quanto costa, quanto ci mette, e come pagare meno a parità di risultato.'),
  ('pipeline','Pipeline','Progettare la pipeline','Quale servizio, quale modalità e quali componenti pronti usare per ogni tipo di contenuto.'),
@@ -75,11 +82,11 @@ extra_css = '''<style id="guida-css">
 nav = '<nav class="nav" aria-label="Temi della guida"><div class="nav-in"><a class="brand" href="./">Radar AI</a><div class="links" id="links">' + \
       '<a href="#indice">Indice</a>' + ''.join('<a href="#%s">%s</a>' % (g[0], g[1]) for g in GROUPS) + '</div></div><div class="progress" id="prog"></div></nav>'
 hero = '''<header class="hero"><div>
-<div class="meta"><span class="chip topic">Azure</span><span class="chip date">%d puntate</span><span class="chip">Aggiornata al 17 ottobre 2026</span></div>
+<div class="meta"><span class="chip topic">Azure</span><span class="chip date">%d puntate</span><span class="chip">Aggiornata al %s</span></div>
 <h1 style="margin-top:1.2rem">Azure Content Understanding: tutta la rubrica in una guida</h1>
 <p class="sub">Le %d puntate della rubrica fissa di Radar AI, ordinate per tema invece che per data. Ogni puntata si apre qui sotto; per calcolatori, simulatori e liste di controllo interattive c'è il link alla sua edizione.</p>
 <p style="margin:1.2rem 0 0;display:flex;flex-wrap:wrap;gap:.6rem"><a class="palcta" href="azure-laboratorio.html">🎮 Gioca nel laboratorio pratico →</a><a class="palcta" href="azure-esercizi.html">Allenati con oltre mille esercizi →</a></p>
-%s</div><svg class="radar" viewBox="0 0 400 400" aria-hidden="true"><g transform="translate(80 80) scale(7.5)"><rect width="32" height="32" rx="9" fill="var(--violet)"/><path d="M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z" fill="var(--bg)" opacity=".28"/><g fill="none" stroke="var(--bg)" stroke-linecap="round"><circle cx="16" cy="16" r="10.5" stroke-width="2" opacity=".6"/><circle cx="16" cy="16" r="5.6" stroke-width="2" opacity=".85"/><path d="M16 16 L25.1 10.75" stroke-width="2.4"/></g><circle cx="16" cy="16" r="2.3" fill="var(--bg)"/><circle cx="22.6" cy="21.4" r="2.2" fill="var(--bg)"/></g></svg></header>''' % (len(EP), len(EP), '<nav class="gsub" id="gsub" aria-label="Temi della guida"><ul class="chips">' + ''.join('<li><a class="chip topic" href="#%s">%s</a></li>' % (g[0], g[1]) for g in GROUPS) + '</ul></nav>')
+%s</div><svg class="radar" viewBox="0 0 400 400" aria-hidden="true"><g transform="translate(80 80) scale(7.5)"><rect width="32" height="32" rx="9" fill="var(--violet)"/><path d="M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z" fill="var(--bg)" opacity=".28"/><g fill="none" stroke="var(--bg)" stroke-linecap="round"><circle cx="16" cy="16" r="10.5" stroke-width="2" opacity=".6"/><circle cx="16" cy="16" r="5.6" stroke-width="2" opacity=".85"/><path d="M16 16 L25.1 10.75" stroke-width="2.4"/></g><circle cx="16" cy="16" r="2.3" fill="var(--bg)"/><circle cx="22.6" cy="21.4" r="2.2" fill="var(--bg)"/></g></svg></header>''' % (len(EP), _AGG, len(EP), '<nav class="gsub" id="gsub" aria-label="Temi della guida"><ul class="chips">' + ''.join('<li><a class="chip topic" href="#%s">%s</a></li>' % (g[0], g[1]) for g in GROUPS) + '</ul></nav>')
 idx = '<section class="ch" id="indice" style="padding-top:2.5rem"><div class="ch-head"><div class="kicker"><span class="chip topic">Indice</span></div><h2>Sei temi, %d puntate</h2><p class="lead">Scegli un tema, oppure cerca una parola in tutte le puntate.</p></div>' % len(EP)
 idx += '<div class="gsearch" role="search"><label class="sr-only" for="gq">Cerca nelle puntate</label><input id="gq" type="search" placeholder="Cerca: costi, 429, Private Link, prompt injection…" autocomplete="off"><span class="gcount" id="gcount" aria-live="polite"></span></div>'
 idx += '<div class="gindex">' + ''.join('<a href="#%s"><span class="chip topic">%s</span><b>%s</b><span class="n">%d puntate · %s</span></a>' % (g[0], g[1], g[2], sum(1 for e in EP if e[3] == g[0]), g[3]) for g in GROUPS) + '</div></section>'
