@@ -63,6 +63,12 @@ head = re.sub(r'<title>.*?</title>', '<title>Guida Azure Content Understanding �
 head = re.sub(r'<style id="(a11y|egraph-css|edx-css)">.*?</style>', '', head, flags=re.S)
 head = re.sub(r'<script id="a11y-theme">.*?</script>', '', head, flags=re.S)
 head = re.sub(r'<link rel="icon"[^>]*>', '', head)
+# metadati propri della guida (non quelli dell'edizione 23 da cui viene l'intestazione)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import site_meta
+head = site_meta.put_head(head, site_meta.head_block('Guida Azure Content Understanding · Radar AI',
+    'Tutte le puntate della rubrica fissa su Azure Content Understanding, ordinate per tema: costi, pipeline, qualità, sicurezza, produzione e casi reali.',
+    site_meta.SITE + 'azure.html', site_meta.SITE + 'img/og/radar-ai.png', 'website'))
 extra_css = '''<style id="guida-css">
 .gsearch{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:1.4rem}
 .gsearch input{flex:1;min-width:14rem;font:inherit;padding:.65rem 1rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}

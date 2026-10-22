@@ -67,6 +67,10 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .gl-btn:hover{text-decoration-style:solid}.gl-btn[aria-expanded="true"]{background:var(--violet-soft);text-decoration-style:solid}
 .gl-tip{display:block;margin:.5rem 0 .8rem;padding:.75rem .95rem;border:1px solid var(--line);border-left:4px solid var(--violet);border-radius:12px;background:var(--surface);color:var(--ink);font-size:.95rem;line-height:1.55;font-weight:400;font-style:normal;text-align:left}
 .gl-tip[hidden]{display:none}.gl-tip .gl-ex{display:block;margin-top:.35rem}.gl-tip .gl-close{display:inline-flex;align-items:center;min-height:32px;margin-top:.5rem;padding:.2rem .8rem;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--ink);font:600 .82rem var(--head,system-ui);cursor:pointer}
+.gl-btn{scroll-margin-top:9rem}.gl-ico{display:inline-flex;align-items:center;justify-content:center;width:1.05em;height:1.05em;margin-left:.15em;border-radius:50%;background:var(--violet);color:var(--bg);font:700 .68em/1 var(--head,system-ui);vertical-align:.35em}
+.gl-tip .gl-act{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .9rem;margin-top:.5rem}.gl-tip .gl-act .gl-close{margin-top:0}
+.gl-tip .gl-more{display:inline-flex;align-items:center;min-height:32px;font:700 .85rem var(--head,system-ui);color:var(--ink);text-decoration:underline;text-decoration-color:var(--violet);text-decoration-thickness:2px;text-underline-offset:.2em}
+a.gl-chip{display:inline-flex;align-items:center;min-height:24px;text-decoration:underline;text-underline-offset:.2em;color:var(--ink)}
 </style>"""
 JS = r"""<script id="a11y-js">
 (function(){
@@ -166,6 +170,9 @@ JS = r"""<script id="a11y-js">
       var c=e.target.closest&&e.target.closest('.gl-close');
       if(c){var g=c.closest('.gl');if(g)close(g.querySelector('.gl-btn'),true);}
     });
+    /* ritorno dal glossario (#glb-NN-i): apre la scheda del termine e ci porta il fuoco */
+    var h=location.hash&&/^#glb-\d+-\d+$/.test(location.hash)&&document.getElementById(location.hash.slice(1));
+    if(h){var ht=document.getElementById(h.getAttribute('aria-controls'));if(ht){ht.hidden=false;h.setAttribute('aria-expanded','true');}try{h.focus({preventScroll:true});}catch(x){h.focus();}}
     document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;var g=document.activeElement&&document.activeElement.closest&&document.activeElement.closest('.gl');if(g){var b=g.querySelector('.gl-btn');if(b&&b.getAttribute('aria-expanded')==='true'){close(b,true);e.stopPropagation();}}},true);
   }
   var t;function all(){glossario();themeToggle();topicMenu();navRow();nameControls();live();scrollables();fixContrast();}

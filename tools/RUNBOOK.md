@@ -53,7 +53,11 @@ Il componente è fisso: stile e comportamento (clic, Invio/Spazio, Esc che chiud
 
 1. Nella pagina marca la **prima** occorrenza di ogni acronimo o termine tecnico significativo (di norma 5–10 per edizione), dentro il testo dei capitoli, mai in titoli, menu, chip o nel codice: `<span class="gl" data-gl="mfu">MFU</span>`. Il testo visibile resta quello della frase.
 2. Se la chiave non esiste, aggiungila a `tools/glossario.json` (chiave minuscola, lettere, cifre e trattini): `"mfu": {"t": "MFU", "esteso": "Model FLOPs Utilization", "spiega": "...", "esempio": "..."}`. `esteso` solo per gli acronimi; `spiega` in italiano semplice, due frasi al massimo; `esempio` concreto, una o due frasi. Le voci valgono per tutte le edizioni: riusale, non duplicarle; correggile solo se sbagliate, verificandole su fonti ufficiali.
-3. `python3 tools/glossario.py .` genera pulsante e scheda (idempotente) e si ferma se manca una chiave.
+   Facoltativi ma consigliati per le voci nuove: `"approfondisci"` (spiegazione più completa, 3–5 frasi, mostrata solo nella pagina del glossario) e `"vedi"` (elenco di chiavi collegate, che devono esistere).
+3. `python3 tools/glossario.py .` genera pulsante e scheda (idempotente) e si ferma se manca una chiave. Genera anche:
+   - nella scheda di ogni termine il link "Approfondisci nel glossario" (`glossario.html?da=NN-i#g-chiave`): la pagina del glossario mostra "Torna all'edizione NN, al punto in cui eri", che riporta a `edizioni/NN.html#glb-NN-i` con la scheda già aperta e il fuoco sul termine;
+   - il chip "Glossario: N termini" nell'intestazione di ogni edizione che ha termini;
+   - la pagina `glossario.html` (voci dalla A alla Z, "Più nel dettaglio", voci collegate, "Dove compare", termini per edizione). È anche una guida nel menu Argomenti (`tools/argomenti.py`, GUIDES).
 4. **Audio**: niente schede; ogni sigla si scioglie a voce alla prima menzione ("il TPU, il chip di Google per l'AI"). **Email**: nessun glossario (è un invito alla lettura costruito da `mail_build.py`, il modello non si tocca).
 
 ## Struttura di un'edizione

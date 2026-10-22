@@ -18,7 +18,14 @@ GUIDES = [
  {'id': 'cu-lab', 'menu': 'Laboratorio', 'c': 'Laboratorio', 'u': 'azure-laboratorio.html', 'map': False,
   'title': 'Laboratorio Content Understanding', 'eds': _AZ,
   's': 'Sfide quotidiane in stile HackerRank: estrai dai documenti scegliendo il metodo giusto, fai scrivere all\'agente le funzioni di trasformazione, confronta documenti con regole.', 'n': 'sfide'},
+ {'id': 'glossario', 'menu': 'Glossario', 'c': 'Glossario', 'u': 'glossario.html', 'map': False,
+  'title': 'Glossario', 'eds': list(range(27, _LAST + 1)),
+  's': 'Acronimi e termini tecnici delle edizioni spiegati in parole semplici, con un esempio e i link ai punti in cui compaiono.', 'n': 'voci'},
 ]
+try:  # numero di voci del glossario
+    GUIDES[3]['n'] = '%d voci' % len(json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'glossario.json'), encoding='utf-8')))
+except Exception:
+    pass
 try:  # numero di puntate Azure letto da guida.py (EP), senza eseguirlo
     _gs = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'guida.py'), encoding='utf-8').read()
     GUIDES[0]['n'] = '%d puntate' % len(re.findall(r"^ \((\d+),'\d+',", _gs, re.M))
@@ -86,10 +93,18 @@ a.chip:hover{outline:2px solid var(--violet);outline-offset:1px}
 @media (max-width:860px){.hero .radar{display:none}}
 </style>'''
 
-def head_from(root, title):
+def head_from(root, title, url=None, desc=None):
+    """Intestazione comune presa dall'edizione 23, senza i suoi metadati (canonical, Open Graph).
+    Con url (relativo alla radice) mette i metadati giusti della pagina; senza, li aggiunge poi site_meta.py."""
     src = open(os.path.join(root, 'edizioni', '23.html'), encoding='utf-8').read()
     head = src[:src.index('<body')]
+    head = re.sub(r'<!-- META -->.*?<!-- /META -->\n?', '', head, flags=re.S)
+    head = re.sub(r'<script type="application/ld\+json">.*?</script>\n?', '', head, flags=re.S)
     head = re.sub(r'<title>.*?</title>', '<title>%s · Radar AI</title>' % html.escape(title), head)
+    if url:
+        import site_meta
+        head = site_meta.put_head(head, site_meta.head_block('%s · Radar AI' % title, desc or 'Radar AI, la newsletter in italiano sull\'intelligenza artificiale.',
+                                                             site_meta.SITE + url, site_meta.SITE + 'img/og/radar-ai.png', 'website'))
     head = re.sub(r'<style id="(a11y|egraph-css|edx-css|arg-css)">.*?</style>', '', head, flags=re.S)
     head = re.sub(r'<script id="a11y-theme">.*?</script>', '', head, flags=re.S)
     head = re.sub(r'<link rel="icon"[^>]*>', '', head)
@@ -131,7 +146,7 @@ def build(root):
         last = max((e for e in eds if t in e['m']), key=lambda e: e['n'])
         body += '<a class="card argcard" href="%s"><span><span class="chip theme">%s</span></span><h3>%s</h3><p>%s</p><span class="meta2">%d edizioni · ultima: n. %d, %s</span></a>' % (theme_url(t), html.escape(t), html.escape(t), THEME_INFO[t][1], cnt[t], last['n'], html.escape(last['d']))
     body += '</div></section>'
-    out['argomenti.html'] = page(head_from(root, 'Argomenti'), NAV('argomenti.html', eds), hero, body)
+    out['argomenti.html'] = page(head_from(root, 'Argomenti', 'argomenti.html', 'I temi cardine della mappa di Radar AI, ognuno con la sua pagina, e le guide di approfondimento.'), NAV('argomenti.html', eds), hero, body)
     # pagine tema
     for t in ts:
         url = theme_url(t)
@@ -152,7 +167,7 @@ def build(root):
         side += '</div>'
         body = ('<section class="ch" id="edizioni" style="padding-top:2.5rem"><div class="ch-head"><div class="kicker"><span class="chip theme">%s</span></div><h2>Le edizioni su questo tema</h2>'
                 '<p class="lead">Dalla più recente. Tocca il titolo per aprire l\'edizione.</p></div>%s%s</section>') % (html.escape(t), side, ''.join(edrow(e) for e in lst))
-        out[url] = page(head_from(root, t), NAV(url, eds), hero, body)
+        out[url] = page(head_from(root, t, url, THEME_INFO[t][1]), NAV(url, eds), hero, body)
     _last = sorted(os.path.basename(f)[:-5] for f in __import__('glob').glob(os.path.join(root, 'edizioni', '*.html')))[-1]
     menu = [{'u': 'index.html', 'l': 'Tutte le edizioni', 'k': 'all'}, {'u': 'edizioni/%s.html' % _last, 'l': 'Ultima edizione', 'k': 'all'},
             {'u': 'argomenti.html', 'l': 'Tutti gli argomenti', 'k': 'all'}] + \

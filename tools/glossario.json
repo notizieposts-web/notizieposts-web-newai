@@ -3,97 +3,162 @@
   "t": "TPU",
   "esteso": "Tensor Processing Unit",
   "spiega": "Il chip che Google progetta apposta per i calcoli dell'intelligenza artificiale, in alternativa alle GPU di NVIDIA. Si usa solo nel cloud di Google.",
-  "esempio": "Una startup che oggi affitta GPU per servire il suo modello può provare a spostare una parte del traffico su TPU e confrontare il conto a parità di risposte."
+  "esempio": "Una startup che oggi affitta GPU per servire il suo modello può provare a spostare una parte del traffico su TPU e confrontare il conto a parità di risposte.",
+  "approfondisci": "I TPU sono progettati per fare in fretta un tipo preciso di calcolo, le moltiplicazioni tra grandi tabelle di numeri, che è il cuore dell'addestramento e dell'uso dei modelli. Non si comprano: si affittano nel cloud di Google, a gruppi che possono arrivare a migliaia di chip collegati tra loro. Rispetto alle GPU sono meno versatili ma, per i lavori giusti, possono costare meno a parità di risultato. La generazione Ironwood è la settima.",
+  "vedi": [
+   "cuda",
+   "pytorch",
+   "mfu"
+  ]
  },
  "cuda": {
   "t": "CUDA",
   "esteso": "Compute Unified Device Architecture",
   "spiega": "Il software di NVIDIA che permette ai programmi di usare le sue GPU per il calcolo. Quasi tutto il software dell'AI è stato scritto pensando a CUDA: è il vero vantaggio di NVIDIA, più ancora dei chip.",
-  "esempio": "Una riga come model.cuda() in un programma PyTorch dice: esegui questo modello su una GPU NVIDIA. Su un altro chip quella riga va cambiata."
+  "esempio": "Una riga come model.cuda() in un programma PyTorch dice: esegui questo modello su una GPU NVIDIA. Su un altro chip quella riga va cambiata.",
+  "approfondisci": "CUDA esiste dal 2007 ed è insieme un linguaggio, un insieme di librerie e un modo di organizzare i calcoli sulle GPU. Molte librerie dell'AI hanno parti scritte apposta per CUDA, ottimizzate a mano per anni: per questo cambiare chip non è solo questione di prezzo, ma di riscrivere o riadattare codice. Progetti come TorchTPU e TorchNeuron cercano di rendere quel passaggio quasi automatico.",
+  "vedi": [
+   "pytorch",
+   "tpu"
+  ]
  },
  "pytorch": {
   "t": "PyTorch",
   "spiega": "La libreria a codice aperto più usata per costruire e addestrare modelli di AI, nata in Meta nel 2016 e oggi della Linux Foundation.",
-  "esempio": "Un ricercatore descrive in PyTorch la struttura del modello e il modo in cui impara; la libreria si occupa di fare i calcoli sul chip disponibile."
+  "esempio": "Un ricercatore descrive in PyTorch la struttura del modello e il modo in cui impara; la libreria si occupa di fare i calcoli sul chip disponibile.",
+  "approfondisci": "PyTorch descrive un modello come una serie di operazioni sui dati e calcola da solo come correggere i parametri durante l'addestramento. È diventato lo standard della ricerca perché si scrive come normale codice Python e si può controllare riga per riga. Il codice PyTorch gira su chip diversi grazie a un \"backend\" per ciascuno: CUDA per NVIDIA, TorchTPU per Google, TorchNeuron per Amazon.",
+  "vedi": [
+   "cuda",
+   "tpu"
+  ]
  },
  "mfu": {
   "t": "MFU",
   "esteso": "Model FLOPs Utilization",
   "spiega": "La quota della potenza di calcolo teorica di un chip che un addestramento usa davvero. Il resto si perde in attese, trasferimenti di dati e comunicazione tra chip.",
-  "esempio": "Con un MFU del 50%, un gruppo di chip capace in teoria di 100 operazioni al secondo ne fa utilmente 50: per finire prima servono più chip o meno sprechi."
+  "esempio": "Con un MFU del 50%, un gruppo di chip capace in teoria di 100 operazioni al secondo ne fa utilmente 50: per finire prima servono più chip o meno sprechi.",
+  "approfondisci": "MFU si calcola dividendo le operazioni utili fatte al secondo per il massimo teorico del chip. È un indicatore di efficienza: due addestramenti con gli stessi chip possono costare molto diverso se uno spreca metà del tempo ad aspettare dati. Nei grandi addestramenti un MFU tra il 40 e il 60 per cento è considerato buono; il valore dipende però dal modello e dalla configurazione.",
+  "vedi": [
+   "tpu"
+  ]
  },
  "vla": {
   "t": "VLA",
   "esteso": "Vision-Language-Action",
   "spiega": "Un tipo di modello per robot che guarda con le telecamere, legge un'istruzione in linguaggio naturale e decide i movimenti.",
-  "esempio": "Dici a un robot \"metti la tazza rossa nel lavandino\": un modello VLA riconosce la tazza nell'immagine, capisce la frase e muove il braccio."
+  "esempio": "Dici a un robot \"metti la tazza rossa nel lavandino\": un modello VLA riconosce la tazza nell'immagine, capisce la frase e muove il braccio.",
+  "approfondisci": "Un modello VLA mette insieme tre cose che prima erano separate: capire le immagini, capire le parole e produrre azioni, cioè comandi per i motori del robot. Si addestra su video, dimostrazioni umane e simulazioni. Alcuni aggiungono altri sensi, come il tatto o la forza, per afferrare oggetti fragili o morbidi."
  },
  "fascsa": {
   "t": "FASCSA",
   "esteso": "Federal Acquisition Supply Chain Security Act",
   "spiega": "Una legge americana del 2018 che permette al governo federale di escludere dagli acquisti, e far togliere dai sistemi, prodotti considerati un rischio per la catena di fornitura.",
-  "esempio": "Se un componente software di un fornitore è giudicato rischioso, un ordine FASCSA può vietarne l'acquisto a tutte le agenzie interessate in una volta sola."
+  "esempio": "Se un componente software di un fornitore è giudicato rischioso, un ordine FASCSA può vietarne l'acquisto a tutte le agenzie interessate in una volta sola.",
+  "approfondisci": "La legge ha creato un consiglio federale che valuta i rischi della catena di fornitura e può raccomandare ordini di esclusione o rimozione. Gli ordini sono pubblicati sul Federal Register e valgono per le agenzie indicate. Non riguardano direttamente le aziende private, ma chi vende al governo americano deve adeguarsi.",
+  "vedi": [
+   "cisa"
+  ]
  },
  "cisa": {
   "t": "CISA",
   "esteso": "Cybersecurity and Infrastructure Security Agency",
   "spiega": "L'agenzia americana per la sicurezza informatica e delle infrastrutture, che fa parte del Dipartimento per la sicurezza interna.",
-  "esempio": "Quando esce una falla grave in un software molto diffuso, è la CISA a dire alle agenzie federali entro quando devono aggiornare."
+  "esempio": "Quando esce una falla grave in un software molto diffuso, è la CISA a dire alle agenzie federali entro quando devono aggiornare.",
+  "approfondisci": "La CISA coordina la difesa informatica delle agenzie federali americane e delle infrastrutture critiche, come energia, acqua e trasporti. Pubblica un elenco di falle sfruttate attivamente con le scadenze entro cui le agenzie devono correggerle, e diffonde avvisi e consigli anche per le aziende. Non ha un equivalente unico in Italia: da noi il ruolo più vicino è quello dell'Agenzia per la cybersicurezza nazionale.",
+  "vedi": [
+   "cve",
+   "cvss"
+  ]
  },
  "embedding": {
   "t": "Embedding",
   "spiega": "La trasformazione di un testo o di un documento in una lista di numeri che ne rappresenta il significato. Testi simili danno numeri vicini, e così si possono cercare per somiglianza.",
-  "esempio": "La fattura di un nuovo fornitore viene trasformata in numeri e confrontata con quelle degli esempi: il servizio recupera l'esempio più vicino e lo usa come guida."
+  "esempio": "La fattura di un nuovo fornitore viene trasformata in numeri e confrontata con quelle degli esempi: il servizio recupera l'esempio più vicino e lo usa come guida.",
+  "approfondisci": "Un modello di embedding legge un testo e restituisce un vettore, cioè una lista di centinaia o migliaia di numeri. Due testi con significato simile danno vettori vicini, anche se usano parole diverse. È la base della ricerca semantica e della RAG: si trasformano in vettori i documenti una volta sola, poi ogni domanda, e si cercano i vettori più vicini. Il costo si paga in token, una tantum per i documenti e a ogni domanda.",
+  "vedi": [
+   "rag",
+   "chunking"
+  ]
  },
  "lora": {
   "t": "LoRA",
   "esteso": "Low-Rank Adaptation",
   "spiega": "Un modo economico di adattare un grande modello a un compito nuovo: invece di modificare tutti i suoi parametri, si addestra un piccolo strato aggiuntivo.",
-  "esempio": "Per far prevedere a un modello da 100 miliardi di parametri le risposte del cervello, si addestrano solo pochi milioni di parametri in più, e il modello originale resta com'è."
+  "esempio": "Per far prevedere a un modello da 100 miliardi di parametri le risposte del cervello, si addestrano solo pochi milioni di parametri in più, e il modello originale resta com'è.",
+  "approfondisci": "Invece di aggiornare miliardi di parametri, LoRA aggiunge accanto a ogni strato due piccole tabelle di numeri e addestra solo quelle. Il risultato è un \"adattatore\" di pochi megabyte che si può attaccare e staccare dal modello originale. Si usa per specializzare un modello su un tema, uno stile o un compito con poca memoria e poca spesa."
  },
  "guardrail": {
   "t": "Guardrail",
   "spiega": "Un filtro che sta davanti o dietro un assistente di AI e decide se una richiesta o una risposta è accettabile, secondo una regola stabilita da chi lo addestra.",
-  "esempio": "Chiedi a un assistente come aprire una serratura: il guardrail valuta la richiesta e la lascia passare o la blocca, secondo la regola che ha imparato."
+  "esempio": "Chiedi a un assistente come aprire una serratura: il guardrail valuta la richiesta e la lascia passare o la blocca, secondo la regola che ha imparato.",
+  "approfondisci": "Un guardrail può essere un modello più piccolo, un insieme di regole o una combinazione dei due. Decide secondo una politica: che cosa è considerato pericoloso, offensivo o fuori tema. Per questo due guardrail ugualmente capaci possono dare verdetti diversi sulla stessa richiesta, se sono stati addestrati con regole diverse. Valutarne uno vuol dire sapere anche quale regola applica."
  },
  "cvss": {
   "t": "CVSS",
   "esteso": "Common Vulnerability Scoring System",
   "spiega": "La scala da 0 a 10 con cui si misura la gravità di una falla informatica. Sopra 9 la falla è considerata critica.",
-  "esempio": "Una falla che permette a chiunque, senza password, di prendere il controllo di un server prende un punteggio vicino a 10."
+  "esempio": "Una falla che permette a chiunque, senza password, di prendere il controllo di un server prende un punteggio vicino a 10.",
+  "approfondisci": "Il punteggio CVSS combina vari fattori: se l'attacco si fa da remoto, se servono credenziali, se serve l'azione di un utente, e quanto danno può fare a riservatezza, integrità e disponibilità dei dati. La versione 4 è del 2023. Il punteggio dice quanto è grave la falla in sé, non quanto è probabile che venga sfruttata: per quello servono altre informazioni, come l'elenco della CISA delle falle già usate negli attacchi.",
+  "vedi": [
+   "cve",
+   "rce",
+   "cisa"
+  ]
  },
  "rce": {
   "t": "RCE",
   "esteso": "Remote Code Execution",
   "spiega": "Esecuzione di codice da remoto: un attaccante riesce a far eseguire istruzioni sue a un computer che non controlla, attraverso la rete.",
-  "esempio": "Con una RCE su un server web, una semplice richiesta costruita apposta basta per installare un programma malevolo sul server."
+  "esempio": "Con una RCE su un server web, una semplice richiesta costruita apposta basta per installare un programma malevolo sul server.",
+  "approfondisci": "Una RCE è tra le falle più gravi perché dà all'attaccante la possibilità di fare sul computer quello che vuole: leggere dati, installare programmi, usarlo per attaccare altri sistemi. Se in più non serve autenticazione, basta raggiungere il servizio dalla rete. Per questo le RCE senza autenticazione prendono di solito punteggi CVSS vicini al massimo.",
+  "vedi": [
+   "cvss",
+   "cve"
+  ]
  },
  "cve": {
   "t": "CVE",
   "esteso": "Common Vulnerabilities and Exposures",
   "spiega": "Il codice univoco con cui si identifica una falla di sicurezza pubblica, così che tutti parlino della stessa cosa.",
-  "esempio": "CVE-2026-109618 indica una delle due falle di PHP del 21 ottobre: aziende, fornitori e avvisi usano lo stesso codice."
+  "esempio": "CVE-2026-109618 indica una delle due falle di PHP del 21 ottobre: aziende, fornitori e avvisi usano lo stesso codice.",
+  "approfondisci": "I codici CVE sono assegnati da organizzazioni autorizzate e hanno la forma CVE-anno-numero. Il codice da solo non dice quanto è grave la falla: la gravità si esprime con il punteggio CVSS. Avere un codice comune permette a fornitori, aziende e strumenti di sicurezza di sapere se un certo aggiornamento corregge proprio la falla di cui si parla.",
+  "vedi": [
+   "cvss",
+   "rce"
+  ]
  },
  "kd": {
   "t": "Costante di dissociazione",
   "spiega": "Misura quanto due molecole restano attaccate: più il valore è basso, più il legame è forte. Si esprime in molare, micromolare, nanomolare.",
-  "esempio": "Una proteina con costante di 5 nanomolari si stacca dalla tossina molto meno di una con 1 micromolare, cioè 200 volte di più."
+  "esempio": "Una proteina con costante di 5 nanomolari si stacca dalla tossina molto meno di una con 1 micromolare, cioè 200 volte di più.",
+  "approfondisci": "La costante di dissociazione, indicata con Kd, è la concentrazione alla quale metà delle molecole bersaglio è legata. Un valore in nanomolari indica un legame mille volte più forte di uno in micromolari. Legarsi forte non basta per un farmaco: bisogna anche bloccare la funzione del bersaglio, essere stabili e non fare danni."
  },
  "capex": {
   "t": "Capex",
   "esteso": "Capital expenditure",
   "spiega": "La spesa di un'azienda per beni che durano anni, come centri dati, server e terreni, distinta dalle spese correnti come gli stipendi.",
-  "esempio": "Quando Meta compra chip e costruisce un centro dati, quei soldi finiscono nella capex del trimestre."
+  "esempio": "Quando Meta compra chip e costruisce un centro dati, quei soldi finiscono nella capex del trimestre.",
+  "approfondisci": "La capex si contrappone alla opex, le spese operative. Per le grandi aziende tecnologiche oggi la capex è soprattutto centri dati: terreni, edifici, impianti elettrici e di raffreddamento, server e chip. Non pesa tutta sull'utile dell'anno, perché viene ammortizzata negli anni di vita del bene; ma esce subito dalla cassa."
  },
  "rag": {
   "t": "RAG",
   "esteso": "Retrieval-Augmented Generation",
   "spiega": "Un modo di far rispondere un assistente partendo dai tuoi documenti: prima cerca i pezzi pertinenti, poi li passa al modello che scrive la risposta.",
-  "esempio": "Chiedi \"qual è la penale nel contratto Rossi?\": il sistema trova il paragrafo giusto e il modello risponde citando contratto e pagina."
+  "esempio": "Chiedi \"qual è la penale nel contratto Rossi?\": il sistema trova il paragrafo giusto e il modello risponde citando contratto e pagina.",
+  "approfondisci": "La RAG evita di riaddestrare il modello: i documenti restano tuoi, in un indice di ricerca, e a ogni domanda il sistema recupera i pezzi pertinenti e li passa al modello insieme alla domanda. Così l'assistente può rispondere su informazioni recenti o private e citare la fonte. La qualità dipende molto dalla preparazione dei documenti: come vengono letti, divisi in pezzi e trasformati in vettori.",
+  "vedi": [
+   "embedding",
+   "chunking"
+  ]
  },
  "chunking": {
   "t": "Chunking",
   "spiega": "La divisione di un documento in pezzi più piccoli prima di indicizzarlo, perché la ricerca trovi il passaggio giusto e non l'intero file.",
-  "esempio": "Un contratto di 15 pagine diviso in pezzi da 500 token diventa una trentina di brani, ognuno cercabile da solo."
+  "esempio": "Un contratto di 15 pagine diviso in pezzi da 500 token diventa una trentina di brani, ognuno cercabile da solo.",
+  "approfondisci": "Il chunking decide la grana della ricerca. Pezzi troppo grandi mescolano argomenti diversi e la risposta diventa vaga; pezzi troppo piccoli perdono il contesto. Si può dividere a lunghezza fissa, con una piccola sovrapposizione tra un pezzo e l'altro, o in modo \"semantico\", rispettando paragrafi, sezioni e tabelle. Conservare per ogni pezzo la pagina di origine permette di citarla nella risposta.",
+  "vedi": [
+   "rag",
+   "embedding"
+  ]
  }
 }
