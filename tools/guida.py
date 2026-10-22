@@ -25,6 +25,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
  (21,'25','azure','produzione','La vita di un analizzatore: versioni'),
  (22,'26','azure','costi','I limiti del servizio: pagine, file, campi'),
  (23,'27','azure','qualita','Insegnare con gli esempi etichettati'),
+ (24,'28','azure','pipeline','Dai documenti alla ricerca: RAG e chunking'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']

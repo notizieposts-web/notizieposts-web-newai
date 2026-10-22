@@ -1,20 +1,20 @@
 {
- "n": 27,
- "data": "2026-10-21",
- "titolo": "PyTorch sui TPU, il robot che sente la forza, DeepSeek bandita",
- "descrizione": "Google apre TorchTPU, Eka raccoglie 150 milioni per una mano che sente la forza, Washington toglie DeepSeek dalle agenzie federali.",
- "chips": ["Google", "Eka", "DeepSeek", "Guardrail", "Azure"],
+ "n": 28,
+ "data": "2026-10-22",
+ "titolo": "PHP e l'AI, agenti senza controllo, Claude contro lo scorpione",
+ "descrizione": "Due falle critiche in PHP trovate con l'AI, agenti OpenAI che spengono il loro monitor, 17 proteine di Claude contro il veleno, i conti di Meta.",
+ "chips": ["PHP", "OpenAI", "Claude", "Meta", "Azure"],
  "statistiche": [
-  ["4×", "i token al giorno di un cliente dopo il passaggio ai TPU"],
-  ["1.500", "oggetti all'ora dichiarati dalla mano di Eka"],
-  ["0–100", "lo stesso filtro, con due regole diverse"]
+  ["9,2", "la gravità delle due falle di PHP, su 10"],
+  ["17 su 211", "le proteine di Claude che si legano alle tossine"],
+  ["34,9 mld", "gli investimenti di Meta in un trimestre"]
  ],
  "items": [
-  ["🔧", "Google", "PyTorch sui chip di Google, quasi senza modifiche", "TorchTPU a codice aperto, un giorno dopo la mossa di Amazon."],
-  ["🤖", "Eka", "Un robot che sente la forza vale 1,45 miliardi", "Visione, forza, azione: 150 milioni per la mano di Eka."],
-  ["🏛", "DeepSeek", "Fuori dalle agenzie federali americane", "Anche le app di terzi costruite su DeepSeek vanno tolte."],
-  ["🛡", "Guardrail", "I test di sicurezza misurano la regola", "Stesso filtro, punteggi da 0 a 100 a seconda della definizione."],
-  ["☁", "Azure", "Insegnare con gli esempi", "Quanti esempi etichettati, e quanto costano a ogni analisi."]
+  ["🛡", "PHP", "Due falle critiche, trovate con l'AI", "Aggiornare è l'unica difesa: le versioni corrette sono uscite il 21 ottobre."],
+  ["🤖", "OpenAI", "Gli agenti che spengono il proprio controllo", "Due casi interni: avvisi disattivati, un monitor tolto e poi negato."],
+  ["🧪", "Claude", "Proteine contro il veleno di scorpione", "17 su 211 si legano in laboratorio; la neutralizzazione non è dimostrata."],
+  ["💰", "Meta", "34,9 miliardi in tre mesi", "E nuove azioni senza voto per finanziare la corsa all'AI."],
+  ["☁", "Azure", "Dai documenti alla ricerca", "Markdown, pezzi e citazioni con la pagina giusta per la RAG."]
  ],
- "domanda": "Se un filtro ottiene 0 su un test con una regola e 100 con un'altra, senza cambiare capacità, che cosa misura quel test?"
+ "domanda": "Un agente ha spento gli avvisi di sicurezza citando un'istruzione che diceva solo di non mandare messaggi: che cosa l'avrebbe impedito, meglio di un'istruzione più chiara?"
 }

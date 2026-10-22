@@ -1,12 +1,99 @@
 {
- "tpu": {"t": "TPU", "esteso": "Tensor Processing Unit", "spiega": "Il chip che Google progetta apposta per i calcoli dell'intelligenza artificiale, in alternativa alle GPU di NVIDIA. Si usa solo nel cloud di Google.", "esempio": "Una startup che oggi affitta GPU per servire il suo modello può provare a spostare una parte del traffico su TPU e confrontare il conto a parità di risposte."},
- "cuda": {"t": "CUDA", "esteso": "Compute Unified Device Architecture", "spiega": "Il software di NVIDIA che permette ai programmi di usare le sue GPU per il calcolo. Quasi tutto il software dell'AI è stato scritto pensando a CUDA: è il vero vantaggio di NVIDIA, più ancora dei chip.", "esempio": "Una riga come model.cuda() in un programma PyTorch dice: esegui questo modello su una GPU NVIDIA. Su un altro chip quella riga va cambiata."},
- "pytorch": {"t": "PyTorch", "spiega": "La libreria a codice aperto più usata per costruire e addestrare modelli di AI, nata in Meta nel 2016 e oggi della Linux Foundation.", "esempio": "Un ricercatore descrive in PyTorch la struttura del modello e il modo in cui impara; la libreria si occupa di fare i calcoli sul chip disponibile."},
- "mfu": {"t": "MFU", "esteso": "Model FLOPs Utilization", "spiega": "La quota della potenza di calcolo teorica di un chip che un addestramento usa davvero. Il resto si perde in attese, trasferimenti di dati e comunicazione tra chip.", "esempio": "Con un MFU del 50%, un gruppo di chip capace in teoria di 100 operazioni al secondo ne fa utilmente 50: per finire prima servono più chip o meno sprechi."},
- "vla": {"t": "VLA", "esteso": "Vision-Language-Action", "spiega": "Un tipo di modello per robot che guarda con le telecamere, legge un'istruzione in linguaggio naturale e decide i movimenti.", "esempio": "Dici a un robot \"metti la tazza rossa nel lavandino\": un modello VLA riconosce la tazza nell'immagine, capisce la frase e muove il braccio."},
- "fascsa": {"t": "FASCSA", "esteso": "Federal Acquisition Supply Chain Security Act", "spiega": "Una legge americana del 2018 che permette al governo federale di escludere dagli acquisti, e far togliere dai sistemi, prodotti considerati un rischio per la catena di fornitura.", "esempio": "Se un componente software di un fornitore è giudicato rischioso, un ordine FASCSA può vietarne l'acquisto a tutte le agenzie interessate in una volta sola."},
- "cisa": {"t": "CISA", "esteso": "Cybersecurity and Infrastructure Security Agency", "spiega": "L'agenzia americana per la sicurezza informatica e delle infrastrutture, che fa parte del Dipartimento per la sicurezza interna.", "esempio": "Quando esce una falla grave in un software molto diffuso, è la CISA a dire alle agenzie federali entro quando devono aggiornare."},
- "embedding": {"t": "Embedding", "spiega": "La trasformazione di un testo o di un documento in una lista di numeri che ne rappresenta il significato. Testi simili danno numeri vicini, e così si possono cercare per somiglianza.", "esempio": "La fattura di un nuovo fornitore viene trasformata in numeri e confrontata con quelle degli esempi: il servizio recupera l'esempio più vicino e lo usa come guida."},
- "lora": {"t": "LoRA", "esteso": "Low-Rank Adaptation", "spiega": "Un modo economico di adattare un grande modello a un compito nuovo: invece di modificare tutti i suoi parametri, si addestra un piccolo strato aggiuntivo.", "esempio": "Per far prevedere a un modello da 100 miliardi di parametri le risposte del cervello, si addestrano solo pochi milioni di parametri in più, e il modello originale resta com'è."},
- "guardrail": {"t": "Guardrail", "spiega": "Un filtro che sta davanti o dietro un assistente di AI e decide se una richiesta o una risposta è accettabile, secondo una regola stabilita da chi lo addestra.", "esempio": "Chiedi a un assistente come aprire una serratura: il guardrail valuta la richiesta e la lascia passare o la blocca, secondo la regola che ha imparato."}
+ "tpu": {
+  "t": "TPU",
+  "esteso": "Tensor Processing Unit",
+  "spiega": "Il chip che Google progetta apposta per i calcoli dell'intelligenza artificiale, in alternativa alle GPU di NVIDIA. Si usa solo nel cloud di Google.",
+  "esempio": "Una startup che oggi affitta GPU per servire il suo modello può provare a spostare una parte del traffico su TPU e confrontare il conto a parità di risposte."
+ },
+ "cuda": {
+  "t": "CUDA",
+  "esteso": "Compute Unified Device Architecture",
+  "spiega": "Il software di NVIDIA che permette ai programmi di usare le sue GPU per il calcolo. Quasi tutto il software dell'AI è stato scritto pensando a CUDA: è il vero vantaggio di NVIDIA, più ancora dei chip.",
+  "esempio": "Una riga come model.cuda() in un programma PyTorch dice: esegui questo modello su una GPU NVIDIA. Su un altro chip quella riga va cambiata."
+ },
+ "pytorch": {
+  "t": "PyTorch",
+  "spiega": "La libreria a codice aperto più usata per costruire e addestrare modelli di AI, nata in Meta nel 2016 e oggi della Linux Foundation.",
+  "esempio": "Un ricercatore descrive in PyTorch la struttura del modello e il modo in cui impara; la libreria si occupa di fare i calcoli sul chip disponibile."
+ },
+ "mfu": {
+  "t": "MFU",
+  "esteso": "Model FLOPs Utilization",
+  "spiega": "La quota della potenza di calcolo teorica di un chip che un addestramento usa davvero. Il resto si perde in attese, trasferimenti di dati e comunicazione tra chip.",
+  "esempio": "Con un MFU del 50%, un gruppo di chip capace in teoria di 100 operazioni al secondo ne fa utilmente 50: per finire prima servono più chip o meno sprechi."
+ },
+ "vla": {
+  "t": "VLA",
+  "esteso": "Vision-Language-Action",
+  "spiega": "Un tipo di modello per robot che guarda con le telecamere, legge un'istruzione in linguaggio naturale e decide i movimenti.",
+  "esempio": "Dici a un robot \"metti la tazza rossa nel lavandino\": un modello VLA riconosce la tazza nell'immagine, capisce la frase e muove il braccio."
+ },
+ "fascsa": {
+  "t": "FASCSA",
+  "esteso": "Federal Acquisition Supply Chain Security Act",
+  "spiega": "Una legge americana del 2018 che permette al governo federale di escludere dagli acquisti, e far togliere dai sistemi, prodotti considerati un rischio per la catena di fornitura.",
+  "esempio": "Se un componente software di un fornitore è giudicato rischioso, un ordine FASCSA può vietarne l'acquisto a tutte le agenzie interessate in una volta sola."
+ },
+ "cisa": {
+  "t": "CISA",
+  "esteso": "Cybersecurity and Infrastructure Security Agency",
+  "spiega": "L'agenzia americana per la sicurezza informatica e delle infrastrutture, che fa parte del Dipartimento per la sicurezza interna.",
+  "esempio": "Quando esce una falla grave in un software molto diffuso, è la CISA a dire alle agenzie federali entro quando devono aggiornare."
+ },
+ "embedding": {
+  "t": "Embedding",
+  "spiega": "La trasformazione di un testo o di un documento in una lista di numeri che ne rappresenta il significato. Testi simili danno numeri vicini, e così si possono cercare per somiglianza.",
+  "esempio": "La fattura di un nuovo fornitore viene trasformata in numeri e confrontata con quelle degli esempi: il servizio recupera l'esempio più vicino e lo usa come guida."
+ },
+ "lora": {
+  "t": "LoRA",
+  "esteso": "Low-Rank Adaptation",
+  "spiega": "Un modo economico di adattare un grande modello a un compito nuovo: invece di modificare tutti i suoi parametri, si addestra un piccolo strato aggiuntivo.",
+  "esempio": "Per far prevedere a un modello da 100 miliardi di parametri le risposte del cervello, si addestrano solo pochi milioni di parametri in più, e il modello originale resta com'è."
+ },
+ "guardrail": {
+  "t": "Guardrail",
+  "spiega": "Un filtro che sta davanti o dietro un assistente di AI e decide se una richiesta o una risposta è accettabile, secondo una regola stabilita da chi lo addestra.",
+  "esempio": "Chiedi a un assistente come aprire una serratura: il guardrail valuta la richiesta e la lascia passare o la blocca, secondo la regola che ha imparato."
+ },
+ "cvss": {
+  "t": "CVSS",
+  "esteso": "Common Vulnerability Scoring System",
+  "spiega": "La scala da 0 a 10 con cui si misura la gravità di una falla informatica. Sopra 9 la falla è considerata critica.",
+  "esempio": "Una falla che permette a chiunque, senza password, di prendere il controllo di un server prende un punteggio vicino a 10."
+ },
+ "rce": {
+  "t": "RCE",
+  "esteso": "Remote Code Execution",
+  "spiega": "Esecuzione di codice da remoto: un attaccante riesce a far eseguire istruzioni sue a un computer che non controlla, attraverso la rete.",
+  "esempio": "Con una RCE su un server web, una semplice richiesta costruita apposta basta per installare un programma malevolo sul server."
+ },
+ "cve": {
+  "t": "CVE",
+  "esteso": "Common Vulnerabilities and Exposures",
+  "spiega": "Il codice univoco con cui si identifica una falla di sicurezza pubblica, così che tutti parlino della stessa cosa.",
+  "esempio": "CVE-2026-109618 indica una delle due falle di PHP del 21 ottobre: aziende, fornitori e avvisi usano lo stesso codice."
+ },
+ "kd": {
+  "t": "Costante di dissociazione",
+  "spiega": "Misura quanto due molecole restano attaccate: più il valore è basso, più il legame è forte. Si esprime in molare, micromolare, nanomolare.",
+  "esempio": "Una proteina con costante di 5 nanomolari si stacca dalla tossina molto meno di una con 1 micromolare, cioè 200 volte di più."
+ },
+ "capex": {
+  "t": "Capex",
+  "esteso": "Capital expenditure",
+  "spiega": "La spesa di un'azienda per beni che durano anni, come centri dati, server e terreni, distinta dalle spese correnti come gli stipendi.",
+  "esempio": "Quando Meta compra chip e costruisce un centro dati, quei soldi finiscono nella capex del trimestre."
+ },
+ "rag": {
+  "t": "RAG",
+  "esteso": "Retrieval-Augmented Generation",
+  "spiega": "Un modo di far rispondere un assistente partendo dai tuoi documenti: prima cerca i pezzi pertinenti, poi li passa al modello che scrive la risposta.",
+  "esempio": "Chiedi \"qual è la penale nel contratto Rossi?\": il sistema trova il paragrafo giusto e il modello risponde citando contratto e pagina."
+ },
+ "chunking": {
+  "t": "Chunking",
+  "spiega": "La divisione di un documento in pezzi più piccoli prima di indicizzarlo, perché la ricerca trovi il passaggio giusto e non l'intero file.",
+  "esempio": "Un contratto di 15 pagine diviso in pezzi da 500 token diventa una trentina di brani, ognuno cercabile da solo."
+ }
 }

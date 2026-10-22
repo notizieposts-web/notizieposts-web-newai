@@ -9,7 +9,7 @@ THEMES = {1:['Decisionali','Costi'],2:['Decisionali','Grandi modelli','Sicurezza
  8:['Pesi aperti','Grandi modelli','Costi'],9:['Sicurezza','Grandi modelli'],10:['Sicurezza'],11:['Pesi aperti','Grandi modelli'],12:['Sicurezza','Ricerca'],
  13:['Grandi modelli','Costi'],14:['Grandi modelli','Hardware'],15:['Regole','Sicurezza'],16:['Regole'],17:['Pesi aperti','Grandi modelli'],
  18:['Sicurezza','Grandi modelli','Costi'],19:['Decisionali','Sicurezza','Ricerca'],20:['Grandi modelli','Hardware','Ricerca','Sicurezza'],
- 21:['Grandi modelli','Regole','Sicurezza','Costi'],22:['Sicurezza','Ricerca','Grandi modelli'],23:['Sicurezza','Pesi aperti','Regole'],24:['Sicurezza','Ricerca','Pesi aperti','Decisionali','Costi'],25:['Regole','Sicurezza','Hardware','Costi','Ricerca'],26:['Sicurezza','Costi','Ricerca'],27:['Hardware','Regole','Valutazione','Costi']}
+ 21:['Grandi modelli','Regole','Sicurezza','Costi'],22:['Sicurezza','Ricerca','Grandi modelli'],23:['Sicurezza','Pesi aperti','Regole'],24:['Sicurezza','Ricerca','Pesi aperti','Decisionali','Costi'],25:['Regole','Sicurezza','Hardware','Costi','Ricerca'],26:['Sicurezza','Costi','Ricerca'],27:['Hardware','Regole','Valutazione','Costi'],28:['Sicurezza','Ricerca','Costi']}
 EXTRA = {4:['Jev'],5:['Jev','OpenAI','NVIDIA'],19:['Jev']}
 
 def data(root):
