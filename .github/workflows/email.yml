@@ -1,0 +1,95 @@
+name: Invio email
+
+# Invia l'email dell'edizione di Radar AI via SMTP di Gmail (tools/mail_build.py + tools/mail_send.py).
+# Parte da solo quando l'operazione delle 8:40 pubblica tools/ultima.json con la data di oggi,
+# con un controllo ogni 30 minuti fino alle 10:40 circa. Si puo' avviare anche a mano.
+# Un tag mail-NN impedisce i doppi invii (lo controlla anche il repository privato radar-ai-invio, che fa da riserva).
+# Secret: GMAIL_APP_PASSWORD, MAIL_DAILY, MAIL_ALTERNATE, MAIL_TEST (facoltativo).
+# I log sono pubblici: gli script non stampano mai indirizzi e i secret sono mascherati da GitHub.
+
+on:
+  push:
+    branches: [main]
+    paths: [tools/ultima.json]
+  schedule:
+    - cron: "10,40 7-8 * * *"   # 9:10-10:40 ora legale, 8:10-9:40 ora solare (UTC); dopo parte la riserva privata
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "tutti = destinatari reali; prova = solo MAIL_TEST (o il mittente)"
+        required: false
+        default: "tutti"
+      forza:
+        description: "Invia anche se l'email di questa edizione e' gia' partita (si/no)"
+        required: false
+        default: "no"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: email
+  cancel-in-progress: false
+
+jobs:
+  email:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Edizione, configurazione e doppi invii
+        id: ed
+        env:
+          MODO: ${{ github.event.inputs.modo }}
+          FORZA: ${{ github.event.inputs.forza }}
+          HAS_PWD: ${{ secrets.GMAIL_APP_PASSWORD != '' }}
+          EVENTO: ${{ github.event_name }}
+        run: |
+          N=$(python3 -c "import json;print(json.load(open('tools/ultima.json'))['n'])")
+          D=$(python3 -c "import json;print(json.load(open('tools/ultima.json'))['data'])")
+          OGGI=$(TZ=Europe/Rome date +%F)
+          echo "n=$N" >> "$GITHUB_OUTPUT"
+          git fetch -q --tags origin || true
+          if [ "$HAS_PWD" != "true" ]; then
+            echo "skip=1" >> "$GITHUB_OUTPUT"; echo "::notice::Secret GMAIL_APP_PASSWORD non configurato in questo repository: nessun invio (fa la riserva radar-ai-invio)."
+          elif [ "$EVENTO" != "workflow_dispatch" ] && [ "$D" != "$OGGI" ]; then
+            echo "skip=1" >> "$GITHUB_OUTPUT"; echo "Edizione di oggi non ancora pubblicata (ultima: $N del $D)."
+          elif [ "$MODO" != "prova" ] && git rev-parse -q --verify "refs/tags/mail-$N" >/dev/null && [ "$FORZA" != "si" ]; then
+            echo "skip=1" >> "$GITHUB_OUTPUT"; echo "Email dell'edizione $N gia' inviata."
+          else
+            echo "skip=0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Attendi l'audio (fino a 10 minuti)
+        if: steps.ed.outputs.skip == '0'
+        env:
+          N: ${{ steps.ed.outputs.n }}
+        run: |
+          for i in $(seq 1 20); do
+            c=$(curl -sI -o /dev/null -w '%{http_code}' "https://github.com/${GITHUB_REPOSITORY}/releases/download/audio-$N/radar-ai-$N.mp3")
+            if [ "$c" = "302" ] || [ "$c" = "200" ]; then echo "audio pronto"; exit 0; fi
+            sleep 30
+          done
+          echo "audio non pronto: l'email parte senza il blocco audio"
+
+      - name: Invia
+        if: steps.ed.outputs.skip == '0'
+        env:
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_DAILY: ${{ secrets.MAIL_DAILY }}
+          MAIL_ALTERNATE: ${{ secrets.MAIL_ALTERNATE }}
+          MAIL_TEST: ${{ secrets.MAIL_TEST }}
+          MAIL_FROM: ${{ vars.MAIL_FROM }}
+          MAIL_ALTERNATE_START: ${{ vars.MAIL_ALTERNATE_START }}
+          MODE: ${{ github.event.inputs.modo }}
+        run: python3 tools/mail_send.py
+
+      - name: Segna come inviata
+        if: steps.ed.outputs.skip == '0' && github.event.inputs.modo != 'prova'
+        env:
+          N: ${{ steps.ed.outputs.n }}
+        run: |
+          git tag -f "mail-$N" && git push -f origin "refs/tags/mail-$N"
