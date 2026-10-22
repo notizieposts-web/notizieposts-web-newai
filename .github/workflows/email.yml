@@ -1,18 +1,17 @@
 name: Invio email
 
 # Invia l'email dell'edizione di Radar AI via SMTP di Gmail (tools/mail_build.py + tools/mail_send.py).
-# Parte da solo quando l'operazione delle 8:40 pubblica tools/ultima.json con la data di oggi,
-# con un controllo ogni 30 minuti fino alle 10:40 circa. Si puo' avviare anche a mano.
+# Invia ALLE 9:00 (ora italiana): parte alle 8:30 (gli orari di GitHub possono slittare) e aspetta le 9:00 in punto.
+# Se alle 9:00 l'edizione di oggi non e' ancora pubblicata, la invia appena esce (fino alle 10:00; dopo c'e' la riserva privata). Si puo' avviare anche a mano.
 # Un tag mail-NN impedisce i doppi invii (lo controlla anche il repository privato radar-ai-invio, che fa da riserva).
 # Secret: GMAIL_APP_PASSWORD, MAIL_DAILY, MAIL_ALTERNATE, MAIL_TEST (facoltativo).
 # I log sono pubblici: gli script non stampano mai indirizzi e i secret sono mascherati da GitHub.
 
 on:
-  push:
-    branches: [main]
-    paths: [tools/ultima.json]
   schedule:
-    - cron: "10,40 7-8 * * *"   # 9:10-10:40 ora legale, 8:10-9:40 ora solare (UTC); dopo parte la riserva privata
+    # UTC: 6:30 e 6:45 = 8:30 e 8:45 con l'ora legale; 7:30 e 7:45 = 8:30 e 8:45 con l'ora solare.
+    # Le corse che cadono prima delle 8 italiane si fermano subito; la seconda fa da riserva se la prima salta.
+    - cron: "30,45 6,7 * * *"
   workflow_dispatch:
     inputs:
       modo:
@@ -34,11 +33,27 @@ concurrency:
 jobs:
   email:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 130
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Aspetta le 9:00 e l'edizione di oggi
+        if: github.event_name == 'schedule'
+        run: |
+          H=$(TZ=Europe/Rome date +%H)
+          if [ "$H" -lt 8 ] || [ "$H" -ge 11 ]; then echo "Fuori finestra ($H): questa corsa non serve."; echo "FUORI=1" >> "$GITHUB_ENV"; exit 0; fi
+          ADESSO=$(date +%s); NOVE=$(TZ=Europe/Rome date -d "$(TZ=Europe/Rome date +%F) 09:00" +%s)
+          if [ "$ADESSO" -lt "$NOVE" ]; then echo "Aspetto le 9:00 ($((NOVE-ADESSO)) secondi)"; sleep $((NOVE-ADESSO)); fi
+          OGGI=$(TZ=Europe/Rome date +%F); FINE=$(TZ=Europe/Rome date -d "$OGGI 10:00" +%s)
+          while :; do
+            git fetch -q origin main
+            D=$(git show origin/main:tools/ultima.json | python3 -c "import json,sys;print(json.load(sys.stdin)['data'])")
+            if [ "$D" = "$OGGI" ]; then git checkout -q origin/main; echo "Edizione di oggi pronta"; break; fi
+            if [ "$(date +%s)" -ge "$FINE" ]; then echo "Alle 10:00 l'edizione di oggi non c'e': nessun invio."; break; fi
+            echo "Edizione di oggi non ancora pubblicata: riprovo tra un minuto"; sleep 60
+          done
 
       - name: Edizione, configurazione e doppi invii
         id: ed
@@ -53,7 +68,9 @@ jobs:
           OGGI=$(TZ=Europe/Rome date +%F)
           echo "n=$N" >> "$GITHUB_OUTPUT"
           git fetch -q --tags origin || true
-          if [ "$HAS_PWD" != "true" ]; then
+          if [ "${FUORI:-0}" = "1" ]; then
+            echo "skip=1" >> "$GITHUB_OUTPUT"
+          elif [ "$HAS_PWD" != "true" ]; then
             echo "skip=1" >> "$GITHUB_OUTPUT"; echo "::notice::Secret GMAIL_APP_PASSWORD non configurato in questo repository: nessun invio (fa la riserva radar-ai-invio)."
           elif [ "$EVENTO" != "workflow_dispatch" ] && [ "$D" != "$OGGI" ]; then
             echo "skip=1" >> "$GITHUB_OUTPUT"; echo "Edizione di oggi non ancora pubblicata (ultima: $N del $D)."
@@ -62,18 +79,6 @@ jobs:
           else
             echo "skip=0" >> "$GITHUB_OUTPUT"
           fi
-
-      - name: Attendi l'audio (fino a 10 minuti)
-        if: steps.ed.outputs.skip == '0'
-        env:
-          N: ${{ steps.ed.outputs.n }}
-        run: |
-          for i in $(seq 1 20); do
-            c=$(curl -sI -o /dev/null -w '%{http_code}' "https://github.com/${GITHUB_REPOSITORY}/releases/download/audio-$N/radar-ai-$N.mp3")
-            if [ "$c" = "302" ] || [ "$c" = "200" ]; then echo "audio pronto"; exit 0; fi
-            sleep 30
-          done
-          echo "audio non pronto: l'email parte senza il blocco audio"
 
       - name: Invia
         if: steps.ed.outputs.skip == '0'
