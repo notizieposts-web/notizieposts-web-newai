@@ -2,19 +2,45 @@
  "n": 29,
  "data": "2026-10-23",
  "titolo": "Agenti all'attacco, Flint sul portatile, skill per tutti",
- "descrizione": "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT.",
- "chips": ["Microsoft", "Flint", "Anthropic", "Perplexity", "Azure"],
- "statistiche": [
-  ["2.250", "i tenant tentati dagli agenti di Storm-0940"],
-  ["2,5 mld", "i parametri attivi per token di Flint, su 40"],
-  ["280 mln", "le installazioni di Agent Skills dichiarate"]
+ "descrizione": "Agenti AI usati per attaccare le aziende attraverso un fornitore, un nuovo modello per programmare che gira sul portatile, lo standard delle skill per agenti che passa a una fondazione aperta e un metodo per insegnare meglio ai modelli.",
+ "chips": [
+  "Microsoft",
+  "Flint",
+  "Anthropic",
+  "Perplexity",
+  "Azure"
  ],
  "items": [
-  ["🛡", "Microsoft", "Gli agenti che attaccano in tre ore", "Storm-0940 è entrato dai clienti di ConnectWise con le credenziali delle sue applicazioni."],
-  ["💻", "Flint", "Un modello per programmare sul portatile", "40 miliardi di parametri, 2,5 attivi, pesi aperti; progettato in buona parte da un'AI."],
-  ["🧩", "Anthropic", "Le Agent Skills diventano di tutti", "Lo standard passa alla fondazione che custodisce già MCP."],
-  ["🎓", "Perplexity", "Maestro e allievo nello stesso modello", "JOLT: consigli che lo studente sa seguire, e molti meno dati."],
-  ["☁", "Azure", "Firme, metadati e codici a barre", "Gli elementi che arrivano senza campi, per smistare e risparmiare."]
+  [
+   "🛡",
+   "Microsoft",
+   "Agenti AI all'attacco attraverso un fornitore",
+   "Microsoft racconta un gruppo di hacker che, con agenti AI, è entrato negli spazi Microsoft 365 dei clienti di ConnectWise usando le credenziali delle sue applicazioni, a volte in meno di tre ore."
+  ],
+  [
+   "💻",
+   "Flint",
+   "Un modello per programmare sul tuo portatile",
+   "La startup Recursive pubblica Flint, gratuito e con pesi aperti: è grande, ma per ogni parola ne usa solo una piccola parte, così gira anche in locale."
+  ],
+  [
+   "🧩",
+   "Anthropic",
+   "Le skill degli agenti diventano uno standard di tutti",
+   "Anthropic cede le Agent Skills, le istruzioni pronte che insegnano un lavoro a un agente, alla stessa fondazione aperta che custodisce già il protocollo MCP."
+  ],
+  [
+   "🎓",
+   "Perplexity",
+   "Un modello che fa da maestro e da allievo",
+   "Con JOLT, Perplexity insegna a un modello dando consigli che è davvero in grado di seguire, e ottiene risultati migliori con meno dati."
+  ],
+  [
+   "☁",
+   "Azure",
+   "Firme, metadati e codici a barre senza configurare nulla",
+   "La rubrica su Content Understanding mostra gli elementi che il servizio riconosce da solo in un documento, utili per smistare i file e risparmiare."
+  ]
  ],
  "domanda": "Gli agenti di Storm-0940 sono entrati nei tenant dei clienti senza rubare una sola password degli utenti: come hanno fatto?"
 }
