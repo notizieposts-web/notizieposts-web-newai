@@ -79,7 +79,6 @@ def build(root, audio=None, precedente=False):
     url_ed = '%sedizioni/%02d.html' % (SITE, n)
     chips = [e(c) for c in u['chips']]
     chips_txt = (', '.join(chips[:-1]) + ' e ' + chips[-1]) if len(chips) > 1 else ''.join(chips)
-    t = block(t, 'STAT', lambda b: ''.join(fill(b, {'STAT_V': e(v), 'STAT_L': e(l)}) for v, l in u['statistiche']))
     t = block(t, 'ITEM', lambda b: ''.join(fill(b, {'IT_NUM': '%02d' % (i + 1), 'IT_EMOJI': ents(em), 'IT_TEMA': e(prot), 'IT_TITOLO': e(tit), 'IT_TESTO': e(txt)}) for i, (em, prot, tit, txt) in enumerate(u['items'])))
     if audio is None:
         audio = audio_exists(n)
