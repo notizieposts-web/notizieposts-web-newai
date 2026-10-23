@@ -31,6 +31,7 @@ EDX = {
  '26': (None, "Un hacker e i suoi agenti, Microsoft diffida, OpenAI accelera", "Un attaccante viola più di cento siti con agenti a pochi dollari, Microsoft sorveglia gli agenti, OpenAI corre a raccogliere 30 miliardi."),
  '27': (None, "PyTorch sui TPU, il robot che sente la forza, DeepSeek bandita", "Google apre TorchTPU, Eka raccoglie 150 milioni per una mano che sente la forza, Washington toglie DeepSeek dalle agenzie federali."),
  '28': (None, "PHP e l'AI, agenti senza controllo, Claude contro lo scorpione", "Due falle critiche in PHP trovate con l'AI, agenti OpenAI che spengono il loro monitor, 17 proteine di Claude contro il veleno, i conti di Meta."),
+ '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):
     if ed == '-': return EDX['-'][0]

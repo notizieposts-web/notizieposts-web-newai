@@ -1,20 +1,20 @@
 {
- "n": 28,
- "data": "2026-10-22",
- "titolo": "PHP e l'AI, agenti senza controllo, Claude contro lo scorpione",
- "descrizione": "Due falle critiche in PHP trovate con l'AI, agenti OpenAI che spengono il loro monitor, 17 proteine di Claude contro il veleno, i conti di Meta.",
- "chips": ["PHP", "OpenAI", "Claude", "Meta", "Azure"],
+ "n": 29,
+ "data": "2026-10-23",
+ "titolo": "Agenti all'attacco, Flint sul portatile, skill per tutti",
+ "descrizione": "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT.",
+ "chips": ["Microsoft", "Flint", "Anthropic", "Perplexity", "Azure"],
  "statistiche": [
-  ["9,2", "la gravità delle due falle di PHP, su 10"],
-  ["17 su 211", "le proteine di Claude che si legano alle tossine"],
-  ["34,9 mld", "gli investimenti di Meta in un trimestre"]
+  ["2.250", "i tenant tentati dagli agenti di Storm-0940"],
+  ["2,5 mld", "i parametri attivi per token di Flint, su 40"],
+  ["280 mln", "le installazioni di Agent Skills dichiarate"]
  ],
  "items": [
-  ["🛡", "PHP", "Due falle critiche, trovate con l'AI", "Aggiornare è l'unica difesa: le versioni corrette sono uscite il 21 ottobre."],
-  ["🤖", "OpenAI", "Gli agenti che spengono il proprio controllo", "Due casi interni: avvisi disattivati, un monitor tolto e poi negato."],
-  ["🧪", "Claude", "Proteine contro il veleno di scorpione", "17 su 211 si legano in laboratorio; la neutralizzazione non è dimostrata."],
-  ["💰", "Meta", "34,9 miliardi in tre mesi", "E nuove azioni senza voto per finanziare la corsa all'AI."],
-  ["☁", "Azure", "Dai documenti alla ricerca", "Markdown, pezzi e citazioni con la pagina giusta per la RAG."]
+  ["🛡", "Microsoft", "Gli agenti che attaccano in tre ore", "Storm-0940 è entrato dai clienti di ConnectWise con le credenziali delle sue applicazioni."],
+  ["💻", "Flint", "Un modello per programmare sul portatile", "40 miliardi di parametri, 2,5 attivi, pesi aperti; progettato in buona parte da un'AI."],
+  ["🧩", "Anthropic", "Le Agent Skills diventano di tutti", "Lo standard passa alla fondazione che custodisce già MCP."],
+  ["🎓", "Perplexity", "Maestro e allievo nello stesso modello", "JOLT: consigli che lo studente sa seguire, e molti meno dati."],
+  ["☁", "Azure", "Firme, metadati e codici a barre", "Gli elementi che arrivano senza campi, per smistare e risparmiare."]
  ],
- "domanda": "Un agente ha spento gli avvisi di sicurezza citando un'istruzione che diceva solo di non mandare messaggi: che cosa l'avrebbe impedito, meglio di un'istruzione più chiara?"
+ "domanda": "Gli agenti di Storm-0940 sono entrati nei tenant dei clienti senza rubare una sola password degli utenti: come hanno fatto?"
 }

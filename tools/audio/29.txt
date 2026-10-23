@@ -1,0 +1,49 @@
+Radar AI. Edizione del ventitré ottobre 2026. Questa è la versione da ascoltare: dura circa otto minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: agenti all'attacco, un modello per programmare sul portatile, e le skill che diventano di tutti.
+
+Una nota prima di cominciare. Un capitolo di oggi parla di Anthropic, e due segnali riguardano Anthropic. Questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti, con i limiti che le fonti stesse indicano.
+
+Il periodo in breve. Mercoledì ventuno ottobre Microsoft ha pubblicato l'analisi di un attacco condotto con una squadra di agenti di intelligenza artificiale. Giovedì ventidue è stato il giorno dei modelli e degli standard: Recursive ha pubblicato il suo primo modello, Anthropic ha donato lo standard delle skill a una fondazione, e Perplexity ha presentato un nuovo metodo di addestramento. Venerdì mattina, Microsoft ha aggiornato il suo rapporto.
+
+Capitolo uno. Microsoft, e gli agenti che attaccano in tre ore.
+
+Il ventuno ottobre Microsoft ha descritto la campagna di un gruppo che chiama Storm-0940, che secondo l'azienda è allineato con lo stato cinese ed è attivo dal 2021. Da settembre il gruppo usa ARTEX, un programma open source per i test di penetrazione fatto di più agenti, che lavorano quasi da soli dalla ricognizione al furto dei dati. Gli obiettivi sono stati centinaia, in settori come difesa, finanza ed enti pubblici. Quasi sempre i tentativi sono falliti, ma in alcuni casi gli agenti sono arrivati all'accesso da amministratore nel cloud in meno di tre ore.
+
+Il colpo principale è passato da un fornitore, ConnectWise, che offre un servizio di backup nel cloud. Le sue applicazioni erano autorizzate negli spazi Microsoft trecentosessantacinque dei clienti, quelli che si chiamano tenant. Rubate le credenziali di quelle applicazioni, gli agenti si sono presentati come il programma legittimo, senza toccare una sola password degli utenti, e hanno tentato l'accesso a più di duemiladuecentocinquanta tenant. Microsoft consiglia di cercare le applicazioni per il loro codice identificativo, non per nome, di non cancellarle subito per non perdere le prove, e di conservare i registri. Nella pagina trovi un esempio su uno studio contabile e il suo backup.
+
+Prova a chiederti: quali applicazioni esterne possono leggere la posta della tua organizzazione, e chi le ha autorizzate?
+
+Capitolo due. Flint, il modello per programmare sul portatile.
+
+Il ventidue ottobre Recursive, la società di Richard Socher, ha pubblicato Flint, con una licenza che permette anche l'uso commerciale. È un modello a miscela di esperti: quaranta miliardi di parametri in tutto, ma per ogni parola ne usa circa due miliardi e mezzo. Per questo è veloce come un modello piccolo. L'azienda dichiara più di centoventicinque token al secondo su un MacBook Pro, e il primo posto tra i modelli di questo tipo in tre prove di programmazione per agenti. Nessuno l'ha ancora verificato in modo indipendente.
+
+La parte curiosa è il metodo: buona parte del lavoro l'ha fatta la Eureka Machine, un sistema di Recursive che propone idee, le scrive e le prova da solo. Ha scelto la struttura degli esperti, ha trovato come comprimere il modello a quattro bit perdendo meno di un punto, e ha scritto il codice per i chip Apple. Il limite lo dice l'azienda stessa: Flint ha bisogno di più guida dei grandi modelli chiusi, e i compiti grandi vanno spezzati in passi piccoli. Nella pagina trovi un esempio su una sviluppatrice che lavora in treno.
+
+Prova a chiederti: quale parte del tuo lavoro faresti fare a un modello che non manda nulla fuori dal tuo computer?
+
+Capitolo tre. Anthropic, e le skill che diventano di tutti.
+
+Il ventidue ottobre Anthropic ha annunciato che dona lo standard Agent Skills alla Agentic AI Foundation, la fondazione dentro la Linux Foundation che custodisce già MCP, il protocollo che collega gli assistenti a strumenti e dati. Una skill è una cartella con un file di istruzioni, che dice all'agente come fare bene un lavoro preciso, ed eventualmente con degli script. Secondo Anthropic, in dieci mesi il formato è stato adottato da più di settanta piattaforme, tra cui ChatGPT, Cursor e GitHub Copilot, con un milione di skill pubblicate. Ora lo curano ingegneri di più aziende, ed è promessa una guida alla sicurezza: installare una skill presa dal web è come installare un programma. Nella pagina trovi un esempio su una skill per le note spese.
+
+Prova a chiederti: quale procedura del tuo ufficio scriveresti per prima in una skill, e chi dovrebbe approvarla?
+
+Capitolo quattro. Perplexity, e l'insegnante che parla la lingua dello studente.
+
+Perplexity, con NVIDIA, ha presentato JOLT, un metodo descritto in un paper depositato su arXiv il sette ottobre e non ancora revisionato. L'idea: per insegnare a un modello compiti difficili, lo stesso modello fa da insegnante, con in mano la soluzione, e da studente, che vede solo il problema. L'insegnante corregge ogni parola dei tentativi dello studente, ma viene addestrato a dare consigli che lo studente sia in grado di seguire, senza scorciatoie che non capirebbe. Secondo gli autori, sulla matematica serve circa sei volte e mezzo meno dati del metodo di riferimento, ma è una stima, e meno dati non vuol dire per forza meno calcolo. Nella pagina trovi un esempio su una ripetizione di matematica.
+
+Prova a chiederti: l'ultimo consiglio utile che hai ricevuto, partiva da quello che sapevi già?
+
+La rubrica Azure, venticinquesima puntata: firme, metadati e codici a barre. Content Understanding restituisce, senza definire un solo campo, una serie di elementi del documento: le firme, con la pagina e la posizione, i metadati del file, come autore, numero di pagine, mittente e oggetto delle email, i codici a barre, le caselle di spunta e le annotazioni dei PDF. Firme e metadati sono in anteprima. Il consiglio è usarli per smistare prima di pagare l'estrazione dei campi: una mail con oggetto fattura va all'analizzatore giusto, un contratto senza firme torna indietro. E ricorda che le coordinate esistono solo per PDF e immagini.
+
+Il laboratorio. Nella pagina trovi cinque esperimenti: elencare le applicazioni autorizzate nel tuo tenant, spezzare un compito per un modello piccolo, scrivere la tua prima skill, fare da insegnante con un consiglio che lo studente possa seguire, e leggere firme e metadati con Content Understanding.
+
+I segnali. Anthropic apre un bando per ricercatori ospiti nelle scienze della vita, e il fisico Christopher Stubbs entra nel suo Long-Term Benefit Trust. Uno sviluppatore ha addestrato un piccolo modello a imitare un terminale che non esiste. E tre notizie che non ho potuto verificare su fonti ufficiali: i moduli prefabbricati di NVIDIA per i centri di calcolo, il servizio di Walmart per gli agenti che fanno acquisti, e il primo sciopero nei semiconduttori di Taiwan, alla Micron. Nella pagina trovi anche i conti di Tesla, sempre da verificare.
+
+La domanda del giorno. Gli agenti di Storm-0940 sono entrati nei tenant dei clienti senza rubare nemmeno una password degli utenti. Come hanno fatto?
+
+Pensaci un momento.
+
+La risposta: hanno usato le credenziali rubate delle applicazioni di ConnectWise, già autorizzate nei tenant. Per i sistemi dei clienti erano il programma di backup di sempre.
+
+È tutto per oggi. Nella pagina dell'edizione trovi esempi, strumenti interattivi, esperimenti, il quiz e tutte le fonti. Grazie per l'ascolto, e a domani con Radar AI.

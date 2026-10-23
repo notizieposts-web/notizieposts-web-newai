@@ -160,5 +160,53 @@
    "rag",
    "embedding"
   ]
+ },
+ "oauth": {
+  "t": "OAuth",
+  "esteso": "Open Authorization",
+  "spiega": "Il sistema con cui un'applicazione ottiene il permesso di accedere ai tuoi dati in un altro servizio senza conoscere la tua password. Il permesso si dà una volta e resta valido finché qualcuno non lo revoca.",
+  "esempio": "Quando un programma di backup chiede di 'leggere tutta la posta' di Microsoft 365 e un amministratore approva, da quel momento l'applicazione entra con le sue credenziali, non con quelle degli utenti.",
+  "approfondisci": "OAuth separa l'identità dell'utente da quella dell'applicazione. L'applicazione riceve un permesso con un perimetro preciso (per esempio leggere la posta) e si presenta con un proprio segreto o certificato. È comodo e più sicuro che condividere password, ma crea un rischio: se il segreto dell'applicazione viene rubato, chi lo ha entra con tutti i permessi concessi, senza passare dagli utenti. Per questo conviene rivedere spesso le applicazioni autorizzate e i loro permessi.",
+  "vedi": [
+   "tenant"
+  ]
+ },
+ "tenant": {
+  "t": "tenant",
+  "spiega": "Lo spazio riservato a un'organizzazione dentro un servizio cloud condiviso, con i suoi utenti, dati e regole. Molte aziende stanno sugli stessi server, ma ognuna vede solo il suo tenant.",
+  "esempio": "Lo studio Rossi e l'azienda Bianchi usano entrambi Microsoft 365: hanno due tenant separati, ciascuno con i suoi account e le sue applicazioni autorizzate.",
+  "vedi": [
+   "oauth"
+  ]
+ },
+ "moe": {
+  "t": "MoE",
+  "esteso": "Mixture of Experts",
+  "spiega": "Un modello diviso in tanti blocchi specializzati, gli esperti, di cui per ogni parola se ne usano solo pochi. Serve memoria per tutti, ma il calcolo è quello dei pochi attivi.",
+  "esempio": "Flint ha 40 miliardi di parametri in tutto, ma per ogni token ne usa circa 2,5: per questo è veloce come un modello piccolo e pesante in memoria come uno grande.",
+  "approfondisci": "In un modello MoE un piccolo componente, il router, sceglie per ogni token quali esperti attivare. Così si può aumentare la conoscenza complessiva del modello senza far crescere nella stessa misura il calcolo per ogni parola. Il prezzo è la memoria, perché tutti gli esperti devono essere caricati, e una maggiore complessità nell'addestramento e nell'esecuzione su più chip.",
+  "vedi": [
+   "quantizzazione"
+  ]
+ },
+ "quantizzazione": {
+  "t": "quantizzazione",
+  "spiega": "Ridurre il numero di bit con cui sono scritti i numeri di un modello, per fargli occupare meno memoria e andare più veloce. Si perde un po' di precisione, che le tecniche migliori recuperano quasi del tutto.",
+  "esempio": "Un modello da 40 miliardi di parametri a 16 bit occupa circa 80 gigabyte; a 4 bit circa 20, abbastanza per stare in un portatile con molta memoria.",
+  "vedi": [
+   "moe"
+  ]
+ },
+ "mcp": {
+  "t": "MCP",
+  "esteso": "Model Context Protocol",
+  "spiega": "Un protocollo aperto che permette agli assistenti AI di collegarsi a strumenti e dati esterni in modo standard. Un servizio scritto una volta funziona con tutti gli assistenti compatibili.",
+  "esempio": "Un'azienda espone il suo gestionale come server MCP: Claude, ChatGPT o un altro agente compatibile possono leggere gli ordini senza un'integrazione diversa per ciascuno."
+ },
+ "grpo": {
+  "t": "GRPO",
+  "esteso": "Group Relative Policy Optimization",
+  "spiega": "Un metodo di apprendimento per rinforzo: il modello prova più risposte allo stesso problema e impara a preferire quelle che hanno ottenuto un premio migliore della media del gruppo.",
+  "esempio": "Su un problema di matematica il modello scrive otto soluzioni; le due giuste vengono rafforzate, le sei sbagliate scoraggiate. Il segnale arriva solo dal risultato finale."
  }
 }
