@@ -86,7 +86,7 @@ def build(root, audio=None, precedente=False):
     if audio:
         txt = os.path.join(root, 'tools/audio/%d.txt' % n)
         mins = max(1, round(len(open(txt, encoding='utf-8').read().split()) / WPM)) if os.path.exists(txt) else None
-        t = block(t, 'AUDIO', lambda b: fill(b, {'MINUTI_AUDIO': (', circa %d minuti' % mins) if mins else '',
+        t = block(t, 'AUDIO', lambda b: fill(b, {'MINUTI_AUDIO': (' in circa %d minuti' % mins) if mins else '',
                                                   'URL_AUDIO': '%s/releases/download/audio-%d/radar-ai-%d.mp3' % (REPO, n, n), 'URL_RELEASES': REPO + '/releases'}))
     else:
         t = block(t, 'AUDIO', lambda b: '')

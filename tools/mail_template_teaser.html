@@ -17,12 +17,9 @@ body{margin:0!important;padding:0!important;width:100%!important;-webkit-text-si
 table{border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0}
 a{text-underline-offset:2px}
 a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important}
-.stat{display:inline-block;vertical-align:top;width:100%;max-width:168px}
 @media screen and (max-width:599px){
   .px{padding-left:20px!important;padding-right:20px!important}
   .h1{font-size:26px!important;line-height:32px!important}
-  .stat{max-width:100%!important;display:block!important}
-  .statin{border-left:0!important;border-top:1px solid #D9DEE8!important;padding:14px 0!important}
   .btnt{width:100%!important}
   .btn a{display:block!important;text-align:center!important}
 }
@@ -34,7 +31,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
   .t2{color:#C3CADB!important}
   .acc{color:#A9B4FF!important}
   .lnk{color:#A9B4FF!important}
-  .rule,.statin{border-color:#2A3350!important}
+  .rule{border-color:#2A3350!important}
   .btn2,.btn2 a{background:#141A2A!important;border-color:#F2F4F9!important;color:#F2F4F9!important}
   .acco{border-left-color:#F2A33A!important}
   .acct{border-left-color:#3CC8D8!important}
@@ -65,20 +62,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
 <tr><td class="px" style="padding:32px 36px 30px;font-family:Helvetica,Arial,sans-serif">
 <p class="acc" style="margin:0 0 10px;font-size:14px;line-height:20px;font-weight:bold;color:#3F3FD9">Oggi: {{CHIPS}}</p>
 <h1 class="h1 t1" style="margin:0;font-size:30px;line-height:37px;font-weight:bold;color:#121A2B">{{TITOLO}}</h1>
-<p class="t2" style="margin:14px 0 26px;font-size:17px;line-height:27px;color:#3D475E">{{DESCRIZIONE}}</p>
-<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{URL_ED}}" style="height:52px;v-text-anchor:middle;width:300px" arcsize="12%" stroke="f" fillcolor="#3F3FD9"><w:anchorlock/><center style="color:#FFFFFF;font-family:Arial,sans-serif;font-size:17px;font-weight:bold">Leggi l'edizione {{N}} sul sito</center></v:roundrect><![endif]-->
-<!--[if !mso]><!--><table role="presentation" cellpadding="0" cellspacing="0" border="0" class="btnt"><tr><td class="btn" bgcolor="#3F3FD9" style="background:#3F3FD9;border-radius:6px"><a href="{{URL_ED}}" target="_blank" rel="noopener" style="display:inline-block;padding:15px 28px;border-radius:6px;background:#3F3FD9;font-family:Helvetica,Arial,sans-serif;font-size:17px;line-height:22px;font-weight:bold;color:#FFFFFF;text-decoration:none">Leggi l'edizione {{N}} sul sito</a></td></tr></table><!--<![endif]-->
-<p class="t2" style="margin:14px 0 0;font-size:15px;line-height:22px;color:#3D475E">Circa {{MINUTI_LETTURA}} minuti di lettura, con esperimenti e quiz finale.</p>
-</td></tr>
-
-<!-- In tre numeri -->
-<tr><td class="px rule" style="padding:28px 36px 6px;border-top:1px solid #D9DEE8;font-family:Helvetica,Arial,sans-serif">
-<h2 class="t1" style="margin:0 0 16px;font-size:19px;line-height:25px;font-weight:bold;color:#121A2B">In tre numeri</h2>
-</td></tr>
-<tr><td class="px" style="padding:0 36px 26px;font-size:0;text-align:left">
-<!--[if mso]><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td width="33%" valign="top"><![endif]-->
-<!-- STAT --><div class="stat"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="statin" style="border-left:3px solid #3F3FD9;padding:2px 14px 4px 14px;font-family:Helvetica,Arial,sans-serif"><p class="acc" style="margin:0;font-size:24px;line-height:30px;font-weight:bold;color:#3F3FD9">{{STAT_V}}</p><p class="t2" style="margin:6px 0 0;font-size:15px;line-height:21px;color:#3D475E">{{STAT_L}}</p></td></tr></table></div><!-- /STAT -->
-<!--[if mso]></td></tr></table><![endif]-->
+<p class="t2" style="margin:14px 0 0;font-size:17px;line-height:27px;color:#3D475E">{{DESCRIZIONE}}</p>
 </td></tr>
 
 <!-- Dentro trovi -->
@@ -87,8 +71,20 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
 <!-- ITEM --><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td width="44" valign="top" class="acc" style="width:44px;padding:18px 0 0;font-size:16px;line-height:24px;font-weight:bold;color:#3F3FD9">{{IT_NUM}}</td><td valign="top" class="rule" style="padding:16px 0 18px;border-bottom:1px solid #E4E8F0"><p class="t2" style="margin:0 0 4px;font-size:14px;line-height:20px;font-weight:bold;color:#3D475E">{{IT_TEMA}}</p><h3 class="t1" style="margin:0 0 4px;font-size:18px;line-height:25px;font-weight:bold;color:#121A2B">{{IT_TITOLO}}</h3><p class="t2" style="margin:0;font-size:16px;line-height:24px;color:#3D475E">{{IT_TESTO}}</p></td></tr></table><!-- /ITEM -->
 </td></tr>
 
-<!-- Domanda del giorno -->
+<!-- AUDIO -->
 <tr><td class="px" style="padding:22px 36px 0">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="panel acct" bgcolor="#F4F6FA" style="background:#F4F6FA;border-left:4px solid #0A6A7C;padding:20px 22px;font-family:Helvetica,Arial,sans-serif">
+<h2 class="t1" style="margin:0 0 8px;font-size:17px;line-height:24px;font-weight:bold;color:#121A2B">La tua newsletter da ascoltare</h2>
+<p class="t2" style="margin:0 0 16px;font-size:16px;line-height:24px;color:#3D475E">Trasforma ogni momento in un'occasione per aggiornarti: ascolta la versione audio{{MINUTI_AUDIO}}, quando vuoi, dove vuoi.</p>
+<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{URL_AUDIO}}" style="height:48px;v-text-anchor:middle;width:300px" arcsize="12%" strokecolor="#121A2B" strokeweight="2px" fillcolor="#FFFFFF"><w:anchorlock/><center style="color:#121A2B;font-family:Arial,sans-serif;font-size:16px;font-weight:bold">Scarica audio</center></v:roundrect><![endif]-->
+<!--[if !mso]><!--><table role="presentation" cellpadding="0" cellspacing="0" border="0" class="btnt"><tr><td class="btn btn2" bgcolor="#FFFFFF" style="background:#FFFFFF;border:2px solid #121A2B;border-radius:6px"><a href="{{URL_AUDIO}}" target="_blank" rel="noopener" style="display:inline-block;padding:12px 24px;border-radius:6px;background:#FFFFFF;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:22px;font-weight:bold;color:#121A2B;text-decoration:none">Scarica audio</a></td></tr></table><!--<![endif]-->
+<p class="t2" style="margin:14px 0 0;font-size:13px;line-height:19px;color:#3D475E">Gli audio di tutte le edizioni sono nella <a class="lnk" href="{{URL_RELEASES}}" target="_blank" rel="noopener" style="color:#3F3FD9;text-decoration:underline">pagina delle Release su GitHub</a>.</p>
+</td></tr></table>
+</td></tr>
+<!-- /AUDIO -->
+
+<!-- Domanda del giorno -->
+<tr><td class="px" style="padding:16px 36px 0">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="panel acco" bgcolor="#F4F6FA" style="background:#F4F6FA;border-left:4px solid #B45309;padding:20px 22px;font-family:Helvetica,Arial,sans-serif">
 <h2 class="t1" style="margin:0 0 8px;font-size:17px;line-height:24px;font-weight:bold;color:#121A2B">La domanda del giorno</h2>
 <p class="t1" style="margin:0;font-size:17px;line-height:26px;color:#121A2B">{{DOMANDA}}</p>
@@ -96,31 +92,20 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
 </td></tr></table>
 </td></tr>
 
-<!-- AUDIO -->
-<tr><td class="px" style="padding:16px 36px 0">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="panel acct" bgcolor="#F4F6FA" style="background:#F4F6FA;border-left:4px solid #0A6A7C;padding:20px 22px;font-family:Helvetica,Arial,sans-serif">
-<h2 class="t1" style="margin:0 0 8px;font-size:17px;line-height:24px;font-weight:bold;color:#121A2B">Versione audio</h2>
-<p class="t2" style="margin:0 0 16px;font-size:16px;line-height:24px;color:#3D475E">L'edizione letta ad alta voce{{MINUTI_AUDIO}}. È un file MP3 da scaricare sul telefono o sul computer.</p>
-<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{URL_AUDIO}}" style="height:48px;v-text-anchor:middle;width:300px" arcsize="12%" strokecolor="#121A2B" strokeweight="2px" fillcolor="#FFFFFF"><w:anchorlock/><center style="color:#121A2B;font-family:Arial,sans-serif;font-size:16px;font-weight:bold">Scarica l'audio (MP3)</center></v:roundrect><![endif]-->
-<!--[if !mso]><!--><table role="presentation" cellpadding="0" cellspacing="0" border="0" class="btnt"><tr><td class="btn btn2" bgcolor="#FFFFFF" style="background:#FFFFFF;border:2px solid #121A2B;border-radius:6px"><a href="{{URL_AUDIO}}" target="_blank" rel="noopener" style="display:inline-block;padding:12px 24px;border-radius:6px;background:#FFFFFF;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:22px;font-weight:bold;color:#121A2B;text-decoration:none">Scarica l'audio dell'edizione {{N}} (MP3)</a></td></tr></table><!--<![endif]-->
-<p class="t2" style="margin:14px 0 0;font-size:15px;line-height:22px;color:#3D475E">Gli audio di tutte le edizioni sono nella <a class="lnk" href="{{URL_RELEASES}}" target="_blank" rel="noopener" style="color:#3F3FD9;text-decoration:underline">pagina delle Release su GitHub</a>.</p>
-</td></tr></table>
-</td></tr>
-<!-- /AUDIO -->
-
 <!-- PRECEDENTE --><tr><td class="px" style="padding:22px 36px 0;font-family:Helvetica,Arial,sans-serif"><p class="t1" style="margin:0;font-size:16px;line-height:24px;color:#121A2B">Hai perso l'edizione precedente? <a class="lnk" href="{{URL_PREC}}" target="_blank" rel="noopener" style="color:#3F3FD9;text-decoration:underline;font-weight:bold">Edizione {{N_PREC}}: {{TITOLO_PREC}}</a></p></td></tr><!-- /PRECEDENTE -->
 
 <!-- Chiusura -->
 <tr><td class="px" style="padding:30px 36px 32px;font-family:Helvetica,Arial,sans-serif">
 <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{URL_ED}}" style="height:52px;v-text-anchor:middle;width:300px" arcsize="12%" stroke="f" fillcolor="#3F3FD9"><w:anchorlock/><center style="color:#FFFFFF;font-family:Arial,sans-serif;font-size:17px;font-weight:bold">Leggi l'edizione {{N}} sul sito</center></v:roundrect><![endif]-->
 <!--[if !mso]><!--><table role="presentation" cellpadding="0" cellspacing="0" border="0" class="btnt"><tr><td class="btn" bgcolor="#3F3FD9" style="background:#3F3FD9;border-radius:6px"><a href="{{URL_ED}}" target="_blank" rel="noopener" style="display:inline-block;padding:15px 28px;border-radius:6px;background:#3F3FD9;font-family:Helvetica,Arial,sans-serif;font-size:17px;line-height:22px;font-weight:bold;color:#FFFFFF;text-decoration:none">Leggi l'edizione {{N}} sul sito</a></td></tr></table><!--<![endif]-->
+<p class="t2" style="margin:14px 0 0;font-size:15px;line-height:22px;color:#3D475E">Circa {{MINUTI_LETTURA}} minuti di lettura, con esperimenti e quiz finale.</p>
 <p class="t1" style="margin:16px 0 0;font-size:16px;line-height:24px;color:#121A2B">Oppure sfoglia <a class="lnk" href="{{URL_SITO}}" target="_blank" rel="noopener" style="color:#3F3FD9;text-decoration:underline;font-weight:bold">tutte le {{N}} edizioni di Radar AI</a>.</p>
 </td></tr>
 
 <!-- Piede -->
 <tr><td class="px panel" bgcolor="#F4F6FA" style="background:#F4F6FA;border-radius:0 0 8px 8px;padding:22px 36px 24px;font-family:Helvetica,Arial,sans-serif">
 <p class="t2" style="margin:0;font-size:14px;line-height:22px;color:#3D475E">Se il pulsante non si apre, copia questo indirizzo nel browser:<br><a class="lnk" href="{{URL_ED}}" target="_blank" rel="noopener" style="color:#3F3FD9;text-decoration:underline;word-break:break-all">{{URL_ED_TESTO}}</a></p>
-<p class="t2" style="margin:12px 0 0;font-size:14px;line-height:22px;color:#3D475E">Radar AI è preparata da Claude (Anthropic). Quando una notizia riguarda Anthropic, lo trovi segnalato nella pagina.</p>
+<p class="t2" style="margin:12px 0 0;font-size:14px;line-height:22px;color:#3D475E">Radar AI è realizzata con l'aiuto dell'intelligenza artificiale.</p>
 </td></tr>
 
 </table>
