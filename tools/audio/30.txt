@@ -1,0 +1,57 @@
+Radar AI. Edizione del ventiquattro ottobre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: il monitor di OpenAI, il medico a tappe, e il codice dimostrato invece che provato.
+
+Una nota prima di cominciare. Un capitolo di oggi parla di Anthropic, e due segnali riguardano Anthropic. Questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti, con i limiti che le fonti stesse indicano.
+
+Il periodo in breve. Giovedì ventidue ottobre è stato il giorno della verifica: un'organizzazione indipendente ha raccontato le falle trovate nel sistema che sorveglia gli agenti di OpenAI, la rivista Science ha pubblicato lo studio sul medico artificiale di Microsoft, e Anthropic ha mostrato Claude che dimostra matematicamente la correttezza di centinaia di programmi. Venerdì è stato il giorno dei prodotti. E oggi recuperiamo un rapporto del quindici ottobre sui conti reali dell'intelligenza artificiale.
+
+Capitolo uno. OpenAI, e chi controlla i controllori.
+
+Il ventidue ottobre METR, un'organizzazione indipendente che valuta i rischi dei modelli, ha pubblicato il resoconto di un esperimento nuovo. Una sua ricercatrice e un ricercatore di Redwood Research hanno lavorato negli uffici di OpenAI per tre settimane, dal ventuno luglio all'undici agosto. Il loro compito: attaccare il monitor, cioè il sistema in cui un modello legge che cosa fanno gli agenti interni di OpenAI e segnala i casi sospetti a una persona.
+
+Hanno trovato diversi buchi. Il più semplice da capire riguarda la compattazione, il momento in cui un agente riassume una conversazione troppo lunga per continuare a lavorare. Il monitor non guardava quei momenti e partiva solo quando l'agente restituiva il controllo all'utente. Così, da maggio a luglio, circa il dieci per cento del lavoro di Codex interno è probabilmente sfuggito, e un agente che non si fermava mai poteva rimandare il controllo all'infinito. C'erano anche un modo per nascondere centinaia di azioni, due impostazioni che spegnevano il monitor per i nuovi agenti, e la possibilità teorica di uscire dalla sandbox, l'ambiente chiuso in cui gli agenti lavorano.
+
+OpenAI dice di aver corretto tutto. METR però non ha verificato le correzioni, e il resoconto pubblico è breve, con parti oscurate da OpenAI. Ne vengono cinque principi utili a tutti: rendere difficile evitare il controllo, contare il traffico, rispondere in fretta, attaccare i propri controlli di continuo, e separare l'agente dal monitor.
+
+Prova a chiederti: se un agente lavora per te per ore, in quale momento qualcuno controlla quello che fa, e l'agente può spostare quel momento?
+
+Capitolo due. Microsoft, e il medico artificiale che fa una domanda alla volta.
+
+Il ventidue ottobre Science ha pubblicato lo studio su MAI-DxO, il sistema di Microsoft che fa diagnosi a tappe. Più agenti, ciascuno con un ruolo, interrogano un paziente simulato, scelgono gli esami tenendo conto del costo, e discutono le ipotesi. Sui trecentoquattro casi complessi del New England Journal of Medicine il sistema arriva all'ottantatré per cento di diagnosi giuste. I medici di base che lavoravano da soli arrivano al trentasei per cento con i libri, al ventidue senza.
+
+Ma attenzione ai dettagli. GPT-5 da solo arriva già a quasi il settantanove per cento: il sistema aggiunge circa quattro punti e fa risparmiare esami. In pronto soccorso il guadagno è quasi nullo. Il salto più grande è con un modello piccolo, Gemini due virgola cinque Flash. E i medici del confronto non avevano specialisti né consulti, mentre i pazienti erano simulati. Il prossimo passo è uno studio con pazienti veri a Boston. Nella pagina trovi un esempio su due modi diversi di chiedere a un assistente.
+
+Prova a chiederti: quando leggi che un'intelligenza artificiale batte i medici, contro quali medici, e su quali pazienti?
+
+Capitolo tre. Anthropic, e il codice dimostrato invece che provato.
+
+Il ventidue ottobre Anthropic ha raccontato un lavoro fatto con la startup Theorem. Di solito il software si controlla con i test e con il fuzzing, cioè milioni di input casuali. La verifica formale fa di più: dimostra con la matematica che una proprietà vale per tutti gli input, e un programma controlla la dimostrazione. Era così costosa da usarsi quasi solo negli aerei e nei sistemi critici.
+
+Claude ha preso i test di fuzzing di centoventitré librerie open source e ha dimostrato, sul codice già compilato, che non vanno mai in crash con nessun input sotto i sessantaquattro megabyte. Le prove, controllate dall'assistente di dimostrazione Rocq, sono lunghe in tutto circa centottanta milioni di righe. Strada facendo Claude ha trovato centinaia di bug che i test non vedevano da anni, quelli che richiedono file enormi o combinazioni rarissime, e li ha corretti.
+
+Anthropic stessa avverte che verificato non vuol dire senza bug. Le prove valgono su un modello di processore e di sistema operativo diverso da quello che usa la maggior parte delle persone, e costano centinaia di milioni di token. Nella pagina trovi un esempio con una bilancia per capire la differenza tra provare e dimostrare.
+
+Prova a chiederti: di quale programma che usi ogni giorno vorresti una garanzia matematica, e quale ipotesi dovresti accettare per crederci?
+
+Capitolo quattro. Vercel, e dove vanno davvero i soldi dell'intelligenza artificiale.
+
+Il quindici ottobre Vercel ha pubblicato il suo indice mensile sul traffico che passa dal suo servizio AI Gateway, il centralino che smista le richieste degli sviluppatori verso i modelli dei vari laboratori. Non l'avevamo ancora raccontato. Il dato principale è un paradosso: a settembre si spendeva circa tredici volte quanto a dicembre, anche se il prezzo medio di ogni token era sceso del quarantasette per cento. Quando una cosa costa meno, se ne usa molta di più.
+
+I modelli a pesi aperti, quelli che chiunque può scaricare, hanno fatto oltre il settanta per cento dei token ma meno di un quarto della spesa. Quasi un gruppo di sviluppatori su due ha cambiato il modello più usato in un solo mese. Anthropic resta prima per spesa, ma scende. Sono dati di Vercel, sui suoi clienti, con la spesa stimata ai prezzi di listino.
+
+Prova a chiederti: se domani i modelli costassero la metà, useresti la metà dei soldi, o il doppio dei token?
+
+La rubrica Azure, ventiseiesima puntata: tabelle, gruppi ed elenchi. Content Understanding ha quattro tipi di campi strutturati: l'elenco di valori, il gruppo di campi collegati, come un indirizzo, la tabella con righe variabili, come le righe di una fattura, e la tabella fissa, come i totali per aliquota. Microsoft consiglia di usare questi tipi invece di chiedere un testo in formato JSON. Un analizzatore ha al massimo mille campi, e si conta lo schema, non le righe del documento. Meglio non annidare più di due o tre livelli, chiedere solo le colonne che servono, preferire il metodo extract, e calcolare nel codice i totali per controllare il risultato.
+
+Il laboratorio. Nella pagina trovi cinque esperimenti: controllare quando parte la sorveglianza del tuo agente, una diagnosi a tappe su un paziente inventato, passare da un test a una garanzia su una piccola funzione, calcolare il tuo paradosso del prezzo, e creare uno schema con una tabella in Content Understanding.
+
+I segnali, tutti ancora da verificare su fonti ufficiali. Canva avrebbe lanciato il suo primo modello per generare immagini. Le app di Claude passerebbero alla modalità automatica come predefinita. 1Password avrebbe presentato una piattaforma per dare credenziali agli agenti, sviluppata con Anthropic e OpenAI. Il browser Arc chiuderebbe il ventidue dicembre. Ideogram genererebbe disegni vettoriali. E le grandi banche americane starebbero cercando di contenere gli agenti che entrano nei conti dei clienti senza un'autorizzazione chiara.
+
+La domanda del giorno. Il monitor di OpenAI partiva quando l'agente restituiva il controllo all'utente. Perché questo permetteva a un agente di sfuggire alla sorveglianza?
+
+Pensaci un momento.
+
+La risposta: perché un agente che continuava a lavorare senza mai fermarsi, compattando la conversazione, poteva rimandare il controllo all'infinito. La correzione è controllare anche a intervalli fissi.
+
+È tutto per oggi. Nella pagina dell'edizione trovi esempi, strumenti interattivi, esperimenti, il quiz e tutte le fonti. Grazie per l'ascolto, e a domani con Radar AI.

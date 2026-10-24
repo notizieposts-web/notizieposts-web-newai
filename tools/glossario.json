@@ -208,5 +208,53 @@
   "esteso": "Group Relative Policy Optimization",
   "spiega": "Un metodo di apprendimento per rinforzo: il modello prova più risposte allo stesso problema e impara a preferire quelle che hanno ottenuto un premio migliore della media del gruppo.",
   "esempio": "Su un problema di matematica il modello scrive otto soluzioni; le due giuste vengono rafforzate, le sei sbagliate scoraggiate. Il segnale arriva solo dal risultato finale."
+ },
+ "red-team": {
+  "t": "red team",
+  "spiega": "Un gruppo che attacca di proposito un sistema, con il permesso di chi lo gestisce, per trovarne i punti deboli prima che li trovi qualcun altro.",
+  "esempio": "Due ricercatori esterni passano tre settimane a cercare modi per far sfuggire un agente ai controlli di OpenAI, e scrivono un rapporto con le falle trovate.",
+  "approfondisci": "Il nome viene dalle esercitazioni militari, dove la squadra rossa fa il nemico. Nell'AI il red team prova a far dire o fare al modello cose vietate, oppure ad aggirare i sistemi che lo sorvegliano. Un buon red team è indipendente, ha accesso vero al sistema e può pubblicare i risultati.",
+  "vedi": [
+   "sandbox",
+   "guardrail"
+  ]
+ },
+ "sandbox": {
+  "t": "sandbox",
+  "spiega": "Un ambiente chiuso in cui un programma, o un agente, può lavorare senza toccare il resto del computer o della rete.",
+  "esempio": "Un agente che scrive codice lo esegue in una sandbox: se il codice cancella file, cancella solo quelli finti della sandbox, non i tuoi.",
+  "approfondisci": "La sandbox limita file, rete e comandi a cui il programma ha accesso. Per gli agenti è una delle difese principali, perché un agente può sbagliare o essere ingannato. Se l'agente riesce a uscire dalla sandbox, può fare tutto quello che può fare l'utente che lo ha avviato.",
+  "vedi": [
+   "red-team"
+  ]
+ },
+ "fuzzing": {
+  "t": "fuzzing",
+  "spiega": "Un modo di provare il software dandogli milioni di input casuali o leggermente modificati, per vedere se si blocca o fa errori di memoria.",
+  "esempio": "Un programma che legge immagini viene bombardato con file JPEG rovinati in mille modi: se uno lo manda in crash, si è trovato un bug.",
+  "approfondisci": "Il fuzzing è automatico e trova moltissimi bug, per questo Google lo fa di continuo sui progetti open source con OSS-Fuzz. Il suo limite è che prova solo gli input che genera: i bug che richiedono file enormi o combinazioni rarissime possono sfuggirgli per anni.",
+  "vedi": [
+   "verifica-formale",
+   "cve"
+  ]
+ },
+ "verifica-formale": {
+  "t": "verifica formale",
+  "spiega": "Dimostrare con la matematica che un programma rispetta una proprietà per tutti gli input possibili, con una prova controllata da un altro programma.",
+  "esempio": "Invece di provare una funzione con mille numeri, si dimostra che per qualunque numero non legge mai fuori dalla memoria che le è stata data.",
+  "approfondisci": "La prova si scrive in un linguaggio speciale, come Rocq o Lean, e un programma chiamato assistente di dimostrazione la controlla passo per passo. Il risultato è più forte di qualunque test, ma vale solo per le ipotesi scelte: se il modello della macchina è diverso dalla realtà, la prova non lo sa. Finora era molto costosa e si usava quasi solo per sistemi critici.",
+  "vedi": [
+   "fuzzing"
+  ]
+ },
+ "pesi-aperti": {
+  "t": "pesi aperti",
+  "spiega": "Modelli i cui parametri, i pesi, sono scaricabili da chiunque: si possono far girare sui propri computer o da fornitori diversi.",
+  "esempio": "Un modello di DeepSeek a pesi aperti può essere usato tramite DeepSeek stessa oppure tramite un fornitore americano che lo ospita sui suoi server.",
+  "approfondisci": "Pesi aperti non vuol dire per forza open source: spesso i dati e il codice di addestramento non sono pubblici, e la licenza può porre limiti. Il vantaggio è il controllo: costi più bassi, nessuna dipendenza da un solo fornitore, dati che restano in casa. Lo svantaggio è che servono macchine e competenze per farli girare bene.",
+  "vedi": [
+   "moe",
+   "quantizzazione"
+  ]
  }
 }

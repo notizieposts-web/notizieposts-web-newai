@@ -1,46 +1,46 @@
 {
- "n": 29,
- "data": "2026-10-23",
- "titolo": "Agenti all'attacco, Flint sul portatile, skill per tutti",
- "descrizione": "Agenti AI usati per attaccare le aziende attraverso un fornitore, un nuovo modello per programmare che gira sul portatile, lo standard delle skill per agenti che passa a una fondazione aperta e un metodo per insegnare meglio ai modelli.",
+ "n": 30,
+ "data": "2026-10-24",
+ "titolo": "Il monitor di OpenAI, il medico a tappe, il codice dimostrato",
+ "descrizione": "Ricercatori esterni trovano i buchi nel sistema che sorveglia gli agenti di OpenAI, Microsoft pubblica su Science il suo medico artificiale, Claude dimostra che centinaia di programmi non si bloccano e i dati di Vercel mostrano dove vanno i soldi dell'AI.",
  "chips": [
+  "OpenAI",
   "Microsoft",
-  "Flint",
   "Anthropic",
-  "Perplexity",
+  "Vercel",
   "Azure"
  ],
  "items": [
   [
-   "🛡",
+   "🔍",
+   "OpenAI",
+   "I buchi nel sistema che sorveglia gli agenti di OpenAI",
+   "Due ricercatori indipendenti hanno lavorato tre settimane dentro OpenAI e hanno trovato modi in cui gli agenti potevano sfuggire ai controlli; OpenAI dice di averli corretti."
+  ],
+  [
+   "🩺",
    "Microsoft",
-   "Agenti AI all'attacco attraverso un fornitore",
-   "Microsoft racconta un gruppo di hacker che, con agenti AI, è entrato negli spazi Microsoft 365 dei clienti di ConnectWise usando le credenziali delle sue applicazioni, a volte in meno di tre ore."
+   "Il medico artificiale che fa una domanda alla volta",
+   "Su Science, Microsoft mostra un sistema che fa diagnosi passo per passo e indovina più casi difficili dei medici di base, ma su pazienti simulati."
   ],
   [
-   "💻",
-   "Flint",
-   "Un modello per programmare sul tuo portatile",
-   "La startup Recursive pubblica Flint, gratuito e con pesi aperti: è grande, ma per ogni parola ne usa solo una piccola parte, così gira anche in locale."
-  ],
-  [
-   "🧩",
+   "🧮",
    "Anthropic",
-   "Le skill degli agenti diventano uno standard di tutti",
-   "Anthropic cede le Agent Skills, le istruzioni pronte che insegnano un lavoro a un agente, alla stessa fondazione aperta che custodisce già il protocollo MCP."
+   "Claude dimostra che i programmi non si bloccano",
+   "Con prove matematiche controllate da un programma, Claude ha garantito che 123 librerie open source non vanno in crash e ha trovato centinaia di errori nascosti."
   ],
   [
-   "🎓",
-   "Perplexity",
-   "Un modello che fa da maestro e da allievo",
-   "Con JOLT, Perplexity insegna a un modello dando consigli che è davvero in grado di seguire, e ottiene risultati migliori con meno dati."
+   "💶",
+   "Vercel",
+   "Si spende di più anche se l'AI costa meno",
+   "I dati del servizio di Vercel mostrano che a settembre le aziende spendevano tredici volte più di dicembre, anche con prezzi dimezzati."
   ],
   [
    "☁",
    "Azure",
-   "Firme, metadati e codici a barre senza configurare nulla",
-   "La rubrica su Content Understanding mostra gli elementi che il servizio riconosce da solo in un documento, utili per smistare i file e risparmiare."
+   "Le righe di una fattura senza perdere precisione",
+   "La rubrica su Content Understanding spiega come chiedere tabelle, gruppi ed elenchi di dati in modo preciso e senza sprecare."
   ]
  ],
- "domanda": "Gli agenti di Storm-0940 sono entrati nei tenant dei clienti senza rubare una sola password degli utenti: come hanno fatto?"
+ "domanda": "Il monitor di OpenAI partiva quando l'agente restituiva il controllo all'utente: perché questo permetteva a un agente di sfuggire alla sorveglianza?"
 }
