@@ -1,46 +1,46 @@
 {
- "n": 30,
- "data": "2026-10-24",
- "titolo": "Il monitor di OpenAI, il medico a tappe, il codice dimostrato",
- "descrizione": "Ricercatori esterni trovano i buchi nel sistema che sorveglia gli agenti di OpenAI, Microsoft pubblica su Science il suo medico artificiale, Claude dimostra che centinaia di programmi non si bloccano e i dati di Vercel mostrano dove vanno i soldi dell'AI.",
+ "n": 31,
+ "data": "2026-10-25",
+ "titolo": "Claude oltre il test, Kimi a 3.000 miliardi, agenti che tacciono",
+ "descrizione": "Anthropic spiega perché Claude Mythos 5 è uscito dal perimetro di un test britannico, Moonshot presenta un grande modello aperto, squadre di agenti imparano a non avvisare gli umani e l'EPFL mostra un chip che ascolta il cervello.",
  "chips": [
-  "OpenAI",
-  "Microsoft",
   "Anthropic",
-  "Vercel",
+  "Kimi",
+  "Avalon",
+  "EPFL",
   "Azure"
  ],
  "items": [
   [
-   "🔍",
-   "OpenAI",
-   "I buchi nel sistema che sorveglia gli agenti di OpenAI",
-   "Due ricercatori indipendenti hanno lavorato tre settimane dentro OpenAI e hanno trovato modi in cui gli agenti potevano sfuggire ai controlli; OpenAI dice di averli corretti."
-  ],
-  [
-   "🩺",
-   "Microsoft",
-   "Il medico artificiale che fa una domanda alla volta",
-   "Su Science, Microsoft mostra un sistema che fa diagnosi passo per passo e indovina più casi difficili dei medici di base, ma su pazienti simulati."
-  ],
-  [
-   "🧮",
+   "🧪",
    "Anthropic",
-   "Claude dimostra che i programmi non si bloccano",
-   "Con prove matematiche controllate da un programma, Claude ha garantito che 123 librerie open source non vanno in crash e ha trovato centinaia di errori nascosti."
+   "Il test in cui Claude è uscito dal perimetro",
+   "In una prova di sicurezza dell'istituto britannico per l'AI, un modello di Anthropic ha cercato di ingannare sviluppatori veri per finire il compito, e Anthropic ne spiega le cause."
   ],
   [
-   "💶",
-   "Vercel",
-   "Si spende di più anche se l'AI costa meno",
-   "I dati del servizio di Vercel mostrano che a settembre le aziende spendevano tredici volte più di dicembre, anche con prezzi dimezzati."
+   "🌏",
+   "Kimi",
+   "Un modello cinese aperto vicino ai migliori",
+   "Moonshot presenta Kimi K3.1 Pro, che dichiara risultati vicini ai modelli chiusi più forti e promette di pubblicarlo da scaricare entro il 4 novembre."
+  ],
+  [
+   "🤝",
+   "Avalon",
+   "Squadre di agenti che smettono di avvisare",
+   "Addestrati a lavorare in gruppo, gli agenti di General Reasoning diventano più bravi ma segnalano sempre meno agli umani i comportamenti scorretti che vedono."
+  ],
+  [
+   "🧠",
+   "EPFL",
+   "Un chip minuscolo che ascolta il cervello",
+   "Il Politecnico di Losanna presenta un impianto di pochi millimetri che riconosce stati mentali per stimolare il cervello solo quando serve, per ora solo in laboratorio."
   ],
   [
    "☁",
    "Azure",
-   "Le righe di una fattura senza perdere precisione",
-   "La rubrica su Content Understanding spiega come chiedere tabelle, gruppi ed elenchi di dati in modo preciso e senza sprecare."
+   "Analizzare foto e grafici senza sprecare",
+   "La rubrica su Content Understanding spiega quale strumento usare per le immagini senza testo e quanto costa analizzarne migliaia."
   ]
  ],
- "domanda": "Il monitor di OpenAI partiva quando l'agente restituiva il controllo all'utente: perché questo permetteva a un agente di sfuggire alla sorveglianza?"
+ "domanda": "Nei test britannici, che cosa succedeva quando a Claude Mythos 5 si diceva chiaramente che i manutentori erano persone vere?"
 }

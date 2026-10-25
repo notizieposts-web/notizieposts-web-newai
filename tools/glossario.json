@@ -256,5 +256,73 @@
    "moe",
    "quantizzazione"
   ]
+ },
+ "ctf": {
+  "t": "CTF",
+  "esteso": "Capture The Flag",
+  "spiega": "Una gara o una prova di sicurezza informatica in cui bisogna recuperare un dato nascosto, la \"bandiera\", dentro un sistema preparato apposta.",
+  "esempio": "In una prova CTF un modello deve entrare in una rete simulata e leggere un file protetto, senza toccare sistemi esterni.",
+  "approfondisci": "Le CTF nascono come gare tra hacker e oggi si usano per misurare le capacità informatiche dei modelli. Il loro valore dipende dal perimetro: tutto deve stare dentro l'ambiente di prova. Se la prova ha accesso a internet, un modello può uscire dal perimetro e toccare persone vere.",
+  "vedi": [
+   "red-team",
+   "sandbox"
+  ]
+ },
+ "catena-di-ragionamento": {
+  "t": "catena di ragionamento",
+  "spiega": "Il testo che un modello scrive \"tra sé\" prima di rispondere o di agire, con i passaggi del suo ragionamento.",
+  "esempio": "Prima di proporre una modifica a un repository, un modello annota: \"la macchina sembra scaricare da qui, provo questa strada\".",
+  "approfondisci": "Leggere la catena di ragionamento aiuta a capire perché un modello fa una scelta, ma non è una finestra perfetta: il testo può essere incompleto o non riflettere davvero il calcolo interno. I ricercatori la usano anche per esperimenti, modificandola per vedere come cambia il comportamento.",
+  "vedi": [
+   "red-team"
+  ]
+ },
+ "finestra-di-contesto": {
+  "t": "finestra di contesto",
+  "spiega": "La quantità di testo, misurata in token, che un modello può considerare tutta insieme in una conversazione.",
+  "esempio": "Con un milione di token di contesto puoi dare al modello diversi libri o un intero archivio di codice e fargli domande su tutto.",
+  "approfondisci": "Una finestra più grande non garantisce che il modello usi bene tutto ciò che contiene: spesso le informazioni in mezzo vengono trascurate. Inoltre più contesto vuol dire più token da pagare e risposte più lente.",
+  "vedi": [
+   "rag",
+   "chunking"
+  ]
+ },
+ "benchmark": {
+  "t": "benchmark",
+  "spiega": "Una prova standard, uguale per tutti, usata per confrontare i modelli su un certo tipo di compito.",
+  "esempio": "Terminal-Bench misura quanti compiti al terminale un agente porta a termine: 65 per cento vuol dire circa due compiti su tre.",
+  "approfondisci": "I benchmark sono utili ma imperfetti: i modelli possono essere ottimizzati proprio su quelle prove, le impostazioni cambiano i risultati e differenze di uno o due punti sono spesso rumore. Per scegliere un modello conta di più provarlo sui propri compiti.",
+  "vedi": [
+   "pesi-aperti"
+  ]
+ },
+ "apprendimento-per-rinforzo": {
+  "t": "apprendimento per rinforzo",
+  "spiega": "Un modo di addestrare un modello premiando i risultati buoni e penalizzando quelli cattivi, invece di mostrargli le risposte giuste.",
+  "esempio": "Una squadra di agenti riceve un premio quando il codice scritto insieme passa i test, e col tempo impara a organizzarsi meglio.",
+  "approfondisci": "Con l'apprendimento per rinforzo il modello impara qualunque comportamento faccia salire il premio, anche quelli non previsti. Per questo ciò che non è premiato, come segnalare un problema, può sparire da solo durante l'addestramento.",
+  "vedi": [
+   "grpo"
+  ]
+ },
+ "soc": {
+  "t": "SoC",
+  "esteso": "System on Chip",
+  "spiega": "Un singolo chip che contiene tutto ciò che serve a un sistema: acquisizione dei segnali, calcolo e controllo.",
+  "esempio": "Il chip LogSync registra i segnali del cervello, li analizza e decide se stimolare, tutto in pochi millimetri.",
+  "approfondisci": "Mettere tutto su un chip riduce dimensioni e consumi, ed è indispensabile per gli impianti medici, che non possono scaldarsi né avere batterie grandi. Il prezzo è che algoritmi e circuiti vanno progettati insieme, con calcoli semplificati.",
+  "vedi": [
+   "dbs"
+  ]
+ },
+ "dbs": {
+  "t": "stimolazione cerebrale profonda",
+  "esteso": "Deep Brain Stimulation",
+  "spiega": "Una terapia in cui elettrodi impiantati nel cervello inviano piccoli impulsi elettrici a zone precise.",
+  "esempio": "Nel Parkinson la stimolazione può ridurre i tremori; una versione adattiva si accenderebbe solo quando il sensore riconosce lo stato da correggere.",
+  "approfondisci": "La stimolazione classica è quasi sempre continua. Quella adattiva, o a circuito chiuso, misura l'attività cerebrale e stimola solo quando serve, con l'obiettivo di meno effetti collaterali e batterie che durano di più. Per i disturbi psichiatrici è ancora sperimentale.",
+  "vedi": [
+   "soc"
+  ]
  }
 }

@@ -30,6 +30,7 @@ MAP = {
  '27':{'google':'Google','eka':'Eka','deepseek':'DeepSeek','guardrail':'Guardrail'},
  '28':{'php':'PHP','openai':'OpenAI','claude':'Claude','meta':'Meta'},
  '30':{'openai':'OpenAI','dxo':'Microsoft','rocq':'Anthropic','vercel':'Vercel'},
+ '31':{'aisi':'Anthropic','kimi':'Kimi','avalon':'Avalon','logsync':'EPFL'},
  '29':{'microsoft':'Microsoft','flint':'Flint','skills':'Anthropic','jolt':'Perplexity'},
 }
 def process(path, labels):
