@@ -324,5 +324,31 @@
   "vedi": [
    "soc"
   ]
+ },
+ "cnn": {
+  "t": "rete convoluzionale",
+  "esteso": "Convolutional Neural Network (CNN)",
+  "spiega": "Un tipo di rete neurale pensato per le immagini: guarda piccoli pezzi della foto alla volta e impara a riconoscere forme, bordi e tessiture.",
+  "esempio": "Inception v3, una rete convoluzionale del 2015, riaddestrata su 68.011 foto di lesioni della pelle, riconosce un neo da un melanoma meglio di due grandi modelli generalisti in un test su 200 casi.",
+  "approfondisci": "Le reti convoluzionali sono state la tecnologia dominante per le immagini dal 2012 a circa il 2020. Sono piccole rispetto ai modelli linguistici di oggi e si possono addestrare su un compito preciso con poche migliaia di esempi etichettati e una sola scheda grafica. Per compiti stretti, come distinguere due tipi di lesione, restano spesso competitive.",
+  "vedi": [
+   "benchmark"
+  ]
+ },
+ "full-duplex": {
+  "t": "full-duplex",
+  "spiega": "Una comunicazione in cui le due parti possono parlare e ascoltare nello stesso momento, come al telefono, invece che a turni come con un walkie-talkie.",
+  "esempio": "Un assistente vocale full-duplex può dire \"sì, certo\" mentre tu stai ancora parlando, o fermarsi se lo interrompi.",
+  "approfondisci": "La maggior parte degli assistenti vocali lavora a turni: aspetta che tu finisca, trascrive, risponde. Un modello full-duplex elabora l'audio in entrata mentre produce quello in uscita, e deve imparare quando è il momento di intervenire. È più naturale ma più difficile da addestrare e da valutare."
+ },
+ "command-injection": {
+  "t": "iniezione di comandi",
+  "spiega": "Una falla in cui un programma inserisce un dato ricevuto dall'esterno dentro un comando del sistema operativo senza controllarlo, così chi manda il dato può far eseguire comandi propri.",
+  "esempio": "Se un robot esegue \"imposta volume X\" e qualcuno manda come X il testo \"50; spegni tutto\", il sistema esegue anche il secondo comando.",
+  "approfondisci": "È una delle falle più antiche e più comuni, catalogata come CWE-78. Si evita controllando che i dati in ingresso abbiano la forma attesa, per esempio un numero tra 0 e 100, e non passando mai testo libero a una shell. Spesso porta all'esecuzione di codice da remoto.",
+  "vedi": [
+   "rce",
+   "cve"
+  ]
  }
 }

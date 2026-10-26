@@ -1,0 +1,67 @@
+Radar AI. Edizione del ventisei ottobre 2026. Questa è la versione da ascoltare: dura circa dieci minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: pelle, codice, robot e voce. Il piccolo specialista vince.
+
+Una nota prima di cominciare. Il primo capitolo mette a confronto anche un modello di Anthropic, Claude Fable cinque punto uno. Questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti, con i loro limiti, anche quando sono scomodi per l'azienda.
+
+Il periodo in breve. Dal ventitré al ventisei ottobre il filo comune è uno: il modello più grande non è sempre la scelta giusta. Venerdì Block ha presentato una voce artificiale nuova. Sabato è stata pubblicata una falla critica in un cane robot. Domenica un dermatologo di Londra ha pubblicato un confronto sulle lesioni della pelle, e un laboratorio cinese ha rilasciato un modello aperto per programmare.
+
+Capitolo uno. La pelle, e la rete di dieci anni fa.
+
+Il venticinque ottobre Magnus Lynch, dermatologo al Guy's Hospital di Londra e ricercatore onorario al King's College, ha pubblicato sul sito del suo laboratorio un confronto su duecento lesioni della pelle, tutte confermate dalla biopsia. Cento erano pericolose, tra cui trenta melanomi. Cento erano innocue, nei e cheratosi.
+
+Da una parte due modelli di frontiera: GPT-6 Astra di OpenAI e Claude Fable cinque punto uno di Anthropic. Dall'altra Inception v3, una rete convoluzionale, cioè una rete neurale pensata per le immagini, presentata nel 2015 e riaddestrata su circa sessantottomila foto di lesioni.
+
+La rete vecchia ha indovinato la diagnosi al primo colpo in centoventicinque casi su duecento. I due grandi modelli in ottantaquattro e ottantacinque. Sulla decisione pratica, dimettere o no il paziente, i grandi modelli sono stati molto prudenti: trattenevano quasi tutte le lesioni pericolose, ma dimettevano solo una lesione innocua su tre, o meno. Mandavano quasi tutti dal medico. La rete, con la soglia prevista, dimetteva molte più lesioni innocue ma anche diciotto melanomi su trenta, troppi. Regolata in modo prudente, invece, ne dimetteva uno o due.
+
+L'autore stesso indica i limiti: il campione è piccolo, ogni caso è stato provato una volta sola, l'archivio è pubblico e i modelli potrebbero averlo già visto. Non è un articolo revisionato, e al ventisei ottobre non ci sono repliche indipendenti. Nella pagina trovi un esempio su un ambulatorio che riceve mille foto al mese.
+
+Prova a chiederti: nel tuo lavoro, quale errore costa di più, un falso allarme o un caso pericoloso che nessuno vede?
+
+Capitolo due. Nanbeige, un modello aperto per programmare.
+
+Il venticinque ottobre il laboratorio Nanbeige, che fa capo alla piattaforma cinese di annunci di lavoro BOSS Zhipin, ha pubblicato su Hugging Face un modello da trentatré miliardi di parametri, con pesi aperti e licenza Apache, che permette anche l'uso commerciale. È un modello denso: a ogni parola lavorano tutti i parametri. Legge fino a circa cinquecentododicimila token, l'equivalente di un intero progetto di codice di medie dimensioni.
+
+Nanbeige dichiara risultati alti nei compiti da agente, per esempio ottanta virgola nove su Terminal-Bench, una prova che misura quanto un modello sa lavorare da solo nel terminale. Ma alcuni numeri attribuiti ai concorrenti non coincidono con quelli che i concorrenti stessi hanno pubblicato. Per Gemma 4 di Google, su una prova di domande scientifiche, Google dichiara ottantaquattro virgola tre, la tabella di Nanbeige novantuno virgola tre. Non c'è un rapporto tecnico, non sono descritti i dati di addestramento, e nessuno ha ancora ripetuto le prove.
+
+Per farlo girare servono circa sessantasei gigabyte di memoria, oppure una versione compressa per un computer più piccolo. Nella pagina trovi un esempio su come un'azienda dovrebbe sceglierlo, provandolo su venti compiti veri.
+
+Prova a chiederti: quando leggi una tabella di confronto pubblicata da chi vende il prodotto, quanti numeri controlli alla fonte?
+
+Capitolo tre. Unitree, e il cane robot comandato da lontano.
+
+Il ventiquattro ottobre è stata pubblicata una scheda di vulnerabilità, un codice CVE, per il Go2 di Unitree, uno dei robot a quattro zampe più diffusi nelle università e tra gli appassionati. Il robot ha un modulo che lo collega a un modello linguistico, per parlargli a voce. Dentro quel modulo, la funzione che regola il volume riceve un valore che dovrebbe essere un numero, ma non lo controlla e lo passa al sistema operativo così com'è. Chi manda un testo costruito apposta può far eseguire al robot comandi a sua scelta. Si chiama iniezione di comandi.
+
+Il punteggio di gravità è nove virgola sei su dieci: critico. Sono colpite le versioni fino alla uno punto uno punto undici punto quattro. Unitree ha riconosciuto il problema, e la versione successiva lo corregge. La scheda non dice se la falla sia già stata usata da qualcuno.
+
+La lezione è più ampia del robot: l'errore è classico, fidarsi di un dato in ingresso, ma sta proprio nel pezzo di codice aggiunto per l'intelligenza artificiale. Ogni chat aggiunta a un oggetto è una strada in più per raggiungerlo. Nella pagina trovi un esempio su un laboratorio universitario con tre robot.
+
+Prova a chiederti: quanti oggetti in casa tua o in ufficio hanno un assistente vocale, e sai come si aggiornano?
+
+Capitolo quattro. Block, e la voce che ha imparato senza leggere.
+
+Il ventitré ottobre Block, l'azienda di pagamenti di Jack Dorsey, quella di Square e Cash App, ha presentato Dessa, un modello di conversazione a voce. Quasi tutti gli assistenti vocali lavorano a turni: ascoltano, trascrivono in testo, ragionano sul testo e poi leggono una risposta. Nel passaggio si perdono il tono, l'ironia, le risate, i sospiri.
+
+Dessa invece è full-duplex: ascolta e parla nello stesso momento, come al telefono. Secondo Block è addestrato da zero solo su registrazioni di persone che conversano, senza testo e senza partire da modelli esistenti. Ha imparato quando interrompere e quando dire "sì" o "certo" mentre l'altro parla. È stato addestrato su un solo armadio di settantadue schede grafiche NVIDIA, e funziona su un MacBook Pro di fascia alta, più veloce del tempo reale.
+
+Per ora è un'anteprima di ricerca. Non ci sono risultati su prove standard, non si conosce la dimensione del modello né quante ore di audio ha ascoltato. L'accesso anticipato va solo a un piccolo gruppo di ricercatori di sicurezza, perché una voce così umana può servire anche a una truffa telefonica. Nella pagina trovi un esempio sul servizio clienti di un negozio.
+
+Prova a chiederti: se al telefono ti rispondesse una voce che ride e sospira al momento giusto, vorresti sapere subito che è una macchina?
+
+La rubrica su Azure Content Understanding, ventottesima puntata: leggere solo le pagine che servono.
+
+Un contratto di ottanta pagine in cui i dati importanti stanno nelle prime tre e nell'ultima. Mandarlo intero vuol dire pagare tutto. Dal novembre 2025 Content Understanding permette di indicare un intervallo: nelle librerie ufficiali il parametro si chiama content range. Per i documenti si indicano le pagine, contate da uno: per esempio da uno a tre, poi la cinque. Per audio e video si indicano i millisecondi. Siccome estrazione, contestualizzazione e token del modello crescono con le pagine elaborate, analizzarne quattro invece di ottanta riduce il conto di circa venti volte. Ma l'intervallo funziona solo se sai prima dove stanno i dati: altrimenti conviene una lettura economica del testo per trovare le pagine giuste, e poi l'analisi completa solo su quelle. Nella pagina trovi un calcolatore del risparmio e un esempio sulle bollette.
+
+Prova a chiederti: nei documenti che tratti ogni giorno, i dati che ti servono stanno sempre nella stessa pagina?
+
+Prova tu. Nella pagina trovi cinque esperimenti: uno per decidere se ti serve uno strumento specialista o generalista, uno per controllare alla fonte le tabelle dei concorrenti, uno per fare l'inventario degli oggetti connessi che parlano, uno per scoprire che cosa si perde quando la voce diventa testo, e uno per analizzare con Content Understanding solo la prima pagina di un documento.
+
+I segnali. Secondo Reuters, Meta avrebbe rinviato al venti novembre le nuove condizioni che rendono le aziende responsabili degli errori dell'AI nelle loro pubblicità. Un economista di Apollo sosterrebbe che l'AI non ha ancora portato guadagni alle grandi aziende fuori dalla tecnologia. SpaceX avrebbe chiuso un finanziamento da circa quaranta miliardi di dollari per comprare chip. SK Hynix preparerebbe un dividendo straordinario, Toyota un piano da quattrocentomila robot, e un forum di Reddit sull'open source avrebbe vietato i progetti fatti con l'AI. Sono tutte notizie di stampa, che non ho potuto verificare su fonti ufficiali.
+
+Cosa è cambiato. Nessuna smentita ufficiale delle notizie precedenti. I pesi di Kimi, promessi entro il quattro novembre, non risultano ancora pubblicati.
+
+E ora la domanda del giorno. Nel test sulla pelle, quante diagnosi giuste al primo colpo ha fatto la vecchia rete specializzata, su duecento lesioni?
+
+La risposta: centoventicinque, contro ottantaquattro e ottantacinque dei due grandi modelli generalisti.
+
+È tutto per oggi. Nella pagina dell'edizione trovi gli esempi, le domande e risposte, il quiz e tutte le fonti. Grazie per l'ascolto, e alla prossima edizione di Radar AI.

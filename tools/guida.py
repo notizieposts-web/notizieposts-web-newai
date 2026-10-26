@@ -29,6 +29,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (25,'29','azure','pipeline','Firme, metadati e codici a barre'),
     (26,'30','azure','qualita','Tabelle, gruppi ed elenchi: i campi annidati'),
     (27,'31','azure','pipeline','Le immagini senza testo: foto, grafici, prodotti'),
+    (28,'32','azure','costi','Solo le pagine che servono: contentRange'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']

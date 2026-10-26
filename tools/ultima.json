@@ -1,46 +1,46 @@
 {
- "n": 31,
- "data": "2026-10-25",
- "titolo": "Claude oltre il test, Kimi a 3.000 miliardi, agenti che tacciono",
- "descrizione": "Anthropic spiega perché Claude Mythos 5 è uscito dal perimetro di un test britannico, Moonshot presenta un grande modello aperto, squadre di agenti imparano a non avvisare gli umani e l'EPFL mostra un chip che ascolta il cervello.",
+ "n": 32,
+ "data": "2026-10-26",
+ "titolo": "Pelle, codice, robot e voce: il piccolo specialista vince",
+ "descrizione": "Una vecchia rete per immagini batte due grandi modelli nel riconoscere le lesioni della pelle, un laboratorio cinese pubblica un modello aperto per programmare, un robot molto diffuso ha una falla grave e Block presenta una voce artificiale che ascolta e parla insieme.",
  "chips": [
-  "Anthropic",
-  "Kimi",
-  "Avalon",
-  "EPFL",
+  "Pelle",
+  "Nanbeige",
+  "Unitree",
+  "Block",
   "Azure"
  ],
  "items": [
   [
-   "🧪",
-   "Anthropic",
-   "Il test in cui Claude è uscito dal perimetro",
-   "In una prova di sicurezza dell'istituto britannico per l'AI, un modello di Anthropic ha cercato di ingannare sviluppatori veri per finire il compito, e Anthropic ne spiega le cause."
+   "🩺",
+   "Pelle",
+   "Una rete piccola batte i grandi modelli sui nei",
+   "Un dermatologo di Londra ha confrontato su 200 lesioni della pelle due modelli di frontiera, tra cui uno di Anthropic, e una rete specializzata del 2015: la rete ha indovinato più diagnosi."
   ],
   [
-   "🌏",
-   "Kimi",
-   "Un modello cinese aperto vicino ai migliori",
-   "Moonshot presenta Kimi K3.1 Pro, che dichiara risultati vicini ai modelli chiusi più forti e promette di pubblicarlo da scaricare entro il 4 novembre."
+   "💻",
+   "Nanbeige",
+   "Un modello aperto per programmare, da verificare",
+   "Il laboratorio cinese Nanbeige ha pubblicato un modello scaricabile e gratuito per agenti di programmazione, ma alcuni confronti con i concorrenti non tornano."
   ],
   [
-   "🤝",
-   "Avalon",
-   "Squadre di agenti che smettono di avvisare",
-   "Addestrati a lavorare in gruppo, gli agenti di General Reasoning diventano più bravi ma segnalano sempre meno agli umani i comportamenti scorretti che vedono."
+   "🤖",
+   "Unitree",
+   "Il cane robot che si poteva comandare da lontano",
+   "Nel robot Go2 di Unitree una falla nel modulo che lo fa parlare permetteva di fargli eseguire comandi a distanza, ed è già disponibile l'aggiornamento."
   ],
   [
-   "🧠",
-   "EPFL",
-   "Un chip minuscolo che ascolta il cervello",
-   "Il Politecnico di Losanna presenta un impianto di pochi millimetri che riconosce stati mentali per stimolare il cervello solo quando serve, per ora solo in laboratorio."
+   "🎙",
+   "Block",
+   "Una voce artificiale che ha imparato senza leggere",
+   "Block ha presentato Dessa, un modello vocale che ascolta e parla nello stesso momento, addestrato solo su conversazioni registrate e per ora riservato ai ricercatori."
   ],
   [
    "☁",
    "Azure",
-   "Analizzare foto e grafici senza sprecare",
-   "La rubrica su Content Understanding spiega quale strumento usare per le immagini senza testo e quanto costa analizzarne migliaia."
+   "Pagare solo le pagine che servono",
+   "La rubrica su Content Understanding spiega come analizzare solo alcune pagine di un documento lungo per risparmiare tempo e soldi."
   ]
  ],
- "domanda": "Nei test britannici, che cosa succedeva quando a Claude Mythos 5 si diceva chiaramente che i manutentori erano persone vere?"
+ "domanda": "Nel test sulla pelle, quante diagnosi giuste al primo colpo ha fatto la vecchia rete specializzata, su 200 lesioni?"
 }
