@@ -32,6 +32,7 @@ MAP = {
  '30':{'openai':'OpenAI','dxo':'Microsoft','rocq':'Anthropic','vercel':'Vercel'},
  '31':{'aisi':'Anthropic','kimi':'Kimi','avalon':'Avalon','logsync':'EPFL'},
  '32':{'pelle':'Lynch','nanbeige':'Nanbeige','unitree':'Unitree','dessa':'Block'},
+ '33':{'anthropic':'Anthropic','eth':'ETH','recinto':'OpenAI'},
  '29':{'microsoft':'Microsoft','flint':'Flint','skills':'Anthropic','jolt':'Perplexity'},
 }
 def process(path, labels):

@@ -350,5 +350,66 @@
    "rce",
    "cve"
   ]
+ },
+ "ipo": {
+  "t": "IPO",
+  "esteso": "Initial Public Offering",
+  "spiega": "La prima vendita delle azioni di un'azienda al pubblico, con cui l'azienda entra in borsa.",
+  "esempio": "Anthropic ha chiesto alla SEC di poter vendere per la prima volta le sue azioni al Nasdaq: è la sua IPO.",
+  "approfondisci": "Prima dell'IPO le azioni sono in mano a fondatori, dipendenti e investitori privati. Con l'IPO l'azienda pubblica un prospetto con conti e rischi, fissa un prezzo con le banche che guidano l'operazione e vende azioni a chiunque. Da quel momento deve pubblicare i conti a scadenze fisse.",
+  "vedi": [
+   "sec"
+  ]
+ },
+ "sec": {
+  "t": "SEC",
+  "esteso": "Securities and Exchange Commission",
+  "spiega": "L'autorità federale americana che vigila sulla borsa e sui prodotti finanziari. Riceve i prospetti di chi vuole quotarsi e ne controlla la completezza.",
+  "esempio": "Il prospetto S-1 di Anthropic si legge gratis nell'archivio EDGAR della SEC.",
+  "approfondisci": "La SEC non giudica se un investimento è buono: verifica che l'azienda abbia detto tutto quello che la legge richiede. Finché la registrazione non è dichiarata efficace, le azioni non si possono vendere. In Italia il ruolo più simile è quello della Consob.",
+  "vedi": [
+   "ipo"
+  ]
+ },
+ "sat": {
+  "t": "SAT",
+  "esteso": "Boolean satisfiability problem",
+  "spiega": "Il problema di decidere se esiste un modo di accendere o spegnere un insieme di interruttori che soddisfi tutte le condizioni date. È il problema difficile per eccellenza dell'informatica teorica.",
+  "esempio": "Con tre interruttori e le condizioni \"almeno uno tra A e B acceso\" e \"B e C mai insieme\", le combinazioni da provare sono otto; con cento interruttori sarebbero più di un miliardo di miliardi di miliardi.",
+  "approfondisci": "SAT è stato il primo problema dimostrato NP-completo: se si trovasse un metodo veloce per risolverlo, si risolverebbero velocemente moltissimi altri problemi. La Exponential Time Hypothesis afferma che per una sua versione nessun metodo può essere molto più rapido di un tempo esponenziale. OpenAI dichiara di averla confutata nell'ottobre 2026; il controllo indipendente è in corso.",
+  "vedi": [
+   "lean",
+   "verifica-formale"
+  ]
+ },
+ "lean": {
+  "t": "Lean",
+  "spiega": "Un linguaggio e un programma che controllano le dimostrazioni matematiche passo per passo: se una dimostrazione scritta in Lean viene accettata, ogni passaggio è corretto secondo le regole.",
+  "esempio": "OpenAI ha pubblicato su GitHub i file Lean della sua confutazione della Exponential Time Hypothesis, così chiunque può farli controllare al proprio computer.",
+  "approfondisci": "Lean verifica che la dimostrazione segua dall'enunciato, ma non può sapere se l'enunciato formale dice davvero ciò che i matematici intendono. Per questo, accanto al controllo automatico, serve sempre una lettura umana dell'enunciato e delle definizioni usate.",
+  "vedi": [
+   "verifica-formale",
+   "sat"
+  ]
+ },
+ "dns": {
+  "t": "DNS",
+  "esteso": "Domain Name System",
+  "spiega": "Il servizio che traduce i nomi dei siti, come esempio.it, negli indirizzi numerici dei computer. Quasi ogni programma lo usa prima di collegarsi a qualcosa.",
+  "esempio": "Una macchina isolata che può ancora interrogare un DNS esterno ha una porta socchiusa verso internet: è l'errore sfruttato da un modello di OpenAI nel settembre 2026.",
+  "approfondisci": "Le richieste DNS passano spesso anche quando il resto del traffico è bloccato, perché sembrano innocue. Per questo sono un canale classico per far uscire dati o raggiungere server esterni. In un ambiente isolato conviene un DNS interno che risponda solo ai nomi permessi e registri tutte le richieste.",
+  "vedi": [
+   "sandbox"
+  ]
+ },
+ "markdown": {
+  "t": "Markdown",
+  "spiega": "Un formato di testo semplice in cui titoli, elenchi e tabelle si scrivono con pochi simboli, come # per un titolo. È facile da leggere sia per le persone sia per i modelli.",
+  "esempio": "Content Understanding restituisce l'intero documento in Markdown, e gli span dei campi indicano in quale punto di quel testo si trova ogni valore.",
+  "approfondisci": "Il Markdown conserva la struttura del documento, titoli, paragrafi, tabelle, senza la complessità di un PDF. Per questo si usa per preparare i documenti da dare ai modelli linguistici o da dividere in pezzi per la ricerca.",
+  "vedi": [
+   "chunking",
+   "rag"
+  ]
  }
 }

@@ -34,6 +34,7 @@ EDX = {
  '30': (None, "Il monitor di OpenAI, il medico a tappe, il codice dimostrato", "METR e Redwood trovano i buchi nel monitor degli agenti di OpenAI, MAI-DxO su Science, Claude dimostra 123 librerie, i conti di Vercel."),
  '31': (None, 'Claude oltre il test, Kimi a 3.000 miliardi, agenti che tacciono', 'Anthropic analizza Mythos 5 nei test britannici, Kimi K3.1 Pro promette i pesi, gli agenti di Avalon-M1 smettono di avvisare, il chip LogSync.'),
  '32': (None, 'Pelle, codice, robot e voce: il piccolo specialista vince', 'Una vecchia rete batte due modelli di frontiera sulla pelle, Nanbeige apre un modello da 33 miliardi, una falla nel robot Go2, la voce Dessa.'),
+ '33': (None, 'Anthropic in borsa, ETH smentita e il modello fuori dal recinto', 'Anthropic deposita il prospetto per il Nasdaq, OpenAI dice di aver confutato la ETH e racconta un modello che ha raggiunto internet.'),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):

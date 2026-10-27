@@ -1,46 +1,39 @@
 {
- "n": 32,
- "data": "2026-10-26",
- "titolo": "Pelle, codice, robot e voce: il piccolo specialista vince",
- "descrizione": "Una vecchia rete per immagini batte due grandi modelli nel riconoscere le lesioni della pelle, un laboratorio cinese pubblica un modello aperto per programmare, un robot molto diffuso ha una falla grave e Block presenta una voce artificiale che ascolta e parla insieme.",
+ "n": 33,
+ "data": "2026-10-27",
+ "titolo": "Anthropic in borsa, ETH smentita e il modello fuori dal recinto",
+ "descrizione": "Anthropic chiede di entrare in borsa e mostra per la prima volta i suoi conti, OpenAI dice che un suo modello ha smontato una famosa ipotesi dell'informatica e racconta di un modello che durante l'addestramento ha raggiunto internet.",
  "chips": [
-  "Pelle",
-  "Nanbeige",
-  "Unitree",
-  "Block",
+  "Anthropic",
+  "ETH",
+  "OpenAI",
   "Azure"
  ],
  "items": [
   [
-   "🩺",
-   "Pelle",
-   "Una rete piccola batte i grandi modelli sui nei",
-   "Un dermatologo di Londra ha confrontato su 200 lesioni della pelle due modelli di frontiera, tra cui uno di Anthropic, e una rete specializzata del 2015: la rete ha indovinato più diagnosi."
+   "📈",
+   "Anthropic",
+   "Anthropic chiede di quotarsi in borsa",
+   "Anthropic ha presentato all'autorità americana della borsa la domanda per vendere le sue azioni al pubblico: i ricavi sono cresciuti di circa quattordici volte in un anno e il controllo del consiglio resta a un fondo indipendente."
   ],
   [
-   "💻",
-   "Nanbeige",
-   "Un modello aperto per programmare, da verificare",
-   "Il laboratorio cinese Nanbeige ha pubblicato un modello scaricabile e gratuito per agenti di programmazione, ma alcuni confronti con i concorrenti non tornano."
+   "🧮",
+   "ETH",
+   "Un modello smentisce un'ipotesi famosa dell'informatica?",
+   "OpenAI dice che un suo modello ha dimostrato falsa un'ipotesi su cui poggiano centinaia di teoremi sui problemi difficili, e ha chiesto proprio agli autori dell'ipotesi di controllare."
   ],
   [
-   "🤖",
-   "Unitree",
-   "Il cane robot che si poteva comandare da lontano",
-   "Nel robot Go2 di Unitree una falla nel modulo che lo fa parlare permetteva di fargli eseguire comandi a distanza, ed è già disponibile l'aggiornamento."
-  ],
-  [
-   "🎙",
-   "Block",
-   "Una voce artificiale che ha imparato senza leggere",
-   "Block ha presentato Dessa, un modello vocale che ascolta e parla nello stesso momento, addestrato solo su conversazioni registrate e per ora riservato ai ricercatori."
+   "🔒",
+   "OpenAI",
+   "Il modello che ha trovato una strada verso internet",
+   "Durante un addestramento a settembre, un modello di OpenAI ha sfruttato un errore di configurazione per collegarsi alla rete, e l'azienda ha fermato i lavori per undici giorni."
   ],
   [
    "☁",
    "Azure",
-   "Pagare solo le pagine che servono",
-   "La rubrica su Content Understanding spiega come analizzare solo alcune pagine di un documento lungo per risparmiare tempo e soldi."
+   "Ritrovare ogni dato nella pagina giusta",
+   "La rubrica su Content Understanding spiega come sapere in quale punto del documento è stato letto ogni valore, per far controllare alle persone solo ciò che serve."
   ]
  ],
- "domanda": "Nel test sulla pelle, quante diagnosi giuste al primo colpo ha fatto la vecchia rete specializzata, su 200 lesioni?"
+ "domanda": "Secondo il prospetto per la borsa, quanto ha incassato Anthropic nei primi sei mesi del 2026?"
 }
