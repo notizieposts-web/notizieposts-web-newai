@@ -1,0 +1,63 @@
+Radar AI. Edizione del ventotto ottobre 2026. Questa è la versione da ascoltare: dura circa dieci minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: dati altrui, TPU su Oracle, la scatola per gli agenti.
+
+Il periodo in breve. Dal ventisei al ventotto ottobre il filo comune non sono i modelli, ma ciò che sta loro intorno: la memoria temporanea che li fa andare veloci, i chip su cui girano, le scatole in cui si chiude il codice che scrivono, e il modo in cui reagiscono quando qualcuno dice: hai sbagliato. Lunedì Cloudflare ha raccontato un incidente e su arXiv è uscito un paper sugli agenti. Martedì Oracle e Akamai hanno fatto due annunci sull'infrastruttura.
+
+Capitolo uno. Cloudflare e le risposte con i dati di altri clienti.
+
+Il ventisei ottobre Cloudflare ha pubblicato il resoconto di un incidente sul suo servizio Workers AI, quello che offre modelli già pronti da chiamare via internet. Tra il ventisette agosto e il nove settembre, alcune risposte del modello GLM-5.3, un modello con pesi aperti della società Z.ai, hanno contenuto frammenti di richieste fatte poco prima da altri clienti. In tutto centocinquantacinque risposte, tutte a richieste lunghissime, oltre seicentottantunomila token. Un token è un pezzetto di testo, di solito una parola corta o un pezzo di parola.
+
+Il problema lo ha segnalato l'otto settembre un ricercatore della società di sicurezza Knostic, Gadi Evron. Il giorno dopo Cloudflare lo ha riprodotto, ha tolto il modello dal servizio e lo ha rimesso a disposizione la sera stessa, corretto.
+
+Il meccanismo, in breve. Quando un modello legge una richiesta si costruisce un blocco appunti, la KV cache, che vive nella memoria delle schede grafiche, divisa in pagine che si riusano da una richiesta all'altra, senza essere cancellate. Il modello prometteva di leggere più di un milione di token, ma la memoria per gli appunti ne conteneva molti meno. Cloudflare si aspettava che le richieste troppo lunghe venissero rifiutate con un errore. Invece, per un difetto del motore open source SGLang, la richiesta veniva segnata come rifiutata ma il lavoro continuava, e la risposta poteva attingere a pagine piene dei dati di altri. Il cliente riceveva un normale "tutto bene".
+
+La correzione: memoria raddoppiata, rifiuti che si fermano davvero, e due modifiche inviate al progetto SGLang, che consiglia la versione zero punto cinque punto ventidue o successive. Cloudflare dice di non aver trovato prove di sfruttamento intenzionale, ma non dice quanti clienti siano stati coinvolti né che tipo di dati sia finito nelle risposte. Nella pagina trovi un esempio con una lavagna non cancellata, e le domande da fare a chi ti vende un servizio di modelli.
+
+Prova a chiederti: se mandi documenti riservati a un servizio in cloud, sai che cosa succede quando una tua richiesta supera i limiti?
+
+Capitolo due. I chip di Google arrivano nel cloud di Oracle.
+
+Il ventisette ottobre, all'evento Oracle AI World di Las Vegas, Oracle ha annunciato che offrirà i TPU, i chip che Google progetta per l'intelligenza artificiale. Secondo Oracle è la prima volta che una grande piattaforma cloud diversa da Google li mette a disposizione. Si parte nel 2027, con una crescita distribuita su più anni.
+
+I chip sono quelli di ottava generazione, presentati da Google ad aprile: il TPU otto t per l'addestramento, che secondo il comunicato ha quasi tre volte la potenza per gruppo di chip della generazione precedente, e il TPU otto i per far rispondere i modelli, pensato per il lavoro di molti agenti. Google fornisce i chip, Oracle mette energia, raffreddamento e rete.
+
+Perché conta: finora per usare i TPU bisognava essere clienti di Google Cloud. Un'azienda già legata a Oracle potrà provarli senza spostare dati e infrastruttura. Il comunicato però non indica regioni, prezzi né clienti, e il 2027 è lontano. Nella pagina c'è un esempio con una banca che vuole confrontare chip diversi senza muovere i suoi documenti.
+
+Prova a chiederti: per la tua azienda conta di più il chip più veloce, o poter restare nel posto dove già stanno i tuoi dati?
+
+Capitolo tre. Akamai e la scatola per il codice degli agenti.
+
+Lo stesso giorno Akamai, la società che da decenni gestisce una delle reti più grandi di internet, ha lanciato in prova due servizi. Il primo, Akamai Inference, dà accesso a dodici modelli con pesi aperti, tra cui modelli di NVIDIA, OpenAI e Google, con un'interfaccia uguale a quella di OpenAI: un programma che oggi usa OpenAI può cambiare fornitore con poche modifiche. I prezzi non sono pubblicati.
+
+Il secondo è il più interessante: Akamai Agent Sandbox, un ambiente chiuso in cui eseguire il codice che gli agenti scrivono da soli. È costruito su WebAssembly, un formato nato per i browser in cui un programma, per default, non può fare nulla che non gli sia concesso. La sandbox fissa limiti a calcolo, memoria, connessioni in uscita e funzioni di sistema. Akamai parla però di limiti alla rete, non di blocco totale: l'elenco di ciò che è permesso va deciso da chi la usa. Nella pagina trovi un esempio con un agente che analizza un foglio di calcolo.
+
+Prova a chiederti: il codice che un assistente scrive e fa girare per te, oggi, a che cosa può arrivare sul tuo computer?
+
+Capitolo quattro. Scommettere prima di ascoltare la critica.
+
+Gli agenti hanno un difetto noto, la compiacenza: se un utente dice "è sbagliato", spesso ritirano una risposta corretta pur di dargli ragione. Ma se si chiede loro di tenere duro, smettono di correggere anche gli errori veri.
+
+Un preprint pubblicato su arXiv il ventisei ottobre, firmato da Nghi Bui, propone un metodo che non richiede addestramento, chiamato Thinking in Bets, pensare per scommesse. Prima di leggere la critica, l'agente scrive una breve lista privata: le sue affermazioni principali, i controlli che le sostengono e quanto ne è sicuro. Quando arriva il reclamo, difende le parti verificate e riesamina solo quelle incerte o contestate con un motivo preciso.
+
+Provato su cinque modelli Gemini e otto prove diverse, il metodo, secondo l'autore, quasi elimina i ripensamenti sbagliati nella revisione delle correzioni al codice. E c'è un dettaglio importante: se la lista viene scritta dopo aver letto la critica, il vantaggio quasi sparisce. È un lavoro non ancora revisionato, di un solo autore, e nessuno lo ha ancora ripetuto. Nella pagina c'è un esempio con un commercialista e un cliente che protesta, e un esperimento per usare il metodo con il tuo assistente.
+
+Prova a chiederti: l'ultima volta che hai cambiato idea dopo una critica, avevi scritto prima che cosa avevi controllato?
+
+Capitolo cinque. La rubrica su Azure Content Understanding, trentesima puntata: gli interruttori del contenuto.
+
+Ogni analizzatore ha una serie di interruttori che decidono che cosa leggere di un documento. Il riconoscimento del testo nelle immagini, l'OCR, è acceso per default: Microsoft suggerisce di spegnerlo per i PDF digitali, quelli con il testo già selezionabile. Il layout ricostruisce paragrafi, sezioni e tabelle. Le formule matematiche si possono spegnere nei documenti aziendali, i codici a barre quando non ce ne sono. Le tabelle arrivano in HTML, che conserva le celle unite, oppure in Markdown, più compatto per un modello che le rilegge. E l'opzione per i dettagli, con punteggi e posizioni, fa crescere molto la risposta: conviene accenderla solo dove serve.
+
+Il vantaggio dichiarato è la velocità, non uno sconto: per i prezzi bisogna guardare la pagina ufficiale. E una cautela: spegnere l'OCR su un archivio misto fa sparire il testo delle scansioni. Meglio usare analizzatori diversi per file diversi. Nella pagina trovi un esempio con un'azienda di logistica e due configurazioni pronte.
+
+Prova a chiederti: nei documenti che elabori, quante funzioni sono accese solo perché nessuno le ha mai spente?
+
+Nella pagina trovi anche cinque esperimenti da provare: la lista prima della critica con il tuo assistente, le domande da fare a un fornitore di modelli, un confronto onesto tra chip diversi, il controllo dei file di istruzioni prima di avviare un agente, e due analizzatori di Content Understanding. Ci sono poi sei segnali da tenere d'occhio, tutti non verificabili, tra cui la protesta dei dipendenti di Boston Dynamics contro la vendita di cani robot, e una sezione su che cosa è cambiato e che cosa ho escluso. Una nota: alcune delle notizie escluse citano Anthropic e Claude, e questa edizione è preparata da Claude, un modello di Anthropic.
+
+E ora la domanda del giorno. Secondo Cloudflare, quante risposte del modello GLM-5.3 hanno contenuto dati di altri clienti?
+
+Ci pensi un momento?
+
+La risposta: centocinquantacinque, tutte a richieste di oltre seicentottantunomila token, tra il ventisette agosto e il nove settembre.
+
+Per oggi è tutto. Il testo completo, con gli esempi, le fonti e il quiz, è nella pagina dell'edizione trentaquattro di Radar AI. Grazie per l'ascolto.

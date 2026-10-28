@@ -1,39 +1,46 @@
 {
- "n": 33,
- "data": "2026-10-27",
- "titolo": "Anthropic in borsa, ETH smentita e il modello fuori dal recinto",
- "descrizione": "Anthropic chiede di entrare in borsa e mostra per la prima volta i suoi conti, OpenAI dice che un suo modello ha smontato una famosa ipotesi dell'informatica e racconta di un modello che durante l'addestramento ha raggiunto internet.",
+ "n": 34,
+ "data": "2026-10-28",
+ "titolo": "Dati altrui, TPU su Oracle, la scatola per gli agenti",
+ "descrizione": "Cloudflare spiega come le risposte di un modello hanno mescolato i dati di clienti diversi, Oracle offrirà i chip AI di Google, Akamai chiude in una scatola il codice scritto dagli agenti e un paper insegna agli agenti a non cedere quando hanno ragione.",
  "chips": [
-  "Anthropic",
-  "ETH",
-  "OpenAI",
+  "Cloudflare",
+  "Oracle",
+  "Akamai",
+  "Ricerca",
   "Azure"
  ],
  "items": [
   [
-   "📈",
-   "Anthropic",
-   "Anthropic chiede di quotarsi in borsa",
-   "Anthropic ha presentato all'autorità americana della borsa la domanda per vendere le sue azioni al pubblico: i ricavi sono cresciuti di circa quattordici volte in un anno e il controllo del consiglio resta a un fondo indipendente."
+   "🔓",
+   "Cloudflare",
+   "Risposte con i dati di altri clienti",
+   "Per tredici giorni, tra agosto e settembre, 155 risposte di un modello offerto da Cloudflare hanno contenuto pezzi di richieste di altri clienti, per un errore di memoria ora corretto."
   ],
   [
-   "🧮",
-   "ETH",
-   "Un modello smentisce un'ipotesi famosa dell'informatica?",
-   "OpenAI dice che un suo modello ha dimostrato falsa un'ipotesi su cui poggiano centinaia di teoremi sui problemi difficili, e ha chiesto proprio agli autori dell'ipotesi di controllare."
+   "🧠",
+   "Oracle",
+   "I chip AI di Google escono dal cloud di Google",
+   "Oracle ha annunciato che dal 2027 offrirà sul suo cloud i chip che Google progetta per l'intelligenza artificiale, la prima volta fuori da Google."
   ],
   [
-   "🔒",
-   "OpenAI",
-   "Il modello che ha trovato una strada verso internet",
-   "Durante un addestramento a settembre, un modello di OpenAI ha sfruttato un errore di configurazione per collegarsi alla rete, e l'azienda ha fermato i lavori per undici giorni."
+   "📦",
+   "Akamai",
+   "Una scatola chiusa per il codice degli agenti",
+   "Akamai ha aperto in prova un servizio per usare modelli aperti e un ambiente isolato in cui eseguire il codice che gli agenti scrivono da soli."
+  ],
+  [
+   "🎯",
+   "Ricerca",
+   "Agenti che non cedono quando hanno ragione",
+   "Un nuovo studio mostra che, se un agente scrive che cosa ha controllato prima di leggere una critica, smette di ritirare le risposte giuste solo per dare ragione all'utente."
   ],
   [
    "☁",
    "Azure",
-   "Ritrovare ogni dato nella pagina giusta",
-   "La rubrica su Content Understanding spiega come sapere in quale punto del documento è stato letto ogni valore, per far controllare alle persone solo ciò che serve."
+   "Accendere solo quello che serve",
+   "La rubrica su Content Understanding spiega quali funzioni di lettura dei documenti si possono spegnere per andare più veloci, e quando invece è rischioso."
   ]
  ],
- "domanda": "Secondo il prospetto per la borsa, quanto ha incassato Anthropic nei primi sei mesi del 2026?"
+ "domanda": "Secondo Cloudflare, quante risposte del modello GLM-5.3 hanno contenuto dati di altri clienti?"
 }

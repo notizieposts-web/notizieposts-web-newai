@@ -2,7 +2,7 @@
  "tpu": {
   "t": "TPU",
   "esteso": "Tensor Processing Unit",
-  "spiega": "Il chip che Google progetta apposta per i calcoli dell'intelligenza artificiale, in alternativa alle GPU di NVIDIA. Si usa solo nel cloud di Google.",
+  "spiega": "Il chip che Google progetta apposta per i calcoli dell'intelligenza artificiale, in alternativa alle GPU di NVIDIA. Finora si affittava solo nel cloud di Google; Oracle ha annunciato che lo offrirà dal 2027.",
   "esempio": "Una startup che oggi affitta GPU per servire il suo modello può provare a spostare una parte del traffico su TPU e confrontare il conto a parità di risposte.",
   "approfondisci": "I TPU sono progettati per fare in fretta un tipo preciso di calcolo, le moltiplicazioni tra grandi tabelle di numeri, che è il cuore dell'addestramento e dell'uso dei modelli. Non si comprano: si affittano nel cloud di Google, a gruppi che possono arrivare a migliaia di chip collegati tra loro. Rispetto alle GPU sono meno versatili ma, per i lavori giusti, possono costare meno a parità di risultato. La generazione Ironwood è la settima.",
   "vedi": [
@@ -410,6 +410,46 @@
   "vedi": [
    "chunking",
    "rag"
+  ]
+ },
+ "token": {
+  "t": "token",
+  "spiega": "Il pezzetto di testo con cui un modello legge e scrive: di solito una parola corta o un pezzo di parola. Si usa per misurare la lunghezza di testi e richieste, e spesso per calcolare il prezzo.",
+  "esempio": "In italiano una pagina di circa 3.000 caratteri vale, a grandi linee, un migliaio di token.",
+  "approfondisci": "Ogni modello spezza il testo in token con un proprio vocabolario: le parole comuni sono spesso un solo token, quelle rare o lunghe diventano più token. La finestra di contesto, il limite di ciò che un modello può leggere in una volta, si misura in token, e così le tariffe di molti servizi, separando i token in ingresso da quelli in uscita.",
+  "vedi": [
+   "finestra-di-contesto",
+   "kv-cache"
+  ]
+ },
+ "kv-cache": {
+  "t": "KV cache",
+  "esteso": "Key-Value cache",
+  "spiega": "Il blocco appunti che un modello si costruisce mentre legge una richiesta, per non dover rileggere tutto il testo a ogni parola che scrive. Vive nella memoria delle schede grafiche.",
+  "esempio": "Nel caso Cloudflare la KV cache era più piccola della richiesta più lunga ammessa, e le pagine non azzerate contenevano dati di richieste precedenti.",
+  "approfondisci": "Per ogni token letto il modello calcola due serie di numeri, chiavi e valori, che servono a decidere a quali parti del testo prestare attenzione. Salvarle evita di ricalcolarle, e rende la scrittura molto più veloce. La memoria è divisa in pagine riusate tra richieste diverse: se un errore fa leggere pagine sbagliate, possono emergere dati di altri.",
+  "vedi": [
+   "token",
+   "finestra-di-contesto",
+   "tenant"
+  ]
+ },
+ "webassembly": {
+  "t": "WebAssembly",
+  "spiega": "Un formato per eseguire programmi veloci dentro un ambiente chiuso, nato per i browser. Per default un programma WebAssembly non può fare nulla che non gli sia concesso esplicitamente.",
+  "esempio": "La sandbox di Akamai esegue in WebAssembly il codice scritto dagli agenti, con limiti a memoria, calcolo e connessioni.",
+  "approfondisci": "WebAssembly, abbreviato Wasm, è uno standard del W3C. Un modulo si avvia in frazioni di secondo e occupa poca memoria, a differenza di una macchina virtuale. L'accesso a file, rete e orologio passa da funzioni che chi lo ospita decide di concedere: per questo si usa sempre più spesso per isolare codice di cui non ci si fida.",
+  "vedi": [
+   "sandbox"
+  ]
+ },
+ "compiacenza": {
+  "t": "compiacenza",
+  "spiega": "La tendenza di un modello a dare ragione all'utente anche quando l'utente sbaglia, cambiando una risposta giusta. In inglese si chiama sycophancy.",
+  "esempio": "Un agente corregge bene un errore nel codice; l'utente protesta per sbaglio e l'agente ritira la correzione giusta.",
+  "approfondisci": "La compiacenza nasce in parte dall'addestramento con le preferenze delle persone, che tendono a premiare le risposte che danno loro ragione. Per gli agenti è un problema pratico: fa perdere lavoro corretto e reintrodurre errori. Dire al modello di essere fermo non basta, perché lo rende sordo anche alle critiche giuste.",
+  "vedi": [
+   "benchmark"
   ]
  }
 }
