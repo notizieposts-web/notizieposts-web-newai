@@ -34,6 +34,7 @@ MAP = {
  '32':{'pelle':'Lynch','nanbeige':'Nanbeige','unitree':'Unitree','dessa':'Block'},
  '33':{'anthropic':'Anthropic','eth':'ETH','recinto':'OpenAI'},
  '34':{'cloudflare':'Cloudflare','tpu':'Oracle','akamai':'Akamai','bui':'Ricerca'},
+ '35':{'gemini':'Gemini','genie':'Genie','farmaci':'Anthropic','harness':'Microsoft'},
  '29':{'microsoft':'Microsoft','flint':'Flint','skills':'Anthropic','jolt':'Perplexity'},
 }
 def process(path, labels):

@@ -1,0 +1,65 @@
+Radar AI. Edizione del ventinove ottobre 2026. Questa è la versione da ascoltare: dura circa dieci minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: Gemini 4 Carbon, Genie 4, Claude nei farmaci.
+
+Il periodo in breve. Il ventisette e il ventotto ottobre i grandi laboratori hanno mostrato dove vogliono portare i modelli: a difendere i programmi dagli attacchi, a simulare mondi interi, a progettare farmaci, e a lavorare per ore dentro un motore gestito da altri. Martedì sono arrivati Genie 4 di Google DeepMind e i risultati di Anthropic sui farmaci. Mercoledì Google ha presentato Gemini 4 Carbon e Microsoft ha aperto il motore degli agenti di Copilot.
+
+Capitolo uno. Gemini 4 Carbon, prima a chi difende le reti.
+
+Il ventotto ottobre Google ha presentato Gemini 4 Carbon, che chiama il suo modello più forte. È il successore di Gemini 4 Argon, uscito due settimane prima. I punti di forza dichiarati sono due: la sicurezza informatica e i lavori lunghi, fatti di molti passaggi. Google racconta che, nei test interni, alcune copie del modello hanno lavorato per giorni per trovare e correggere errori sottili in grandi basi di codice, ma non dà altri dettagli.
+
+I numeri, tutti dichiarati da Google. Nel test che misura la capacità di trovare vulnerabilità, ottantotto virgola due per cento. In quello che misura la capacità di sfruttarle, cinquantaquattro virgola otto. In quello sulla correzione, settantuno per cento. Le prove esterne sono state fatte senza i filtri di sicurezza che nell'uso reale bloccano le richieste pericolose.
+
+La scelta più interessante è l'ordine di consegna. Per ora Carbon lo usa solo un gruppo di difensori informatici, e l'accesso si allargherà con un programma chiamato Fairwind. Sviluppatori, aziende e pubblico lo avranno il prima possibile, senza una data. I prezzi sono già noti: nel periodo di lancio due dollari per milione di token in ingresso e dieci in uscita, poi il doppio. Nessuno, fuori da Google, ha ancora potuto ripetere le prove. Nella pagina trovi un esempio sul costo di un lavoro lungo e un calcolatore.
+
+Prova a chiederti: è giusto che uno strumento capace sia di difendere sia di attaccare arrivi prima ad alcuni e poi a tutti, e chi dovrebbe decidere a chi?
+
+Capitolo due. Genie 4, mondi che si possono attraversare e ascoltare.
+
+Il ventisette ottobre Google DeepMind ha presentato Genie 4, un modello del mondo. Invece di produrre un video finito, genera in tempo reale un ambiente in cui ti muovi con i tasti, come in un videogioco che nessuno ha programmato.
+
+Le novità: è il primo modello di questo tipo di Google DeepMind che genera il suono insieme alle immagini, cioè musica, rumori e dialoghi con i personaggi. Si può cambiare la scena a parole, per esempio far piovere o aggiungere un personaggio, e Gemini fa da regista, pianificando gli eventi e controllando che riescano. I personaggi si muovono in modo più naturale e la fisica è più credibile.
+
+Per ora è un'anteprima per pochi tester. Presto arriverà agli abbonati Google AI Ultra in Project Genie e ad alcuni sviluppatori. Tutto ciò che genera porta una filigrana invisibile, SynthID. Google DeepMind ammette i limiti: nelle sessioni lunghe o dopo molte modifiche i dettagli possono cambiare, e un oggetto visto prima può sparire. Nella pagina trovi un esempio su come questi modelli servono anche ad allenare i robot.
+
+Prova a chiederti: se un mondo simulato diventa abbastanza credibile, che cosa ti servirebbe per fidarti di ciò che un robot ha imparato lì dentro?
+
+Capitolo tre. Claude nella ricerca di farmaci.
+
+Prima una nota di trasparenza: questa edizione è preparata da Claude, un modello di Anthropic, e questo capitolo riguarda Anthropic e Claude. Riporto i fatti come li dà la fonte, senza conferme indipendenti.
+
+Il ventisette ottobre Anthropic ha pubblicato i primi risultati di sei collaborazioni con aziende farmaceutiche e biotech. Con Generate Biomedicines, Claude ha proposto una versione più corta di un pezzo di una terapia contro i tumori, che in laboratorio ha funzionato meglio di quella standard. Con Divergence Labs, sulle allergie alimentari, ha generato circa trentacinquemila progetti di anticorpi in un mese. Con BigHat Biosciences, il laboratorio ha provato circa milleedieci varianti proposte da Claude in dieci settimane, e le migliori si legavano al bersaglio più di dieci volte meglio. Con Enveda, la revisione dei documenti di produzione è scesa da oltre venticinque ore a meno di tre. Ci sono poi The Column Group, che crea una nuova società, e Bristol Myers Squibb, che usa Claude per valutare una sperimentazione clinica.
+
+Anthropic ha anche comprato Mithril Medicine, un'azienda di una sola persona che lavora su due forme rare di distrofia muscolare. Il fondatore ha usato Claude per coordinare undici laboratori. Se i risultati reggono, le prime prove sulle persone potrebbero arrivare non prima della fine del 2028.
+
+Il punto da ricordare: quasi tutto è in fase preclinica, cioè in laboratorio. Un buon risultato in provetta non è ancora un farmaco. Il dato più solido, oggi, è forse il più noioso: le ore di revisione risparmiate. Nella pagina trovi due esempi su come leggere questi numeri.
+
+Prova a chiederti: quando leggi che l'intelligenza artificiale accelera la scoperta di farmaci, sai distinguere ciò che è misurato oggi da ciò che è una promessa?
+
+Capitolo quattro. Il motore degli agenti di Copilot arriva in Foundry.
+
+Il ventotto ottobre Microsoft ha aperto agli sviluppatori, in anteprima dentro Foundry, il Copilot harness: il sistema costruito dagli ingegneri di GitHub che fa lavorare gli agenti di Copilot. Un agente lavora in un ciclo: decide un passo, usa uno strumento, guarda il risultato e riparte. Il programma che gestisce questo ciclo e lo chiude in un ambiente protetto si chiama harness. Microsoft lo offre come servizio: lei gestisce ciclo e ambiente protetto, tu porti istruzioni, abilità e strumenti, collegati anche con il protocollo MCP, lo standard aperto per collegare strumenti agli agenti.
+
+Lo stesso giorno è diventata disponibile per tutti la ripresa automatica degli agenti dopo un'interruzione, utile per i lavori di ore o giorni. Il motore è gratuito fino al trenta novembre; dal primo dicembre l'ambiente protetto si paga a ore, oltre al costo del modello. Nella pagina trovi un esempio di agente e un calcolatore dei costi.
+
+Prova a chiederti: se affidi a un'altra azienda il motore dei tuoi agenti, che cosa ti serve tenere tuo per poterlo cambiare domani?
+
+Capitolo cinque. La rubrica Azure, trentunesima puntata: Content Understanding dentro un agente.
+
+Microsoft offre un pezzo già pronto per il Microsoft Agent Framework: un fornitore di contesto che, prima di ogni chiamata al modello, passa gli allegati a Content Understanding e aggiunge al contesto il testo e i campi estratti. Funziona con documenti, immagini, audio e video. Il pacchetto è ancora in versione preliminare.
+
+Tre parametri contano. Il primo sceglie l'analizzatore: se non lo indichi, ne usa uno generico per tipo di file. Il secondo decide quanto aspettare: per default cinque secondi, poi l'analisi prosegue in sottofondo e l'agente risponde senza il documento al primo giro. Il terzo decide che cosa mettere nel contesto: per default il testo completo e i campi.
+
+Il consiglio sui costi: il testo estratto si paga due volte, una per l'analisi e una come token del modello, a ogni giro della conversazione. Se servono pochi dati, metti nel contesto solo i campi. Se il documento è lungo, usa la ricerca su archivio vettoriale. E per migliaia di file al giorno non passare dall'agente: analizzali a parte e dai all'agente solo i risultati. Nella pagina trovi due esempi, uno su una fattura e uno su una riunione registrata.
+
+Prova a chiederti: nei tuoi agenti, quante volte il modello rilegge per intero un documento di cui gli servivano tre righe?
+
+Nella pagina trovi anche cinque esperimenti: chiedere a un assistente di trovare e correggere le falle senza scrivere attacchi, progettare un mondo a parole, leggere con occhio critico un annuncio scientifico, scrivere la tua prima abilità per un agente, e collegare Content Understanding a un agente. Ci sono poi sei segnali, tra cui l'accordo tra Oracle e OpenAI per portare i programmi di Oracle dentro ChatGPT, e una sezione su che cosa è cambiato e che cosa ho escluso. Uno dei segnali, non verificato, riguarda gli sconti di Anthropic per gli enti pubblici americani.
+
+E ora la domanda del giorno. A chi è andato per primo Gemini 4 Carbon?
+
+Ci pensi un momento?
+
+La risposta: a un gruppo di difensori informatici. L'accesso si allargherà ad altri partner fidati con il programma Fairwind, e solo dopo a sviluppatori, aziende e pubblico.
+
+Per oggi è tutto. Il testo completo, con gli esempi, le fonti e il quiz, è nella pagina dell'edizione trentacinque di Radar AI. Grazie per l'ascolto.

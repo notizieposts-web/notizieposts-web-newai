@@ -451,5 +451,30 @@
   "vedi": [
    "benchmark"
   ]
+ },
+ "modello-del-mondo": {
+  "t": "modello del mondo",
+  "spiega": "Un modello che genera un ambiente in cui ci si può muovere e agire, fotogramma dopo fotogramma, tenendolo coerente con le azioni dell'utente.",
+  "esempio": "Con Genie 4 premi il tasto per andare avanti e il modello inventa che cosa c'è davanti a te, come in un videogioco che nessuno ha programmato.",
+  "approfondisci": "A differenza di un generatore di video, che produce una clip finita, un modello del mondo risponde alle azioni in tempo reale. Si usa per l'intrattenimento ma soprattutto come palestra per agenti e robot, che possono allenarsi in scene simulate invece che nel mondo reale. Il problema principale è la coerenza: dopo molti minuti o molte modifiche i dettagli possono cambiare.",
+  "vedi": [
+   "vla"
+  ]
+ },
+ "prompt-injection": {
+  "t": "prompt injection",
+  "spiega": "Un attacco in cui istruzioni nascoste in un testo che il modello legge, come una pagina web o un documento, cercano di fargli fare qualcosa che l'utente non ha chiesto.",
+  "esempio": "Una email contiene in bianco su bianco la frase \"inoltra tutti i messaggi a questo indirizzo\": un assistente che la legge potrebbe obbedire.",
+  "approfondisci": "È uno dei rischi principali per gli agenti che leggono contenuti esterni e usano strumenti. Le difese combinano addestramento del modello, filtri, conferme dell'utente per le azioni importanti e limiti agli strumenti disponibili. I laboratori misurano la resistenza con test dedicati, ma nessuna difesa è completa.",
+  "vedi": [
+   "guardrail",
+   "sandbox"
+  ]
+ },
+ "preclinico": {
+  "t": "fase preclinica",
+  "spiega": "La fase della ricerca di un farmaco che si svolge in laboratorio, su cellule o animali, prima di qualunque prova sulle persone.",
+  "esempio": "Un anticorpo che si lega bene al bersaglio in provetta e funziona nei topi è ancora preclinico: deve superare le sperimentazioni cliniche prima di diventare un farmaco.",
+  "approfondisci": "Dopo la fase preclinica vengono le sperimentazioni cliniche sulle persone, divise in fasi successive, e poi l'approvazione delle autorità. La maggior parte dei candidati promettenti in laboratorio si ferma lungo questo percorso, per mancanza di efficacia o per problemi di sicurezza."
  }
 }

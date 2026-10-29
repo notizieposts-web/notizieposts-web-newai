@@ -1,46 +1,46 @@
 {
- "n": 34,
- "data": "2026-10-28",
- "titolo": "Dati altrui, TPU su Oracle, la scatola per gli agenti",
- "descrizione": "Cloudflare spiega come le risposte di un modello hanno mescolato i dati di clienti diversi, Oracle offrirà i chip AI di Google, Akamai chiude in una scatola il codice scritto dagli agenti e un paper insegna agli agenti a non cedere quando hanno ragione.",
+ "n": 35,
+ "data": "2026-10-29",
+ "titolo": "Gemini 4 Carbon, Genie 4, Claude nei farmaci",
+ "descrizione": "Google consegna il suo modello più forte prima a chi difende le reti, genera mondi interattivi con il suono, Anthropic racconta i primi risultati di Claude nella ricerca di farmaci e Microsoft apre agli sviluppatori il motore dei suoi agenti.",
  "chips": [
-  "Cloudflare",
-  "Oracle",
-  "Akamai",
-  "Ricerca",
+  "Gemini",
+  "Genie",
+  "Anthropic",
+  "Microsoft",
   "Azure"
  ],
  "items": [
   [
-   "🔓",
-   "Cloudflare",
-   "Risposte con i dati di altri clienti",
-   "Per tredici giorni, tra agosto e settembre, 155 risposte di un modello offerto da Cloudflare hanno contenuto pezzi di richieste di altri clienti, per un errore di memoria ora corretto."
+   "🛡",
+   "Gemini",
+   "Il nuovo modello di Google va prima ai difensori",
+   "Google ha presentato Gemini 4 Carbon, molto forte nel trovare e correggere falle nei programmi, e per ora lo dà solo a un gruppo di esperti di sicurezza informatica."
   ],
   [
-   "🧠",
-   "Oracle",
-   "I chip AI di Google escono dal cloud di Google",
-   "Oracle ha annunciato che dal 2027 offrirà sul suo cloud i chip che Google progetta per l'intelligenza artificiale, la prima volta fuori da Google."
+   "🌍",
+   "Genie",
+   "Mondi generati che ora si sentono anche",
+   "Google DeepMind ha mostrato Genie 4, che crea in tempo reale ambienti da esplorare come un videogioco, con suoni e dialoghi e scene che cambiano a parole."
   ],
   [
-   "📦",
-   "Akamai",
-   "Una scatola chiusa per il codice degli agenti",
-   "Akamai ha aperto in prova un servizio per usare modelli aperti e un ambiente isolato in cui eseguire il codice che gli agenti scrivono da soli."
+   "💊",
+   "Anthropic",
+   "Claude nella ricerca di nuovi farmaci",
+   "Anthropic ha pubblicato i primi risultati di laboratorio di sei collaborazioni con aziende farmaceutiche e ha comprato una piccola azienda che studia due malattie muscolari rare."
   ],
   [
-   "🎯",
-   "Ricerca",
-   "Agenti che non cedono quando hanno ragione",
-   "Un nuovo studio mostra che, se un agente scrive che cosa ha controllato prima di leggere una critica, smette di ritirare le risposte giuste solo per dare ragione all'utente."
+   "⚙",
+   "Microsoft",
+   "Il motore degli agenti di Copilot per tutti gli sviluppatori",
+   "Microsoft ha aperto in prova il sistema che fa lavorare gli agenti di Copilot, così le aziende possono costruire i propri agenti senza gestire da sole il ciclo di lavoro."
   ],
   [
    "☁",
    "Azure",
-   "Accendere solo quello che serve",
-   "La rubrica su Content Understanding spiega quali funzioni di lettura dei documenti si possono spegnere per andare più veloci, e quando invece è rischioso."
+   "Un agente che legge da solo gli allegati",
+   "La rubrica su Content Understanding spiega come far leggere a un agente fatture, audio e video allegati, e come evitare attese e costi inutili."
   ]
  ],
- "domanda": "Secondo Cloudflare, quante risposte del modello GLM-5.3 hanno contenuto dati di altri clienti?"
+ "domanda": "A chi è andato per primo Gemini 4 Carbon, il nuovo modello di Google?"
 }
