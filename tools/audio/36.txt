@@ -1,0 +1,67 @@
+Radar AI. Edizione del trenta ottobre 2026. Questa è la versione da ascoltare: dura circa dieci minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: Mistral Large 4, Nemotron Transcribe, VAPOR PANDA.
+
+Una nota di trasparenza: due capitoli citano confronti con Claude, e un segnale riguarda Anthropic. Questa edizione è preparata da Claude, un modello di Anthropic, e riporta i fatti come li dà la fonte, con i suoi limiti.
+
+Il periodo in breve. Il ventotto e il ventinove ottobre l'intelligenza artificiale si è mostrata in tre modi: come strumento aperto a tutti, con i pesi di Mistral e il trascrittore di NVIDIA; come arma nelle mani di chi attacca, con gli agenti usati in una campagna di spionaggio; e come collega di lavoro ormai normale, con gli agenti che su GitHub aprono quasi metà delle modifiche al codice.
+
+Capitolo uno. Mistral Large 4 si può scaricare.
+
+Il ventinove ottobre la francese Mistral ha pubblicato i pesi di Mistral Large 4, il modello presentato in anteprima il sei ottobre. Pubblicare i pesi vuol dire che chiunque può scaricare il modello, farlo girare sui propri server e modificarlo. È un modello enorme: mille miliardi di parametri in tutto, ma ne usa circa cinquantadue miliardi per ogni parola, perché è diviso in tanti blocchi specializzati, detti esperti, e ne attiva solo pochi alla volta. Legge testo e immagini e parla oltre centosessanta lingue.
+
+La licenza permette uso, modifica e uso commerciale, con un'eccezione: chi rivende l'accesso al modello come servizio a pagamento deve ottenere una licenza separata. Una banca che lo usa al suo interno è libera, un fornitore cloud che lo rivende no.
+
+I numeri sono tutti dichiarati da Mistral. Quarantuno per cento in una prova di compiti al terminale svolti da un agente, tredici punti più dell'anteprima. Quarantotto per cento in un indice sugli agenti di programmazione. Sull'API costa settanta centesimi di dollaro per milione di token letti e due dollari e dieci per milione di token scritti.
+
+La parte più interessante riguarda la sicurezza. Mistral ammette di aver visto che il modello può dare un aiuto concreto a chi vuole condurre attacchi informatici reali, e di aver rafforzato le protezioni: dichiara che rifiuta in media novantasei virgola sei richieste malevole su cento. Ma con i pesi aperti chi scarica il modello può riaddestrarlo e togliere i rifiuti. Nessuna verifica indipendente sui pesi appena pubblicati, e il rapporto tecnico completo non c'è ancora. Nella pagina trovi un esempio su quanto hardware serve e uno sul conto di un mese.
+
+Prova a chiederti: se un modello aperto può aiutare un attacco, chi dovrebbe decidere se pubblicarlo, l'azienda o qualcun altro?
+
+Capitolo due. Nemotron 3.5 Transcribe, il trascrittore di NVIDIA.
+
+Il ventotto ottobre NVIDIA ha pubblicato Nemotron 3.5 Transcribe, un modello con pesi aperti che trasforma in testo registrazioni fino a un'ora, in quaranta lingue. Distingue fino a otto voci diverse, mette l'orario a ogni parola e traduce da e verso l'inglese in trentuno lingue. L'italiano c'è, con tutte le funzioni. La licenza permette anche l'uso commerciale.
+
+La qualità di una trascrizione si misura con la percentuale di parole sbagliate. Per l'italiano NVIDIA dichiara uno virgola quattro per cento su frasi lette con cura e tre virgola due su voci registrate in condizioni varie. Sulle registrazioni lunghe in inglese si sale a circa undici per cento.
+
+I limiti sono scritti nella scheda: non funziona in diretta, solo su audio già registrato; oltre un'ora la qualità non è garantita; e in rari casi il modello si incanta e ripete lo stesso pezzo all'infinito. Serve una scheda grafica da data center. Nella pagina trovi un esempio su come fare il verbale di una riunione.
+
+Prova a chiederti: quali registrazioni nella tua vita o nel tuo lavoro diventerebbero utili se fossero testo da cercare?
+
+Capitolo tre. Agenti al servizio dello spionaggio.
+
+Il ventinove ottobre la società di sicurezza CrowdStrike ha descritto una campagna di VAPOR PANDA, un gruppo che collega alla Cina. Dal diciassette ottobre, in undici giorni, il gruppo ha usato ARTEX, un programma che coordina squadre di agenti di intelligenza artificiale, contro più di duecento organizzazioni in almeno quattordici Paesi: ministeri degli esteri, uffici di governo europei, aziende farmaceutiche e della difesa americane, operatori telefonici. In nove organizzazioni CrowdStrike ha visto attività dopo l'ingresso.
+
+Gli agenti si dividevano il lavoro: uno principale distribuiva i compiti, altri pianificavano ed eseguivano, tutti con una mappa comune delle scoperte. Un solo operatore umano interveniva nei momenti decisivi. Il motore era soprattutto il modello cinese DeepSeek, insieme a un secondo modello commerciale non identificato. In una sola intrusione, gli agenti hanno letto circa un miliardo e quattrocento milioni di token.
+
+Le porte d'ingresso erano spesso banali: un sistema di accesso che accettava messaggi senza firma, un servizio di gestione esposto senza password, e chiavi vecchie di anni mai cambiate. CrowdStrike precisa che non si tratta di Storm-0940, la campagna con lo stesso strumento descritta da Microsoft e raccontata nell'edizione ventinove: secondo l'azienda, ARTEX si sta diffondendo tra più gruppi. Attribuzione e numeri vengono da CrowdStrike, senza conferme indipendenti. Nella pagina trovi un esempio sulle chiavi dimenticate e una lista di controlli.
+
+Prova a chiederti: nella tua organizzazione, quante chiavi o password vecchie sono ancora valide senza che nessuno lo sappia?
+
+Capitolo quattro. GitHub e il codice scritto dagli agenti.
+
+Il ventotto ottobre, alla conferenza GitHub Universe, GitHub ha presentato Copilot Fusion: un sistema che sceglie quale modello usare per ogni passo di un lavoro di programmazione, il piccolo e veloce per i passi facili, il più forte per quelli difficili. GitHub dichiara che la versione più potente arriva a meno di due punti da Claude Opus cinque punto cinque Max, a metà del costo, ma non pubblica il metodo. Le aziende con GitHub Enterprise possono ora pagare Copilot a consumo, con crediti, senza abbonamento separato.
+
+Lo stesso giorno il rapporto annuale Octoverse ha dato la misura del cambiamento. In un anno su GitHub ci sono stati quasi diciotto miliardi di invii di codice, più del 2024 e del 2025 insieme. E le richieste di modifica nate da un agente sono passate dal diciassette per cento di marzo a oltre il quaranta per cento di settembre: centodieci milioni in un solo mese. GitHub avverte che è un valore minimo, perché non riconosce tutti gli agenti. Nella pagina trovi un esempio su come funziona la scelta del modello.
+
+Prova a chiederti: se gli agenti scrivono quasi metà delle modifiche, chi controlla che siano giuste, e quanto tempo gli serve?
+
+Capitolo cinque. La rubrica Azure, trentaduesima puntata: documenti fino a duemila pagine.
+
+A ottobre Microsoft ha alzato il limite dei PDF e dei TIFF che Content Understanding analizza in modo asincrono da trecento a duemila pagine, per tutte le versioni dell'interfaccia. L'analisi sincrona, quella con risposta immediata, resta a cinque pagine.
+
+Ma ci sono altri limiti. Il file non può superare duecento megabyte, e una scansione a colori di molte pagine li supera facilmente. La quota standard della risorsa è di mille pagine al minuto: un solo documento da duemila pagine la occupa per due minuti. E se un'analisi così lunga fallisce a metà, rifarla costa di nuovo tutto.
+
+Il consiglio: manda il documento intero quando i dati dipendono da parti lontane, come un contratto con gli allegati. Dividilo a blocchi di cento o duecento pagine quando lavori grandi volumi, così si rifanno solo i blocchi falliti. E se il dato sta in poche pagine, analizza solo quelle. Nella pagina trovi un calcolatore e due esempi, uno su un archivio di fascicoli e uno su una scansione troppo pesante.
+
+Prova a chiederti: nei tuoi documenti più lunghi, quante pagine contengono davvero i dati che ti servono?
+
+Nella pagina trovi anche cinque esperimenti: leggere una licenza prima di usare un modello, trasformare una trascrizione in un verbale, fare l'inventario delle chiavi dimenticate, ragionare come un sistema che sceglie i modelli, e analizzare un fascicolo a blocchi. Ci sono poi sei segnali, tra cui il supporto dei modelli più recenti di OpenAI in Content Understanding e alcune notizie non verificate, come un sequestro di chip in Malesia e un possibile accordo di NVIDIA legato a un campus di Anthropic. Infine, che cosa è cambiato e che cosa ho escluso.
+
+E ora la domanda del giorno. Quale percentuale delle richieste di modifica su GitHub nasceva da un agente a settembre?
+
+Ci pensi un momento?
+
+La risposta: oltre il quaranta per cento, contro il diciassette per cento di marzo. Ed è un valore minimo, perché GitHub non riesce a riconoscere tutti gli agenti.
+
+Per oggi è tutto. Il testo completo, con gli esempi, le fonti e il quiz, è nella pagina dell'edizione trentasei di Radar AI. Grazie per l'ascolto.

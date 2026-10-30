@@ -33,6 +33,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (29,'33','azure','qualita','Dove sta il dato: source e span'),
     (30,'34','azure','costi','Gli interruttori: OCR, layout, formule, tabelle'),
     (31,'35','azure','pipeline','Content Understanding dentro un agente'),
+    (32,'36','azure','costi','Documenti fino a 2.000 pagine'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']

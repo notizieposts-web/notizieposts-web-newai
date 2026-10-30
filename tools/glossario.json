@@ -476,5 +476,60 @@
   "spiega": "La fase della ricerca di un farmaco che si svolge in laboratorio, su cellule o animali, prima di qualunque prova sulle persone.",
   "esempio": "Un anticorpo che si lega bene al bersaglio in provetta e funziona nei topi è ancora preclinico: deve superare le sperimentazioni cliniche prima di diventare un farmaco.",
   "approfondisci": "Dopo la fase preclinica vengono le sperimentazioni cliniche sulle persone, divise in fasi successive, e poi l'approvazione delle autorità. La maggior parte dei candidati promettenti in laboratorio si ferma lungo questo percorso, per mancanza di efficacia o per problemi di sicurezza."
+ },
+ "diarizzazione": {
+  "t": "diarizzazione",
+  "spiega": "Il lavoro di capire chi parla e quando in una registrazione, dividendo il testo per voce. Non dice il nome delle persone: le distingue come Parlante 1, Parlante 2.",
+  "esempio": "In una riunione di cinque persone, la trascrizione con diarizzazione mette davanti a ogni frase l'etichetta della voce che l'ha detta.",
+  "approfondisci": "Un sistema di diarizzazione trasforma la voce in una specie di impronta numerica e raggruppa i pezzi di audio con impronte simili. È difficile quando le persone si parlano sopra, hanno voci simili o la registrazione è lontana dal microfono. I modelli più recenti fanno trascrizione e diarizzazione insieme, invece che in due passaggi separati.",
+  "vedi": [
+   "wer"
+  ]
+ },
+ "wer": {
+  "t": "WER",
+  "esteso": "Word Error Rate",
+  "spiega": "La percentuale di parole sbagliate, mancanti o in più in una trascrizione automatica, rispetto a quella corretta. Più è basso, meglio è.",
+  "esempio": "Un WER del 3 per cento su un testo di mille parole vuol dire circa trenta parole da correggere.",
+  "approfondisci": "Il WER si calcola contando sostituzioni, cancellazioni e inserimenti necessari per trasformare la trascrizione automatica in quella giusta, e dividendo per il numero di parole corrette. Dipende molto dal tipo di audio: frasi lette in studio danno valori bassi, conversazioni rumorose valori molto più alti. Per questo si confrontano i modelli sulle stesse raccolte.",
+  "vedi": [
+   "diarizzazione",
+   "benchmark"
+  ]
+ },
+ "saml": {
+  "t": "SAML",
+  "esteso": "Security Assertion Markup Language",
+  "spiega": "Un formato con cui un sistema di accesso aziendale dice a un'applicazione chi sei, senza farti inserire di nuovo la password. Il messaggio, chiamato asserzione, deve essere firmato per essere creduto.",
+  "esempio": "Entri nel portale aziendale una volta e poi apri il programma delle note spese senza password: dietro c'è spesso un'asserzione SAML.",
+  "approfondisci": "Il fornitore di identità firma digitalmente l'asserzione e l'applicazione verifica la firma prima di fidarsi. Se l'applicazione accetta asserzioni senza firma, chiunque può scriverne una falsa e presentarsi come un altro utente. Per questo le linee guida chiedono di rendere obbligatoria la verifica della firma.",
+  "vedi": [
+   "oauth"
+  ]
+ },
+ "edr": {
+  "t": "EDR",
+  "esteso": "Endpoint Detection and Response",
+  "spiega": "Un programma di sicurezza installato su computer e server che osserva che cosa succede, segnala i comportamenti sospetti e permette di bloccarli.",
+  "esempio": "Se un processo sconosciuto prova a leggere le password salvate di Windows, l'EDR lo segnala e può isolare il computer dalla rete.",
+  "vedi": [
+   "soc"
+  ]
+ },
+ "password-spraying": {
+  "t": "password spraying",
+  "spiega": "Un attacco che prova poche password molto comuni su moltissimi account, invece di tante password su un solo account, per non far scattare i blocchi.",
+  "esempio": "Provare \"Autunno2026!\" su tremila account aziendali una volta sola: basta che uno lo usi per entrare.",
+  "vedi": [
+   "oauth"
+  ]
+ },
+ "instradamento": {
+  "t": "instradamento",
+  "spiega": "La scelta automatica di quale modello di AI usare per ogni richiesta o per ogni passo di un lavoro, secondo difficoltà e costo.",
+  "esempio": "Una domanda semplice va a un modello piccolo ed economico, un ragionamento complesso al modello più forte: si paga il prezzo alto solo quando serve.",
+  "vedi": [
+   "token"
+  ]
  }
 }

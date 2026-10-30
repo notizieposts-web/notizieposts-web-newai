@@ -1,46 +1,46 @@
 {
- "n": 35,
- "data": "2026-10-29",
- "titolo": "Gemini 4 Carbon, Genie 4, Claude nei farmaci",
- "descrizione": "Google consegna il suo modello più forte prima a chi difende le reti, genera mondi interattivi con il suono, Anthropic racconta i primi risultati di Claude nella ricerca di farmaci e Microsoft apre agli sviluppatori il motore dei suoi agenti.",
+ "n": 36,
+ "data": "2026-10-30",
+ "titolo": "Mistral Large 4, Nemotron Transcribe, VAPOR PANDA",
+ "descrizione": "Mistral rende scaricabile il suo modello più grande, NVIDIA regala un trascrittore per 40 lingue, CrowdStrike scopre agenti AI usati per spiare governi e aziende, e GitHub conta quanto codice scrivono ormai gli agenti.",
  "chips": [
-  "Gemini",
-  "Genie",
-  "Anthropic",
-  "Microsoft",
+  "Mistral",
+  "NVIDIA",
+  "CrowdStrike",
+  "GitHub",
   "Azure"
  ],
  "items": [
   [
-   "🛡",
-   "Gemini",
-   "Il nuovo modello di Google va prima ai difensori",
-   "Google ha presentato Gemini 4 Carbon, molto forte nel trovare e correggere falle nei programmi, e per ora lo dà solo a un gruppo di esperti di sicurezza informatica."
+   "🧠",
+   "Mistral",
+   "Il grande modello europeo diventa scaricabile",
+   "Mistral ha pubblicato i pesi di Mistral Large 4, così chiunque può usarlo sui propri server, e avverte che potrebbe aiutare anche chi attacca i sistemi informatici."
   ],
   [
-   "🌍",
-   "Genie",
-   "Mondi generati che ora si sentono anche",
-   "Google DeepMind ha mostrato Genie 4, che crea in tempo reale ambienti da esplorare come un videogioco, con suoni e dialoghi e scene che cambiano a parole."
+   "🎙",
+   "NVIDIA",
+   "Un trascrittore gratuito che riconosce chi parla",
+   "NVIDIA ha rilasciato un modello aperto che trasforma in testo registrazioni fino a un'ora in 40 lingue, italiano compreso, distinguendo le voci e traducendo."
   ],
   [
-   "💊",
-   "Anthropic",
-   "Claude nella ricerca di nuovi farmaci",
-   "Anthropic ha pubblicato i primi risultati di laboratorio di sei collaborazioni con aziende farmaceutiche e ha comprato una piccola azienda che studia due malattie muscolari rare."
+   "🕵",
+   "CrowdStrike",
+   "Squadre di agenti AI al servizio dello spionaggio",
+   "CrowdStrike racconta come un gruppo legato alla Cina abbia usato agenti AI guidati da un solo operatore contro più di 200 organizzazioni in undici giorni."
   ],
   [
-   "⚙",
-   "Microsoft",
-   "Il motore degli agenti di Copilot per tutti gli sviluppatori",
-   "Microsoft ha aperto in prova il sistema che fa lavorare gli agenti di Copilot, così le aziende possono costruire i propri agenti senza gestire da sole il ciclo di lavoro."
+   "💻",
+   "GitHub",
+   "Quasi metà delle modifiche al codice nasce da un agente",
+   "GitHub ha presentato un sistema che sceglie il modello AI giusto per ogni passo e ha rivelato che a settembre oltre il 40 per cento delle modifiche partiva da un agente."
   ],
   [
    "☁",
    "Azure",
-   "Un agente che legge da solo gli allegati",
-   "La rubrica su Content Understanding spiega come far leggere a un agente fatture, audio e video allegati, e come evitare attese e costi inutili."
+   "Documenti fino a 2.000 pagine",
+   "La rubrica su Content Understanding spiega il nuovo limite per i documenti lunghi e quando conviene comunque dividerli per risparmiare tempo e costi."
   ]
  ],
- "domanda": "A chi è andato per primo Gemini 4 Carbon, il nuovo modello di Google?"
+ "domanda": "Quale percentuale delle modifiche al codice su GitHub nasceva da un agente a settembre?"
 }

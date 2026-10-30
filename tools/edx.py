@@ -37,6 +37,7 @@ EDX = {
  '33': (None, 'Anthropic in borsa, ETH smentita e il modello fuori dal recinto', 'Anthropic deposita il prospetto per il Nasdaq, OpenAI dice di aver confutato la ETH e racconta un modello che ha raggiunto internet.'),
  '34': (None, 'Dati altrui, TPU su Oracle, la scatola per gli agenti', 'Cloudflare spiega 155 risposte con dati di altri clienti, Oracle offrirà i TPU di Google, Akamai chiude il codice degli agenti in una sandbox.'),
  '35': (None, 'Gemini 4 Carbon, Genie 4, Claude nei farmaci', 'Google dà Gemini 4 Carbon prima ai difensori, Genie 4 genera mondi con suono, Claude nei farmaci e il motore degli agenti di Copilot in Foundry.'),
+ '36': (None, 'Mistral Large 4, Nemotron Transcribe, VAPOR PANDA', 'Mistral pubblica i pesi di Large 4, NVIDIA un trascrittore per 40 lingue, agenti AI in una campagna di spionaggio e il 40% di modifiche da agenti su GitHub.'),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):
