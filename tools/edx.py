@@ -38,6 +38,7 @@ EDX = {
  '34': (None, 'Dati altrui, TPU su Oracle, la scatola per gli agenti', 'Cloudflare spiega 155 risposte con dati di altri clienti, Oracle offrirà i TPU di Google, Akamai chiude il codice degli agenti in una sandbox.'),
  '35': (None, 'Gemini 4 Carbon, Genie 4, Claude nei farmaci', 'Google dà Gemini 4 Carbon prima ai difensori, Genie 4 genera mondi con suono, Claude nei farmaci e il motore degli agenti di Copilot in Foundry.'),
  '36': (None, 'Mistral Large 4, Nemotron Transcribe, VAPOR PANDA', 'Mistral pubblica i pesi di Large 4, NVIDIA un trascrittore per 40 lingue, agenti AI in una campagna di spionaggio e il 40% di modifiche da agenti su GitHub.'),
+ '37': (None, 'Il monitor di OpenAI, Claude per la scienza, il Canada in Cohere', 'OpenAI svela come sorveglia i suoi agenti, Anthropic porta Claude in venti istituti scientifici e il Canada investe fino a 1,6 miliardi in Cohere.'),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):

@@ -1,46 +1,39 @@
 {
- "n": 36,
- "data": "2026-10-30",
- "titolo": "Mistral Large 4, Nemotron Transcribe, VAPOR PANDA",
- "descrizione": "Mistral rende scaricabile il suo modello più grande, NVIDIA regala un trascrittore per 40 lingue, CrowdStrike scopre agenti AI usati per spiare governi e aziende, e GitHub conta quanto codice scrivono ormai gli agenti.",
+ "n": 37,
+ "data": "2026-10-31",
+ "titolo": "Il monitor di OpenAI, Claude per la scienza, il Canada in Cohere",
+ "descrizione": "OpenAI spiega come sorveglia i suoi agenti dopo una fuga dai test, Anthropic porta Claude in venti istituti scientifici, il Canada compra una quota di Cohere e la rubrica Azure insegna ad analizzare le telefonate.",
  "chips": [
-  "Mistral",
-  "NVIDIA",
-  "CrowdStrike",
-  "GitHub",
+  "OpenAI",
+  "Anthropic",
+  "Cohere",
   "Azure"
  ],
  "items": [
   [
-   "🧠",
-   "Mistral",
-   "Il grande modello europeo diventa scaricabile",
-   "Mistral ha pubblicato i pesi di Mistral Large 4, così chiunque può usarlo sui propri server, e avverte che potrebbe aiutare anche chi attacca i sistemi informatici."
+   "🛡",
+   "OpenAI",
+   "Come OpenAI controlla i suoi agenti",
+   "OpenAI ha descritto il sistema a quattro livelli che sorveglia i suoi modelli mentre lavorano come agenti, dicendo che oggi darebbe l'allarme in circa mezz'ora e ammettendo i punti che ancora non copre."
   ],
   [
-   "🎙",
-   "NVIDIA",
-   "Un trascrittore gratuito che riconosce chi parla",
-   "NVIDIA ha rilasciato un modello aperto che trasforma in testo registrazioni fino a un'ora in 40 lingue, italiano compreso, distinguendo le voci e traducendo."
+   "🔬",
+   "Anthropic",
+   "Claude entra in venti istituti scientifici",
+   "Anthropic ha allargato il suo programma per la ricerca a venti enti, tra cui la National Science Foundation e il laboratorio europeo EMBL, e propone uno standard per far usare agli agenti gli strumenti di laboratorio."
   ],
   [
-   "🕵",
-   "CrowdStrike",
-   "Squadre di agenti AI al servizio dello spionaggio",
-   "CrowdStrike racconta come un gruppo legato alla Cina abbia usato agenti AI guidati da un solo operatore contro più di 200 organizzazioni in undici giorni."
-  ],
-  [
-   "💻",
-   "GitHub",
-   "Quasi metà delle modifiche al codice nasce da un agente",
-   "GitHub ha presentato un sistema che sceglie il modello AI giusto per ogni passo e ha rivelato che a settembre oltre il 40 per cento delle modifiche partiva da un agente."
+   "🍁",
+   "Cohere",
+   "Il Canada diventa socio di un'azienda di AI",
+   "Il governo canadese investirà fino a 1,6 miliardi di dollari canadesi in Cohere, in cambio di mille posti di lavoro, nuovi centri di calcolo e la sede in Canada."
   ],
   [
    "☁",
    "Azure",
-   "Documenti fino a 2.000 pagine",
-   "La rubrica su Content Understanding spiega il nuovo limite per i documenti lunghi e quando conviene comunque dividerli per risparmiare tempo e costi."
+   "Telefonate e riunioni analizzate in automatico",
+   "La rubrica su Content Understanding spiega come trascrivere le registrazioni distinguendo chi parla, quale lingua impostare e quanto costa un'ora di audio."
   ]
  ],
- "domanda": "Quale percentuale delle modifiche al codice su GitHub nasceva da un agente a settembre?"
+ "domanda": "Dopo quanto tempo, secondo OpenAI, i nuovi controlli darebbero l'allarme se un agente uscisse dal suo ambiente isolato?"
 }

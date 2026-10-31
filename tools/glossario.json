@@ -531,5 +531,34 @@
   "vedi": [
    "token"
   ]
+ },
+ "sonda": {
+  "t": "sonda",
+  "spiega": "Un piccolo classificatore che legge le attivazioni interne di un modello, cioè i numeri che produce mentre ragiona, per riconoscere uno stato particolare senza leggere il testo.",
+  "esempio": "Una sonda addestrata su casi di inganno può segnalare che il modello sta probabilmente mentendo anche quando la risposta scritta sembra normale.",
+  "approfondisci": "Le sonde sono economiche perché non generano testo: fanno un calcolo veloce sui valori interni già prodotti dal modello. Per questo si usano come primo filtro su grandi volumi di traffico. Il limite è che riconoscono solo ciò per cui sono state addestrate, e vanno regolate tra falsi allarmi e casi persi.",
+  "vedi": [
+   "catena-di-ragionamento",
+   "red-team"
+  ]
+ },
+ "webvtt": {
+  "t": "WebVTT",
+  "esteso": "Web Video Text Tracks",
+  "spiega": "Un formato di testo standard per trascrizioni e sottotitoli, in cui ogni frase ha un orario di inizio e di fine.",
+  "esempio": "Una riga WebVTT dice per esempio: da 00:01:05 a 00:01:09, Parlante 2: «Vorrei disdire il contratto».",
+  "vedi": [
+   "diarizzazione"
+  ]
+ },
+ "pii": {
+  "t": "PII",
+  "esteso": "Personally Identifiable Information",
+  "spiega": "I dati che permettono di identificare una persona: nome, indirizzo, codice fiscale, numero di telefono, IBAN.",
+  "esempio": "In una telefonata registrata il cliente detta il suo codice fiscale: prima di salvare la trascrizione, quel dato va oscurato.",
+  "approfondisci": "Nel lessico europeo si parla di dati personali, secondo il GDPR. Nelle pipeline di AI i PII si cercano e si oscurano prima di salvare o condividere i risultati, perché log e trascrizioni finiscono spesso in sistemi con accessi più larghi. L'oscuramento può essere fatto con servizi dedicati o con regole proprie, ma va sempre verificato su un campione.",
+  "vedi": [
+   "diarizzazione"
+  ]
  }
 }
