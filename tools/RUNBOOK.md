@@ -43,6 +43,8 @@ Per ogni notizia, nel capitolo:
 
 Ogni capitolo di notizie ha un riquadro `<div class="example"><b>Verifica</b>…</div>` con: fonte primaria e data · dichiarato · verificato da altri · limiti · collegamenti.
 
+**Come aprire le fonti senza richieste di consenso** (regola dal 1° novembre 2026; le operazioni pianificate girano senza nessuno che possa approvare): un link trovato **dentro** una pagina già letta (rassegne, newsletter, articoli) non si apre mai direttamente con WebFetch, perché fa scattare una richiesta di consenso che, senza risposta, scade e fa perdere la fonte. Si apre solo un link che arriva da un risultato di **WebSearch**: per ogni link interno, prima cerca con WebSearch il titolo della pagina o l'indirizzo esatto (eventualmente con `allowed_domains` sul dominio), poi apri con WebFetch l'indirizzo restituito dalla ricerca. Se la pagina non compare in nessuna ricerca, non aprirla: la fonte si segna come "non letta", e la notizia segue la regola qui sotto (segnale `non verificabile` o "Cosa ho escluso"). Se una pagina non si apre per un errore del sito, dillo nel riquadro Verifica.
+
 **Notizie senza fonte primaria**: non diventano mai un capitolo. Possono comparire solo tra i segnali con l'etichetta `non verificabile`, scritte al condizionale e mai come fatto accertato. Se sono troppo deboli anche per questo, vanno in "Cosa ho escluso".
 
 **Smentite**: se una fonte primaria ufficiale smentisce o contesta una notizia (anche una data in un'edizione precedente), la smentita si pubblica sempre: nel capitolo della notizia, oppure, se riguarda un'edizione passata, in "Cosa è cambiato" con l'etichetta `smentita` e il link al capitolo originale.
