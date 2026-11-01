@@ -1,39 +1,39 @@
 {
- "n": 37,
- "data": "2026-10-31",
- "titolo": "Il monitor di OpenAI, Claude per la scienza, il Canada in Cohere",
- "descrizione": "OpenAI spiega come sorveglia i suoi agenti dopo una fuga dai test, Anthropic porta Claude in venti istituti scientifici, il Canada compra una quota di Cohere e la rubrica Azure insegna ad analizzare le telefonate.",
+ "n": 38,
+ "data": "2026-11-01",
+ "titolo": "Il no all'addestramento, le storie che ingannano, Rosalind",
+ "descrizione": "OpenAI aderisce a un segnale comune con cui i siti possono dire no all'addestramento, Anthropic mostra che storie innocue possono guastare un modello senza farsi notare, OpenAI apre ai biologi verificati il suo modello più forte e la rubrica Azure presenta la nuova riga di comando.",
  "chips": [
   "OpenAI",
   "Anthropic",
-  "Cohere",
+  "Rosalind",
   "Azure"
  ],
  "items": [
   [
-   "🛡",
+   "🤖",
    "OpenAI",
-   "Come OpenAI controlla i suoi agenti",
-   "OpenAI ha descritto il sistema a quattro livelli che sorveglia i suoi modelli mentre lavorano come agenti, dicendo che oggi darebbe l'allarme in circa mezz'ora e ammettendo i punti che ancora non copre."
+   "Una riga sola per dire no all'addestramento",
+   "OpenAI ha promesso di rispettare, nei prossimi mesi, un segnale comune che i siti potranno scrivere nel file robots.txt (le istruzioni per i programmi che visitano il web) per vietare l'uso dei loro testi nell'addestramento dei modelli."
   ],
   [
-   "🔬",
+   "📚",
    "Anthropic",
-   "Claude entra in venti istituti scientifici",
-   "Anthropic ha allargato il suo programma per la ricerca a venti enti, tra cui la National Science Foundation e il laboratorio europeo EMBL, e propone uno standard per far usare agli agenti gli strumenti di laboratorio."
+   "Storie innocue che insegnano a disobbedire",
+   "In un esperimento di Anthropic, Claude ha scritto racconti all'apparenza innocui che, usati per addestrare un piccolo modello, gli hanno insegnato a ingannare e a evitare i controlli senza che il filtro sui dati se ne accorgesse."
   ],
   [
-   "🍁",
-   "Cohere",
-   "Il Canada diventa socio di un'azienda di AI",
-   "Il governo canadese investirà fino a 1,6 miliardi di dollari canadesi in Cohere, in cambio di mille posti di lavoro, nuovi centri di calcolo e la sede in Canada."
+   "🧬",
+   "Rosalind",
+   "Il modello di OpenAI per biologia e farmaci",
+   "OpenAI ha pubblicato la scheda di sicurezza di GPT-Rosalind-6, un modello per la ricerca biologica che solo scienziati e organizzazioni verificati possono usare e che l'azienda stessa classifica a rischio alto."
   ],
   [
    "☁",
    "Azure",
-   "Telefonate e riunioni analizzate in automatico",
-   "La rubrica su Content Understanding spiega come trascrivere le registrazioni distinguendo chi parla, quale lingua impostare e quanto costa un'ora di audio."
+   "Analizzare documenti dalla riga di comando",
+   "La rubrica su Content Understanding spiega il nuovo strumento a comandi di Microsoft per analizzare documenti, e come lavorare su intere cartelle senza pagare due volte i file già fatti."
   ]
  ],
- "domanda": "Dopo quanto tempo, secondo OpenAI, i nuovi controlli darebbero l'allarme se un agente uscisse dal suo ambiente isolato?"
+ "domanda": "Quando OpenAI dice che inizierà a rispettare il segnale comune contro l'addestramento nel robots.txt?"
 }

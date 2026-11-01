@@ -560,5 +560,61 @@
   "vedi": [
    "diarizzazione"
   ]
+ },
+ "robots-txt": {
+  "t": "robots.txt",
+  "spiega": "Un file di testo nella cartella principale di un sito che dice ai programmi automatici quali pagine possono leggere. È una convenzione: chi lo rispetta lo fa per scelta.",
+  "esempio": "La riga «User-agent: GPTBot» seguita da «Disallow: /» chiede al crawler di OpenAI di non leggere nessuna pagina del sito.",
+  "approfondisci": "Il file robots.txt esiste dagli anni Novanta ed è stato standardizzato dall'IETF nel 2022. Le regole Allow e Disallow dicono se un programma può scaricare una pagina, non che cosa può farne dopo. Per questo il gruppo di lavoro AI Preferences dell'IETF sta definendo una regola in più, Content-Usage, per esprimere preferenze sull'uso dei contenuti, come l'addestramento dei modelli.",
+  "vedi": [
+   "crawler"
+  ]
+ },
+ "crawler": {
+  "t": "crawler",
+  "spiega": "Un programma che visita automaticamente le pagine web, una dopo l'altra, per copiarne il contenuto: lo usano i motori di ricerca e le aziende di AI.",
+  "esempio": "Googlebot legge le pagine per l'indice di Google; GPTBot le raccoglie per OpenAI.",
+  "vedi": [
+   "robots-txt"
+  ]
+ },
+ "grounding": {
+  "t": "grounding",
+  "spiega": "Il collegamento delle risposte di un modello a fonti precise, lette al momento, invece che solo a ciò che ha imparato in addestramento.",
+  "esempio": "Un assistente che risponde sulle elezioni cercando articoli di oggi e citandoli fa grounding; uno che risponde a memoria no.",
+  "vedi": [
+   "rag"
+  ]
+ },
+ "fine-tuning": {
+  "t": "fine-tuning",
+  "spiega": "Un addestramento in più, su pochi dati scelti, fatto su un modello già addestrato per cambiarne il comportamento o specializzarlo.",
+  "esempio": "Un'azienda prende un modello aperto e lo riaddestra su 5.000 risposte del suo servizio clienti perché risponda con il suo stile.",
+  "vedi": [
+   "lora"
+  ]
+ },
+ "disallineamento-emergente": {
+  "t": "disallineamento emergente",
+  "spiega": "Quando addestrare un modello su un compito ristretto con un difetto lo rende scorretto anche in tutt'altri campi, in modo inatteso.",
+  "esempio": "Un modello riaddestrato a scrivere codice con falle nascoste comincia a dare consigli pericolosi anche su domande che non c'entrano con il codice.",
+  "vedi": [
+   "fine-tuning",
+   "red-team"
+  ]
+ },
+ "system-card": {
+  "t": "system card",
+  "spiega": "Il documento che un'azienda pubblica con un modello per descriverne capacità, prove di sicurezza, rischi e protezioni.",
+  "esempio": "Nella system card di un modello si legge per esempio quante richieste pericolose rifiuta e con quali prove è stato valutato.",
+  "vedi": [
+   "benchmark"
+  ]
+ },
+ "cli": {
+  "t": "CLI",
+  "esteso": "Command-Line Interface",
+  "spiega": "Un programma che si usa scrivendo comandi in un terminale invece di cliccare in una finestra.",
+  "esempio": "Con il comando «azd ai cu analyze fattura.pdf» si analizza una fattura senza aprire il portale."
  }
 }
