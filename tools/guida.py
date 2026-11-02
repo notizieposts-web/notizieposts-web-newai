@@ -36,6 +36,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (32,'36','azure','costi','Documenti fino a 2.000 pagine'),
     (33,'37','azure','pipeline','Telefonate e riunioni: chi parla e quanto costa'),
     (34,'38','azure','produzione','La riga di comando: prove e lotti'),
+    (35,'39','azure','pipeline','Senza codice: Logic Apps e i costi nascosti'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']

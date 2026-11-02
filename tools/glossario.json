@@ -616,5 +616,58 @@
   "esteso": "Command-Line Interface",
   "spiega": "Un programma che si usa scrivendo comandi in un terminale invece di cliccare in una finestra.",
   "esempio": "Con il comando «azd ai cu analyze fattura.pdf» si analizza una fattura senza aprire il portale."
+ },
+ "ide": {
+  "t": "IDE",
+  "esteso": "Integrated Development Environment",
+  "spiega": "Il programma in cui si scrive il codice, con editor, ricerca, terminale e strumenti per provare il programma tutti insieme. Si arricchisce con le estensioni.",
+  "esempio": "VS Code e Cursor sono IDE: l'estensione di Claude Code aggiunge dentro l'editor un assistente che legge e modifica i file del progetto.",
+  "approfondisci": "Un IDE riunisce in una finestra tutto ciò che serve a programmare. Le estensioni ne ampliano le funzioni e girano con gli stessi permessi dell'utente: possono leggere i file, usare la rete e avviare programmi. Per questo un'estensione falsa è pericolosa quanto un programma installato di nascosto.",
+  "vedi": [
+   "supply-chain"
+  ]
+ },
+ "ssh": {
+  "t": "SSH",
+  "esteso": "Secure Shell",
+  "spiega": "Un sistema per collegarsi a un computer da remoto e dargli comandi, attraverso un canale cifrato. Chi ha una chiave autorizzata può entrare senza password.",
+  "esempio": "Un amministratore entra con SSH nel server dell'azienda da casa; se un attaccante aggiunge la sua chiave all'elenco di quelle autorizzate, può fare lo stesso.",
+  "approfondisci": "Le chiavi autorizzate a entrare stanno di solito nel file authorized_keys della cartella .ssh dell'utente. Un tunnel inverso è un collegamento SSH che parte dal computer della vittima verso l'esterno: così l'attaccante può entrare anche se il computer è dietro un firewall che blocca le connessioni in arrivo."
+ },
+ "ioc": {
+  "t": "IOC",
+  "esteso": "Indicator of Compromise",
+  "spiega": "Un indizio tecnico che rivela un attacco: l'impronta di un file, un indirizzo di rete, il nome di un processo o di una chiave.",
+  "esempio": "Nell'avviso di Cursor sono IOC l'indirizzo 134.209.82.225, la chiave SSH chiamata svc-telemetry e l'attività pianificata SysMon.",
+  "vedi": [
+   "edr"
+  ]
+ },
+ "supply-chain": {
+  "t": "catena di fornitura",
+  "spiega": "Nel software, l'insieme di librerie, pacchetti ed estensioni da cui dipende un programma. Un attacco alla catena di fornitura colpisce uno di questi pezzi per arrivare a chi lo installa.",
+  "esempio": "Invece di attaccare mille sviluppatori uno per uno, un attaccante modifica un'estensione che tutti aggiornano: arriva a tutti in un colpo solo.",
+  "vedi": [
+   "ide"
+  ]
+ },
+ "stablecoin": {
+  "t": "stablecoin",
+  "spiega": "Una criptovaluta legata al valore di una moneta tradizionale, di solito il dollaro, così che il suo prezzo resti quasi fisso.",
+  "esempio": "Un USDC vale circa un dollaro: un portafoglio con 10 USDC contiene l'equivalente di dieci dollari."
+ },
+ "otp": {
+  "t": "OTP",
+  "esteso": "One-Time Password",
+  "spiega": "Un codice che vale una volta sola e per poco tempo, mandato per SMS, email o app per confermare un'operazione.",
+  "esempio": "La banca manda un codice di sei cifre per confermare un bonifico: se un agente legge la stessa casella dove arriva il codice, può confermarlo da solo.",
+  "vedi": [
+   "prompt-injection"
+  ]
+ },
+ "pull-request": {
+  "t": "pull request",
+  "spiega": "Una proposta di modifica al codice di un progetto, che altre persone possono leggere, commentare e approvare prima di unirla al codice principale.",
+  "esempio": "Un agente sistema un errore in un ramo separato e apre una pull request: il manutentore la rivede e decide se accettarla."
  }
 }

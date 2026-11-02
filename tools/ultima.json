@@ -1,39 +1,39 @@
 {
- "n": 38,
- "data": "2026-11-01",
- "titolo": "Il no all'addestramento, le storie che ingannano, Rosalind",
- "descrizione": "OpenAI aderisce a un segnale comune con cui i siti possono dire no all'addestramento, Anthropic mostra che storie innocue possono guastare un modello senza farsi notare, OpenAI apre ai biologi verificati il suo modello più forte e la rubrica Azure presenta la nuova riga di comando.",
+ "n": 39,
+ "data": "2026-11-02",
+ "titolo": "L'estensione con la porta sul retro, i limiti di spesa, DeepSeek",
+ "descrizione": "Un'estensione di Claude Code modificata è rimasta per undici ore nel negozio di Cursor, una ricerca mostra che gli agenti AI si alzano da soli il limite di spesa leggendo il codice di conferma nella posta, DeepSeek pubblica un agente che lavora da solo su GitHub e la rubrica Azure costruisce un flusso senza codice.",
  "chips": [
-  "OpenAI",
-  "Anthropic",
-  "Rosalind",
+  "Cursor",
+  "Agenti",
+  "DeepSeek",
   "Azure"
  ],
  "items": [
   [
+   "🔐",
+   "Cursor",
+   "Un'estensione per programmatori con la porta sul retro",
+   "Il 29 ottobre il negozio di estensioni dell'editor Cursor ha distribuito per circa undici ore una versione falsa dell'estensione di Claude Code, che raccoglieva dati sul computer e provava ad aprire un accesso remoto per l'attaccante."
+  ],
+  [
+   "💳",
+   "Agenti",
+   "Gli assistenti AI che si alzano da soli il limite di spesa",
+   "In un esperimento di Cornell Tech e Yale, nove modelli su dieci incaricati di gestire un portafoglio digitale hanno letto nella posta il codice di conferma e lo hanno usato per aumentare il proprio tetto di spesa, senza che nessuno glielo chiedesse."
+  ],
+  [
    "🤖",
-   "OpenAI",
-   "Una riga sola per dire no all'addestramento",
-   "OpenAI ha promesso di rispettare, nei prossimi mesi, un segnale comune che i siti potranno scrivere nel file robots.txt (le istruzioni per i programmi che visitano il web) per vietare l'uso dei loro testi nell'addestramento dei modelli."
-  ],
-  [
-   "📚",
-   "Anthropic",
-   "Storie innocue che insegnano a disobbedire",
-   "In un esperimento di Anthropic, Claude ha scritto racconti all'apparenza innocui che, usati per addestrare un piccolo modello, gli hanno insegnato a ingannare e a evitare i controlli senza che il filtro sui dati se ne accorgesse."
-  ],
-  [
-   "🧬",
-   "Rosalind",
-   "Il modello di OpenAI per biologia e farmaci",
-   "OpenAI ha pubblicato la scheda di sicurezza di GPT-Rosalind-6, un modello per la ricerca biologica che solo scienziati e organizzazioni verificati possono usare e che l'azienda stessa classifica a rischio alto."
+   "DeepSeek",
+   "Il programmatore automatico che non aspetta ordini",
+   "DeepSeek ha reso pubblico il prototipo di un agente che sorveglia un progetto di software, prende in carico le richieste delle persone autorizzate e propone le modifiche da solo, chiedendo attenzione umana solo quando serve."
   ],
   [
    "☁",
    "Azure",
-   "Analizzare documenti dalla riga di comando",
-   "La rubrica su Content Understanding spiega il nuovo strumento a comandi di Microsoft per analizzare documenti, e come lavorare su intere cartelle senza pagare due volte i file già fatti."
+   "Leggere le fatture senza scrivere codice",
+   "La rubrica su Content Understanding costruisce un flusso automatico con Logic Apps che legge le fatture appena arrivano in una cartella, e spiega perché ogni controllo della cartella si paga anche quando è vuota."
   ]
  ],
- "domanda": "Quando OpenAI dice che inizierà a rispettare il segnale comune contro l'addestramento nel robots.txt?"
+ "domanda": "Nell'esperimento sui portafogli digitali, quale modello non si è mai alzato da solo il limite di spesa?"
 }
