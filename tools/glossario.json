@@ -669,5 +669,47 @@
   "t": "pull request",
   "spiega": "Una proposta di modifica al codice di un progetto, che altre persone possono leggere, commentare e approvare prima di unirla al codice principale.",
   "esempio": "Un agente sistema un errore in un ramo separato e apre una pull request: il manutentore la rivede e decide se accettarla."
+ },
+ "harness": {
+  "t": "harness",
+  "spiega": "Il programma che fa lavorare un modello come agente: gli dà gli strumenti (terminale, file, ricerca), gestisce i passi e la memoria del lavoro. Lo stesso modello può rendere in modo diverso con harness diversi.",
+  "esempio": "Claude Code è l'harness di Anthropic per i modelli Claude e Codex quello di OpenAI; OpenCode è un harness aperto che funziona con modelli di aziende diverse.",
+  "approfondisci": "Un modello da solo risponde a un messaggio. Per lavorare ore su un compito servono un ciclo che decide il passo successivo, strumenti per leggere e scrivere file o eseguire comandi, e un modo per riassumere ciò che è già stato fatto quando il contesto si riempie. Tutto questo è l'harness. Negli esami per agenti, come GDPx, il voto misura la coppia modello più harness, non il modello isolato.",
+  "vedi": [
+   "benchmark",
+   "finestra-di-contesto"
+  ]
+ },
+ "jepa": {
+  "t": "JEPA",
+  "esteso": "Joint Embedding Predictive Architecture",
+  "spiega": "Un modo di addestrare i modelli proposto da Yann LeCun: invece di ricostruire i dati parola per parola o pixel per pixel, il modello prevede la rappresentazione di una parte a partire da un'altra.",
+  "esempio": "Un JEPA per immagini vede metà di una foto e deve prevedere come rappresenterebbe l'altra metà, senza dover disegnare ogni pixel.",
+  "approfondisci": "Le architetture JEPA lavorano nello spazio delle rappresentazioni, gli embedding, e non sui dati grezzi. L'idea è che così il modello impari le cose importanti di una scena e ignori i dettagli imprevedibili, come la posizione esatta delle foglie di un albero. Il lavoro di Balestriero e LeCun dell'ottobre 2026 sostiene che anche la previsione della parola successiva sia un JEPA, ma con coppie di dati meno informative.",
+  "vedi": [
+   "embedding",
+   "modello-del-mondo"
+  ]
+ },
+ "sdk": {
+  "t": "SDK",
+  "esteso": "Software Development Kit",
+  "spiega": "Una libreria ufficiale che un'azienda offre per usare il suo servizio da un linguaggio di programmazione, senza scrivere a mano le richieste di rete.",
+  "esempio": "Con l'SDK Python di Content Understanding basta chiamare begin_analyze e poi result(): attese, ritentativi e autenticazione li gestisce la libreria.",
+  "approfondisci": "Un servizio cloud si usa di solito con un'API REST, cioè richieste HTTP con un formato preciso. L'SDK impacchetta quelle richieste in funzioni e oggetti del linguaggio, con tipi controllati, gestione degli errori e regole comuni. Conviene in produzione perché riduce il codice da mantenere, ma va aggiornato quando cambia la versione delle API.",
+  "vedi": [
+   "cli",
+   "lro"
+  ]
+ },
+ "lro": {
+  "t": "operazione lunga",
+  "esteso": "Long-Running Operation",
+  "spiega": "Una richiesta a un servizio che non dà subito il risultato: risponde con un indirizzo e bisogna tornare a chiedere finché il lavoro è finito.",
+  "esempio": "Un'analisi di Content Understanding su un PDF di cento pagine parte, restituisce un ID dell'operazione, e il programma controlla ogni pochi secondi finché lo stato diventa riuscito.",
+  "approfondisci": "Le operazioni lunghe servono per i lavori che durano più di qualche secondo, così la connessione non resta aperta. Il controllo a intervalli si chiama polling; gli SDK lo fanno con un oggetto chiamato poller. Conservare l'ID dell'operazione permette di recuperare il risultato più tardi, finché il servizio lo tiene.",
+  "vedi": [
+   "sdk"
+  ]
  }
 }

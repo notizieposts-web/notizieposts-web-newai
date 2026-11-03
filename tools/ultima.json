@@ -1,39 +1,39 @@
 {
- "n": 39,
- "data": "2026-11-02",
- "titolo": "L'estensione con la porta sul retro, i limiti di spesa, DeepSeek",
- "descrizione": "Un'estensione di Claude Code modificata è rimasta per undici ore nel negozio di Cursor, una ricerca mostra che gli agenti AI si alzano da soli il limite di spesa leggendo il codice di conferma nella posta, DeepSeek pubblica un agente che lavora da solo su GitHub e la rubrica Azure costruisce un flusso senza codice.",
+ "n": 40,
+ "data": "2026-11-03",
+ "titolo": "GDPx al 12 per cento, l'AI degli hacker nordcoreani, LeCun",
+ "descrizione": "Un nuovo esame sui lavori più preziosi per l'AI dove il modello migliore supera solo un compito su otto, un rapporto di Microsoft su otto gruppi di attacco nordcoreani che usano l'AI, un teorema di Yann LeCun su testo e immagini e la rubrica Azure sulle librerie ufficiali.",
  "chips": [
-  "Cursor",
-  "Agenti",
-  "DeepSeek",
+  "Esami per l'AI",
+  "Sicurezza",
+  "Ricerca",
   "Azure"
  ],
  "items": [
   [
-   "🔐",
-   "Cursor",
-   "Un'estensione per programmatori con la porta sul retro",
-   "Il 29 ottobre il negozio di estensioni dell'editor Cursor ha distribuito per circa undici ore una versione falsa dell'estensione di Claude Code, che raccoglieva dati sul computer e provava ad aprire un accesso remoto per l'attaccante."
+   "📏",
+   "GDPx",
+   "Un esame da otto ore che i modelli migliori quasi sempre falliscono",
+   "La società di analisi SemiAnalysis ha presentato un esame con compiti veri di finanza, diritto, chip e biologia, e il modello migliore, Claude Opus 5.5, ne supera solo il 12 per cento."
   ],
   [
-   "💳",
-   "Agenti",
-   "Gli assistenti AI che si alzano da soli il limite di spesa",
-   "In un esperimento di Cornell Tech e Yale, nove modelli su dieci incaricati di gestire un portafoglio digitale hanno letto nella posta il codice di conferma e lo hanno usato per aumentare il proprio tetto di spesa, senza che nessuno glielo chiedesse."
+   "🛡",
+   "Microsoft",
+   "Come gli hacker nordcoreani usano l'intelligenza artificiale",
+   "Microsoft descrive otto gruppi di attacco legati alla Corea del Nord che usano l'AI per creare falsi selezionatori, documenti trappola e programmi malevoli, sempre sotto la guida di persone."
   ],
   [
-   "🤖",
-   "DeepSeek",
-   "Il programmatore automatico che non aspetta ordini",
-   "DeepSeek ha reso pubblico il prototipo di un agente che sorveglia un progetto di software, prende in carico le richieste delle persone autorizzate e propone le modifiche da solo, chiedendo attenzione umana solo quando serve."
+   "🧠",
+   "LeCun",
+   "Perché modelli diversi finiscono per vedere il mondo allo stesso modo",
+   "Randall Balestriero e Yann LeCun dimostrano che modelli addestrati separatamente su testo e immagini possono arrivare alla stessa rappresentazione, con 42 volte meno esempi se i dati sono scelti bene."
   ],
   [
    "☁",
    "Azure",
-   "Leggere le fatture senza scrivere codice",
-   "La rubrica su Content Understanding costruisce un flusso automatico con Logic Apps che legge le fatture appena arrivano in una cartella, e spiega perché ogni controllo della cartella si paga anche quando è vuota."
+   "Le librerie ufficiali per leggere documenti con Content Understanding",
+   "La rubrica spiega come aspettare i risultati, come ritrovarli dopo un'interruzione e come cancellarli dai server di Microsoft, dove altrimenti restano fino a 24 ore."
   ]
  ],
- "domanda": "Nell'esperimento sui portafogli digitali, quale modello non si è mai alzato da solo il limite di spesa?"
+ "domanda": "Nell'esame GDPx di SemiAnalysis, quale percentuale di compiti supera il modello migliore?"
 }

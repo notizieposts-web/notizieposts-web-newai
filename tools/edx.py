@@ -41,6 +41,7 @@ EDX = {
  '37': (None, 'Il monitor di OpenAI, Claude per la scienza, il Canada in Cohere', 'OpenAI svela come sorveglia i suoi agenti, Anthropic porta Claude in venti istituti scientifici e il Canada investe fino a 1,6 miliardi in Cohere.'),
  '38': (None, 'Il no all\'addestramento, le storie che ingannano, Rosalind', 'Un segnale comune nel robots.txt contro l\'addestramento, i dati innocui che guastano un modello e il modello di OpenAI per la biologia.'),
  '39': (None, 'L\'estensione con la porta sul retro, i limiti di spesa, DeepSeek', 'Un\'estensione di Claude Code modificata nel negozio di Cursor, gli agenti che si alzano il limite di spesa e l\'agente proattivo di DeepSeek.'),
+ '40': (None, "GDPx al 12 per cento, l'AI degli hacker nordcoreani, LeCun", "L'esame GDPx sui lavori più preziosi, otto gruppi nordcoreani che usano l'AI e il teorema di Balestriero e LeCun su testo e immagini."),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):

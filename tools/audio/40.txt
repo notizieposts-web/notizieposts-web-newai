@@ -1,0 +1,53 @@
+Radar AI. Edizione del tre novembre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: un esame che i modelli migliori superano una volta su otto, l'intelligenza artificiale degli hacker nordcoreani, e il teorema di Yann LeCun.
+
+Una nota prima di cominciare. Nel primo capitolo il modello in testa alla classifica è Claude Opus cinque punto cinque, e tra i segnali ci sono i conti di Anthropic. Questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti, con i limiti che le fonti stesse indicano.
+
+Il periodo in breve. Tre notizie su come misuriamo e su come usiamo l'intelligenza artificiale. Un esame nuovo che mette i modelli davanti a lavori veri e a lunghe ore di fatica. Un rapporto su chi li usa per attaccare. E un risultato teorico che spiega perché modelli diversi finiscono per assomigliarsi.
+
+Capitolo uno. GDPx, l'esame dei lavori che valgono di più.
+
+Lunedì due novembre la società di analisi SemiAnalysis ha presentato GDPx, un nuovo benchmark, cioè un esame standard per confrontare i modelli. Copre undici campi scelti perché, secondo gli autori, sono quelli dove l'intelligenza artificiale più avanzata può rendere di più: la progettazione di chip e di hardware, la sicurezza informatica, la biologia, la finanza, il diritto, il trading quantitativo, la scienza dei materiali, lo sviluppo di software, e la ricerca sull'intelligenza artificiale stessa.
+
+I compiti li hanno preparati aziende specializzate, ciascuno con un ambiente di lavoro realistico. In finanza, per esempio, c'è un archivio simulato di circa quattromila file, come quello che un analista apre per studiare un'acquisizione. Ogni compito può durare fino a otto ore. E ogni modello lavora con il suo strumento da agente, per esempio Claude Code per Claude e Codex per i modelli di OpenAI.
+
+Il risultato: anche il modello migliore supera solo il dodici per cento dei compiti. Secondo SemiAnalysis, il migliore nel complesso è Claude Opus cinque punto cinque, primo anche nei chip e nel trading. Gemini quattro Carbon di Google è il migliore in biologia e vince di poco nello sviluppo di software. GPT sei Astra di OpenAI guida la scienza dei materiali. In finanza e diritto quasi tutti prendono zero; con un punteggio parziale, nel compito legale Opus arriva al quarantaquattro per cento e GPT sei Astra al venticinque.
+
+C'è un limite che gli autori stessi indicano: alcuni modelli hanno un voto più basso del dovuto perché i loro filtri di sicurezza frenano le risposte su attacchi informatici e biologia. Il voto misura capacità e regole insieme. E quasi tutti i compiti sono privati: al tre novembre nessuno ha ripetuto l'esame in modo indipendente. Nella pagina trovi un esempio su come leggere la classifica per scegliere un modello.
+
+Prova a chiederti: se dovessi scrivere un esame sul tuo lavoro, sapresti dire con un sì o con un no quando è fatto bene?
+
+Capitolo due. Microsoft e l'intelligenza artificiale dei gruppi nordcoreani.
+
+Giovedì ventinove ottobre il gruppo di analisi delle minacce di Microsoft ha pubblicato un rapporto su otto gruppi di attacco legati alla Corea del Nord. Microsoft li chiama con nomi che finiscono con Sleet, nevischio. Il giudizio è netto: l'adozione dell'intelligenza artificiale è alta, ma le operazioni restano guidate da persone. L'intelligenza artificiale serve a fare più in fretta le stesse cose di prima.
+
+Qualche esempio. Un gruppo, a giugno, ha creato in una settimana tre aziende di facciata e falsi selezionatori per una presunta azienda di analisi della blockchain. Un altro ha prodotto oltre cento documenti esca su misura per i bersagli, decine in pochi minuti, e da fine ottobre usa ARTEX, il sistema di agenti per i test di intrusione di cui avevamo parlato nell'edizione trentasei. Un altro ancora inserisce codice malevolo in progetti privati su GitHub. E il gruppo dei falsi lavoratori informatici da remoto usa l'intelligenza artificiale per scrivere curriculum e gestire molti personaggi falsi.
+
+Tra gli strumenti, il rapporto nomina Cursor, l'editor con l'intelligenza artificiale integrata: gli attaccanti scrivono codice con gli stessi strumenti dei programmatori onesti. Microsoft non nomina modelli e non dice di aver chiuso account. I consigli: aggiornare subito i sistemi raggiungibili da internet, non eseguire compiti tecnici prima di un colloquio vero, e fare colloqui con la telecamera accesa a chi lavora da remoto. Nella pagina trovi un esempio su un selezionatore troppo perfetto.
+
+Prova a chiederti: se domani ricevessi un'offerta di lavoro impeccabile, che cosa ti convincerebbe che dall'altra parte c'è davvero un'azienda?
+
+Capitolo tre. Il teorema di Balestriero e LeCun.
+
+Sempre il ventinove ottobre, Randall Balestriero e Yann LeCun hanno pubblicato un preprint, cioè un lavoro non ancora revisionato. Parte da un'osservazione del 2024: modelli molto diversi, se crescono abbastanza, tendono a organizzare le informazioni nello stesso modo. Un modello di sole immagini e uno di solo testo mettono vicine le stesse cose. La chiamano ipotesi della rappresentazione platonica.
+
+Gli autori la trasformano in un teorema per i modelli di tipo JEPA, un metodo di addestramento proposto da LeCun, in cui il modello impara confrontando due viste della stessa cosa. Se le viste sono buone, cioè due osservazioni della stessa scena, come una foto e la sua didascalia, modelli addestrati separatamente imparano la stessa rappresentazione, che si sovrappone con una sola rotazione. Secondo gli autori, prevedere la parola successiva, come fanno i modelli linguistici, è un caso con viste cattive: due pezzi dello stesso documento. Per questo servono molti più dati.
+
+I numeri. Con le viste buone bastano quarantadue volte meno esempi per arrivare allo stesso allineamento. Un piccolo modello di testo da centonove milioni di parametri si allinea alle immagini meglio di modelli linguistici fino a settantadue miliardi. Sono risultati degli autori, di pochi giorni fa, senza ancora conferme indipendenti né codice pubblicato. Nella pagina trovi un esempio con due mappe della stessa città.
+
+Prova a chiederti: impari meglio una città guardandola dal vivo o leggendo frammenti di guide diverse?
+
+La rubrica Azure. Trentaseiesima puntata: Content Understanding con le librerie ufficiali.
+
+Da marzo Content Understanding ha librerie ufficiali per Python, dot net, Java e JavaScript, e Microsoft le consiglia per la produzione. Un'analisi è un'operazione lunga: la richiesta parte, il servizio risponde subito, e poi bisogna chiedere a intervalli se ha finito. La libreria lo fa da sola, con un oggetto chiamato poller, che in Python controlla ogni tre secondi.
+
+Il poller ha anche un identificativo dell'operazione, come il biglietto del guardaroba. Serve per recuperare i file prodotti e per cancellare il risultato. Perché i risultati restano negli spazi di Microsoft fino a ventiquattro ore, poi spariscono da soli. I consigli: salva l'identificativo appena parte ogni analisi, così se un lotto si ferma recuperi i risultati già pronti senza rilanciare le analisi, che sono quelle che si pagano. Per i grandi volumi usa la versione asincrona della libreria. E se i documenti contengono dati personali, cancella il risultato dal servizio appena l'hai salvato. Nella pagina trovi un calcolatore e un esempio di codice.
+
+E ora la domanda del giorno. Nell'esame GDPx, quanto arriva il modello migliore?
+
+La risposta: al dodici per cento dei compiti. Secondo SemiAnalysis è Claude Opus cinque punto cinque, con compiti che possono durare fino a otto ore.
+
+Nei segnali di oggi trovi l'unione tra Marvell e Lumentum, da centoquindici miliardi di dollari, per i collegamenti tra i chip dei centri di calcolo, e alcune notizie ancora da confermare: i conti di Anthropic, una banca che limiterebbe gli assistenti di programmazione, e un decreto russo sui centri di calcolo. E una conferma: Apple dice ora ufficialmente che Qwen di Alibaba arriverà nelle sue funzioni di intelligenza artificiale in Cina.
+
+Questo era Radar AI. La pagina dell'edizione ha le fonti, gli esempi, cinque esperimenti da provare e un quiz di otto domande. A domani.
