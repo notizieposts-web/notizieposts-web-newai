@@ -711,5 +711,33 @@
   "vedi": [
    "sdk"
   ]
+ },
+ "prova-a-conoscenza-zero": {
+  "t": "prova a conoscenza zero",
+  "spiega": "Una tecnica crittografica con cui si dimostra che un calcolo è stato fatto correttamente senza rivelare i dati segreti usati. Chi controlla impara solo che l'affermazione è vera.",
+  "esempio": "Con FlashProve chi serve un modello prova che una risposta viene da certi pesi, senza mostrare i pesi a chi verifica.",
+  "approfondisci": "In inglese si chiama zero-knowledge proof. Chi dimostra produce un file, la prova, che chiunque può controllare con poco calcolo; se l'affermazione fosse falsa, costruire una prova valida sarebbe praticamente impossibile. Le varianti 'succinte', come gli zkSNARK, producono prove piccole e veloci da verificare anche quando il calcolo originale è enorme, ma generarle costa molto più del calcolo stesso.",
+  "vedi": [
+   "quantizzazione"
+  ]
+ },
+ "test-di-regressione": {
+  "t": "test di regressione",
+  "spiega": "Un controllo automatico che verifica che un programma, dopo una modifica, si comporti ancora come prima. Non dice se il risultato è buono, dice se è cambiato.",
+  "esempio": "Si salvano cinque domande con le risposte attuali di un modello e si rilanciano a ogni aggiornamento della libreria: se una risposta cambia, qualcosa si è rotto.",
+  "approfondisci": "Il nome viene dall'idea di 'regredire', cioè tornare indietro introducendo un errore in qualcosa che funzionava. I test di regressione girano di solito a ogni modifica, dentro l'integrazione continua. Per i modelli di AI sono delicati perché le risposte possono variare per caso: per questo si usano impostazioni deterministiche o si confronta solo ciò che deve restare uguale.",
+  "vedi": [
+   "integrazione-continua"
+  ]
+ },
+ "integrazione-continua": {
+  "t": "CI",
+  "esteso": "Continuous Integration, integrazione continua",
+  "spiega": "Il sistema che a ogni modifica proposta al codice lancia in automatico la compilazione e i test. Se qualcosa non va, la modifica viene segnalata o bloccata.",
+  "esempio": "Su GitHub, ogni proposta di modifica a Transformers fa partire migliaia di test; il nuovo controllo dei contratti per ora segnala i guasti senza bloccare.",
+  "approfondisci": "L'integrazione continua nasce per scoprire gli errori il prima possibile, quando la modifica è piccola e chi l'ha scritta la ricorda. Un controllo 'bloccante' impedisce di unire la modifica finché non passa; uno 'non bloccante' si limita ad avvisare, ed è il modo tipico di provare un controllo nuovo senza rallentare il lavoro per falsi allarmi.",
+  "vedi": [
+   "test-di-regressione"
+  ]
  }
 }

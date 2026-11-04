@@ -40,6 +40,7 @@ MAP = {
  '38':{'preferenze':'OpenAI','storie':'Anthropic','rosalind':'Rosalind'},
  '39':{'cursor':'Cursor','portafogli':'Agenti','deepseek':'DeepSeek'},
  '40':{'gdpx':'GDPx','coreadelnord':'Microsoft','jepa':'LeCun'},
+ '41':{'flashprove':'Anthropic','veriharm':'VeriHarm','mic':'Transformers'},
  '29':{'microsoft':'Microsoft','flint':'Flint','skills':'Anthropic','jolt':'Perplexity'},
 }
 def process(path, labels):
