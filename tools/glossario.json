@@ -739,5 +739,34 @@
   "vedi": [
    "test-di-regressione"
   ]
+ },
+ "app-intents": {
+  "t": "App Intents",
+  "spiega": "Il sistema di Apple con cui un'app dichiara al telefono le azioni che sa fare, così che Siri, Spotlight e i Comandi rapidi possano usarle senza aprire l'app.",
+  "esempio": "Un'app di spedizioni dichiara l'azione \"stato della consegna\": l'utente chiede a Siri dov'è il pacco e l'assistente la chiama da solo.",
+  "approfondisci": "Ogni azione ha un nome, i dati di cui ha bisogno e il risultato che restituisce. Con Siri AI, Apple permette anche di combinare più azioni in una skill. Le azioni che cambiano qualcosa, come un pagamento o un cambio di indirizzo, dovrebbero sempre chiedere una conferma all'utente.",
+  "vedi": [
+   "mcp"
+  ]
+ },
+ "modello-ricorrente": {
+  "t": "modello ricorrente",
+  "spiega": "Un modello che legge un testo un pezzo alla volta e porta con sé uno stato, una specie di taccuino, che aggiorna a ogni passo invece di rileggere tutto ogni volta.",
+  "esempio": "Gated DeltaNet è un modello ricorrente: in StateBench ha seguito gli scambi di cinque tazze molto più a lungo dei transformer delle stesse dimensioni.",
+  "approfondisci": "I modelli ricorrenti occupano una memoria fissa, qualunque sia la lunghezza del testo, e per questo sono interessanti per i contesti molto lunghi. Il prezzo è che lo stato ha una dimensione limitata e può dimenticare dettagli. Molti modelli recenti sono ibridi: alternano strati ricorrenti e strati di attenzione come quelli dei transformer.",
+  "vedi": [
+   "transformer",
+   "finestra-di-contesto"
+  ]
+ },
+ "transformer": {
+  "t": "transformer",
+  "spiega": "L'architettura su cui si basano quasi tutti i grandi modelli linguistici: a ogni nuova parola il modello guarda, con il meccanismo dell'attenzione, tutte le parole precedenti.",
+  "esempio": "GPT, Claude e Gemini sono transformer: per rispondere su un documento lungo ne ripercorrono il testo con l'attenzione a ogni passo.",
+  "approfondisci": "Il transformer è nato nel 2017 e funziona molto bene perché si addestra in parallelo su enormi quantità di testo. Il costo dell'attenzione cresce con la lunghezza del testo, e alcuni risultati teorici indicano problemi, come il tracciamento di certi stati, che un transformer standard non riesce a risolvere in generale.",
+  "vedi": [
+   "modello-ricorrente",
+   "kv-cache"
+  ]
  }
 }
