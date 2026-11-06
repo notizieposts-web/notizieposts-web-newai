@@ -768,5 +768,34 @@
    "modello-ricorrente",
    "kv-cache"
   ]
+ },
+ "crio-em": {
+  "t": "Crio-microscopia elettronica",
+  "spiega": "Una tecnica che congela rapidamente le molecole in un velo di ghiaccio e le fotografa con un microscopio elettronico; migliaia di immagini vengono combinate al computer in una forma tridimensionale.",
+  "esempio": "Per vedere la forma di una proteina si fotografano centomila copie congelate in posizioni diverse e un programma come RELION le ricompone in un modello 3D.",
+  "approfondisci": "La crio-microscopia elettronica, o crio-EM, ha valso il Nobel per la chimica nel 2017. Il campione viene congelato così in fretta che l'acqua non forma cristalli, e le molecole restano nella loro forma naturale. Ogni immagine è molto rumorosa: la qualità nasce dalla media di moltissime immagini, ed è per questo che l'elaborazione richiede molta potenza di calcolo.",
+  "vedi": [
+   "harness"
+  ]
+ },
+ "compattazione": {
+  "t": "Compattazione",
+  "spiega": "Il passaggio in cui un agente sostituisce la lunga storia della conversazione con un riassunto, per continuare a lavorare con una memoria più corta.",
+  "esempio": "Dopo cento passi su un progetto, l'agente scrive una nota con il compito, il punto raggiunto e il piano, e riparte da quella invece che da tutta la cronologia.",
+  "approfondisci": "Più è lunga la conversazione, più costa ogni nuova risposta, perché il modello deve rileggere tutto. La compattazione riduce questo costo ma è con perdita: un fatto lasciato fuori dal riassunto non c'è più. Per questo conviene tenere anche un registro completo da cui recuperare i dettagli quando servono.",
+  "vedi": [
+   "finestra-di-contesto",
+   "token",
+   "harness"
+  ]
+ },
+ "event-grid": {
+  "t": "Event Grid",
+  "spiega": "Il servizio di Azure che consegna avvisi di eventi, per esempio \"è arrivato un file\", ai programmi che devono reagire, appena l'evento accade.",
+  "esempio": "Quando una fattura viene caricata in un contenitore di Blob Storage, Event Grid avvisa subito la funzione che la manda in analisi, senza aspettare una scansione periodica.",
+  "approfondisci": "Event Grid funziona come un postino: le sorgenti, come Blob Storage, pubblicano eventi, e i sottoscrittori, come Azure Functions, li ricevono. Rispetto al controllo periodico di un contenitore, riduce il ritardo e il rischio di perdere un evento. Si paga per operazione.",
+  "vedi": [
+   "sdk"
+  ]
  }
 }

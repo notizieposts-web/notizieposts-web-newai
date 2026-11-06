@@ -44,6 +44,7 @@ EDX = {
  '40': (None, "GDPx al 12 per cento, l'AI degli hacker nordcoreani, LeCun", "L'esame GDPx sui lavori più preziosi, otto gruppi nordcoreani che usano l'AI e il teorema di Balestriero e LeCun su testo e immagini."),
  '41': (None, "La prova di quale modello risponde, agenti che rompono, collaudi", "FlashProve di Anthropic dimostra quale modello ha risposto, VeriHarm misura i danni collaterali degli agenti, Hugging Face collauda i modelli."),
  '42': (None, "Siri aperta alle app, il filo nei testi lunghi, credenze", "Apple apre Siri AI alle azioni delle app, StateBench misura chi perde il conto nei testi lunghi, e un modello addestrato al falso si guasta."),
+ '43': (None, "Le vault trovate con Claude, il contesto corto, i pesi di Kimi", "Claude aiuta a trovare la prima vault nei batteri, gli agenti lavorano con un promemoria corto e Moonshot apre i pesi di Kimi K3.1 Pro."),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):

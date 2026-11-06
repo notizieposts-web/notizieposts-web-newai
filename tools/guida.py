@@ -40,6 +40,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (36,'40','azure','produzione','Gli SDK: poller, ID e 24 ore'),
     (37,'41','azure','pipeline','Due documenti sullo stesso foglio'),
     (38,'42','azure','sicurezza','Guardrail: i campi svuotati dal filtro'),
+    (39,'43','azure','produzione','In automatico: Functions, Event Grid e tentativi'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']

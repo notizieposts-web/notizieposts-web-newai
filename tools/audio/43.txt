@@ -1,0 +1,53 @@
+Radar AI. Edizione del sei novembre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: una proteina misteriosa trovata nei batteri con l'aiuto di Claude, gli agenti che non hanno bisogno di ricordare tutto, e i pesi aperti di Kimi K3.1 Pro.
+
+Una nota prima di cominciare. Il primo capitolo racconta un lavoro di Anthropic fatto con Claude, il secondo un rapporto che mette alla prova anche un modello Claude, e il terzo una tabella che confronta Kimi con modelli Claude. Questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti, con i limiti che le fonti stesse indicano.
+
+Il periodo in breve. Tre notizie su che cosa serve davvero a un modello per lavorare bene. Un assistente che fa da tecnico di laboratorio sotto la guida dei ricercatori. Agenti che lavorano meglio con un promemoria corto che con tutta la loro storia. E un modello aperto gigantesco, reso apposta un po' meno capace in un campo pericoloso.
+
+Capitolo uno. La prima vault trovata nei batteri, con l'aiuto di Claude.
+
+Mercoledì quattro novembre il gruppo di scienze della vita di Anthropic ha raccontato un progetto durato meno di quattro mesi. Le vault sono grandi gusci di proteine, come piccole botti vuote, scoperte nel 1986 nelle cellule dei mammiferi. A che cosa servano, nessuno lo sa ancora. Finora si conoscevano solo negli organismi le cui cellule hanno un nucleo.
+
+Sotto la direzione dei ricercatori, Claude ha cercato le parenti della proteina delle vault in un archivio di circa quindici miliardi di proteine, ha progettato il DNA per produrle in un batterio di laboratorio, ha proposto come semplificare la purificazione e ha elaborato le immagini della crio-microscopia elettronica, la tecnica che fotografa molecole congelate e le ricompone in tre dimensioni. Le scelte di analisi le hanno consigliate le persone.
+
+Il risultato: la struttura della vault di un virus che infetta i batteri, fatta di novantasei copie della stessa proteina, con una parete di sette segmenti invece di nove. In ogni copia c'è una piccola molecola non identificata. La purificazione è scesa da circa tre giorni a circa novanta minuti.
+
+Anthropic racconta anche gli errori: un protocollo sbagliato che ha fatto perdere due settimane, e una mappa mescolata con la sua immagine allo specchio, per un passaggio standard saltato. Il lavoro è un preprint, cioè non ancora revisionato, e nessuno l'ha ancora replicato. Lo scopritore delle vault, Leonard Rome, ha commentato il manoscritto come consulente pagato. Le vault sono state prodotte solo in laboratorio, non ancora osservate nei batteri d'origine. Nella pagina trovi un esempio su chi fa che cosa in una giornata di lavoro.
+
+Prova a chiederti: in un lavoro che conosci bene, quale parte affideresti a un assistente veloce, e quale controllo non salteresti mai?
+
+Capitolo due. Gli agenti non hanno bisogno di ricordare tutto.
+
+Martedì tre novembre dodici ricercatori legati a NVIDIA hanno pubblicato un rapporto tecnico dal titolo, in italiano, non ti serve un contesto lungo. Un agente di programmazione lavora a passi, e ogni passo si aggiunge alla conversazione, che il modello rilegge tutta ogni volta. Secondo le stime del rapporto, far lavorare un modello con una memoria di duecentocinquantaseimila token, i pezzetti di testo che il modello legge, invece di sedicimila, costa da tre volte e mezzo fino a sette volte di più.
+
+La proposta è la compattazione: quando la conversazione diventa lunga, la si sostituisce con un riassunto. Un buon riassunto, scrivono gli autori, ha tre parti: il compito copiato quasi alla lettera, a che punto si è, e un piano con la condizione per dire che il lavoro è finito.
+
+Con questo metodo, su tredici esami, Claude Opus 4.5 e GPT 5.6 Sol cambiano di pochi punti, a volte in meglio, a volte in peggio, con risparmi stimati fino a quasi nove volte. Sui documenti lunghi, farli leggere a pezzi invece che tutti insieme fa addirittura salire l'accuratezza. I limiti: un riassunto prima o poi dimentica un fatto che servirà, i costi sono stime e non bollette vere, e manca ancora una replica indipendente. Nella pagina trovi l'esempio del passaggio di consegne tra colleghi e un calcolatore.
+
+Prova a chiederti: se dovessi lasciare oggi il tuo lavoro a qualcuno in cento parole, che cosa scriveresti, e che cosa perderesti?
+
+Capitolo tre. Kimi K3.1 Pro, i pesi aperti.
+
+Moonshot AI, l'azienda cinese di Kimi, aveva lanciato K3.1 Pro il ventitré ottobre per la chat e per gli sviluppatori, promettendo i pesi, cioè il modello scaricabile, entro il quattro novembre. Ora sono su Hugging Face. È un modello a esperti da duemilaottocento miliardi di parametri, di cui ne lavorano circa centoquattro miliardi per ogni token, con una memoria di un milione di token, per testo e immagini. È un modello per centri dati, non per un portatile.
+
+Nella tabella dei voti pubblicata da Moonshot, Kimi è primo su alcuni esami e indietro su altri, a volte di molto. Molti esami sono interni, e alcuni voti dei concorrenti vengono dai loro rapporti.
+
+La scelta più interessante riguarda la sicurezza informatica. Per la versione aperta, Moonshot ha tolto dall'ultima parte dell'addestramento i dati sugli attacchi informatici, e dichiara quanto ha perso: su un suo esame interno la riuscita scende dal novanta virgola cinque all'ottantuno per cento. L'obiettivo è non spingere più in là, con un modello che chiunque può scaricare, il limite di queste capacità. Ma una volta pubblici, i pesi si possono riaddestrare: è una riduzione del rischio, non un'eliminazione. Non ho potuto verificare la data esatta del caricamento né leggere la licenza. Nella pagina trovi l'esempio di una banca che vuole tenere il modello nei suoi server.
+
+Prova a chiederti: è giusto che chi pubblica un modello aperto lo renda apposta meno capace in un campo, e chi dovrebbe decidere fino a che punto?
+
+Capitolo quattro. La rubrica Azure Content Understanding, trentanovesima puntata: l'analisi che parte da sola.
+
+Lo schema è comune: un documento arriva in un contenitore di archiviazione di Azure, una funzione di Azure Functions se ne accorge e lo manda a Content Understanding. Le trappole sono tre. La prima è il ritardo: il modo predefinito controlla il contenitore a intervalli, e con il piano a consumo, se l'app era ferma, può tardare fino a dieci minuti; inoltre un evento si può perdere. Con Event Grid, il servizio che avvisa appena il file arriva, il ritardo si riduce, ed è la strada indicata da Microsoft. La seconda sono le ricevute: Azure non rielabora la stessa versione di un file, ma un file ricaricato con lo stesso nome è una versione nuova, e si paga di nuovo. La terza sono i tentativi: se la funzione fallisce, viene tentata cinque volte in tutto, poi il file finisce in una coda di scarto. Se l'errore arriva dopo l'analisi, ogni tentativo rifà l'analisi da capo. Il consiglio: controllare se il risultato esiste già prima di chiamare il servizio, salvare subito il numero dell'operazione e riprenderla invece di ripartire, e regolare quante esecuzioni girano insieme. Nella pagina trovi uno strumento per scegliere il modo giusto e un calcolatore dei tentativi pagati.
+
+Prova a chiederti: nel tuo flusso, quante volte paghi lo stesso documento quando qualcosa va storto?
+
+E ora la domanda del giorno. Quante copie della stessa proteina formano la vault del virus dei batteri risolta con l'aiuto di Claude?
+
+La risposta: novantasei, quarantotto per metà, contro le settantotto della vault dei mammiferi.
+
+Nei segnali di oggi trovi alcune notizie ancora da confermare. OpenAI che comprerebbe Pierre Computer, una società di strumenti per programmatori. Meta che avrebbe acquisito Conductor, che divide il lavoro di programmazione tra più agenti. Apple che taglierebbe il budget interno per gli strumenti di AI. Le GIF animate di ChatGPT Images 2.6. E Uber, dove quasi nessuno prenota una corsa con un agente.
+
+Questo era Radar AI. La pagina dell'edizione ha le fonti, gli esempi, cinque esperimenti da provare e un quiz di otto domande. A domani.

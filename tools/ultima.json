@@ -1,39 +1,39 @@
 {
- "n": 42,
- "data": "2026-11-05",
- "titolo": "Siri aperta alle app, il filo nei testi lunghi, credenze",
- "descrizione": "Apple apre Siri alle azioni di tutte le app, un nuovo esame mostra che i modelli perdono il conto nei documenti lunghi, uno studio spiega come i fatti falsi guastano un modello e la rubrica Azure racconta i campi svuotati dai filtri di sicurezza.",
+ "n": 43,
+ "data": "2026-11-06",
+ "titolo": "Le vault trovate con Claude, il contesto corto, i pesi di Kimi",
+ "descrizione": "Claude aiuta a trovare nei batteri una misteriosa struttura di proteine, gli agenti imparano a lavorare con una memoria corta e più economica, Moonshot pubblica il suo modello più grande e la rubrica Azure spiega come far partire l'analisi da sola quando arriva un file.",
  "chips": [
-  "Assistenti",
-  "Valutazione",
-  "Sicurezza",
+  "Ricerca",
+  "Agenti",
+  "Modelli aperti",
   "Azure"
  ],
  "items": [
   [
-   "📱",
-   "Apple",
-   "Siri potrà usare le azioni di tutte le app",
-   "Apple ha aperto agli sviluppatori la possibilità di offrire le azioni delle loro app al nuovo Siri, in prova da subito ma per ora non in Europa su iPhone e non in italiano."
-  ],
-  [
-   "🧮",
-   "Ai2",
-   "I modelli perdono il conto nei documenti lunghi",
-   "Un nuovo esame dell'istituto di ricerca Ai2 mostra che i modelli più avanzati vanno bene a trovare un'informazione ma sbagliano spesso quando devono seguire tanti cambiamenti di fila in un testo lungo."
+   "🧬",
+   "Anthropic",
+   "Una proteina misteriosa trovata nei batteri con l'aiuto di Claude",
+   "Anthropic racconta come Claude, guidato da quattro ricercatori, ha aiutato a ottenere la prima immagine in tre dimensioni di una particella vault, un guscio di proteine dalla funzione ancora sconosciuta, in un organismo senza nucleo."
   ],
   [
    "🧠",
-   "Ricerca",
-   "Insegnare risposte false guasta un modello",
-   "Uno studio mostra che riaddestrare un modello a ripetere risposte che sa essere sbagliate lo rende meno onesto anche su argomenti che non c'entrano, molto più che insegnargli lo stesso fatto in modo coerente."
+   "NVIDIA",
+   "Gli agenti non hanno bisogno di ricordare tutto",
+   "Un gruppo di ricerca mostra che gli assistenti che lavorano a passi possono sostituire la lunga storia della conversazione con un buon riassunto, perdendo pochissimo e spendendo fino a sette volte meno."
+  ],
+  [
+   "🔓",
+   "Moonshot",
+   "Kimi K3.1 Pro diventa scaricabile",
+   "L'azienda cinese Moonshot AI ha pubblicato il suo modello più grande, che chiunque può scaricare, dopo averlo reso apposta meno capace negli attacchi informatici."
   ],
   [
    "☁",
    "Azure",
-   "Quando il filtro di sicurezza svuota un campo",
-   "La rubrica spiega come Content Understanding può lasciare vuoti dei campi per colpa dei filtri di sicurezza anche quando l'analisi risulta riuscita, e come accorgersene."
+   "L'analisi dei documenti che parte da sola",
+   "La rubrica spiega come far analizzare a Content Understanding ogni file appena arriva, senza ritardi e senza pagare due volte lo stesso documento quando qualcosa va storto."
   ]
  ],
- "domanda": "In un nuovo esame sui documenti lunghi, fin dove scende l'accuratezza dei modelli più avanzati sui problemi più difficili?"
+ "domanda": "Quante copie della stessa proteina formano la particella vault di un virus dei batteri, risolta con l'aiuto di Claude?"
 }
