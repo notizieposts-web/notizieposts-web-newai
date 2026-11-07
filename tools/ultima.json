@@ -1,39 +1,39 @@
 {
- "n": 43,
- "data": "2026-11-06",
- "titolo": "Le vault trovate con Claude, il contesto corto, i pesi di Kimi",
- "descrizione": "Claude aiuta a trovare nei batteri una misteriosa struttura di proteine, gli agenti imparano a lavorare con una memoria corta e più economica, Moonshot pubblica il suo modello più grande e la rubrica Azure spiega come far partire l'analisi da sola quando arriva un file.",
+ "n": 44,
+ "data": "2026-11-07",
+ "titolo": "Anthropic accelera, GPT-6 Cyber, Inkling 2 Small",
+ "descrizione": "Un valutatore indipendente misura quanto in fretta Anthropic migliora i suoi modelli, OpenAI dà il suo modello per la sicurezza informatica solo a chi è verificato, Thinking Machines presenta un nuovo modello che promette di rendere scaricabile e la rubrica Azure spiega come si contano le pagine dei file d'ufficio.",
  "chips": [
+  "Sicurezza",
   "Ricerca",
-  "Agenti",
   "Modelli aperti",
   "Azure"
  ],
  "items": [
   [
-   "🧬",
-   "Anthropic",
-   "Una proteina misteriosa trovata nei batteri con l'aiuto di Claude",
-   "Anthropic racconta come Claude, guidato da quattro ricercatori, ha aiutato a ottenere la prima immagine in tre dimensioni di una particella vault, un guscio di proteine dalla funzione ancora sconosciuta, in un organismo senza nucleo."
+   "📈",
+   "METR",
+   "Anthropic migliora i suoi modelli circa due volte più in fretta",
+   "Dopo undici settimane nei dati interni di Anthropic, l'organizzazione indipendente METR stima che il ritmo di miglioramento dei modelli sia raddoppiato, soprattutto grazie all'AI che aiuta i ricercatori, ma scrive che gran parte delle prove è stata oscurata."
   ],
   [
-   "🧠",
-   "NVIDIA",
-   "Gli agenti non hanno bisogno di ricordare tutto",
-   "Un gruppo di ricerca mostra che gli assistenti che lavorano a passi possono sostituire la lunga storia della conversazione con un buon riassunto, perdendo pochissimo e spendendo fino a sette volte meno."
+   "🛡",
+   "OpenAI",
+   "Un modello che scrive attacchi informatici, solo per chi è verificato",
+   "OpenAI ha pubblicato la scheda di GPT-6 Cyber, un modello che trova falle nei programmi e prepara le prove per sfruttarle, riservato a esperti di sicurezza che superano controlli d'identità."
   ],
   [
-   "🔓",
-   "Moonshot",
-   "Kimi K3.1 Pro diventa scaricabile",
-   "L'azienda cinese Moonshot AI ha pubblicato il suo modello più grande, che chiunque può scaricare, dopo averlo reso apposta meno capace negli attacchi informatici."
+   "🧩",
+   "Thinking Machines",
+   "Inkling 2 Small arriva, i pesi solo dopo i test",
+   "La società di Mira Murati ha presentato un grande modello che legge testo e immagini, per ora usabile solo sulla sua piattaforma, e promette di renderlo scaricabile dopo i controlli di sicurezza esterni."
   ],
   [
    "☁",
    "Azure",
-   "L'analisi dei documenti che parte da sola",
-   "La rubrica spiega come far analizzare a Content Understanding ogni file appena arriva, senza ritardi e senza pagare due volte lo stesso documento quando qualcosa va storto."
+   "Quante pagine valgono un foglio Excel e un'email",
+   "La rubrica spiega come Content Understanding conta le pagine di Word, Excel, PowerPoint e delle email, perché i fogli nascosti si pagano e perché gli allegati vanno mandati a parte."
   ]
  ],
- "domanda": "Quante copie della stessa proteina formano la particella vault di un virus dei batteri, risolta con l'aiuto di Claude?"
+ "domanda": "Di quante volte, secondo METR, Anthropic ha accelerato il miglioramento dei suoi modelli rispetto a prima di ottobre 2025?"
 }

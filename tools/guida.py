@@ -41,6 +41,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (37,'41','azure','pipeline','Due documenti sullo stesso foglio'),
     (38,'42','azure','sicurezza','Guardrail: i campi svuotati dal filtro'),
     (39,'43','azure','produzione','In automatico: Functions, Event Grid e tentativi'),
+    (40,'44','azure','costi','File Office ed email: le pagine equivalenti'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']

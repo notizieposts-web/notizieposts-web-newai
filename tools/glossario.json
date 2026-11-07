@@ -797,5 +797,36 @@
   "vedi": [
    "sdk"
   ]
+ },
+ "intervallo-di-confidenza": {
+  "t": "Intervallo di confidenza",
+  "spiega": "La forchetta di valori entro cui, con i dati disponibili, si trova probabilmente il valore vero di una stima. Al 95 per cento vuol dire che il metodo usato centra il valore vero 95 volte su 100.",
+  "esempio": "\"1,9 volte, da 1,5 a 2,8\": il valore più probabile è vicino a 2, ma non si può escludere né mezzo raddoppio né quasi il triplo.",
+  "approfondisci": "Un numero da solo dice poco se non si sa quanto è incerto. L'intervallo di confidenza misura proprio questa incertezza: più dati ci sono, più la forchetta si stringe. Un intervallo largo non vuol dire che la stima sia sbagliata, ma che va presa con cautela. Quando due intervalli si sovrappongono molto, la differenza tra due valori può essere solo rumore.",
+  "vedi": [
+   "benchmark"
+  ]
+ },
+ "rsp": {
+  "t": "RSP",
+  "esteso": "Responsible Scaling Policy",
+  "spiega": "La politica con cui Anthropic decide quali protezioni servono man mano che i suoi modelli diventano più capaci. Fissa delle soglie: quando un modello le supera, scattano verifiche e misure più severe.",
+  "esempio": "Una soglia riguarda la ricerca automatizzata: se l'AI accelera di due volte la ricerca dell'azienda, è un campanello d'allarme che chiede più controlli.",
+  "approfondisci": "Anche altri laboratori hanno documenti simili, con nomi diversi, come il Preparedness Framework di OpenAI. Sono impegni volontari scritti dalle aziende stesse: valutatori esterni come METR controllano in parte come vengono applicati. Le soglie sono legate a capacità specifiche, per esempio nella biologia o nella sicurezza informatica.",
+  "vedi": [
+   "system-card",
+   "red-team"
+  ]
+ },
+ "exploit": {
+  "t": "Exploit",
+  "spiega": "Un programma o una sequenza di passi che sfrutta una vulnerabilità di un software per fargli fare qualcosa che non dovrebbe, come eseguire codice o ottenere permessi in più.",
+  "esempio": "Una falla nel browser permette a una pagina web di scrivere fuori dalla memoria prevista; l'exploit è il codice che usa quella falla per far girare un programma sul computer di chi visita la pagina.",
+  "approfondisci": "Chi difende un sistema scrive exploit per dimostrare che una falla è reale e grave, e per verificare che la correzione funzioni. Per questo i test di intrusione autorizzati li usano normalmente. La stessa capacità, nelle mani sbagliate, serve ad attaccare: è il classico problema dell'uso duplice.",
+  "vedi": [
+   "cve",
+   "red-team",
+   "sandbox"
+  ]
  }
 }

@@ -43,6 +43,7 @@ MAP = {
  '41':{'flashprove':'Anthropic','veriharm':'VeriHarm','mic':'Transformers'},
  '42':{'siri':'Apple','statebench':'Ai2','credenze':'LASR'},
  '43':{'vault':'Anthropic','compattazione':'NVIDIA','kimi':'Moonshot'},
+ '44':{'metr':'METR','cyber':'OpenAI','inkling':'Inkling'},
  '29':{'microsoft':'Microsoft','flint':'Flint','skills':'Anthropic','jolt':'Perplexity'},
 }
 def process(path, labels):
