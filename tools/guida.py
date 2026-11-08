@@ -42,6 +42,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (38,'42','azure','sicurezza','Guardrail: i campi svuotati dal filtro'),
     (39,'43','azure','produzione','In automatico: Functions, Event Grid e tentativi'),
     (40,'44','azure','costi','File Office ed email: le pagine equivalenti'),
+    (41,'45','azure','qualita','Il punteggio di confidenza e la revisione umana'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']

@@ -1,39 +1,39 @@
 {
- "n": 44,
- "data": "2026-11-07",
- "titolo": "Anthropic accelera, GPT-6 Cyber, Inkling 2 Small",
- "descrizione": "Un valutatore indipendente misura quanto in fretta Anthropic migliora i suoi modelli, OpenAI dà il suo modello per la sicurezza informatica solo a chi è verificato, Thinking Machines presenta un nuovo modello che promette di rendere scaricabile e la rubrica Azure spiega come si contano le pagine dei file d'ufficio.",
+ "n": 45,
+ "data": "2026-11-08",
+ "titolo": "ARTEX dei criminali, memoria degli agenti, ToyBlocks",
+ "descrizione": "Criminali comuni usano squadre di agenti AI per rubare certificati e account con pochi dollari di spesa, Anthropic spiega come un agente può ricordare ciò che impara, Ai2 apre un mondo simulato per capire dove sbagliano i robot e la rubrica Azure spiega quando far controllare un dato a una persona.",
  "chips": [
   "Sicurezza",
-  "Ricerca",
-  "Modelli aperti",
+  "Agenti",
+  "Robot",
   "Azure"
  ],
  "items": [
   [
-   "📈",
-   "METR",
-   "Anthropic migliora i suoi modelli circa due volte più in fretta",
-   "Dopo undici settimane nei dati interni di Anthropic, l'organizzazione indipendente METR stima che il ritmo di miglioramento dei modelli sia raddoppiato, soprattutto grazie all'AI che aiuta i ricercatori, ma scrive che gran parte delle prove è stata oscurata."
-  ],
-  [
    "🛡",
-   "OpenAI",
-   "Un modello che scrive attacchi informatici, solo per chi è verificato",
-   "OpenAI ha pubblicato la scheda di GPT-6 Cyber, un modello che trova falle nei programmi e prepara le prove per sfruttarle, riservato a esperti di sicurezza che superano controlli d'identità."
+   "Check Point",
+   "Agenti AI al servizio dei criminali, per pochi dollari",
+   "Leggendo i registri di dieci pannelli di controllo lasciati aperti, Check Point ha scoperto che squadre di agenti AI hanno rubato centinaia di certificati per app Apple e oltre 190.000 account di un videogioco, spendendo tra 180 e 1.500 dollari."
   ],
   [
-   "🧩",
-   "Thinking Machines",
-   "Inkling 2 Small arriva, i pesi solo dopo i test",
-   "La società di Mira Murati ha presentato un grande modello che legge testo e immagini, per ora usabile solo sulla sua piattaforma, e promette di renderlo scaricabile dopo i controlli di sicurezza esterni."
+   "🧠",
+   "Anthropic",
+   "Come far ricordare a un agente ciò che ha imparato",
+   "Anthropic ha pubblicato le sue prove su come un assistente AI può tenere appunti tra un lavoro e l'altro e riordinarli da solo nei momenti liberi, con risultati molto migliori quando gli appunti sono pochi e ordinati."
+  ],
+  [
+   "🤖",
+   "Ai2",
+   "Un mondo di cubetti per capire dove sbagliano i robot",
+   "L'Allen Institute for AI ha reso disponibile a tutti un braccio robotico simulato con oltre 85.000 esempi, che mostra come i modelli per robot falliscano appena gli oggetti sono in posizioni nuove."
   ],
   [
    "☁",
    "Azure",
-   "Quante pagine valgono un foglio Excel e un'email",
-   "La rubrica spiega come Content Understanding conta le pagine di Word, Excel, PowerPoint e delle email, perché i fogli nascosti si pagano e perché gli allegati vanno mandati a parte."
+   "Quali dati lasciare all'automatismo e quali far controllare",
+   "La rubrica spiega il punteggio con cui Content Understanding dice quanto è sicuro di ogni dato estratto, come sceglierne la soglia e quanto costa attivarlo."
   ]
  ],
- "domanda": "Di quante volte, secondo METR, Anthropic ha accelerato il miglioramento dei suoi modelli rispetto a prima di ottobre 2025?"
+ "domanda": "Come ha fatto Check Point a leggere le istruzioni degli operatori di ARTEX?"
 }

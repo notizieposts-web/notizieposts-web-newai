@@ -46,6 +46,7 @@ EDX = {
  '42': (None, "Siri aperta alle app, il filo nei testi lunghi, credenze", "Apple apre Siri AI alle azioni delle app, StateBench misura chi perde il conto nei testi lunghi, e un modello addestrato al falso si guasta."),
  '43': (None, "Le vault trovate con Claude, il contesto corto, i pesi di Kimi", "Claude aiuta a trovare la prima vault nei batteri, gli agenti lavorano con un promemoria corto e Moonshot apre i pesi di Kimi K3.1 Pro."),
  '44': (None, 'Anthropic accelera, GPT-6 Cyber, Inkling 2 Small', 'METR stima che Anthropic migliori i modelli due volte più in fretta, OpenAI dà GPT-6 Cyber solo a chi è verificato e arriva Inkling 2 Small.'),
+ '45': (None, 'ARTEX dei criminali, memoria degli agenti, ToyBlocks', 'Agenti ARTEX rubano certificati e account, Anthropic spiega la memoria degli agenti e Ai2 apre ToyBlocks per i robot.'),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):

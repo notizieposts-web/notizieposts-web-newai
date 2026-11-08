@@ -828,5 +828,26 @@
    "red-team",
    "sandbox"
   ]
+ },
+ "pentest": {
+  "t": "test di intrusione",
+  "spiega": "Un attacco autorizzato contro i propri sistemi, fatto da esperti o da programmi, per trovare le falle prima che le trovino i criminali. In inglese si chiama penetration test, o pentest.",
+  "esempio": "Una banca paga una società perché provi a entrare nel suo sito con le tecniche degli attaccanti, entro regole scritte, e le consegni l'elenco delle falle trovate.",
+  "approfondisci": "Un test di intrusione ha un perimetro scritto: che cosa si può attaccare, quando, con quali tecniche, chi avvisare. La differenza tra un test e un attacco sta proprio nel permesso. Gli strumenti per i test, come gli scanner di rete o le piattaforme di agenti, sono gli stessi che usano i criminali: per questo uno strumento nato per difendere può finire nelle mani sbagliate.",
+  "vedi": [
+   "red-team",
+   "exploit"
+  ]
+ },
+ "mig": {
+  "t": "MIG",
+  "esteso": "Multi-Instance GPU",
+  "spiega": "Una funzione delle GPU NVIDIA più potenti che divide fisicamente un chip in più parti indipendenti, ciascuna con la sua memoria e i suoi core. Ogni parte si comporta come una GPU più piccola.",
+  "esempio": "Una H100 divisa in sette parti può servire sette modelli piccoli diversi, invece di tenerne uno solo che usa il chip a metà.",
+  "approfondisci": "Il partizionamento serve quando un modello non sfrutta da solo tutta la GPU: con MIG le parti non si disturbano a vicenda, perché memoria e calcolo sono separati in hardware. Il limite è che le combinazioni di parti sono fisse, decise da NVIDIA per ogni chip, e che su molti servizi cloud si paga comunque la macchina intera.",
+  "vedi": [
+   "cuda",
+   "tpu"
+  ]
  }
 }
