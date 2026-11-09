@@ -1,39 +1,39 @@
 {
- "n": 45,
- "data": "2026-11-08",
- "titolo": "ARTEX dei criminali, memoria degli agenti, ToyBlocks",
- "descrizione": "Criminali comuni usano squadre di agenti AI per rubare certificati e account con pochi dollari di spesa, Anthropic spiega come un agente può ricordare ciò che impara, Ai2 apre un mondo simulato per capire dove sbagliano i robot e la rubrica Azure spiega quando far controllare un dato a una persona.",
+ "n": 46,
+ "data": "2026-11-09",
+ "titolo": "NVIDIA indaga, regole dopo il riassunto, StepBack",
+ "descrizione": "NVIDIA apre un'indagine interna dopo le notizie su un'operazione di spionaggio contro il suo fondatore, una ricerca mostra che gli agenti AI rispettano meno le regole quando riassumono la propria memoria, un nuovo metodo fa ragionare i modelli spendendo meno e la rubrica Azure spiega come usare al meglio il testo estratto dai documenti.",
  "chips": [
   "Sicurezza",
   "Agenti",
-  "Robot",
+  "Ragionamento",
   "Azure"
  ],
  "items": [
   [
    "🛡",
-   "Check Point",
-   "Agenti AI al servizio dei criminali, per pochi dollari",
-   "Leggendo i registri di dieci pannelli di controllo lasciati aperti, Check Point ha scoperto che squadre di agenti AI hanno rubato centinaia di certificati per app Apple e oltre 190.000 account di un videogioco, spendendo tra 180 e 1.500 dollari."
+   "NVIDIA",
+   "NVIDIA indaga sulle notizie di spionaggio contro Jensen Huang",
+   "Il consiglio di amministrazione di NVIDIA ha affidato a consiglieri indipendenti, con avvocati esterni, un'indagine dopo le notizie secondo cui il fondatore sarebbe stato preso di mira da servizi segreti stranieri, dicendo di non avere motivo di credere che i segreti dell'azienda siano stati compromessi."
   ],
   [
    "🧠",
-   "Anthropic",
-   "Come far ricordare a un agente ciò che ha imparato",
-   "Anthropic ha pubblicato le sue prove su come un assistente AI può tenere appunti tra un lavoro e l'altro e riordinarli da solo nei momenti liberi, con risultati molto migliori quando gli appunti sono pochi e ordinati."
+   "ARCBench",
+   "Gli agenti AI dimenticano le regole quando riassumono la memoria",
+   "Ricercatori dell'università di Amsterdam hanno mostrato che, quando un assistente AI riassume una conversazione lunga per continuare a lavorare, viola le regole ricevute circa quattro volte più spesso, anche se le ha ancora scritte nel riassunto."
   ],
   [
-   "🤖",
-   "Ai2",
-   "Un mondo di cubetti per capire dove sbagliano i robot",
-   "L'Allen Institute for AI ha reso disponibile a tutti un braccio robotico simulato con oltre 85.000 esempi, che mostra come i modelli per robot falliscano appena gli oggetti sono in posizioni nuove."
+   "🔁",
+   "StepBack",
+   "Ragionare meglio spendendo meno: tornare solo al passo sbagliato",
+   "Un nuovo metodo, invece di far rifare a un modello tutto il ragionamento molte volte, rifà solo la parte dal primo errore in poi, con la stessa precisione e fino al 41 per cento di calcolo in meno."
   ],
   [
    "☁",
    "Azure",
-   "Quali dati lasciare all'automatismo e quali far controllare",
-   "La rubrica spiega il punteggio con cui Content Understanding dice quanto è sicuro di ogni dato estratto, come sceglierne la soglia e quanto costa attivarlo."
+   "Come usare il testo che Content Understanding estrae dai documenti",
+   "La rubrica spiega come sono segnate pagine, tabelle e caselle nel testo restituito dal servizio, e come tagliarlo per pagina per spendere meno quando lo si passa a un modello."
   ]
  ],
- "domanda": "Come ha fatto Check Point a leggere le istruzioni degli operatori di ARTEX?"
+ "domanda": "Chi guida l'indagine annunciata dal consiglio di NVIDIA?"
 }

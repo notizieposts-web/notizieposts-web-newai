@@ -849,5 +849,21 @@
    "cuda",
    "tpu"
   ]
+ },
+ "amministratore-indipendente": {
+  "t": "Amministratore indipendente",
+  "spiega": "Un membro del consiglio di amministrazione di una società che non vi lavora come dirigente e non ha legami d'affari o personali che ne limitino il giudizio. Serve a controllare chi guida l'azienda.",
+  "esempio": "Se c'è un sospetto sull'amministratore delegato, l'indagine la conducono gli amministratori indipendenti, non i suoi collaboratori.",
+  "approfondisci": "Nelle società quotate le regole di borsa chiedono che una parte del consiglio sia indipendente e che alcuni comitati, come quello per il controllo dei conti, siano formati solo da indipendenti. Quando un caso riguarda il vertice, un comitato di indipendenti con avvocati esterni è la forma più forte di verifica interna. Non è però un'indagine pubblica: i risultati li decide di rendere noti il consiglio."
+ },
+ "autoconsistenza": {
+  "t": "Autoconsistenza",
+  "spiega": "Una tecnica in cui si fa ragionare un modello più volte, in modo indipendente, sullo stesso problema, e si tiene la risposta che compare più spesso. In inglese si chiama self-consistency.",
+  "esempio": "Chiedi dieci volte la soluzione di un problema di matematica: se sette risposte dicono 42, si sceglie 42.",
+  "approfondisci": "Funziona perché gli errori tendono a essere diversi tra loro, mentre la risposta giusta si ripete. Il prezzo è alto: ogni ragionamento in più costa token e tempo. Per questo esistono varianti che si fermano quando i voti sono già concordi, o che rigenerano solo una parte del ragionamento.",
+  "vedi": [
+   "catena-di-ragionamento",
+   "token"
+  ]
  }
 }
