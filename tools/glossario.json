@@ -865,5 +865,44 @@
    "catena-di-ragionamento",
    "token"
   ]
+ },
+ "latenza": {
+  "t": "latenza",
+  "spiega": "Il tempo che passa tra una richiesta e la sua risposta. Per un modello AI è quanto si aspetta prima che la risposta sia pronta.",
+  "esempio": "Se un'analisi chiama due volte un modello e ogni chiamata richiede circa 5 secondi, la latenza totale del modello è di circa 10 secondi.",
+  "approfondisci": "La latenza si misura di solito come media, ma per i sistemi in produzione contano anche i casi più lenti, per esempio il tempo entro cui finisce il 95 per cento delle richieste. Quando si lavora a grandi lotti, la latenza di ogni richiesta e il numero di richieste in parallelo decidono insieme quanto dura tutto il lavoro.",
+  "vedi": [
+   "token"
+  ]
+ },
+ "gdpr": {
+  "t": "GDPR",
+  "esteso": "General Data Protection Regulation",
+  "spiega": "Il regolamento dell'Unione europea sulla protezione dei dati personali, in vigore dal 2018. Dice quando e come si possono raccogliere e usare i dati delle persone.",
+  "esempio": "Un'azienda che usa un agente AI per leggere le email dei clienti deve rispettare il GDPR: usare quei dati solo per lo scopo dichiarato e non raccoglierne più del necessario.",
+  "approfondisci": "L'articolo 5 del GDPR elenca i principi di base: tra questi la limitazione della finalità, cioè usare i dati solo per lo scopo per cui sono stati raccolti, e la minimizzazione, cioè raccogliere solo quelli necessari. Valgono anche quando a trattare i dati è un programma automatico come un agente AI.",
+  "vedi": [
+   "minimizzazione-dei-dati",
+   "pii"
+  ]
+ },
+ "minimizzazione-dei-dati": {
+  "t": "minimizzazione dei dati",
+  "spiega": "Il principio per cui si raccolgono e si usano solo i dati personali davvero necessari a uno scopo preciso, e non di più.",
+  "esempio": "Per calcolare il rimborso spese di una persona servono le sue ricevute del mese, non quelle di tutti i colleghi né quelle dell'anno intero.",
+  "approfondisci": "È scritto nell'articolo 5 del GDPR e in molte leggi simili in altri Paesi. Per gli agenti AI è un problema pratico: se uno strumento restituisce più dati del necessario, un agente capace tende a usarli. Per questo conviene progettare gli strumenti in modo che restituiscano solo ciò che serve.",
+  "vedi": [
+   "gdpr",
+   "pii"
+  ]
+ },
+ "opentelemetry": {
+  "t": "OpenTelemetry",
+  "spiega": "Uno standard aperto per raccogliere da un programma misure, tracce e registri in un formato strutturato, da mandare poi a un sistema di monitoraggio.",
+  "esempio": "Invece di leggere a mano i messaggi di diagnostica, un'applicazione può registrare con OpenTelemetry durata e esito di ogni analisi e far scattare un allarme se i tempi crescono.",
+  "approfondisci": "OpenTelemetry è un progetto della Cloud Native Computing Foundation ed è supportato dai principali servizi cloud, Azure compreso. Definisce come descrivere una richiesta che attraversa più servizi, così da vedere in un unico punto dove si perde tempo. È più adatto all'automazione di un testo libero, che può cambiare forma senza preavviso.",
+  "vedi": [
+   "latenza"
+  ]
  }
 }

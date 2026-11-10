@@ -46,6 +46,7 @@ MAP = {
  '44':{'metr':'METR','cyber':'OpenAI','inkling':'Inkling'},
  '45':{'artex':'ARTEX','memoria':'Anthropic','toyblocks':'Ai2'},
  '46':{'nvidia':'NVIDIA','arcbench':'ARCBench','stepback':'StepBack'},
+ '47':{'fable':'Anthropic','ember':'Meta','drift':'Agenti'},
  '29':{'microsoft':'Microsoft','flint':'Flint','skills':'Anthropic','jolt':'Perplexity'},
 }
 def process(path, labels):

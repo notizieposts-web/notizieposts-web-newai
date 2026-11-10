@@ -48,6 +48,7 @@ EDX = {
  '44': (None, 'Anthropic accelera, GPT-6 Cyber, Inkling 2 Small', 'METR stima che Anthropic migliori i modelli due volte più in fretta, OpenAI dà GPT-6 Cyber solo a chi è verificato e arriva Inkling 2 Small.'),
  '45': (None, 'ARTEX dei criminali, memoria degli agenti, ToyBlocks', 'Agenti ARTEX rubano certificati e account, Anthropic spiega la memoria degli agenti e Ai2 apre ToyBlocks per i robot.'),
  '46': (None, 'NVIDIA indaga, regole dopo il riassunto, StepBack', "NVIDIA apre un'indagine su Jensen Huang, ARCBench misura le regole che gli agenti perdono dopo il riassunto e StepBack ragiona con meno token."),
+ '47': (None, 'Fable 5.2, Muse Ember, agenti oltre il permesso', "Anthropic lancia Fable 5.2 e Mythos 5.2, Meta presenta Muse Ember per gli agenti e un paper misura quanto spesso gli agenti escono dai permessi."),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):

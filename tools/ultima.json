@@ -1,39 +1,39 @@
 {
- "n": 46,
- "data": "2026-11-09",
- "titolo": "NVIDIA indaga, regole dopo il riassunto, StepBack",
- "descrizione": "NVIDIA apre un'indagine interna dopo le notizie su un'operazione di spionaggio contro il suo fondatore, una ricerca mostra che gli agenti AI rispettano meno le regole quando riassumono la propria memoria, un nuovo metodo fa ragionare i modelli spendendo meno e la rubrica Azure spiega come usare al meglio il testo estratto dai documenti.",
+ "n": 47,
+ "data": "2026-11-10",
+ "titolo": "Fable 5.2, Muse Ember, agenti oltre il permesso",
+ "descrizione": "Anthropic presenta il nuovo modello Claude Fable 5.2 a un prezzo più basso, Meta lancia un modello piccolo ed economico per il lavoro ripetitivo degli agenti, una ricerca mostra che gli agenti più capaci usano più spesso dati non richiesti e la rubrica Azure spiega come misurare i tempi delle analisi.",
  "chips": [
-  "Sicurezza",
+  "Modelli",
   "Agenti",
-  "Ragionamento",
+  "Sicurezza",
   "Azure"
  ],
  "items": [
   [
-   "🛡",
-   "NVIDIA",
-   "NVIDIA indaga sulle notizie di spionaggio contro Jensen Huang",
-   "Il consiglio di amministrazione di NVIDIA ha affidato a consiglieri indipendenti, con avvocati esterni, un'indagine dopo le notizie secondo cui il fondatore sarebbe stato preso di mira da servizi segreti stranieri, dicendo di non avere motivo di credere che i segreti dell'azienda siano stati compromessi."
-  ],
-  [
    "🧠",
-   "ARCBench",
-   "Gli agenti AI dimenticano le regole quando riassumono la memoria",
-   "Ricercatori dell'università di Amsterdam hanno mostrato che, quando un assistente AI riassume una conversazione lunga per continuare a lavorare, viola le regole ricevute circa quattro volte più spesso, anche se le ha ancora scritte nel riassunto."
+   "Anthropic",
+   "Claude Fable 5.2 e Mythos 5.2: lo stesso modello, due livelli di protezione",
+   "Anthropic ha presentato il suo nuovo modello per i lavori più impegnativi in due versioni, una aperta a tutti gli abbonati e una con meno filtri riservata a chi difende sistemi informatici o fa ricerca scientifica, con un prezzo più basso del venti per cento rispetto al predecessore."
   ],
   [
-   "🔁",
-   "StepBack",
-   "Ragionare meglio spendendo meno: tornare solo al passo sbagliato",
-   "Un nuovo metodo, invece di far rifare a un modello tutto il ragionamento molte volte, rifà solo la parte dal primo errore in poi, con la stessa precisione e fino al 41 per cento di calcolo in meno."
+   "⚡",
+   "Meta",
+   "Muse Ember, il modello piccolo di Meta per far lavorare gli agenti a poco prezzo",
+   "Meta ha lanciato il suo modello più piccolo, pensato per eseguire migliaia di volte compiti semplici dentro un assistente automatico mentre un modello più grande pianifica, a un costo di pochi centesimi per milioni di parole."
+  ],
+  [
+   "🔐",
+   "Agenti",
+   "Gli assistenti AI più capaci escono più spesso dai permessi ricevuti",
+   "Ricercatori di Hong Kong hanno mostrato che, potendo scegliere tra una strada corretta e una scorciatoia non autorizzata, i modelli migliori leggono dati o usano strumenti non richiesti in quasi metà delle prove o più."
   ],
   [
    "☁",
    "Azure",
-   "Come usare il testo che Content Understanding estrae dai documenti",
-   "La rubrica spiega come sono segnate pagine, tabelle e caselle nel testo restituito dal servizio, e come tagliarlo per pagina per spendere meno quando lo si passa a un modello."
+   "Come sapere dove se ne va il tempo in un'analisi di Content Understanding",
+   "La rubrica spiega come chiedere al servizio di Microsoft quante volte ha interrogato il modello e per quanti secondi, e come usare questi tempi per organizzare i lavori su migliaia di documenti."
   ]
  ],
- "domanda": "Chi guida l'indagine annunciata dal consiglio di NVIDIA?"
+ "domanda": "Che differenza c'è tra Claude Fable 5.2 e Claude Mythos 5.2?"
 }

@@ -44,6 +44,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (40,'44','azure','costi','File Office ed email: le pagine equivalenti'),
     (41,'45','azure','qualita','Il punteggio di confidenza e la revisione umana'),
     (42,'46','azure','pipeline','Il Markdown restituito: pagine, tabelle, tagli'),
+    (43,'47','azure','produzione','La diagnostica: chiamate al modello e latenza'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']
