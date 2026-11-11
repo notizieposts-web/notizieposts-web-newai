@@ -120,7 +120,7 @@ CSS = '''<style id="pal-css">
 .hbtn[aria-expanded="true"]{background:var(--violet-soft);border-color:var(--violet)}
 .hpan{margin-top:.8rem;padding:.9rem 1rem;border-left:4px solid var(--violet);background:var(--soft);border-radius:0 12px 12px 0}
 .hpan[hidden]{display:none}
-.hpan h4{margin:0 0 .4rem;font-size:1.02rem}
+.hpan h4{margin:0;font-size:1.05rem}.hpan .rd-row{margin-bottom:.4rem}
 .hpan p{margin:.3rem 0}.hpan ol,.hpan ul{margin:.3rem 0;padding-left:1.3rem}.hpan li{margin:.3rem 0}
 .hpan .rt-say{margin-top:.6rem}
 .schema{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:.6rem;margin:.5rem 0}
@@ -205,21 +205,21 @@ function mask(e){var s=String(e.s).replace(/<b>.*?<\/b>/g,'▢');return steps(pl
 function sibling(e){var c=EX.filter(function(x){return x.t===e.t&&x.id!==e.id&&x.k===e.k&&plain(x.q)!==plain(e.q)});if(!c.length)return null;c.sort(function(a,b){return (Math.abs(a.l-e.l)-Math.abs(b.l-e.l))||(Math.abs(a.id-e.id)-Math.abs(b.id-e.id))});return c[0]}
 function sayBtn(){return '<button type="button" class="rt-say" data-say="1">'+T.avatar(28)+'<span>Ascolta da Rada</span></button>'}
 var HELP={
- facile:function(e){var q=qparts(e),w=words(e);return '<h4>🧩 Spiegamelo facile</h4><div class="schema">'+
+ facile:function(e){var q=qparts(e),w=words(e);return '<div class="rd-row">'+T.avatar(60,'curiosa')+'<h4>Spiegamelo facile</h4></div><div class="schema">'+
    '<div class="sb s1"><h5>1. Che cosa so</h5>'+(q.know.length?'<ul>'+q.know.map(function(s){return '<li>'+T.nums(esc(s))+'</li>'}).join('')+'</ul>':'<p>Tutto quello che serve è nella domanda qui accanto.</p>')+'</div>'+
    '<div class="sb s2"><h5>2. Che cosa devo trovare</h5>'+q.ask.map(function(s){return '<p>'+T.nums(esc(s))+'</p>'}).join('')+'</div>'+
    '<div class="sb s3"><h5>3. Come rispondo</h5><p>'+how(e)+'</p></div></div>'+
    (w.length?'<h4 style="margin-top:.8rem">Parole difficili</h4><dl class="words">'+w.map(function(x){return '<dt>'+esc(x[0])+'</dt><dd>'+esc(x[2])+'</dd>'}).join('')+'</dl>':'')+sayBtn()},
- h1:function(e){var p=ep(e);return '<h4>💡 Aiuto 1: un indizio</h4><p>Questo esercizio è del tipo «'+e.t+'».</p>'+(p?'<p>La regola che ti serve è spiegata nella puntata '+p[0]+' della rubrica: «'+esc(p[1])+'». La trovi nella <a href="azure.html">guida Content Understanding</a>.</p>':'')+
+ h1:function(e){var p=ep(e);return '<div class="rd-row">'+T.avatar(60,'idea')+'<h4>Aiuto 1: un indizio</h4></div><p>Questo esercizio è del tipo «'+e.t+'».</p>'+(p?'<p>La regola che ti serve è spiegata nella puntata '+p[0]+' della rubrica: «'+esc(p[1])+'». La trovi nella <a href="azure.html">guida Content Understanding</a>.</p>':'')+
    '<p>'+(e.k==='mcq'?'Leggi tutte le risposte prima di scegliere. Spesso una o due si possono escludere subito.':'Scrivi su un foglio i numeri del testo. Poi chiediti: quali vanno divisi, quali moltiplicati, e in che ordine?'+(e.u?' Il risultato è in '+unit(e)+'.':''))+'</p>'+sayBtn()},
  h2:function(e){if(e.k==='mcq'&&e.o.length>=3){var wr=[];e.o.forEach(function(o,i){if(i!==e.c)wr.push(i)});wr=wr.slice(0,Math.max(1,Math.floor(e.o.length/2)));
      document.querySelectorAll('#stage .opt2').forEach(function(l,i){if(wr.indexOf(i)>=0)l.classList.add('out')});
-     return '<h4>🧭 Aiuto 2: restringi il campo</h4><p>Queste risposte le puoi escludere:</p><ul>'+wr.map(function(i){return '<li>'+e.o[i]+'</li>'}).join('')+'</ul><p>Nell\'elenco le vedi barrate. Scegli tra quelle rimaste.</p>'+sayBtn()}
-   return '<h4>🧭 Aiuto 2: il metodo</h4><p>Ecco i passaggi, senza i risultati. I conti falli tu, anche con la calcolatrice qui sotto.</p><ol>'+mask(e).map(function(s){return '<li>'+T.nums(esc(s))+'</li>'}).join('')+'</ol>'+sayBtn()},
- h3:function(e){return '<h4>✅ Aiuto 3: la soluzione passo passo</h4><ol>'+steps(e.s).map(function(s){return '<li>'+T.nums(s)+'</li>'}).join('')+'</ol><p><b>Risposta: '+(e.k==='num'?e.fa:e.o[e.c])+'</b></p><p>Ora prova a rifare i passaggi da solo e premi Verifica: i punti li prendi lo stesso.</p>'+sayBtn()},
- es:function(e){var x=sibling(e);if(!x)return '<h4>📘 Esempio svolto</h4><p>Per questo tipo di esercizio non c\'è un secondo esempio. Apri l\'aiuto 3 per vedere la soluzione passo passo.</p>'+sayBtn();
-   return '<h4>📘 Esempio svolto: stesso tipo, altri dati</h4><p>Guarda come si risolve questo. Poi torna al tuo e fai gli stessi passaggi.</p><div class="exq">'+T.nums(x.q)+'</div><ol>'+steps(x.s).map(function(s){return '<li>'+T.nums(s)+'</li>'}).join('')+'</ol><p><b>Risposta dell\'esempio: '+(x.k==='num'?x.fa:x.o[x.c])+'</b></p>'+sayBtn()},
- calc:function(e){return '<h4>🔢 Calcolatrice</h4><p id="calch">Scrivi un calcolo con + − × ÷ e le parentesi, per esempio 17.646 / 3.000. Il punto separa le migliaia, la virgola i decimali.</p><div class="calc"><label for="calci">Calcolo</label><input id="calci" inputmode="text" autocomplete="off" aria-describedby="calch"><button type="button" class="pbtn" id="calcb">= Calcola</button></div><p class="calcout" id="calco" role="status" aria-live="polite"></p>'}
+     return '<div class="rd-row">'+T.avatar(60,'pensa')+'<h4>Aiuto 2: restringi il campo</h4></div><p>Queste risposte le puoi escludere:</p><ul>'+wr.map(function(i){return '<li>'+e.o[i]+'</li>'}).join('')+'</ul><p>Nell\'elenco le vedi barrate. Scegli tra quelle rimaste.</p>'+sayBtn()}
+   return '<div class="rd-row">'+T.avatar(60,'pensa')+'<h4>Aiuto 2: il metodo</h4></div><p>Ecco i passaggi, senza i risultati. I conti falli tu, anche con la calcolatrice qui sotto.</p><ol>'+mask(e).map(function(s){return '<li>'+T.nums(esc(s))+'</li>'}).join('')+'</ol>'+sayBtn()},
+ h3:function(e){return '<div class="rd-row">'+T.avatar(60,'spiega')+'<h4>Aiuto 3: la soluzione passo passo</h4></div><ol>'+steps(e.s).map(function(s){return '<li>'+T.nums(s)+'</li>'}).join('')+'</ol><p><b>Risposta: '+(e.k==='num'?e.fa:e.o[e.c])+'</b></p><p>Ora prova a rifare i passaggi da solo e premi Verifica: i punti li prendi lo stesso.</p>'+sayBtn()},
+ es:function(e){var x=sibling(e);if(!x)return '<div class="rd-row">'+T.avatar(60,'spiega')+'<h4>Esempio svolto</h4></div><p>Per questo tipo di esercizio non c\'è un secondo esempio. Apri l\'aiuto 3 per vedere la soluzione passo passo.</p>'+sayBtn();
+   return '<div class="rd-row">'+T.avatar(60,'spiega')+'<h4>Esempio svolto: stesso tipo, altri dati</h4></div><p>Guarda come si risolve questo. Poi torna al tuo e fai gli stessi passaggi.</p><div class="exq">'+T.nums(x.q)+'</div><ol>'+steps(x.s).map(function(s){return '<li>'+T.nums(s)+'</li>'}).join('')+'</ol><p><b>Risposta dell\'esempio: '+(x.k==='num'?x.fa:x.o[x.c])+'</b></p>'+sayBtn()},
+ calc:function(e){return '<div class="rd-row">'+T.avatar(60,'conta')+'<h4>Calcolatrice</h4></div><p id="calch">Scrivi un calcolo con + − × ÷ e le parentesi, per esempio 17.646 / 3.000. Il punto separa le migliaia, la virgola i decimali.</p><div class="calc"><label for="calci">Calcolo</label><input id="calci" inputmode="text" autocomplete="off" aria-describedby="calch"><button type="button" class="pbtn" id="calcb">= Calcola</button></div><p class="calcout" id="calco" role="status" aria-live="polite"></p>'}
 };
 function calc(){var raw=$('calci').value,v=raw.replace(/\s/g,'').replace(/[÷:]/g,'/').replace(/[×xX]/g,'*').replace(/−/g,'-');
   v=v.replace(/\d[\d.,]*/g,function(n){n=n.replace(/[.,]+$/,'');if(n.indexOf(',')>=0)return n.replace(/\./g,'').replace(',','.');if(/^\d{1,3}(\.\d{3})+$/.test(n))return n.replace(/\./g,'');return n});
@@ -237,8 +237,8 @@ function open(id){var e=BY[id];cur=e;$('listview').hidden=true;var S=$('stage');
     '<form class="card ans" id="xf" novalidate>';
   if(e.k==='mcq'){h+='<fieldset><legend>Scegli una risposta</legend>'+e.o.map(function(o,i){return '<label class="opt2"><input type="radio" name="r'+e.id+'" value="'+i+'"'+(SV[e.id]&&SV[e.id].v===i?' checked':'')+'><span>'+o+'</span></label>'}).join('')+'</fieldset>'}
   else{h+='<div class="numrow"><label for="xn">La tua risposta'+(e.u?' ('+e.u+')':'')+'</label><input id="xn" inputmode="decimal" autocomplete="off" aria-describedby="xfb" value="'+(SV[e.id]&&SV[e.id].v!=null?esc(SV[e.id].v):'')+'"></div>'}
-  h+='<div class="acts"><button type="submit" class="vbtn">Verifica</button></div><p class="fb" id="xfb" role="status" aria-live="polite"></p></form>'+
-    '<section class="help" aria-labelledby="xh"><h3 id="xh">Hai bisogno di una mano?</h3><p class="nop">Gli aiuti non tolgono punti e non c\'è limite di tempo. Parti dal primo e apri il successivo solo se serve.</p><div class="hbtns">'+
+  h+='<div class="acts"><button type="submit" class="vbtn">Verifica</button></div><div class="rd-row"><span id="xface"></span><p class="fb" id="xfb" role="status" aria-live="polite"></p></div></form>'+
+    '<section class="help" aria-labelledby="xh"><div class="rd-row">'+T.avatar(64,'ciao')+'<h3 id="xh">Hai bisogno di una mano? Chiedi a Rada</h3></div><p class="nop">Gli aiuti non tolgono punti e non c\'è limite di tempo. Parti dal primo e apri il successivo solo se serve.</p><div class="hbtns">'+
     hb.map(function(b){return '<button type="button" class="hbtn" data-h="'+b[0]+'" aria-expanded="false" aria-controls="hp_'+b[0]+'">'+b[1]+'</button>'}).join('')+'</div>'+hb.map(function(b){return '<div class="hpan" id="hp_'+b[0]+'" hidden></div>'}).join('')+'</section>'+
     '<div class="snav"><button type="button" class="pbtn" id="xprev">← Precedente</button><button type="button" class="pbtn" id="xnext">Prossimo da fare →</button></div>'+
     '<p class="ref">Riferimento: '+e.p+' · <a href="azure.html">guida Content Understanding</a></p>';
@@ -258,7 +258,7 @@ function check(e){var id=e.id,fb=$('xfb'),ok,dir='';tries[id]=(tries[id]||0)+1;
     ok=+sel.value===e.c;document.querySelectorAll('input[name="r'+id+'"]').forEach(function(r){var l=r.parentNode;l.classList.remove('ok','ko');if(+r.value===e.c&&ok)l.classList.add('ok');if(r===sel&&!ok)l.classList.add('ko')})}
   else{var v=num($('xn').value);if(isNaN(v)){fb.className='fb ko';fb.textContent='Scrivi un numero, per esempio 1.250 o 3,5.';return}ok=Math.abs(v-e.a)<=e.tol;RSol.set('ex',id,{v:$('xn').value});SV=RSol.all('ex');
     if(!ok&&tries[id]>=2)dir=v>e.a?' Il tuo numero è troppo alto.':' Il tuo numero è troppo basso.'}
-  fb.className='fb '+(ok?'ok':'ko');
+  fb.className='fb '+(ok?'ok':'ko');$('xface').innerHTML=T.avatar(72,ok?'felice':'coraggio');
   if(ok){var first=!done[id];if(first){done[id]=1;save();var k=document.querySelector('#stage .kicker');if(k&&!k.querySelector('.done'))k.insertAdjacentHTML('beforeend','<span class="chip done">✓ Risolto</span>')}
     fb.textContent='✓ Giusto!'+(first?' +'+PT[e.l]+' punti.':' Era già risolto: i punti li avevi già.')+' Puoi passare al prossimo.'}
   else fb.textContent='✗ Non ancora.'+dir+' Nessun problema: riprova, oppure apri un aiuto qui sotto.'}

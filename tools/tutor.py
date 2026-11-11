@@ -9,11 +9,9 @@ API nel browser (window.RTutor):
   RTutor.avatar(px)            l'SVG dell'avatar
 """
 
-AVATAR = ('<svg class="rt-av" viewBox="0 0 64 64" width="%d" height="%d" aria-hidden="true" focusable="false">'
-          '<path d="M32 12V5" stroke="var(--violet)" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="5" r="3.2" fill="var(--teal)"/>'
-          '<circle cx="32" cy="36" r="25" fill="var(--violet)"/><circle cx="32" cy="37" r="18.5" fill="var(--bg)"/>'
-          '<g class="rt-eyes" fill="var(--ink)"><circle cx="25" cy="34" r="3"/><circle cx="39" cy="34" r="3"/></g>'
-          '<rect class="rt-mouth" x="26" y="43" width="12" height="3" rx="1.5" fill="var(--ink)"/></svg>')
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import rada
 
 CSS = '''<style id="tutor-css">
 .rt-fab{position:fixed;right:max(.8rem,env(safe-area-inset-right));bottom:max(.8rem,env(safe-area-inset-bottom));z-index:9500;display:inline-flex;align-items:center;gap:.5rem;min-height:52px;padding:.3rem 1rem .3rem .4rem;border-radius:999px;border:2px solid var(--violet);background:var(--surface);color:var(--ink);font:700 .95rem var(--head,system-ui);cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.18)}
@@ -40,7 +38,7 @@ CSS = '''<style id="tutor-css">
 .rt-opt{display:flex;gap:.6rem;align-items:center;min-height:40px}
 .rt-opt input[type=checkbox]{width:22px;height:22px;flex:none}
 .rt-read .hint{font-size:.85rem;color:var(--muted);margin:.5rem 0 0}
-.rt-av{flex:none}
+.rt-face{display:inline-flex;flex:none}
 .rt-eyes,.rt-mouth{transform-box:fill-box;transform-origin:center}
 .rt-eyes{animation:rt-blink 5s infinite}
 .rt-talk .rt-mouth{animation:rt-talk .26s infinite alternate ease-in-out}
@@ -58,11 +56,12 @@ html.rt-font body,html.rt-font main h1,html.rt-font main h2,html.rt-font main h3
 .rt-ruler{position:fixed;left:0;right:0;top:40%;height:3rem;z-index:9400;pointer-events:none;background:var(--violet);opacity:.13;border-top:2px solid var(--violet);border-bottom:2px solid var(--violet)}
 .rt-ruler[hidden]{display:none}
 .rt-say{display:inline-flex;align-items:center;gap:.4rem;min-height:40px;padding:.3rem .9rem .3rem .35rem;border-radius:999px;border:1px solid var(--violet);background:var(--surface);color:var(--ink);font:700 .92rem var(--head,system-ui);cursor:pointer}
-</style>'''
+</style>''' + rada.CSS
 
 JS = r'''<script id="tutor-js">(function(){
 var AV=__AV__;
-function av(px){return AV.replace(/width="\d+" height="\d+"/,'width="'+px+'" height="'+px+'"')}
+function av(px,ex){return (AV[ex]||AV.ciao).replace(/width="\d+" height="\d+"/,'width="'+px+'" height="'+Math.round(px*128/136)+'"')}
+var face='';function setFace(ex){if(face===ex||!panel)return;face=ex;panel.querySelector('.rt-face').innerHTML=av(64,ex);fab.querySelector('.rt-face').innerHTML=av(44,ex)}
 var P={size:0,sp:0,font:0,ruler:0,num:0,auto:0,rate:1};
 try{var sv=JSON.parse(localStorage.getItem('radar-read')||'{}');for(var k in P)if(sv[k]!=null)P[k]=sv[k]}catch(e){}
 function keep(){try{localStorage.setItem('radar-read',JSON.stringify(P))}catch(e){}}
@@ -88,7 +87,7 @@ function pickVoice(){if(!syn)return;var v=syn.getVoices()||[];voice=v.filter(fun
 if(syn){pickVoice();try{syn.addEventListener('voiceschanged',pickVoice)}catch(e){}}
 function ui(){if(!panel)return;var b=panel.querySelector('#rt-play'),p=panel.querySelector('#rt-pause'),s=panel.querySelector('#rt-stop');
   b.disabled=!Q.length||!syn;b.textContent=state==='paused'?'▶ Riprendi':(state==='play'?'↺ Da capo':'▶ Ascolta');p.disabled=state!=='play';s.disabled=state==='idle';
-  [fab,panel].forEach(function(x){x.classList.toggle('rt-talk',state==='play')});
+  setFace(state==='play'?'parla':'ciao');
   panel.querySelector('#rt-msg').textContent=!syn?'Questo browser non ha una voce: il testo qui sopra dice le stesse cose.':(Q.length&&!voice&&syn.getVoices().length?'Non trovo una voce italiana in questo dispositivo: la lettura può avere un accento straniero. Il testo resta scritto qui sopra.':'')}
 function mark(i){if(!cap)return;cap.querySelectorAll('.rt-s').forEach(function(n){n.classList.toggle('on',+n.dataset.i===i)});var on=cap.querySelector('.rt-s.on');if(on&&on.scrollIntoView)try{on.scrollIntoView({block:'nearest'})}catch(e){}}
 function next(){if(state!=='play')return;if(qi>=Q.length){state='idle';mark(-1);ui();return}
@@ -99,9 +98,9 @@ function stop(){if(syn)try{syn.cancel()}catch(e){}state='idle';qi=0;mark(-1);ui(
 function play(){if(!syn||!Q.length)return;try{syn.cancel()}catch(e){}qi=0;state='play';ui();setTimeout(next,60)}
 function build(){
   fab=document.createElement('button');fab.type='button';fab.className='rt-fab';fab.id='rt-fab';fab.setAttribute('aria-expanded','false');fab.setAttribute('aria-controls','rt-panel');
-  fab.innerHTML=av(40)+'<span class="rt-lab">Rada ti aiuta</span><span class="sr-only">: apri la guida e la lettura facilitata</span>';
+  fab.innerHTML='<span class="rt-face"></span><span class="rt-lab">Rada ti aiuta</span><span class="sr-only">: apri la guida e la lettura facilitata</span>';
   panel=document.createElement('section');panel.className='rt-panel';panel.id='rt-panel';panel.hidden=true;panel.tabIndex=-1;panel.setAttribute('role','dialog');panel.setAttribute('aria-labelledby','rt-h');
-  panel.innerHTML='<div class="rt-head">'+av(56)+'<div><h2 id="rt-h">Rada, la tua guida</h2><p>Ti spiego gli esercizi un passo alla volta. Posso leggere ad alta voce: il testo resta sempre scritto.</p></div><button type="button" class="rt-x" id="rt-x" aria-label="Chiudi la guida">✕</button></div>'+
+  panel.innerHTML='<div class="rt-head"><span class="rt-face"></span><div><h2 id="rt-h">Rada, la tua guida</h2><p>Ti spiego gli esercizi un passo alla volta. Posso leggere ad alta voce: il testo resta sempre scritto.</p></div><button type="button" class="rt-x" id="rt-x" aria-label="Chiudi la guida">✕</button></div>'+
     '<div class="rt-cap" id="rt-cap" tabindex="0" role="region" aria-label="Quello che dice Rada" aria-live="polite"><p>Ciao! In ogni esercizio trovi i pulsanti di aiuto: un indizio, il metodo, la soluzione passo passo, un esempio già svolto. Premi «Ascolta» e te li leggo io.</p></div>'+
     '<div class="rt-ctl"><button type="button" class="rt-b pri" id="rt-play">▶ Ascolta</button><button type="button" class="rt-b" id="rt-pause">⏸ Pausa</button><button type="button" class="rt-b" id="rt-stop">⏹ Ferma</button>'+
     '<label for="rt-rate">Velocità</label><select id="rt-rate"><option value="0.75">Lenta</option><option value="1">Normale</option><option value="1.25">Veloce</option></select></div><p class="rt-msg" id="rt-msg" role="status"></p>'+
@@ -136,9 +135,9 @@ function say(title,parts,opt){opt=opt||{};stop();var n=0,h=title?'<p><b>'+esc(ti
   cap.innerHTML=h;cap.scrollTop=0;if(opt.open!==false&&panel.hidden)show(false);ui();if(opt.play||P.auto)play()}
 window.RTutor={say:say,text:text,nums:nums,avatar:av,stop:stop,prefs:P,sents:sents};
 if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
-})();</script>'''.replace('__AV__', __import__('json').dumps(AVATAR % (40, 40)))
+})();</script>'''.replace('__AV__', __import__('json').dumps(rada.ALL))
 
 
 def say_btn(label='Ascolta da Rada', attrs=''):
     """Pulsante con l'avatar piccolo, da usare nelle pagine generate in Python."""
-    return '<button type="button" class="rt-say" %s>%s<span>%s</span></button>' % (attrs, AVATAR % (28, 28), label)
+    return '<button type="button" class="rt-say" %s>%s<span>%s</span></button>' % (attrs, rada.svg('ciao', 28), label)

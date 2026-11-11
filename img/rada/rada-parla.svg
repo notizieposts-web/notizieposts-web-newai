@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -10 136 128" width="272" height="256" role="img" aria-labelledby="t"><title id="t">Rada parla</title><style>.rd-all{animation:rd-float 3.2s ease-in-out infinite}
+.rd-eyes,.rd-mouth-t,.rd-wave,.rd-bulb,.rd-ping,.rd-spark,.rd-dot,.rd-drop,.rd-sym,.rd-armL,.rd-armR,.rd-q{transform-box:fill-box;transform-origin:center}
+.rd-eyes{animation:rd-blink 4.6s infinite}
+.rd-ping{animation:rd-ping 2.4s ease-out infinite;transform-origin:50% 100%}
+.rd-ping.b{animation-delay:.5s}
+.rd-wave{transform-origin:0% 100%;animation:rd-wave .9s ease-in-out infinite alternate}
+.rd-mouth-t{animation:rd-talk .24s ease-in-out infinite alternate}
+.rd-snd{animation:rd-fade 1s ease-in-out infinite}.rd-snd.b{animation-delay:.3s}
+.rd-bulb{animation:rd-pop 1.4s ease-in-out infinite alternate}
+.rd-dot{animation:rd-fade 1.6s ease-in-out infinite}.rd-dot.b{animation-delay:.25s}.rd-dot.c{animation-delay:.5s}
+.rd-spark{animation:rd-twinkle 1.1s ease-in-out infinite alternate}.rd-spark.b{animation-delay:.35s}.rd-spark.c{animation-delay:.7s}
+.rd-jump{animation:rd-jump .7s ease-in-out infinite alternate}
+.rd-drop{animation:rd-drop 1.8s ease-in infinite}
+.rd-sym{animation:rd-bob 1.8s ease-in-out infinite alternate}.rd-sym.b{animation-delay:.4s}.rd-sym.c{animation-delay:.8s}
+.rd-q{animation:rd-tilt 1.6s ease-in-out infinite alternate}
+.rd-point{transform-box:fill-box;transform-origin:0% 100%;animation:rd-point 1.2s ease-in-out infinite alternate}
+.rd-fist{transform-box:fill-box;transform-origin:100% 100%;animation:rd-fist .8s ease-in-out infinite alternate}
+@keyframes rd-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+@keyframes rd-blink{0%,93%,100%{transform:scaleY(1)}96.5%{transform:scaleY(.08)}}
+@keyframes rd-ping{0%{opacity:.9;transform:scale(.5)}100%{opacity:0;transform:scale(1.25)}}
+@keyframes rd-wave{from{transform:rotate(-10deg)}to{transform:rotate(16deg)}}
+@keyframes rd-talk{from{transform:scaleY(.45)}to{transform:scaleY(1.25)}}
+@keyframes rd-fade{0%,100%{opacity:.15}50%{opacity:1}}
+@keyframes rd-pop{from{transform:scale(.9)}to{transform:scale(1.12)}}
+@keyframes rd-twinkle{from{transform:scale(.4) rotate(0deg);opacity:.3}to{transform:scale(1.1) rotate(25deg);opacity:1}}
+@keyframes rd-jump{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+@keyframes rd-drop{0%{transform:translateY(-3px);opacity:0}25%{opacity:1}100%{transform:translateY(9px);opacity:0}}
+@keyframes rd-bob{from{transform:translateY(2px)}to{transform:translateY(-3px)}}
+@keyframes rd-tilt{from{transform:rotate(-8deg)}to{transform:rotate(10deg)}}
+@keyframes rd-point{from{transform:rotate(0deg)}to{transform:rotate(-9deg)}}
+@keyframes rd-fist{from{transform:rotate(0deg)}to{transform:rotate(10deg)}}
+@media (prefers-reduced-motion:reduce){.rd-all,.rd-all *{animation:none!important}}</style><ellipse cx="60" cy="112" rx="30" ry="3.2" fill="#121A2B" opacity=".12"/><g class="rd-all"><g><path d="M60 28 V15" stroke="#4B4BF5" stroke-width="3.6" stroke-linecap="round"/><path class="rd-ping" d="M51 9 Q60 0 69 9" fill="none" stroke="#0A9BB5" stroke-width="2.2" stroke-linecap="round"/><path class="rd-ping b" d="M46 6 Q60 -8 74 6" fill="none" stroke="#0A9BB5" stroke-width="2.2" stroke-linecap="round"/><circle cx="60" cy="13" r="4.6" fill="#0A9BB5"/><ellipse cx="46" cy="104" rx="9" ry="5" fill="#4B4BF5"/><ellipse cx="74" cy="104" rx="9" ry="5" fill="#4B4BF5"/><g><path d="M23 72 Q12 82 16 93" fill="none" stroke="#4B4BF5" stroke-width="7.5" stroke-linecap="round"/><circle cx="16" cy="93" r="5.4" fill="#4B4BF5"/></g><g class="rd-point"><path d="M97 70 Q110 70 110 56" fill="none" stroke="#4B4BF5" stroke-width="7.5" stroke-linecap="round"/><circle cx="110" cy="56" r="5.4" fill="#4B4BF5"/></g><ellipse cx="60" cy="66" rx="40" ry="39" fill="#4B4BF5"/><ellipse cx="60" cy="65" rx="30.5" ry="27" fill="#FFFFFF"/><circle cx="37.5" cy="71" r="4.4" fill="#F27BA8" opacity=".45"/><circle cx="82.5" cy="71" r="4.4" fill="#F27BA8" opacity=".45"/><g class="rd-eyes"><circle cx="47" cy="60" r="5.2" fill="#121A2B"/><circle cx="48.6" cy="58.2" r="1.7" fill="#FFFFFF"/><circle cx="73" cy="60" r="5.2" fill="#121A2B"/><circle cx="74.6" cy="58.2" r="1.7" fill="#FFFFFF"/></g><ellipse class="rd-mouth-t" cx="60" cy="76" rx="5.5" ry="4.6" fill="#121A2B"/><path class="rd-snd" d="M10 60 Q6 68 10 76" fill="none" stroke="#0A9BB5" stroke-width="2.6" stroke-linecap="round"/><path class="rd-snd b" d="M4 55 Q-3 68 4 81" fill="none" stroke="#0A9BB5" stroke-width="2.6" stroke-linecap="round"/></g></g></svg>

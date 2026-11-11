@@ -7,7 +7,7 @@ che resta nel suo browser (radar-team) e si esporta in CSV. Non c'è controllo a
 """
 import sys, os, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import argomenti, graph, store, tutor, cloud
+import argomenti, graph, store, tutor, cloud, rada
 from esercizi_gen import EX, it
 
 root = sys.argv[1]
@@ -91,7 +91,7 @@ body = ('''<section class="ch" id="pacchetti" style="padding-top:2.5rem"><div cl
 <div class="card"><div class="k">Punti Laboratorio</div><div class="v" id="mlp">0</div><div class="s" id="mls"></div></div>
 <div class="card"><div class="k">Totale</div><div class="v" id="mtot">0</div><div class="s" id="mth"></div></div></div>
 
-<div class="card online" id="online"><h3>🌐 Entra o registrati</h3>
+<div class="card online" id="online"><div class="rd-row">''' + rada.svg('ciao', 64) + '''<h3>Entra o registrati</h3></div>
 <p>Bastano un nome e una password: niente email, niente conferme. Se è la prima volta ti registri, se hai già un profilo entri e ritrovi i tuoi progressi, anche su un altro dispositivo. <a href="#privacy">Che cosa viene salvato</a>.</p>
 <p class="msg" id="ostat" role="status" aria-live="polite" tabindex="-1"></p>
 <form class="frm" id="oform" novalidate>
