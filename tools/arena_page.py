@@ -5,7 +5,7 @@ e genera azure-laboratorio.html (hub), lab-estrai.html, lab-trasforma.html, lab-
 """
 import sys, os, json, glob
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import argomenti, graph, bench, store
+import argomenti, graph, bench, store, tutor
 
 TOOLS = os.path.dirname(os.path.abspath(__file__))
 PACKS = [json.load(open(p, encoding='utf-8')) for p in sorted(glob.glob(os.path.join(TOOLS, 'arena', 'packs', '*.json')))]
@@ -124,9 +124,14 @@ function list(){var L=META.filter(function(m){return (F.d==='all'||m.d===F.d)&&(
 function filters(){document.querySelectorAll('.filters input').forEach(function(i){if(F[i.name]===i.value)i.checked=true;i.onchange=function(){F[this.name]=this.value;list()}})}
 /* ---------------- vista sfida */
 var cur=null;
+var HOW={estrai:['Leggi l\'obiettivo e le linee guida: dicono cosa notare, non la risposta.','Per ogni campo cerca il valore nel documento.','Scrivilo sotto il nome del campo, nel formato indicato.','Scegli il metodo. Se il valore è scritto così com\'è: Estrai. Se va scelto da un elenco: Classifica. Se va calcolato o cambiato di formato: Estrai e trasforma nel codice.','Premi Verifica: nel documento i valori giusti diventano verdi. L\'indizio evidenzia in giallo dove guardare.'],
+ trasforma:['Leggi la tabella «Specifica dell\'output»: dice quali campi deve restituire la funzione.','Guarda gli esempi: per ogni input c\'è l\'output atteso.','Scrivi la funzione, oppure descrivi all\'agente che cosa deve fare, una regola per riga.','Premi «Prova sugli esempi» e correggi finché passano.','Premi «Invia: tutti i test». Se un test nascosto non passa, pensa ai casi strani: valore vuoto, numero negativo, formato diverso.'],
+ confronta:['Leggi le regole di confronto: sono l\'unica cosa che conta.','Apri i documenti e cerca lo stesso dato in ognuno.','Applica le regole una alla volta, nell\'ordine in cui sono scritte.','Scrivi l\'esito di ogni campo nel formato indicato.','Premi Verifica. Se sbagli puoi correggere e riprovare.']};
+function wireSay(c){var b=$('csay');if(b&&window.RTutor)b.onclick=function(){RTutor.say(c.t,[c.goal,c.ctx,'Cosa notare prima di iniziare.'].concat(c.guide).concat(['Come si affronta, un passo alla volta.']).concat(HOW[c.track]||[]),{play:true})}}
 function head(c){var s=stat({id:c.id,p:c.pts});return '<div class="chead"><button type="button" class="back" id="back">← Tutte le sfide</button><div class="kicker" style="margin-top:.8rem"><span class="chip d'+c.d+'">'+DN[c.d]+'</span><span class="chip">'+c.pts+' punti</span><span class="chip">'+esc(c.kind)+'</span><span class="chip">giorno '+fday(c.giorno)+' · livello '+c.k+'</span>'+(s[1]?'<span class="chip done">'+s[0]+'</span>':'')+'</div>'+
-  '<h2 id="ctitle" tabindex="-1">'+esc(c.t)+'</h2><p class="goal">'+esc(c.goal)+'</p><p>'+esc(c.ctx)+'</p></div>'+
-  '<section class="guide" aria-labelledby="gh'+c.id+'"><h3 id="gh'+c.id+'">📋 Linee guida: cosa notare prima di iniziare</h3><ul>'+c.guide.map(function(g){return '<li>'+esc(g)+'</li>'}).join('')+'</ul></section>'}
+  '<h2 id="ctitle" tabindex="-1">'+esc(c.t)+'</h2><p class="goal">'+esc(c.goal)+'</p><p>'+esc(c.ctx)+'</p>'+(window.RTutor?'<p><button type="button" class="rt-say" id="csay">'+RTutor.avatar(28)+'<span>Rada, spiegami la sfida</span></button></p>':'')+'</div>'+
+  '<section class="guide" aria-labelledby="gh'+c.id+'"><h3 id="gh'+c.id+'">📋 Linee guida: cosa notare prima di iniziare</h3><ul>'+c.guide.map(function(g){return '<li>'+esc(g)+'</li>'}).join('')+'</ul></section>'+
+  '<section class="guide" aria-labelledby="hw'+c.id+'"><h3 id="hw'+c.id+'">🧩 Come si affronta, un passo alla volta</h3><ol>'+(HOW[c.track]||[]).map(function(g){return '<li>'+esc(g)+'</li>'}).join('')+'</ol><p>Non c\'è limite di tempo. Con «Rada ti aiuta», in basso a destra, puoi ingrandire il testo, aumentare gli spazi e farti leggere la sfida.</p></section>'}
 function docs(c){return '<div class="docs">'+c.docs.map(function(d,j){return '<div><p class="dname" id="dn'+c.id+'_'+j+'">📄 '+esc(d.nome)+'</p><div class="paper" id="paper'+j+'" tabindex="0" role="document" aria-labelledby="dn'+c.id+'_'+j+'">'+d.html+'</div>'+
   '<div class="ptool">'+(d.dl?'<a class="pbtn" href="'+d.dl+'" download>⬇ Scarica il PDF'+(d.kb?' ('+d.kb+' KB)':'')+'</a>':'')+(c.trap&&j===0?'<button type="button" class="pbtn" id="showhid" aria-pressed="false">👁 Mostra il testo nascosto (quello che legge il servizio)</button>':'')+'</div></div>'}).join('')+'</div>'}
 function wireHid(){if($('showhid'))$('showhid').onclick=function(){var p=$('paper0'),on=!p.classList.contains('show');p.classList.toggle('show',on);this.setAttribute('aria-pressed',on?'true':'false')}}
@@ -212,7 +217,7 @@ function takeT(c,won){var tin=c.gen.tin,tout=c.gen.tout,per=(tin*0.4+tout*1.6)/1
   $('out').innerHTML=h;$('redo').onclick=function(){try{localStorage.removeItem('arena_code_'+c.id)}catch(e){}open(c.id,true)};$('nextc').onclick=nextTodo}
 var REND={estrai:rEstrai,trasforma:rTrasforma,confronta:rConfronta};
 function open(id,keep){$('listview').hidden=true;$('stage').hidden=false;$('stage').innerHTML='<p role="status">Carico la sfida…</p>';
-  get(id).then(function(c){cur=c;REND[c.track](c);$('back').onclick=function(){location.hash=''};if(!keep)$('stage').scrollIntoView({block:'start'});$('ctitle').focus({preventScroll:true})})
+  get(id).then(function(c){cur=c;REND[c.track](c);wireSay(c);$('back').onclick=function(){location.hash=''};if(!keep)$('stage').scrollIntoView({block:'start'});$('ctitle').focus({preventScroll:true})})
     .catch(function(){$('stage').innerHTML='<p class="warn">Non riesco a caricare la sfida: controlla la connessione e riprova.</p><button type="button" class="back" id="back">← Tutte le sfide</button>';$('back').onclick=function(){location.hash=''}})}
 function nextTodo(){var L=META.slice().sort(function(a,b){return a.g<b.g?1:a.g>b.g?-1:(DO[a.d]-DO[b.d])||(a.id-b.id)});var m=L.find(function(x){return !(S.done[x.id]>=x.p)&&(!cur||x.id!==cur.id)});if(m)location.hash='a'+m.id;else toast('Hai risolto tutte le sfide di questo percorso!')}
 function route(){var m=/^#a(\d+)$/.exec(location.hash);if(m&&META.some(function(x){return x.id===+m[1]})){open(+m[1])}else{var back=cur;cur=null;$('stage').hidden=true;$('stage').innerHTML='';$('listview').hidden=false;list();if(back&&$('l'+back.id))$('l'+back.id).focus()}}
@@ -235,14 +240,14 @@ def main(root):
     lab = os.path.join(root, 'lab'); os.makedirs(lab, exist_ok=True)
     for c in CH:
         json.dump(c, open(os.path.join(lab, 'a%d.json' % c['id']), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
-    head = argomenti.head_from(root, 'Laboratorio') + CSS + bench.CSS + store.BACKUP_CSS + '</head>\n<body>\n'
+    head = argomenti.head_from(root, 'Laboratorio') + CSS + tutor.CSS + bench.CSS + store.BACKUP_CSS + '</head>\n<body>\n'
     first = next((c for c in reversed(CH) if c['track'] == 'estrai'), None)
     def page(fname, pg, title, hero_html, body_html, meta_list):
         js = (JS.replace('__META__', json.dumps(meta_list, ensure_ascii=False, separators=(',', ':'))).replace('__PAGES__', json.dumps(PAGES)).replace('__PAGE__', json.dumps(pg))
               .replace('__LAST__', json.dumps(LAST)).replace('__DAY__', json.dumps([{'id': c['id'], 'tr': c['track'], 'd': c['d'], 'p': c['pts']} for c in CH if c['giorno'] == LAST], separators=(',', ':'))).replace('__TRACKS__', json.dumps([t[:4] for t in TRACKS], ensure_ascii=False))
               .replace('__PROVA_DOC__', json.dumps(bench_text(first) if first else '', ensure_ascii=False)).replace('__PROVA_SCHEMA__', json.dumps(first['schema'] if first else '{}', ensure_ascii=False)))
         h = (head.replace('<title>Laboratorio · Radar AI</title>', '<title>%s · Radar AI</title>' % title) + argomenti.NAV('azure-laboratorio.html', eds) + hero_html +
-             '<main class="wrap">' + body_html + '</main><div class="toast" id="toast" role="status" aria-live="polite"></div>' + argomenti.FOOT + argomenti.JS + store.JS + bench.JS + js + '\n</body>\n</html>\n')
+             '<main class="wrap">' + body_html + '</main><div class="toast" id="toast" role="status" aria-live="polite"></div>' + argomenti.FOOT + argomenti.JS + store.JS + tutor.JS + bench.JS + js + '\n</body>\n</html>\n')
         open(os.path.join(root, fname), 'w', encoding='utf-8').write(h); return len(h)
     GBAR = ('<div class="gbar"><div class="card gstat"><div class="k">Livello</div><div class="v" id="glv">Apprendista</div><div class="xpbar" aria-hidden="true"><i id="gxpbar"></i></div><div class="s" id="gnext"></div></div>'
             '<div class="card gstat"><div class="k">Punti</div><div class="v" id="gxp">0</div><div class="s">il punteggio migliore di ogni sfida</div></div>'

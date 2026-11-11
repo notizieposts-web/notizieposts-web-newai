@@ -141,6 +141,14 @@ Segue Google Search Central (titoli e descrizioni unici, sitemap, dati struttura
 
 - `azure.html` (guida per tema) e `azure-esercizi.html` (palestra) si rigenerano con `guida.py` ed `esercizi_page.py`. Il Laboratorio (`azure-laboratorio.html` + `lab-estrai.html`, `lab-trasforma.html`, `lab-confronta.html`, `lab-prova.html`) si rigenera con `arena_page.py`. Laboratorio e Palestra non vanno toccati in un'edizione normale.
 
+## Rada, aiuti e lettura facilitata (dall'11 novembre 2026)
+
+- `tools/tutor.py` contiene **Rada**, la guida degli esercizi: un avatar che legge ad alta voce con la voce del browser (nessun server, nessuna chiave), con il testo sempre scritto e la frase in lettura evidenziata, e il pannello **Lettura facilitata** (testo più grande, più spazio, carattere ad alta leggibilità, righello, numeri in evidenza, lettura automatica degli aiuti). Le preferenze stanno nel browser (`radar-read`). È incluso da `esercizi_page.py` e `arena_page.py`.
+- **Palestra** (`esercizi_page.py`): elenco stile HackerRank con difficoltà Facile (20 punti), Media (40), Difficile (80), percorsi per tema, gradi a stelle; un esercizio alla volta (`#exN`). Gli aiuti non tolgono punti e si generano da soli da consegna e soluzione di `esercizi_gen.py`: indizio, metodo (passaggi senza risultati, o risposte da escludere), soluzione passo passo, esempio svolto (un esercizio dello stesso tipo con altri dati), "Spiegamelo facile" (schema, parole difficili da `WORDS`), calcolatrice.
+- **Laboratorio**: in ogni sfida il pulsante "Rada, spiegami la sfida" e i passi "Come si affronta" (`HOW` in `arena_page.py`). Punteggi e regole non cambiano.
+- Dopo ogni modifica: `esercizi_page.py`, `arena_page.py`, `site_meta.py`, `inject.py`, poi `arenatest.py`, `audit3.py`, `reflow.py`. Gli audit automatici vedono solo l'elenco: la vista di un esercizio con gli aiuti aperti va controllata a parte con axe.
+- Account, squadre e classifica condivisa non ci sono: servono un servizio esterno di accesso e un database (da decidere).
+
 ## Sfide quotidiane del Laboratorio (operazione delle 8:10)
 
 Standard dal 2026-10-20 (giorno 1), stile HackerRank: l'obiettivo è imparare a usare bene agenti e Content Understanding, non programmare. Ogni giorno 30 sfide, 10 per percorso, con difficoltà mista: 4 Facili (20 punti), 4 Medie (40), 2 Difficili (80). Livello del giorno k = giorni dal 2026-10-20 + 1: tutte e tre le difficoltà crescono con k (più righe, più aliquote, più test nascosti, trappole).
