@@ -48,7 +48,7 @@ CSS = '''<style id="sq-css">
 .board thead th{background:var(--soft)}
 .board tr.top td{font-weight:700}
 .board .rm{min-width:44px;min-height:44px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-weight:700}
-.online{margin-top:1.4rem;padding:1.2rem 1.3rem;max-width:44rem;border-top:6px solid var(--teal)}.online h3{margin:0 0 .4rem;font-size:1.15rem}.online .frm{margin-top:.8rem}
+.online{margin-top:1.4rem;padding:1.2rem 1.3rem;max-width:44rem;border-top:6px solid var(--teal)}.online h3{margin:0 0 .4rem;font-size:1.15rem}.online .frm{margin-top:.8rem}.frm[hidden],.sbtn[hidden]{display:none}
 .steps{counter-reset:s;list-style:none;padding:0;display:grid;gap:.6rem;max-width:44rem}
 .steps li{counter-increment:s;padding:.8rem 1rem .8rem 3.2rem;border:1px solid var(--line);border-radius:14px;background:var(--surface);position:relative}
 .steps li::before{content:counter(s);position:absolute;left:.9rem;top:.75rem;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--violet);color:var(--bg);font-weight:800;display:flex;align-items:center;justify-content:center}
@@ -67,8 +67,8 @@ body = ('''<section class="ch" id="pacchetti" style="padding-top:2.5rem"><div cl
 <li>''' + it(len(EX)) + ''' esercizi della Palestra e le sfide quotidiane del Laboratorio.</li><li>Percorsi per tema e tre difficoltà, con punti e gradi.</li><li>Aiuti graduali, lettura facilitata e Rada che legge ad alta voce.</li><li>Progressi salvati nel browser, con codice di backup.</li></ul>
 <div class="cta"><a class="sbtn pri" href="azure-esercizi.html?l=1">Inizia dai facili</a><a class="sbtn" href="azure-laboratorio.html">Sfide di oggi</a></div></div>
 <div class="card p2"><span><span class="chip">Da 2 a 30 persone</span></span><h3>Gruppo</h3><p class="who">Per una classe, un team, un gruppo di studio.</p><ul>
-<li>Tutto il pacchetto Utente, per ogni persona.</li><li>Un codice squadra scelto da chi coordina.</li><li>Ogni persona crea il suo codice risultato e lo manda a chi coordina.</li><li>Classifica della squadra con punti di Palestra e Laboratorio.</li></ul>
-<div class="cta"><a class="sbtn pri" href="#scheda">Crea il mio codice</a><a class="sbtn" href="#classifica">Apri la classifica</a></div></div>
+<li>Tutto il pacchetto Utente, per ogni persona.</li><li>Un codice squadra scelto da chi coordina.</li><li>Ogni persona entra con nome e password e scrive il codice squadra.</li><li>Classifica della squadra che si aggiorna da sola.</li></ul>
+<div class="cta"><a class="sbtn pri" href="#scheda">Entra o registrati</a><a class="sbtn" href="#classifica">Apri la classifica</a></div></div>
 <div class="card p3"><span><span class="chip">Più squadre</span></span><h3>Azienda</h3><p class="who">Per reparti diversi che seguono lo stesso programma.</p><ul>
 <li>Tutto il pacchetto Gruppo, per ogni squadra.</li><li>Una sola classifica con più squadre e il totale per squadra.</li><li>Percorsi consigliati per ruolo: acquisti, sviluppo, sicurezza, qualità.</li><li>Esportazione in CSV per i propri rapporti.</li></ul>
 <div class="cta"><a class="sbtn pri" href="#classifica">Classifica e CSV</a><a class="sbtn" href="#percorsi">Percorsi per ruolo</a></div></div>
@@ -85,24 +85,29 @@ body = ('''<section class="ch" id="pacchetti" style="padding-top:2.5rem"><div cl
     path('azure-esercizi.html?g=casi&l=3', 'Responsabili di progetto', 'Casi completi, difficili: scelte con vincoli.') +
     path('azure-laboratorio.html', 'Tutti: la sfida del giorno', '30 sfide nuove ogni giorno nel Laboratorio.') + '''</div></section>
 
-<section class="ch" id="scheda"><div class="ch-head"><div class="kicker"><span class="chip guide">Per ogni persona</span></div><h2>La mia scheda e il mio codice risultato</h2>
-<p class="lead">Questi numeri vengono dai progressi salvati in questo browser. Il codice risultato li riassume: lo crei tu e decidi tu a chi mandarlo.</p></div>
+<section class="ch" id="scheda"><div class="ch-head"><div class="kicker"><span class="chip guide">Per ogni persona</span></div><h2>La mia scheda</h2>
+<p class="lead">Questi numeri vengono dai progressi salvati in questo browser. Se entri, si salvano anche online e compaiono nella classifica della tua squadra.</p></div>
 <div class="me"><div class="card"><div class="k">Punti Palestra</div><div class="v" id="mpp">0</div><div class="s" id="mps"></div></div>
 <div class="card"><div class="k">Punti Laboratorio</div><div class="v" id="mlp">0</div><div class="s" id="mls"></div></div>
 <div class="card"><div class="k">Totale</div><div class="v" id="mtot">0</div><div class="s" id="mth"></div></div></div>
-<form class="frm" id="mf" novalidate>
+
+<div class="card online" id="online"><h3>🌐 Entra o registrati</h3>
+<p>Bastano un nome e una password: niente email, niente conferme. Se è la prima volta ti registri, se hai già un profilo entri e ritrovi i tuoi progressi, anche su un altro dispositivo. <a href="#privacy">Che cosa viene salvato</a>.</p>
+<p class="msg" id="ostat" role="status" aria-live="polite" tabindex="-1"></p>
+<form class="frm" id="oform" novalidate>
+<div><label for="on">Nome o soprannome</label><input type="text" id="on" maxlength="40" autocomplete="username"></div>
+<div><label for="op">Password</label><input type="password" id="op" maxlength="80" autocomplete="current-password" aria-describedby="oph"><p class="hint" id="oph">Almeno 6 caratteri. Non si può recuperare: se la dimentichi, i progressi online non si ritrovano.</p></div>
+<div><label for="otm">Codice squadra (facoltativo)</label><input type="text" id="otm" maxlength="24" autocomplete="off" aria-describedby="otmh"><p class="hint" id="otmh">Te lo dà chi coordina. Puoi aggiungerlo anche dopo.</p></div>
+<div class="row"><button type="submit" class="sbtn pri">Entra o registrati</button><button type="button" class="sbtn" id="onew" hidden>È la prima volta: crea il profilo</button></div></form>
+<div class="frm" id="oin2" hidden><div><label for="otm2">Codice squadra</label><input type="text" id="otm2" maxlength="24" autocomplete="off"></div>
+<div class="row"><button type="button" class="sbtn pri" id="osync">Salva e aggiorna</button><button type="button" class="sbtn" id="oout">Esci</button><button type="button" class="sbtn" id="oleave">Cancella i miei dati online</button></div></div>
+<p class="msg" id="omsg" role="status" aria-live="polite"></p></div>
+<details class="backup" style="margin-top:1.2rem;max-width:44rem"><summary style="cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center">Preferisci non salvare nulla online? Usa il codice risultato</summary><p>Scrivi nome e squadra, crea il codice e mandalo a chi coordina: nessun dato lascia il tuo browser.</p><form class="frm" id="mf" novalidate>
 <div><label for="mn">Il tuo nome, o un soprannome</label><input type="text" id="mn" maxlength="40" autocomplete="nickname" aria-describedby="mnh"><p class="hint" id="mnh">Compare nella classifica di chi riceve il codice. Puoi usare un soprannome.</p></div>
 <div><label for="mt">Codice squadra (facoltativo)</label><input type="text" id="mt" maxlength="24" autocomplete="off" aria-describedby="mth2"><p class="hint" id="mth2">Te lo dà chi coordina la squadra, per esempio VENDITE-7K2Q.</p></div>
 <div class="row"><button type="submit" class="sbtn pri">Crea il mio codice risultato</button></div>
 <div><label for="mc">Il tuo codice risultato</label><textarea id="mc" readonly aria-describedby="mch"></textarea><p class="hint" id="mch">Copialo e mandalo a chi coordina, per email o in chat. Contiene solo nome, squadra, data e punti.</p></div>
-<div class="row"><button type="button" class="sbtn" id="mcopy">Copia il codice</button></div><p class="msg" id="mmsg" role="status" aria-live="polite"></p></form>
-<div class="card online" id="online"><h3>🌐 Classifica online (facoltativa)</h3>
-<p>Se partecipi, il tuo nome, il codice squadra, i punti e i progressi vengono salvati su un database in Europa. Da quel momento la classifica della tua squadra si aggiorna da sola quando risolvi un esercizio, e puoi ritrovare i progressi su un altro dispositivo. Non servono email né password. <a href="#privacy">Che cosa viene salvato</a>.</p>
-<p class="msg" id="ostat" role="status" aria-live="polite"></p>
-<div class="row"><button type="button" class="sbtn pri" id="ojoin">Partecipa alla classifica online</button><button type="button" class="sbtn" id="osync" hidden>Aggiorna adesso</button><button type="button" class="sbtn" id="oleave" hidden>Esci e cancella i miei dati online</button></div>
-<div class="frm" id="osec" hidden><div><label for="ocode">Il tuo codice personale</label><input type="text" id="ocode" readonly aria-describedby="ocodeh"><p class="hint" id="ocodeh">Conservalo e non darlo ad altri: serve a ritrovare i tuoi progressi su un altro dispositivo. Chi lo conosce può modificare i tuoi dati.</p></div><div class="row"><button type="button" class="sbtn" id="ocopy">Copia il codice personale</button></div></div>
-<div class="frm"><div><label for="oin">Hai già un codice personale? Incollalo qui</label><input type="text" id="oin" autocomplete="off" aria-describedby="oinh"><p class="hint" id="oinh">I progressi salvati online si aggiungono a quelli di questo browser.</p></div><div class="row"><button type="button" class="sbtn" id="oload">Recupera i miei progressi</button></div></div>
-<p class="msg" id="omsg" role="status" aria-live="polite"></p></div></section>
+<div class="row"><button type="button" class="sbtn" id="mcopy">Copia il codice</button></div><p class="msg" id="mmsg" role="status" aria-live="polite"></p></form></details></section>
 
 <section class="ch" id="classifica"><div class="ch-head"><div class="kicker"><span class="chip guide">Per chi coordina</span></div><h2>La classifica della squadra</h2>
 <p class="lead">Scegli un codice squadra e dallo alle persone. Quando ti mandano i loro codici risultato, incollali qui: la classifica si aggiorna e resta in questo browser.</p></div>
@@ -122,22 +127,22 @@ body = ('''<section class="ch" id="pacchetti" style="padding-top:2.5rem"><div cl
 <section class="ch" id="come"><div class="ch-head"><div class="kicker"><span class="chip guide">Come funziona</span></div><h2>In quattro passi, e i limiti da sapere</h2></div>
 <ol class="steps"><li>Chi coordina crea un codice squadra e lo comunica alle persone, con il percorso della settimana.</li>
 <li>Ognuno si allena nella Palestra e nel Laboratorio, con i propri tempi e con gli aiuti che gli servono.</li>
-<li>Quando vuole, ognuno apre questa pagina, scrive nome e codice squadra e crea il suo codice risultato.</li>
-<li>Chi coordina incolla i codici nella classifica e, se serve, la scarica in CSV.</li></ol>
+<li>Ognuno apre questa pagina una volta, entra con nome e password e scrive il codice squadra.</li>
+<li>Chi coordina scrive il codice squadra nella classifica online e, se serve, la scarica in CSV.</li></ol>
 <div class="prose" style="margin-top:1.2rem"><ul>
 <li><b>Due modi, a scelta.</b> Con i codici risultato nessun dato lascia i browser. Con la classifica online i punti si aggiornano da soli, ma vengono salvati su un database.</li>
 <li><b>Si basa sulla fiducia.</b> Il codice non è protetto contro le modifiche: va bene per allenarsi insieme, non per esami o premi.</li>
 <li><b>Gli aiuti non compaiono in classifica.</b> Usarli non toglie punti nella Palestra: la classifica non distingue chi li ha usati.</li>
-<li><b>Niente email né password.</b> Online ti riconosce un codice personale creato nel tuo browser: se lo perdi e cancelli i dati del browser, i progressi online non si recuperano.</li></ul></div></section>
+<li><b>Niente email.</b> Entri con nome e password. Non esiste il recupero della password: se la dimentichi, i progressi online non si ritrovano.</li></ul></div></section>
 
 <section class="ch" id="privacy"><div class="ch-head"><div class="kicker"><span class="chip guide">Privacy</span></div><h2>Che cosa viene salvato online, e come cancellarlo</h2></div>
 <div class="prose"><ul>
-<li><b>Solo se premi «Partecipa alla classifica online».</b> Senza quel pulsante, tutto resta nel tuo browser.</li>
-<li><b>Che cosa:</b> il nome o soprannome che scrivi, il codice squadra, i punti, l'elenco degli esercizi e delle sfide risolte, la data dell'ultimo aggiornamento. Niente email, niente password, nessun dato di pagamento. Usa un soprannome se non vuoi comparire con il tuo nome.</li>
+<li><b>Solo se entri o ti registri.</b> Altrimenti tutto resta nel tuo browser.</li>
+<li><b>Che cosa:</b> il nome o soprannome che scrivi, il codice squadra, i punti, l'elenco degli esercizi e delle sfide risolte, la data dell'ultimo aggiornamento. Niente email e nessun dato di pagamento. La password non viene mai inviata: il browser la trasforma in un codice, e online resta solo un'impronta di quel codice. Usa un soprannome se non vuoi comparire con il tuo nome.</li>
 <li><b>Dove:</b> in un database Supabase nell'Unione europea (Francoforte). Come ogni servizio in rete, il fornitore registra dati tecnici di collegamento, come l'indirizzo IP, per sicurezza.</li>
-<li><b>Chi li vede:</b> chi conosce il codice della tua squadra vede nome, punti e data. I progressi li legge solo chi ha il tuo codice personale.</li>
-<li><b>Per quanto:</b> finché non li cancelli. Con «Esci e cancella i miei dati online» la riga viene eliminata subito.</li>
-<li><b>Chi risponde:</b> Radar AI, la newsletter di Alberto Cecinato. Per domande o per chiedere la cancellazione: <a href="mailto:notizieposts@gmail.com">notizieposts@gmail.com</a>.</li></ul></div></section>''')
+<li><b>Chi li vede:</b> chi conosce il codice della tua squadra vede nome, punti e data. I progressi li legge solo chi entra con il tuo nome e la tua password.</li>
+<li><b>Per quanto:</b> finché non li cancelli. Con «Cancella i miei dati online» la riga viene eliminata subito, senza chiedere a nessuno.</li>
+</ul></div></section>''')
 
 JS = r'''<script id="sq-js">(function(){
 var LV=__LV__,GS=__GS__,GR=__GR__,PT={1:20,2:40,3:80};
@@ -160,7 +165,7 @@ $('mpp').textContent=fmt(M.pp);$('mps').textContent='Facili '+M.pl[0]+' · Medie
 $('mtot').textContent=fmt(M.pp+M.lp);$('mth').textContent='Grado in Palestra: '+rank(M.pp);
 try{var me=JSON.parse(localStorage.getItem('radar-me')||'{}');$('mn').value=me.n||'';$('mt').value=me.t||''}catch(e){}
 $('mf').onsubmit=function(ev){ev.preventDefault();var n=clean($('mn').value,40),t=team($('mt').value);if(!n){$('mmsg').textContent='Scrivi prima il tuo nome o un soprannome.';$('mn').focus();return}
-  var mm=RCloud.me();mm.n=n;mm.t=t;RCloud.setMe(mm);
+  if(!RCloud.on()){var mm=RCloud.me();mm.n=n;mm.t=t;RCloud.setMe(mm)}
   var p=b64e(JSON.stringify({n:n,t:t,d:new Date().toISOString().slice(0,10),pp:M.pp,pl:M.pl,pg:M.pg,lp:M.lp,ls:M.ls}));$('mc').value='RS1:'+p+'.'+sum(p);$('mmsg').textContent='Codice creato. Copialo e mandalo a chi coordina.'};
 $('mcopy').onclick=function(){var t=$('mc');if(!t.value){$('mmsg').textContent='Crea prima il codice.';return}t.select();try{navigator.clipboard.writeText(t.value).then(function(){$('mmsg').textContent='Codice copiato.'},function(){document.execCommand('copy');$('mmsg').textContent='Codice copiato.'})}catch(e){document.execCommand('copy');$('mmsg').textContent='Codice copiato.'}};
 /* ---------------- classifica (resta in questo browser) */
@@ -169,23 +174,34 @@ function keep(){try{localStorage.setItem('radar-team',JSON.stringify(B))}catch(e
 function parse(line){var m=/RS1:([A-Za-z0-9_\-]+)\.([a-z0-9]+)/.exec(line);if(!m||sum(m[1])!==m[2])return null;try{var o=JSON.parse(b64d(m[1]));if(!o||!o.n)return null;
   return {n:clean(o.n,40),t:team(o.t),d:/^\d{4}-\d{2}-\d{2}$/.test(o.d)?o.d:'',pp:Math.max(0,+o.pp||0),lp:Math.max(0,+o.lp||0),ps:(o.pl||[]).reduce(function(a,b){return a+(+b||0)},0),ls:Math.max(0,+o.ls||0)}}catch(e){return null}}
 function online(){return !!(window.RCloud&&RCloud.on())}
-function ostate(){var m=RCloud.me(),o=online();$('ojoin').hidden=o;$('osync').hidden=!o;$('oleave').hidden=!o;$('osec').hidden=!o;$('ocode').value=o?m.s:'';
-  $('ostat').textContent=o?('Partecipi come «'+m.n+'»'+(m.t?' nella squadra '+m.t:', senza squadra')+'. I punti si aggiornano da soli.'):'Non stai partecipando alla classifica online.'}
+function ostate(){var m=RCloud.me(),o=online();$('oform').hidden=o;$('oin2').hidden=!o;
+  $('ostat').textContent=o?('Sei dentro come «'+m.n+'»'+(m.t?', squadra '+m.t:', senza squadra')+'. I punti si aggiornano da soli quando risolvi un esercizio.'):'';if(o)$('otm2').value=m.t||''}
 function refreshMine(){M=mine();$('mpp').textContent=fmt(M.pp);$('mps').textContent='Facili '+M.pl[0]+' · Medie '+M.pl[1]+' · Difficili '+M.pl[2];$('mlp').textContent=fmt(M.lp);$('mls').textContent=M.ls+(M.ls===1?' sfida con punti':' sfide con punti');$('mtot').textContent=fmt(M.pp+M.lp);$('mth').textContent='Grado in Palestra: '+rank(M.pp);
   RCloud.setStats({pp:M.pp,ps:M.pl[0]+M.pl[1]+M.pl[2],lp:M.lp,ls:M.ls})}
-function send(okmsg){$('omsg').textContent='Invio in corso…';return RCloud.pushNow().then(function(){$('omsg').textContent=okmsg;ostate()},function(e){$('omsg').textContent='⚠ Non sono riuscito a salvare online: '+e.message+' Riprova tra poco.'})}
-$('ojoin').onclick=function(){var n=clean($('mn').value,40),t=team($('mt').value);if(!n){$('omsg').textContent='Scrivi prima il tuo nome o un soprannome, qui sopra.';$('mn').focus();return}
-  if(t&&t.length<6){$('omsg').textContent='Il codice squadra deve avere almeno 6 caratteri.';$('mt').focus();return}
-  var m=RCloud.me();m.n=n;m.t=t;m.s=m.s||RCloud.newSecret();m.on=1;RCloud.setMe(m);refreshMine();send('Fatto: ora partecipi alla classifica online. Conserva il codice personale qui sotto.').then(function(){if(!$('osync').hidden)$('osync').focus()})};
-$('osync').onclick=function(){var m=RCloud.me(),n=clean($('mn').value,40),t=team($('mt').value);if(n)m.n=n;m.t=t;RCloud.setMe(m);refreshMine();send('Dati online aggiornati.')};
-$('oleave').onclick=function(){var m=RCloud.me();$('omsg').textContent='Cancello…';RCloud.rpc('radar_forget',{p_secret:m.s}).then(function(){RCloud.setMe({n:m.n,t:m.t});ostate();$('omsg').textContent='I tuoi dati online sono stati cancellati. I progressi in questo browser restano.';$('ojoin').focus()},function(e){$('omsg').textContent='⚠ Non sono riuscito a cancellare: '+e.message}) };
-$('ocopy').onclick=function(){var t=$('ocode');t.select();try{navigator.clipboard.writeText(t.value).then(function(){$('omsg').textContent='Codice personale copiato.'},function(){document.execCommand('copy');$('omsg').textContent='Codice personale copiato.'})}catch(e){document.execCommand('copy');$('omsg').textContent='Codice personale copiato.'}};
-$('oload').onclick=function(){var s=$('oin').value.trim();if(!/^RA1-[0-9a-f]{48}$/.test(s)){$('omsg').textContent='Questo non sembra un codice personale: comincia con RA1- ed è lungo 52 caratteri.';return}$('omsg').textContent='Cerco i tuoi progressi…';
-  RCloud.rpc('radar_load',{p_secret:s}).then(function(d){if(!d){$('omsg').textContent='Non trovo dati per questo codice.';return}
-    var a=decD(RStore.load('radar_ex')),b=decD(d.ex||'');Object.keys(b).forEach(function(k){a[k]=1});RStore.save('radar_ex',encD(a,LV.length));
-    function asum(t){var x=0;String(t||'').split('~')[0].split('_').forEach(function(q){q=q.split('-');if(q.length===2)x+=+q[1]||0});return x}
-    if(asum(d.arena)>asum(RStore.load('radar_arena')))RStore.save('radar_arena',d.arena);
-    RCloud.setMe({n:d.name,t:d.team,s:s,on:1});$('mn').value=d.name;$('mt').value=d.team;$('oin').value='';refreshMine();ostate();send('Progressi recuperati e uniti a quelli di questo browser.')},function(e){$('omsg').textContent='⚠ Non sono riuscito a leggere i dati: '+e.message})};
+function send(okmsg){return RCloud.pushNow().then(function(){$('omsg').textContent=okmsg;ostate()},function(e){$('omsg').textContent='⚠ Non sono riuscito a salvare online: '+e.message+' Riprova tra poco.'})}
+/* il codice segreto nasce da nome e password, nel browser: al server arriva solo quello, mai la password */
+function derive(name,pass){var E=new TextEncoder(),C=window.crypto&&window.crypto.subtle;if(!C)return Promise.reject(new Error('Questo browser non permette l\'accesso sicuro.'));
+  return C.importKey('raw',E.encode(pass),'PBKDF2',false,['deriveBits']).then(function(k){return C.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:E.encode('radar-ai:'+name.toLowerCase()),iterations:150000},k,192)}).then(function(b){var a=new Uint8Array(b),h='';for(var i=0;i<a.length;i++)h+=(a[i]<16?'0':'')+a[i].toString(16);return 'RA1-'+h})}
+function merge(d){var a=decD(RStore.load('radar_ex')),b=decD(d.ex||'');Object.keys(b).forEach(function(k){a[k]=1});RStore.save('radar_ex',encD(a,LV.length));
+  function asum(t){var x=0;String(t||'').split('~')[0].split('_').forEach(function(q){q=q.split('-');if(q.length===2)x+=+q[1]||0});return x}
+  if(asum(d.arena)>asum(RStore.load('radar_arena')))RStore.save('radar_arena',d.arena)}
+$('oform').onsubmit=function(ev){ev.preventDefault();var n=clean($('on').value,40),pw=$('op').value,t=team($('otm').value);
+  if(!n){$('omsg').textContent='Scrivi un nome o un soprannome.';$('on').focus();return}
+  if(pw.length<6){$('omsg').textContent='La password deve avere almeno 6 caratteri.';$('op').focus();return}
+  if(t&&t.length<6){$('omsg').textContent='Il codice squadra deve avere almeno 6 caratteri. Se non ne hai uno, lascia vuoto.';$('otm').focus();return}
+  $('omsg').textContent='Un momento…';
+  derive(n,pw).then(function(sec){return RCloud.rpc('radar_load',{p_secret:sec}).then(function(d){
+    if(!d){pend={n:n,t:t,s:sec};$('onew').hidden=false;$('omsg').textContent='Non trovo un profilo con questo nome e questa password. Se è la prima volta, premi «È la prima volta: crea il profilo». Se ne hai già uno, controlla nome e password e riprova.';$('onew').focus();return}
+    merge(d);enter(n,t||d.team,sec,'Bentornato! Ho unito i progressi salvati online a quelli di questo browser.')})}).catch(function(e){$('omsg').textContent='⚠ Non sono riuscito a entrare: '+e.message})};
+var pend=null;
+function enter(n,t,sec,msg){RCloud.setMe({n:n,t:t||'',s:sec,on:1});pend=null;$('onew').hidden=true;$('op').value='';$('mn').value=n;$('mt').value=t||'';refreshMine();$('omsg').textContent='Salvo…';return send(msg).then(function(){if(online())$('ostat').focus()})}
+$('onew').onclick=function(){if(pend)enter(pend.n,pend.t,pend.s,'Fatto: sei registrato. La prossima volta entri con lo stesso nome e la stessa password.')};
+$('on').addEventListener('input',function(){pend=null;$('onew').hidden=true});$('op').addEventListener('input',function(){pend=null;$('onew').hidden=true});
+$('osync').onclick=function(){var m=RCloud.me(),t=team($('otm2').value);if(t&&t.length<6){$('omsg').textContent='Il codice squadra deve avere almeno 6 caratteri.';$('otm2').focus();return}m.t=t;RCloud.setMe(m);$('mt').value=t;refreshMine();$('omsg').textContent='Salvo…';send('Salvato.')};
+$('oout').onclick=function(){var m=RCloud.me();RCloud.setMe({n:m.n,t:m.t});ostate();$('on').value=m.n||'';$('omsg').textContent='Sei uscito da questo browser. I dati online restano: per rientrare usa nome e password.';$('on').focus()};
+$('oleave').onclick=function(){var b=this;if(!b.dataset.ask){b.dataset.ask='1';b.textContent='Sì, cancella i miei dati online';$('omsg').textContent='Premi di nuovo per confermare: la cancellazione non si può annullare.';return}delete b.dataset.ask;b.textContent='Cancella i miei dati online';
+  var m=RCloud.me();$('omsg').textContent='Cancello…';RCloud.rpc('radar_forget',{p_secret:m.s}).then(function(){RCloud.setMe({n:m.n,t:m.t});ostate();$('omsg').textContent='I tuoi dati online sono stati cancellati. I progressi in questo browser restano.';$('on').focus()},function(e){$('omsg').textContent='⚠ Non sono riuscito a cancellare: '+e.message})};
+try{var m0=RCloud.me();$('on').value=m0.n||'';$('otm').value=m0.t||''}catch(e){}
 var otimer=null;
 function oget(silent){var codes=$('ot').value.split(/[,;\n]+/).map(team).filter(function(c){return c.length>=6}).slice(0,12);if(!codes.length){if(!silent)$('otmsg').textContent='Scrivi almeno un codice squadra di 6 caratteri o più.';return}
   try{localStorage.setItem('radar-team-codes',codes.join(', '))}catch(e){}if(!silent)$('otmsg').textContent='Carico…';
