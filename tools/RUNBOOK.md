@@ -147,7 +147,8 @@ Segue Google Search Central (titoli e descrizioni unici, sitemap, dati struttura
 - **Palestra** (`esercizi_page.py`): elenco stile HackerRank con difficoltà Facile (20 punti), Media (40), Difficile (80), percorsi per tema, gradi a stelle; un esercizio alla volta (`#exN`). Gli aiuti non tolgono punti e si generano da soli da consegna e soluzione di `esercizi_gen.py`: indizio, metodo (passaggi senza risultati, o risposte da escludere), soluzione passo passo, esempio svolto (un esercizio dello stesso tipo con altri dati), "Spiegamelo facile" (schema, parole difficili da `WORDS`), calcolatrice.
 - **Laboratorio**: in ogni sfida il pulsante "Rada, spiegami la sfida" e i passi "Come si affronta" (`HOW` in `arena_page.py`). Punteggi e regole non cambiano.
 - Dopo ogni modifica: `esercizi_page.py`, `arena_page.py`, `site_meta.py`, `inject.py`, poi `arenatest.py`, `audit3.py`, `reflow.py`. Gli audit automatici vedono solo l'elenco: la vista di un esercizio con gli aiuti aperti va controllata a parte con axe.
-- Account, squadre e classifica condivisa non ci sono: servono un servizio esterno di accesso e un database (da decidere).
+- **Pacchetti e squadre** (`tools/squadre_page.py` → `squadre.html`, voce "Squadre" nel menu Argomenti): pacchetti Utente, Gruppo, Azienda, percorsi per ruolo (la Palestra accetta `?l=1..3&g=tema`), codice risultato `RS1:` creato da ogni persona e classifica di chi coordina, salvata nel suo browser (`radar-team`) ed esportabile in CSV. Nessun server e nessun controllo antifrode. Va rigenerata quando cambia il numero degli esercizi: `python3 tools/squadre_page.py .` prima di `site_meta.py` e `inject.py`.
+- Account veri e classifica in tempo reale non ci sono: servono un servizio esterno di accesso, un database e un'informativa sulla privacy, che può creare solo il titolare del sito.
 
 ## Sfide quotidiane del Laboratorio (operazione delle 8:10)
 

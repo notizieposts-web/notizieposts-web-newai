@@ -14,13 +14,16 @@ GUIDES = [
   's': 'Tutte le puntate della rubrica fissa, ordinate per tema: costi, pipeline, qualità, sicurezza, produzione e casi reali.', 'n': '19 puntate'},
  {'id': 'cu-ex', 'menu': 'Esercizi', 'c': 'Palestra Content Understanding', 'u': 'azure-esercizi.html', 'map': False,
   'title': 'Palestra Content Understanding', 'eds': _AZ,
-  's': 'Oltre mille esercizi a tre livelli, media, alta ed estrema, con verifica immediata e soluzione spiegata.', 'n': '%s esercizi'},
+  's': 'Oltre mille esercizi a tre livelli, facile, media e difficile, con aiuti graduali, soluzione passo passo e una guida che legge ad alta voce.', 'n': '%s esercizi'},
  {'id': 'cu-lab', 'menu': 'Laboratorio', 'c': 'Laboratorio', 'u': 'azure-laboratorio.html', 'map': False,
   'title': 'Laboratorio Content Understanding', 'eds': _AZ,
   's': 'Sfide quotidiane in stile HackerRank: estrai dai documenti scegliendo il metodo giusto, fai scrivere all\'agente le funzioni di trasformazione, confronta documenti con regole.', 'n': 'sfide'},
  {'id': 'glossario', 'menu': 'Glossario', 'c': 'Glossario', 'u': 'glossario.html', 'map': False,
   'title': 'Glossario', 'eds': list(range(27, _LAST + 1)),
   's': 'Acronimi e termini tecnici delle edizioni spiegati in parole semplici, con un esempio e i link ai punti in cui compaiono.', 'n': 'voci'},
+ {'id': 'squadre', 'menu': 'Squadre', 'c': 'Pacchetti e squadre', 'u': 'squadre.html', 'map': False,
+  'title': 'Pacchetti e squadre', 'eds': _AZ,
+  's': 'Tre modi di usare esercizi e sfide: da soli, in gruppo con una classifica di squadra, in azienda con più squadre e l\'esportazione in CSV.', 'n': '3 pacchetti'},
 ]
 try:  # numero di voci del glossario
     GUIDES[3]['n'] = '%d voci' % len(json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'glossario.json'), encoding='utf-8')))

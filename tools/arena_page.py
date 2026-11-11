@@ -281,7 +281,7 @@ def main(root):
     sizes = {}
     sizes['azure-laboratorio.html'] = page('azure-laboratorio.html', 'hub', 'Laboratorio', hero,
         '<section class="ch" id="gioco" style="padding-top:2.5rem"><div class="ch-head"><div class="kicker"><span class="chip guide">Oggi</span></div><h2>Le sfide del %s</h2><p class="lead">%d sfide nuove: scegli un percorso. Sotto ogni percorso vedi quante ne hai risolte oggi, per difficoltà.</p></div>' % (gday, n_day) +
-        tracks_nav(None) + GBAR + '<div class="acts2" id="lreset"></div>' + BACKUP + '</section>' + RULES + VERO, [meta(c) for c in CH])
+        tracks_nav(None) + GBAR + '<p style="margin-top:1rem"><a class="pbtn" href="squadre.html">👥 Pacchetti e squadre: allenati in gruppo</a></p><div class="acts2" id="lreset"></div>' + BACKUP + '</section>' + RULES + VERO, [meta(c) for c in CH])
     for k, ic, lab_, f, d in TRACKS:
         ml = [meta(c) for c in CH if c['track'] == k]
         hh = ('<header class="hero"><div><div class="meta"><span class="chip guide">Laboratorio</span><span class="chip">%d sfide</span></div><h1 style="margin-top:1.2rem">%s %s</h1><p class="sub">%s <a href="azure-laboratorio.html#regole">Come funziona</a>.</p></div>%s</header>'

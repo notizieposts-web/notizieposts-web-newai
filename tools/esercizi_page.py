@@ -158,7 +158,7 @@ ctl = '''<section class="ch" id="esercizi" style="padding-top:2.5rem"><div class
 </div>
 <p class="pcount" id="pcount" role="status" aria-live="polite"></p>
 <ul class="xlist" id="plist"></ul><nav class="pager" id="ppager" aria-label="Pagine degli esercizi"></nav>
-<div class="pal-row" style="margin-top:1rem"><button type="button" class="fbtn" id="preset">Azzera i progressi</button></div>''' + store.backup_html('e') + store.mysol_html('e') + '''
+<div class="pal-row" style="margin-top:1rem"><a class="pbtn" style="display:inline-flex;align-items:center;text-decoration:none" href="squadre.html">👥 Pacchetti e squadre: allenati in gruppo</a><button type="button" class="fbtn" id="preset">Azzera i progressi</button></div>''' + store.backup_html('e') + store.mysol_html('e') + '''
 </div><div class="stage" id="stage" hidden></div></section>'''
 
 JS = r'''<script id="pal-js">(function(){
@@ -279,6 +279,7 @@ $('esolimp').onchange=function(){var f=this.files&&this.files[0];if(!f)return;RS
 $('ebk').value='EX1:'+encD(done,EX.length);
 $('ebc').onclick=function(){var t=$('ebk');t.select();try{navigator.clipboard.writeText(t.value).then(function(){$('ebm').textContent='Codice copiato.'},function(){document.execCommand('copy');$('ebm').textContent='Codice copiato.'})}catch(e){document.execCommand('copy');$('ebm').textContent='Codice copiato.'}};
 $('ebr').onclick=function(){var v=$('ebi').value.trim();if(v.indexOf('EX1:')!==0){$('ebm').textContent='⚠ Questo non sembra un codice della Palestra (deve iniziare con EX1:).';return}done=decD(v.slice(4));save();render();$('ebi').value='';$('ebm').textContent='Progressi ripristinati: '+Object.keys(done).length+' esercizi completati.'};
+try{var QS=new URLSearchParams(location.search),ql=+QS.get('l'),qg=QS.get('g')||'';if(ql>=1&&ql<=3){st.l=ql;document.querySelectorAll('.pal-row [data-l]').forEach(function(x){x.setAttribute('aria-pressed',+x.getAttribute('data-l')===ql?'true':'false')})}if(GN[qg])st.g=qg}catch(e){}
 window.addEventListener('hashchange',route);route();
 })();</script>'''
 
