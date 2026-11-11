@@ -904,5 +904,61 @@
   "vedi": [
    "latenza"
   ]
+ },
+ "api": {
+  "t": "API",
+  "esteso": "Application Programming Interface",
+  "spiega": "Il modo in cui un programma usa un servizio di un altro: invece di aprire una pagina e cliccare, il programma manda richieste e riceve risposte in un formato preciso.",
+  "esempio": "Un'applicazione che riassume email chiama l'API di un modello AI: manda il testo, riceve il riassunto e paga in base ai token usati.",
+  "approfondisci": "Le aziende che sviluppano modelli li vendono in due modi: nelle app, con un abbonamento, e attraverso l'API, a consumo. Con l'API si paga di solito per milione di token in ingresso e in uscita, con prezzi diversi per i due. È la strada usata da chi costruisce prodotti e agenti sopra un modello.",
+  "vedi": [
+   "token"
+  ]
+ },
+ "credenziali": {
+  "t": "credenziali",
+  "spiega": "Le informazioni che provano chi sei a un sistema e ti fanno entrare: password, chiavi di accesso, token di sessione.",
+  "esempio": "La password del database e la chiave per l'API di un servizio di pagamento sono credenziali: chi le conosce può usarle al tuo posto.",
+  "approfondisci": "Quando una credenziale finisce dove non dovrebbe, per esempio in una chat salvata da un fornitore, la regola è considerarla nota a estranei e cambiarla, cioè ruotarla: se ne crea una nuova, la si mette nei programmi che la usano e si disattiva la vecchia. Per questo conviene non incollarle mai nelle conversazioni con un assistente.",
+  "vedi": [
+   "oauth"
+  ]
+ },
+ "sub-responsabile": {
+  "t": "sub-responsabile del trattamento",
+  "spiega": "Un'azienda a cui un fornitore affida una parte del lavoro sui dati dei suoi clienti, per esempio far girare i modelli AI. Nel linguaggio del GDPR è un sub-responsabile.",
+  "esempio": "Un'app di appunti usa un'altra società per far girare i modelli dell'assistente: quella società è un sub-responsabile e riceve parte delle conversazioni.",
+  "approfondisci": "Le aziende che trattano dati personali per conto dei clienti pubblicano di solito l'elenco dei loro sub-responsabili. Leggerlo serve a capire dove passano i dati e chi potrebbe esserne coinvolto in caso di incidente. Un attacco a un sub-responsabile può esporre i dati anche se i sistemi del fornitore principale sono intatti.",
+  "vedi": [
+   "gdpr"
+  ]
+ },
+ "failover": {
+  "t": "failover",
+  "spiega": "Il passaggio automatico o manuale a un sistema di riserva quando quello principale si guasta, così il servizio continua.",
+  "esempio": "Se la risorsa Azure in una regione smette di rispondere, la pipeline manda i documenti a una seconda risorsa in un'altra regione, già pronta con lo stesso analizzatore.",
+  "approfondisci": "Un failover funziona solo se la riserva è preparata prima del guasto: stessa configurazione, stessi permessi, provata su casi reali. Va deciso anche quando scatta, per esempio dopo un certo numero di errori consecutivi, e come si torna indietro.",
+  "vedi": [
+   "latenza"
+  ]
+ },
+ "gradi-di-liberta": {
+  "t": "gradi di libertà",
+  "spiega": "Il numero di movimenti indipendenti che un meccanismo può fare. In una mano robotica, ogni articolazione che si muove da sola è un grado di libertà.",
+  "esempio": "Una pinza che si apre e si chiude ha un grado di libertà; una mano a cinque dita con 22 gradi di libertà può muovere le falangi quasi come una mano umana.",
+  "approfondisci": "Più gradi di libertà vogliono dire più compiti possibili, ma anche un controllo più difficile: il modello deve decidere molti movimenti insieme, in pochi millisecondi. Per questo le mani robotiche molto articolate sono un banco di prova per i modelli VLA.",
+  "vedi": [
+   "vla"
+  ]
+ },
+ "jailbreak": {
+  "t": "jailbreak",
+  "spiega": "Un modo di scrivere una richiesta che aggira le protezioni di un modello AI e gli fa fare ciò che dovrebbe rifiutare.",
+  "esempio": "Invece di chiedere direttamente una cosa vietata, si inventa un gioco di ruolo in cui il modello \"interpreta\" qualcuno che la fa: se il modello cede, il jailbreak è riuscito.",
+  "approfondisci": "La resistenza ai jailbreak si misura con raccolte di richieste costruite apposta, contando quante volte il modello cede. Per i robot il rischio è più concreto: un jailbreak riuscito può tradursi in un movimento pericoloso. Nessuna difesa è perfetta, quindi si combinano più livelli di protezione.",
+  "vedi": [
+   "prompt-injection",
+   "red-team"
+  ]
  }
 }

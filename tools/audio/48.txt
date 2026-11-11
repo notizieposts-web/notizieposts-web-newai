@@ -1,0 +1,59 @@
+Radar AI. Edizione dell'undici novembre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: Gemini 4 Carbon aperto a tutti, gli agenti di DeepMind che dimostrano il codice di Signal, e le chat di Notion AI finite in un furto di dati.
+
+Il periodo in breve. Una giornata dominata da Google, e una lezione che arriva da un fornitore. Il modello più forte di Google esce dalla cerchia ristretta dei difensori informatici e arriva a tutti gli sviluppatori. Lo stesso modello, dentro una squadra di agenti, dimostra con la matematica che il codice di Signal fa ciò che promette. E Notion ricorda che quello che scriviamo in una chat con un assistente può finire anche nei sistemi di un'altra azienda.
+
+Capitolo uno. Gemini 4 Carbon per tutti.
+
+Martedì dieci novembre Google ha annunciato che Gemini 4 Carbon, il suo modello più forte, è disponibile per gli sviluppatori e le aziende che pagano e per gli abbonati a Google AI Ultra. Fino a due settimane fa lo usavano solo alcuni difensori informatici scelti, attraverso il programma Fairwind. Ne avevamo parlato nell'edizione trentacinque.
+
+Carbon si affianca a Gemini 4 Argon. Secondo Google, Carbon è per i problemi più difficili, perché usa più token, cioè più pezzetti di testo, e ragiona più a fondo. Argon resta la scelta predefinita per la maggior parte della programmazione e del lavoro d'ufficio.
+
+Il prezzo è da segnare in calendario. Fino al trenta novembre Carbon costa come Argon: due dollari per milione di token in ingresso e dieci in uscita. Dal primo dicembre, quattro e venti. Il doppio.
+
+Google dichiara il primo posto su tre prove di lavoro da agente, con un costo per compito più che dimezzato rispetto ai concorrenti, e numeri di sicurezza migliori di Argon: meno dell'uno per cento di attacchi riusciti nelle prove interne, contro il tre per cento. Sono dati dell'azienda. Un solo riscontro arriva da fuori: anche la tabella pubblicata da Anthropic il giorno prima mette Carbon davanti nei flussi di lavoro aziendali. Nella pagina trovi un esempio su come cambia il preventivo di dicembre, e un calcolatore per il tuo volume.
+
+Prova a chiederti: se oggi provi un modello a prezzo di lancio, sai già quanto ti costerà lo stesso lavoro tra un mese?
+
+Capitolo due. AlphaProof Code e il codice di Signal.
+
+Sempre il dieci novembre, Google DeepMind, il laboratorio di ricerca di Google, ha presentato AlphaProof Code. È un sistema di agenti che ha dimostrato con la matematica alcune proprietà di sicurezza del codice vero del protocollo di Signal, l'app di messaggi cifrati. Per esempio, che i messaggi restano protetti prima e dopo che un telefono è stato compromesso per un periodo.
+
+Di solito il software si prova su molti casi. La verifica formale fa un'altra cosa: scrive come una formula che cosa il programma deve garantire, e dimostra che lo garantisce sempre, per qualunque ingresso.
+
+Il lavoro ha tre livelli. Persone e modelli hanno tradotto gli obiettivi di sicurezza in specifiche formali, e ogni specifica è stata rivista da esperti. Agenti basati su Gemini 4 Carbon hanno scritto le dimostrazioni. E Lean, un programma che controlla le dimostrazioni passo per passo, le ha verificate in automatico. Alle persone è rimasto da guardare circa l'uno per cento del codice. Tutto in quattro settimane, contro gli anni che di solito servono.
+
+Per controllare il sistema, il gruppo ha rimesso apposta in una copia del codice due errori veri, già corretti in passato. Il sistema li ha trovati entrambi.
+
+Restano dei limiti. Sono dichiarazioni di DeepMind, con il sostegno del dirigente tecnico di Signal ma senza una revisione indipendente. La stessa pagina parla in un punto di tre milioni di righe di dimostrazioni e in un altro di sei. E Lean garantisce che la dimostrazione segue dalla specifica, non che la specifica dica la cosa giusta. Nella pagina trovi un esempio sulla differenza tra provare e dimostrare.
+
+Prova a chiederti: nel tuo lavoro, quali regole verifichi davvero sempre, e quali solo sui casi che ti vengono in mente?
+
+Capitolo tre. Le chat di Notion AI nel furto a un fornitore.
+
+Notion ha pubblicato un avviso di sicurezza, aggiornato il nove novembre. Fireworks AI, l'azienda che per Notion faceva girare alcuni modelli a pesi aperti, ha subito un accesso di malintenzionati.
+
+La sequenza è questa. Il due novembre Fireworks avvisa: sono stati visti solo dati di prova. Il tre Notion si scollega e cancella i suoi dati da Fireworks. Il sei arriva un nuovo avviso, e l'otto la conferma: tra i dati visti c'erano trascrizioni di chat di Notion AI, usate per una funzione che analizza come si usa l'assistente.
+
+Secondo Notion è coinvolto meno dell'uno per cento degli spazi di lavoro, e per la maggior parte le trascrizioni non dicono chi le ha scritte. I clienti coinvolti sono stati contattati. Notion ha spento la funzione e consiglia di cambiare password e chiavi incollate nelle chat durante il periodo dell'incidente. Non ho trovato un comunicato di Fireworks, e l'indagine continua.
+
+La lezione vale per tutti: la conversazione con un assistente spesso passa da altre aziende. Nelle chat non si incollano segreti, e se è successo, il segreto si cambia. Nella pagina trovi un esempio con una password di database, e un piccolo controllo da provare nel browser.
+
+Prova a chiederti: nell'ultimo mese, hai mai incollato in una chat qualcosa che non avresti scritto in una email a uno sconosciuto?
+
+Capitolo quattro. La rubrica su Azure Content Understanding, puntata quarantaquattro: copiare un analizzatore.
+
+Un analizzatore personalizzato costa giorni di lavoro, e prima o poi va spostato: dalla prova alla produzione, o in un'altra regione come riserva per i guasti. Content Understanding ha un'operazione di copia in due varianti. Dentro la stessa risorsa basta una richiesta. Tra risorse diverse, anche tra abbonamenti e organizzazioni diverse, servono due passi: un'autorizzazione dalla risorsa di partenza, che scade, e poi la copia dalla risorsa di arrivo, con lo stesso ruolo di accesso su tutte e due.
+
+Due cose la copia non le fa da sola. Gli analizzatori a cui rimanda vanno copiati anche loro. E i modelli no: la risorsa di arrivo deve avere i suoi modelli configurati prima della prima analisi. Il consiglio è preparare la riserva prima del guasto, e dopo la copia ripetere un campione di prova per confrontare i risultati. Nella pagina trovi l'esempio del passaggio in produzione e una lista di controlli.
+
+Prova a chiederti: se domani la tua risorsa principale si fermasse, quanto tempo ti servirebbe per ripartire altrove?
+
+Segnali in breve. Google DeepMind porta ai partner Gemini Robotics 2.5, il suo modello per robot, provato anche sulle linee di montaggio di Mercedes-Benz. IBM e Microsoft presentano una piattaforma di agenti per settore. Poi alcune notizie che non ho potuto verificare su fonti primarie: un interruttore di OpenAI per fermare in pochi secondi i modelli di ricerca, ChatGPT per le aziende nel catalogo di Amazon, e un finanziamento alla startup di chip Tendrils.
+
+La domanda del giorno. Dopo aver copiato un analizzatore di Content Understanding in un'altra risorsa, che cosa serve prima della prima analisi?
+
+La risposta: i modelli predefiniti configurati nella risorsa di arrivo. La copia porta la definizione dell'analizzatore, non i modelli che lo fanno funzionare.
+
+È tutto per oggi. Nella pagina dell'edizione trovi gli esempi, i cinque esperimenti da provare, il quiz e tutte le fonti. Grazie per l'ascolto, e a domani con Radar AI.
