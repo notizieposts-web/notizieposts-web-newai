@@ -14,37 +14,45 @@ THEME = {'V': 'var(--violet)', 'T': 'var(--teal)', 'I': 'var(--ink)', 'F': 'var(
 FIXED = {'V': '#4B4BF5', 'T': '#0A9BB5', 'I': '#121A2B', 'F': '#FFFFFF', 'P': '#F27BA8', 'Y': '#FFC94D', 'W': '#FFFFFF', 'L': '#D3D9E6'}
 
 # animazioni: valgono per l'SVG nella pagina (rada.CSS) e, identiche, dentro i file
-ANIM = '''.rd-all{animation:rd-float 3.2s ease-in-out infinite}
-.rd-eyes,.rd-mouth-t,.rd-wave,.rd-bulb,.rd-ping,.rd-spark,.rd-dot,.rd-drop,.rd-sym,.rd-armL,.rd-armR,.rd-q{transform-box:fill-box;transform-origin:center}
-.rd-eyes{animation:rd-blink 4.6s infinite}
+ANIM = '''.rd-all{transform-box:fill-box;transform-origin:50% 100%;animation:rd-float 2.4s ease-in-out infinite}
+.rd-look{animation:rd-look 5s ease-in-out infinite}
+.rd-swing{transform-box:fill-box;transform-origin:100% 0%;animation:rd-swing 1.6s ease-in-out infinite alternate}
+.rd-tip{transform-box:fill-box;transform-origin:center;animation:rd-tip 1.2s ease-in-out infinite alternate}
+.rd-cheek{animation:rd-cheek 2.4s ease-in-out infinite}
+.rd-look,.rd-eyes,.rd-mouth-t,.rd-wave,.rd-bulb,.rd-ping,.rd-spark,.rd-dot,.rd-drop,.rd-sym,.rd-armL,.rd-armR,.rd-q{transform-box:fill-box;transform-origin:center}
+.rd-eyes{animation:rd-blink 3.2s infinite}
 .rd-ping{animation:rd-ping 2.4s ease-out infinite;transform-origin:50% 100%}
 .rd-ping.b{animation-delay:.5s}
-.rd-wave{transform-origin:0% 100%;animation:rd-wave .9s ease-in-out infinite alternate}
+.rd-wave{transform-origin:0% 100%;animation:rd-wave .55s ease-in-out infinite alternate}
 .rd-mouth-t{animation:rd-talk .24s ease-in-out infinite alternate}
 .rd-snd{animation:rd-fade 1s ease-in-out infinite}.rd-snd.b{animation-delay:.3s}
 .rd-bulb{animation:rd-pop 1.4s ease-in-out infinite alternate}
 .rd-dot{animation:rd-fade 1.6s ease-in-out infinite}.rd-dot.b{animation-delay:.25s}.rd-dot.c{animation-delay:.5s}
 .rd-spark{animation:rd-twinkle 1.1s ease-in-out infinite alternate}.rd-spark.b{animation-delay:.35s}.rd-spark.c{animation-delay:.7s}
-.rd-jump{animation:rd-jump .7s ease-in-out infinite alternate}
+.rd-jump{animation:rd-jump .5s cubic-bezier(.3,0,.5,1) infinite alternate}
 .rd-drop{animation:rd-drop 1.8s ease-in infinite}
 .rd-sym{animation:rd-bob 1.8s ease-in-out infinite alternate}.rd-sym.b{animation-delay:.4s}.rd-sym.c{animation-delay:.8s}
 .rd-q{animation:rd-tilt 1.6s ease-in-out infinite alternate}
-.rd-point{transform-box:fill-box;transform-origin:0% 100%;animation:rd-point 1.2s ease-in-out infinite alternate}
-.rd-fist{transform-box:fill-box;transform-origin:100% 100%;animation:rd-fist .8s ease-in-out infinite alternate}
-@keyframes rd-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+.rd-point{transform-box:fill-box;transform-origin:0% 100%;animation:rd-point .8s ease-in-out infinite alternate}
+.rd-fist{transform-box:fill-box;transform-origin:100% 100%;animation:rd-fist .5s ease-in-out infinite alternate}
+@keyframes rd-float{0%,100%{transform:translateY(0) rotate(0deg) scale(1,1)}25%{transform:translateY(-5px) rotate(-2.5deg) scale(.98,1.03)}50%{transform:translateY(-7px) rotate(0deg) scale(1,1)}75%{transform:translateY(-5px) rotate(2.5deg) scale(.98,1.03)}}
+@keyframes rd-look{0%,30%,100%{transform:translateX(0)}38%,55%{transform:translateX(-2.5px)}63%,80%{transform:translateX(2.5px)}}
+@keyframes rd-swing{from{transform:rotate(-12deg)}to{transform:rotate(10deg)}}
+@keyframes rd-tip{from{transform:scale(.85)}to{transform:scale(1.25)}}
+@keyframes rd-cheek{0%,100%{opacity:.35}50%{opacity:.75}}
 @keyframes rd-blink{0%,93%,100%{transform:scaleY(1)}96.5%{transform:scaleY(.08)}}
 @keyframes rd-ping{0%{opacity:.9;transform:scale(.5)}100%{opacity:0;transform:scale(1.25)}}
-@keyframes rd-wave{from{transform:rotate(-10deg)}to{transform:rotate(16deg)}}
-@keyframes rd-talk{from{transform:scaleY(.45)}to{transform:scaleY(1.25)}}
+@keyframes rd-wave{from{transform:rotate(-18deg)}to{transform:rotate(24deg)}}
+@keyframes rd-talk{from{transform:scaleY(.3)}to{transform:scaleY(1.4)}}
 @keyframes rd-fade{0%,100%{opacity:.15}50%{opacity:1}}
-@keyframes rd-pop{from{transform:scale(.9)}to{transform:scale(1.12)}}
+@keyframes rd-pop{from{transform:scale(.8) rotate(-6deg)}to{transform:scale(1.2) rotate(6deg)}}
 @keyframes rd-twinkle{from{transform:scale(.4) rotate(0deg);opacity:.3}to{transform:scale(1.1) rotate(25deg);opacity:1}}
-@keyframes rd-jump{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+@keyframes rd-jump{from{transform:translateY(0) scale(1.04,.96)}to{transform:translateY(-12px) scale(.97,1.04)}}
 @keyframes rd-drop{0%{transform:translateY(-3px);opacity:0}25%{opacity:1}100%{transform:translateY(9px);opacity:0}}
-@keyframes rd-bob{from{transform:translateY(2px)}to{transform:translateY(-3px)}}
-@keyframes rd-tilt{from{transform:rotate(-8deg)}to{transform:rotate(10deg)}}
-@keyframes rd-point{from{transform:rotate(0deg)}to{transform:rotate(-9deg)}}
-@keyframes rd-fist{from{transform:rotate(0deg)}to{transform:rotate(10deg)}}
+@keyframes rd-bob{from{transform:translateY(4px) rotate(-8deg)}to{transform:translateY(-5px) rotate(8deg)}}
+@keyframes rd-tilt{from{transform:rotate(-14deg) translateY(2px)}to{transform:rotate(14deg) translateY(-3px)}}
+@keyframes rd-point{from{transform:rotate(4deg)}to{transform:rotate(-16deg)}}
+@keyframes rd-fist{from{transform:rotate(-6deg)}to{transform:rotate(16deg)}}
 @media (prefers-reduced-motion:reduce){.rd-all,.rd-all *{animation:none!important}}'''
 
 CSS = '<style id="rada-css">.rd{flex:none;overflow:visible;vertical-align:middle}\n' + ANIM + '\n.rd-row{display:flex;gap:.7rem;align-items:center}.rd-row>:last-child{flex:1;min-width:0}</style>'
@@ -77,8 +85,8 @@ def _arm(d, hx, hy, cls=''):
     return '<g%s><path d="%s" fill="none" stroke="{V}" stroke-width="7.5" stroke-linecap="round"/><circle cx="%s" cy="%s" r="5.4" fill="{V}"/></g>' % (
         (' class="%s"' % cls) if cls else '', d, hx, hy)
 
-L_DOWN = _arm('M23 72 Q12 82 16 93', 16, 93)
-R_DOWN = _arm('M97 72 Q108 82 104 93', 104, 93)
+L_DOWN = _arm('M23 72 Q12 82 16 93', 16, 93, 'rd-swing')
+R_DOWN = _arm('M97 72 Q108 82 104 93', 104, 93, 'rd-swing')
 SPARK = '<path class="rd-spark %s" d="M%s %s l2.2 5 l5 2.2 l-5 2.2 l-2.2 5 l-2.2 -5 l-5 -2.2 l5 -2.2 z" fill="%s"/>'
 
 POSE = {
@@ -109,13 +117,13 @@ def _body(expr):
              '<path d="M60 28 V15" stroke="{V}" stroke-width="3.6" stroke-linecap="round"/>'
              '<path class="rd-ping" d="M51 9 Q60 0 69 9" fill="none" stroke="{T}" stroke-width="2.2" stroke-linecap="round"/>'
              '<path class="rd-ping b" d="M46 6 Q60 -8 74 6" fill="none" stroke="{T}" stroke-width="2.2" stroke-linecap="round"/>'
-             '<circle cx="60" cy="13" r="4.6" fill="{T}"/>'
+             '<circle class="rd-tip" cx="60" cy="13" r="4.6" fill="{T}"/>'
              '<ellipse cx="46" cy="104" rx="9" ry="5" fill="{V}"/><ellipse cx="74" cy="104" rx="9" ry="5" fill="{V}"/>'
              + p['arms'] +
              '<ellipse cx="60" cy="66" rx="40" ry="39" fill="{V}"/>'
              '<ellipse cx="60" cy="65" rx="30.5" ry="27" fill="{F}"/>'
-             '<circle cx="37.5" cy="71" r="4.4" fill="{P}" opacity=".45"/><circle cx="82.5" cy="71" r="4.4" fill="{P}" opacity=".45"/>'
-             '<g class="rd-eyes">' + _eyes(p['eyes']) + '</g>' + _mouth(p['mouth']) + p.get('front', '') + p['extra'] + '</g></g>')
+             '<g class="rd-cheek"><circle cx="37.5" cy="71" r="4.4" fill="{P}" opacity=".6"/><circle cx="82.5" cy="71" r="4.4" fill="{P}" opacity=".6"/></g>'
+             '<g class="rd-look"><g class="rd-eyes">' + _eyes(p['eyes']) + '</g></g>' + _mouth(p['mouth']) + p.get('front', '') + p['extra'] + '</g></g>')
     return inner
 
 
