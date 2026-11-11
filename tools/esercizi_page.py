@@ -9,7 +9,7 @@ Gli aiuti si costruiscono da soli da consegna e soluzione di ogni esercizio (too
 """
 import sys, os, json, html, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import argomenti, graph, store, tutor
+import argomenti, graph, store, tutor, cloud
 from esercizi_gen import EX, it
 
 root = sys.argv[1]
@@ -169,7 +169,7 @@ var RANK=[[0,'Nuovo arrivo'],[200,'★ Bronzo'],[1000,'★★ Argento'],[3000,'�
 var PER=25,st={l:0,g:'',q:'',s:'all',page:1},done={},cur=null,tries={};
 __CODEC__
 var _sv=RStore.load('radar_ex');if(_sv){done=decD(_sv)}else{try{done=JSON.parse(localStorage.getItem('radar-cu-done')||'{}')||{}}catch(e){done={}}}
-function save(){RStore.save('radar_ex',encD(done,EX.length));if($('ebk'))$('ebk').value='EX1:'+encD(done,EX.length)}
+function save(){RStore.save('radar_ex',encD(done,EX.length));if($('ebk'))$('ebk').value='EX1:'+encD(done,EX.length);if(window.RCloud){RCloud.setStats({pp:points(),ps:Object.keys(done).filter(function(k){return BY[k]}).length});RCloud.push()}}
 var $=function(id){return document.getElementById(id)};
 var T=window.RTutor;
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -287,6 +287,6 @@ ex_js = json.dumps(EX, ensure_ascii=False, separators=(',', ':')).replace('</', 
 js = (JS.replace('__CODEC__', store.EX_CODEC).replace('__EX__', ex_js).replace('__EPT__', json.dumps(EPT, ensure_ascii=False, separators=(',', ':')))
       .replace('__WORDS__', json.dumps(WORDS, ensure_ascii=False, separators=(',', ':'))).replace('__GR__', json.dumps(GR, ensure_ascii=False)))
 page = (argomenti.head_from(root, 'Palestra Content Understanding') + CSS + tutor.CSS + store.BACKUP_CSS + store.SOL_CSS + '</head>\n<body>\n' + argomenti.NAV('azure-esercizi.html', eds) + hero +
-        '<main class="wrap">' + ctl + '</main>' + argomenti.FOOT + argomenti.JS + store.JS + store.SOL_JS + tutor.JS + js + '\n</body>\n</html>\n')
+        '<main class="wrap">' + ctl + '</main>' + argomenti.FOOT + argomenti.JS + store.JS + store.SOL_JS + tutor.JS + cloud.JS + js + '\n</body>\n</html>\n')
 open(os.path.join(root, 'azure-esercizi.html'), 'w', encoding='utf-8').write(page)
 print('ok', N, len(page))

@@ -1,0 +1,4 @@
+-- Schema applicato l'11 novembre 2026 al progetto Supabase radar-ai (migrazione radar_members_and_rpc).
+-- Tabella public.radar_members: RLS attiva, nessuna policy, nessun privilegio per anon/authenticated.
+-- Accesso solo tramite le funzioni SECURITY DEFINER: radar_save, radar_load, radar_forget, radar_board.
+-- Il testo completo della migrazione è nello storico delle migrazioni del progetto (Database > Migrations).

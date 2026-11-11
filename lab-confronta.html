@@ -505,6 +505,20 @@ function say(title,parts,opt){opt=opt||{};stop();var n=0,h=title?'<p><b>'+esc(ti
   cap.innerHTML=h;cap.scrollTop=0;if(opt.open!==false&&panel.hidden)show(false);ui();if(opt.play||P.auto)play()}
 window.RTutor={say:say,text:text,nums:nums,avatar:av,stop:stop,prefs:P,sents:sents};
 if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script><script id="cloud-js">(function(){
+var URL0="https://nuklyddnactuxuiixiqo.supabase.co",KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51a2x5ZGRuYWN0dXh1aWl4aXFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ0MjgzNTksImV4cCI6MjExMDAwNDM1OX0.WGd3uEFb-KBV75RHTh_dbTViuJn042XnNxBCU3DztWo",timer=null;
+function rpc(fn,body){return fetch(URL0+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(body||{})}).then(function(r){return r.text().then(function(t){var j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok)throw new Error(j&&j.message?j.message:'Il servizio ha risposto con un errore ('+r.status+').');return j})})}
+function rd(k){try{return JSON.parse(localStorage.getItem(k)||'{}')||{}}catch(e){return {}}}
+function wr(k,o){try{localStorage.setItem(k,JSON.stringify(o))}catch(e){}}
+function me(){return rd('radar-me')}
+function setMe(o){wr('radar-me',o)}
+function newSecret(){var b=new Uint8Array(24);(window.crypto||window.msCrypto).getRandomValues(b);var s='';for(var i=0;i<b.length;i++)s+=(b[i]<16?'0':'')+b[i].toString(16);return 'RA1-'+s}
+function on(){var m=me();return !!(m.on&&m.s&&m.n)}
+function setStats(p){var s=rd('radar-stats');for(var k in p)s[k]=p[k];wr('radar-stats',s)}
+function pushNow(){var m=me(),s=rd('radar-stats');if(!on())return Promise.resolve(null);
+  return rpc('radar_save',{p_secret:m.s,p_name:m.n,p_team:m.t||'',p_pp:+s.pp||0,p_lp:+s.lp||0,p_ps:+s.ps||0,p_ls:+s.ls||0,p_ex:window.RStore?RStore.load('radar_ex'):'',p_arena:window.RStore?RStore.load('radar_arena'):''})}
+function push(){if(!on())return;clearTimeout(timer);timer=setTimeout(function(){pushNow().catch(function(){})},4000)}
+window.RCloud={rpc:rpc,me:me,setMe:setMe,newSecret:newSecret,on:on,setStats:setStats,push:push,pushNow:pushNow};
 })();</script><script id="bench-js">(function(){
 var WEBLLM='https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.85/+esm';
 var MODELS=[['Qwen2.5-1.5B-Instruct-q4f16_1-MLC','Qwen2.5 1,5B · consigliato · circa 1,6 GB di memoria video'],['Qwen2.5-0.5B-Instruct-q4f16_1-MLC','Qwen2.5 0,5B · leggero · circa 0,9 GB'],
@@ -613,7 +627,7 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return
 var D0=Date.UTC(2026,9,20);function dnum(s){var p=s.split('-');return Math.round((Date.UTC(+p[0],+p[1]-1,+p[2])-D0)/864e5)}
 function enc(S){return Object.keys(S.done).map(function(k){return (+k).toString(36)+'-'+S.done[k]}).join('_')+'~'+Object.keys(S.days).map(function(d){return (+d).toString(36)}).join('.')}
 function dec(t){var o={done:{},days:{}};if(!t)return o;var p=String(t).split('~');(p[0]||'').split('_').forEach(function(x){var q=x.split('-');if(q.length===2)o.done[parseInt(q[0],36)]=+q[1]||0});(p[1]||'').split('.').forEach(function(x){if(x)o.days[parseInt(x,36)]=1});return o}
-var S=dec(RStore.load('radar_arena'));function save(){RStore.save('radar_arena',enc(S))}
+var S=dec(RStore.load('radar_arena'));function save(){RStore.save('radar_arena',enc(S));if(window.RCloud){RCloud.setStats({lp:xp(),ls:Object.keys(S.done).filter(function(k){return S.done[k]>0}).length});RCloud.push()}}
 function xp(){return Object.keys(S.done).reduce(function(a,k){return a+S.done[k]},0)}
 function today(){var d=new Date();return Math.round((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-D0)/864e5)}
 function streak(){var t=today(),n=0,d=S.days[t]?t:t-1;while(S.days[d]){n++;d--}return n}

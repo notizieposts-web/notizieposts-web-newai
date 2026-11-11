@@ -5,7 +5,7 @@ e genera azure-laboratorio.html (hub), lab-estrai.html, lab-trasforma.html, lab-
 """
 import sys, os, json, glob
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import argomenti, graph, bench, store, tutor
+import argomenti, graph, bench, store, tutor, cloud
 
 TOOLS = os.path.dirname(os.path.abspath(__file__))
 PACKS = [json.load(open(p, encoding='utf-8')) for p in sorted(glob.glob(os.path.join(TOOLS, 'arena', 'packs', '*.json')))]
@@ -94,7 +94,7 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return
 var D0=Date.UTC(2026,9,20);function dnum(s){var p=s.split('-');return Math.round((Date.UTC(+p[0],+p[1]-1,+p[2])-D0)/864e5)}
 function enc(S){return Object.keys(S.done).map(function(k){return (+k).toString(36)+'-'+S.done[k]}).join('_')+'~'+Object.keys(S.days).map(function(d){return (+d).toString(36)}).join('.')}
 function dec(t){var o={done:{},days:{}};if(!t)return o;var p=String(t).split('~');(p[0]||'').split('_').forEach(function(x){var q=x.split('-');if(q.length===2)o.done[parseInt(q[0],36)]=+q[1]||0});(p[1]||'').split('.').forEach(function(x){if(x)o.days[parseInt(x,36)]=1});return o}
-var S=dec(RStore.load('radar_arena'));function save(){RStore.save('radar_arena',enc(S))}
+var S=dec(RStore.load('radar_arena'));function save(){RStore.save('radar_arena',enc(S));if(window.RCloud){RCloud.setStats({lp:xp(),ls:Object.keys(S.done).filter(function(k){return S.done[k]>0}).length});RCloud.push()}}
 function xp(){return Object.keys(S.done).reduce(function(a,k){return a+S.done[k]},0)}
 function today(){var d=new Date();return Math.round((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-D0)/864e5)}
 function streak(){var t=today(),n=0,d=S.days[t]?t:t-1;while(S.days[d]){n++;d--}return n}
@@ -247,7 +247,7 @@ def main(root):
               .replace('__LAST__', json.dumps(LAST)).replace('__DAY__', json.dumps([{'id': c['id'], 'tr': c['track'], 'd': c['d'], 'p': c['pts']} for c in CH if c['giorno'] == LAST], separators=(',', ':'))).replace('__TRACKS__', json.dumps([t[:4] for t in TRACKS], ensure_ascii=False))
               .replace('__PROVA_DOC__', json.dumps(bench_text(first) if first else '', ensure_ascii=False)).replace('__PROVA_SCHEMA__', json.dumps(first['schema'] if first else '{}', ensure_ascii=False)))
         h = (head.replace('<title>Laboratorio · Radar AI</title>', '<title>%s · Radar AI</title>' % title) + argomenti.NAV('azure-laboratorio.html', eds) + hero_html +
-             '<main class="wrap">' + body_html + '</main><div class="toast" id="toast" role="status" aria-live="polite"></div>' + argomenti.FOOT + argomenti.JS + store.JS + tutor.JS + bench.JS + js + '\n</body>\n</html>\n')
+             '<main class="wrap">' + body_html + '</main><div class="toast" id="toast" role="status" aria-live="polite"></div>' + argomenti.FOOT + argomenti.JS + store.JS + tutor.JS + cloud.JS + bench.JS + js + '\n</body>\n</html>\n')
         open(os.path.join(root, fname), 'w', encoding='utf-8').write(h); return len(h)
     GBAR = ('<div class="gbar"><div class="card gstat"><div class="k">Livello</div><div class="v" id="glv">Apprendista</div><div class="xpbar" aria-hidden="true"><i id="gxpbar"></i></div><div class="s" id="gnext"></div></div>'
             '<div class="card gstat"><div class="k">Punti</div><div class="v" id="gxp">0</div><div class="s">il punteggio migliore di ogni sfida</div></div>'
