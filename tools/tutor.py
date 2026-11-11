@@ -60,7 +60,7 @@ html.rt-font body,html.rt-font main h1,html.rt-font main h2,html.rt-font main h3
 
 JS = r'''<script id="tutor-js">(function(){
 var AV=__AV__;
-function av(px,ex){return (AV[ex]||AV.ciao).replace(/width="\d+" height="\d+"/,'width="'+px+'" height="'+Math.round(px*128/136)+'"')}
+function av(px,ex){return (AV[ex]||AV.ciao).replace(/width="\d+" height="\d+"/,'width="'+px+'" height="'+Math.round(px*148/140)+'"')}
 var face='';function setFace(ex){if(face===ex||!panel)return;face=ex;panel.querySelector('.rt-face').innerHTML=av(64,ex);fab.querySelector('.rt-face').innerHTML=av(44,ex)}
 var P={size:0,sp:0,font:0,ruler:0,num:0,auto:0,rate:1};
 try{var sv=JSON.parse(localStorage.getItem('radar-read')||'{}');for(var k in P)if(sv[k]!=null)P[k]=sv[k]}catch(e){}

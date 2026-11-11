@@ -10,16 +10,21 @@ import os, sys
 EXPR = ['ciao', 'parla', 'idea', 'pensa', 'spiega', 'felice', 'coraggio', 'curiosa', 'conta']
 LABEL = {'ciao': 'Rada saluta', 'parla': 'Rada parla', 'idea': 'Rada ha un\'idea', 'pensa': 'Rada pensa', 'spiega': 'Rada spiega',
          'felice': 'Rada festeggia', 'coraggio': 'Rada ti incoraggia', 'curiosa': 'Rada è curiosa', 'conta': 'Rada fa i conti'}
-THEME = {'V': 'var(--violet)', 'T': 'var(--teal)', 'I': 'var(--ink)', 'F': 'var(--bg)', 'P': 'var(--red)', 'Y': '#FFC94D', 'W': 'var(--surface)', 'L': 'var(--line)'}
-FIXED = {'V': '#4B4BF5', 'T': '#0A9BB5', 'I': '#121A2B', 'F': '#FFFFFF', 'P': '#F27BA8', 'Y': '#FFC94D', 'W': '#FFFFFF', 'L': '#D3D9E6'}
+THEME = {'V': 'var(--violet)', 'T': 'var(--teal)', 'I': 'var(--ink)', 'F': 'var(--bg)', 'P': 'var(--red)', 'Y': '#FFC94D', 'W': 'var(--surface)', 'L': 'var(--line)', 'G': '#CFC8FF', 'G2': '#FFE7A3', 'M': '#FFFFFF'}
+FIXED = {'V': '#5B4BF5', 'T': '#0A9BB5', 'I': '#121A2B', 'F': '#FFFFFF', 'P': '#F27BA8', 'Y': '#FFC94D', 'W': '#FFFFFF', 'L': '#D3D9E6', 'G': '#CFC8FF', 'G2': '#FFE7A3', 'M': '#FFFFFF'}
 
 # animazioni: valgono per l'SVG nella pagina (rada.CSS) e, identiche, dentro i file
-ANIM = '''.rd-all{transform-box:fill-box;transform-origin:50% 100%;animation:rd-float 2.4s ease-in-out infinite}
+ANIM = '''.rd-wingL{transform-box:fill-box;transform-origin:100% 70%;animation:rd-flapL .38s ease-in-out infinite alternate}
+.rd-wingR{transform-box:fill-box;transform-origin:0% 70%;animation:rd-flapR .38s ease-in-out infinite alternate}
+.rd-star{transform-box:fill-box;transform-origin:center;animation:rd-star 2.2s ease-in-out infinite}
+.rd-dust{transform-box:fill-box;transform-origin:center;animation:rd-dust 3s ease-in infinite}.rd-dust.b{animation-delay:1s}.rd-dust.c{animation-delay:2s}
+.rd-shine{animation:rd-shine 3s ease-in-out infinite}
+.rd-all{transform-box:fill-box;transform-origin:50% 100%;animation:rd-float 2.4s ease-in-out infinite}
 .rd-look{animation:rd-look 5s ease-in-out infinite}
 .rd-swing{transform-box:fill-box;transform-origin:100% 0%;animation:rd-swing 1.6s ease-in-out infinite alternate}
 .rd-tip{transform-box:fill-box;transform-origin:center;animation:rd-tip 1.2s ease-in-out infinite alternate}
 .rd-cheek{animation:rd-cheek 2.4s ease-in-out infinite}
-.rd-look,.rd-eyes,.rd-mouth-t,.rd-wave,.rd-bulb,.rd-ping,.rd-spark,.rd-dot,.rd-drop,.rd-sym,.rd-armL,.rd-armR,.rd-q{transform-box:fill-box;transform-origin:center}
+.rd-dust,.rd-look,.rd-eyes,.rd-mouth-t,.rd-wave,.rd-bulb,.rd-ping,.rd-spark,.rd-dot,.rd-drop,.rd-sym,.rd-armL,.rd-armR,.rd-q{transform-box:fill-box;transform-origin:center}
 .rd-eyes{animation:rd-blink 3.2s infinite}
 .rd-ping{animation:rd-ping 2.4s ease-out infinite;transform-origin:50% 100%}
 .rd-ping.b{animation-delay:.5s}
@@ -36,6 +41,11 @@ ANIM = '''.rd-all{transform-box:fill-box;transform-origin:50% 100%;animation:rd-
 .rd-point{transform-box:fill-box;transform-origin:0% 100%;animation:rd-point .8s ease-in-out infinite alternate}
 .rd-fist{transform-box:fill-box;transform-origin:100% 100%;animation:rd-fist .5s ease-in-out infinite alternate}
 @keyframes rd-float{0%,100%{transform:translateY(0) rotate(0deg) scale(1,1)}25%{transform:translateY(-5px) rotate(-2.5deg) scale(.98,1.03)}50%{transform:translateY(-7px) rotate(0deg) scale(1,1)}75%{transform:translateY(-5px) rotate(2.5deg) scale(.98,1.03)}}
+@keyframes rd-flapL{from{transform:rotate(8deg) scaleX(1)}to{transform:rotate(-14deg) scaleX(.72)}}
+@keyframes rd-flapR{from{transform:rotate(-8deg) scaleX(1)}to{transform:rotate(14deg) scaleX(.72)}}
+@keyframes rd-star{0%,100%{transform:rotate(0deg) scale(1)}50%{transform:rotate(72deg) scale(1.22)}}
+@keyframes rd-dust{0%{transform:translateY(8px) scale(.3);opacity:0}20%{opacity:1}100%{transform:translateY(-26px) scale(1) rotate(90deg);opacity:0}}
+@keyframes rd-shine{0%,100%{opacity:.35}50%{opacity:.75}}
 @keyframes rd-look{0%,30%,100%{transform:translateX(0)}38%,55%{transform:translateX(-2.5px)}63%,80%{transform:translateX(2.5px)}}
 @keyframes rd-swing{from{transform:rotate(-12deg)}to{transform:rotate(10deg)}}
 @keyframes rd-tip{from{transform:scale(.85)}to{transform:scale(1.25)}}
@@ -59,8 +69,9 @@ CSS = '<style id="rada-css">.rd{flex:none;overflow:visible;vertical-align:middle
 
 
 def _eyes(kind):
-    hl = '<circle cx="{x}" cy="{y}" r="1.7" fill="{F}"/>'
-    def dot(x, y, r=5.2, dx=1.6, dy=-1.8): return '<circle cx="%s" cy="%s" r="%s" fill="{I}"/>' % (x, y, r) + hl.replace('{x}', str(x + dx)).replace('{y}', str(y + dy))
+    def dot(x, y, r=6.4, dx=1.9, dy=-2.1):
+        return ('<circle cx="%s" cy="%s" r="%s" fill="{I}"/><circle cx="%s" cy="%s" r="%s" fill="{M}"/><circle cx="%s" cy="%s" r="%s" fill="{M}"/>'
+                % (x, y, r, x + dx, y + dy, round(r * .36, 2), x - dx * .7, y + dy * -.8, round(r * .17, 2)))
     arc = lambda x: '<path d="M%s 62 Q%s 53 %s 62" fill="none" stroke="{I}" stroke-width="3.6" stroke-linecap="round"/>' % (x - 6, x, x + 6)
     if kind == 'happy': return arc(47) + arc(73)
     if kind == 'up': return dot(49, 57, 5, 1.8, -2) + dot(75, 57, 5, 1.8, -2)
@@ -69,7 +80,7 @@ def _eyes(kind):
     if kind == 'curious': return dot(47, 61, 4.4) + dot(73, 59, 6.8, 2.2, -2.4) + '<path d="M66 47 Q74 43 81 48" fill="none" stroke="{I}" stroke-width="2.6" stroke-linecap="round"/>'
     if kind == 'wide': return dot(47, 59, 5.6) + dot(73, 59, 5.6) + '<path d="M40 48 Q47 44 53 48 M67 48 Q73 44 80 48" fill="none" stroke="{I}" stroke-width="2.4" stroke-linecap="round"/>'
     if kind == 'focus': return dot(47, 61, 4.6, 1.2, -1.4) + dot(73, 61, 4.6, 1.2, -1.4) + '<path d="M41 52 L53 53 M79 52 L67 53" stroke="{I}" stroke-width="2.6" stroke-linecap="round"/>'
-    return dot(47, 60) + dot(73, 60)
+    return dot(47, 60) + dot(73, 60) + '<path d="M40 55 l-3 -3 M41.5 52.5 l-1.6 -3.6 M80 55 l3 -3 M78.5 52.5 l1.6 -3.6" stroke="{I}" stroke-width="1.8" stroke-linecap="round"/>'
 
 
 def _mouth(kind):
@@ -114,13 +125,18 @@ def _body(expr):
     p = POSE[expr]
     inner = ('<ellipse cx="60" cy="112" rx="30" ry="3.2" fill="{I}" opacity=".12"/>'
              '<g class="rd-all"><g%s>' % (' class="rd-jump"' if p.get('jump') else '') +
-             '<path d="M60 28 V15" stroke="{V}" stroke-width="3.6" stroke-linecap="round"/>'
-             '<path class="rd-ping" d="M51 9 Q60 0 69 9" fill="none" stroke="{T}" stroke-width="2.2" stroke-linecap="round"/>'
-             '<path class="rd-ping b" d="M46 6 Q60 -8 74 6" fill="none" stroke="{T}" stroke-width="2.2" stroke-linecap="round"/>'
-             '<circle class="rd-tip" cx="60" cy="13" r="4.6" fill="{T}"/>'
+             '<path class="rd-wingL" d="M28 56 C8 30 -4 44 2 58 C-6 66 6 82 26 72 Z" fill="{G}" stroke="{V}" stroke-width="2.2" stroke-linejoin="round" opacity=".92"/>'
+             '<path class="rd-wingR" d="M92 56 C112 30 124 44 118 58 C126 66 114 82 94 72 Z" fill="{G}" stroke="{V}" stroke-width="2.2" stroke-linejoin="round" opacity=".92"/>'
+             '<path d="M60 29 C60 22 54 21 56 15 C57.5 11 62 11 61 7" fill="none" stroke="{V}" stroke-width="3.2" stroke-linecap="round"/>'
+             '<circle class="rd-ping" cx="61" cy="3" r="9" fill="{G2}" opacity=".7"/>'
+             '<path class="rd-star" d="M61 -5.5 L63.4 0.4 L69.6 0.8 L64.8 4.8 L66.4 10.8 L61 7.4 L55.6 10.8 L57.2 4.8 L52.4 0.8 L58.6 0.4 Z" fill="{Y}" stroke="{I}" stroke-width="1.2" stroke-linejoin="round"/>'
+             '<path class="rd-dust" d="M18 92 l1.4 3.2 l3.2 1.4 l-3.2 1.4 l-1.4 3.2 l-1.4 -3.2 l-3.2 -1.4 l3.2 -1.4 z" fill="{Y}"/>'
+             '<path class="rd-dust b" d="M104 96 l1.2 2.8 l2.8 1.2 l-2.8 1.2 l-1.2 2.8 l-1.2 -2.8 l-2.8 -1.2 l2.8 -1.2 z" fill="{P}"/>'
+             '<circle class="rd-dust c" cx="88" cy="100" r="2" fill="{T}"/>'
              '<ellipse cx="46" cy="104" rx="9" ry="5" fill="{V}"/><ellipse cx="74" cy="104" rx="9" ry="5" fill="{V}"/>'
              + p['arms'] +
              '<ellipse cx="60" cy="66" rx="40" ry="39" fill="{V}"/>'
+             '<path class="rd-shine" d="M30 46 Q38 31 54 28" fill="none" stroke="{M}" stroke-width="3.4" stroke-linecap="round"/>'
              '<ellipse cx="60" cy="65" rx="30.5" ry="27" fill="{F}"/>'
              '<g class="rd-cheek"><circle cx="37.5" cy="71" r="4.4" fill="{P}" opacity=".6"/><circle cx="82.5" cy="71" r="4.4" fill="{P}" opacity=".6"/></g>'
              '<g class="rd-look"><g class="rd-eyes">' + _eyes(p['eyes']) + '</g></g>' + _mouth(p['mouth']) + p.get('front', '') + p['extra'] + '</g></g>')
@@ -134,12 +150,12 @@ def _fill(s, pal):
 
 def svg(expr='ciao', px=48, cls=''):
     """SVG decorativo per la pagina: usa i colori del tema e le animazioni di rada.CSS."""
-    return _fill('<svg class="rd%s" data-rd="%s" viewBox="-6 -10 136 128" width="%d" height="%d" aria-hidden="true" focusable="false">%s</svg>' % (
-        (' ' + cls) if cls else '', expr, px, round(px * 128 / 136), _body(expr)), THEME)
+    return _fill('<svg class="rd%s" data-rd="%s" viewBox="-8 -28 140 148" width="%d" height="%d" aria-hidden="true" focusable="false">%s</svg>' % (
+        (' ' + cls) if cls else '', expr, px, round(px * 148 / 140), _body(expr)), THEME)
 
 
 def standalone(expr):
-    return _fill('<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -10 136 128" width="272" height="256" role="img" aria-labelledby="t"><title id="t">%s</title><style>%s</style>%s</svg>\n' % (
+    return _fill('<svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -28 140 148" width="280" height="296" role="img" aria-labelledby="t"><title id="t">%s</title><style>%s</style>%s</svg>\n' % (
         LABEL[expr], ANIM, _body(expr)), FIXED)
 
 
