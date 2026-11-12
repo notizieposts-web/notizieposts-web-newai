@@ -4,7 +4,7 @@ Dal 12 novembre 2026 il sito si chiama **Sapit** (prima «Radar AI»). Dal latin
 
 ## La storia
 
-Il sapere oggi passa dall'intelligenza artificiale e cambia ogni giorno. Sapit è il gufo che veglia di notte e la mattina ti porta quello che conta. Frase: **«Lui sa. Tu impari.»**
+Il sapere oggi passa dall'intelligenza artificiale e cambia ogni giorno. Sapit è il gufo che veglia di notte e la mattina ti porta quello che conta. Frase: **«Lui sa. Tu impari.»** Racconto completo, pubblico e confronto con le alternative: [`storia.md`](storia.md).
 
 | Cosa sa fare | Segno nel logo |
 |---|---|
