@@ -1,4 +1,4 @@
-"""Radar AI: inietta lo strato di accessibilita' WCAG 2.2 AA in una o piu' pagine. Idempotente."""
+"""Sapit: inietta lo strato di accessibilita' WCAG 2.2 AA in una o piu' pagine. Idempotente."""
 import re, json, os, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import logo
@@ -196,14 +196,15 @@ def process(path):
     s = re.sub(r'<a class="skip-link"[^>]*>.*?</a>\s*', '', s, flags=re.S)
     if not re.search(r'<html[^>]*\blang=', s): s = s.replace('<html', '<html lang="it"', 1)
     s = re.sub(r'<link rel="icon"[^>]*>\s*', '', s)
-    s = s.replace('</head>', HEADJS + CSS.replace('</style>', logo.CSS + '</style>') + '<link rel="icon" href="' + logo.FAVICON + '">\n</head>', 1)
+    s = re.sub(r'<link rel="apple-touch-icon"[^>]*>\s*', '', s)
+    s = s.replace('</head>', HEADJS + CSS.replace('</style>', logo.CSS + '</style>') + '<link rel="icon" href="' + logo.FAVICON + '">' + logo.ICONS + '\n</head>', 1)
     home = '../' if 'edizioni/' in path.replace('\\','/') else './'
     s = re.sub(r'<script id="a11y-menu">.*?</script>\s*', '', s, flags=re.S)
     mp = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'topics_menu.json')
     if os.path.exists(mp):
         s = s.replace('</head>', '<script id="a11y-menu">window.RADAR_MENU={base:%s,items:%s};</script>\n</head>' % (json.dumps(home), open(mp, encoding='utf-8').read()), 1)
-    s = re.sub(r'<span class="brand">(.*?)</span>', lambda m: '<a class="brand" href="%s" aria-label="Radar AI, tutte le edizioni">%s</a>' % (home, m.group(1)), s, count=1)
-    s = re.sub(r'<a class="brand" href="[^"]*"( aria-label="[^"]*")?>.*?</a>', lambda m: '<a class="brand" href="%s" aria-label="Radar AI, tutte le edizioni">%s</a>' % (home, logo.LOGO), s, count=1, flags=re.S)
+    s = re.sub(r'<span class="brand">(.*?)</span>', lambda m: '<a class="brand" href="%s" aria-label="Sapit, tutte le edizioni">%s</a>' % (home, m.group(1)), s, count=1)
+    s = re.sub(r'<a class="brand" href="[^"]*"( aria-label="[^"]*")?>.*?</a>', lambda m: '<a class="brand" href="%s" aria-label="Sapit, tutte le edizioni">%s</a>' % (home, logo.LOGO), s, count=1, flags=re.S)
     # skip link e destinazione
     m = re.search(r'<main\b([^>]*)>', s)
     if m:

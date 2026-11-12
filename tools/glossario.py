@@ -160,7 +160,7 @@ if per_ed:
             n, n, int(n), ' · '.join('<a href="#g-%s">%s</a>' % (k, e(data[k]['t'])) for k in per_ed[n]))
     body += '</section>'
 
-desc = 'Gli acronimi e i termini tecnici delle edizioni di Radar AI, spiegati in parole semplici con un esempio concreto e i link ai punti in cui compaiono.'
+desc = 'Gli acronimi e i termini tecnici delle edizioni di Sapit, spiegati in parole semplici con un esempio concreto e i link ai punti in cui compaiono.'
 hero = ('<header class="hero"><div><div class="meta"><span class="chip guide">Glossario</span><span class="chip date">%d voci</span></div>'
         '<h1 style="margin-top:1.2rem">Glossario: acronimi e termini tecnici</h1>'
         '<p class="sub">%s Nelle edizioni i termini sono sottolineati a puntini con un punto di domanda: toccali per la spiegazione breve, poi "Approfondisci nel glossario" per arrivare qui e tornare al punto in cui eri.</p></div>%s</header>') % (len(data), desc, argomenti.MARK)

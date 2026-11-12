@@ -1,4 +1,4 @@
-"""Laboratorio di Radar AI (nuovo standard): hub e pagine dei percorsi. Uso: python3 tools/arena_page.py <repo>
+"""Laboratorio di Sapit (nuovo standard): hub e pagine dei percorsi. Uso: python3 tools/arena_page.py <repo>
 
 Legge i pacchetti tools/arena/packs/*.json (scritti da arena_gen.py), scrive una sfida per file in lab/a<id>.json
 e genera azure-laboratorio.html (hub), lab-estrai.html, lab-trasforma.html, lab-confronta.html, lab-prova.html.
@@ -246,7 +246,7 @@ def main(root):
         js = (JS.replace('__META__', json.dumps(meta_list, ensure_ascii=False, separators=(',', ':'))).replace('__PAGES__', json.dumps(PAGES)).replace('__PAGE__', json.dumps(pg))
               .replace('__LAST__', json.dumps(LAST)).replace('__DAY__', json.dumps([{'id': c['id'], 'tr': c['track'], 'd': c['d'], 'p': c['pts']} for c in CH if c['giorno'] == LAST], separators=(',', ':'))).replace('__TRACKS__', json.dumps([t[:4] for t in TRACKS], ensure_ascii=False))
               .replace('__PROVA_DOC__', json.dumps(bench_text(first) if first else '', ensure_ascii=False)).replace('__PROVA_SCHEMA__', json.dumps(first['schema'] if first else '{}', ensure_ascii=False)))
-        h = (head.replace('<title>Laboratorio · Radar AI</title>', '<title>%s · Radar AI</title>' % title) + argomenti.NAV('azure-laboratorio.html', eds) + hero_html +
+        h = (head.replace('<title>Laboratorio · Sapit</title>', '<title>%s · Sapit</title>' % title) + argomenti.NAV('azure-laboratorio.html', eds) + hero_html +
              '<main class="wrap">' + body_html + '</main><div class="toast" id="toast" role="status" aria-live="polite"></div>' + argomenti.FOOT + argomenti.JS + store.JS + tutor.JS + cloud.JS + bench.JS + js + '\n</body>\n</html>\n')
         open(os.path.join(root, fname), 'w', encoding='utf-8').write(h); return len(h)
     GBAR = ('<div class="gbar"><div class="card gstat"><div class="k">Livello</div><div class="v" id="glv">Apprendista</div><div class="xpbar" aria-hidden="true"><i id="gxpbar"></i></div><div class="s" id="gnext"></div></div>'

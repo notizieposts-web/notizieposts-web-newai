@@ -1,4 +1,6 @@
-# Radar AI
+# Sapit
+
+Prima «Radar AI». Il marchio (storia, logo, regole d'uso): [`docs/marchio.md`](docs/marchio.md).
 
 Newsletter personale sull'intelligenza artificiale, preparata con Claude (Anthropic).
 

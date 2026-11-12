@@ -1,4 +1,4 @@
-"""Radar AI: aggiunge il lettore audio alle edizioni che hanno tools/audio/NN.txt. Idempotente.
+"""Sapit: aggiunge il lettore audio alle edizioni che hanno tools/audio/NN.txt. Idempotente.
 
 Uso: python3 tools/audio_page.py .
 

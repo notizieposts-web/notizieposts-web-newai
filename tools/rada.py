@@ -3,7 +3,7 @@ Uso:
   import rada; rada.svg('idea', 48)            SVG da mettere nella pagina (colori del tema, animazioni in rada.CSS)
   python3 tools/rada.py <repo>                 scrive i file img/rada/rada-<espressione>.svg (colori fissi, animazioni dentro il file)
 Espressioni: ciao, parla, idea, pensa, spiega, felice, coraggio, curiosa, conta.
-Il disegno è originale di Radar AI. Le animazioni si fermano con "riduci movimento".
+Il disegno è originale di Sapit. Le animazioni si fermano con "riduci movimento".
 """
 import os, re, sys
 

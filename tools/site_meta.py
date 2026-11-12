@@ -1,10 +1,10 @@
-"""Radar AI: metadati e servizi del sito, secondo Google Search Central, W3C/WAI e GitHub Pages. Idempotente.
+"""Sapit: metadati e servizi del sito, secondo Google Search Central, W3C/WAI e GitHub Pages. Idempotente.
 
 Uso (dalla radice del repository, dopo edx.py e audio_page.py, prima di inject.py):
   python3 tools/site_meta.py .
 
 Fa:
-- titolo descrittivo di ogni edizione ("Titolo · Radar AI, 19 ottobre 2026") e meta description (da tools/edx.py);
+- titolo descrittivo di ogni edizione ("Titolo · Sapit, 19 ottobre 2026") e meta description (da tools/edx.py);
 - canonical, link al feed, Open Graph e Twitter card, dati strutturati NewsArticle (JSON-LD);
 - immagine di anteprima per ogni edizione (img/og/NN.png, 1200x630) e una generale (img/og/radar-ai.png);
 - navigazione "edizione precedente / successiva" in fondo a ogni edizione;
@@ -16,7 +16,7 @@ import datetime, glob, html, json, os, re, sys
 from zoneinfo import ZoneInfo
 
 SITE = 'https://notizieposts-web.github.io/notizieposts-web-newai/'
-NAME = 'Radar AI'
+NAME = 'Sapit'
 TZ = ZoneInfo('Europe/Rome')
 MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto',
         'settembre', 'ottobre', 'novembre', 'dicembre']
@@ -45,6 +45,11 @@ def og_image(root, path, kicker, title, chips):
     font = os.path.join(root, 'tools/fonts/Inter-Bold.otf')
     W, H, P = 1200, 630, 72
     im = Image.new('RGB', (W, H), '#3F7A12')
+    try:
+        ico = Image.open(os.path.join(root, 'img/brand/sapit-gufo-og.png')).convert('RGBA')
+        im.paste(ico, (W - P - ico.width, P - 18), ico)
+    except Exception:
+        pass
     dr = ImageDraw.Draw(im)
     f_k = ImageFont.truetype(font, 28)
     dr.text((P, P), kicker.upper(), font=f_k, fill='#FFFFFF')
@@ -54,7 +59,7 @@ def og_image(root, path, kicker, title, chips):
         words, lines, cur = title.split(), [], ''
         for w in words:
             t = (cur + ' ' + w).strip()
-            if dr.textlength(t, font=f_t) <= W - 2 * P:
+            if dr.textlength(t, font=f_t) <= W - 2 * P - (130 if len(lines) == 0 else 0):
                 cur = t
             else:
                 lines.append(cur); cur = w
@@ -76,14 +81,14 @@ def og_image(root, path, kicker, title, chips):
         dr.text((x + 18, cy + 8), c, font=f_c, fill='#FFFFFF')
         x += w + 12
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    im.quantize(colors=32).save(path, optimize=True)
+    im.quantize(colors=64).save(path, optimize=True)
 
 # ---------------------------------------------------------------- blocchi HTML
 def head_block(title, desc, url, image, kind, ld=None):
     b = ['<!-- META -->',
          '<meta name="description" content="%s">' % esc(desc),
          '<link rel="canonical" href="%s">' % esc(url),
-         '<link rel="alternate" type="application/atom+xml" title="Radar AI, tutte le edizioni" href="%sfeed.xml">' % SITE,
+         '<link rel="alternate" type="application/atom+xml" title="Sapit, tutte le edizioni" href="%sfeed.xml">' % SITE,
          '<meta property="og:site_name" content="%s">' % NAME,
          '<meta property="og:locale" content="it_IT">',
          '<meta property="og:type" content="%s">' % kind,
@@ -151,11 +156,11 @@ def main(root):
     # immagini
     gen = os.path.join(root, 'img/og/radar-ai.png')
     if not os.path.exists(gen):
-        og_image(root, gen, 'Radar AI · newsletter in italiano', 'Le novità sull\'intelligenza artificiale, spiegate con esempi ed esperimenti', ['Edizioni', 'Argomenti', 'Azure', 'Laboratorio'])
+        og_image(root, gen, 'Sapit · newsletter in italiano', 'Le novità sull\'intelligenza artificiale, spiegate con esempi ed esperimenti', ['Edizioni', 'Argomenti', 'Azure', 'Laboratorio'])
     for n in eds:
         p = os.path.join(root, 'img/og/%s.png' % n)
         if not os.path.exists(p):
-            og_image(root, p, 'Radar AI · %s' % label(info[n]['date']), info[n]['t'], info[n]['c'])
+            og_image(root, p, 'Sapit · %s' % label(info[n]['date']), info[n]['t'], info[n]['c'])
 
     # edizioni
     for i, n in enumerate(eds):
@@ -189,9 +194,9 @@ def main(root):
         s = open(f, encoding='utf-8').read()
         t = re.search(r'<title>(.*?)</title>', s, flags=re.S).group(1).strip()
         m = re.search(r'<p class="sub">(.*?)</p>', s, flags=re.S) or re.search(r'<p class="lead">(.*?)</p>', s, flags=re.S)
-        desc = short(m.group(1)) if m else 'Radar AI, la newsletter in italiano sulle novità dell\'intelligenza artificiale.'
+        desc = short(m.group(1)) if m else 'Sapit, la newsletter in italiano sulle novità dell\'intelligenza artificiale.'
         if name == 'index.html':
-            desc = 'Tutte le edizioni di Radar AI, la newsletter in italiano sull\'intelligenza artificiale: notizie verificate, esempi, esperimenti e la rubrica su Azure.'
+            desc = 'Tutte le edizioni di Sapit, la newsletter in italiano sull\'intelligenza artificiale: notizie verificate, esempi, esperimenti e la rubrica su Azure.'
         url = SITE if name == 'index.html' else SITE + name
         s = put_head(s, head_block(html.unescape(t), desc, url, gen_img, 'website'))
         open(f, 'w', encoding='utf-8').write(s)
@@ -206,9 +211,9 @@ def main(root):
                        ''.join('<category term="%s"/>' % esc(c) for c in x['c'])))
     last = stamp(info[eds[-1]]['date'])
     feed = ('<?xml version="1.0" encoding="utf-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="it">\n'
-            '<title>Radar AI</title><subtitle>La newsletter in italiano sull\'intelligenza artificiale</subtitle>'
+            '<title>Sapit</title><subtitle>La newsletter in italiano sull\'intelligenza artificiale</subtitle>'
             '<link href="%s"/><link rel="self" href="%sfeed.xml"/><id>%s</id><updated>%s</updated>'
-            '<author><name>Radar AI</name></author>\n%s\n</feed>\n') % (SITE, SITE, SITE, last, '\n'.join(entries))
+            '<author><name>Sapit</name></author>\n%s\n</feed>\n') % (SITE, SITE, SITE, last, '\n'.join(entries))
     open(os.path.join(root, 'feed.xml'), 'w', encoding='utf-8').write(feed)
 
     # sitemap: lastmod solo dove la data e' certa (le edizioni)
@@ -235,7 +240,7 @@ PAGE_404 = '''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Pagina non trovata · Radar AI</title>
+<title>Pagina non trovata · Sapit</title>
 <style>
 :root{--bg:#F6F6F5;--ink:#1C1D1F;--muted:#55575B;--line:#D6D6D4;--violet:#3F7A12;--surface:#FFFFFF}
 @media (prefers-color-scheme: dark){:root{--bg:#121212;--ink:#EDEDED;--muted:#A9AAAF;--line:#3A3B3F;--violet:#9CD84A;--surface:#1E1F21}}
@@ -252,7 +257,7 @@ a:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
 </head>
 <body>
 <main>
-<p class="k">Radar AI</p>
+<p class="k">Sapit</p>
 <h1>Pagina non trovata</h1>
 <p>L'indirizzo che hai aperto non esiste, o è stato scritto in modo diverso. Puoi ripartire da qui:</p>
 <nav aria-label="Pagine principali">

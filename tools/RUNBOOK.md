@@ -1,4 +1,6 @@
-# Radar AI — procedura per una nuova edizione
+# Sapit (prima Radar AI) — procedura per una nuova edizione
+
+> Dal 12 novembre 2026 il sito si chiama **Sapit**: nel sito, nei titoli e nei piè di pagina delle nuove edizioni scrivi «Sapit». Marchio e regole: `docs/marchio.md`. L'email e i testi audio restano «Radar AI» finché non si decide diversamente.
 
 Questa cartella contiene tutto ciò che serve a una sessione nuova (anche pianificata) per produrre, pubblicare e inviare un'edizione di **Radar AI**, la newsletter italiana sull'AI di Alberto Cecinato.
 

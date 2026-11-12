@@ -73,7 +73,7 @@ def NAV(cur, eds):
     ts, _ = themes(eds)
     items = [('argomenti.html', 'Argomenti')] + [(g['u'], g['menu']) for g in GUIDES] + [(theme_url(t), t) for t in ts]
     a = ''.join('<a href="%s"%s>%s</a>' % (u, ' aria-current="page" class="on"' if u == cur else '', html.escape(l)) for u, l in items)
-    return ('<nav class="nav" aria-label="Argomenti"><div class="nav-in"><a class="brand" href="./">Radar AI</a>'
+    return ('<nav class="nav" aria-label="Argomenti"><div class="nav-in"><a class="brand" href="./">Sapit</a>'
             '<div class="links" id="links">%s</div></div><div class="progress" id="prog"></div></nav>') % a
 
 CSS = '''<style id="arg-css">
@@ -103,10 +103,10 @@ def head_from(root, title, url=None, desc=None):
     head = src[:src.index('<body')]
     head = re.sub(r'<!-- META -->.*?<!-- /META -->\n?', '', head, flags=re.S)
     head = re.sub(r'<script type="application/ld\+json">.*?</script>\n?', '', head, flags=re.S)
-    head = re.sub(r'<title>.*?</title>', '<title>%s · Radar AI</title>' % html.escape(title), head)
+    head = re.sub(r'<title>.*?</title>', '<title>%s · Sapit</title>' % html.escape(title), head)
     if url:
         import site_meta
-        head = site_meta.put_head(head, site_meta.head_block('%s · Radar AI' % title, desc or 'Radar AI, la newsletter in italiano sull\'intelligenza artificiale.',
+        head = site_meta.put_head(head, site_meta.head_block('%s · Sapit' % title, desc or 'Sapit, la newsletter in italiano sull\'intelligenza artificiale.',
                                                              site_meta.SITE + url, site_meta.SITE + 'img/og/radar-ai.png', 'website'))
     head = re.sub(r'<style id="(a11y|egraph-css|edx-css|arg-css)">.*?</style>', '', head, flags=re.S)
     head = re.sub(r'<script id="a11y-theme">.*?</script>', '', head, flags=re.S)
@@ -116,7 +116,7 @@ def head_from(root, title, url=None, desc=None):
 MARK = '<svg class="radar" viewBox="0 0 400 400" aria-hidden="true"><g transform="translate(80 80) scale(7.5)"><rect width="32" height="32" rx="9" fill="var(--violet)"/><path d="M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z" fill="var(--bg)" opacity=".28"/><g fill="none" stroke="var(--bg)" stroke-linecap="round"><circle cx="16" cy="16" r="10.5" stroke-width="2" opacity=".6"/><circle cx="16" cy="16" r="5.6" stroke-width="2" opacity=".85"/><path d="M16 16 L25.1 10.75" stroke-width="2.4"/></g><circle cx="16" cy="16" r="2.3" fill="var(--bg)"/><circle cx="22.6" cy="21.4" r="2.2" fill="var(--bg)"/></g></svg>'
 JS = '''<script id="arg-js">(function(){var p=document.getElementById('prog');function f(){var h=document.documentElement;if(p)p.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%';}window.addEventListener('scroll',f,{passive:true});f();
 var on=document.querySelector('.nav .links a[aria-current]');if(on)setTimeout(function(){var l=on.parentElement;l.scrollLeft=on.offsetLeft-l.clientWidth/2+on.offsetWidth/2},50);})();</script>'''
-FOOT = '<footer>Radar AI · preparata da Claude (Anthropic). Quando una notizia riguarda Anthropic, lo trovi segnalato nella pagina.</footer>'
+FOOT = '<footer>Sapit · preparata da Claude (Anthropic). Quando una notizia riguarda Anthropic, lo trovi segnalato nella pagina.</footer>'
 
 def page(head, nav, hero, body):
     return head + '</head>\n<body>\n' + nav + hero + '<main class="wrap">' + body + '</main>' + FOOT + JS + '\n</body>\n</html>\n'
@@ -149,7 +149,7 @@ def build(root):
         last = max((e for e in eds if t in e['m']), key=lambda e: e['n'])
         body += '<a class="card argcard" href="%s"><span><span class="chip theme">%s</span></span><h3>%s</h3><p>%s</p><span class="meta2">%d edizioni · ultima: n. %d, %s</span></a>' % (theme_url(t), html.escape(t), html.escape(t), THEME_INFO[t][1], cnt[t], last['n'], html.escape(last['d']))
     body += '</div></section>'
-    out['argomenti.html'] = page(head_from(root, 'Argomenti', 'argomenti.html', 'I temi cardine della mappa di Radar AI, ognuno con la sua pagina, e le guide di approfondimento.'), NAV('argomenti.html', eds), hero, body)
+    out['argomenti.html'] = page(head_from(root, 'Argomenti', 'argomenti.html', 'I temi cardine della mappa di Sapit, ognuno con la sua pagina, e le guide di approfondimento.'), NAV('argomenti.html', eds), hero, body)
     # pagine tema
     for t in ts:
         url = theme_url(t)

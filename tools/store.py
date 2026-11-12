@@ -44,7 +44,7 @@ window.RSol={
   all:function(ns){return rd(ns)},
   exportFile:function(){var d={tipo:'radar-ai-soluzioni',versione:1,data:new Date().toISOString(),progressi:{lab:RStore.load('radar_lab'),esercizi:RStore.load('radar_ex')},soluzioni:{lab:rd('lab'),esercizi:rd('ex'),prova:rd('prova')}};
     var b=new Blob([JSON.stringify(d,null,1)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='radar-ai-le-mie-soluzioni-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)},
-  importFile:function(file,cb){var r=new FileReader();r.onload=function(){try{var d=JSON.parse(r.result);if(d.tipo!=='radar-ai-soluzioni')throw new Error('Il file non è un salvataggio di Radar AI.');
+  importFile:function(file,cb){var r=new FileReader();r.onload=function(){try{var d=JSON.parse(r.result);if(d.tipo!=='radar-ai-soluzioni')throw new Error('Il file non è un salvataggio di Sapit.');
       ['lab','esercizi','prova'].forEach(function(k){var ns=k==='esercizi'?'ex':k;var cur=rd(ns),inc=(d.soluzioni||{})[k]||{};Object.keys(inc).forEach(function(id){if(!cur[id]||(inc[id].t||0)>=(cur[id].t||0))cur[id]=inc[id]});wr(ns,cur)});
       if(d.progressi){if(d.progressi.lab)RStore.save('radar_lab',d.progressi.lab);if(d.progressi.esercizi)RStore.save('radar_ex',d.progressi.esercizi)}cb(null,d)}catch(e){cb(e)}};r.readAsText(file)}
 };})();</script>'''

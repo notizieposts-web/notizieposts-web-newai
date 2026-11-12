@@ -80,14 +80,14 @@ def extract(ed, sid):
     return h2, lead, prose
 src23 = open(os.path.join(root, 'edizioni', '23.html'), encoding='utf-8').read()
 head = src23[:src23.index('<body')]
-head = re.sub(r'<title>.*?</title>', '<title>Guida Azure Content Understanding · Radar AI</title>', head)
+head = re.sub(r'<title>.*?</title>', '<title>Guida Azure Content Understanding · Sapit</title>', head)
 head = re.sub(r'<style id="(a11y|egraph-css|edx-css)">.*?</style>', '', head, flags=re.S)
 head = re.sub(r'<script id="a11y-theme">.*?</script>', '', head, flags=re.S)
 head = re.sub(r'<link rel="icon"[^>]*>', '', head)
 # metadati propri della guida (non quelli dell'edizione 23 da cui viene l'intestazione)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import site_meta
-head = site_meta.put_head(head, site_meta.head_block('Guida Azure Content Understanding · Radar AI',
+head = site_meta.put_head(head, site_meta.head_block('Guida Azure Content Understanding · Sapit',
     'Tutte le puntate della rubrica fissa su Azure Content Understanding, ordinate per tema: costi, pipeline, qualità, sicurezza, produzione e casi reali.',
     site_meta.SITE + 'azure.html', site_meta.SITE + 'img/og/radar-ai.png', 'website'))
 extra_css = '''<style id="guida-css">
@@ -107,12 +107,12 @@ extra_css = '''<style id="guida-css">
 .ep .eplinks a{display:inline-flex;align-items:center;min-height:32px;padding:.35rem .9rem;border-radius:999px;border:1px solid var(--line);text-decoration:none;font-weight:600;color:var(--ink);background:var(--surface)}
 .ep .eplinks a.pri{background:var(--violet);color:var(--bg);border-color:var(--violet)}
 </style>'''
-nav = '<nav class="nav" aria-label="Temi della guida"><div class="nav-in"><a class="brand" href="./">Radar AI</a><div class="links" id="links">' + \
+nav = '<nav class="nav" aria-label="Temi della guida"><div class="nav-in"><a class="brand" href="./">Sapit</a><div class="links" id="links">' + \
       '<a href="#indice">Indice</a>' + ''.join('<a href="#%s">%s</a>' % (g[0], g[1]) for g in GROUPS) + '</div></div><div class="progress" id="prog"></div></nav>'
 hero = '''<header class="hero"><div>
 <div class="meta"><span class="chip topic">Azure</span><span class="chip date">%d puntate</span><span class="chip">Aggiornata al %s</span></div>
 <h1 style="margin-top:1.2rem">Azure Content Understanding: tutta la rubrica in una guida</h1>
-<p class="sub">Le %d puntate della rubrica fissa di Radar AI, ordinate per tema invece che per data. Ogni puntata si apre qui sotto; per calcolatori, simulatori e liste di controllo interattive c'è il link alla sua edizione.</p>
+<p class="sub">Le %d puntate della rubrica fissa di Sapit, ordinate per tema invece che per data. Ogni puntata si apre qui sotto; per calcolatori, simulatori e liste di controllo interattive c'è il link alla sua edizione.</p>
 <p style="margin:1.2rem 0 0;display:flex;flex-wrap:wrap;gap:.6rem"><a class="palcta" href="azure-laboratorio.html">🎮 Gioca nel laboratorio pratico →</a><a class="palcta" href="azure-esercizi.html">Allenati con oltre mille esercizi →</a></p>
 %s</div><svg class="radar" viewBox="0 0 400 400" aria-hidden="true"><g transform="translate(80 80) scale(7.5)"><rect width="32" height="32" rx="9" fill="var(--violet)"/><path d="M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z" fill="var(--bg)" opacity=".28"/><g fill="none" stroke="var(--bg)" stroke-linecap="round"><circle cx="16" cy="16" r="10.5" stroke-width="2" opacity=".6"/><circle cx="16" cy="16" r="5.6" stroke-width="2" opacity=".85"/><path d="M16 16 L25.1 10.75" stroke-width="2.4"/></g><circle cx="16" cy="16" r="2.3" fill="var(--bg)"/><circle cx="22.6" cy="21.4" r="2.2" fill="var(--bg)"/></g></svg></header>''' % (len(EP), _AGG, len(EP), '<nav class="gsub" id="gsub" aria-label="Temi della guida"><ul class="chips">' + ''.join('<li><a class="chip topic" href="#%s">%s</a></li>' % (g[0], g[1]) for g in GROUPS) + '</ul></nav>')
 idx = '<section class="ch" id="indice" style="padding-top:2.5rem"><div class="ch-head"><div class="kicker"><span class="chip topic">Indice</span></div><h2>Sei temi, %d puntate</h2><p class="lead">Scegli un tema, oppure cerca una parola in tutte le puntate.</p></div>' % len(EP)
@@ -140,7 +140,7 @@ var links=[].slice.call(document.querySelectorAll('#gsub a')),secs=links.map(fun
 function onScroll(){var h=document.documentElement;var p=document.getElementById('prog');if(p)p.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';var cur=0;secs.forEach(function(s,i){if(s&&!s.hidden&&s.getBoundingClientRect().top<140)cur=i});links.forEach(function(a,i){a.classList.toggle('on',i===cur&&window.scrollY>200)})}
 window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 })();</script>'''
-foot = '<footer>Radar AI · Guida Azure Content Understanding · preparata da Claude (Anthropic).<br>I contenuti vengono dalle puntate pubblicate nelle edizioni, con le fonti ufficiali di Microsoft Learn indicate in ciascuna; ricontrolla le impostazioni sulla documentazione della tua versione prima di usarle in produzione.</footer>'
+foot = '<footer>Sapit · Guida Azure Content Understanding · preparata da Claude (Anthropic).<br>I contenuti vengono dalle puntate pubblicate nelle edizioni, con le fonti ufficiali di Microsoft Learn indicate in ciascuna; ricontrolla le impostazioni sulla documentazione della tua versione prima di usarle in produzione.</footer>'
 page = head + extra_css + '</head>\n<body>\n' + nav + hero + '<main class="wrap">' + idx + body + '</main>' + foot + js + '\n</body>\n</html>\n'
 open(os.path.join(root, 'azure.html'), 'w', encoding='utf-8').write(page)
 print('ok', len(page))
