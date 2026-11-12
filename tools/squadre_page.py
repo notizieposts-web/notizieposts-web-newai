@@ -64,7 +64,7 @@ body = ('''<section class="ch" id="pacchetti" style="padding-top:2.5rem"><div cl
 <p class="lead">Non cambia il contenuto, cambia l'organizzazione: un percorso personale, una squadra con la sua classifica, oppure più squadre con un riepilogo per l'azienda.</p></div>
 <div class="pk">
 <div class="card p1"><span><span class="chip">Per una persona</span></span><h3>Utente</h3><p class="who">Per chi studia da solo, con i suoi tempi.</p><ul>
-<li>''' + it(len(EX)) + ''' esercizi della Palestra e le sfide quotidiane del Laboratorio.</li><li>Percorsi per tema e tre difficoltà, con punti e gradi.</li><li>Aiuti graduali, lettura facilitata e Rada che legge ad alta voce.</li><li>Progressi salvati nel browser, con codice di backup.</li></ul>
+<li>''' + it(len(EX)) + ''' esercizi della Palestra e le sfide quotidiane del Laboratorio.</li><li>Percorsi per tema e tre difficoltà, con punti e gradi.</li><li>Aiuti graduali, lettura facilitata e una guida che legge ad alta voce.</li><li>Progressi salvati nel browser, con codice di backup.</li></ul>
 <div class="cta"><a class="sbtn pri" href="azure-esercizi.html?l=1">Inizia dai facili</a><a class="sbtn" href="azure-laboratorio.html">Sfide di oggi</a></div></div>
 <div class="card p2"><span><span class="chip">Da 2 a 30 persone</span></span><h3>Gruppo</h3><p class="who">Per una classe, un team, un gruppo di studio.</p><ul>
 <li>Tutto il pacchetto Utente, per ogni persona.</li><li>Un codice squadra scelto da chi coordina.</li><li>Ogni persona entra con nome e password e scrive il codice squadra.</li><li>Classifica della squadra che si aggiorna da sola.</li></ul>

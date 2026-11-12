@@ -13,6 +13,9 @@ LABEL = {'ciao': 'Rada saluta', 'parla': 'Rada parla', 'idea': 'Rada ha un\'idea
 # colori della fatina: fissi, uguali in tema chiaro e scuro (il personaggio non cambia colore)
 PAL = {'O': '#2B2250', 'S': '#FAD7BE', 'S2': '#F2BFA0', 'H': '#8E6CF0', 'H2': '#B9A3FF', 'D': '#7C5CFF', 'D2': '#B9A8FF', 'B': '#16A2B8',
        'G': '#E2DAFF', 'G2': '#FFE7A3', 'GW': '#9B87FF', 'Y': '#FFC94D', 'P': '#F59AB5', 'T': '#0A9BB5', 'I': '#2B2250', 'M': '#FFFFFF', 'W': '#FFFFFF', 'V': '#7C5CFF'}
+PAL.update({'A': '#FAD7BE', 'R': '#4B3FBF', 'R2': '#6A5CE0', 'BE': '#F4F2FB', 'HT': '#3A2E9A', 'GL': '#C99A2E'})
+SAGE = dict(PAL, A='#3F31A3', H='#2E2470', R='#5B4BC8', R2='#DCD5FF', BE='#F6F4FC', BK='#F59E2B')
+CHARS = {'saggio': ('Sapio', 'il gufo saggio'), 'fatina': ('Rada', 'la fatina')}
 THEME = PAL
 FIXED = PAL
 
@@ -74,13 +77,14 @@ CSS = '<style id="rada-css">.rd{flex:none;overflow:visible;vertical-align:middle
 EX, EY = (52, 34), (68, 34)
 
 
-def _eyes(kind):
+def _eyes(kind, lashes=True):
     def dot(x, y, r=4.1):
         return ('<ellipse cx="%s" cy="%s" rx="%s" ry="%s" fill="{O}"/><circle cx="%s" cy="%s" r="%s" fill="{M}"/><circle cx="%s" cy="%s" r="%s" fill="{M}"/>'
                 % (x, y, r, round(r * 1.12, 2), round(x + r * .35, 2), round(y - r * .45, 2), round(r * .38, 2), round(x - r * .35, 2), round(y + r * .4, 2), round(r * .18, 2)))
     lash = '<path d="M46.5 31 l-3 -2 M47.5 28.6 l-2 -2.8 M73.5 31 l3 -2 M72.5 28.6 l2 -2.8" stroke="{O}" stroke-width="1.4" stroke-linecap="round"/>'
     brow = lambda d: '<path d="%s" fill="none" stroke="{H}" stroke-width="2.2" stroke-linecap="round"/>' % d
     arc = lambda x: '<path d="M%s 35 Q%s 29.5 %s 35" fill="none" stroke="{O}" stroke-width="2.6" stroke-linecap="round"/>' % (x - 4.5, x, x + 4.5)
+    if not lashes: lash = ''
     if kind == 'happy': return arc(52) + arc(68) + lash
     if kind == 'up': return dot(52.5, 32.5, 3.9) + dot(68.5, 32.5, 3.9) + lash + brow('M47 25.5 Q52 23 56 25') + brow('M64 25 Q68 23 73 25.5')
     if kind == 'soft': return dot(52, 34.5, 3.9) + dot(68, 34.5, 3.9) + lash + brow('M47 27.5 L56 25.5') + brow('M73 27.5 L64 25.5')
@@ -101,7 +105,7 @@ def _mouth(kind):
 
 def _arm(d, hx, hy, cls=''):
     """braccio con contorno: prima la linea scura, poi la pelle; la mano è un cerchietto"""
-    return ('<g%s><path d="%s" fill="none" stroke="{O}" stroke-width="6.6" stroke-linecap="round"/><path d="%s" fill="none" stroke="{S}" stroke-width="4.2" stroke-linecap="round"/>'
+    return ('<g%s><path d="%s" fill="none" stroke="{O}" stroke-width="6.6" stroke-linecap="round"/><path d="%s" fill="none" stroke="{A}" stroke-width="4.2" stroke-linecap="round"/>'
             '<circle cx="%s" cy="%s" r="3.9" fill="{S}" stroke="{O}" stroke-width="1.3"/></g>') % ((' class="%s"' % cls) if cls else '', d, d, hx, hy)
 
 
@@ -164,12 +168,41 @@ DUST = ('<path class="rd-dust" d="M14 98 l1.4 3.2 l3.2 1.4 l-3.2 1.4 l-1.4 3.2 l
         '<circle class="rd-dust c" cx="92" cy="104" r="1.9" fill="{T}"/>')
 
 
-def _body(expr):
+# Sapio, il gufo saggio: disegno originale (viola, tocco da laureato, occhiali dorati, libro)
+OWL_BACK = ('<path d="M37 26 L31 4 L49 15 Z M83 26 L89 4 L71 15 Z" fill="{R}" stroke="{O}" stroke-width="1.6" stroke-linejoin="round"/>'
+            '<path d="M60 9 C81 9 87 31 86 56 C85 84 76 102 60 102 C44 102 35 84 34 56 C33 31 39 9 60 9 Z" fill="{R}" stroke="{O}" stroke-width="1.6"/>'
+            '<ellipse cx="60" cy="73" rx="17" ry="22" fill="{R2}"/>'
+            '<path d="M50 62 q3 3 6 0 q3 3 6 0 q3 3 6 0 M47 70 q3 3 6 0 q3 3 6 0 q3 3 6 0 q3 3 6 0 M47 78 q3 3 6 0 q3 3 6 0 q3 3 6 0 q3 3 6 0 M50 86 q3 3 6 0 q3 3 6 0 q3 3 6 0" fill="none" stroke="{R}" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>'
+            '<path d="M51 101 l-3 5 M53 101 v6 M55 101 l3 5 M65 101 l-3 5 M67 101 v6 M69 101 l3 5" stroke="{BK}" stroke-width="2.2" stroke-linecap="round"/>'
+            '<path d="M41 22 Q51 26 60 31 Q69 26 79 22 Q74 46 60 51 Q46 46 41 22 Z" fill="{BE}" opacity=".0"/>'
+            '<circle cx="51" cy="34" r="11" fill="{BE}" stroke="{O}" stroke-width="1.2"/><circle cx="69" cy="34" r="11" fill="{BE}" stroke="{O}" stroke-width="1.2"/>'
+            '<g class="rd-cheek"><ellipse cx="43" cy="43" rx="3.2" ry="2" fill="{P}" opacity=".6"/><ellipse cx="77" cy="43" rx="3.2" ry="2" fill="{P}" opacity=".6"/></g>')
+OWL_FACE = ('<g fill="none" stroke="{GL}" stroke-width="1.7"><circle cx="52" cy="34" r="6.8"/><circle cx="68" cy="34" r="6.8"/><path d="M58.6 32.6 Q60 31 61.4 32.6"/></g>')
+OWL_CAP = ('<path d="M47 9 L47 15 Q60 20.5 73 15 L73 9 Z" fill="{O}"/>'
+           '<path d="M34 6 L60 -5 L86 6 L60 16 Z" fill="{O}" stroke="{O}" stroke-width="1.2" stroke-linejoin="round"/>'
+           '<path d="M40 6 L60 -1.5 L80 6" fill="none" stroke="#5A4E8C" stroke-width="1"/>'
+           '<circle cx="60" cy="5" r="1.8" fill="{Y}"/>'
+           '<g class="rd-swing"><path d="M60 5 L80 9 L81 20" fill="none" stroke="{Y}" stroke-width="1.6" stroke-linecap="round"/><path d="M78.5 19 h5 l-1 6 h-3 Z" fill="{Y}" stroke="{O}" stroke-width=".8"/></g>')
+OWL_BOOK = ('<g class="rd-sym"><path d="M92 92 Q99 88 106 92 Q113 88 120 92 L120 104 Q113 100 106 104 Q99 100 92 104 Z" fill="{W}" stroke="{O}" stroke-width="1.4" stroke-linejoin="round"/>'
+            '<path d="M106 92 V104 M95 95 h7 M95 98 h6 M109 95 h7 M109 98 h6" stroke="{L}" stroke-width="1.1" stroke-linecap="round"/></g>')
+
+
+def _beak(kind):
+    if kind in ('open', 'talk', 'o'):
+        low = '<path%s d="M57.2 46 L62.8 46 L60 50.5 Z" fill="{BK}" stroke="{O}" stroke-width="1" stroke-linejoin="round"/>' % (' class="rd-mouth-t"' if kind == 'talk' else '')
+        return '<path d="M56.5 45 Q60 47 63.5 45 L60 49 Z" fill="{O}"/>' + low + '<path d="M55.5 40.5 L64.5 40.5 L60 46 Z" fill="{BK}" stroke="{O}" stroke-width="1.1" stroke-linejoin="round"/>'
+    return '<path d="M55.5 40.5 L64.5 40.5 L60 48 Z" fill="{BK}" stroke="{O}" stroke-width="1.1" stroke-linejoin="round"/>'
+
+
+def _body(expr, ch='fatina'):
     p = POSE[expr]
-    return ('<ellipse cx="60" cy="114" rx="26" ry="3" fill="{O}" opacity=".14"/>' + DUST +
-            '<g class="rd-all"><g%s>' % (' class="rd-jump"' if p.get('jump') else '') +
-            WINGS + BODY + HEAD + '<g class="rd-look"><g class="rd-eyes">' + _eyes(p['eyes']) + '</g></g>' + _mouth(p['mouth']) + BANGS +
-            p['arms'] + p['extra'] + '</g></g>')
+    head = '<ellipse cx="60" cy="114" rx="26" ry="3" fill="{O}" opacity=".14"/>' + DUST + '<g class="rd-all"><g%s>' % (' class="rd-jump"' if p.get('jump') else '')
+    eyes = '<g class="rd-look"><g class="rd-eyes">' + _eyes(p['eyes'], ch == 'fatina') + '</g></g>'
+    if ch == 'saggio':
+        arms = p['arms'].replace('stroke-width="4.2"', 'stroke-width="7.4"').replace('stroke-width="6.6"', 'stroke-width="9.8"').replace('r="3.9" fill="{S}"', 'r="4.6" fill="{A}"')
+        return (head + OWL_BACK + eyes + OWL_FACE + _beak(p['mouth']) + OWL_CAP +
+                arms + p['extra'] + ('' if expr in ('spiega', 'conta', 'idea') else OWL_BOOK) + '</g></g>')
+    return head + WINGS + BODY + HEAD + eyes + _mouth(p['mouth']) + BANGS + p['arms'] + p['extra'] + '</g></g>'
 
 
 def _fill(s, pal):
@@ -177,22 +210,24 @@ def _fill(s, pal):
     return s
 
 
-def svg(expr='ciao', px=48, cls=''):
-    """SVG decorativo per la pagina: usa i colori del tema e le animazioni di rada.CSS."""
+def svg(expr='ciao', px=48, cls='', ch='saggio'):
+    """SVG decorativo per la pagina (aria-hidden), con le animazioni di rada.CSS."""
     return _fill('<svg class="rd%s" data-rd="%s" viewBox="-8 -28 140 148" width="%d" height="%d" aria-hidden="true" focusable="false">%s</svg>' % (
-        (' ' + cls) if cls else '', expr, px, round(px * 148 / 140), _body(expr)), THEME)
+        (' ' + cls) if cls else '', expr, px, round(px * 148 / 140), _body(expr, ch)), SAGE if ch == 'saggio' else PAL)
 
 
-def standalone(expr):
+def standalone(expr, ch='saggio'):
+    nm = CHARS[ch][0]
     return _fill('<svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -28 140 148" width="280" height="296" role="img" aria-labelledby="t"><title id="t">%s</title><style>%s</style>%s</svg>\n' % (
-        LABEL[expr], ANIM, _body(expr)), FIXED)
+        LABEL[expr].replace('Rada', nm), ANIM, _body(expr, ch)), SAGE if ch == 'saggio' else PAL)
 
 
-ALL = {e: svg(e, 48) for e in EXPR}
+ALL = {ch: {e: svg(e, 48, ch=ch) for e in EXPR} for ch in CHARS}
 
 if __name__ == '__main__':
     root = sys.argv[1] if len(sys.argv) > 1 else '.'
     out = os.path.join(root, 'img', 'rada'); os.makedirs(out, exist_ok=True)
     for e in EXPR:
-        open(os.path.join(out, 'rada-%s.svg' % e), 'w', encoding='utf-8').write(standalone(e))
-    print('ok rada', len(EXPR), 'svg in img/rada/')
+        open(os.path.join(out, 'rada-%s.svg' % e), 'w', encoding='utf-8').write(standalone(e, 'fatina'))
+        open(os.path.join(out, 'sapio-%s.svg' % e), 'w', encoding='utf-8').write(standalone(e, 'saggio'))
+    print('ok', len(EXPR), 'espressioni x', len(CHARS), 'personaggi in img/rada/')

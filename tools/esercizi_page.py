@@ -139,7 +139,7 @@ CSS = '''<style id="pal-css">
 
 hero = ('<header class="hero"><div><div class="meta"><span class="chip guide">Esercizi</span><span class="chip l1">Facile: %s</span><span class="chip l2">Media: %s</span><span class="chip l3">Difficile: %s</span></div>'
         '<h1 style="margin-top:1.2rem">Palestra Content Understanding: %s esercizi</h1>'
-        '<p class="sub">Calcoli di pagine, quote, token e costi, scelte di architettura, qualità, sicurezza e casi completi. Un esercizio alla volta, senza limiti di tempo, con aiuti che non tolgono punti: un indizio, il metodo, la soluzione passo passo e un esempio già svolto. Rada, la guida, te li legge ad alta voce. I tuoi progressi restano in questo browser.</p></div>%s</header>') % (
+        '<p class="sub">Calcoli di pagine, quote, token e costi, scelte di architettura, qualità, sicurezza e casi completi. Un esercizio alla volta, senza limiti di tempo, con aiuti che non tolgono punti: un indizio, il metodo, la soluzione passo passo e un esempio già svolto. La guida, il gufo saggio Sapio o la fatina Rada, te li legge ad alta voce. I tuoi progressi restano in questo browser.</p></div>%s</header>') % (
         it(lv[1]), it(lv[2]), it(lv[3]), it(N), argomenti.MARK)
 
 ctl = '''<section class="ch" id="esercizi" style="padding-top:2.5rem"><div class="ch-head"><div class="kicker"><span class="chip guide">Allenamento</span></div><h2>Scegli un percorso e una difficoltà</h2>
@@ -203,7 +203,7 @@ function words(e){var t=plain(e.q+' '+(e.o||[]).join(' ')),out=[];WORDS.forEach(
 function ep(e){var m=/P(\d+)/.exec(e.p||'');return m&&EPT[+m[1]]?[+m[1],EPT[+m[1]]]:null}
 function mask(e){var s=String(e.s).replace(/<b>.*?<\/b>/g,'▢');return steps(plain(s)).map(function(x){var i=x.lastIndexOf('=');if(i>=0)x=x.slice(0,i)+'= ?';return x})}
 function sibling(e){var c=EX.filter(function(x){return x.t===e.t&&x.id!==e.id&&x.k===e.k&&plain(x.q)!==plain(e.q)});if(!c.length)return null;c.sort(function(a,b){return (Math.abs(a.l-e.l)-Math.abs(b.l-e.l))||(Math.abs(a.id-e.id)-Math.abs(b.id-e.id))});return c[0]}
-function sayBtn(){return '<button type="button" class="rt-say" data-say="1">'+T.avatar(28)+'<span>Ascolta da Rada</span></button>'}
+function sayBtn(){return '<button type="button" class="rt-say" data-say="1">'+T.avatar(28)+'<span>Ascolta da <span class="rt-nm">'+T.name()+'</span></span></button>'}
 var HELP={
  facile:function(e){var q=qparts(e),w=words(e);return '<div class="rd-row">'+T.avatar(60,'curiosa')+'<h4>Spiegamelo facile</h4></div><div class="schema">'+
    '<div class="sb s1"><h5>1. Che cosa so</h5>'+(q.know.length?'<ul>'+q.know.map(function(s){return '<li>'+T.nums(esc(s))+'</li>'}).join('')+'</ul>':'<p>Tutto quello che serve è nella domanda qui accanto.</p>')+'</div>'+
@@ -233,12 +233,12 @@ function open(id){var e=BY[id];cur=e;$('listview').hidden=true;var S=$('stage');
   var hb=[['h1','💡 1. Un indizio'],['h2',e.k==='mcq'&&e.o.length>=3?'🧭 2. Restringi il campo':'🧭 2. Il metodo'],['h3','✅ 3. Soluzione passo passo'],['es','📘 Esempio svolto'],['facile','🧩 Spiegamelo facile']];if(e.k==='num')hb.push(['calc','🔢 Calcolatrice']);
   var h='<button type="button" class="back" id="xback">← Tutti gli esercizi</button><div class="kicker" style="margin-top:.9rem"><span class="chip">N. '+e.id+'</span><span class="chip l'+e.l+'">'+LN[e.l]+'</span><span class="chip">'+PT[e.l]+' punti</span><span class="chip topic">'+GN[e.g]+'</span>'+(done[e.id]?'<span class="chip done">✓ Risolto</span>':'')+'</div>'+
     '<h2 id="xt" tabindex="-1">'+e.t+'</h2><div class="qq" id="xq">'+T.nums(e.q)+'</div>'+
-    '<button type="button" class="rt-say" id="xsay">'+T.avatar(28)+'<span>Rada, leggimi l\'esercizio</span></button>'+
+    '<button type="button" class="rt-say" id="xsay">'+T.avatar(28)+'<span><span class="rt-nm">'+T.name()+'</span>, leggimi l\'esercizio</span></button>'+
     '<form class="card ans" id="xf" novalidate>';
   if(e.k==='mcq'){h+='<fieldset><legend>Scegli una risposta</legend>'+e.o.map(function(o,i){return '<label class="opt2"><input type="radio" name="r'+e.id+'" value="'+i+'"'+(SV[e.id]&&SV[e.id].v===i?' checked':'')+'><span>'+o+'</span></label>'}).join('')+'</fieldset>'}
   else{h+='<div class="numrow"><label for="xn">La tua risposta'+(e.u?' ('+e.u+')':'')+'</label><input id="xn" inputmode="decimal" autocomplete="off" aria-describedby="xfb" value="'+(SV[e.id]&&SV[e.id].v!=null?esc(SV[e.id].v):'')+'"></div>'}
   h+='<div class="acts"><button type="submit" class="vbtn">Verifica</button></div><div class="rd-row"><span id="xface"></span><p class="fb" id="xfb" role="status" aria-live="polite"></p></div></form>'+
-    '<section class="help" aria-labelledby="xh"><div class="rd-row">'+T.avatar(64,'ciao')+'<h3 id="xh">Hai bisogno di una mano? Chiedi a Rada</h3></div><p class="nop">Gli aiuti non tolgono punti e non c\'è limite di tempo. Parti dal primo e apri il successivo solo se serve.</p><div class="hbtns">'+
+    '<section class="help" aria-labelledby="xh"><div class="rd-row">'+T.avatar(64,'ciao')+'<h3 id="xh">Hai bisogno di una mano? Chiedi a <span class="rt-nm">'+T.name()+'</span></h3></div><p class="nop">Gli aiuti non tolgono punti e non c\'è limite di tempo. Parti dal primo e apri il successivo solo se serve.</p><div class="hbtns">'+
     hb.map(function(b){return '<button type="button" class="hbtn" data-h="'+b[0]+'" aria-expanded="false" aria-controls="hp_'+b[0]+'">'+b[1]+'</button>'}).join('')+'</div>'+hb.map(function(b){return '<div class="hpan" id="hp_'+b[0]+'" hidden></div>'}).join('')+'</section>'+
     '<div class="snav"><button type="button" class="pbtn" id="xprev">← Precedente</button><button type="button" class="pbtn" id="xnext">Prossimo da fare →</button></div>'+
     '<p class="ref">Riferimento: '+e.p+' · <a href="azure.html">guida Content Understanding</a></p>';

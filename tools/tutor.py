@@ -60,9 +60,14 @@ html.rt-font body,html.rt-font main h1,html.rt-font main h2,html.rt-font main h3
 
 JS = r'''<script id="tutor-js">(function(){
 var AV=__AV__;
-function av(px,ex){return (AV[ex]||AV.ciao).replace(/width="\d+" height="\d+"/,'width="'+px+'" height="'+Math.round(px*148/140)+'"')}
+var NM=__NM__;
+function ch(){return AV[P.ch]?P.ch:'saggio'}
+function name(){return NM[ch()][0]}
+function av(px,ex){var A=AV[ch()];return (A[ex]||A.ciao).replace(/width="\d+" height="\d+"/,'width="'+px+'" height="'+Math.round(px*148/140)+'"')}
+function swapAll(){document.querySelectorAll('svg.rd[data-rd]').forEach(function(s){if(s.closest('#rt-panel,#rt-fab'))return;var w=+s.getAttribute('width')||48,t=document.createElement('span');t.innerHTML=av(w,s.getAttribute('data-rd'));s.replaceWith(t.firstChild)});
+  document.querySelectorAll('.rt-nm').forEach(function(n){n.textContent=name()});if(panel){face='';setFace(state==='play'?'parla':'ciao');panel.querySelector('#rt-h').textContent=name()+', '+NM[ch()][1]+' che ti guida';fab.querySelector('.rt-lab').textContent=name()+' ti aiuta';cap.setAttribute('aria-label','Quello che dice '+name())}}
 var face='';function setFace(ex){if(face===ex||!panel)return;face=ex;panel.querySelector('.rt-face').innerHTML=av(64,ex);fab.querySelector('.rt-face').innerHTML=av(44,ex)}
-var P={size:0,sp:0,font:0,ruler:0,num:0,auto:0,rate:1};
+var P={size:0,sp:0,font:0,ruler:0,num:0,auto:0,rate:1,ch:'saggio'};
 try{var sv=JSON.parse(localStorage.getItem('radar-read')||'{}');for(var k in P)if(sv[k]!=null)P[k]=sv[k]}catch(e){}
 function keep(){try{localStorage.setItem('radar-read',JSON.stringify(P))}catch(e){}}
 var H=document.documentElement,ruler=null,fontLoaded=false;
@@ -98,12 +103,13 @@ function stop(){if(syn)try{syn.cancel()}catch(e){}state='idle';qi=0;mark(-1);ui(
 function play(){if(!syn||!Q.length)return;try{syn.cancel()}catch(e){}qi=0;state='play';ui();setTimeout(next,60)}
 function build(){
   fab=document.createElement('button');fab.type='button';fab.className='rt-fab';fab.id='rt-fab';fab.setAttribute('aria-expanded','false');fab.setAttribute('aria-controls','rt-panel');
-  fab.innerHTML='<span class="rt-face"></span><span class="rt-lab">Rada ti aiuta</span><span class="sr-only">: apri la guida e la lettura facilitata</span>';
+  fab.innerHTML='<span class="rt-face"></span><span class="rt-lab">'+name()+' ti aiuta</span><span class="sr-only">: apri la guida e la lettura facilitata</span>';
   panel=document.createElement('section');panel.className='rt-panel';panel.id='rt-panel';panel.hidden=true;panel.tabIndex=-1;panel.setAttribute('role','dialog');panel.setAttribute('aria-labelledby','rt-h');
-  panel.innerHTML='<div class="rt-head"><span class="rt-face"></span><div><h2 id="rt-h">Rada, la tua guida</h2><p>Ti spiego gli esercizi un passo alla volta. Posso leggere ad alta voce: il testo resta sempre scritto.</p></div><button type="button" class="rt-x" id="rt-x" aria-label="Chiudi la guida">✕</button></div>'+
-    '<div class="rt-cap" id="rt-cap" tabindex="0" role="region" aria-label="Quello che dice Rada" aria-live="polite"><p>Ciao! In ogni esercizio trovi i pulsanti di aiuto: un indizio, il metodo, la soluzione passo passo, un esempio già svolto. Premi «Ascolta» e te li leggo io.</p></div>'+
+  panel.innerHTML='<div class="rt-head"><span class="rt-face"></span><div><h2 id="rt-h">'+name()+', '+NM[ch()][1]+' che ti guida</h2><p>Ti spiego gli esercizi un passo alla volta. Posso leggere ad alta voce: il testo resta sempre scritto.</p></div><button type="button" class="rt-x" id="rt-x" aria-label="Chiudi la guida">✕</button></div>'+
+    '<div class="rt-cap" id="rt-cap" tabindex="0" role="region" aria-label="Quello che dice '+name()+'" aria-live="polite"><p>Ciao! In ogni esercizio trovi i pulsanti di aiuto: un indizio, il metodo, la soluzione passo passo, un esempio già svolto. Premi «Ascolta» e te li leggo io.</p></div>'+
     '<div class="rt-ctl"><button type="button" class="rt-b pri" id="rt-play">▶ Ascolta</button><button type="button" class="rt-b" id="rt-pause">⏸ Pausa</button><button type="button" class="rt-b" id="rt-stop">⏹ Ferma</button>'+
     '<label for="rt-rate">Velocità</label><select id="rt-rate"><option value="0.75">Lenta</option><option value="1">Normale</option><option value="1.25">Veloce</option></select></div><p class="rt-msg" id="rt-msg" role="status"></p>'+
+    '<div class="rt-ctl" style="margin-top:.6rem"><label for="rt-ch">La tua guida</label><select id="rt-ch"><option value="saggio">Sapio, il gufo saggio</option><option value="fatina">Rada, la fatina</option></select></div>'+
     '<details class="rt-read" id="rt-read"><summary>👓 Lettura facilitata</summary><fieldset><legend>Opzioni di lettura</legend>'+
     '<div class="rt-opt"><label for="rt-size">Grandezza del testo</label><select id="rt-size"><option value="0">Normale</option><option value="1">Grande</option><option value="2">Molto grande</option></select></div>'+
     '<label class="rt-opt"><input type="checkbox" id="rt-sp"> Più spazio tra righe, parole e lettere</label>'+
@@ -120,6 +126,7 @@ function build(){
   panel.querySelector('#rt-pause').onclick=function(){if(state==='play'){try{syn.pause()}catch(e){}state='paused';ui()}};
   panel.querySelector('#rt-stop').onclick=stop;
   var r=panel.querySelector('#rt-rate');r.value=String(P.rate);if(!r.value)r.value='1';r.onchange=function(){P.rate=+r.value;keep();if(state==='play'){var at=qi;try{syn.cancel()}catch(e){}qi=at;state='play';setTimeout(next,60)}};
+  var cs=panel.querySelector('#rt-ch');cs.value=ch();cs.onchange=function(){P.ch=cs.value;keep();swapAll();cs.focus()};
   var z=panel.querySelector('#rt-size');z.value=String(P.size);z.onchange=function(){P.size=+z.value;keep();apply()};
   [['sp','rt-sp'],['font','rt-font'],['ruler','rt-ruler'],['num','rt-num'],['auto','rt-auto']].forEach(function(o){var c=panel.querySelector('#'+o[1]);c.checked=!!P[o[0]];c.onchange=function(){P[o[0]]=c.checked?1:0;keep();apply()}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!panel.hidden&&!e.defaultPrevented){hide()}});
@@ -133,9 +140,10 @@ function hide(){var inside=panel.contains(document.activeElement);panel.hidden=t
 function say(title,parts,opt){opt=opt||{};stop();var n=0,h=title?'<p><b>'+esc(title)+'</b></p>':'';Q=[];
   (parts||[]).forEach(function(p){var ss=sents(String(p));if(!ss.length)return;h+='<p>'+ss.map(function(s){Q.push(s);return '<span class="rt-s" data-i="'+(n++)+'">'+esc(s)+'</span>'}).join(' ')+'</p>'});
   cap.innerHTML=h;cap.scrollTop=0;if(opt.open!==false&&panel.hidden)show(false);ui();if(opt.play||P.auto)play()}
-window.RTutor={say:say,text:text,nums:nums,avatar:av,stop:stop,prefs:P,sents:sents};
-if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
-})();</script>'''.replace('__AV__', __import__('json').dumps(rada.ALL))
+window.RTutor={say:say,text:text,nums:nums,avatar:av,stop:stop,prefs:P,sents:sents,name:name};
+function boot(){build();swapAll()}
+if(document.readyState!=='loading')boot();else document.addEventListener('DOMContentLoaded',boot);
+})();</script>'''.replace('__AV__', __import__('json').dumps(rada.ALL)).replace('__NM__', __import__('json').dumps(rada.CHARS, ensure_ascii=False))
 
 
 def say_btn(label='Ascolta da Rada', attrs=''):
