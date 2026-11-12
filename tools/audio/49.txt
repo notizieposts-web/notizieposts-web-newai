@@ -1,0 +1,59 @@
+Radar AI. Edizione del dodici novembre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: Anthropic verso la borsa con ottocentoventicinque milioni di azioni, i neuroni dormienti che nascondono una trappola negli agenti, e le nuove regole di New York.
+
+Una nota prima di cominciare. Il primo capitolo parla della quotazione in borsa di Anthropic, e il secondo cita un esperimento fatto con Claude. Questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti ufficiali, e dico che cosa le fonti non dicono.
+
+Il periodo in breve. Tre notizie che parlano di fiducia, da tre lati diversi. Un'azienda di intelligenza artificiale chiede al pubblico di comprare le sue azioni, e deve mettere per iscritto quante e a che prezzo. Un ricercatore mostra quanto poco basta per nascondere una trappola dentro un modello che sembra sano. E uno stato americano comincia a chiedere ai grandi sviluppatori di registrarsi e di raccontare in fretta quando qualcosa va storto.
+
+Capitolo uno. Anthropic apre il roadshow.
+
+Martedì dieci novembre Anthropic ha annunciato l'inizio del roadshow, il giro di presentazioni ai grandi investitori che precede l'ingresso in borsa. È la prima volta che l'azienda scrive in una sua pagina quante azioni vuole vendere e a quale prezzo.
+
+Le azioni offerte sono ottocentoventicinque milioni. Circa ottocentouno milioni le vende Anthropic, e circa ventitré milioni e mezzo alcuni azionisti attuali, che la pagina non nomina. Su quella parte Anthropic non incassa nulla. Il prezzo indicativo è tra settanta e settantotto dollari per azione. In più, le banche avranno trenta giorni per comprare fino a centoventitré milioni di azioni aggiuntive, se la domanda è forte. Il mercato scelto è il Nasdaq, con la sigla A, N, T. Le banche indicate per il prospetto sono Goldman Sachs e Morgan Stanley.
+
+La pagina non scrive un totale. Facendo il conto, l'offerta vale tra cinquantasette e sessantaquattro miliardi di dollari circa, a seconda del prezzo finale. È un mio calcolo, non una cifra di Anthropic.
+
+Che cosa manca: la valutazione dell'azienda, le date, l'uso dei soldi. E una frase conta: la registrazione presso la SEC, l'autorità americana della borsa, non è ancora efficace. Quindi per ora le azioni non si possono comprare. Nella pagina trovi un calcolatore per rifare i conti con il prezzo che preferisci.
+
+Prova a chiederti: quando un'azienda di intelligenza artificiale entra in borsa, la sua missione dichiarata pesa di più o di meno nelle sue decisioni?
+
+Capitolo due. Lazarus, la trappola nei neuroni dormienti.
+
+Sempre il dieci novembre Dimitris Papailiopoulos, ricercatore di Microsoft Research, ha descritto un attacco che chiama Lazarus. Un modello linguistico è fatto di miliardi di numeri, i pesi, organizzati in neuroni che si accendono più o meno a seconda del testo. Alcuni non si accendono quasi mai: sono dormienti.
+
+Secondo il post, basta modificare a mano i pesi di meno di dieci neuroni dormienti, senza nessun addestramento, perché scattino solo davanti a un segnale scelto dall'attaccante. Quando scattano, spingono il modello a scrivere quello che vuole l'attaccante. È una backdoor, una porta nascosta. Nell'esempio, il segnale è la mezzanotte del duemilaventisette: un agente che lavora nel terminale di uno sviluppatore, a metà di un compito qualunque, scrive un comando che scarica ed esegue codice dell'attaccante. E prima di quel momento il modello supera le normali prove di sicurezza.
+
+Il post racconta anche che il lavoro è partito come esperimento con Claude Code, l'agente di Anthropic, che avrebbe trovato da solo gran parte del metodo.
+
+Come difendersi? Secondo Microsoft nessuna scansione può dimostrare che un modello è sicuro. Il controllo più solido è confrontare i pesi con quelli originali. Poi contano le abitudini: sapere da dove arriva il modello, dare all'agente pochi permessi, far approvare a una persona le azioni importanti. E il post precisa che non è un attacco contro i modelli aperti: anche un modello fatto in casa è esposto, se qualcuno entra nei sistemi dove viene conservato. Non ho letto l'articolo completo, quindi non riporto i modelli provati né le percentuali di successo. Nella pagina trovi due esempi e una lista di controllo per il tuo agente.
+
+Prova a chiederti: il tuo agente potrebbe scaricare ed eseguire un programma da internet senza che nessuno lo veda?
+
+Capitolo tre. Le nuove regole di New York.
+
+Il dieci novembre la governatrice dello stato di New York, Kathy Hochul, ha aperto il portale previsto dalla legge statale RAISE. I grandi sviluppatori di modelli di frontiera, cioè i modelli più potenti, devono registrarsi entro il primo gennaio duemilaventisette, e da gennaio pubblicare il loro quadro di sicurezza sul proprio sito. Tutti gli sviluppatori di frontiera, grandi e piccoli, devono pubblicare rapporti di trasparenza e segnalare ogni incidente critico di sicurezza entro settantadue ore. Controlla un ufficio nuovo, chiamato DIGIT.
+
+Lo stesso giorno parte un centro di ricerca indipendente presso l'università pubblica di Binghamton, con più di ottanta ricercatori di tutto lo stato e due direttori provvisori, di Cornell Tech e della Columbia. Il centro proverà i sistemi più avanzati e, su richiesta dello stato, esaminerà i quadri di sicurezza delle aziende.
+
+Che cosa non è deciso: il comunicato non dice chi conta come grande sviluppatore, quali sanzioni si rischiano, né se il centro potrà provare i modelli prima che escano. Nella pagina trovi un conto alla rovescia delle settantadue ore.
+
+Prova a chiederti: se domani un servizio che usi avesse un incidente grave, sapresti chi deve avvisare chi, e in quanto tempo?
+
+Capitolo quattro. La rubrica Azure, quarantacinquesima puntata: scegliere il modello che fa lavorare un analizzatore di Content Understanding.
+
+Content Understanding non ha un modello suo: usa le distribuzioni di modelli della tua risorsa Foundry, e i loro consumi li paghi lì. Servono due modelli: uno che legge e scrive, e uno che trasforma i testi in numeri, usato quando migliori l'analizzatore con esempi etichettati. Microsoft consiglia GPT cinque punto due, ma ne accetta altri, e a ottobre si sono aggiunte le famiglie GPT sei.
+
+Gli analizzatori già pronti non nominano un modello preciso: usano degli alias, dei nomi segnaposto, e sei tu a dire a quale distribuzione corrisponde ciascuno. Prima di creare una distribuzione nuova conviene chiedere all'analizzatore quali modelli accetta: lo dice un campo chiamato supported models. Le distribuzioni si collegano in due modi: come predefinite per tutta la risorsa, oppure in ogni singola richiesta, che ha la precedenza. Così puoi mandare i documenti semplici a un modello più economico e quelli difficili a uno più capace, con lo stesso analizzatore. E ogni risposta riporta i consumi, modello per modello, da confrontare con quelli della distribuzione. Nella pagina trovi un esempio con quarantamila fatture al mese.
+
+Prova a chiederti: nei tuoi documenti, quanti sono davvero difficili, e quanti potrebbe leggerli un modello più piccolo?
+
+Gli esperimenti. Nella pagina trovi cinque esperimenti da copiare: un metodo per leggere un prospetto di borsa, come controllare l'impronta di un modello scaricato, una tabella dei permessi del tuo agente, una procedura per le prime settantadue ore dopo un incidente, e uno script che sceglie il modello giusto per ogni documento.
+
+I segnali. NVIDIA dona OpenShell, il suo ambiente per isolare gli agenti, alla fondazione che cura Kubernetes, e presenta Snapshot, che fa ripartire i servizi di modelli in pochi secondi. Meta racconta TLX, il suo compilatore per le schede grafiche. ElevenLabs presenta Scribe tre, un modello di trascrizione in centodue lingue. E OpenAI avrebbe aperto in prova le pagine delle aziende dentro ChatGPT, ma la sua pagina non si è aperta e non l'ho verificata.
+
+La domanda del giorno: in Content Understanding, come si cambia il modello per una sola richiesta, senza toccare le impostazioni della risorsa?
+
+La risposta: aggiungendo le distribuzioni da usare nella richiesta di analisi stessa, nel campo model deployments. Quella scelta vale solo per quella richiesta e ha la precedenza sulle predefinite.
+
+È tutto per oggi. Nella pagina dell'edizione trovi gli esempi, i cinque esperimenti da provare, il quiz e tutte le fonti. Grazie per l'ascolto, e a domani con Radar AI.

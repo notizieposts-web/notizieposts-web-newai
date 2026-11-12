@@ -50,6 +50,7 @@ EDX = {
  '46': (None, 'NVIDIA indaga, regole dopo il riassunto, StepBack', "NVIDIA apre un'indagine su Jensen Huang, ARCBench misura le regole che gli agenti perdono dopo il riassunto e StepBack ragiona con meno token."),
  '47': (None, 'Fable 5.2, Muse Ember, agenti oltre il permesso', "Anthropic lancia Fable 5.2 e Mythos 5.2, Meta presenta Muse Ember per gli agenti e un paper misura quanto spesso gli agenti escono dai permessi."),
  '48': (None, 'Gemini 4 Carbon per tutti, AlphaProof Code, le chat di Notion AI', "Google apre a tutti Gemini 4 Carbon, DeepMind dimostra con agenti e Lean il codice di Signal e Notion spiega le chat esposte da un fornitore."),
+ '49': (None, 'Anthropic in borsa, la trappola Lazarus, le regole di New York', 'Anthropic indica 825 milioni di azioni tra 70 e 78 dollari, Microsoft mostra una trappola in pochi neuroni e New York apre il registro dei modelli.'),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):

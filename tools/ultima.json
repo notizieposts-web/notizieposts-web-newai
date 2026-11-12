@@ -1,39 +1,39 @@
 {
- "n": 48,
- "data": "2026-11-11",
- "titolo": "Gemini 4 Carbon per tutti, AlphaProof Code, le chat di Notion AI",
- "descrizione": "Google apre a tutti gli sviluppatori il suo modello più potente a metà prezzo fino a fine mese, i suoi agenti dimostrano con la matematica che il codice di Signal è sicuro su punti precisi, Notion spiega quali chat del suo assistente sono finite in un furto di dati e la rubrica Azure spiega come copiare un analizzatore da una risorsa all'altra.",
+ "n": 49,
+ "data": "2026-11-12",
+ "titolo": "Anthropic in borsa, la trappola Lazarus, le regole di New York",
+ "descrizione": "Anthropic fissa quante azioni vende e a che prezzo per entrare in borsa, un ricercatore di Microsoft mostra come nascondere una trappola in pochi punti di un modello, New York obbliga i grandi sviluppatori a registrarsi e la rubrica Azure spiega come scegliere il modello che legge i documenti.",
  "chips": [
-  "Modelli",
+  "Borsa",
   "Sicurezza",
-  "Agenti",
+  "Regole",
   "Azure"
  ],
  "items": [
   [
-   "🧠",
-   "Gemini",
-   "Gemini 4 Carbon, il modello più potente di Google, ora aperto a tutti",
-   "Google ha reso disponibile a sviluppatori e abbonati il modello che finora usavano solo alcuni esperti di sicurezza informatica, con un prezzo di lancio che raddoppia dal primo dicembre."
+   "📈",
+   "Anthropic",
+   "Anthropic indica quante azioni vende per entrare in borsa, e a che prezzo",
+   "Anthropic ha avviato le presentazioni agli investitori per la quotazione al Nasdaq, con 825 milioni di azioni a un prezzo indicativo tra 70 e 78 dollari, che per ora non si possono ancora comprare."
   ],
   [
-   "🔏",
-   "DeepMind",
-   "Gli agenti di Google dimostrano con la matematica che il codice di Signal è sicuro",
-   "Una squadra di agenti di Google DeepMind ha dimostrato in quattro settimane alcune garanzie di sicurezza del codice dell'app di messaggi Signal, con ogni passaggio controllato da un programma e le regole di partenza riviste da esperti."
+   "🪤",
+   "Microsoft",
+   "Bastano pochi neuroni modificati per nascondere una trappola in un agente AI",
+   "Un ricercatore di Microsoft ha mostrato che cambiando meno di dieci parti di un modello che di solito restano spente si può far eseguire a un agente un comando pericoloso in una data scelta, mentre i normali controlli non si accorgono di nulla."
   ],
   [
-   "🔐",
-   "Notion",
-   "Le chat dell'assistente di Notion finite nel furto di dati a un fornitore",
-   "Notion ha spiegato che l'attacco all'azienda che faceva girare alcuni suoi modelli ha esposto conversazioni con l'assistente di meno di un cliente su cento, e consiglia di cambiare le password incollate nelle chat."
+   "🗽",
+   "New York",
+   "New York chiede ai grandi sviluppatori di modelli di registrarsi e segnalare gli incidenti",
+   "Lo stato di New York ha aperto il registro obbligatorio per chi sviluppa i modelli più potenti, da usare entro il 1° gennaio 2027, con 72 ore di tempo per segnalare un incidente grave, e ha avviato un centro di ricerca con più di 80 studiosi."
   ],
   [
    "☁",
    "Azure",
-   "Come copiare un analizzatore di Content Understanding in un'altra risorsa",
-   "La rubrica spiega come spostare un analizzatore di documenti dalla prova alla produzione o prepararne una riserva in un'altra regione, e perché la copia da sola non basta a farlo funzionare."
+   "Come scegliere il modello che fa lavorare Content Understanding",
+   "La rubrica spiega come collegare a un analizzatore di documenti il modello giusto, per tutta la risorsa o per una sola richiesta, così da mandare i documenti semplici a un modello più economico."
   ]
  ],
- "domanda": "Dopo aver copiato un analizzatore di Content Understanding in un'altra risorsa, che cosa serve prima della prima analisi?"
+ "domanda": "In Content Understanding, come si cambia il modello per una sola richiesta, senza toccare le impostazioni della risorsa?"
 }

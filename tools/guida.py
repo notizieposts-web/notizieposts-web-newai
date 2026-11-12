@@ -46,6 +46,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (42,'46','azure','pipeline','Il Markdown restituito: pagine, tabelle, tagli'),
     (43,'47','azure','produzione','La diagnostica: chiamate al modello e latenza'),
     (44,'48','azure','produzione','Copiare un analizzatore tra risorse'),
+    (45,'49','azure','costi','Scegliere il modello: alias e richieste'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']

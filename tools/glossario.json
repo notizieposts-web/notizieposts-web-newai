@@ -960,5 +960,36 @@
    "prompt-injection",
    "red-team"
   ]
+ },
+ "backdoor": {
+  "t": "backdoor",
+  "spiega": "Una porta nascosta in un programma o in un modello: un comportamento segreto che si attiva solo con un segnale scelto da chi l'ha inserita.",
+  "esempio": "Un modello risponde normalmente a tutto, ma quando nel testo compare una certa data scrive un comando che scarica codice di un attaccante.",
+  "approfondisci": "Una backdoor è pericolosa proprio perché il resto del sistema funziona bene: le prove normali non la trovano, perché non contengono il segnale. Nei modelli AI può stare nei dati di addestramento o direttamente nei pesi. Le difese principali sono controllare la provenienza dei file, confrontarli con gli originali e limitare quello che il sistema può fare da solo.",
+  "vedi": [
+   "supply-chain",
+   "pesi-aperti"
+  ]
+ },
+ "roadshow": {
+  "t": "roadshow",
+  "spiega": "Il giro di presentazioni con cui un'azienda e le sue banche illustrano conti e piani ai grandi investitori prima di entrare in borsa.",
+  "esempio": "Durante il roadshow Anthropic indica una forchetta di prezzo tra 70 e 78 dollari; alla fine, contata la domanda, si fissa il prezzo definitivo.",
+  "approfondisci": "Il roadshow dura di solito una o due settimane. Serve a raccogliere gli ordini indicativi degli investitori: se sono molti più delle azioni offerte, il prezzo sale verso il massimo della forchetta o lo supera; se sono pochi, scende. Si chiude con la fissazione del prezzo, il giorno prima dell'inizio degli scambi.",
+  "vedi": [
+   "ipo",
+   "sec",
+   "greenshoe"
+  ]
+ },
+ "greenshoe": {
+  "t": "greenshoe",
+  "spiega": "L'opzione che permette alle banche di una quotazione di vendere più azioni del previsto, di solito fino al 15 per cento in più, se la domanda è forte.",
+  "esempio": "Anthropic offre 825 milioni di azioni e dà alle banche un'opzione di 30 giorni su altri 123,75 milioni: è la greenshoe.",
+  "approfondisci": "Il nome viene dalla prima società che la usò, la Green Shoe Manufacturing. Serve anche a stabilizzare il prezzo nei primi giorni: se il titolo scende, le banche possono ricomprare azioni sul mercato invece di esercitare l'opzione.",
+  "vedi": [
+   "ipo",
+   "roadshow"
+  ]
  }
 }
