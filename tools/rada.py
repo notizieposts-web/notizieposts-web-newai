@@ -1,4 +1,4 @@
-"""Rada, il pupazzo degli aiuti: un solo disegno, nove espressioni, animato.
+"""Rada, la fatina degli aiuti: un solo disegno originale (testa, capelli lilla, ali, vestito a petali, bacchetta), nove espressioni, animata.
 Uso:
   import rada; rada.svg('idea', 48)            SVG da mettere nella pagina (colori del tema, animazioni in rada.CSS)
   python3 tools/rada.py <repo>                 scrive i file img/rada/rada-<espressione>.svg (colori fissi, animazioni dentro il file)
@@ -10,8 +10,11 @@ import os, sys
 EXPR = ['ciao', 'parla', 'idea', 'pensa', 'spiega', 'felice', 'coraggio', 'curiosa', 'conta']
 LABEL = {'ciao': 'Rada saluta', 'parla': 'Rada parla', 'idea': 'Rada ha un\'idea', 'pensa': 'Rada pensa', 'spiega': 'Rada spiega',
          'felice': 'Rada festeggia', 'coraggio': 'Rada ti incoraggia', 'curiosa': 'Rada è curiosa', 'conta': 'Rada fa i conti'}
-THEME = {'V': 'var(--violet)', 'T': 'var(--teal)', 'I': 'var(--ink)', 'F': 'var(--bg)', 'P': 'var(--red)', 'Y': '#FFC94D', 'W': 'var(--surface)', 'L': 'var(--line)', 'G': '#CFC8FF', 'G2': '#FFE7A3', 'M': '#FFFFFF'}
-FIXED = {'V': '#5B4BF5', 'T': '#0A9BB5', 'I': '#121A2B', 'F': '#FFFFFF', 'P': '#F27BA8', 'Y': '#FFC94D', 'W': '#FFFFFF', 'L': '#D3D9E6', 'G': '#CFC8FF', 'G2': '#FFE7A3', 'M': '#FFFFFF'}
+# colori della fatina: fissi, uguali in tema chiaro e scuro (il personaggio non cambia colore)
+PAL = {'O': '#2B2250', 'S': '#FAD7BE', 'S2': '#F2BFA0', 'H': '#8E6CF0', 'H2': '#B9A3FF', 'D': '#7C5CFF', 'D2': '#B9A8FF', 'B': '#16A2B8',
+       'G': '#E2DAFF', 'G2': '#FFE7A3', 'GW': '#9B87FF', 'Y': '#FFC94D', 'P': '#F59AB5', 'T': '#0A9BB5', 'I': '#2B2250', 'M': '#FFFFFF', 'W': '#FFFFFF', 'V': '#7C5CFF'}
+THEME = PAL
+FIXED = PAL
 
 # animazioni: valgono per l'SVG nella pagina (rada.CSS) e, identiche, dentro i file
 ANIM = '''.rd-wingL{transform-box:fill-box;transform-origin:100% 70%;animation:rd-flapL .38s ease-in-out infinite alternate}
@@ -68,79 +71,105 @@ ANIM = '''.rd-wingL{transform-box:fill-box;transform-origin:100% 70%;animation:r
 CSS = '<style id="rada-css">.rd{flex:none;overflow:visible;vertical-align:middle}\n' + ANIM + '\n.rd-row{display:flex;gap:.7rem;align-items:center}.rd-row>:last-child{flex:1;min-width:0}</style>'
 
 
+EX, EY = (52, 34), (68, 34)
+
+
 def _eyes(kind):
-    def dot(x, y, r=6.4, dx=1.9, dy=-2.1):
-        return ('<circle cx="%s" cy="%s" r="%s" fill="{I}"/><circle cx="%s" cy="%s" r="%s" fill="{M}"/><circle cx="%s" cy="%s" r="%s" fill="{M}"/>'
-                % (x, y, r, x + dx, y + dy, round(r * .36, 2), x - dx * .7, y + dy * -.8, round(r * .17, 2)))
-    arc = lambda x: '<path d="M%s 62 Q%s 53 %s 62" fill="none" stroke="{I}" stroke-width="3.6" stroke-linecap="round"/>' % (x - 6, x, x + 6)
-    if kind == 'happy': return arc(47) + arc(73)
-    if kind == 'up': return dot(49, 57, 5, 1.8, -2) + dot(75, 57, 5, 1.8, -2)
-    if kind == 'soft': return (dot(47, 61, 4.8) + dot(73, 61, 4.8) +
-                               '<path d="M40 52 L52 49 M80 52 L68 49" stroke="{I}" stroke-width="2.6" stroke-linecap="round"/>')
-    if kind == 'curious': return dot(47, 61, 4.4) + dot(73, 59, 6.8, 2.2, -2.4) + '<path d="M66 47 Q74 43 81 48" fill="none" stroke="{I}" stroke-width="2.6" stroke-linecap="round"/>'
-    if kind == 'wide': return dot(47, 59, 5.6) + dot(73, 59, 5.6) + '<path d="M40 48 Q47 44 53 48 M67 48 Q73 44 80 48" fill="none" stroke="{I}" stroke-width="2.4" stroke-linecap="round"/>'
-    if kind == 'focus': return dot(47, 61, 4.6, 1.2, -1.4) + dot(73, 61, 4.6, 1.2, -1.4) + '<path d="M41 52 L53 53 M79 52 L67 53" stroke="{I}" stroke-width="2.6" stroke-linecap="round"/>'
-    return dot(47, 60) + dot(73, 60) + '<path d="M40 55 l-3 -3 M41.5 52.5 l-1.6 -3.6 M80 55 l3 -3 M78.5 52.5 l1.6 -3.6" stroke="{I}" stroke-width="1.8" stroke-linecap="round"/>'
+    def dot(x, y, r=4.1):
+        return ('<ellipse cx="%s" cy="%s" rx="%s" ry="%s" fill="{O}"/><circle cx="%s" cy="%s" r="%s" fill="{M}"/><circle cx="%s" cy="%s" r="%s" fill="{M}"/>'
+                % (x, y, r, round(r * 1.12, 2), round(x + r * .35, 2), round(y - r * .45, 2), round(r * .38, 2), round(x - r * .35, 2), round(y + r * .4, 2), round(r * .18, 2)))
+    lash = '<path d="M46.5 31 l-3 -2 M47.5 28.6 l-2 -2.8 M73.5 31 l3 -2 M72.5 28.6 l2 -2.8" stroke="{O}" stroke-width="1.4" stroke-linecap="round"/>'
+    brow = lambda d: '<path d="%s" fill="none" stroke="{H}" stroke-width="2.2" stroke-linecap="round"/>' % d
+    arc = lambda x: '<path d="M%s 35 Q%s 29.5 %s 35" fill="none" stroke="{O}" stroke-width="2.6" stroke-linecap="round"/>' % (x - 4.5, x, x + 4.5)
+    if kind == 'happy': return arc(52) + arc(68) + lash
+    if kind == 'up': return dot(52.5, 32.5, 3.9) + dot(68.5, 32.5, 3.9) + lash + brow('M47 25.5 Q52 23 56 25') + brow('M64 25 Q68 23 73 25.5')
+    if kind == 'soft': return dot(52, 34.5, 3.9) + dot(68, 34.5, 3.9) + lash + brow('M47 27.5 L56 25.5') + brow('M73 27.5 L64 25.5')
+    if kind == 'curious': return dot(52, 34.5, 3.4) + dot(68, 33.5, 4.9) + lash + brow('M63.5 25.5 Q68.5 21.5 74 25')
+    if kind == 'wide': return dot(52, 33.5, 4.6) + dot(68, 33.5, 4.6) + lash + brow('M46.5 25 Q52 21.5 56.5 24.5') + brow('M63.5 24.5 Q68 21.5 73.5 25')
+    if kind == 'focus': return dot(52, 34.5, 3.6) + dot(68, 34.5, 3.6) + lash + brow('M47 26 L56.5 27.5') + brow('M73 26 L63.5 27.5')
+    return dot(52, 34) + dot(68, 34) + lash
 
 
 def _mouth(kind):
-    if kind == 'open': return '<path d="M50 72 Q60 87 70 72 Z" fill="{I}"/><ellipse cx="60" cy="79.5" rx="4.2" ry="2.4" fill="{P}"/>'
-    if kind == 'talk': return '<ellipse class="rd-mouth-t" cx="60" cy="76" rx="5.5" ry="4.6" fill="{I}"/>'
-    if kind == 'o': return '<ellipse cx="62" cy="76" rx="3.4" ry="3.8" fill="{I}"/>'
-    if kind == 'flat': return '<path d="M53 76 Q60 78.5 67 74.5" fill="none" stroke="{I}" stroke-width="3.2" stroke-linecap="round"/>'
-    if kind == 'small': return '<path d="M53 75 Q60 80.5 67 75" fill="none" stroke="{I}" stroke-width="3.2" stroke-linecap="round"/>'
-    return '<path d="M50 73 Q60 83 70 73" fill="none" stroke="{I}" stroke-width="3.4" stroke-linecap="round"/>'
+    if kind == 'open': return '<path d="M54.5 41.5 Q60 50.5 65.5 41.5 Z" fill="{O}"/><ellipse cx="60" cy="46" rx="2.8" ry="1.6" fill="{P}"/>'
+    if kind == 'talk': return '<ellipse class="rd-mouth-t" cx="60" cy="43.5" rx="3.4" ry="2.9" fill="{O}"/>'
+    if kind == 'o': return '<ellipse cx="61" cy="43.5" rx="2.1" ry="2.5" fill="{O}"/>'
+    if kind == 'flat': return '<path d="M56 44 Q60 45.5 64 42.5" fill="none" stroke="{O}" stroke-width="2.2" stroke-linecap="round"/>'
+    if kind == 'small': return '<path d="M56 42.5 Q60 46 64 42.5" fill="none" stroke="{O}" stroke-width="2.2" stroke-linecap="round"/>'
+    return '<path d="M54.5 41.5 Q60 47.5 65.5 41.5" fill="none" stroke="{O}" stroke-width="2.4" stroke-linecap="round"/>'
 
 
 def _arm(d, hx, hy, cls=''):
-    return '<g%s><path d="%s" fill="none" stroke="{V}" stroke-width="7.5" stroke-linecap="round"/><circle cx="%s" cy="%s" r="5.4" fill="{V}"/></g>' % (
-        (' class="%s"' % cls) if cls else '', d, hx, hy)
+    """braccio con contorno: prima la linea scura, poi la pelle; la mano è un cerchietto"""
+    return ('<g%s><path d="%s" fill="none" stroke="{O}" stroke-width="6.6" stroke-linecap="round"/><path d="%s" fill="none" stroke="{S}" stroke-width="4.2" stroke-linecap="round"/>'
+            '<circle cx="%s" cy="%s" r="3.9" fill="{S}" stroke="{O}" stroke-width="1.3"/></g>') % ((' class="%s"' % cls) if cls else '', d, d, hx, hy)
 
-L_DOWN = _arm('M23 72 Q12 82 16 93', 16, 93, 'rd-swing')
-R_DOWN = _arm('M97 72 Q108 82 104 93', 104, 93, 'rd-swing')
+
+def _wand(x1, y1, x2, y2, cls='rd-star'):
+    return ('<path d="M%s %s L%s %s" stroke="{O}" stroke-width="2.6" stroke-linecap="round"/><path d="M%s %s L%s %s" stroke="{Y}" stroke-width="1.2" stroke-linecap="round"/>' % (x1, y1, x2, y2, x1, y1, x2, y2) +
+            '<g transform="translate(%s %s)"><circle class="rd-ping" r="8" fill="{G2}" opacity=".75"/><path class="%s" d="M0 -7 L2 -2.4 L7 -2.2 L3.1 1 L4.4 6 L0 3.2 L-4.4 6 L-3.1 1 L-7 -2.2 L-2 -2.4 Z" fill="{Y}" stroke="{O}" stroke-width="1.1" stroke-linejoin="round"/></g>' % (x2, y2, cls))
+
+L_DOWN = _arm('M50 61 Q42 70 42 80', 42, 80, 'rd-swing')
+R_DOWN = _arm('M70 61 Q78 70 78 80', 78, 80, 'rd-swing')
 SPARK = '<path class="rd-spark %s" d="M%s %s l2.2 5 l5 2.2 l-5 2.2 l-2.2 5 l-2.2 -5 l-5 -2.2 l5 -2.2 z" fill="%s"/>'
 
 POSE = {
-    'ciao': dict(eyes='normal', mouth='smile', arms=L_DOWN + _arm('M97 68 Q112 58 109 40', 109, 40, 'rd-wave'), extra=''),
-    'parla': dict(eyes='normal', mouth='talk', arms=L_DOWN + _arm('M97 70 Q110 70 110 56', 110, 56, 'rd-point'),
-                  extra='<path class="rd-snd" d="M10 60 Q6 68 10 76" fill="none" stroke="{T}" stroke-width="2.6" stroke-linecap="round"/><path class="rd-snd b" d="M4 55 Q-3 68 4 81" fill="none" stroke="{T}" stroke-width="2.6" stroke-linecap="round"/>'),
-    'idea': dict(eyes='wide', mouth='open', arms=L_DOWN + _arm('M97 68 Q110 60 104 44', 104, 44, 'rd-point'),
-                 extra='<g class="rd-bulb"><path d="M103 6 v-5 M90 11 l-4 -4 M116 11 l4 -4 M86 22 h-5 M120 22 h5" stroke="{Y}" stroke-width="2.6" stroke-linecap="round"/><circle cx="103" cy="21" r="9" fill="{Y}"/><rect x="99" y="29" width="8" height="5.5" rx="1.6" fill="{I}"/></g>'),
-    'pensa': dict(eyes='up', mouth='flat', arms=L_DOWN, front=_arm('M98 84 Q97 99 79 91', 75, 87).replace('r="5.4" fill="{V}"', 'r="5.4" fill="{V}" stroke="{F}" stroke-width="2"'),
-                  extra='<circle class="rd-dot" cx="96" cy="34" r="2.6" fill="{T}"/><circle class="rd-dot b" cx="104" cy="25" r="3.8" fill="{T}"/><circle class="rd-dot c" cx="112" cy="13" r="5.4" fill="{T}"/>'),
-    'spiega': dict(eyes='normal', mouth='open', arms=L_DOWN + _arm('M97 68 Q108 62 106 50', 106, 50, 'rd-point'),
-                   extra='<g><rect x="92" y="6" width="27" height="33" rx="4" fill="{W}" stroke="{I}" stroke-width="2.2"/><path d="M97 15 h3 M97 22.5 h3 M97 30 h3" stroke="{T}" stroke-width="3" stroke-linecap="round"/><path d="M104 15 h10 M104 22.5 h10 M104 30 h7" stroke="{I}" stroke-width="2.2" stroke-linecap="round"/></g>'),
-    'felice': dict(eyes='happy', mouth='open', arms=_arm('M23 64 Q8 50 14 34', 14, 34, 'rd-fist') + _arm('M97 64 Q112 50 106 34', 106, 34, 'rd-wave'),
-                   extra=(SPARK % ('', 24, 8, '{Y}')) + (SPARK % ('b', 98, 6, '{Y}')) + (SPARK % ('c', 112, 52, '{T}')) + (SPARK % ('b', 6, 56, '{P}')), jump=True),
-    'coraggio': dict(eyes='soft', mouth='small', arms=_arm('M23 66 Q10 56 15 42', 15, 42, 'rd-fist') + R_DOWN,
-                     extra='<path class="rd-drop" d="M88 36 q4 6 0 9 q-4 -3 0 -9 z" fill="{T}"/><path d="M6 30 l5 3 M4 40 h6 M8 51 l5 -3" stroke="{Y}" stroke-width="2.6" stroke-linecap="round"/>'),
-    'curiosa': dict(eyes='curious', mouth='o', arms=L_DOWN, front=_arm('M98 84 Q98 100 80 93', 76, 89).replace('r="5.4" fill="{V}"', 'r="5.4" fill="{V}" stroke="{F}" stroke-width="2"'),
-                    extra='<g class="rd-q"><path d="M96 22 q0 -9 8 -9 q8 0 8 7.5 q0 5 -5.5 7.5 q-2.5 1.2 -2.5 5" fill="none" stroke="{T}" stroke-width="3.6" stroke-linecap="round"/><circle cx="104" cy="40" r="2.4" fill="{T}"/></g>'),
-    'conta': dict(eyes='focus', mouth='small', arms=_arm('M23 70 Q10 66 12 52', 12, 52, 'rd-fist') + _arm('M97 70 Q110 66 108 52', 108, 52, 'rd-point'),
-                  extra='<path class="rd-sym" d="M6 22 h12 M12 16 v12" stroke="{T}" stroke-width="3.4" stroke-linecap="round"/><path class="rd-sym b" d="M100 16 l10 10 M110 16 l-10 10" stroke="{Y}" stroke-width="3.4" stroke-linecap="round"/><path class="rd-sym c" d="M104 36 h12 M104 42 h12" stroke="{P}" stroke-width="3.2" stroke-linecap="round"/>'),
+    'ciao': dict(eyes='normal', mouth='smile', arms=L_DOWN + _arm('M70 61 Q84 54 86 38', 86, 38, 'rd-wave'), extra=''),
+    'parla': dict(eyes='normal', mouth='talk', arms=R_DOWN + '<g class="rd-point">' + _arm('M50 61 Q40 62 36 54', 36, 54) + '</g>',
+                  extra='<path class="rd-snd" d="M30 36 Q26 43 30 50" fill="none" stroke="{T}" stroke-width="2.2" stroke-linecap="round"/><path class="rd-snd b" d="M24 32 Q18 43 24 54" fill="none" stroke="{T}" stroke-width="2.2" stroke-linecap="round"/>'),
+    'idea': dict(eyes='wide', mouth='open', arms=L_DOWN + '<g class="rd-point">' + _arm('M70 61 Q82 58 87 49', 87, 49) + _wand(88, 47, 100, 24, 'rd-bulb rd-star') + '</g>',
+                 extra='<path d="M100 8 v-5 M89 13 l-3.5 -3.5 M111 13 l3.5 -3.5 M86 24 h-4 M114 24 h4" stroke="{Y}" stroke-width="2.4" stroke-linecap="round"/>'),
+    'pensa': dict(eyes='up', mouth='flat', arms=L_DOWN + _arm('M70 61 Q78 54 66 49', 65, 49),
+                  extra='<circle class="rd-dot" cx="86" cy="18" r="2.4" fill="{T}"/><circle class="rd-dot b" cx="94" cy="9" r="3.4" fill="{T}"/><circle class="rd-dot c" cx="104" cy="-2" r="4.8" fill="{T}"/>'),
+    'spiega': dict(eyes='normal', mouth='open', arms=L_DOWN + '<g class="rd-point">' + _arm('M70 61 Q80 58 84 52', 84, 52) + _wand(85, 50, 92, 38) + '</g>',
+                   extra='<g><rect x="95" y="2" width="25" height="31" rx="4" fill="{W}" stroke="{O}" stroke-width="2"/><path d="M99.5 10.5 h3 M99.5 17.5 h3 M99.5 24.5 h3" stroke="{T}" stroke-width="2.8" stroke-linecap="round"/><path d="M106 10.5 h9.5 M106 17.5 h9.5 M106 24.5 h6.5" stroke="{O}" stroke-width="2" stroke-linecap="round"/></g>'),
+    'felice': dict(eyes='happy', mouth='open', arms='<g class="rd-fist">' + _arm('M50 61 Q38 50 36 36', 36, 36) + '</g>' + '<g class="rd-wave">' + _arm('M70 61 Q82 50 84 36', 84, 36) + _wand(85, 34, 94, 18) + '</g>',
+                   extra=(SPARK % ('', 18, 4, '{Y}')) + (SPARK % ('b', 104, 40, '{P}')) + (SPARK % ('c', 10, 54, '{T}')) + (SPARK % ('b', 106, 2, '{Y}')), jump=True),
+    'coraggio': dict(eyes='soft', mouth='small', arms='<g class="rd-fist">' + _arm('M50 61 Q38 58 38 46', 38, 46) + '</g>' + R_DOWN,
+                     extra='<path class="rd-drop" d="M80 14 q3.4 5 0 7.6 q-3.4 -2.6 0 -7.6 z" fill="{T}"/><path d="M26 36 l4.5 2.5 M24 45 h5.5 M27 54 l4.5 -2.5" stroke="{Y}" stroke-width="2.4" stroke-linecap="round"/>'),
+    'curiosa': dict(eyes='curious', mouth='o', arms=L_DOWN + _arm('M70 61 Q88 52 86 28', 86, 28),
+                    extra='<g class="rd-q"><path d="M96 2 q0 -8 7.5 -8 q7.5 0 7.5 7 q0 4.6 -5 7 q-2.4 1.1 -2.4 4.6" fill="none" stroke="{T}" stroke-width="3.2" stroke-linecap="round"/><circle cx="103.6" cy="18.5" r="2.2" fill="{T}"/></g>'),
+    'conta': dict(eyes='focus', mouth='small', arms='<g class="rd-fist">' + _arm('M50 61 Q38 60 36 48', 36, 48) + '</g><g class="rd-point">' + _arm('M70 61 Q82 60 84 48', 84, 48) + '</g>',
+                  extra='<path class="rd-sym" d="M14 20 h11 M19.5 14.5 v11" stroke="{T}" stroke-width="3" stroke-linecap="round"/><path class="rd-sym b" d="M96 12 l9 9 M105 12 l-9 9" stroke="{Y}" stroke-width="3" stroke-linecap="round"/><path class="rd-sym c" d="M98 32 h11 M98 37.5 h11" stroke="{P}" stroke-width="2.8" stroke-linecap="round"/>'),
 }
+
+WINGS = ('<g class="rd-wingL"><path d="M51 62 C34 28 4 30 10 52 C13 62 30 66 51 66 Z" fill="{G}" stroke="{GW}" stroke-width="1.8" stroke-linejoin="round" opacity=".95"/>'
+         '<path d="M51 68 C34 70 18 84 26 92 C33 98 46 84 51 72 Z" fill="{G}" stroke="{GW}" stroke-width="1.8" stroke-linejoin="round" opacity=".95"/>'
+         '<path d="M48 63 C36 50 22 44 16 48 M48 70 C40 76 32 84 30 89" fill="none" stroke="{GW}" stroke-width="1" opacity=".8"/>'
+         '<circle cx="24" cy="50" r="1.6" fill="{M}"/><circle cx="31" cy="85" r="1.3" fill="{M}"/></g>'
+         '<g class="rd-wingR"><path d="M69 62 C86 28 116 30 110 52 C107 62 90 66 69 66 Z" fill="{G}" stroke="{GW}" stroke-width="1.8" stroke-linejoin="round" opacity=".95"/>'
+         '<path d="M69 68 C86 70 102 84 94 92 C87 98 74 84 69 72 Z" fill="{G}" stroke="{GW}" stroke-width="1.8" stroke-linejoin="round" opacity=".95"/>'
+         '<path d="M72 63 C84 50 98 44 104 48 M72 70 C80 76 88 84 90 89" fill="none" stroke="{GW}" stroke-width="1" opacity=".8"/>'
+         '<circle cx="96" cy="50" r="1.6" fill="{M}"/><circle cx="89" cy="85" r="1.3" fill="{M}"/></g>')
+
+BODY = ('<path d="M55 92 L54 106 M65 92 L66 106" stroke="{O}" stroke-width="6" stroke-linecap="round"/><path d="M55 92 L54 106 M65 92 L66 106" stroke="{S}" stroke-width="3.8" stroke-linecap="round"/>'
+        '<path d="M47 108.5 Q48 103 54 104.5 Q57 106 56 108.5 Z M73 108.5 Q72 103 66 104.5 Q63 106 64 108.5 Z" fill="{D}" stroke="{O}" stroke-width="1.3" stroke-linejoin="round"/>'
+        '<path d="M45 70 Q60 64 75 70 L86 93 Q79 99 73 93 Q66.5 99.5 60 93 Q53.5 99.5 47 93 Q41 99 34 93 Z" fill="{D}" stroke="{O}" stroke-width="1.6" stroke-linejoin="round"/>'
+        '<path d="M49 72 Q60 68 71 72 L77 89 Q72 92 68 88 Q64 92 60 88 Q56 92 52 88 Q48 92 43 89 Z" fill="{D2}" opacity=".85"/>'
+        '<path d="M50 57 Q60 53 70 57 L72 71 Q60 74 48 71 Z" fill="{B}" stroke="{O}" stroke-width="1.6" stroke-linejoin="round"/>'
+        '<circle cx="60" cy="71" r="2.2" fill="{Y}" stroke="{O}" stroke-width=".9"/><circle cx="53.5" cy="70.4" r="1.2" fill="{Y}"/><circle cx="66.5" cy="70.4" r="1.2" fill="{Y}"/>'
+        '<path d="M57.5 51 h5 v6 h-5 Z" fill="{S2}"/>')
+
+HEAD = ('<path d="M31 32 C28 3 92 3 89 32 L91 50 Q85 57 79 50 L41 50 Q35 57 29 50 Z" fill="{H}" stroke="{O}" stroke-width="1.6" stroke-linejoin="round"/>'
+        '<path d="M38.5 30 L27 22 L38 39 Z M81.5 30 L93 22 L82 39 Z" fill="{S}" stroke="{O}" stroke-width="1.4" stroke-linejoin="round"/>'
+        '<ellipse cx="60" cy="33" rx="22.5" ry="21" fill="{S}" stroke="{O}" stroke-width="1.6"/>'
+        '<g class="rd-cheek"><ellipse cx="45.5" cy="40.5" rx="3.6" ry="2.4" fill="{P}" opacity=".7"/><ellipse cx="74.5" cy="40.5" rx="3.6" ry="2.4" fill="{P}" opacity=".7"/></g>')
+
+BANGS = ('<path d="M36 28 C35 6 85 6 84 28 C79 20 74 23 70 16 C66 23 58 23 55.5 15.5 C52 22.5 42 21 36 28 Z" fill="{H}" stroke="{O}" stroke-width="1.6" stroke-linejoin="round"/>'
+         '<path class="rd-shine" d="M44 14 Q50 9 58 9" fill="none" stroke="{H2}" stroke-width="2.6" stroke-linecap="round"/>'
+         '<g transform="translate(80 13)"><path class="rd-tip" d="M0 -5.5 L1.6 -1.8 L5.5 -1.7 L2.4 .8 L3.4 4.7 L0 2.5 L-3.4 4.7 L-2.4 .8 L-5.5 -1.7 L-1.6 -1.8 Z" fill="{Y}" stroke="{O}" stroke-width="1" stroke-linejoin="round"/></g>')
+
+DUST = ('<path class="rd-dust" d="M14 98 l1.4 3.2 l3.2 1.4 l-3.2 1.4 l-1.4 3.2 l-1.4 -3.2 l-3.2 -1.4 l3.2 -1.4 z" fill="{Y}"/>'
+        '<path class="rd-dust b" d="M104 100 l1.2 2.8 l2.8 1.2 l-2.8 1.2 l-1.2 2.8 l-1.2 -2.8 l-2.8 -1.2 l2.8 -1.2 z" fill="{P}"/>'
+        '<circle class="rd-dust c" cx="92" cy="104" r="1.9" fill="{T}"/>')
 
 
 def _body(expr):
     p = POSE[expr]
-    inner = ('<ellipse cx="60" cy="112" rx="30" ry="3.2" fill="{I}" opacity=".12"/>'
-             '<g class="rd-all"><g%s>' % (' class="rd-jump"' if p.get('jump') else '') +
-             '<path class="rd-wingL" d="M28 56 C8 30 -4 44 2 58 C-6 66 6 82 26 72 Z" fill="{G}" stroke="{V}" stroke-width="2.2" stroke-linejoin="round" opacity=".92"/>'
-             '<path class="rd-wingR" d="M92 56 C112 30 124 44 118 58 C126 66 114 82 94 72 Z" fill="{G}" stroke="{V}" stroke-width="2.2" stroke-linejoin="round" opacity=".92"/>'
-             '<path d="M60 29 C60 22 54 21 56 15 C57.5 11 62 11 61 7" fill="none" stroke="{V}" stroke-width="3.2" stroke-linecap="round"/>'
-             '<circle class="rd-ping" cx="61" cy="3" r="9" fill="{G2}" opacity=".7"/>'
-             '<path class="rd-star" d="M61 -5.5 L63.4 0.4 L69.6 0.8 L64.8 4.8 L66.4 10.8 L61 7.4 L55.6 10.8 L57.2 4.8 L52.4 0.8 L58.6 0.4 Z" fill="{Y}" stroke="{I}" stroke-width="1.2" stroke-linejoin="round"/>'
-             '<path class="rd-dust" d="M18 92 l1.4 3.2 l3.2 1.4 l-3.2 1.4 l-1.4 3.2 l-1.4 -3.2 l-3.2 -1.4 l3.2 -1.4 z" fill="{Y}"/>'
-             '<path class="rd-dust b" d="M104 96 l1.2 2.8 l2.8 1.2 l-2.8 1.2 l-1.2 2.8 l-1.2 -2.8 l-2.8 -1.2 l2.8 -1.2 z" fill="{P}"/>'
-             '<circle class="rd-dust c" cx="88" cy="100" r="2" fill="{T}"/>'
-             '<ellipse cx="46" cy="104" rx="9" ry="5" fill="{V}"/><ellipse cx="74" cy="104" rx="9" ry="5" fill="{V}"/>'
-             + p['arms'] +
-             '<ellipse cx="60" cy="66" rx="40" ry="39" fill="{V}"/>'
-             '<path class="rd-shine" d="M30 46 Q38 31 54 28" fill="none" stroke="{M}" stroke-width="3.4" stroke-linecap="round"/>'
-             '<ellipse cx="60" cy="65" rx="30.5" ry="27" fill="{F}"/>'
-             '<g class="rd-cheek"><circle cx="37.5" cy="71" r="4.4" fill="{P}" opacity=".6"/><circle cx="82.5" cy="71" r="4.4" fill="{P}" opacity=".6"/></g>'
-             '<g class="rd-look"><g class="rd-eyes">' + _eyes(p['eyes']) + '</g></g>' + _mouth(p['mouth']) + p.get('front', '') + p['extra'] + '</g></g>')
-    return inner
+    return ('<ellipse cx="60" cy="114" rx="26" ry="3" fill="{O}" opacity=".14"/>' + DUST +
+            '<g class="rd-all"><g%s>' % (' class="rd-jump"' if p.get('jump') else '') +
+            WINGS + BODY + HEAD + '<g class="rd-look"><g class="rd-eyes">' + _eyes(p['eyes']) + '</g></g>' + _mouth(p['mouth']) + BANGS +
+            p['arms'] + p['extra'] + '</g></g>')
 
 
 def _fill(s, pal):
