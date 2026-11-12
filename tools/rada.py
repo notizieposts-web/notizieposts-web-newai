@@ -1,4 +1,4 @@
-"""Rada, la fatina degli aiuti: un solo disegno originale (testa, capelli lilla, ali, vestito a petali, bacchetta), nove espressioni, animata.
+"""Rada, la fatina degli aiuti: un solo disegno originale (testa, capelli ramati, ali, vestito a petali, bacchetta), nove espressioni, animata.
 Uso:
   import rada; rada.svg('idea', 48)            SVG da mettere nella pagina (colori del tema, animazioni in rada.CSS)
   python3 tools/rada.py <repo>                 scrive i file img/rada/rada-<espressione>.svg (colori fissi, animazioni dentro il file)
@@ -11,8 +11,8 @@ EXPR = ['ciao', 'parla', 'idea', 'pensa', 'spiega', 'felice', 'coraggio', 'curio
 LABEL = {'ciao': 'Rada saluta', 'parla': 'Rada parla', 'idea': 'Rada ha un\'idea', 'pensa': 'Rada pensa', 'spiega': 'Rada spiega',
          'felice': 'Rada festeggia', 'coraggio': 'Rada ti incoraggia', 'curiosa': 'Rada è curiosa', 'conta': 'Rada fa i conti'}
 # colori della fatina: fissi, uguali in tema chiaro e scuro (il personaggio non cambia colore)
-PAL = {'O': '#2B2250', 'S': '#FAD7BE', 'S2': '#F2BFA0', 'H': '#8E6CF0', 'H2': '#B9A3FF', 'D': '#7C5CFF', 'D2': '#B9A8FF', 'B': '#16A2B8',
-       'G': '#E2DAFF', 'G2': '#FFE7A3', 'GW': '#9B87FF', 'Y': '#FFC94D', 'P': '#F59AB5', 'T': '#0A9BB5', 'I': '#2B2250', 'M': '#FFFFFF', 'W': '#FFFFFF', 'V': '#7C5CFF'}
+PAL = {'O': '#1B2540', 'S': '#FAD7BE', 'S2': '#F2BFA0', 'H': '#B5552B', 'H2': '#E89A62', 'D': '#1E6B4F', 'D2': '#6DB894', 'B': '#E3A22E',
+       'G': '#DCEBFA', 'G2': '#FFE7A3', 'GW': '#6F9BD1', 'Y': '#FFC94D', 'P': '#F2998A', 'T': '#2E7FB8', 'I': '#1B2540', 'M': '#FFFFFF', 'W': '#FFFFFF', 'V': '#1E3A6E'}
 PAL.update({'A': '#FAD7BE', 'R': '#4B3FBF', 'R2': '#6A5CE0', 'BE': '#F4F2FB', 'HT': '#3A2E9A', 'GL': '#C99A2E'})
 SAGE = dict(PAL, O='#3A2618', I='#3A2618', H='#8A5A34', A='#6B4423', R='#9A6A3C', R3='#7C5230', R2='#F4E4C4', BE='#F8EBD3', RIM='#C89B6A', BK='#E3A22E', IR='#F2A91E', LF='#5E9E4B', BR='#7A5230')
 CHARS = {'saggio': ('Sapio', 'il gufo saggio'), 'fatina': ('Rada', 'la fatina')}
