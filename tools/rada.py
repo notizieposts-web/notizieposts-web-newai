@@ -5,7 +5,7 @@ Uso:
 Espressioni: ciao, parla, idea, pensa, spiega, felice, coraggio, curiosa, conta.
 Il disegno è originale di Radar AI. Le animazioni si fermano con "riduci movimento".
 """
-import os, sys
+import os, re, sys
 
 EXPR = ['ciao', 'parla', 'idea', 'pensa', 'spiega', 'felice', 'coraggio', 'curiosa', 'conta']
 LABEL = {'ciao': 'Rada saluta', 'parla': 'Rada parla', 'idea': 'Rada ha un\'idea', 'pensa': 'Rada pensa', 'spiega': 'Rada spiega',
@@ -14,7 +14,7 @@ LABEL = {'ciao': 'Rada saluta', 'parla': 'Rada parla', 'idea': 'Rada ha un\'idea
 PAL = {'O': '#2B2250', 'S': '#FAD7BE', 'S2': '#F2BFA0', 'H': '#8E6CF0', 'H2': '#B9A3FF', 'D': '#7C5CFF', 'D2': '#B9A8FF', 'B': '#16A2B8',
        'G': '#E2DAFF', 'G2': '#FFE7A3', 'GW': '#9B87FF', 'Y': '#FFC94D', 'P': '#F59AB5', 'T': '#0A9BB5', 'I': '#2B2250', 'M': '#FFFFFF', 'W': '#FFFFFF', 'V': '#7C5CFF'}
 PAL.update({'A': '#FAD7BE', 'R': '#4B3FBF', 'R2': '#6A5CE0', 'BE': '#F4F2FB', 'HT': '#3A2E9A', 'GL': '#C99A2E'})
-SAGE = dict(PAL, A='#3F31A3', H='#2E2470', R='#5B4BC8', R2='#DCD5FF', BE='#F6F4FC', BK='#F59E2B')
+SAGE = dict(PAL, O='#3A2618', I='#3A2618', H='#8A5A34', A='#6B4423', R='#9A6A3C', R3='#7C5230', R2='#F4E4C4', BE='#F8EBD3', RIM='#C89B6A', BK='#E3A22E', IR='#F2A91E', LF='#5E9E4B', BR='#7A5230')
 CHARS = {'saggio': ('Sapio', 'il gufo saggio'), 'fatina': ('Rada', 'la fatina')}
 THEME = PAL
 FIXED = PAL
@@ -110,8 +110,8 @@ def _arm(d, hx, hy, cls=''):
 
 
 def _wand(x1, y1, x2, y2, cls='rd-star'):
-    return ('<path d="M%s %s L%s %s" stroke="{O}" stroke-width="2.6" stroke-linecap="round"/><path d="M%s %s L%s %s" stroke="{Y}" stroke-width="1.2" stroke-linecap="round"/>' % (x1, y1, x2, y2, x1, y1, x2, y2) +
-            '<g transform="translate(%s %s)"><circle class="rd-ping" r="8" fill="{G2}" opacity=".75"/><path class="%s" d="M0 -7 L2 -2.4 L7 -2.2 L3.1 1 L4.4 6 L0 3.2 L-4.4 6 L-3.1 1 L-7 -2.2 L-2 -2.4 Z" fill="{Y}" stroke="{O}" stroke-width="1.1" stroke-linejoin="round"/></g>' % (x2, y2, cls))
+    return '<g data-wand="1">' + ('<path d="M%s %s L%s %s" stroke="{O}" stroke-width="2.6" stroke-linecap="round"/><path d="M%s %s L%s %s" stroke="{Y}" stroke-width="1.2" stroke-linecap="round"/>' % (x1, y1, x2, y2, x1, y1, x2, y2) +
+            '<g transform="translate(%s %s)"><circle class="rd-ping" r="8" fill="{G2}" opacity=".75"/><path class="%s" d="M0 -7 L2 -2.4 L7 -2.2 L3.1 1 L4.4 6 L0 3.2 L-4.4 6 L-3.1 1 L-7 -2.2 L-2 -2.4 Z" fill="{Y}" stroke="{O}" stroke-width="1.1" stroke-linejoin="round"/></g>' % (x2, y2, cls)) + '</g><!--/wand-->'
 
 L_DOWN = _arm('M50 61 Q42 70 42 80', 42, 80, 'rd-swing')
 R_DOWN = _arm('M70 61 Q78 70 78 80', 78, 80, 'rd-swing')
@@ -168,23 +168,20 @@ DUST = ('<path class="rd-dust" d="M14 98 l1.4 3.2 l3.2 1.4 l-3.2 1.4 l-1.4 3.2 l
         '<circle class="rd-dust c" cx="92" cy="104" r="1.9" fill="{T}"/>')
 
 
-# Sapio, il gufo saggio: disegno originale (viola, tocco da laureato, occhiali dorati, libro)
-OWL_BACK = ('<path d="M37 26 L31 4 L49 15 Z M83 26 L89 4 L71 15 Z" fill="{R}" stroke="{O}" stroke-width="1.6" stroke-linejoin="round"/>'
-            '<path d="M60 9 C81 9 87 31 86 56 C85 84 76 102 60 102 C44 102 35 84 34 56 C33 31 39 9 60 9 Z" fill="{R}" stroke="{O}" stroke-width="1.6"/>'
-            '<ellipse cx="60" cy="73" rx="17" ry="22" fill="{R2}"/>'
-            '<path d="M50 62 q3 3 6 0 q3 3 6 0 q3 3 6 0 M47 70 q3 3 6 0 q3 3 6 0 q3 3 6 0 q3 3 6 0 M47 78 q3 3 6 0 q3 3 6 0 q3 3 6 0 q3 3 6 0 M50 86 q3 3 6 0 q3 3 6 0 q3 3 6 0" fill="none" stroke="{R}" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>'
-            '<path d="M51 101 l-3 5 M53 101 v6 M55 101 l3 5 M65 101 l-3 5 M67 101 v6 M69 101 l3 5" stroke="{BK}" stroke-width="2.2" stroke-linecap="round"/>'
-            '<path d="M41 22 Q51 26 60 31 Q69 26 79 22 Q74 46 60 51 Q46 46 41 22 Z" fill="{BE}" opacity=".0"/>'
-            '<circle cx="51" cy="34" r="11" fill="{BE}" stroke="{O}" stroke-width="1.2"/><circle cx="69" cy="34" r="11" fill="{BE}" stroke="{O}" stroke-width="1.2"/>'
-            '<g class="rd-cheek"><ellipse cx="43" cy="43" rx="3.2" ry="2" fill="{P}" opacity=".6"/><ellipse cx="77" cy="43" rx="3.2" ry="2" fill="{P}" opacity=".6"/></g>')
-OWL_FACE = ('<g fill="none" stroke="{GL}" stroke-width="1.7"><circle cx="52" cy="34" r="6.8"/><circle cx="68" cy="34" r="6.8"/><path d="M58.6 32.6 Q60 31 61.4 32.6"/></g>')
-OWL_CAP = ('<path d="M47 9 L47 15 Q60 20.5 73 15 L73 9 Z" fill="{O}"/>'
-           '<path d="M34 6 L60 -5 L86 6 L60 16 Z" fill="{O}" stroke="{O}" stroke-width="1.2" stroke-linejoin="round"/>'
-           '<path d="M40 6 L60 -1.5 L80 6" fill="none" stroke="#5A4E8C" stroke-width="1"/>'
-           '<circle cx="60" cy="5" r="1.8" fill="{Y}"/>'
-           '<g class="rd-swing"><path d="M60 5 L80 9 L81 20" fill="none" stroke="{Y}" stroke-width="1.6" stroke-linecap="round"/><path d="M78.5 19 h5 l-1 6 h-3 Z" fill="{Y}" stroke="{O}" stroke-width=".8"/></g>')
-OWL_BOOK = ('<g class="rd-sym"><path d="M92 92 Q99 88 106 92 Q113 88 120 92 L120 104 Q113 100 106 104 Q99 100 92 104 Z" fill="{W}" stroke="{O}" stroke-width="1.4" stroke-linejoin="round"/>'
-            '<path d="M106 92 V104 M95 95 h7 M95 98 h6 M109 95 h7 M109 98 h6" stroke="{L}" stroke-width="1.1" stroke-linecap="round"/></g>')
+# Sapio, il gufo saggio: disegno originale, al naturale (piumaggio bruno, disco facciale chiaro, occhi ambra, posato su un ramo)
+OWL_BACK = ('<path d="M4 104 Q40 99 78 103 Q100 105 122 100" fill="none" stroke="{O}" stroke-width="7.5" stroke-linecap="round"/><path d="M4 104 Q40 99 78 103 Q100 105 122 100" fill="none" stroke="{BR}" stroke-width="5" stroke-linecap="round"/>'
+            '<g class="rd-swing"><path d="M108 101 Q112 90 122 90 Q120 99 108 101 Z" fill="{LF}" stroke="{O}" stroke-width="1.1" stroke-linejoin="round"/></g><path d="M14 103 Q8 94 0 96 Q3 104 14 103 Z" fill="{LF}" stroke="{O}" stroke-width="1.1" stroke-linejoin="round"/>'
+            '<path d="M50 96 L46 112 L54 108 L60 114 L66 108 L74 112 L70 96 Z" fill="{R3}" stroke="{O}" stroke-width="1.4" stroke-linejoin="round"/>'
+            '<path d="M40 22 L35 5 L52 14 Z M80 22 L85 5 L68 14 Z" fill="{R3}" stroke="{O}" stroke-width="1.5" stroke-linejoin="round"/>'
+            '<path d="M60 9 C84 9 91 32 90 58 C89 84 78 100 60 100 C42 100 31 84 30 58 C29 32 36 9 60 9 Z" fill="{R}" stroke="{O}" stroke-width="1.6"/>'
+            '<path d="M44 14 q4 3 8 0 M68 14 q4 3 8 0 M52 11 q4 3 8 0 q4 -3 8 0" fill="none" stroke="{R3}" stroke-width="1.3" stroke-linecap="round"/>'
+            '<path d="M60 52 C74 52 80 64 79 77 C78 90 71 97 60 97 C49 97 42 90 41 77 C40 64 46 52 60 52 Z" fill="{R2}"/>'
+            '<path d="M51 62 l3 3 l3 -3 M63 62 l3 3 l3 -3 M47 71 l3 3 l3 -3 M57 71 l3 3 l3 -3 M67 71 l3 3 l3 -3 M51 80 l3 3 l3 -3 M63 80 l3 3 l3 -3 M57 88 l3 3 l3 -3" fill="none" stroke="{R3}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>'
+            '<path d="M50 99 l-3 5 M52.5 99 v6 M55 99 l3 5 M65 99 l-3 5 M67.5 99 v6 M70 99 l3 5" stroke="{BK}" stroke-width="2.4" stroke-linecap="round"/>'
+            '<path d="M60 22 C52 14 36 17 35 32 C34 45 46 52 60 49 C74 52 86 45 85 32 C84 17 68 14 60 22 Z" fill="{BE}" stroke="{RIM}" stroke-width="1.8" stroke-linejoin="round"/>'
+            '<g class="rd-cheek"><ellipse cx="42" cy="43" rx="3" ry="1.9" fill="{P}" opacity=".5"/><ellipse cx="78" cy="43" rx="3" ry="1.9" fill="{P}" opacity=".5"/></g>')
+OWL_IRIS = '<circle cx="50" cy="34" r="8.6" fill="{IR}" stroke="{O}" stroke-width="1.3"/><circle cx="70" cy="34" r="8.6" fill="{IR}" stroke="{O}" stroke-width="1.3"/>'
+OWL_LIDS = '<path d="M41.5 31 Q50 23 58.5 31 M61.5 31 Q70 23 78.5 31" fill="none" stroke="{RIM}" stroke-width="1.6" stroke-linecap="round"/>'
 
 
 def _beak(kind):
@@ -199,9 +196,20 @@ def _body(expr, ch='fatina'):
     head = '<ellipse cx="60" cy="114" rx="26" ry="3" fill="{O}" opacity=".14"/>' + DUST + '<g class="rd-all"><g%s>' % (' class="rd-jump"' if p.get('jump') else '')
     eyes = '<g class="rd-look"><g class="rd-eyes">' + _eyes(p['eyes'], ch == 'fatina') + '</g></g>'
     if ch == 'saggio':
-        arms = p['arms'].replace('stroke-width="4.2"', 'stroke-width="7.4"').replace('stroke-width="6.6"', 'stroke-width="9.8"').replace('r="3.9" fill="{S}"', 'r="4.6" fill="{A}"')
-        return (head + OWL_BACK + eyes + OWL_FACE + _beak(p['mouth']) + OWL_CAP +
-                arms + p['extra'] + ('' if expr in ('spiega', 'conta', 'idea') else OWL_BOOK) + '</g></g>')
+        arms = re.sub(r'<g data-wand="1">.*?</g><!--/wand-->', '', p['arms'], flags=re.S)
+        arms = arms.replace('stroke-width="4.2"', 'stroke-width="7.6"').replace('stroke-width="6.6"', 'stroke-width="9.8"')
+        arms = re.sub(r'<circle cx="([\d.]+)" cy="([\d.]+)" r="3.9" fill="\{S\}" stroke="\{O\}" stroke-width="1.3"/>',
+                      lambda m: '<circle cx="%s" cy="%s" r="4.4" fill="{A}" stroke="{O}" stroke-width="1.1"/><path d="M%s %s l-2.4 -3 M%s %s l0 -3.6 M%s %s l2.4 -3" stroke="{R3}" stroke-width="1.2" stroke-linecap="round"/>' % (
+                          m.group(1), m.group(2), float(m.group(1)) - 2, float(m.group(2)) + 1.5, m.group(1), float(m.group(2)) + 1.5, float(m.group(1)) + 2, float(m.group(2)) + 1.5), arms)
+        happy = p['eyes'] == 'happy'
+        ex = lambda e, dx: '<g transform="translate(%s 0)">%s</g>' % (dx, e)
+        e_all = _eyes(p['eyes'], False)
+        # sposta l'occhio sinistro di -2 e il destro di +2: ogni occhio comincia con il suo <ellipse>/<path>
+        parts = re.split(r'(?=<ellipse cx="6[5-9])|(?=<path d="M63\.5 35)', e_all, maxsplit=1)
+        eyes2 = (ex(parts[0], -2) + (ex(parts[1], 2) if len(parts) > 1 else ''))
+        eyes = ('' if happy else OWL_IRIS) + '<g class="rd-look"><g class="rd-eyes">' + eyes2 + '</g></g>' + ('' if happy else OWL_LIDS)
+        bulb = '<g class="rd-bulb"><circle cx="100" cy="22" r="8" fill="{Y}" stroke="{O}" stroke-width="1.2"/><rect x="96.5" y="29" width="7" height="4.6" rx="1.4" fill="{O}"/></g>' if expr == 'idea' else ''
+        return head + OWL_BACK + eyes + _beak(p['mouth']) + '<g transform="translate(60 0) scale(1.4 1) translate(-60 0)">' + arms + '</g>' + p['extra'] + bulb + '</g></g>'
     return head + WINGS + BODY + HEAD + eyes + _mouth(p['mouth']) + BANGS + p['arms'] + p['extra'] + '</g></g>'
 
 
