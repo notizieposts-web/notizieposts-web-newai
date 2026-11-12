@@ -2,6 +2,12 @@
 
 Dal 12 novembre 2026 il sito si chiama **Sapit** (prima «Radar AI»). Dal latino *sapio, sapere*: «egli sa, ha giudizio». Si pronuncia «sàpit».
 
+## Il marchio e il personaggio
+
+- **Sapit** è il nome del sito e del marchio (logo, favicon, anteprime).
+- **Sapio** è il gufetto, il personaggio che guida, spiega e legge ad alta voce negli esercizi e negli aiuti. Il nome resta Sapio (deciso il 12 novembre 2026).
+- Insieme: Sapio è il gufo di Sapit.
+
 ## La storia
 
 Il sapere oggi passa dall'intelligenza artificiale e cambia ogni giorno. Sapit è il gufo che veglia di notte e la mattina ti porta quello che conta. Frase: **«Lui sa. Tu impari.»** Racconto completo, pubblico e confronto con le alternative: [`storia.md`](storia.md).
@@ -36,4 +42,3 @@ Il sapere oggi passa dall'intelligenza artificiale e cambia ogni giorno. Sapit �
 
 - Verifiche prima di registrarlo: marchio (UIBM, EUIPO), dominio e profili social.
 - Email della newsletter e testi audio dicono ancora «Radar AI»: il modello dell'email si cambia solo con approvazione.
-- Il gufo guida degli esercizi si chiama ancora Sapio: da decidere se diventa Sapit.

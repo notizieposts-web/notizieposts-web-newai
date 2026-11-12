@@ -16,7 +16,7 @@ Costruendolo è diventato chiaro che lo stesso bisogno lo hanno in tanti. Ragazz
 
 Il sapere oggi passa sempre di più dall'AI. Sapit vuole che questo sia un vantaggio per tutti: lo strumento più potente che abbiamo deve servire a crescere, non a delegare il pensiero.
 
-Il nome viene dal latino *sapit*, «egli sa». Il gufo veglia di notte, legge tutto, e la mattina ti dà quello che conta, in quindici minuti, in italiano, nel modo che funziona per te.
+Il nome viene dal latino *sapit*, «egli sa». Il gufetto che accompagna chi studia si chiama **Sapio** («io so»): Sapit è il marchio, Sapio è il personaggio. Il gufo veglia di notte, legge tutto, e la mattina ti dà quello che conta, in quindici minuti, in italiano, nel modo che funziona per te.
 
 ## Per chi
 
