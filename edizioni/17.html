@@ -192,7 +192,59 @@ footer{border-top:1px solid var(--line);margin-top:4rem;padding:2rem 1.2rem 3rem
 .dash{stroke-dasharray:6 6;animation:dash 1.5s linear infinite}
 @keyframes dash{to{stroke-dashoffset:-24}}
 </style>
-<style id="pager-css">.ed-pager{max-width:72rem;margin:3rem auto 0;padding:0 1.2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}.ed-pager a{display:flex;flex-direction:column;gap:.3rem;min-height:44px;padding:1rem 1.2rem;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);text-decoration:none}.ed-pager a:hover .tt{text-decoration:underline}.ed-pager .dir{font-size:.85rem;font-weight:700;letter-spacing:.04em;color:var(--muted)}.ed-pager .tt{font-weight:700;line-height:1.35}.ed-pager .next{text-align:right}</style><script id="a11y-theme">try{var t=localStorage.getItem('radar-theme');if(t=='light'||t=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script><style id="a11y">
+<style id="pager-css">.ed-pager{max-width:72rem;margin:3rem auto 0;padding:0 1.2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}.ed-pager a{display:flex;flex-direction:column;gap:.3rem;min-height:44px;padding:1rem 1.2rem;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);text-decoration:none}.ed-pager a:hover .tt{text-decoration:underline}.ed-pager .dir{font-size:.85rem;font-weight:700;letter-spacing:.04em;color:var(--muted)}.ed-pager .tt{font-weight:700;line-height:1.35}.ed-pager .next{text-align:right}</style><style id="rada-css">.rd{flex:none;overflow:visible;vertical-align:middle}
+.rd-wingL{transform-box:fill-box;transform-origin:100% 70%;animation:rd-flapL .38s ease-in-out infinite alternate}
+.rd-wingR{transform-box:fill-box;transform-origin:0% 70%;animation:rd-flapR .38s ease-in-out infinite alternate}
+.rd-star{transform-box:fill-box;transform-origin:center;animation:rd-star 2.2s ease-in-out infinite}
+.rd-dust{transform-box:fill-box;transform-origin:center;animation:rd-dust 3s ease-in infinite}.rd-dust.b{animation-delay:1s}.rd-dust.c{animation-delay:2s}
+.rd-shine{animation:rd-shine 3s ease-in-out infinite}
+.rd-all{transform-box:fill-box;transform-origin:50% 100%;animation:rd-float 2.4s ease-in-out infinite}
+.rd-look{animation:rd-look 5s ease-in-out infinite}
+.rd-swing{transform-box:fill-box;transform-origin:100% 0%;animation:rd-swing 1.6s ease-in-out infinite alternate}
+.rd-tip{transform-box:fill-box;transform-origin:center;animation:rd-tip 1.2s ease-in-out infinite alternate}
+.rd-cheek{animation:rd-cheek 2.4s ease-in-out infinite}
+.rd-dust,.rd-look,.rd-eyes,.rd-mouth-t,.rd-wave,.rd-bulb,.rd-ping,.rd-spark,.rd-dot,.rd-drop,.rd-sym,.rd-armL,.rd-armR,.rd-q{transform-box:fill-box;transform-origin:center}
+.rd-eyes{animation:rd-blink 3.2s infinite}
+.rd-ping{animation:rd-ping 2.4s ease-out infinite;transform-origin:50% 100%}
+.rd-ping.b{animation-delay:.5s}
+.rd-wave{transform-origin:0% 100%;animation:rd-wave .55s ease-in-out infinite alternate}
+.rd-mouth-t{animation:rd-talk .24s ease-in-out infinite alternate}
+.rd-snd{animation:rd-fade 1s ease-in-out infinite}.rd-snd.b{animation-delay:.3s}
+.rd-bulb{animation:rd-pop 1.4s ease-in-out infinite alternate}
+.rd-dot{animation:rd-fade 1.6s ease-in-out infinite}.rd-dot.b{animation-delay:.25s}.rd-dot.c{animation-delay:.5s}
+.rd-spark{animation:rd-twinkle 1.1s ease-in-out infinite alternate}.rd-spark.b{animation-delay:.35s}.rd-spark.c{animation-delay:.7s}
+.rd-jump{animation:rd-jump .5s cubic-bezier(.3,0,.5,1) infinite alternate}
+.rd-drop{animation:rd-drop 1.8s ease-in infinite}
+.rd-sym{animation:rd-bob 1.8s ease-in-out infinite alternate}.rd-sym.b{animation-delay:.4s}.rd-sym.c{animation-delay:.8s}
+.rd-q{animation:rd-tilt 1.6s ease-in-out infinite alternate}
+.rd-point{transform-box:fill-box;transform-origin:0% 100%;animation:rd-point .8s ease-in-out infinite alternate}
+.rd-fist{transform-box:fill-box;transform-origin:100% 100%;animation:rd-fist .5s ease-in-out infinite alternate}
+@keyframes rd-float{0%,100%{transform:translateY(0) rotate(0deg) scale(1,1)}25%{transform:translateY(-5px) rotate(-2.5deg) scale(.98,1.03)}50%{transform:translateY(-7px) rotate(0deg) scale(1,1)}75%{transform:translateY(-5px) rotate(2.5deg) scale(.98,1.03)}}
+@keyframes rd-flapL{from{transform:rotate(8deg) scaleX(1)}to{transform:rotate(-14deg) scaleX(.72)}}
+@keyframes rd-flapR{from{transform:rotate(-8deg) scaleX(1)}to{transform:rotate(14deg) scaleX(.72)}}
+@keyframes rd-star{0%,100%{transform:rotate(0deg) scale(1)}50%{transform:rotate(72deg) scale(1.22)}}
+@keyframes rd-dust{0%{transform:translateY(8px) scale(.3);opacity:0}20%{opacity:1}100%{transform:translateY(-26px) scale(1) rotate(90deg);opacity:0}}
+@keyframes rd-shine{0%,100%{opacity:.35}50%{opacity:.75}}
+@keyframes rd-look{0%,30%,100%{transform:translateX(0)}38%,55%{transform:translateX(-2.5px)}63%,80%{transform:translateX(2.5px)}}
+@keyframes rd-swing{from{transform:rotate(-12deg)}to{transform:rotate(10deg)}}
+@keyframes rd-tip{from{transform:scale(.85)}to{transform:scale(1.25)}}
+@keyframes rd-cheek{0%,100%{opacity:.35}50%{opacity:.75}}
+@keyframes rd-blink{0%,93%,100%{transform:scaleY(1)}96.5%{transform:scaleY(.08)}}
+@keyframes rd-ping{0%{opacity:.9;transform:scale(.5)}100%{opacity:0;transform:scale(1.25)}}
+@keyframes rd-wave{from{transform:rotate(-18deg)}to{transform:rotate(24deg)}}
+@keyframes rd-talk{from{transform:scaleY(.3)}to{transform:scaleY(1.4)}}
+@keyframes rd-fade{0%,100%{opacity:.15}50%{opacity:1}}
+@keyframes rd-pop{from{transform:scale(.8) rotate(-6deg)}to{transform:scale(1.2) rotate(6deg)}}
+@keyframes rd-twinkle{from{transform:scale(.4) rotate(0deg);opacity:.3}to{transform:scale(1.1) rotate(25deg);opacity:1}}
+@keyframes rd-jump{from{transform:translateY(0) scale(1.04,.96)}to{transform:translateY(-12px) scale(.97,1.04)}}
+@keyframes rd-drop{0%{transform:translateY(-3px);opacity:0}25%{opacity:1}100%{transform:translateY(9px);opacity:0}}
+@keyframes rd-bob{from{transform:translateY(4px) rotate(-8deg)}to{transform:translateY(-5px) rotate(8deg)}}
+@keyframes rd-tilt{from{transform:rotate(-14deg) translateY(2px)}to{transform:rotate(14deg) translateY(-3px)}}
+@keyframes rd-point{from{transform:rotate(4deg)}to{transform:rotate(-16deg)}}
+@keyframes rd-fist{from{transform:rotate(-6deg)}to{transform:rotate(16deg)}}
+@media (prefers-reduced-motion:reduce){.rd-all,.rd-all *{animation:none!important}}
+.rd-row{display:flex;gap:.7rem;align-items:center}.rd-row>:last-child{flex:1;min-width:0}</style>
+<script id="a11y-theme">try{var t=localStorage.getItem('radar-theme');if(t=='light'||t=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script><style id="a11y">
 /* Strato accessibilita' WCAG 2.2 AA */
 /* palette "Verde Deloitte" (docs/palette.md): neutri grafite; --violet = pulsante verde #3F7A12, uguale nei due temi, testo sopra --on-violet bianco; --violet-ink = verde per testi; --accent = #86BC24 con testo nero, solo dettagli. Il nome --violet resta per compatibilità: è il colore principale. Testo AA su ogni sfondo */
 :root:not([data-theme="dark"]){--bg:#F6F6F5;--surface:#FFFFFF;--soft:#EEEEED;--line:#D6D6D4;--ink:#1C1D1F;--muted:#55575B;--violet:#3F7A12;--on-violet:#FFFFFF;--violet-ink:#3F7A12;--violet-soft:#E6F2D3;--accent:#86BC24;--on-accent:#000000;--teal:#2E6B12;--teal-soft:#E6F2D3;--sun:#9A4B00;--sun-soft:#FCEFD9;--red:#B3261E;--red-soft:#FBE7E5}
@@ -267,6 +319,37 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 a.gl-chip{display:inline-flex;align-items:center;min-height:24px;text-decoration:underline;text-underline-offset:.2em;color:var(--ink)}
 .nav .brand{gap:.45rem!important;color:var(--ink)}.logo-mark{flex:none;display:block}.logo-word{display:block;height:1.55rem;width:auto;color:var(--ink)}.nav .brand:hover .logo-word{color:var(--violet-ink,var(--ink))}</style><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2216%22 fill=%22%233F7A12%22/%3E%3Cg transform=%22translate%2832 35%29 scale%28.84%29 translate%28-32 -35%29%22%3E%3Cpath d=%22M15 24 L10 6 L26 15 Z M49 24 L54 6 L38 15 Z%22 fill=%22%237C5230%22/%3E%3Cpath d=%22M32 11 C49 11 57 22 57 37 C57 51 46 59 32 59 C18 59 7 51 7 37 C7 22 15 11 32 11 Z%22 fill=%22%239A6A3C%22/%3E%3Cpath d=%22M32 26 C27 17 12 18 12 31 C12 43 22 48 32 46 C42 48 52 43 52 31 C52 18 37 17 32 26 Z%22 fill=%22%23F8EBD3%22/%3E%3Ccircle cx=%2222.5%22 cy=%2232%22 r=%228.4%22 fill=%22%23F2A91E%22/%3E%3Ccircle cx=%2241.5%22 cy=%2232%22 r=%228.4%22 fill=%22%23F2A91E%22/%3E%3Ccircle cx=%2222.5%22 cy=%2232%22 r=%224.8%22 fill=%22%231C1D1F%22/%3E%3Ccircle cx=%2241.5%22 cy=%2232%22 r=%224.8%22 fill=%22%231C1D1F%22/%3E%3Cpath d=%22M28.4 38 L35.6 38 L32 46 Z%22 fill=%22%23E3A22E%22/%3E%3C/g%3E%3C/svg%3E"><link rel="icon" type="image/png" sizes="48x48" href="https://notizieposts-web.github.io/notizieposts-web-newai/img/brand/sapit-icona-48.png"><link rel="apple-touch-icon" href="https://notizieposts-web.github.io/notizieposts-web-newai/img/brand/sapit-icona-180.png">
 <script id="a11y-menu">window.RADAR_MENU={base:"../",items:[{"u": "index.html", "l": "Tutte le edizioni", "k": "all"}, {"u": "edizioni/49.html", "l": "Ultima edizione", "k": "all"}, {"u": "argomenti.html", "l": "Tutti gli argomenti", "k": "all"}, {"u": "azure.html", "l": "Azure Content Understanding", "k": "guide", "n": "24 puntate"}, {"u": "azure-esercizi.html", "l": "Palestra Content Understanding", "k": "guide", "n": "1.343 esercizi"}, {"u": "azure-laboratorio.html", "l": "Laboratorio Content Understanding", "k": "guide", "n": "720 sfide"}, {"u": "glossario.html", "l": "Glossario", "k": "guide", "n": "107 voci"}, {"u": "squadre.html", "l": "Pacchetti e squadre", "k": "guide", "n": "3 pacchetti"}, {"u": "tema-sicurezza.html", "l": "Sicurezza", "k": "theme", "n": "39 edizioni"}, {"u": "tema-ricerca.html", "l": "Ricerca", "k": "theme", "n": "30 edizioni"}, {"u": "tema-costi.html", "l": "Costi", "k": "theme", "n": "22 edizioni"}, {"u": "tema-grandi-modelli.html", "l": "Grandi modelli", "k": "theme", "n": "22 edizioni"}, {"u": "tema-pesi-aperti.html", "l": "Pesi aperti", "k": "theme", "n": "19 edizioni"}, {"u": "tema-valutazione.html", "l": "Valutazione", "k": "theme", "n": "12 edizioni"}, {"u": "tema-regole.html", "l": "Regole", "k": "theme", "n": "11 edizioni"}, {"u": "tema-hardware.html", "l": "Hardware", "k": "theme", "n": "9 edizioni"}, {"u": "tema-decisionali.html", "l": "Decisionali", "k": "theme", "n": "6 edizioni"}]};</script>
+<style id="kw-css">
+.kw{margin:.9rem 0 0}
+.kw-btn{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:.3rem .95rem .3rem .4rem;border-radius:999px;border:2px solid var(--violet);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.kw-btn:hover{background:var(--violet-soft)}
+.kw-btn[aria-expanded="true"]{background:var(--violet-soft)}
+.kw-box{margin-top:.7rem;padding:1rem 1.1rem;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink)}
+.kw-say{margin:0;line-height:1.5}
+.kw-say b{color:var(--violet-ink)}
+.kw-list{list-style:none;display:flex;flex-wrap:wrap;gap:.45rem;margin:.85rem 0 0;padding:0}
+.kw-chip{display:inline-flex;align-items:center;gap:.35rem;min-height:36px;padding:.25rem .8rem;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--ink);font:inherit;font-weight:600;cursor:pointer}
+.kw-chip:hover{border-color:var(--violet)}
+.kw-chip[aria-pressed="true"]{background:var(--violet);border-color:var(--violet);color:var(--on-violet)}
+.kw-n{font-weight:400;font-size:.85em;opacity:.9}
+.kw-ctx{margin-top:.85rem}
+.kw-ctx:empty{display:none}
+.kw-card{padding:.85rem 1rem;border-left:4px solid var(--violet);border-radius:0 12px 12px 0;background:var(--violet-soft);color:var(--ink)}
+.kw-card h4{margin:0 0 .35rem;font-size:1rem}
+.kw-card p{margin:.3rem 0 0;line-height:1.55}
+.kw-lab{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.kw-tools{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.85rem}
+.kw-tool{min-height:36px;padding:.25rem .85rem;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}
+.kw-tool:hover{border-color:var(--violet)}
+.kw-tool[aria-pressed="true"]{background:var(--violet);border-color:var(--violet);color:var(--on-violet)}
+mark.kw-m{background:var(--violet-soft);color:var(--ink);border-bottom:2px solid var(--violet-ink);border-radius:3px;padding:0 .1em}
+mark.kw-m.on{outline:2px solid var(--violet-ink);outline-offset:1px}
+.kw-card mark.kw-m{background:var(--surface)}
+.kw-dim .prose>*:not(:has(mark.kw-m.on)),.kw-dim .lead:not(:has(mark.kw-m.on)){color:var(--muted)}
+.kw-dim .prose>p:has(mark.kw-m.on),.kw-dim .prose>li:has(mark.kw-m.on),.kw-dim .lead:has(mark.kw-m.on){color:var(--ink);box-shadow:-10px 0 0 -6px var(--violet-ink)}
+@media (prefers-reduced-motion:no-preference){mark.kw-m.on{transition:outline-color .2s}}
+@media (forced-colors:active){mark.kw-m{forced-color-adjust:none;background:Mark;color:MarkText}.kw-chip[aria-pressed="true"],.kw-tool[aria-pressed="true"]{border:3px solid Highlight}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#contenuto">Salta al contenuto</a>
@@ -608,6 +691,124 @@ a.gl-chip{display:inline-flex;align-items:center;min-height:24px;text-decoration
   var mo=new MutationObserver(soon);
   function start(){all();mo.observe(document.body,{childList:true,subtree:true});
     if(window.matchMedia)matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){document.querySelectorAll('[style*="color"]').forEach(function(e){if(e.style.getPropertyPriority('color')==='important')e.style.removeProperty('color')});fixContrast();});}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
+</script>
+<script id="kw-js">
+/* Sapio, trova le parole chiave (tools/chiavi.py) */
+(function(){
+  var STOP={}; 'abbiamo adesso affinché agli alla alle allo allora almeno alcuni alcune altra altre altri altro anche ancora anni anno attraverso aveva avere avevano bisogna bene caso cento certo che chi ciascun ciascuno come comunque con contro cosa cose così cui dalla dalle dallo degli della delle dello dentro deve devono dice dicono diventa dopo dove dunque durante ecco esempio essere esso fare fatto fino finora forse fra gennaio febbraio marzo aprile maggio giugno luglio agosto settembre ottobre novembre dicembre giorno giorni già grande grandi ieri invece lavoro loro lunedì martedì mercoledì giovedì venerdì sabato domenica mentre meno mese mesi metà migliaia miliardi milioni modo molto molti molte nella nelle nello nessun nessuno niente noi nostro nostra nuova nuove nuovi nuovo oggi ogni ognuno oltre oppure ora ossia parte perché però piccolo pochi poco poi poiché possono potrebbe potrebbero prima primo proprio può quale quali qualche qualcosa quando quanto quasi quella quelle quelli quello questa queste questi questo quindi rispetto sarà sarebbe secondo sembra semplice sempre senza serve servono settimana settimane sia siamo significa solo soltanto sono sopra sotto stata state stati stato stessa stesse stessi stesso sulla sulle sullo tanto tempo testo tra tranne troppo tutta tutte tutti tutto ultima ultime ultimi ultimo una uno vengono viene volta volte vuol vuole edizione capitolo verifica fonte fonti dichiarato verificato limiti collegamenti annunciato annuncio spiega scrive detto dollari euro domanda domande risposta risposte esempi persone cosa caso numero numeri punto punti tipo esattamente davvero infatti cioè anzi inoltre the and for with from that this into il lo la le gli un di da in su per con tra fra se ma ed non sui sul sulla dal dai del dei nel nei al ai ad né mai più tu io lui lei voi copia due tre quattro cinque sei sette otto nove dieci mille arriva arrivano usato usata usati usate fatta fatti'.split(' ').forEach(function(w){STOP[w]=1});
+  var OWL_S='<svg class="rd" data-rd="curiosa" viewBox="-8 -28 140 148" width="30" height="32" aria-hidden="true" focusable="false"><ellipse cx="60" cy="114" rx="26" ry="3" fill="#3A2618" opacity=".14"/><path class="rd-dust" d="M14 98 l1.4 3.2 l3.2 1.4 l-3.2 1.4 l-1.4 3.2 l-1.4 -3.2 l-3.2 -1.4 l3.2 -1.4 z" fill="#FFC94D"/><path class="rd-dust b" d="M104 100 l1.2 2.8 l2.8 1.2 l-2.8 1.2 l-1.2 2.8 l-1.2 -2.8 l-2.8 -1.2 l2.8 -1.2 z" fill="#F2998A"/><circle class="rd-dust c" cx="92" cy="104" r="1.9" fill="#2F7D5B"/><g class="rd-all"><g><path d="M4 104 Q40 99 78 103 Q100 105 122 100" fill="none" stroke="#3A2618" stroke-width="7.5" stroke-linecap="round"/><path d="M4 104 Q40 99 78 103 Q100 105 122 100" fill="none" stroke="#7A5230" stroke-width="5" stroke-linecap="round"/><g class="rd-swing"><path d="M108 101 Q112 90 122 90 Q120 99 108 101 Z" fill="#5E9E4B" stroke="#3A2618" stroke-width="1.1" stroke-linejoin="round"/></g><path d="M14 103 Q8 94 0 96 Q3 104 14 103 Z" fill="#5E9E4B" stroke="#3A2618" stroke-width="1.1" stroke-linejoin="round"/><path d="M50 96 L46 112 L54 108 L60 114 L66 108 L74 112 L70 96 Z" fill="#7C5230" stroke="#3A2618" stroke-width="1.4" stroke-linejoin="round"/><path d="M40 22 L35 5 L52 14 Z M80 22 L85 5 L68 14 Z" fill="#7C5230" stroke="#3A2618" stroke-width="1.5" stroke-linejoin="round"/><path d="M60 9 C84 9 91 32 90 58 C89 84 78 100 60 100 C42 100 31 84 30 58 C29 32 36 9 60 9 Z" fill="#9A6A3C" stroke="#3A2618" stroke-width="1.6"/><path d="M44 14 q4 3 8 0 M68 14 q4 3 8 0 M52 11 q4 3 8 0 q4 -3 8 0" fill="none" stroke="#7C5230" stroke-width="1.3" stroke-linecap="round"/><path d="M60 52 C74 52 80 64 79 77 C78 90 71 97 60 97 C49 97 42 90 41 77 C40 64 46 52 60 52 Z" fill="#F4E4C4"/><path d="M51 62 l3 3 l3 -3 M63 62 l3 3 l3 -3 M47 71 l3 3 l3 -3 M57 71 l3 3 l3 -3 M67 71 l3 3 l3 -3 M51 80 l3 3 l3 -3 M63 80 l3 3 l3 -3 M57 88 l3 3 l3 -3" fill="none" stroke="#7C5230" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 99 l-3 5 M52.5 99 v6 M55 99 l3 5 M65 99 l-3 5 M67.5 99 v6 M70 99 l3 5" stroke="#E3A22E" stroke-width="2.4" stroke-linecap="round"/><path d="M60 22 C52 14 36 17 35 32 C34 45 46 52 60 49 C74 52 86 45 85 32 C84 17 68 14 60 22 Z" fill="#F8EBD3" stroke="#C89B6A" stroke-width="1.8" stroke-linejoin="round"/><g class="rd-cheek"><ellipse cx="42" cy="43" rx="3" ry="1.9" fill="#F2998A" opacity=".5"/><ellipse cx="78" cy="43" rx="3" ry="1.9" fill="#F2998A" opacity=".5"/></g><circle cx="50" cy="34" r="8.6" fill="#F2A91E" stroke="#3A2618" stroke-width="1.3"/><circle cx="70" cy="34" r="8.6" fill="#F2A91E" stroke="#3A2618" stroke-width="1.3"/><g class="rd-look"><g class="rd-eyes"><g transform="translate(-2 0)"><ellipse cx="52" cy="34.5" rx="3.4" ry="3.81" fill="#3A2618"/><circle cx="53.19" cy="32.97" r="1.29" fill="#FFFFFF"/><circle cx="50.81" cy="35.86" r="0.61" fill="#FFFFFF"/></g><g transform="translate(2 0)"><ellipse cx="68" cy="33.5" rx="4.9" ry="5.49" fill="#3A2618"/><circle cx="69.72" cy="31.3" r="1.86" fill="#FFFFFF"/><circle cx="66.28" cy="35.46" r="0.88" fill="#FFFFFF"/><path d="M63.5 25.5 Q68.5 21.5 74 25" fill="none" stroke="#8A5A34" stroke-width="2.2" stroke-linecap="round"/></g></g></g><path d="M41.5 31 Q50 23 58.5 31 M61.5 31 Q70 23 78.5 31" fill="none" stroke="#C89B6A" stroke-width="1.6" stroke-linecap="round"/><path d="M56.5 45 Q60 47 63.5 45 L60 49 Z" fill="#3A2618"/><path d="M57.2 46 L62.8 46 L60 50.5 Z" fill="#E3A22E" stroke="#3A2618" stroke-width="1" stroke-linejoin="round"/><path d="M55.5 40.5 L64.5 40.5 L60 46 Z" fill="#E3A22E" stroke="#3A2618" stroke-width="1.1" stroke-linejoin="round"/><g transform="translate(60 0) scale(1.4 1) translate(-60 0)"><g class="rd-swing"><path d="M50 61 Q42 70 42 80" fill="none" stroke="#3A2618" stroke-width="9.8" stroke-linecap="round"/><path d="M50 61 Q42 70 42 80" fill="none" stroke="#6B4423" stroke-width="7.6" stroke-linecap="round"/><circle cx="42" cy="80" r="4.4" fill="#6B4423" stroke="#3A2618" stroke-width="1.1"/><path d="M40.0 81.5 l-2.4 -3 M42 81.5 l0 -3.6 M44.0 81.5 l2.4 -3" stroke="#7C5230" stroke-width="1.2" stroke-linecap="round"/></g><g><path d="M70 61 Q88 52 86 28" fill="none" stroke="#3A2618" stroke-width="9.8" stroke-linecap="round"/><path d="M70 61 Q88 52 86 28" fill="none" stroke="#6B4423" stroke-width="7.6" stroke-linecap="round"/><circle cx="86" cy="28" r="4.4" fill="#6B4423" stroke="#3A2618" stroke-width="1.1"/><path d="M84.0 29.5 l-2.4 -3 M86 29.5 l0 -3.6 M88.0 29.5 l2.4 -3" stroke="#7C5230" stroke-width="1.2" stroke-linecap="round"/></g></g><g class="rd-q"><path d="M96 2 q0 -8 7.5 -8 q7.5 0 7.5 7 q0 4.6 -5 7 q-2.4 1.1 -2.4 4.6" fill="none" stroke="#2F7D5B" stroke-width="3.2" stroke-linecap="round"/><circle cx="103.6" cy="18.5" r="2.2" fill="#2F7D5B"/></g></g></g></svg>', OWL_L='<svg class="rd" data-rd="spiega" viewBox="-8 -28 140 148" width="60" height="63" aria-hidden="true" focusable="false"><ellipse cx="60" cy="114" rx="26" ry="3" fill="#3A2618" opacity=".14"/><path class="rd-dust" d="M14 98 l1.4 3.2 l3.2 1.4 l-3.2 1.4 l-1.4 3.2 l-1.4 -3.2 l-3.2 -1.4 l3.2 -1.4 z" fill="#FFC94D"/><path class="rd-dust b" d="M104 100 l1.2 2.8 l2.8 1.2 l-2.8 1.2 l-1.2 2.8 l-1.2 -2.8 l-2.8 -1.2 l2.8 -1.2 z" fill="#F2998A"/><circle class="rd-dust c" cx="92" cy="104" r="1.9" fill="#2F7D5B"/><g class="rd-all"><g><path d="M4 104 Q40 99 78 103 Q100 105 122 100" fill="none" stroke="#3A2618" stroke-width="7.5" stroke-linecap="round"/><path d="M4 104 Q40 99 78 103 Q100 105 122 100" fill="none" stroke="#7A5230" stroke-width="5" stroke-linecap="round"/><g class="rd-swing"><path d="M108 101 Q112 90 122 90 Q120 99 108 101 Z" fill="#5E9E4B" stroke="#3A2618" stroke-width="1.1" stroke-linejoin="round"/></g><path d="M14 103 Q8 94 0 96 Q3 104 14 103 Z" fill="#5E9E4B" stroke="#3A2618" stroke-width="1.1" stroke-linejoin="round"/><path d="M50 96 L46 112 L54 108 L60 114 L66 108 L74 112 L70 96 Z" fill="#7C5230" stroke="#3A2618" stroke-width="1.4" stroke-linejoin="round"/><path d="M40 22 L35 5 L52 14 Z M80 22 L85 5 L68 14 Z" fill="#7C5230" stroke="#3A2618" stroke-width="1.5" stroke-linejoin="round"/><path d="M60 9 C84 9 91 32 90 58 C89 84 78 100 60 100 C42 100 31 84 30 58 C29 32 36 9 60 9 Z" fill="#9A6A3C" stroke="#3A2618" stroke-width="1.6"/><path d="M44 14 q4 3 8 0 M68 14 q4 3 8 0 M52 11 q4 3 8 0 q4 -3 8 0" fill="none" stroke="#7C5230" stroke-width="1.3" stroke-linecap="round"/><path d="M60 52 C74 52 80 64 79 77 C78 90 71 97 60 97 C49 97 42 90 41 77 C40 64 46 52 60 52 Z" fill="#F4E4C4"/><path d="M51 62 l3 3 l3 -3 M63 62 l3 3 l3 -3 M47 71 l3 3 l3 -3 M57 71 l3 3 l3 -3 M67 71 l3 3 l3 -3 M51 80 l3 3 l3 -3 M63 80 l3 3 l3 -3 M57 88 l3 3 l3 -3" fill="none" stroke="#7C5230" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 99 l-3 5 M52.5 99 v6 M55 99 l3 5 M65 99 l-3 5 M67.5 99 v6 M70 99 l3 5" stroke="#E3A22E" stroke-width="2.4" stroke-linecap="round"/><path d="M60 22 C52 14 36 17 35 32 C34 45 46 52 60 49 C74 52 86 45 85 32 C84 17 68 14 60 22 Z" fill="#F8EBD3" stroke="#C89B6A" stroke-width="1.8" stroke-linejoin="round"/><g class="rd-cheek"><ellipse cx="42" cy="43" rx="3" ry="1.9" fill="#F2998A" opacity=".5"/><ellipse cx="78" cy="43" rx="3" ry="1.9" fill="#F2998A" opacity=".5"/></g><circle cx="50" cy="34" r="8.6" fill="#F2A91E" stroke="#3A2618" stroke-width="1.3"/><circle cx="70" cy="34" r="8.6" fill="#F2A91E" stroke="#3A2618" stroke-width="1.3"/><g class="rd-look"><g class="rd-eyes"><g transform="translate(-2 0)"><ellipse cx="52" cy="34" rx="4.1" ry="4.59" fill="#3A2618"/><circle cx="53.44" cy="32.16" r="1.56" fill="#FFFFFF"/><circle cx="50.56" cy="35.64" r="0.74" fill="#FFFFFF"/></g><g transform="translate(2 0)"><ellipse cx="68" cy="34" rx="4.1" ry="4.59" fill="#3A2618"/><circle cx="69.44" cy="32.16" r="1.56" fill="#FFFFFF"/><circle cx="66.56" cy="35.64" r="0.74" fill="#FFFFFF"/></g></g></g><path d="M41.5 31 Q50 23 58.5 31 M61.5 31 Q70 23 78.5 31" fill="none" stroke="#C89B6A" stroke-width="1.6" stroke-linecap="round"/><path d="M56.5 45 Q60 47 63.5 45 L60 49 Z" fill="#3A2618"/><path d="M57.2 46 L62.8 46 L60 50.5 Z" fill="#E3A22E" stroke="#3A2618" stroke-width="1" stroke-linejoin="round"/><path d="M55.5 40.5 L64.5 40.5 L60 46 Z" fill="#E3A22E" stroke="#3A2618" stroke-width="1.1" stroke-linejoin="round"/><g transform="translate(60 0) scale(1.4 1) translate(-60 0)"><g class="rd-swing"><path d="M50 61 Q42 70 42 80" fill="none" stroke="#3A2618" stroke-width="9.8" stroke-linecap="round"/><path d="M50 61 Q42 70 42 80" fill="none" stroke="#6B4423" stroke-width="7.6" stroke-linecap="round"/><circle cx="42" cy="80" r="4.4" fill="#6B4423" stroke="#3A2618" stroke-width="1.1"/><path d="M40.0 81.5 l-2.4 -3 M42 81.5 l0 -3.6 M44.0 81.5 l2.4 -3" stroke="#7C5230" stroke-width="1.2" stroke-linecap="round"/></g><g class="rd-point"><g><path d="M70 61 Q80 58 84 52" fill="none" stroke="#3A2618" stroke-width="9.8" stroke-linecap="round"/><path d="M70 61 Q80 58 84 52" fill="none" stroke="#6B4423" stroke-width="7.6" stroke-linecap="round"/><circle cx="84" cy="52" r="4.4" fill="#6B4423" stroke="#3A2618" stroke-width="1.1"/><path d="M82.0 53.5 l-2.4 -3 M84 53.5 l0 -3.6 M86.0 53.5 l2.4 -3" stroke="#7C5230" stroke-width="1.2" stroke-linecap="round"/></g></g></g><g><rect x="95" y="2" width="25" height="31" rx="4" fill="#FFFFFF" stroke="#3A2618" stroke-width="2"/><path d="M99.5 10.5 h3 M99.5 17.5 h3 M99.5 24.5 h3" stroke="#2F7D5B" stroke-width="2.8" stroke-linecap="round"/><path d="M106 10.5 h9.5 M106 17.5 h9.5 M106 24.5 h6.5" stroke="#3A2618" stroke-width="2" stroke-linecap="round"/></g></g></g></svg>';
+  var SKIP='.gl-tip,.sr-only,code,pre,.prompt,button,.kw,script,style,.src,.chip';
+  var L='A-Za-zÀ-ÖØ-öø-ÿ', LD=L+'0-9';
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function rx(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+  function textOf(el){var c=el.cloneNode(true);c.querySelectorAll(SKIP).forEach(function(x){
+      if(x.classList.contains('gl-btn')){x.replaceWith(document.createTextNode(x.firstChild?x.firstChild.textContent:''));}else x.remove();});
+    return c.textContent.replace(/\s+/g,' ').trim();}
+  function zones(sec){return [].slice.call(sec.querySelectorAll('.ch-head .lead, .prose'));}
+  function sentences(t){return t.split(/(?<=[.!?…])\s+(?=[«"“A-ZÀ-Ý0-9])/);}
+  function stem(w){return w.length>=6?w.replace(/(i|e|a|o)$/,''):w;}
+  function analyze(sec){
+    var h2=sec.querySelector('.ch-head h2'), title=h2?h2.textContent:'', leadEl=sec.querySelector('.ch-head .lead'), lead=leadEl?textOf(leadEl):'';
+    var body=zones(sec).map(textOf).join(' '), all=title+'. '+body, C={};
+    function add(k,disp,w,kind){var o=C[k]||(C[k]={k:k,d:disp,s:0,kind:kind,forms:{}});o.s+=w;o.forms[disp]=(o.forms[disp]||0)+1;if(kind==='gl'||kind==='np')o.kind=o.kind==='gl'?'gl':kind;return o;}
+    /* 1. glossario */
+    sec.querySelectorAll('.prose .gl, .ch-head .gl').forEach(function(g){var b=g.querySelector('.gl-btn'),t=b&&b.firstChild?b.firstChild.textContent.trim():'';
+      if(t){var o=add(t.toLowerCase(),t,4,'gl');o.gl=g.getAttribute('data-gl');var tip=g.querySelector('.gl-tip');if(tip&&!o.def){var c=tip.cloneNode(true);c.querySelectorAll('.gl-ex,.gl-act,b').forEach(function(x){x.remove()});o.def=c.textContent.replace(/^\s*\.\s*/,'').trim();}}});
+    /* 2. nomi propri */
+    var np=new RegExp('(?:^|[^'+LD+'])((?:[A-ZÀ-Ý]['+LD+'\\-]*|[0-9][0-9.,]*)(?:\\s(?:[A-ZÀ-Ý]['+LD+'\\-]*|[0-9][0-9.,]*|AI|AI\\.))*)','g');
+    sentences(all).forEach(function(s){var m;np.lastIndex=0;
+      while((m=np.exec(s))){var p=m[1].replace(/[.,]+$/,''),start=m.index+(m[0].length-m[1].length);
+        if(/^[0-9.,\s]+$/.test(p))continue;
+        var ws=p.split(' ');while(ws.length&&STOP[ws[0].toLowerCase()])ws.shift();if(!ws.length)continue;
+        if(start===0&&ws.length===p.split(' ').length&&ws.length===1&&!/[A-Z].*[A-Z]|[0-9]/.test(ws[0].slice(1)))continue;
+        p=ws.join(' ');if(p.length<2||/^[0-9.,\s]+$/.test(p))continue;add(p.toLowerCase(),p,1.5,'np');}});
+    /* 3. parole che tornano */
+    var wr=new RegExp('['+L+']{6,}','g'),F={},m2;var low=body;
+    while((m2=wr.exec(low))){var w=m2[0];if(/^[A-ZÀ-Ý]/.test(w))continue;var lw=w.toLowerCase();if(STOP[lw]||/(mente|are|ere|ire|ano|ono|ava|avano|eva|evano|iamo|ete)$/.test(lw))continue;var st=stem(lw);(F[st]||(F[st]={n:0,f:{}})).n++;F[st].f[lw]=(F[st].f[lw]||0)+1;}
+    Object.keys(F).forEach(function(st){if(F[st].n<3)return;var best=Object.keys(F[st].f).sort(function(a,b){return F[st].f[b]-F[st].f[a]})[0];var o=add(best,best,F[st].n*0.8,'w');o.stem=st;});
+    /* occorrenze reali, titolo e introduzione */
+    var list=Object.keys(C).map(function(k){var o=C[k];o.d=Object.keys(o.forms).sort(function(a,b){return o.forms[b]-o.forms[a]})[0];
+      var re=new RegExp('(?<!['+LD+'])'+rx(o.stem||o.d)+(o.stem?'['+L+']{0,3}':'')+'(?!['+LD+'])','gi');o.re=re;
+      o.n=(all.match(re)||[]).length;if(o.kind==='np')o.s=o.n*1.5;if(o.kind==='gl')o.s=4+o.n;
+      if(o.kind==='np'&&o.d.indexOf(' ')<0&&!/[A-Z].*[A-Z]|[0-9]/.test(o.d.slice(1))){var mid=new RegExp('[a-zà-ÿ0-9,;)]\\s'+rx(o.d)+'(?!['+LD+'])','g');if(!(all.match(mid)||[]).length)o.n=0;}
+      re.lastIndex=0;if(re.test(title))o.s+=4;re.lastIndex=0;if(re.test(lead))o.s+=2;re.lastIndex=0;return o;})
+      .filter(function(o){return o.n>0&&(o.kind!=='np'||o.n>=2||o.s>=4)});
+    /* doppioni */
+    list.sort(function(a,b){return b.d.length-a.d.length});
+    var keep=[];list.forEach(function(o){var host=keep.filter(function(h){return h.d.length>o.d.length&&new RegExp('(?<!['+LD+'])'+rx(o.d)+'(?!['+LD+'])','i').test(h.d)})[0];
+      if(host&&o.kind!=='gl'){host.s+=o.s*0.5;if(host.kind==='np'&&o.kind==='np'){(host.al||(host.al=[])).push(o.d);}}else keep.push(o);});
+    keep.forEach(function(o){if(!o.al)return;o.re=new RegExp('(?<!['+LD+'])(?:'+[o.d].concat(o.al).map(rx).join('|')+')(?!['+LD+'])','gi');o.n=(all.match(o.re)||[]).length;o.re.lastIndex=0;});
+    keep.sort(function(a,b){return b.s-a.s||b.n-a.n});
+    var out=keep.slice(0,8);
+    out.forEach(function(o){o.ctx='';sentences(body).some(function(s){o.re.lastIndex=0;if(o.re.test(s)){o.ctx=s;return true}});o.re.lastIndex=0;});
+    return {title:title,list:out};
+  }
+  function unmark(sec){sec.querySelectorAll('mark.kw-m').forEach(function(m){var p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();});}
+  function markAll(sec,list){unmark(sec);
+    zones(sec).forEach(function(z){var w=document.createTreeWalker(z,NodeFilter.SHOW_TEXT,{acceptNode:function(n){return n.parentElement.closest(SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}}),nodes=[],n;
+      while((n=w.nextNode()))nodes.push(n);
+      nodes.forEach(function(t){var s=t.nodeValue,hits=[];
+        list.forEach(function(o,i){o.re.lastIndex=0;var m;while((m=o.re.exec(s))){hits.push([m.index,m.index+m[0].length,i]);}o.re.lastIndex=0;});
+        if(!hits.length)return;hits.sort(function(a,b){return a[0]-b[0]||(b[1]-b[0])-(a[1]-a[0])});
+        var f=document.createDocumentFragment(),pos=0;
+        hits.forEach(function(h){if(h[0]<pos)return;f.appendChild(document.createTextNode(s.slice(pos,h[0])));var mk=document.createElement('mark');mk.className='kw-m';mk.setAttribute('data-kw',h[2]);mk.textContent=s.slice(h[0],h[1]);f.appendChild(mk);pos=h[1];});
+        f.appendChild(document.createTextNode(s.slice(pos)));t.parentNode.replaceChild(f,t);});});}
+  function joinIt(a){return a.length<2?a.join(''):a.slice(0,-1).join(', ')+' e '+a[a.length-1];}
+  var uid=0;
+  function build(sec){
+    var head=sec.querySelector('.ch-head');if(!head||head.querySelector('.kw'))return;
+    var id='kw-'+(++uid),h=head.querySelector('h2'),ht=h?h.textContent:'';
+    var wrap=document.createElement('div');wrap.className='kw';
+    wrap.innerHTML='<button type="button" class="kw-btn" aria-expanded="false" aria-controls="'+id+'">'+OWL_S+'<span>Sapio, trova le parole chiave</span></button>'+
+      '<div class="kw-box" id="'+id+'" role="region" aria-label="Parole chiave del capitolo: '+esc(ht)+'" hidden></div>';
+    head.appendChild(wrap);
+    var btn=wrap.querySelector('.kw-btn'),box=wrap.querySelector('.kw-box'),data=null,sel=-1,showAll=false,focusMode=false;
+    function render(){
+      var L=data.list;if(!L.length){box.innerHTML='<div class="rd-row">'+OWL_L+'<p class="kw-say">In questo capitolo non ho trovato parole chiave chiare. Prova a leggere il titolo e l\'introduzione: sono il riassunto.</p></div>';return;}
+      var top=L.slice(0,3).map(function(o){return '<b>'+esc(o.d)+'</b>'});
+      box.innerHTML='<div class="rd-row">'+OWL_L+'<div><p class="kw-say">Questo capitolo parla soprattutto di '+joinIt(top)+'.</p><p class="kw-say" style="margin-top:.35rem">Ho trovato '+L.length+' parole chiave. Toccane una: la evidenzio nel testo e ti mostro la frase dove compare.</p></div></div>'+
+        '<ul class="kw-list" aria-label="Parole chiave">'+L.map(function(o,i){return '<li><button type="button" class="kw-chip" data-i="'+i+'" aria-pressed="false">'+esc(o.d)+' <span class="kw-n" aria-hidden="true">×'+o.n+'</span><span class="sr-only">, '+o.n+(o.n===1?' volta':' volte')+'</span></button></li>'}).join('')+'</ul>'+
+        '<div class="kw-ctx" aria-live="polite"></div>'+
+        '<div class="kw-tools"><button type="button" class="kw-tool" data-t="all" aria-pressed="false">Evidenzia tutte nel testo</button>'+
+        '<button type="button" class="kw-tool" data-t="focus" aria-pressed="false">Concentrati: attenua il resto</button>'+
+        ('speechSynthesis' in window?'<button type="button" class="kw-tool" data-t="voice">Sapio, leggile ad alta voce</button>':'')+
+        '<button type="button" class="kw-tool" data-t="close">Chiudi</button></div>';
+    }
+    function apply(){
+      var L=data.list;if(showAll||sel>=0)markAll(sec,L);else unmark(sec);
+      sec.querySelectorAll('mark.kw-m').forEach(function(m){var i=+m.getAttribute('data-kw');m.classList.toggle('on',i===sel);if(!showAll&&i!==sel){var p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize();}});
+      sec.classList.toggle('kw-dim',focusMode&&sel>=0);
+      box.querySelectorAll('.kw-chip').forEach(function(c){c.setAttribute('aria-pressed',+c.getAttribute('data-i')===sel?'true':'false')});
+      var ctx=box.querySelector('.kw-ctx');
+      if(sel<0){ctx.innerHTML='';return;}
+      var o=L[sel],s=esc(o.ctx);o.re.lastIndex=0;var hl=s.replace(new RegExp(o.re.source,'gi'),function(x){return '<mark class="kw-m on">'+x+'</mark>'});o.re.lastIndex=0;
+      ctx.innerHTML='<div class="kw-card"><h4>'+esc(o.d)+'</h4>'+(o.def?'<p><span class="kw-lab">Che cos\'è</span><br>'+esc(o.def)+'</p>':'')+
+        (o.ctx?'<p><span class="kw-lab">Nel testo</span><br>'+hl+'</p>':'')+
+        '<p>Compare '+o.n+(o.n===1?' volta':' volte')+' in questo capitolo.'+(o.gl?' <a href="'+(document.querySelector('a.brand')?document.querySelector('a.brand').getAttribute('href'):'../')+'glossario.html#g-'+esc(o.gl)+'">Apri la voce del glossario</a>.':'')+'</p>'+
+        '<div class="kw-tools" style="margin-top:.6rem"><button type="button" class="kw-tool" data-t="go">Portami al punto nel testo</button></div></div>';
+    }
+    function open(o){box.hidden=!o;btn.setAttribute('aria-expanded',o?'true':'false');
+      if(o){if(!data){data=analyze(sec);render();}var f=box.querySelector('.kw-chip');if(f)f.focus();}
+      else{sel=-1;showAll=false;focusMode=false;apply();try{speechSynthesis.cancel()}catch(e){}}}
+    btn.addEventListener('click',function(){open(box.hidden)});
+    box.addEventListener('click',function(e){var c=e.target.closest('.kw-chip');
+      if(c){var i=+c.getAttribute('data-i');sel=sel===i?-1:i;apply();return;}
+      var t=e.target.closest('.kw-tool');if(!t)return;var k=t.getAttribute('data-t');
+      if(k==='close'){open(false);btn.focus();return;}
+      if(k==='all'){showAll=!showAll;t.setAttribute('aria-pressed',showAll?'true':'false');apply();return;}
+      if(k==='focus'){focusMode=!focusMode;t.setAttribute('aria-pressed',focusMode?'true':'false');if(focusMode&&sel<0)sel=0;apply();return;}
+      if(k==='go'){var m=sec.querySelector('mark.kw-m.on:not(.kw-card mark)');if(m){m.setAttribute('tabindex','-1');try{m.focus({preventScroll:true})}catch(x){m.focus()}m.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}return;}
+      if(k==='voice'){try{speechSynthesis.cancel();var L=data.list,txt='Ciao, sono Sapio. Le parole chiave di questo capitolo sono: '+L.map(function(o){return o.d}).join(', ')+'.';
+        if(sel>=0&&L[sel].ctx)txt='Sapio ti legge la frase su '+L[sel].d+'. '+L[sel].ctx;
+        var u=new SpeechSynthesisUtterance(txt);u.lang='it-IT';u.rate=.95;var v=speechSynthesis.getVoices().filter(function(v){return /^it/i.test(v.lang)})[0];if(v)u.voice=v;speechSynthesis.speak(u);}catch(x){}}
+    });
+    box.addEventListener('keydown',function(e){if(e.key==='Escape'){open(false);btn.focus();e.stopPropagation();}});
+  }
+  function start(){document.querySelectorAll('section.ch').forEach(function(sec){
+    if(!sec.querySelector('.prose')||!sec.querySelector('.ch-head h2'))return;
+    var n=zones(sec).map(textOf).join(' ').split(' ').length;if(n<250)return;build(sec);});}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
 </script>

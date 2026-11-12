@@ -78,7 +78,7 @@ Dopo 15 minuti: **«È stato piacevole»**. Leggero, con il gufo, senza ansia da
 
 ## Cosa c'è già e cosa manca per mantenere le promesse
 
-Già presente: edizione quotidiana verificata, audio, email; Palestra con aiuti graduali; Laboratorio; guide Sapio e Rada con voce e lettura facilitata; squadre con classifica online; palette e marchio accessibili.
+Già presente: edizione quotidiana verificata, audio, email; «Sapio, trova le parole chiave» in ogni capitolo (parole evidenziate, frase di contesto, modalità concentrazione sul capitolo); Palestra con aiuti graduali; Laboratorio; guide Sapio e Rada con voce e lettura facilitata; squadre con classifica online; palette e marchio accessibili.
 
 Da costruire per essere davvero lo strumento di studio promesso:
 
