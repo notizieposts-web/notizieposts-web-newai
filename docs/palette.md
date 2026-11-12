@@ -2,7 +2,7 @@
 
 Documento di riferimento per i colori del sito, scelto il 12 novembre 2026. Ogni modifica ai colori parte da qui.
 
-Stato: **scelta approvata, da applicare al sito**. Oggi il sito usa ancora la palette grafite provvisoria in `tools/inject.py`.
+Stato: **applicata a tutto il sito il 12 novembre 2026** (`tools/inject.py`). Resta escluso il modello dell'email, che ha ancora i suoi colori.
 
 ## Principi
 
@@ -73,7 +73,7 @@ WCAG 2.2 è la norma in vigore (testo almeno 4,5:1, livello AA; 7:1 livello AAA;
 
 ## Dove si applica
 
-- `tools/inject.py`, righe `:root`: tutti i colori del sito, per i temi chiaro e scuro. Il nome della variabile del colore principale resta `--violet` per compatibilità.
+- `tools/inject.py`, righe `:root`: tutti i colori del sito, per i temi chiaro e scuro. Variabili: `--violet` = pulsante verde `#3F7A12` (il nome resta per compatibilità), `--on-violet` = testo bianco sopra il verde, `--violet-ink` = verde per i testi (`#3F7A12` in chiaro, `#9CD84A` in scuro), `--accent` / `--on-accent` = `#86BC24` con testo nero (badge «AI» del logo), `--teal`, `--sun`, `--red` con le loro tinte `-soft` per gli stati. Subito sotto, un blocco forza il testo bianco su tutti i componenti con fondo verde.
 - `tools/logo.py` (logo e favicon) e `tools/site_meta.py` (immagini di anteprima e pagina 404).
 - `tools/mail_template_teaser.html`: il modello dell'email ha ancora i suoi colori e si cambia solo con un'approvazione a parte.
 

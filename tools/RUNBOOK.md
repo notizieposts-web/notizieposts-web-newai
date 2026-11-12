@@ -143,9 +143,7 @@ Segue Google Search Central (titoli e descrizioni unici, sitemap, dati struttura
 
 ## Colori (dal 12 novembre 2026)
 
-**Palette approvata: "Verde Deloitte"**, documentata in `docs/palette.md` (colori, contrasti, fonti). Quando la si applica, i valori vanno in `tools/inject.py` e il paragrafo qui sotto si aggiorna. Fino ad allora il sito usa la palette grafite provvisoria descritta qui sotto.
-
-Niente viola né blu. La palette sta in un solo punto, `tools/inject.py` (righe `:root`, che sovrascrivono anche fondi e testi delle pagine): fondo grigio chiarissimo `#F6F6F5` (scuro `#141516`), testo grafite `#1C1D1F` (scuro `#ECECEE`), colore principale nero grafite (`--violet`, il nome resta per compatibilità: chiaro `#1F2023`, scuro `#E8E8EA`); verde bosco (`--teal`), ambra (`--sun`) e terracotta (`--red`) solo per stati e difficoltà. Stessi toni per logo e favicon (`tools/logo.py`), anteprime `img/og/` e 404 (`tools/site_meta.py`) e per i contorni delle guide (`tools/rada.py`). Dopo un cambio: rigenera le pagine, poi `audit3.py` (contrasto AA nei temi chiaro e scuro). Il modello dell'email non si tocca e ha ancora il suo blu-viola `#3F3FD9`: va deciso a parte.
+**Palette "Verde Deloitte"**, applicata a tutto il sito e documentata in `docs/palette.md` (colori, contrasti, fonti ufficiali). Sta in un solo punto, `tools/inject.py` (righe `:root` e il blocco subito sotto). Neutri grafite; pulsante verde `#3F7A12` con testo bianco, identico in chiaro e in scuro; verde chiaro `#86BC24` con testo nero solo per dettagli; stati verde, ambra, rosso con le loro tinte. Logo e favicon in `tools/logo.py`, anteprime `img/og/` e 404 in `tools/site_meta.py`. Dopo un cambio: rigenera le pagine (per le anteprime, cancella prima `img/og/*.png`), poi `audit3.py` e `reflow.py`. Il modello dell'email non si tocca e ha ancora il suo blu-viola `#3F3FD9`: va deciso a parte.
 
 ## Rada, aiuti e lettura facilitata (dall'11 novembre 2026)
 

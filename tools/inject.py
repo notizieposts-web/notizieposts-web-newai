@@ -5,10 +5,10 @@ import logo
 HEADJS = r"""<script id="a11y-theme">try{var t=localStorage.getItem('radar-theme');if(t=='light'||t=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>"""
 CSS = r"""<style id="a11y">
 /* Strato accessibilita' WCAG 2.2 AA */
-/* palette (dal 12 novembre 2026): nero grafite e grigi neutri, verde bosco, ambra, terracotta; niente viola né blu. Il nome --violet resta per compatibilità: è il colore principale. Testo AA su ogni sfondo */
-:root:not([data-theme="dark"]){--bg:#F6F6F5;--surface:#FFFFFF;--soft:#EEEEED;--line:#D6D6D4;--ink:#1C1D1F;--muted:#55575B;--violet:#1F2023;--violet-soft:#E6E6E4;--teal:#1E6B4F;--teal-soft:#E1F1E9;--sun:#9A4B00;--sun-soft:#FCEFD9;--red:#B0362A;--red-soft:#FBE8E4}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#141516;--surface:#1C1D1F;--soft:#26272A;--line:#3A3B3F;--ink:#ECECEE;--muted:#A9AAAF;--violet:#E8E8EA;--violet-soft:#2E2F33;--teal:#74D3A6;--teal-soft:#11362A;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#FF9A8B;--red-soft:#40201B}}
-:root[data-theme="dark"]{--bg:#141516;--surface:#1C1D1F;--soft:#26272A;--line:#3A3B3F;--ink:#ECECEE;--muted:#A9AAAF;--violet:#E8E8EA;--violet-soft:#2E2F33;--teal:#74D3A6;--teal-soft:#11362A;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#FF9A8B;--red-soft:#40201B}
+/* palette "Verde Deloitte" (docs/palette.md): neutri grafite; --violet = pulsante verde #3F7A12, uguale nei due temi, testo sopra --on-violet bianco; --violet-ink = verde per testi; --accent = #86BC24 con testo nero, solo dettagli. Il nome --violet resta per compatibilità: è il colore principale. Testo AA su ogni sfondo */
+:root:not([data-theme="dark"]){--bg:#F6F6F5;--surface:#FFFFFF;--soft:#EEEEED;--line:#D6D6D4;--ink:#1C1D1F;--muted:#55575B;--violet:#3F7A12;--on-violet:#FFFFFF;--violet-ink:#3F7A12;--violet-soft:#E6F2D3;--accent:#86BC24;--on-accent:#000000;--teal:#2E6B12;--teal-soft:#E6F2D3;--sun:#9A4B00;--sun-soft:#FCEFD9;--red:#B3261E;--red-soft:#FBE7E5}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121212;--surface:#1E1F21;--soft:#26272A;--line:#3A3B3F;--ink:#EDEDED;--muted:#A9AAAF;--violet:#3F7A12;--on-violet:#FFFFFF;--violet-ink:#9CD84A;--violet-soft:#1C2A12;--accent:#86BC24;--on-accent:#000000;--teal:#9CD84A;--teal-soft:#1C2A12;--sun:#FFB86B;--sun-soft:#3A2A12;--red:#FF8A80;--red-soft:#40201E}}
+:root[data-theme="dark"]{--bg:#121212;--surface:#1E1F21;--soft:#26272A;--line:#3A3B3F;--ink:#EDEDED;--muted:#A9AAAF;--violet:#3F7A12;--on-violet:#FFFFFF;--violet-ink:#9CD84A;--violet-soft:#1C2A12;--accent:#86BC24;--on-accent:#000000;--teal:#9CD84A;--teal-soft:#1C2A12;--sun:#FFB86B;--sun-soft:#3A2A12;--red:#FF8A80;--red-soft:#40201E}
 html{scroll-padding-top:6rem}
 :focus{scroll-margin-top:6rem;scroll-margin-bottom:2rem}
 :focus-visible{outline:3px solid var(--violet)!important;outline-offset:2px!important;border-radius:4px}
@@ -38,8 +38,13 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .nav-arrow:disabled{opacity:.35;cursor:default}
 @media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
 .chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#141516!important}}
-:root[data-theme="dark"] .chip.topic{color:#141516!important}
+/* testo sopra il verde: sempre bianco, in chiaro e in scuro */
+.logo-ai,.btn.primary,.chip.done,.chip.topic,.ep .eplinks a.pri,.gl-ico,.gpanel .gbtn,.menu-btn,.palcta,.rt-b.pri,.sbtn.pri,.steps li::before,.topicmenu a[aria-current="page"],.vbtn2,.vbtn,.w.on{color:var(--on-violet)!important}
+.menu-btn[aria-expanded="true"]{color:var(--bg)!important}
+/* testi in verde: tonalità leggibile in ogni tema */
+.chip.date,.ep details>summary,.src.u,.stat strong,.tl-date,.gl-tip .gl-more:hover,.nav .brand:hover{color:var(--violet-ink)!important}
+/* il badge AI del logo: verde chiaro con testo nero */
+.logo-ai{background:var(--accent)!important;color:var(--on-accent)!important}
 :root[data-theme="light"]{--bg:#F6F6F5;--surface:#FFFFFF;--soft:#EEEEED;--line:#D6D6D4;--ink:#1C1D1F;--muted:#55575B}
 :root[data-theme="light"] .card,:root[data-theme="light"] .sig,:root[data-theme="light"] .stat{border:1px solid var(--line)}
 .nav-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
