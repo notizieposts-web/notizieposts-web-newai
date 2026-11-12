@@ -3,6 +3,7 @@ Tutte le pagine condividono lo stesso menu (NAV). Uso: python3 argomenti.py <rep
 import re, sys, os, html, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import graph
+import logo
 
 # Guide: pagine di approfondimento fatte a mano. 'eds' = edizioni collegate (per la mappa).
 import glob as _gg
@@ -113,7 +114,7 @@ def head_from(root, title, url=None, desc=None):
     head = re.sub(r'<link rel="icon"[^>]*>', '', head)
     return head + CSS
 
-MARK = '<svg class="radar" viewBox="0 0 400 400" aria-hidden="true"><g transform="translate(80 80) scale(7.5)"><rect width="32" height="32" rx="9" fill="var(--violet)"/><path d="M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z" fill="var(--bg)" opacity=".28"/><g fill="none" stroke="var(--bg)" stroke-linecap="round"><circle cx="16" cy="16" r="10.5" stroke-width="2" opacity=".6"/><circle cx="16" cy="16" r="5.6" stroke-width="2" opacity=".85"/><path d="M16 16 L25.1 10.75" stroke-width="2.4"/></g><circle cx="16" cy="16" r="2.3" fill="var(--bg)"/><circle cx="22.6" cy="21.4" r="2.2" fill="var(--bg)"/></g></svg>'
+MARK = '<svg class="radar" viewBox="0 0 400 400" aria-hidden="true">' + logo.HERO_G + '</svg>'
 JS = '''<script id="arg-js">(function(){var p=document.getElementById('prog');function f(){var h=document.documentElement;if(p)p.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%';}window.addEventListener('scroll',f,{passive:true});f();
 var on=document.querySelector('.nav .links a[aria-current]');if(on)setTimeout(function(){var l=on.parentElement;l.scrollLeft=on.offsetLeft-l.clientWidth/2+on.offsetWidth/2},50);})();</script>'''
 FOOT = '<footer>Sapit · preparata da Claude (Anthropic). Quando una notizia riguarda Anthropic, lo trovi segnalato nella pagina.</footer>'

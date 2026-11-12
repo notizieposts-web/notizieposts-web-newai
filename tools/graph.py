@@ -2,6 +2,7 @@
 import re, sys, json, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import edx
+import logo
 
 
 THEMES = {1:['Decisionali','Costi'],2:['Decisionali','Grandi modelli','Sicurezza','Costi','Ricerca'],3:['Grandi modelli','Sicurezza','Ricerca','Costi'],
@@ -197,7 +198,7 @@ def apply(root):
         s = s.replace('<div class="links" id="links">', '<div class="links" id="links"><a href="#mappa">Mappa</a>', 1)
     # grafico in testata: il marchio del logo, al posto dei cerchi numerati
     s = re.sub(r"var arc='';ED\.forEach\(.*?\$\('arcsvg'\)\.innerHTML=arc;",
-               lambda m: "$('arcsvg').innerHTML='<g transform=\"translate(80 80) scale(7.5)\"><rect width=\"32\" height=\"32\" rx=\"9\" fill=\"var(--violet)\"/><path d=\"M16 16 L16 5.5 A10.5 10.5 0 0 1 25.1 10.75 Z\" fill=\"var(--bg)\" opacity=\".28\"/><g fill=\"none\" stroke=\"var(--bg)\" stroke-linecap=\"round\"><circle cx=\"16\" cy=\"16\" r=\"10.5\" stroke-width=\"2\" opacity=\".6\"/><circle cx=\"16\" cy=\"16\" r=\"5.6\" stroke-width=\"2\" opacity=\".85\"/><path d=\"M16 16 L25.1 10.75\" stroke-width=\"2.4\"/></g><circle cx=\"16\" cy=\"16\" r=\"2.3\" fill=\"var(--bg)\"/><circle cx=\"22.6\" cy=\"21.4\" r=\"2.2\" fill=\"var(--bg)\"/></g>';",
+               lambda m: "$('arcsvg').innerHTML='" + logo.HERO_G + "';",
                s, count=1, flags=re.S)
     s = s.replace('<svg class="radar" viewBox="0 0 400 400" role="img" aria-label="Archivio">', '<svg class="radar" viewBox="0 0 400 400" aria-hidden="true">', 1)
     open(p, 'w', encoding='utf-8').write(s)
