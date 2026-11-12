@@ -5,10 +5,10 @@ import logo
 HEADJS = r"""<script id="a11y-theme">try{var t=localStorage.getItem('radar-theme');if(t=='light'||t=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>"""
 CSS = r"""<style id="a11y">
 /* Strato accessibilita' WCAG 2.2 AA */
-/* palette (dal 12 novembre 2026): blu notte, verde bosco, ambra, terracotta; niente viola. Il nome --violet resta per compatibilità: è il colore principale. Testo AA su ogni sfondo */
-:root:not([data-theme="dark"]){--violet:#1E3A6E;--violet-soft:#E4ECF7;--teal:#1E6B4F;--teal-soft:#E1F1E9;--sun:#9A4B00;--sun-soft:#FCEFD9;--red:#B0362A;--red-soft:#FBE8E4}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--violet:#9CC2F5;--violet-soft:#1A2C4A;--teal:#74D3A6;--teal-soft:#11362A;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#FF9A8B;--red-soft:#40201B}}
-:root[data-theme="dark"]{--violet:#9CC2F5;--violet-soft:#1A2C4A;--teal:#74D3A6;--teal-soft:#11362A;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#FF9A8B;--red-soft:#40201B}
+/* palette (dal 12 novembre 2026): nero grafite e grigi neutri, verde bosco, ambra, terracotta; niente viola né blu. Il nome --violet resta per compatibilità: è il colore principale. Testo AA su ogni sfondo */
+:root:not([data-theme="dark"]){--bg:#F6F6F5;--surface:#FFFFFF;--soft:#EEEEED;--line:#D6D6D4;--ink:#1C1D1F;--muted:#55575B;--violet:#1F2023;--violet-soft:#E6E6E4;--teal:#1E6B4F;--teal-soft:#E1F1E9;--sun:#9A4B00;--sun-soft:#FCEFD9;--red:#B0362A;--red-soft:#FBE8E4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#141516;--surface:#1C1D1F;--soft:#26272A;--line:#3A3B3F;--ink:#ECECEE;--muted:#A9AAAF;--violet:#E8E8EA;--violet-soft:#2E2F33;--teal:#74D3A6;--teal-soft:#11362A;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#FF9A8B;--red-soft:#40201B}}
+:root[data-theme="dark"]{--bg:#141516;--surface:#1C1D1F;--soft:#26272A;--line:#3A3B3F;--ink:#ECECEE;--muted:#A9AAAF;--violet:#E8E8EA;--violet-soft:#2E2F33;--teal:#74D3A6;--teal-soft:#11362A;--sun:#F5B25B;--sun-soft:#3A2A12;--red:#FF9A8B;--red-soft:#40201B}
 html{scroll-padding-top:6rem}
 :focus{scroll-margin-top:6rem;scroll-margin-bottom:2rem}
 :focus-visible{outline:3px solid var(--violet)!important;outline-offset:2px!important;border-radius:4px}
@@ -38,9 +38,9 @@ code,pre{white-space:pre-wrap;word-break:break-word}
 .nav-arrow:disabled{opacity:.35;cursor:default}
 @media (hover:none){.links-row.can-scroll .nav-arrow{display:none}}
 .chip.topic{background:var(--violet)!important;color:#fff!important;font-weight:700;letter-spacing:.02em}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#0E1424!important}}
-:root[data-theme="dark"] .chip.topic{color:#0E1424!important}
-:root[data-theme="light"]{--bg:#FFFFFF;--surface:#FFFFFF;--soft:#F1F3F8;--line:#D3D9E6;--ink:#121A2B;--muted:#4E5A72}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.topic{color:#141516!important}}
+:root[data-theme="dark"] .chip.topic{color:#141516!important}
+:root[data-theme="light"]{--bg:#F6F6F5;--surface:#FFFFFF;--soft:#EEEEED;--line:#D6D6D4;--ink:#1C1D1F;--muted:#55575B}
 :root[data-theme="light"] .card,:root[data-theme="light"] .sig,:root[data-theme="light"] .stat{border:1px solid var(--line)}
 .nav-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
 .nav-actions{display:flex;align-items:center;gap:.5rem;position:relative}
@@ -116,7 +116,7 @@ JS = r"""<script id="a11y-js">
       var size=parseFloat(s.fontSize),bold=parseInt(s.fontWeight)>=700,large=size>=24||(bold&&size>=18.66);
       var need=large?3:4.5;if(ratio(fg,bg)>=need)return;
       var dark={r:18,g:26,b:43,a:1},light={r:255,g:255,b:255,a:1};
-      el.style.setProperty('color',ratio(dark,bg)>=ratio(light,bg)?'#121A2B':'#FFFFFF','important');
+      el.style.setProperty('color',ratio(dark,bg)>=ratio(light,bg)?'#1C1D1F':'#FFFFFF','important');
     });
   }
   /* menu a due righe: logo sopra, capitoli sotto, scorrevoli con frecce */

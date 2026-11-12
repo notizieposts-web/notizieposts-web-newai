@@ -143,7 +143,7 @@ Segue Google Search Central (titoli e descrizioni unici, sitemap, dati struttura
 
 ## Colori (dal 12 novembre 2026)
 
-Niente viola. La palette sta in un solo punto, `tools/inject.py` (righe `:root`): colore principale blu notte (`--violet`, il nome resta per compatibilità: chiaro `#1E3A6E`, scuro `#9CC2F5`), verde bosco (`--teal`), ambra (`--sun`), terracotta (`--red`), ognuno con la sua tinta tenue. Stesso blu per le anteprime `img/og/` e la pagina 404 (`tools/site_meta.py`); la fatina ha capelli ramati e vestito verde (`tools/rada.py`). Dopo un cambio: rigenera le pagine, poi `audit3.py` (contrasto AA nei temi chiaro e scuro). Il modello dell'email non si tocca e ha ancora il suo blu-viola `#3F3FD9`: va deciso a parte.
+Niente viola né blu. La palette sta in un solo punto, `tools/inject.py` (righe `:root`, che sovrascrivono anche fondi e testi delle pagine): fondo grigio chiarissimo `#F6F6F5` (scuro `#141516`), testo grafite `#1C1D1F` (scuro `#ECECEE`), colore principale nero grafite (`--violet`, il nome resta per compatibilità: chiaro `#1F2023`, scuro `#E8E8EA`); verde bosco (`--teal`), ambra (`--sun`) e terracotta (`--red`) solo per stati e difficoltà. Stessi toni per logo e favicon (`tools/logo.py`), anteprime `img/og/` e 404 (`tools/site_meta.py`) e per i contorni delle guide (`tools/rada.py`). Dopo un cambio: rigenera le pagine, poi `audit3.py` (contrasto AA nei temi chiaro e scuro). Il modello dell'email non si tocca e ha ancora il suo blu-viola `#3F3FD9`: va deciso a parte.
 
 ## Rada, aiuti e lettura facilitata (dall'11 novembre 2026)
 

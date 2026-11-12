@@ -44,7 +44,7 @@ def og_image(root, path, kicker, title, chips):
     from PIL import Image, ImageDraw, ImageFont
     font = os.path.join(root, 'tools/fonts/Inter-Bold.otf')
     W, H, P = 1200, 630, 72
-    im = Image.new('RGB', (W, H), '#1E3A6E')
+    im = Image.new('RGB', (W, H), '#1F2023')
     dr = ImageDraw.Draw(im)
     f_k = ImageFont.truetype(font, 28)
     dr.text((P, P), kicker.upper(), font=f_k, fill='#FFFFFF')
@@ -237,8 +237,8 @@ PAGE_404 = '''<!doctype html>
 <meta name="robots" content="noindex">
 <title>Pagina non trovata · Radar AI</title>
 <style>
-:root{--bg:#FFFFFF;--ink:#121A2B;--muted:#3B455C;--line:#D3D9E6;--violet:#1E3A6E;--surface:#F5F6FB}
-@media (prefers-color-scheme: dark){:root{--bg:#0E1322;--ink:#F2F4FA;--muted:#C3CADB;--line:#2C3550;--violet:#9CC2F5;--surface:#161D31}}
+:root{--bg:#F6F6F5;--ink:#1C1D1F;--muted:#55575B;--line:#D6D6D4;--violet:#1F2023;--surface:#FFFFFF}
+@media (prefers-color-scheme: dark){:root{--bg:#141516;--ink:#ECECEE;--muted:#A9AAAF;--line:#3A3B3F;--violet:#E8E8EA;--surface:#161D31}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:1.05rem/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 main{max-width:40rem;margin:0 auto;padding:4rem 1.2rem}

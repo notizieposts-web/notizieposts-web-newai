@@ -11,8 +11,8 @@ EXPR = ['ciao', 'parla', 'idea', 'pensa', 'spiega', 'felice', 'coraggio', 'curio
 LABEL = {'ciao': 'Rada saluta', 'parla': 'Rada parla', 'idea': 'Rada ha un\'idea', 'pensa': 'Rada pensa', 'spiega': 'Rada spiega',
          'felice': 'Rada festeggia', 'coraggio': 'Rada ti incoraggia', 'curiosa': 'Rada è curiosa', 'conta': 'Rada fa i conti'}
 # colori della fatina: fissi, uguali in tema chiaro e scuro (il personaggio non cambia colore)
-PAL = {'O': '#1B2540', 'S': '#FAD7BE', 'S2': '#F2BFA0', 'H': '#B5552B', 'H2': '#E89A62', 'D': '#1E6B4F', 'D2': '#6DB894', 'B': '#E3A22E',
-       'G': '#DCEBFA', 'G2': '#FFE7A3', 'GW': '#6F9BD1', 'Y': '#FFC94D', 'P': '#F2998A', 'T': '#2E7FB8', 'I': '#1B2540', 'M': '#FFFFFF', 'W': '#FFFFFF', 'V': '#1E3A6E'}
+PAL = {'O': '#232427', 'S': '#FAD7BE', 'S2': '#F2BFA0', 'H': '#B5552B', 'H2': '#E89A62', 'D': '#1E6B4F', 'D2': '#6DB894', 'B': '#E3A22E',
+       'G': '#ECEEEC', 'G2': '#FFE7A3', 'GW': '#8E938F', 'Y': '#FFC94D', 'P': '#F2998A', 'T': '#2F7D5B', 'I': '#232427', 'M': '#FFFFFF', 'W': '#FFFFFF', 'V': '#232427'}
 PAL.update({'A': '#FAD7BE', 'R': '#4B3FBF', 'R2': '#6A5CE0', 'BE': '#F4F2FB', 'HT': '#3A2E9A', 'GL': '#C99A2E'})
 SAGE = dict(PAL, O='#3A2618', I='#3A2618', H='#8A5A34', A='#6B4423', R='#9A6A3C', R3='#7C5230', R2='#F4E4C4', BE='#F8EBD3', RIM='#C89B6A', BK='#E3A22E', IR='#F2A91E', LF='#5E9E4B', BR='#7A5230')
 CHARS = {'saggio': ('Sapio', 'il gufo saggio'), 'fatina': ('Rada', 'la fatina')}
