@@ -991,5 +991,29 @@
    "ipo",
    "roadshow"
   ]
+ },
+ "calibrazione": {
+  "t": "calibrazione",
+  "spiega": "Un modello è ben calibrato quando le probabilità che dà corrispondono a quanto spesso ha ragione davvero.",
+  "esempio": "Su 100 risposte a cui il modello dà il 90 per cento di probabilità, circa 90 dovrebbero essere giuste. Se lo sono solo 60, il modello è troppo sicuro di sé.",
+  "approfondisci": "La calibrazione non dice quanto un modello è bravo, ma quanto ci si può fidare delle sue probabilità. Un modello può avere ragione spesso ed essere mal calibrato, se dice sempre 99 per cento. Si misura dividendo le risposte in fasce di probabilità e confrontando, per ogni fascia, la probabilità media con la quota di risposte giuste. Serve per scegliere una soglia oltre la quale passare il caso a una persona.",
+  "vedi": [
+   "intervallo-di-confidenza"
+  ]
+ },
+ "gwas": {
+  "t": "GWAS",
+  "esteso": "Genome-Wide Association Study",
+  "spiega": "Uno studio che confronta il DNA di molte persone, con e senza una malattia o una caratteristica, per trovare le varianti che compaiono più spesso in un gruppo.",
+  "esempio": "Uno studio su 100.000 persone trova che una certa lettera del DNA è più frequente tra chi ha l'asma: è un'associazione, non ancora una prova che sia la causa.",
+  "approfondisci": "I GWAS hanno trovato migliaia di varianti legate a malattie, ma quasi sempre indicano una zona del DNA, non la variante precisa né il meccanismo. Molte di queste varianti stanno fuori dai geni, nelle parti che li regolano. Capire quale variante conta e in quale cellula agisce richiede esperimenti, o modelli che aiutano a scegliere quali fare."
+ },
+ "cromatina": {
+  "t": "cromatina",
+  "spiega": "Il DNA dentro il nucleo della cellula, avvolto attorno a proteine. Dove è più aperta, i geni si possono leggere; dove è chiusa, restano spenti.",
+  "esempio": "In una cellula del fegato la cromatina vicino ai geni del fegato è aperta, in un globulo bianco no: lo stesso DNA, usato in modo diverso.",
+  "vedi": [
+   "gwas"
+  ]
  }
 }

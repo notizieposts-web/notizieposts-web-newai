@@ -1,39 +1,39 @@
 {
- "n": 49,
- "data": "2026-11-12",
- "titolo": "Anthropic in borsa, la trappola Lazarus, le regole di New York",
- "descrizione": "Anthropic fissa quante azioni vende e a che prezzo per entrare in borsa, un ricercatore di Microsoft mostra come nascondere una trappola in pochi punti di un modello, New York obbliga i grandi sviluppatori a registrarsi e la rubrica Azure spiega come scegliere il modello che legge i documenti.",
+ "n": 50,
+ "data": "2026-11-13",
+ "titolo": "Huang lascia NVIDIA, la Decisions API di Google, AlphaGenome 2",
+ "descrizione": "Jensen Huang lascia la guida di NVIDIA, Google presenta un modello che sceglie tra risposte già date in un quarto di secondo, DeepMind prevede l'effetto del DNA cellula per cellula e la rubrica Azure spiega come leggere i documenti d'identità.",
  "chips": [
-  "Borsa",
-  "Sicurezza",
-  "Regole",
+  "Chip",
+  "Modelli",
+  "Biologia",
   "Azure"
  ],
  "items": [
   [
-   "📈",
-   "Anthropic",
-   "Anthropic indica quante azioni vende per entrare in borsa, e a che prezzo",
-   "Anthropic ha avviato le presentazioni agli investitori per la quotazione al Nasdaq, con 825 milioni di azioni a un prezzo indicativo tra 70 e 78 dollari, che per ora non si possono ancora comprare."
+   "🔄",
+   "NVIDIA",
+   "Jensen Huang lascia la guida di NVIDIA dopo 33 anni",
+   "Il consiglio di NVIDIA ha accettato le dimissioni del fondatore, e la direttrice finanziaria Colette Kress guida l'azienda finché non sarà scelto un successore, mentre i documenti ufficiali non indicano il motivo."
   ],
   [
-   "🪤",
-   "Microsoft",
-   "Bastano pochi neuroni modificati per nascondere una trappola in un agente AI",
-   "Un ricercatore di Microsoft ha mostrato che cambiando meno di dieci parti di un modello che di solito restano spente si può far eseguire a un agente un comando pericoloso in una data scelta, mentre i normali controlli non si accorgono di nulla."
+   "⚡",
+   "Google",
+   "Google presenta un modello che non scrive, ma sceglie tra risposte già date",
+   "Con la nuova Decisions API un modello di Google risponde a domande chiuse, come sì o no o la scelta tra più opzioni, con una probabilità per ogni risposta, in meno di un quarto di secondo e a un costo molto basso."
   ],
   [
-   "🗽",
-   "New York",
-   "New York chiede ai grandi sviluppatori di modelli di registrarsi e segnalare gli incidenti",
-   "Lo stato di New York ha aperto il registro obbligatorio per chi sviluppa i modelli più potenti, da usare entro il 1° gennaio 2027, con 72 ore di tempo per segnalare un incidente grave, e ha avviato un centro di ricerca con più di 80 studiosi."
+   "🧬",
+   "DeepMind",
+   "AlphaGenome 2 prevede che cosa fa una differenza nel DNA in un tipo preciso di cellula",
+   "Il nuovo modello di DeepMind per la ricerca indica quasi il doppio delle varianti genetiche responsabili rispetto agli strumenti precedenti, adattandosi ai dati di un singolo esperimento di laboratorio."
   ],
   [
    "☁",
    "Azure",
-   "Come scegliere il modello che fa lavorare Content Understanding",
-   "La rubrica spiega come collegare a un analizzatore di documenti il modello giusto, per tutta la risorsa o per una sola richiesta, così da mandare i documenti semplici a un modello più economico."
+   "Come leggere passaporti e patenti con Content Understanding",
+   "La rubrica spiega quale analizzatore usare per i documenti d'identità, quando saltare il riconoscimento automatico del tipo e come proteggere dati personali così delicati."
   ]
  ],
- "domanda": "In Content Understanding, come si cambia il modello per una sola richiesta, senza toccare le impostazioni della risorsa?"
+ "domanda": "Perché la Decisions API di Google non fa pagare i token in uscita?"
 }

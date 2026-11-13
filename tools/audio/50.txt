@@ -1,0 +1,57 @@
+Radar AI. Edizione del tredici novembre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: Jensen Huang lascia NVIDIA, Google fa decidere un modello in un quarto di secondo, e AlphaGenome due legge il DNA cellula per cellula.
+
+Una nota prima di cominciare. Due dei segnali di oggi riguardano Anthropic: un grande produttore di chip comprerà sue azioni, e la documentazione di Claude descrive una funzione nuova. Un terzo cita una ricerca di Anthropic. Questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti ufficiali, e dico che cosa le fonti non dicono.
+
+Il periodo in breve. Tre notizie su chi decide, e su come. Il consiglio della più grande azienda di chip per l'intelligenza artificiale cambia la persona al comando nel giro di tre giorni. Google mette in vendita un modello che non scrive, ma sceglie, e lo fa in meno di un battito di ciglia. E DeepMind costruisce un modello che prova a dire in quale cellula del corpo una lettera diversa del DNA fa danni.
+
+Capitolo uno. Jensen Huang lascia NVIDIA.
+
+Mercoledì undici novembre il consiglio di amministrazione di NVIDIA ha accettato le dimissioni di Jensen Huang, il fondatore, da presidente, amministratore delegato e membro del consiglio, con effetto immediato. Lo dice il documento depositato il giorno dopo presso la SEC, l'autorità americana che sorveglia la borsa.
+
+Colette Kress, cinquantanove anni, direttrice finanziaria dal duemilatredici, diventa amministratrice delegata ad interim, finché non sarà scelto un successore, e mantiene anche il ruolo di prima. Il consiglio cercherà il nuovo capo tra candidati interni ed esterni. E per la prima volta NVIDIA ha un presidente del consiglio separato: Harvey Jones, settantatré anni, nel consiglio dal millenovecentonovantatré, che in passato ha guidato Synopsys, un'azienda di software per progettare chip.
+
+Il documento non dà nessun motivo. Non parla dell'indagine interna annunciata l'otto novembre, dopo le notizie di stampa su un'operazione di intelligence straniera che avrebbe avuto Huang come bersaglio. Collegare le due cose è quindi un'ipotesi dei giornali, non un fatto scritto da NVIDIA. Il prossimo appuntamento ufficiale sono i conti del trimestre, martedì diciassette novembre. Nella pagina trovi un esempio su come leggere questo tipo di documento.
+
+Prova a chiederti: quando un'azienda annuncia un cambio al vertice, distingui ciò che è scritto nei documenti da ciò che si racconta intorno?
+
+Capitolo due. La Decisions API di Google.
+
+Sempre l'undici novembre Google DeepMind ha presentato un modello nuovo, Gemini Decision uno, che si usa attraverso la Decisions API. Non scrive risposte parola per parola. Riceve un contenuto e una serie di domande chiuse, e per ogni risposta possibile restituisce una probabilità.
+
+Le domande sono di tre tipi: sì o no; scelta tra opzioni, da due a duecentocinquantacinque; e voto su una scala ordinata, per esempio da zero a tre. Ogni risposta ha anche un grado di fiducia, così i casi incerti si possono passare a una persona. Il contenuto si manda una volta sola, fino a duecentocinquantaseimila token, cioè i pezzetti di testo che i modelli leggono, e sopra si possono fare fino a mille domande.
+
+Google dichiara un'attesa tra centocinquanta e duecentocinquanta millesimi di secondo, e un prezzo di dieci centesimi di dollaro per milione di token in ingresso, con l'uscita gratuita, perché il modello non produce testo. Dice anche che il modello è il meglio calibrato nelle sue prove: cioè che quando dice novanta per cento, ha ragione circa nove volte su dieci. Ma i risultati sono solo in grafici, senza numeri nel testo, e nessuno li ha ancora verificati. Nella pagina trovi un esempio con la coda dei messaggi di un negozio online e un calcolatore dei costi.
+
+Prova a chiederti: tra le cose che oggi leggi a mano, quali si potrebbero ridurre a una domanda con risposte già pronte?
+
+Capitolo tre. AlphaGenome due.
+
+Il terzo annuncio dell'undici novembre arriva ancora da DeepMind. AlphaGenome due prova a prevedere che cosa fa una variante, cioè una lettera diversa in un punto del DNA, non in generale ma in un tipo preciso di cellula. Il DNA è quasi uguale in tutte le cellule, ma una cellula del cuore e un globulo bianco ne usano parti diverse: una variante può non fare nulla nel fegato e fare danni nel sistema immunitario.
+
+La novità è che il modello lavora una condizione alla volta, un tessuto o un tipo di cellula, e può adattarsi ai dati di un singolo esperimento di laboratorio senza essere riaddestrato: secondo DeepMind bastano poche decine di cellule. È addestrato su più di cento milioni di profili di singole cellule di esseri umani e topi.
+
+Su una raccolta di dati di ventotto tipi di cellule del sistema immunitario, il modello trova la variante responsabile nel trenta per cento dei casi, contro il sedici del miglior sistema precedente. Quasi il doppio, ma vuol dire anche che settanta su cento restano da trovare. È disponibile per la ricerca non commerciale, ed è solo per la ricerca: non è validato per diagnosi. Nella pagina trovi un esempio su come un ricercatore può usarlo per scegliere il primo esperimento.
+
+Prova a chiederti: quando leggi che un modello raddoppia un risultato, ti chiedi anche quanto resta ancora da fare?
+
+Capitolo quattro. La rubrica Azure, quarantaseiesima puntata: i documenti d'identità.
+
+Content Understanding, il servizio di Microsoft che legge i documenti, ha una famiglia di analizzatori già pronti per i documenti d'identità. Il primo, quello generale, riconosce da solo se ha davanti un passaporto, una patente o una carta d'identità, e manda ogni pagina all'analizzatore specifico, nella stessa chiamata. Poi ce n'è uno solo per i passaporti, e uno per i documenti generici di varie regioni.
+
+Il consiglio principale: se sai già che cosa arriverà, per esempio perché il modulo chiede proprio il passaporto, chiama direttamente l'analizzatore dei passaporti. Salti lo smistamento ed eviti un possibile errore. Di un passaporto basta di solito la prima pagina, e i campi incerti è meglio farli guardare a una persona.
+
+E poi la sicurezza, che qui viene prima di tutto: accesso con identità gestite invece delle chiavi, rete privata, chiavi di cifratura gestite da te, e solo i campi che servono davvero. Nella pagina trovi l'esempio di una banca online che apre i conti dei nuovi clienti.
+
+Prova a chiederti: dei dati personali che il tuo servizio legge, quanti ti servono davvero, e quanti conservi solo perché ci sono?
+
+Gli esperimenti. Nella pagina trovi cinque esperimenti da copiare: un metodo per leggere un cambio al vertice, come trasformare una domanda aperta in domande chiuse, uno script per misurare la calibrazione di un modello, una spiegazione semplice delle varianti del DNA, e una funzione che sceglie l'analizzatore giusto per un documento d'identità.
+
+I segnali. Il consiglio di TSMC, il più grande produttore di chip su commissione, approva fino a cinquecento milioni di dollari in azioni di Anthropic, al prezzo della quotazione, e altrettanti in azioni di OpenAI. La documentazione di Claude descrive come cambiare il livello di impegno del modello a metà conversazione, senza perdere la memoria già pagata. Alibaba avrebbe messo in anteprima Qwen quattro Max, ma non ho letto la pagina ufficiale. Una ricerca di Anthropic troverebbe che più agenti, uno per persona, lavorano peggio insieme di un solo agente condiviso: anche questa non l'ho verificata. E United Airlines bloccherebbe gli agenti che prenotano voli per conto dei clienti, secondo la stampa.
+
+La domanda del giorno: perché la Decisions API di Google non fa pagare i token in uscita?
+
+La risposta: perché il modello non scrive testo. Guarda il contenuto una volta e restituisce solo una probabilità per ciascuna delle risposte che gli hai dato tu.
+
+È tutto per oggi. Nella pagina dell'edizione trovi gli esempi, i cinque esperimenti da provare, il quiz e tutte le fonti. Grazie per l'ascolto, e a domani con Radar AI.
