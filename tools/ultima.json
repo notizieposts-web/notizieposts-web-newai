@@ -1,39 +1,39 @@
 {
- "n": 50,
- "data": "2026-11-13",
- "titolo": "Huang lascia NVIDIA, la Decisions API di Google, AlphaGenome 2",
- "descrizione": "Jensen Huang lascia la guida di NVIDIA, Google presenta un modello che sceglie tra risposte già date in un quarto di secondo, DeepMind prevede l'effetto del DNA cellula per cellula e la rubrica Azure spiega come leggere i documenti d'identità.",
+ "n": 51,
+ "data": "2026-11-14",
+ "titolo": "Gemini 4 Hydrogen, il nuovo AgentCore, le regole australiane",
+ "descrizione": "Google presenta un modello veloce ed economico per far lavorare gli agenti, Amazon li fa partire in due secondi facendo pagare solo il lavoro, l'Australia annuncia obblighi di sicurezza per chi sviluppa i modelli più avanzati e la rubrica Azure spiega come preparare foto e scansioni.",
  "chips": [
-  "Chip",
   "Modelli",
-  "Biologia",
+  "Agenti",
+  "Regole",
   "Azure"
  ],
  "items": [
   [
-   "🔄",
-   "NVIDIA",
-   "Jensen Huang lascia la guida di NVIDIA dopo 33 anni",
-   "Il consiglio di NVIDIA ha accettato le dimissioni del fondatore, e la direttrice finanziaria Colette Kress guida l'azienda finché non sarà scelto un successore, mentre i documenti ufficiali non indicano il motivo."
-  ],
-  [
    "⚡",
    "Google",
-   "Google presenta un modello che non scrive, ma sceglie tra risposte già date",
-   "Con la nuova Decisions API un modello di Google risponde a domande chiuse, come sì o no o la scelta tra più opzioni, con una probabilità per ogni risposta, in meno di un quarto di secondo e a un costo molto basso."
+   "Google lancia Gemini 4 Hydrogen, il suo modello veloce per gli agenti",
+   "Il nuovo modello costa meno dei modelli più potenti di Google, ha lo stesso prezzo anche con testi lunghissimi e, secondo Google, finisce i compiti due volte e mezzo più in fretta del predecessore."
   ],
   [
-   "🧬",
-   "DeepMind",
-   "AlphaGenome 2 prevede che cosa fa una differenza nel DNA in un tipo preciso di cellula",
-   "Il nuovo modello di DeepMind per la ricerca indica quasi il doppio delle varianti genetiche responsabili rispetto agli strumenti precedenti, adattandosi ai dati di un singolo esperimento di laboratorio."
+   "🖥",
+   "AWS",
+   "Su Amazon gli agenti si accendono in meno di due secondi",
+   "Il servizio di Amazon che fa girare gli agenti dei clienti, ognuno in una sua macchina isolata, ora parte molto più in fretta e fa pagare il lavoro svolto invece del tempo passato ad aspettare."
+  ],
+  [
+   "⚖",
+   "Australia",
+   "L'Australia annuncia regole obbligatorie per chi sviluppa i modelli più avanzati",
+   "Il governo vuole imporre per legge sei obblighi di sicurezza, tra cui valutazioni indipendenti e la segnalazione rapida degli incidenti, controllati da un nuovo regolatore, ma soglie, sanzioni e date non ci sono ancora."
   ],
   [
    "☁",
    "Azure",
-   "Come leggere passaporti e patenti con Content Understanding",
-   "La rubrica spiega quale analizzatore usare per i documenti d'identità, quando saltare il riconoscimento automatico del tipo e come proteggere dati personali così delicati."
+   "Come preparare foto e scansioni prima di mandarle a Content Understanding",
+   "La rubrica spiega quali formati e dimensioni accetta il servizio, perché la qualità dell'immagine conta e quando spegnere il riconoscimento del testo per spendere meno."
   ]
  ],
- "domanda": "Perché la Decisions API di Google non fa pagare i token in uscita?"
+ "domanda": "Perché per un agente conta pagare il lavoro fatto e non il tempo passato acceso?"
 }

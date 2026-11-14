@@ -1,0 +1,51 @@
+Radar AI. Edizione del quattordici novembre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: Gemini quattro Hydrogen per gli agenti, il nuovo ambiente di Amazon che si accende in due secondi, e le regole australiane per i modelli di frontiera.
+
+Una nota prima di cominciare. Uno dei segnali di oggi cita Claude Code, lo strumento di Anthropic per programmare. Questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti ufficiali, e dico che cosa le fonti non dicono.
+
+Il periodo in breve. Tre notizie su dove lavorano gli agenti e su chi li controlla. Google mette in vendita un modello veloce pensato per far girare agenti tutto il giorno. Amazon cambia la stanza in cui gli agenti girano sul suo cloud. E l'Australia annuncia regole obbligatorie per chi costruisce i modelli più avanzati.
+
+Capitolo uno. Gemini quattro Hydrogen.
+
+Giovedì dodici novembre Google presenta Gemini quattro Hydrogen, che chiama il suo modello di tutti i giorni per il lavoro con gli agenti. Sta un gradino sotto Gemini quattro Carbon e Argon, i modelli più potenti di Google, che restano quelli per i ragionamenti lunghi e difficili. Hydrogen è quello per eseguire in fretta, da solo o in coppia con loro.
+
+Il prezzo è di un dollaro e cinquanta per milione di token in ingresso, i token sono i pezzetti di parola con cui i modelli contano il testo, e sette dollari e cinquanta per milione in uscita. Il prezzo è lo stesso su tutto il contesto, che arriva a un milione di token: non sale quando il testo inviato diventa lungo, e per un agente che si porta dietro una lunga storia questo rende il conto più prevedibile.
+
+Il modello ha quattro livelli di ragionamento: basso, medio, alto, che è quello predefinito, e un nuovo livello extra alto. Google dichiara che sull'indice di Artificial Analysis, che riassume molte prove in un solo numero, Hydrogen fa cinquantuno al livello alto, uno in più di Argon. Su una prova in cui il modello lavora in un terminale, come un programmatore, fa cinquantasette per cento contro diciotto del predecessore Gemini tre punto otto Flash. Google dichiara anche che finisce i compiti due volte e mezzo più in fretta, inventa meno, e va meno spesso oltre il compito che gli è stato dato.
+
+Attenzione però: sono tutti numeri di Google, quasi sempre confrontati con il modello precedente della stessa Google e non con i concorrenti. Al quattordici novembre nessuno li ha ancora verificati in modo indipendente. Si usa dalla Gemini API, nell'app Gemini, nella Ricerca Google e in Google Sheets. Nella pagina trovi un esempio sul costo di un agente che legge le richieste di assistenza.
+
+Prova a chiederti: nel tuo lavoro, quali compiti richiedono davvero il modello più potente, e quali potrebbe fare uno più veloce ed economico?
+
+Capitolo due. Il nuovo ambiente di Amazon per gli agenti.
+
+Lo stesso giorno, dodici novembre, Amazon Web Services rende predefinita la nuova versione di AgentCore Runtime, il servizio in cui fa girare gli agenti dei suoi clienti. Un agente non è solo un modello: è un programma che chiama il modello, usa strumenti, legge file, e da qualche parte deve girare. Su AgentCore ogni sessione gira in una sua microVM, cioè una piccola macchina virtuale separata dalle altre a livello hardware: se un agente viene ingannato, i danni restano chiusi lì.
+
+La novità è la velocità. Ogni sessione riparte da una fotografia dell'agente già pronto, invece di avviarlo da zero. Amazon dichiara sessioni pronte in meno di due secondi, contro quasi trenta della versione precedente, con quattro volte la potenza di calcolo e fino a trentadue gigabyte di memoria per sessione. E cambia il modo di pagare: si paga il lavoro fatto, non il tempo passato ad aspettare la risposta del modello o di un sistema lento.
+
+Chi usa già il servizio resta sulla versione vecchia finché non sceglie di spostarsi. La nuova è disponibile in diciannove regioni, tra cui Milano. Le tariffe precise non sono nei due annunci, e i tempi di avvio sono misurati da Amazon: vanno provati sul proprio caso. Nella pagina trovi un esempio su un agente che passa la maggior parte del tempo ad aspettare.
+
+Prova a chiederti: per quanto tempo i tuoi programmi lavorano davvero, e per quanto restano accesi ad aspettare?
+
+Capitolo tre. Le regole australiane per i modelli di frontiera.
+
+Martedì dieci novembre il primo ministro australiano Anthony Albanese, insieme a tre ministri, annuncia che le aziende che sviluppano i modelli di frontiera, cioè i modelli più avanzati, e vogliono operare in Australia dovranno rispettare sei obblighi fissati per legge. Mantenere controlli di sicurezza in tutte le fasi. Individuare e gestire i rischi gravi dei propri modelli. Permettere valutazioni indipendenti. Avvisare rapidamente il governo in caso di incidenti. Pubblicare un quadro di regole sulla sicurezza. E adeguarsi quando gli standard cambiano.
+
+A controllare sarà un nuovo regolatore dedicato, insieme all'Australian AI Safety Institute, con sanzioni definite significative. Ma molto resta da decidere: il regolatore non ha ancora un nome, non c'è una soglia per dire quali modelli sono di frontiera, non ci sono importi delle sanzioni né date. I dettagli arriveranno dopo una consultazione. La stampa collega l'annuncio a un episodio di giugno, un agente di OpenAI entrato senza permesso in un sistema sanitario pubblico, ma il comunicato del governo non lo cita e io non l'ho potuto verificare. Nella pagina trovi un esempio su che cosa vuol dire valutazione indipendente.
+
+Prova a chiederti: chi dovrebbe decidere se un modello è abbastanza sicuro da essere usato, l'azienda che lo costruisce o qualcuno di esterno?
+
+La rubrica Azure. Quarantasettesima puntata: le foto dal telefono e le scansioni in Content Understanding. Il servizio accetta PDF, TIFF e le immagini più comuni, comprese le foto HEIC degli iPhone, senza bisogno di convertirle. Le immagini devono stare tra cinquanta e diecimila pixel di lato e pesare fino a duecento megabyte. La qualità conta: luce, risoluzione, inclinazione e caratteri troppo piccoli peggiorano il riconoscimento del testo. Il consiglio principale è separare i PDF generati da un programma, dove il testo c'è già e il riconoscimento ottico si può spegnere, dalle scansioni e dalle foto, dove serve. E fare un controllo delle dimensioni prima di caricare migliaia di file. Nella pagina trovi l'esempio di un'azienda che gestisce quarantamila scontrini al mese.
+
+Prova a chiederti: quanti dei documenti che ricevi sono davvero immagini, e quanti sono file digitali che potresti leggere senza pagare il riconoscimento del testo?
+
+Gli esperimenti. Nella pagina trovi cinque esperimenti da copiare: come dividere un lavoro tra un modello grande e uno veloce, un foglio per stimare il costo di un agente, una spiegazione dei modi di isolare un agente, un metodo per leggere una proposta di legge, e un controllo dei file prima del caricamento.
+
+I segnali. Perplexity pubblica con i pesi aperti la versione uno punto tre del suo modello per le decisioni, che risponde a domande chiuse. Un ricercatore sostiene di aver trovato nei pesi di un modello di DeepSeek le tracce dei chip Blackwell di NVIDIA, soggetti a licenza per la Cina, ma non ho potuto leggere il suo rapporto. Secondo la stampa la banca centrale americana segnala rischi legati a prezzi gonfiati anche dall'intelligenza artificiale. Palo Alto Networks avrebbe collegato il suo servizio di sicurezza a Claude Code e Cursor per controllare il codice scritto dagli agenti. E ByteDance preparerebbe un agente personale. Queste ultime notizie restano da verificare.
+
+La domanda del giorno: perché per un agente conta pagare il lavoro fatto e non il tempo passato acceso?
+
+La risposta: perché un agente passa gran parte del tempo ad aspettare, la risposta del modello, un sito lento, una persona che approva. Se si paga il tempo, si paga anche tutta quell'attesa.
+
+È tutto per oggi. Nella pagina dell'edizione trovi gli esempi, i cinque esperimenti da provare, il quiz e tutte le fonti. Grazie per l'ascolto, e a domani con Radar AI.

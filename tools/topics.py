@@ -50,6 +50,7 @@ MAP = {
  '48':{'carbon':'Gemini','alphaproof':'DeepMind','notion':'Notion'},
  '49':{'anthropic':'Anthropic','lazarus':'Microsoft','newyork':'New York'},
  '50':{'nvidia':'NVIDIA','decisions':'Google','alphagenome':'DeepMind'},
+ '51':{'hydrogen':'Gemini','agentcore':'AWS','australia':'Australia'},
  '29':{'microsoft':'Microsoft','flint':'Flint','skills':'Anthropic','jolt':'Perplexity'},
 }
 def process(path, labels):

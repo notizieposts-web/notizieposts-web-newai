@@ -1015,5 +1015,55 @@
   "vedi": [
    "gwas"
   ]
+ },
+ "microvm": {
+  "t": "microVM",
+  "spiega": "Una macchina virtuale molto leggera, che si avvia in una frazione di secondo ma resta separata dalle altre come un computer a sé. Firecracker è la tecnologia di Amazon per crearle.",
+  "esempio": "Ogni sessione di un agente su AgentCore gira in una sua microVM: se l'agente viene ingannato, non può leggere i file delle altre sessioni.",
+  "approfondisci": "Un container condivide il sistema operativo con gli altri container della stessa macchina; una microVM ha invece un suo piccolo sistema operativo e un isolamento garantito dall'hardware. Per questo è più sicura per far girare codice di cui non ci si fida del tutto, come quello scritto o eseguito da un agente. Il prezzo è un avvio un po' più lento, che le tecniche di ripartenza da una fotografia della memoria riducono.",
+  "vedi": [
+   "sandbox",
+   "avvio-a-freddo"
+  ]
+ },
+ "avvio-a-freddo": {
+  "t": "avvio a freddo",
+  "spiega": "Il tempo che serve per far partire da zero un programma o un servizio quando arriva la prima richiesta, prima che possa rispondere.",
+  "esempio": "Se un agente impiega 30 secondi ad avviarsi, il primo messaggio dell'utente aspetta mezzo minuto prima di ricevere una risposta.",
+  "approfondisci": "Per evitare gli avvii a freddo molte aziende tengono i servizi sempre accesi, pagandoli anche quando non lavorano. L'alternativa è rendere l'avvio molto veloce, per esempio ripartendo da una fotografia del programma già pronto. Nei servizi pagati a consumo, un avvio rapido permette di spegnere tutto quando non serve.",
+  "vedi": [
+   "microvm",
+   "latenza"
+  ]
+ },
+ "modello-di-frontiera": {
+  "t": "modello di frontiera",
+  "spiega": "Uno dei modelli di AI più potenti disponibili in un certo momento, al limite di ciò che la tecnologia sa fare. Le leggi lo definiscono spesso con soglie di calcolo usato per l'addestramento o di fatturato.",
+  "esempio": "Gemini 4 Carbon e i modelli più grandi di OpenAI e Anthropic sono modelli di frontiera; un piccolo modello che gira su un telefono no.",
+  "approfondisci": "Le regole sui modelli di frontiera nascono dall'idea che i rischi più gravi, come l'aiuto ad attacchi informatici, arrivino dai modelli più capaci. Il problema è definire dove sta il confine: una soglia di calcolo è misurabile ma invecchia in fretta, una definizione a parole è flessibile ma vaga. Per questo le leggi tendono a prevedere che le soglie si aggiornino.",
+  "vedi": [
+   "red-team",
+   "system-card"
+  ]
+ },
+ "ocr": {
+  "t": "OCR",
+  "esteso": "Optical Character Recognition",
+  "spiega": "Il riconoscimento ottico dei caratteri: il programma guarda un'immagine e trascrive il testo che vede.",
+  "esempio": "La foto di uno scontrino diventa testo copiabile, con il totale e la data, grazie all'OCR.",
+  "approfondisci": "L'OCR serve solo quando il testo è dentro un'immagine: foto, scansioni, PDF fatti di immagini. Nei PDF generati da un programma il testo c'è già e si può leggere direttamente, più in fretta e senza errori di riconoscimento. La qualità dipende molto dall'immagine: luce, risoluzione, inclinazione e dimensione dei caratteri.",
+  "vedi": [
+   "dpi"
+  ]
+ },
+ "dpi": {
+  "t": "dpi",
+  "esteso": "dots per inch",
+  "spiega": "Punti per pollice: quanti pixel una scansione dedica a ogni pollice (2,54 centimetri) del foglio. Più dpi vuol dire più dettagli.",
+  "esempio": "Un foglio A4 scansionato a 150 dpi diventa un'immagine di circa 1.240 × 1.750 pixel; a 300 dpi il doppio in ogni direzione.",
+  "approfondisci": "Per leggere il testo con l'OCR 150–300 dpi bastano quasi sempre; oltre, il file pesa di più senza grandi vantaggi. Con i caratteri piccoli, invece, una risoluzione bassa li rende illeggibili. Ingrandire dopo un'immagine scansionata male non recupera i dettagli persi.",
+  "vedi": [
+   "ocr"
+  ]
  }
 }

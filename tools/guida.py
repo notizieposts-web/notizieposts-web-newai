@@ -48,6 +48,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (44,'48','azure','produzione','Copiare un analizzatore tra risorse'),
     (45,'49','azure','costi','Scegliere il modello: alias e richieste'),
     (46,'50','azure','sicurezza','Documenti d\'identità: passaporti e patenti'),
+    (47,'51','azure','qualita','Foto e scansioni: prepararle prima di pagarle'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']
