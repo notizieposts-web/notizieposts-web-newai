@@ -1065,5 +1065,26 @@
   "vedi": [
    "ocr"
   ]
+ },
+ "semver": {
+  "t": "versionamento semantico",
+  "spiega": "Un modo di numerare le versioni di un programma con tre numeri, MAGGIORE.MINORE.CORREZIONE, in cui ogni numero dice che tipo di cambiamento è avvenuto.",
+  "esempio": "Passare da 1.4.2 a 1.5.0 aggiunge funzioni senza rompere nulla; passare a 2.0.0 avvisa che qualcosa è cambiato in modo incompatibile.",
+  "approfondisci": "Il primo numero sale quando un cambiamento obbliga chi usa il programma a modificare il proprio codice; il secondo quando arrivano funzioni nuove compatibili; il terzo per le correzioni. È una promessa: chi aggiorna sa in anticipo quanto rischia guardando solo il numero.",
+  "vedi": [
+   "api",
+   "abi"
+  ]
+ },
+ "abi": {
+  "t": "ABI",
+  "esteso": "Application Binary Interface",
+  "spiega": "Le regole con cui due programmi già compilati si parlano: come sono disposti i dati in memoria e come si chiamano le funzioni. Se cambia, un programma compilato prima smette di funzionare finché non viene ricompilato.",
+  "esempio": "Una libreria aggiunge un campo in mezzo a una struttura: il codice sorgente di un'app resta uguale, ma l'app compilata con la versione vecchia legge i dati nel posto sbagliato.",
+  "approfondisci": "L'API riguarda il codice sorgente, cioè che cosa scrive il programmatore; l'ABI riguarda il programma già trasformato in istruzioni per la macchina. Una libreria può mantenere la stessa API e cambiare l'ABI: in quel caso basta ricompilare. Per questo i progetti seri dichiarano anche quando cambia l'ABI.",
+  "vedi": [
+   "api",
+   "semver"
+  ]
  }
 }

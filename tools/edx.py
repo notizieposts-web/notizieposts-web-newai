@@ -53,6 +53,7 @@ EDX = {
  '49': (None, 'Anthropic in borsa, la trappola Lazarus, le regole di New York', 'Anthropic indica 825 milioni di azioni tra 70 e 78 dollari, Microsoft mostra una trappola in pochi neuroni e New York apre il registro dei modelli.'),
  '50': (None, 'Huang lascia NVIDIA, la Decisions API, AlphaGenome 2', 'Jensen Huang lascia la guida di NVIDIA, Google fa scegliere un modello in un quarto di secondo e AlphaGenome 2 legge il DNA cellula per cellula.'),
  '51': (None, 'Gemini 4 Hydrogen, il nuovo AgentCore, le regole australiane', 'Google lancia un modello veloce per agenti, Amazon li avvia in due secondi e l\'Australia annuncia obblighi per i modelli di frontiera.'),
+ '52': (None, 'ChatGPT Wallet, llama.cpp 1.0, la memoria piegata di Folio', 'OpenAI fa pagare gli agenti senza dati della carta, llama.cpp promette versioni stabili e Folio accorcia la memoria degli agenti a meno costo.'),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):

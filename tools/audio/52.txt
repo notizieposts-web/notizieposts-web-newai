@@ -1,0 +1,59 @@
+Radar AI. Edizione del quindici novembre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: gli agenti che pagano con ChatGPT Wallet, llama.cpp arriva alla versione uno, e Folio, la memoria che si piega senza perdere i pezzi.
+
+Una nota prima di cominciare. Il terzo capitolo cita Claude Code, lo strumento di Anthropic per programmare, e uno dei segnali riguarda anche Anthropic. Questa edizione è preparata da Claude, un modello di Anthropic. Riporto i fatti come li danno le fonti ufficiali, e dico che cosa le fonti non dicono.
+
+Il periodo in breve. Tre notizie su che cosa possono fare gli agenti, e con quali strumenti. OpenAI e Replit li lasciano comprare, ma solo con un sì della persona a ogni spesa. llama.cpp, il motore che fa girare i modelli sul proprio computer, diventa una base stabile. E un gruppo di ricercatori mostra che la memoria di un agente si può accorciare senza farla riscrivere al modello.
+
+Capitolo uno. OpenAI e ChatGPT Wallet.
+
+Venerdì tredici novembre OpenAI presenta ChatGPT Wallet, un portafoglio pensato per gli acquisti che un agente fa al posto tuo. OpenAI dice di averlo costruito con American Express, Mastercard e Visa. L'agente paga senza conoscere i dati veri della carta, ogni acquisto passa da un controllo di sicurezza, e restano i punti e le tutele della carta per le contestazioni.
+
+All'inizio è solo per gli abbonati a ChatGPT Pro negli Stati Uniti, attraverso dots, l'agente di OpenAI che fa commissioni sul web. Per gli altri Paesi, Italia compresa, non ci sono date. E non ci sono ancora informazioni su commissioni, limiti di spesa e rimborsi.
+
+Per i negozi online OpenAI scrive che le pagine di pagamento di oggi dovrebbero già funzionare. Consiglia però di riconoscere le richieste firmate del browser di ChatGPT, di insegnare ai sistemi antifrode a distinguere gli acquisti legittimi fatti da agenti, e di costruire estensioni con MCP, il protocollo che collega gli assistenti ai servizi esterni, per cercare prodotti e gestire il carrello.
+
+Il giorno prima, giovedì dodici novembre, Replit, la piattaforma per creare applicazioni con un agente, aveva fatto un passo simile. Il suo agente può comprare forniture per l'attività dell'utente con Link, il portafoglio di Stripe, e con Visa, e può gestire campagne pubblicitarie su Google. Prima di addebitare qualsiasi cosa aspetta che l'utente approvi negozio, totale ed eventuali pagamenti ricorrenti. Replit scrive che l'agente non riceve mai un permesso illimitato di spendere.
+
+Il filo comune è semplice: l'agente prepara, la persona approva. Nella pagina trovi un esempio con le cartucce della stampante e uno su un negozio che deve imparare a riconoscere i clienti con agente.
+
+Prova a chiederti: che cosa vorresti vedere sullo schermo, prima di dire sì a un acquisto fatto da un agente?
+
+Capitolo due. llama.cpp alla versione uno.
+
+Sempre il tredici novembre il gruppo ggml-org pubblica la versione uno punto zero punto zero di llama.cpp, il programma open source con cui moltissime persone e applicazioni fanno girare i modelli con i pesi aperti sul proprio computer. Supporta più di centocinquanta varianti di modelli e chip di NVIDIA, AMD, Qualcomm, Arm, IBM e Intel.
+
+Dopo tre anni e mezzo la novità non è una funzione ma una promessa. Il progetto adotta il versionamento semantico: tre numeri, maggiore, minore e correzione. Il primo sale solo quando un cambiamento può rompere i programmi costruiti sopra llama.cpp, sia quelli da riscrivere sia quelli solo da ricompilare. Il secondo sale per funzioni e modelli nuovi compatibili. Il terzo per le correzioni.
+
+Per partire puliti, la versione uno toglie il vecchio: trentacinque funzioni già dichiarate obsolete, alcune opzioni, e un file per le immagini che confluisce nella parte multimediale. Per chi usa un modello sul computer vuol dire, in prospettiva, meno app che smettono di funzionare dopo un aggiornamento. Nella pagina trovi un esempio su come leggere un numero di versione.
+
+Prova a chiederti: quanto conta, per te, sapere in anticipo se un aggiornamento romperà qualcosa?
+
+Capitolo tre. Folio, la memoria degli agenti.
+
+Giovedì dodici novembre un gruppo di quattordici ricercatori pubblica su arXiv, senza revisione, il lavoro su Folio. Il problema è noto: un agente che lavora a lungo accumula così tanta storia che non ci sta più nella sua memoria di lavoro. Di solito si fa scrivere al modello un riassunto, che però costa e lascia fuori dei pezzi.
+
+Folio fa diversamente. Mentre l'agente lavora, tiene la storia a tre livelli: una nota breve per ogni turno, l'elenco di tutte le chiamate fatte, e i dati originali. Quando la memoria si riempie, un programma, non il modello, sceglie viste più sommarie per i turni vecchi e lascia delle maniglie, piccoli riferimenti per ritrovare l'originale quando serve.
+
+I numeri sono degli autori. Con lo stesso modello, DeepSeek V quattro Pro, su settantacinque compiti della prova LOCA-bench Folio ne risolve sessantasei. La stessa base con il riassunto del modello ne risolve cinquantaquattro. Claude Code, Codex e SoL-Pi, usati come confronto, tra quarantanove e cinquantanove. Folio usa circa metà del tempo e costa due virgola quattro volte meno. Nessuno l'ha ancora replicato, e il codice non è indicato. Nella pagina trovi due esempi.
+
+Prova a chiederti: quando riassumi qualcosa per ricordartela, che cosa perdi, e dove tieni l'originale?
+
+Capitolo quattro. La rubrica Azure Content Understanding, quarantottesima puntata: gli scontrini.
+
+Content Understanding ha tre analizzatori pronti per le ricevute: uno per gli scontrini di negozi e ristoranti, uno generico per le ricevute di vendita, e uno per i conti d'albergo. Non costano uguale. Secondo la pagina dei prezzi di Microsoft, quello generico usa il contatore di lettura di base, mentre gli altri due usano quello standard, più ricco e più caro. Tutti pagano anche la contestualizzazione, circa un dollaro ogni mille pagine, e i token del modello.
+
+Il contatore dipende dal lavoro fatto: una ricevuta digitale, arrivata per email, paga sempre il contatore più basso. Una richiesta che fallisce non paga né lettura né contestualizzazione. E chiedere la fonte e la confidenza di ogni campo circa raddoppia i token. Il consiglio: prova il generico su un campione, tieni quello per gli alberghi dove servono le righe, e accendi la confidenza solo per gli importi alti.
+
+Prova a chiederti: nei tuoi documenti, quali meritano davvero l'analisi più costosa?
+
+Gli esperimenti. Nella pagina trovi cinque esperimenti da copiare: le regole per un agente che compra, come riconoscere una pagina che inganna l'agente, come leggere le note di una nuova versione, una memoria a tre livelli da provare a mano, e un programma che smista gli scontrini.
+
+I segnali. IBM presenta LLMON, un formato per separare istruzioni e dati contro gli attacchi nascosti nei testi, ancora sperimentale. Un preprint mostra che nei sistemi che citano documenti fino a quasi il sedici per cento delle affermazioni viene in realtà dalla memoria del modello. Il ministero dell'Istruzione inglese apre una consultazione su un bollino di sicurezza per l'intelligenza artificiale a scuola, fino al quattro febbraio. OpenAI descrive la sua fabbrica della difesa, con agenti che trovano e correggono falle. E secondo la stampa una coalizione avrebbe fatto causa a OpenAI, Anthropic, Google, Meta e SpaceX per fermare i modelli più potenti: non ho trovato l'atto, quindi resta da verificare.
+
+La domanda del giorno: perché un agente che compra deve chiedere l'approvazione a ogni acquisto?
+
+La risposta: perché può capire male una richiesta, o essere ingannato da una pagina costruita apposta. Il controllo del totale prima di pagare è l'ultima occasione per accorgersene.
+
+È tutto per oggi. Nella pagina dell'edizione trovi gli esempi, i cinque esperimenti da provare, il quiz e tutte le fonti. Grazie per l'ascolto, e a domani con Radar AI.
