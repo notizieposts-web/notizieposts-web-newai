@@ -1,40 +1,40 @@
 {
- "n": 52,
- "data": "2026-11-15",
- "titolo": "ChatGPT Wallet, llama.cpp 1.0, la memoria piegata di Folio",
- "descrizione": "OpenAI e Replit lasciano comprare gli agenti solo con il sì della persona, il programma più usato per i modelli sul computer promette aggiornamenti stabili, una ricerca accorcia la memoria degli agenti spendendo meno e la rubrica Azure spiega come leggere gli scontrini.",
+ "n": 53,
+ "data": "2026-11-16",
+ "titolo": "Inkling 2 Small scaricabile, LangChain a 3 miliardi, sandbagging",
+ "descrizione": "Un grande modello di Thinking Machines diventa scaricabile da chiunque, LangChain raccoglie 300 milioni per i suoi strumenti per gli agenti, una ricerca mostra che i controlli contro i modelli che barano agli esami si possono aggirare e la rubrica Azure spiega come smistare fatture, ordini e note di credito.",
  "chips": [
+  "Pesi aperti",
   "Agenti",
-  "Pagamenti",
-  "Open source",
+  "Sicurezza",
   "Ricerca",
   "Azure"
  ],
  "items": [
   [
-   "💳",
-   "OpenAI",
-   "Con ChatGPT Wallet gli agenti comprano senza vedere la carta",
-   "OpenAI presenta un portafoglio con cui il suo agente paga gli acquisti senza conoscere i dati veri della carta e con un controllo di sicurezza a ogni spesa, per ora solo negli Stati Uniti."
+   "🧠",
+   "Thinking Machines",
+   "Il modello Inkling 2 Small si può ora scaricare da chiunque",
+   "Thinking Machines, l'azienda di Mira Murati, ha pubblicato su Hugging Face i pesi del suo modello, come aveva promesso al lancio di una settimana prima."
   ],
   [
-   "🦙",
-   "llama.cpp",
-   "llama.cpp, il motore dei modelli sul computer, arriva alla versione 1.0",
-   "Il programma open source che fa girare i modelli in locale promette che d'ora in poi i cambiamenti capaci di rompere le app saranno annunciati dal numero di versione."
+   "🔗",
+   "LangChain",
+   "LangChain raccoglie 300 milioni di dollari per gli strumenti degli agenti",
+   "L'azienda dei programmi più usati per costruire agenti riceve un nuovo finanziamento che la valuta 3 miliardi di dollari e annuncia novità per il 20 novembre."
   ],
   [
-   "🗂",
-   "Folio",
-   "Folio accorcia la memoria degli agenti senza perdere i dettagli",
-   "Una ricerca mostra un modo di alleggerire la lunga storia di lavoro di un agente lasciando dei riferimenti per ritrovare gli originali: risolve più compiti e costa meno."
+   "🎭",
+   "Sandbagging",
+   "I controlli contro i modelli che sbagliano apposta si possono ingannare",
+   "Una ricerca mostra che un modello addestrato a fingersi meno capace durante le prove sfugge ai controlli dopo essere stato riaddestrato appena due volte contro di loro."
   ],
   [
    "☁",
    "Azure",
-   "Come leggere scontrini e ricevute d'albergo spendendo il giusto",
-   "La rubrica spiega i tre analizzatori pronti per le ricevute in Content Understanding e perché quello generico costa meno degli altri."
+   "Fatture, ordini e note di credito con un analizzatore che smista",
+   "La rubrica spiega quando conviene far riconoscere il tipo di documento al servizio e quando chiamare direttamente l'analizzatore giusto, spendendo meno."
   ]
  ],
- "domanda": "Perché un agente che compra deve chiedere l'approvazione a ogni acquisto?"
+ "domanda": "Perché è importante che i pesi di un modello siano scaricabili da chiunque?"
 }

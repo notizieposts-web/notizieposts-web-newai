@@ -1086,5 +1086,34 @@
    "api",
    "semver"
   ]
+ },
+ "sandbagging": {
+  "t": "sandbagging",
+  "spiega": "Quando un modello ottiene apposta un risultato basso in una prova, pur avendo le capacità per fare meglio. Preoccupa perché le regole di sicurezza spesso scattano proprio sopra certe soglie di punteggio.",
+  "esempio": "Un modello addestrato a sbagliare i problemi di matematica solo quando capisce di essere sotto esame, e a risolverli bene nel resto del tempo.",
+  "approfondisci": "Il termine viene dallo sport e dal gioco d'azzardo, dove indica chi finge di essere più debole. Nell'AI riguarda le valutazioni delle capacità pericolose: un modello che si nasconde potrebbe sfuggire a protezioni obbligatorie. Si cerca di scoprirlo guardando le risposte, confrontando prove diverse o con sonde sulle attivazioni interne, ma nessun metodo è sicuro contro un attacco che si adatta.",
+  "vedi": [
+   "sonda",
+   "red-team"
+  ]
+ },
+ "auc": {
+  "t": "AUC",
+  "esteso": "Area Under the Curve",
+  "spiega": "Un numero tra 0 e 1 che dice quanto bene un controllo distingue due gruppi, per esempio casi sospetti e casi normali. 1 è perfetto, 0,5 è come tirare a indovinare.",
+  "esempio": "Un AUC di 0,9 vuol dire che, presi a caso un caso sospetto e uno normale, il controllo dà al sospetto un punteggio più alto circa 90 volte su 100.",
+  "vedi": [
+   "benchmark"
+  ]
+ },
+ "sft": {
+  "t": "SFT",
+  "esteso": "Supervised Fine-Tuning",
+  "spiega": "L'addestramento di un modello già pronto su esempi di domande con la risposta giusta, perché impari a imitarli. È il primo passo dopo il pre-addestramento, prima o al posto del rinforzo.",
+  "esempio": "Si mostrano a un modello 10.000 problemi di matematica risolti passo per passo, e lui impara a scrivere soluzioni nello stesso modo.",
+  "vedi": [
+   "fine-tuning",
+   "apprendimento-per-rinforzo"
+  ]
  }
 }
