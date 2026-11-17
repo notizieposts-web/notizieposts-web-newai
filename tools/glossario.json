@@ -1115,5 +1115,27 @@
    "fine-tuning",
    "apprendimento-per-rinforzo"
   ]
+ },
+ "jwt": {
+  "t": "JWT",
+  "esteso": "JSON Web Token",
+  "spiega": "Un gettone digitale firmato che dice chi sei e che cosa puoi fare, e che un servizio può controllare senza chiedere di nuovo la password.",
+  "esempio": "Dopo l'accesso, un'app riceve un JWT valido un'ora che le permette di leggere i tuoi ordini ma non di cambiare la carta salvata.",
+  "approfondisci": "Un JWT è un breve testo in tre parti: intestazione, contenuto e firma. Il contenuto elenca chi è l'utente, a chi è destinato il gettone, quando scade e quali permessi dà. La firma permette al servizio di accorgersi se qualcuno l'ha modificato. Si usa spesso insieme a OAuth.",
+  "vedi": [
+   "oauth",
+   "credenziali"
+  ]
+ },
+ "npu": {
+  "t": "NPU",
+  "esteso": "Neural Processing Unit",
+  "spiega": "Un processore progettato apposta per i calcoli delle reti neurali, più efficiente di un processore generico per far girare o addestrare modelli di AI.",
+  "esempio": "Molti telefoni recenti hanno una piccola NPU per riconoscere le foto; nei centri di calcolo si usano NPU grandi come alternativa alle schede grafiche.",
+  "approfondisci": "Le NPU eseguono soprattutto moltiplicazioni di matrici, il cuore delle reti neurali, con numeri a bassa precisione. Esistono NPU minuscole nei telefoni e nei portatili e acceleratori grandi per i centri di calcolo. In Cina sono diffuse come alternativa ai chip americani soggetti a restrizioni all'esportazione.",
+  "vedi": [
+   "tpu",
+   "quantizzazione"
+  ]
  }
 }

@@ -55,6 +55,7 @@ EDX = {
  '51': (None, 'Gemini 4 Hydrogen, il nuovo AgentCore, le regole australiane', 'Google lancia un modello veloce per agenti, Amazon li avvia in due secondi e l\'Australia annuncia obblighi per i modelli di frontiera.'),
  '52': (None, 'ChatGPT Wallet, llama.cpp 1.0, la memoria piegata di Folio', 'OpenAI fa pagare gli agenti senza dati della carta, llama.cpp promette versioni stabili e Folio accorcia la memoria degli agenti a meno costo.'),
  '53': (None, 'Inkling 2 Small scaricabile, LangChain a 3 miliardi, sandbagging', 'Thinking Machines pubblica i pesi di Inkling 2 Small, LangChain raccoglie 300 milioni e i controlli contro i modelli che barano cadono.'),
+ '54': (None, 'Qwen4-Max, Poppy 1.0 per gli agenti, LongCat-2.5 con licenza MIT', 'Alibaba presenta Qwen4-Max, Sierra pubblica Poppy 1.0 per gli agenti personali e Meituan conferma i pesi di LongCat-2.5.'),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):

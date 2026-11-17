@@ -1,40 +1,40 @@
 {
- "n": 53,
- "data": "2026-11-16",
- "titolo": "Inkling 2 Small scaricabile, LangChain a 3 miliardi, sandbagging",
- "descrizione": "Un grande modello di Thinking Machines diventa scaricabile da chiunque, LangChain raccoglie 300 milioni per i suoi strumenti per gli agenti, una ricerca mostra che i controlli contro i modelli che barano agli esami si possono aggirare e la rubrica Azure spiega come smistare fatture, ordini e note di credito.",
+ "n": 54,
+ "data": "2026-11-17",
+ "titolo": "Qwen4-Max, Poppy 1.0 per gli agenti, LongCat-2.5 con licenza MIT",
+ "descrizione": "Alibaba presenta il suo modello più potente a prezzi bassi, Sierra pubblica le regole con cui gli agenti personali chiedono il permesso di agire per noi, Meituan rende scaricabile un modello enorme con una licenza libera e la rubrica Azure spiega come leggere i contratti.",
  "chips": [
-  "Pesi aperti",
+  "Grandi modelli",
   "Agenti",
-  "Sicurezza",
-  "Ricerca",
+  "Pesi aperti",
+  "Costi",
   "Azure"
  ],
  "items": [
   [
    "🧠",
-   "Thinking Machines",
-   "Il modello Inkling 2 Small si può ora scaricare da chiunque",
-   "Thinking Machines, l'azienda di Mira Murati, ha pubblicato su Hugging Face i pesi del suo modello, come aveva promesso al lancio di una settimana prima."
+   "Alibaba",
+   "Alibaba presenta Qwen4-Max, il suo modello più capace",
+   "Il nuovo modello legge testo, immagini e video, tiene in memoria circa mille pagine alla volta e costa molto meno dei concorrenti occidentali, ma non si può scaricare."
   ],
   [
-   "🔗",
-   "LangChain",
-   "LangChain raccoglie 300 milioni di dollari per gli strumenti degli agenti",
-   "L'azienda dei programmi più usati per costruire agenti riceve un nuovo finanziamento che la valuta 3 miliardi di dollari e annuncia novità per il 20 novembre."
+   "🛂",
+   "Sierra",
+   "Poppy 1.0: le regole per gli agenti che agiscono al posto nostro",
+   "Un protocollo stabilisce come un agente personale si presenta a un'azienda e ottiene dal cliente il permesso per fare solo certe azioni, e Shopify lo attiva su tutti i suoi negozi."
   ],
   [
-   "🎭",
-   "Sandbagging",
-   "I controlli contro i modelli che sbagliano apposta si possono ingannare",
-   "Una ricerca mostra che un modello addestrato a fingersi meno capace durante le prove sfugge ai controlli dopo essere stato riaddestrato appena due volte contro di loro."
+   "🐱",
+   "Meituan",
+   "LongCat-2.5 si può scaricare e usare liberamente",
+   "La scheda ufficiale conferma che il grande modello di Meituan, addestrato su chip cinesi, è scaricabile con una licenza che ne permette anche l'uso commerciale."
   ],
   [
    "☁",
    "Azure",
-   "Fatture, ordini e note di credito con un analizzatore che smista",
-   "La rubrica spiega quando conviene far riconoscere il tipo di documento al servizio e quando chiamare direttamente l'analizzatore giusto, spendendo meno."
+   "Contratti: l'analizzatore pronto o la modalità che ragiona",
+   "La rubrica spiega quando basta lo strumento già pronto per leggere parti e scadenze e quando serve quello più costoso che collega clausole e appendici."
   ]
  ],
- "domanda": "Perché è importante che i pesi di un modello siano scaricabili da chiunque?"
+ "domanda": "Che cosa deve sapere un'azienda per lasciar agire un agente personale al posto di un cliente?"
 }

@@ -1,0 +1,61 @@
+Radar AI. Edizione del diciassette novembre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: Qwen4-Max di Alibaba, Poppy uno punto zero per gli agenti personali, e i pesi di LongCat due punto cinque con licenza MIT.
+
+Il periodo in breve. Tre notizie su modelli e agenti che escono dai confini di chi li ha creati. Un grande modello cinese a pagamento che costa una frazione dei concorrenti occidentali. Un protocollo che prova a dare regole comuni agli agenti personali quando entrano nel sito di un'azienda. E un modello enorme che chiunque può scaricare, con una delle licenze più libere che esistano.
+
+Capitolo uno. Alibaba e Qwen4-Max.
+
+Lunedì sedici novembre Alibaba presenta Qwen4-Max, che definisce il modello più capace della famiglia Qwen finora. Non si può scaricare: si usa a pagamento, attraverso le API di Alibaba Cloud, cioè le porte con cui i programmi parlano al modello, e nelle app dell'azienda.
+
+È un modello a miscela di esperti: dentro ci sono molti sotto-modelli specializzati, e per ogni parola ne lavorano solo alcuni. Ha duemilaquattrocento miliardi di parametri in tutto, ma ne attiva settantuno miliardi per ogni token, il pezzetto di testo con cui il modello legge e scrive. Alibaba dice che sono un quarto in meno rispetto al modello precedente della stessa taglia. Legge testo, immagini e video, e tiene in memoria fino a un milione di token in una sola richiesta: circa mille pagine.
+
+I prezzi: un dollaro e mezzo per milione di token in ingresso e quattro dollari e mezzo in uscita, nell'area internazionale di Singapore, un po' meno nelle altre aree. Il modello accetta le richieste scritte nei formati di OpenAI e di Anthropic, quindi chi ha già un programma per quei servizi può provarlo cambiando poche righe.
+
+Sulle prestazioni Alibaba dà pochi numeri: un sesto posto in una classifica di programmazione e risultati migliori del modello precedente su una prova interna, con molti meno token e circa il sessanta per cento di costo in meno per compito. Al momento nessuno li ha verificati in modo indipendente. Nella pagina trovi un esempio su quanto costa leggere un contratto di trecento pagine.
+
+Prova a chiederti: se un modello costa molto meno e risponde nello stesso formato di quello che usi, che cosa controlleresti prima di cambiare?
+
+Capitolo due. Sierra e Poppy.
+
+Venerdì tredici novembre Sierra, l'azienda di Bret Taylor e Clay Bavor, pubblica la versione uno punto zero del Personal Agent Protocol, chiamato Poppy. È un insieme di regole per gli agenti personali, i programmi che fanno cose al posto nostro: prenotare un volo, fare un reso, controllare un conto.
+
+Funziona così. L'azienda pubblica un file in un punto fisso del suo sito, che spiega agli agenti che cosa possono fare e come si accede. L'agente si presenta come agente del cliente, così l'azienda sa sempre con chi sta parlando. Per le operazioni sul conto, il cliente accede sulla pagina dell'azienda con OAuth, lo stesso sistema dei pulsanti accedi con, e l'agente riceve un gettone che vale solo per ciò che il cliente ha approvato. Il cliente decide quanto accesso dare, e l'azienda decide i limiti: per esempio, puoi avviare un reso ma non cambiare la carta salvata.
+
+Rispetto alla bozza di ottobre, la nuova versione si può adottare un pezzo alla volta e introduce le estensioni: la prima, per il commercio, è scritta con Shopify, che ora pubblica il file Poppy su tutti i suoi negozi. L'agente Muse di Meta lo cerca per primo su ogni sito, e Sierra elenca più di cento partner, tra banche, compagnie aeree e negozi. Non c'è però un ente indipendente dietro il protocollo, e la licenza della specifica non è indicata. Nella pagina trovi un esempio su un reso fatto dall'agente.
+
+Prova a chiederti: quali azioni lasceresti fare da solo al tuo agente, e quali vorresti sempre confermare tu?
+
+Capitolo tre. Meituan e LongCat due punto cinque.
+
+Meituan, il gigante cinese delle consegne a domicilio, ha messo a disposizione LongCat due punto cinque il due novembre. Nell'edizione quarantotto avevamo escluso la notizia perché la trovavamo solo sulla stampa. Il fatto nuovo è la verifica: la scheda ufficiale del modello su Hugging Face, il grande archivio pubblico di modelli, conferma i dati principali.
+
+È un modello da milleseicento miliardi di parametri, con circa quarantotto miliardi attivi per token, pensato per lavori lunghi da agente, con testo e immagini. I pesi si possono scaricare con licenza MIT: si può usare, modificare e rivendere anche in prodotti commerciali, ma senza diritti sul marchio di Meituan. La scheda scrive che il modello poggia su acceleratori di AI nazionali, cioè chip cinesi, senza dire quali. La stampa lo ha raccontato come un modello addestrato senza schede NVIDIA: è un'interpretazione plausibile, ma la scheda non lo dice con queste parole.
+
+I punteggi dichiarati sono alti nelle prove da agente, ma non vince ovunque, e molti numeri sono misurati dalla stessa Meituan. C'è anche un dettaglio che non torna: il testo parla di milleseicento miliardi di parametri, i dati dei file di milleottocento.
+
+Una nota di trasparenza: tra i modelli con cui LongCat si confronta ci sono i Claude di Anthropic, e questa edizione è preparata con Claude, un modello di Anthropic.
+
+Nella pagina trovi un esempio su una software house che vuole rivendere il modello.
+
+Prova a chiederti: un modello scaricabile e libero da usare ti basterebbe, se per farlo girare servissero diversi terabyte di memoria?
+
+La rubrica Azure Content Understanding. Puntata cinquanta: i contratti.
+
+Un contratto non è una fattura: le informazioni importanti sono sparse in clausole lunghe, a volte modificate da un'appendice. Content Understanding ha un analizzatore pronto, prebuilt contract, per le cose che ogni contratto ha: le parti, le date di firma, di inizio e di fine, il rinnovo, il foro competente. Costa come gli altri analizzatori pronti: circa un dollaro ogni mille pagine per la preparazione del contesto, più l'estrazione e i token del modello.
+
+Per le domande che richiedono di collegare più clausole, come il preavviso per recedere o gli obblighi di ciascuna parte, Microsoft offre in anteprima la modalità agentica, che ragiona su più passaggi. Costa di più: tre dollari ogni mille pagine invece di uno, più token del modello e più tempo, anche alcuni minuti per documento. E chiede capacità: circa quattrocentomila token al minuto per ogni lavoro.
+
+Il consiglio: usa l'analizzatore pronto per tutto l'archivio, e la modalità agentica solo sui contratti dove serve ragionare, per esempio quelli in scadenza. Prova prima su un campione, misura i token, e fai sempre controllare a una persona recessi e penali.
+
+Prova a chiederti: nei contratti che conosci, quante informazioni importanti stanno in una sola clausola, e quante sono sparse?
+
+Nel laboratorio della pagina trovi cinque esperimenti da provare con un assistente: cambiare modello senza riscrivere un programma, calcolare quanto costa il ragionamento, scrivere le regole per gli agenti di una libreria online, leggere una tabella di confronto senza farsi ingannare, e preparare uno schema per i contratti.
+
+Tra i segnali, tutti ancora da verificare: un lavoro di fisica di OpenAI fatto con GPT-6 Astra sul Modello Standard delle particelle, un modello da centoquarantacinque miliardi di parametri che girerebbe su un portatile, uno studio di Apple su come usiamo l'AI per la salute, l'AI in cima ai timori della banca centrale americana, e un nuovo centro pubblico di ricerca sui modelli di frontiera a New York.
+
+La domanda del giorno: che cosa deve sapere un'azienda per lasciar agire un agente personale al posto di un cliente?
+
+Secondo Poppy, tre cose: che dall'altra parte c'è un agente e non una persona, che il cliente ha dato il permesso, e quali azioni gli sono concesse. Tutto il resto si può costruire su questi tre punti.
+
+È tutto per oggi. Esempi, fonti, quiz ed esperimenti ti aspettano nella pagina dell'edizione cinquantaquattro di Radar AI. A domani.
