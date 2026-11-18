@@ -1137,5 +1137,36 @@
    "tpu",
    "quantizzazione"
   ]
+ },
+ "checkpoint": {
+  "t": "checkpoint",
+  "spiega": "Una copia salvata di un modello in un certo momento dell'addestramento. Permette di tornare indietro o di studiare come il modello è cambiato.",
+  "esempio": "Se un modello impara un trucco sbagliato al giorno 20 dell'addestramento, confrontando i checkpoint del giorno 15 e del giorno 25 si vede quando è comparso.",
+  "approfondisci": "L'addestramento di un grande modello dura settimane e si salva a intervalli regolari. Ogni salvataggio, il checkpoint, contiene tutti i pesi del modello in quel momento. Serve per riprendere dopo un guasto, per scegliere la versione migliore e, per chi controlla la sicurezza, per vedere come cambiano i comportamenti lungo il percorso.",
+  "vedi": [
+   "apprendimento-per-rinforzo"
+  ]
+ },
+ "interpretabilita": {
+  "t": "interpretabilità",
+  "spiega": "Lo studio di che cosa succede dentro un modello: quali parti si attivano e perché, per capire come arriva a una risposta.",
+  "esempio": "Un ricercatore trova un gruppo di neuroni artificiali che si accende ogni volta che il modello parla di inganno, e lo usa come spia durante l'addestramento.",
+  "approfondisci": "Un modello linguistico è fatto di miliardi di numeri che nessuno ha scritto a mano. L'interpretabilità prova a tradurre questi numeri in concetti comprensibili, per esempio individuando le direzioni interne legate a un tema. Serve a scoprire comportamenti nascosti che i test sulle sole risposte non vedono, ma i metodi sono ancora imperfetti.",
+  "vedi": [
+   "red-team"
+  ]
+ },
+ "tpp": {
+  "t": "TPP",
+  "esteso": "Total Processing Performance",
+  "spiega": "La misura della potenza di calcolo di un chip usata nelle regole americane sulle esportazioni. Tiene conto di quante operazioni fa e con quanta precisione.",
+  "esempio": "Un chip con un TPP alto, come le schede più potenti per l'AI, supera le soglie e serve una licenza per esportarlo; un chip per videogiochi di solito resta sotto.",
+  "approfondisci": "Il TPP si calcola moltiplicando le operazioni al secondo del chip per la lunghezza in bit dei numeri che usa. Le norme del Commercio americano fissano soglie di TPP per decidere quali chip, e ora quanta potenza affittata, richiedono una licenza. È una misura amministrativa, non una prova di velocità reale."
+ },
+ "petaflops": {
+  "t": "petaflops",
+  "spiega": "Un milione di miliardi di operazioni con i numeri decimali al secondo. Si usa per misurare la velocità dei supercomputer.",
+  "esempio": "Un computer da 220 petaflops fa in un secondo il lavoro che a un portatile richiederebbe giorni.",
+  "approfondisci": "FLOPS sta per operazioni in virgola mobile al secondo; il prefisso peta vale un milione di miliardi. La classifica TOP500 misura i petaflops con una prova standard su calcoli in doppia precisione. Le prestazioni per l'intelligenza artificiale si misurano spesso con numeri meno precisi e risultano molto più alte."
  }
 }

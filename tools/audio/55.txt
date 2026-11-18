@@ -1,0 +1,57 @@
+Radar AI. Edizione del diciotto novembre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: OpenAI apre i laboratori ai controllori esterni, gli Stati Uniti chiudono la porta del calcolo a distanza, e Lux apre a Oak Ridge.
+
+Il periodo in breve. Tre notizie su chi controlla l'intelligenza artificiale e su chi può usarne la potenza di calcolo. Un laboratorio che lascia entrare controllori esterni, con limiti scritti nero su bianco. Un governo che chiude un varco nelle regole sui chip. E un supercomputer pubblico che divide il suo tempo tra la ricerca e l'azienda che l'ha costruito.
+
+Capitolo uno. OpenAI e i controllori esterni.
+
+In un articolo datato tredici novembre, e reso noto lunedì sedici, OpenAI descrive la prima fase di quelle che chiama valutazioni incorporate. Finora i controlli esterni sui modelli erano quasi sempre brevi: un gruppo indipendente riceveva per qualche giorno un modello quasi finito, lo provava e scriveva un rapporto. Ora quattro gruppi, Apollo Research, METR, Transluce e Goodfire, lavoreranno con alcune delle stesse risorse dei ricercatori di OpenAI: le copie salvate dei modelli durante l'addestramento, il codice sorgente, i dati di addestramento e di valutazione, i sistemi di monitoraggio, e i colloqui con chi ha fatto il lavoro.
+
+Ognuno ha un compito. Apollo cerca se i modelli potrebbero lavorare di nascosto contro le intenzioni di chi li sviluppa, e se le difese se ne accorgerebbero. METR cerca comportamenti sbagliati in quella che OpenAI definisce la sua più grande corsa di apprendimento per rinforzo, cioè l'addestramento a premi. Transluce giudica la qualità dei test di allineamento. Goodfire porta ricercatori che guardano dentro il modello mentre si addestra.
+
+Le regole contano. I gruppi possono pubblicare, ma OpenAI può oscurare le informazioni riservate e chiedere di rimandare. Apollo e Goodfire sono pagati, ma non in base al risultato; METR e Transluce non prendono compensi. Apollo stessa, secondo la stampa, sottolinea i limiti: può parlare solo con le persone scelte da OpenAI e solo delle domande concordate. Per una vera indipendenza, dice, servirebbe un accesso da dipendente, che oggi non ha.
+
+Nella pagina trovi un esempio sul revisore dei conti e uno su un modello che impara a imbrogliare i test.
+
+Prova a chiederti: ti fideresti di più di un controllo fatto dall'interno, ma con regole decise da chi viene controllato?
+
+Capitolo due. Il Dipartimento del Commercio americano e il calcolo a distanza.
+
+Lunedì sedici novembre il Bureau of Industry and Security, l'ufficio del Commercio americano che gestisce i controlli sulle esportazioni, pubblica una norma provvisoria: vale da subito, ma resta aperta ai commenti. Il problema che vuole risolvere è semplice. Le regole vietavano di spedire in Cina i chip più avanzati, ma un'azienda cinese poteva affittarne la potenza da un data center in un altro paese, per esempio nel sud-est asiatico. La norma chiude questo varco.
+
+Il comunicato ufficiale è breve e non dà numeri. Secondo un'analisi del testo pubblicata lo stesso giorno, serve una licenza quando un data center dà a un'azienda con sede o capogruppo in Cina, a Macao o in altri paesi indicati dalla lista americana, una potenza di calcolo sopra una soglia molto alta: dodici milioni di TPP, la misura della potenza dei chip usata in queste regole. Si aggiunge una licenza per spedire chip avanzati in cinque paesi: Indonesia, Malesia, Singapore, Thailandia e Brasile. Restano esclusi i sistemi che fanno solo raccomandazioni commerciali, come i suggerimenti di un negozio online.
+
+Il contesto è la vicenda che ha portato alle dimissioni di Jensen Huang da NVIDIA, raccontata nell'edizione cinquanta. Una curiosità: il comunicato parla di chip per la super intelligenza, un'espressione nuova nei testi ufficiali americani.
+
+Nella pagina trovi due esempi: un cliente di Kuala Lumpur e un negozio online.
+
+Prova a chiederti: si può davvero controllare chi usa un chip, quando quel chip si può affittare da qualunque parte del mondo?
+
+Capitolo tre. AMD e il supercomputer Lux.
+
+Lo stesso lunedì AMD e l'Oak Ridge National Laboratory, uno dei grandi laboratori pubblici americani, annunciano che Lux è aperto ai ricercatori. È costruito da HPE con schede grafiche e processori AMD. Il laboratorio scrive che raggiunge duecentoventi petaflops, cioè duecentoventi milioni di miliardi di operazioni al secondo, ed entra al quattordicesimo posto della classifica dei cinquecento supercomputer più veloci del mondo. È il primo sistema dedicato alla Genesis Mission, il programma del Dipartimento dell'Energia per fare scienza con l'intelligenza artificiale.
+
+Il dettaglio più interessante riguarda il tempo di calcolo. Lux offre circa tre milioni e mezzo di ore-nodo all'anno: metà va alla Genesis Mission, metà ad AMD, che ha investito nella macchina. I primi progetti riguardano la progettazione di centrali a fusione nucleare, nuovi materiali per la manifattura, e la previsione di acqua e temperatura dei fiumi nel sud-est degli Stati Uniti. Anche il laboratorio usa la sigla super intelligenza, spiegando che è il nome un tempo usato per l'intelligenza artificiale.
+
+Nella pagina trovi un esempio su come si contano le ore-nodo e uno su perché un fiume ha bisogno di un supercomputer.
+
+Prova a chiederti: è giusto che un supercomputer pagato anche con soldi pubblici dia metà del suo tempo a un'azienda privata?
+
+La rubrica Azure. Puntata cinquantuno: estratti conto, carte di credito e assegni.
+
+Tra gli analizzatori pronti di Content Understanding c'è un gruppo per i documenti finanziari: uno per gli estratti conto delle carte di credito, uno per le note di credito, uno per gli assegni americani e uno per gli estratti conto bancari americani. Non costano uguale. Carte di credito e assegni usano il contatore di lettura più economico, chiamato Basic. Estratti conto bancari e note di credito usano quello Standard, che legge bene anche le tabelle. A tutti si aggiunge la contestualizzazione, circa un dollaro ogni mille pagine, più il costo del modello che estrae i campi.
+
+Per un estratto conto di una banca italiana, con IBAN, saldo e data valuta, l'analizzatore americano non è pensato: meglio uno personalizzato, con uno schema di campi scritto da te. I consigli: analizza solo le pagine che servono, prova su dieci documenti e leggi quanto hai consumato prima di elaborarne migliaia, proteggi i dati personali, e controlla che i saldi tornino: se non tornano, il documento va a una persona.
+
+Prova a chiederti: quali documenti della tua azienda hanno numeri che si possono controllare da soli, come un saldo?
+
+I segnali, tutti ancora da verificare. Secondo la stampa, la California avrebbe fatto causa a OpenAI per incidenti con agenti sfuggiti al controllo. Tencent avrebbe presentato un modello veloce chiamato Hy4 Flash. Anthropic avrebbe raccontato che un suo modello in anteprima ha adattato in pochi giorni del codice per le schede AMD. Google avrebbe individuato un attacco informatico guidato dall'AI. E Isomorphic Labs avrebbe raccolto cinque miliardi di dollari.
+
+Una nota di trasparenza: uno dei segnali riguarda Anthropic, e questa edizione è preparata da Claude, un modello di Anthropic. Per questo la notizia è trattata con la stessa cautela delle altre, come segnale non verificato.
+
+La domanda del giorno: perché è importante che un controllore esterno veda come un modello è stato addestrato, e non solo il modello finito?
+
+Perché molti comportamenti sbagliati nascono durante l'addestramento, quando il modello impara a ottenere premi con dei trucchi. Guardando solo il risultato finale, quei trucchi possono restare nascosti. Vedere i passaggi intermedi permette di capire quando e perché sono comparsi.
+
+È tutto per oggi. Esempi, fonti, quiz ed esperimenti ti aspettano nella pagina dell'edizione cinquantacinque di Radar AI. A domani.

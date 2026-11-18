@@ -1,40 +1,40 @@
 {
- "n": 54,
- "data": "2026-11-17",
- "titolo": "Qwen4-Max, Poppy 1.0 per gli agenti, LongCat-2.5 con licenza MIT",
- "descrizione": "Alibaba presenta il suo modello più potente a prezzi bassi, Sierra pubblica le regole con cui gli agenti personali chiedono il permesso di agire per noi, Meituan rende scaricabile un modello enorme con una licenza libera e la rubrica Azure spiega come leggere i contratti.",
+ "n": 55,
+ "data": "2026-11-18",
+ "titolo": "Controllori esterni in OpenAI, stop al calcolo a distanza, Lux",
+ "descrizione": "OpenAI fa entrare quattro gruppi indipendenti a controllare i suoi modelli, gli Stati Uniti vietano di aggirare le regole sui chip affittandoli all'estero, apre il supercomputer Lux e la rubrica Azure spiega come leggere estratti conto e carte di credito.",
  "chips": [
-  "Grandi modelli",
-  "Agenti",
-  "Pesi aperti",
-  "Costi",
+  "Sicurezza",
+  "Regole",
+  "Hardware",
+  "Ricerca",
   "Azure"
  ],
  "items": [
   [
-   "🧠",
-   "Alibaba",
-   "Alibaba presenta Qwen4-Max, il suo modello più capace",
-   "Il nuovo modello legge testo, immagini e video, tiene in memoria circa mille pagine alla volta e costa molto meno dei concorrenti occidentali, ma non si può scaricare."
+   "🔍",
+   "OpenAI",
+   "OpenAI fa entrare quattro gruppi di controllori esterni",
+   "Apollo Research, METR, Transluce e Goodfire potranno vedere modelli in addestramento, codice e dati per controllarne la sicurezza, e pubblicare i risultati con alcuni limiti decisi da OpenAI."
   ],
   [
-   "🛂",
-   "Sierra",
-   "Poppy 1.0: le regole per gli agenti che agiscono al posto nostro",
-   "Un protocollo stabilisce come un agente personale si presenta a un'azienda e ottiene dal cliente il permesso per fare solo certe azioni, e Shopify lo attiva su tutti i suoi negozi."
+   "🌐",
+   "Stati Uniti",
+   "Stop ai chip americani affittati dall'estero per le aziende cinesi",
+   "Una nuova norma del Dipartimento del Commercio impone una licenza ai data center di qualunque paese che offrono grande potenza di calcolo ad aziende controllate dalla Cina."
   ],
   [
-   "🐱",
-   "Meituan",
-   "LongCat-2.5 si può scaricare e usare liberamente",
-   "La scheda ufficiale conferma che il grande modello di Meituan, addestrato su chip cinesi, è scaricabile con una licenza che ne permette anche l'uso commerciale."
+   "🖥",
+   "AMD",
+   "Apre Lux, il supercomputer per la scienza con l'intelligenza artificiale",
+   "Il nuovo supercomputer del laboratorio pubblico di Oak Ridge, costruito con chip AMD, entra tra i quindici più veloci al mondo e divide il suo tempo tra la ricerca pubblica e AMD."
   ],
   [
    "☁",
    "Azure",
-   "Contratti: l'analizzatore pronto o la modalità che ragiona",
-   "La rubrica spiega quando basta lo strumento già pronto per leggere parti e scadenze e quando serve quello più costoso che collega clausole e appendici."
+   "Estratti conto e carte di credito: quale strumento costa meno",
+   "La rubrica spiega quali analizzatori pronti usare per carte, conti e assegni, perché non costano uguale e come trattare un estratto conto di una banca italiana."
   ]
  ],
- "domanda": "Che cosa deve sapere un'azienda per lasciar agire un agente personale al posto di un cliente?"
+ "domanda": "Perché è importante che un controllore esterno veda come un modello è stato addestrato, e non solo il modello finito?"
 }
