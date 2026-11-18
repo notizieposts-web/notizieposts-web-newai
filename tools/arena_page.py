@@ -34,7 +34,7 @@ a.tcard b{font:800 1.15rem var(--head,system-ui)}a.tcard .d{font-size:.9rem;colo
 .chip.dD{background:var(--red-soft)!important;color:var(--ink)!important;border:1px solid var(--red)!important}
 .filters{display:flex;flex-wrap:wrap;gap:1rem 1.6rem;margin:1.2rem 0 .6rem;align-items:flex-start}
 .filters fieldset{border:0;padding:0;margin:0}.filters legend{font-weight:700;font-size:.85rem;margin-bottom:.3rem}
-.seg{display:flex;flex-wrap:wrap;gap:.3rem}.seg label{position:relative}.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg{display:flex;flex-wrap:wrap;gap:.3rem}.seg label{position:relative}.seg input{position:absolute;inset:0;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
 .seg span{display:inline-flex;align-items:center;min-height:36px;padding:.25rem .8rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:.9rem;font-weight:600}
 .seg input:checked+span{background:var(--ink);color:var(--bg);border-color:var(--ink)}.seg input:focus-visible+span{outline:3px solid var(--violet);outline-offset:2px}
 .plist{list-style:none;padding:0;margin:.4rem 0 0;border-top:1px solid var(--line)}
