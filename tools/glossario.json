@@ -1168,5 +1168,23 @@
   "spiega": "Un milione di miliardi di operazioni con i numeri decimali al secondo. Si usa per misurare la velocità dei supercomputer.",
   "esempio": "Un computer da 220 petaflops fa in un secondo il lavoro che a un portatile richiederebbe giorni.",
   "approfondisci": "FLOPS sta per operazioni in virgola mobile al secondo; il prefisso peta vale un milione di miliardi. La classifica TOP500 misura i petaflops con una prova standard su calcoli in doppia precisione. Le prestazioni per l'intelligenza artificiale si misurano spesso con numeri meno precisi e risultano molto più alte."
+ },
+ "cache-dei-prompt": {
+  "t": "cache dei prompt",
+  "spiega": "Una memoria in cui il servizio conserva la parte iniziale di una richiesta già vista. Se la richiesta successiva comincia allo stesso modo, quella parte si paga molto meno.",
+  "esempio": "Un assistente manda ogni volta le stesse 20 pagine di istruzioni e poi una domanda nuova: le istruzioni restano in cache e costano un decimo, si paga per intero solo la domanda.",
+  "approfondisci": "Molti servizi di modelli linguistici tengono per qualche minuto il prefisso delle richieste recenti. Se una nuova richiesta inizia con gli stessi token, il servizio li riusa e applica un prezzo ridotto. Per approfittarne conviene mettere all'inizio le parti fisse, come istruzioni e documenti, e in fondo quelle che cambiano. Se si modifica anche una sola parola all'inizio, la cache non vale più.",
+  "vedi": [
+   "token"
+  ]
+ },
+ "frontiera-di-pareto": {
+  "t": "frontiera di Pareto",
+  "spiega": "L'insieme delle scelte per cui non ne esiste un'altra migliore su tutti i fronti insieme. Per i modelli di AI si usa di solito per qualità e costo.",
+  "esempio": "Se nessun modello dà risultati migliori di Neon spendendo meno, Neon sta sulla frontiera di Pareto; un modello più caro e peggiore di un altro no.",
+  "approfondisci": "Il nome viene dall'economista Vilfredo Pareto. In un grafico con il costo su un asse e la qualità sull'altro, i modelli sulla frontiera sono quelli che non si possono migliorare in un aspetto senza peggiorare nell'altro. Stare sulla frontiera non vuol dire essere il migliore in assoluto, ma essere una scelta sensata a quel prezzo. Il risultato dipende dai test scelti.",
+  "vedi": [
+   "benchmark"
+  ]
  }
 }

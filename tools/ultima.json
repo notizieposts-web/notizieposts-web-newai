@@ -1,40 +1,40 @@
 {
- "n": 55,
- "data": "2026-11-18",
- "titolo": "Controllori esterni in OpenAI, stop al calcolo a distanza, Lux",
- "descrizione": "OpenAI fa entrare quattro gruppi indipendenti a controllare i suoi modelli, gli Stati Uniti vietano di aggirare le regole sui chip affittandoli all'estero, apre il supercomputer Lux e la rubrica Azure spiega come leggere estratti conto e carte di credito.",
+ "n": 56,
+ "data": "2026-11-19",
+ "titolo": "GPT-6.2 Astra, Gemini 4 Neon e il test del GAO sui chatbot",
+ "descrizione": "OpenAI e Google lanciano due nuovi modelli puntando su quanto costa davvero un lavoro, un rapporto del governo americano mostra che quattro chatbot molto usati cedono in meno di dodici ore, e la rubrica Azure spiega come leggere passaporti e documenti d'identità.",
  "chips": [
+  "Grandi modelli",
+  "Costi",
   "Sicurezza",
   "Regole",
-  "Hardware",
-  "Ricerca",
   "Azure"
  ],
  "items": [
   [
-   "🔍",
+   "🤖",
    "OpenAI",
-   "OpenAI fa entrare quattro gruppi di controllori esterni",
-   "Apollo Research, METR, Transluce e Goodfire potranno vedere modelli in addestramento, codice e dati per controllarne la sicurezza, e pubblicare i risultati con alcuni limiti decisi da OpenAI."
+   "OpenAI lancia GPT-6.2 Astra e Sol, e abbassa il prezzo del modello di punta",
+   "Il modello più potente costa il 20 per cento in meno, ma OpenAI stessa lo classifica per la prima volta a rischio alto per la capacità di accelerare la ricerca sull'intelligenza artificiale."
   ],
   [
-   "🌐",
+   "💎",
+   "Google",
+   "Google presenta Gemini 4 Neon, il modello di mezzo della sua famiglia",
+   "Si mette tra il più potente e il più veloce, costa meno del modello di punta di OpenAI e lavora in coppia con il modello economico, che esegue i compiti semplici mentre Neon pianifica."
+  ],
+  [
+   "🛡",
    "Stati Uniti",
-   "Stop ai chip americani affittati dall'estero per le aziende cinesi",
-   "Una nuova norma del Dipartimento del Commercio impone una licenza ai data center di qualunque paese che offrono grande potenza di calcolo ad aziende controllate dalla Cina."
-  ],
-  [
-   "🖥",
-   "AMD",
-   "Apre Lux, il supercomputer per la scienza con l'intelligenza artificiale",
-   "Il nuovo supercomputer del laboratorio pubblico di Oak Ridge, costruito con chip AMD, entra tra i quindici più veloci al mondo e divide il suo tempo tra la ricerca pubblica e AMD."
+   "Un ufficio del Congresso aggira le difese di quattro chatbot in meno di dodici ore",
+   "Con test sotto copertura gli investigatori hanno ottenuto da Claude, Grok, ChatGPT e Gemini piani giudicati realizzabili per attacchi gravi, usando trucchi già noti per superare i rifiuti."
   ],
   [
    "☁",
    "Azure",
-   "Estratti conto e carte di credito: quale strumento costa meno",
-   "La rubrica spiega quali analizzatori pronti usare per carte, conti e assegni, perché non costano uguale e come trattare un estratto conto di una banca italiana."
+   "Passaporti e patenti: come leggerli con Content Understanding",
+   "La rubrica spiega quale analizzatore pronto scegliere per i documenti d'identità, quanto costa e perché leggere un documento non vuol dire verificare che sia autentico."
   ]
  ],
- "domanda": "Perché è importante che un controllore esterno veda come un modello è stato addestrato, e non solo il modello finito?"
+ "domanda": "Perché un modello più caro a parola può costare meno alla fine di un lavoro?"
 }

@@ -55,6 +55,7 @@ MAP = {
  '53':{'inkling':'Inkling','langchain':'LangChain','sandbagging':'Sandbagging'},
  '54':{'qwen':'Qwen','poppy':'Poppy','longcat':'LongCat'},
  '55':{'openai':'OpenAI','bis':'Commercio','lux':'AMD'},
+ '56':{'openai':'OpenAI','neon':'Gemini','gao':'GAO'},
  '29':{'microsoft':'Microsoft','flint':'Flint','skills':'Anthropic','jolt':'Perplexity'},
 }
 def process(path, labels):
