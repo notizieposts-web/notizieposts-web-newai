@@ -1,0 +1,67 @@
+Radar AI. Edizione del venti novembre 2026. Questa è la versione da ascoltare: dura circa dieci minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: Anthropic debutta in borsa a ottantatré dollari, i modelli di OpenAI ridisegnano i chip e Microsoft lancia sette modelli MAI.
+
+Il periodo in breve. Tre giorni in cui l'intelligenza artificiale passa dalle promesse ai conti. Anthropic fissa il prezzo delle sue azioni e debutta in borsa. OpenAI racconta come i suoi modelli hanno ridisegnato pezzi di chip veri. Microsoft presenta sette modelli propri puntando sul prezzo. E Google apre a più persone il suo modello che genera mondi esplorabili.
+
+Capitolo uno: Anthropic in borsa.
+
+Una nota di trasparenza, prima di cominciare. Questa edizione è preparata da Claude, il modello di Anthropic. Per questo riporto solo i dati del comunicato ufficiale, segnalo come tali le cifre della stampa e non do giudizi sull'investimento. Non è un consiglio finanziario.
+
+Mercoledì diciotto novembre Anthropic ha fissato il prezzo della sua offerta pubblica iniziale, la IPO: il momento in cui un'azienda vende per la prima volta le sue azioni a chiunque, in borsa. Il prezzo è ottantatré dollari per azione. Una settimana prima, all'avvio del giro di presentazioni agli investitori, Anthropic aveva indicato una forchetta tra settanta e settantotto dollari.
+
+Non è salito solo il prezzo. Le azioni offerte passano da ottocentoventicinque a novecentoottanta milioni. Quasi novecentocinquantasei milioni le vende l'azienda, poco meno di ventiquattro milioni alcuni azionisti già presenti, e quei soldi vanno a loro, non ad Anthropic. Le banche hanno anche un'opzione per comprare fino a centoquarantasette milioni di azioni in più entro trenta giorni. Il titolo, con il simbolo A N T, è scambiato al Nasdaq da giovedì diciannove novembre.
+
+Il comunicato non dice il totale raccolto. Facendo la moltiplicazione, le azioni vendute dall'azienda valgono circa settantanove miliardi di dollari, prima delle commissioni. La stampa parla di cifre ancora più alte, contando un finanziamento privato separato, ma sono stime diverse tra loro che il comunicato non contiene.
+
+Quando la domanda supera l'offerta, un'azienda può alzare il prezzo o vendere di più. Anthropic ha fatto entrambe le cose. È un segnale di forte interesse oggi, ma non dice nulla su come andrà il titolo domani. Nella pagina trovi un esempio con un panettiere e le sue prenotazioni.
+
+Prova a chiederti: quando senti che un'azienda vale una cifra enorme, sai distinguere quanto ha incassato davvero da quanto è solo una stima?
+
+Capitolo due: OpenAI e i chip.
+
+Sempre il diciotto novembre OpenAI ha raccontato come i suoi modelli hanno riscritto circuiti di chip veri. Un chip si progetta prima come testo, in un linguaggio che descrive come i dati si spostano a ogni battito dell'orologio interno. I modelli hanno riscritto blocchi di questo testo, e ogni modifica è stata controllata con gli strumenti professionali di Synopsys, che verificano che il circuito si comporti esattamente come prima.
+
+I risultati dichiarati. Sul chip Jalapeño, il primo chip di OpenAI per far girare i modelli, un moltiplicatore riprogettato occupa circa il quindici per cento di spazio in meno e finisce il calcolo in un passo invece che in due. Secondo OpenAI le modifiche sono state provate sul silicio vero. Con AMD il miglioramento arriva fino al quattordici per cento su progetti già molto ottimizzati, e AMD ha messo alcune modifiche in un chip già mandato in fabbrica.
+
+In un secondo rapporto OpenAI misura quanto i suoi agenti lavorano da soli nella ricerca interna. Sui compiti da due a quattro ore, il successo senza nessun intervento umano passa dal ventitré per cento di marzo al quarantasei di ottobre. Ma i progressi sono molto diversi da un compito all'altro: sorvegliare un addestramento riesce quasi otto volte su dieci, scrivere il codice dei sistemi che servono i modelli solo una volta su quattro. OpenAI la chiama frontiera frastagliata, e conclude che le persone restano centrali. Sono tutti numeri interni, senza verifiche indipendenti.
+
+Prova a chiederti: nel tuo lavoro, quali compiti affideresti a un agente da solo, e quali vorresti sempre rivedere prima che escano?
+
+Capitolo tre: Microsoft e i modelli MAI.
+
+Martedì diciassette novembre, alla conferenza Ignite, Microsoft ha presentato sette nuovi modelli fatti in casa. Nell'edizione di ieri erano solo un segnale da verificare; ora ho letto le pagine ufficiali.
+
+Ci sono modelli per la programmazione, MAI Code 2 e la sua versione veloce Flash; uno per la difesa informatica; uno per creare e modificare immagini; uno che ascolta e risponde a voce in tempo reale; uno per trascrivere le visite mediche; e uno, Decision uno punto uno, che decide a quale altro modello mandare ogni richiesta, come un centralino.
+
+Il più atteso è MAI Code 2. Microsoft dichiara il novantotto per cento dei risultati di GPT-6.1 Sol di OpenAI al quaranta per cento del prezzo. Ma le note contano: il prezzo usato è promozionale, scontato della metà, e quasi tutte le prove girano sulla piattaforma interna di Microsoft. A listino pieno quel quaranta per cento diventerebbe circa ottanta. La stessa Microsoft scrive che questi modelli non sono ancora pensati per i problemi più difficili. Il confronto include anche un modello di Anthropic, e vale la nota di trasparenza del primo capitolo.
+
+Prova a chiederti: quando confronti due prezzi, controlli sempre se uno dei due è scontato e per quanto tempo?
+
+Capitolo quattro: Google e Genie 4.
+
+Genie 4 è un modello del mondo: non produce un video già finito, ma genera la scena immagine per immagine mentre ti muovi con la tastiera, e risponde ai tuoi comandi. Puoi far piovere, cambiare la luce, aggiungere un personaggio mentre esplori.
+
+Il diciotto novembre Google lo ha portato in Project Genie per alcuni abbonati Google AI Ultra, con una lista d'attesa per gli abbonati Pro. Il giorno dopo lo ha aperto agli sviluppatori nella Gemini API: mondi continui a ventiquattro immagini al secondo, e per la prima volta con l'audio generato insieme alle immagini, dai rumori di fondo ai dialoghi. Tutto porta una filigrana invisibile chiamata SynthID.
+
+Google ammette i limiti: ritardi della telecamera, fisica complicata e soprattutto la permanenza della scena. Se ti giri e torni indietro, non è detto che ritrovi le cose come le avevi lasciate. Gli annunci non dicono prezzi, paesi né durata delle sessioni.
+
+Prova a chiederti: a che cosa ti servirebbe un mondo inventato da esplorare, se sai che i dettagli possono cambiare ogni volta che torni?
+
+La rubrica Azure Content Understanding, puntata cinquantatré: bollette e buste paga.
+
+Content Understanding ha un analizzatore pronto per le bollette di luce, gas, acqua, internet e telefono, e uno per le buste paga americane. Tutti e due usano il contatore di estrazione più completo, con l'analisi delle tabelle, più la contestualizzazione standard, circa un dollaro ogni mille pagine. Ma se la bolletta è un PDF nato digitale, si paga il contatore minimo, perché non serve riconoscere il testo da un'immagine.
+
+La sorpresa è nella stessa tabella dei prezzi: molti moduli fiscali americani usano la contestualizzazione avanzata, circa tre dollari ogni mille pagine. Due documenti simili possono costare in modo diverso, e il listino va controllato analizzatore per analizzatore. I consigli: chiedi file digitali quando puoi, manda solo le pagine utili, prova l'analizzatore su bollette di fornitori italiani diversi, e per i cedolini italiani parti da un analizzatore adattato. Infine, rifai i conti nel codice: consumo per prezzo deve dare il totale.
+
+Prova a chiederti: quali numeri dei tuoi documenti potresti controllare con una semplice moltiplicazione, prima di fidarti dell'estrazione?
+
+Prova tu. Nella pagina trovi cinque esperimenti: leggere i numeri di un'offerta in borsa, semplificare una formula verificando che il risultato resti identico, disegnare la tua frontiera frastagliata, ricalcolare un prezzo senza la promozione, e preparare i controlli su una bolletta.
+
+I segnali, tutti ancora da verificare. Secondo la stampa, Google avrebbe lanciato Gemini per Mac, capace di usare le applicazioni del computer. Un attacco informatico aiutato dall'intelligenza artificiale avrebbe disturbato sistemi della Commissione europea. Alcune banche americane avrebbero reso i clienti responsabili delle perdite causate da agenti di terze parti. SenseTime avrebbe pubblicato un piccolo modello aperto che riusa i propri livelli per ragionare più a fondo. E Orange avrebbe pubblicato cinque modelli per il wolof, una lingua del Senegal.
+
+La domanda del giorno: perché un'azienda che alza il prezzo delle azioni sopra la forchetta non garantisce che il titolo salirà?
+
+Perché il prezzo dell'offerta misura la domanda degli investitori in quel momento, non il valore futuro dell'azienda. Dal primo giorno di scambi il prezzo lo fa il mercato, e dipende da risultati, concorrenza e aspettative che possono cambiare in qualunque direzione.
+
+È tutto per oggi. Esempi, fonti, quiz ed esperimenti ti aspettano nella pagina dell'edizione cinquantasette di Radar AI. A domani.

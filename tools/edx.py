@@ -58,6 +58,7 @@ EDX = {
  '54': (None, 'Qwen4-Max, Poppy 1.0 per gli agenti, LongCat-2.5 con licenza MIT', 'Alibaba presenta Qwen4-Max, Sierra pubblica Poppy 1.0 per gli agenti personali e Meituan conferma i pesi di LongCat-2.5.'),
  '55': (None, 'Controllori esterni in OpenAI, stop al calcolo a distanza, Lux', 'OpenAI fa entrare quattro gruppi di controllori, gli Stati Uniti limitano i chip affittati all\'estero e apre il supercomputer Lux di Oak Ridge.'),
  '56': (None, 'GPT-6.2 Astra, Gemini 4 Neon e il test del GAO sui chatbot', 'OpenAI e Google lanciano due modelli puntando sul costo per compito, e il GAO mostra che quattro chatbot cedono in meno di dodici ore.'),
+ '57': (None, 'Anthropic in borsa, i chip di OpenAI e i sette modelli MAI', 'Anthropic debutta al Nasdaq a 83 dollari, i modelli di OpenAI ridisegnano i chip e Microsoft lancia sette modelli venduti sul prezzo.'),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),
 }
 def chips_for(ed):

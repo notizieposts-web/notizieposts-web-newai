@@ -1,40 +1,46 @@
 {
- "n": 56,
- "data": "2026-11-19",
- "titolo": "GPT-6.2 Astra, Gemini 4 Neon e il test del GAO sui chatbot",
- "descrizione": "OpenAI e Google lanciano due nuovi modelli puntando su quanto costa davvero un lavoro, un rapporto del governo americano mostra che quattro chatbot molto usati cedono in meno di dodici ore, e la rubrica Azure spiega come leggere passaporti e documenti d'identità.",
+ "n": 57,
+ "data": "2026-11-20",
+ "titolo": "Anthropic in borsa, i chip di OpenAI e i sette modelli MAI",
+ "descrizione": "Anthropic debutta al Nasdaq dopo aver fissato il prezzo delle azioni sopra le attese, OpenAI racconta come i suoi modelli hanno ridisegnato pezzi di chip veri, Microsoft lancia sette modelli propri puntando sul prezzo, Google apre Genie 4 e la rubrica Azure spiega bollette e buste paga.",
  "chips": [
-  "Grandi modelli",
   "Costi",
-  "Sicurezza",
-  "Regole",
+  "Hardware",
+  "Grandi modelli",
+  "Ricerca",
   "Azure"
  ],
  "items": [
   [
-   "🤖",
+   "📈",
+   "Anthropic",
+   "Anthropic fissa il prezzo delle azioni a 83 dollari e debutta al Nasdaq",
+   "L'azienda che sviluppa Claude ha venduto le sue azioni sopra la forchetta annunciata e ne ha messe in vendita 155 milioni in più, segno di una domanda molto forte."
+  ],
+  [
+   "🔧",
    "OpenAI",
-   "OpenAI lancia GPT-6.2 Astra e Sol, e abbassa il prezzo del modello di punta",
-   "Il modello più potente costa il 20 per cento in meno, ma OpenAI stessa lo classifica per la prima volta a rischio alto per la capacità di accelerare la ricerca sull'intelligenza artificiale."
+   "I modelli di OpenAI ridisegnano pezzi di chip veri",
+   "Hanno riscritto circuiti del chip di OpenAI e di schede AMD, rendendo un componente più piccolo e più veloce, e un secondo rapporto mostra che gli agenti chiudono da soli quasi metà dei compiti di ricerca brevi."
   ],
   [
-   "💎",
+   "🪟",
+   "Microsoft",
+   "Microsoft presenta sette modelli propri per programmare, difendere, creare immagini e parlare",
+   "Il modello per la programmazione promette quasi gli stessi risultati di OpenAI a meno della metà del prezzo, ma il confronto usa un prezzo scontato in promozione."
+  ],
+  [
+   "🌍",
    "Google",
-   "Google presenta Gemini 4 Neon, il modello di mezzo della sua famiglia",
-   "Si mette tra il più potente e il più veloce, costa meno del modello di punta di OpenAI e lavora in coppia con il modello economico, che esegue i compiti semplici mentre Neon pianifica."
-  ],
-  [
-   "🛡",
-   "Stati Uniti",
-   "Un ufficio del Congresso aggira le difese di quattro chatbot in meno di dodici ore",
-   "Con test sotto copertura gli investigatori hanno ottenuto da Claude, Grok, ChatGPT e Gemini piani giudicati realizzabili per attacchi gravi, usando trucchi già noti per superare i rifiuti."
+   "Genie 4, il modello che genera mondi da esplorare, arriva agli abbonati e agli sviluppatori",
+   "Si cammina con la tastiera dentro scene inventate dal modello e, per la prima volta, con suoni e dialoghi generati insieme alle immagini."
   ],
   [
    "☁",
    "Azure",
-   "Passaporti e patenti: come leggerli con Content Understanding",
-   "La rubrica spiega quale analizzatore pronto scegliere per i documenti d'identità, quanto costa e perché leggere un documento non vuol dire verificare che sia autentico."
+   "Bollette e buste paga: come leggerle con Content Understanding",
+   "La rubrica spiega quali analizzatori pronti usare, come risparmiare con i file digitali e perché alcuni moduli fiscali costano il triplo."
   ]
  ],
- "domanda": "Perché un modello più caro a parola può costare meno alla fine di un lavoro?"
+ "domanda": "Perché un'azienda che alza il prezzo delle azioni sopra la forchetta non garantisce che il titolo salirà?"
 }

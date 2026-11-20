@@ -1186,5 +1186,25 @@
   "vedi": [
    "benchmark"
   ]
+ },
+ "rtl": {
+  "t": "RTL",
+  "esteso": "Register Transfer Level",
+  "spiega": "Il livello a cui si descrive un chip come testo: dice come i dati passano tra i registri a ogni battito dell'orologio interno. Da questa descrizione gli strumenti ricavano il circuito vero.",
+  "esempio": "Una riga RTL può dire: a ogni ciclo, somma i due numeri in ingresso e salva il risultato in un registro.",
+  "approfondisci": "I progettisti scrivono l'RTL in linguaggi come Verilog o VHDL. Poi un programma di sintesi trasforma il testo in porte logiche e celle, e altri strumenti le dispongono sul silicio. Cambiare l'RTL cambia area, consumo e velocità del chip, per questo è il punto dove un'ottimizzazione pesa di più.",
+  "vedi": [
+   "eda"
+  ]
+ },
+ "eda": {
+  "t": "EDA",
+  "esteso": "Electronic Design Automation",
+  "spiega": "I programmi professionali con cui si progettano e controllano i chip: simulano il circuito, lo verificano e misurano consumo, velocità e area.",
+  "esempio": "Dopo aver modificato un circuito, uno strumento EDA controlla che dia esattamente le stesse uscite di prima per ogni ingresso.",
+  "approfondisci": "Il mercato degli strumenti EDA è dominato da poche aziende, come Synopsys e Cadence. Servono in ogni fase: dalla scrittura dell'RTL alla verifica, dalla sintesi fino al disegno finale mandato in fabbrica. Una verifica di equivalenza dimostra che due versioni di un circuito si comportano allo stesso modo.",
+  "vedi": [
+   "rtl"
+  ]
  }
 }
