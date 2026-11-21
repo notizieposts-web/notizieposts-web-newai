@@ -262,7 +262,7 @@ html{scroll-padding-top:6rem}
 .skip-link{position:absolute;left:1rem;top:-100px;z-index:10000;background:var(--ink);color:var(--bg)!important;padding:.75rem 1.1rem;border-radius:10px;font-weight:700;text-decoration:none}
 .skip-link:focus{top:1rem}
 .tl-dot{width:24px!important;height:24px!important;margin:-10px 0 0 -12px!important}
-.tl-in{min-width:60rem!important}
+.tl-in{min-width:calc(var(--tln,12) * 5rem)!important}
 .nav .links a,.btn,.opt,button,select,summary{min-height:24px}
 input[type=range]{min-height:24px}
 .grid2>*,.cards>*,.stats>*{min-width:0}
@@ -829,6 +829,9 @@ for r in intervalli:
       el.setAttribute('aria-label',txt);
     });
   }
+  /* linea del tempo: larga quanto serve ai suoi giorni (5rem ciascuno), così sul telefono con 3-4 giorni si vedono tutti senza scorrere */
+  function tlw(){document.querySelectorAll('.tl-in').forEach(function(el){var n=el.querySelectorAll('.tl-dot').length;if(n)el.style.setProperty('--tln',Math.max(n,3));});}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',tlw);else tlw();window.addEventListener('load',tlw);
   /* annunci dei risultati dinamici */
   function live(){
     document.querySelectorAll('[id$="out"],[id^="fb"],#score,.tl-card,[id$="note"],[id$="res"]').forEach(function(el){if(!el.hasAttribute('aria-live'))el.setAttribute('aria-live','polite')});
