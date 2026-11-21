@@ -1,46 +1,46 @@
 {
- "n": 57,
- "data": "2026-11-20",
- "titolo": "Anthropic in borsa, i chip di OpenAI e i sette modelli MAI",
- "descrizione": "Anthropic debutta al Nasdaq dopo aver fissato il prezzo delle azioni sopra le attese, OpenAI racconta come i suoi modelli hanno ridisegnato pezzi di chip veri, Microsoft lancia sette modelli propri puntando sul prezzo, Google apre Genie 4 e la rubrica Azure spiega bollette e buste paga.",
+ "n": 58,
+ "data": "2026-11-21",
+ "titolo": "Gli agenti che tengono veloce ChatGPT, EverydayBench e DaisyRose",
+ "descrizione": "OpenAI racconta gli agenti che cercano da soli perché ChatGPT rallenta, uno studio misura quante richieste di tutti i giorni gli agenti portano a termine, una piccola azienda pubblica un modello aperto addestrato con pochi compiti scelti con cura, AMD porta i modelli sul chip per l'AI dei portatili e la rubrica Azure spiega le pratiche di mutuo.",
  "chips": [
-  "Costi",
-  "Hardware",
-  "Grandi modelli",
   "Ricerca",
+  "Valutazione",
+  "Pesi aperti",
+  "Hardware",
   "Azure"
  ],
  "items": [
   [
-   "📈",
-   "Anthropic",
-   "Anthropic fissa il prezzo delle azioni a 83 dollari e debutta al Nasdaq",
-   "L'azienda che sviluppa Claude ha venduto le sue azioni sopra la forchetta annunciata e ne ha messe in vendita 155 milioni in più, segno di una domanda molto forte."
-  ],
-  [
-   "🔧",
+   "🛠",
    "OpenAI",
-   "I modelli di OpenAI ridisegnano pezzi di chip veri",
-   "Hanno riscritto circuiti del chip di OpenAI e di schede AMD, rendendo un componente più piccolo e più veloce, e un secondo rapporto mostra che gli agenti chiudono da soli quasi metà dei compiti di ricerca brevi."
+   "Gli agenti di OpenAI cercano da soli perché ChatGPT rallenta",
+   "In tre mesi hanno seguito oltre 1.700 casi di rallentamento e ne hanno spiegati più di 600, proponendo le correzioni che poi gli ingegneri approvano."
   ],
   [
-   "🪟",
-   "Microsoft",
-   "Microsoft presenta sette modelli propri per programmare, difendere, creare immagini e parlare",
-   "Il modello per la programmazione promette quasi gli stessi risultati di OpenAI a meno della metà del prezzo, ma il confronto usa un prezzo scontato in promozione."
+   "🧾",
+   "EverydayBench",
+   "Le richieste di tutti i giorni restano difficili anche per i migliori agenti",
+   "Su 77 compiti quotidiani svolti sul web vero, come scegliere un prodotto o pianificare un viaggio, i migliori agenti ne completano bene poco più della metà."
   ],
   [
-   "🌍",
-   "Google",
-   "Genie 4, il modello che genera mondi da esplorare, arriva agli abbonati e agli sviluppatori",
-   "Si cammina con la tastiera dentro scene inventate dal modello e, per la prima volta, con suoni e dialoghi generati insieme alle immagini."
+   "🌼",
+   "RadixArk",
+   "Un modello aperto migliorato con 1.200 compiti scelti a mano",
+   "DaisyRose-27B si può scaricare e usare anche per lavoro, e raddoppia il punteggio del modello di partenza su una prova difficile per agenti, pur restando dietro ad altri."
+  ],
+  [
+   "💻",
+   "AMD",
+   "I modelli locali girano sul chip per l'AI dei portatili Ryzen",
+   "Con il programma gratuito Unsloth Desktop, più di cento applicazioni possono usare un modello sul portatile consumando meno batteria, se c'è abbastanza memoria."
   ],
   [
    "☁",
    "Azure",
-   "Bollette e buste paga: come leggerle con Content Understanding",
-   "La rubrica spiega quali analizzatori pronti usare, come risparmiare con i file digitali e perché alcuni moduli fiscali costano il triplo."
+   "Le pratiche di mutuo lette pagina per pagina con Content Understanding",
+   "La rubrica spiega come un solo servizio riconosce i cinque moduli di un mutuo americano, quanto costa e come pagare solo le pagine utili."
   ]
  ],
- "domanda": "Perché un'azienda che alza il prezzo delle azioni sopra la forchetta non garantisce che il titolo salirà?"
+ "domanda": "Perché un agente che supera solo poco più della metà dei compiti quotidiani può essere comunque utile?"
 }

@@ -1,0 +1,63 @@
+Radar AI. Edizione del ventuno novembre 2026. Questa è la versione da ascoltare: dura circa nove minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: gli agenti che tengono veloce ChatGPT, le richieste di tutti i giorni e un modello aperto addestrato con milleduecento compiti.
+
+Una nota prima di cominciare. Il secondo capitolo parla di uno studio in cui due modelli Claude sono in testa, e questa edizione è preparata da Claude, un modello di Anthropic. Riporto i numeri come li scrivono gli autori, e dico quello che non ho potuto leggere.
+
+Il periodo in breve. Due giorni, il diciotto e il diciannove novembre, in cui l'intelligenza artificiale lavora più che annunciare. OpenAI racconta gli agenti che cercano da soli perché ChatGPT rallenta. Un gruppo di ricercatori misura quante richieste quotidiane gli agenti portano davvero a termine. Una piccola azienda pubblica un modello aperto addestrato con pochi compiti scelti con cura. E AMD porta i modelli locali sul chip per l'intelligenza artificiale dei portatili.
+
+Capitolo uno. OpenAI e la Performance Factory.
+
+Giovedì diciannove novembre due ingegneri di OpenAI hanno descritto la Performance Factory, la fabbrica delle prestazioni. Il problema è questo: un servizio come ChatGPT cambia molte volte al giorno, e ogni tanto una modifica lo rende più lento. Trovare quale modifica è stata è un lavoro da investigatore, fatto di grafici, registri e tracce delle richieste.
+
+Nella fabbrica, quando suona un allarme, un agente Codex, l'agente di OpenAI per la programmazione, cerca quando è cominciato il rallentamento, quali richieste colpisce e quale modifica l'ha provocato. Poi propone una correzione. Un secondo agente ha il compito opposto: provare a dimostrare che la diagnosi è sbagliata. Un ingegnere approva e rilascia la correzione, e alla fine un agente controlla che il servizio sia tornato veloce.
+
+I numeri: in poco più di tre mesi, oltre millesettecento indagini e più di seicento casi con la causa trovata, circa diciassette indagini al giorno. Su cento diagnosi controllate a mano, settanta erano corrette. OpenAI scrive anche i limiti: i primi agenti si fermavano alla prima spiegazione plausibile, le correzioni sono più difficili delle diagnosi, e oggi il passo più lento è proprio l'attesa della revisione umana. Nessuno, fuori da OpenAI, ha verificato questi numeri. Nella pagina trovi un esempio su un rallentamento di lunedì mattina.
+
+Prova a chiederti: nel tuo lavoro, quale controllo ripetitivo affideresti a un agente, se poi la decisione finale restasse a te?
+
+Capitolo due. EverydayBench, le richieste di tutti i giorni.
+
+Mercoledì diciotto novembre diciassette ricercatori hanno pubblicato su arXiv, l'archivio dei paper non ancora revisionati, una prova chiamata EverydayBench. Contiene settantasette compiti scritti da persone, presi dalla vita quotidiana: scegliere un prodotto, pianificare un viaggio, fare una ricerca, preparare un documento. Gli agenti li svolgono sul web vero.
+
+Ogni compito dichiara prima i criteri di successo, ma non la risposta. Il giudizio ha tre parti: controlli automatici sui vincoli, come un prezzo massimo; la riapertura delle pagine che l'agente cita, per vedere se dicono davvero quello che sostiene; e una griglia di criteri sulla qualità del risultato.
+
+I migliori, Claude Opus cinque punto cinque e Claude Fable cinque punto uno, superano il controllo più severo nel cinquantaquattro virgola cinquantacinque per cento dei casi, cioè quarantadue compiti su settantasette. GPT-6 Sol passa da circa il trenta a circa il quarantacinque per cento alzando lo sforzo di ragionamento. E la classifica cambia per tipo di compito. Ho letto solo il riassunto del paper: la versione completa non si è aperta.
+
+Prova a chiederti: quando un assistente ti dà una risposta con un link, quante volte apri il link per controllare?
+
+Capitolo tre. RadixArk e DaisyRose-27B.
+
+Sempre il diciotto novembre RadixArk ha pubblicato su Hugging Face il suo primo modello, DaisyRose-27B. Parte da Qwen tre punto otto, un modello di Alibaba da ventisette miliardi di parametri, ed è addestrato solo con l'apprendimento per rinforzo: il modello prova, riceve un punteggio e si corregge.
+
+Il punto di forza sono i compiti: circa milleduecento, scelti tra migliaia, ognuno pensato su un errore che il modello di partenza fa davvero. L'addestramento è durato diciotto giorni su centoquarantaquattro GPU, i processori grafici. Su una prova difficile per agenti, Terminal-Bench quattro punto uno, il punteggio passa dal cinque virgola sei al dodici per cento. I pesi sono scaricabili con licenza Apache due punto zero, che permette anche l'uso commerciale.
+
+Ma attenzione: nella sua stessa tabella, DaisyRose è primo solo in una prova su sette. Il raddoppio è vero, ma parte da un numero basso, e i punteggi li ha misurati RadixArk. Nella pagina trovi un esempio su come scegliere la versione da scaricare in base alla memoria.
+
+Prova a chiederti: per insegnare qualcosa a qualcuno, servono più esempi o esempi scelti meglio?
+
+Capitolo quattro. AMD, Unsloth e la NPU.
+
+Giovedì diciannove novembre AMD ha annunciato che Unsloth Desktop, un programma per far girare modelli sul proprio computer, ora usa la NPU dei processori Ryzen AI. La NPU è un chip piccolo fatto apposta per le reti neurali, che consuma molto meno della scheda grafica.
+
+Le applicazioni mandano le richieste a Unsloth Desktop come se parlassero con un servizio cloud, e il modello gira invece sul portatile. AMD dice che più di cento applicazioni per agenti sono compatibili. Il limite è la memoria: per un modello da trentacinque miliardi di parametri servono circa ventotto gigabyte per la NPU, quindi un portatile con sessantaquattro gigabyte. AMD non pubblica velocità né confronti.
+
+Prova a chiederti: quali richieste preferiresti che restassero sul tuo computer, invece di andare su un server esterno?
+
+La rubrica Azure, cinquantaquattresima puntata: i fascicoli di mutuo.
+
+Una pratica di mutuo americana è un fascicolo di decine o centinaia di pagine. Content Understanding ha un analizzatore composto che riconosce ogni modulo e lo manda al lettore giusto: la domanda di mutuo, la perizia, la verifica del lavoro, la sintesi dell'istruttoria e il documento finale con le condizioni. Tutti usano l'estrazione standard e la contestualizzazione standard, circa un dollaro ogni mille pagine, più i token del modello.
+
+I consigli: per le pratiche italiane serve un analizzatore personalizzato; si mandano solo le pagine utili, togliendo per esempio le fotografie delle perizie; i file digitali costano meno; e lo stesso reddito, che compare in tre documenti diversi, si confronta nel codice per scoprire gli errori.
+
+Prova a chiederti: quale dato dei tuoi documenti compare in più di un posto, e potrebbe fare da controllo?
+
+Prova tu. Nella pagina trovi cinque esperimenti: far fare all'assistente l'avvocato del diavolo su un rallentamento, scrivere una richiesta con i criteri dichiarati, preparare un compito che non si possa aggirare, fare il conto della memoria per un modello locale e scrivere i controlli su una pratica di mutuo.
+
+I segnali, tutti ancora da verificare. Secondo la stampa, NVIDIA sarebbe in trattative per comprare Inception, l'azienda dei modelli a diffusione. Moonshot avrebbe rinunciato a un contratto per chip NVIDIA in Indonesia dopo le nuove regole americane. Documenti del Congresso americano mostrerebbero centinaia di migliaia di chip approvati per aziende cinesi. Quattro senatori avrebbero proposto più trasparenza sull'uso dell'intelligenza artificiale nelle società quotate. E Canva avrebbe aggiunto un interruttore per spegnere le sue funzioni di intelligenza artificiale.
+
+La domanda del giorno: perché un agente che supera solo poco più della metà dei compiti quotidiani può essere comunque utile?
+
+Perché il valore dipende da quanto costa controllare il suo lavoro. Se l'agente prepara una risposta con le fonti e tu impieghi un minuto a verificarla, anche un successo su due fa risparmiare tempo. Diventa un problema solo quando ci si fida senza controllare.
+
+È tutto per oggi. Esempi, fonti, quiz ed esperimenti ti aspettano nella pagina dell'edizione cinquantotto di Radar AI. A domani.
