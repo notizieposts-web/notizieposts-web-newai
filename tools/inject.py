@@ -1,7 +1,7 @@
 """Sapit: inietta lo strato di accessibilita' WCAG 2.2 AA in una o piu' pagine. Idempotente."""
 import re, json, os, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import logo, chiavi, rada
+import logo, chiavi, rada, mappe
 HEADJS = r"""<script id="a11y-theme">try{var t=localStorage.getItem('radar-theme');if(t=='light'||t=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>"""
 CSS = r"""<style id="a11y">
 /* Strato accessibilita' WCAG 2.2 AA */
@@ -232,10 +232,17 @@ def process(path):
     # Sapio, trova le parole chiave: solo nelle edizioni (tools/chiavi.py)
     s = re.sub(r'<style id="kw-css">.*?</style>\s*', '', s, flags=re.S)
     s = re.sub(r'<script id="kw-js">.*?</script>\s*', '', s, flags=re.S)
+    s = re.sub(r'<style id="mv-css">.*?</style>\s*', '', s, flags=re.S)
+    s = re.sub(r'<script id="mv-js">.*?</script>\s*', '', s, flags=re.S)
+    s = re.sub(r'<script type="application/json" id="mv-data">.*?</script>\s*', '', s, flags=re.S)
     if re.search(r'edizioni/\d+\.html$', path.replace('\\','/')):
         extra = chiavi.CSS + ('' if 'id="rada-css"' in s else rada.CSS)
         s = s.replace('</head>', extra + '\n</head>', 1)
         s = s.replace('</body>', chiavi.js() + '\n</body>', 1)
+        _n = re.search(r'edizioni/(\d+)\.html$', path.replace('\\','/')).group(1)
+        _root = os.path.dirname(os.path.dirname(os.path.abspath(path)))
+        s = s.replace('</head>', mappe.CSS + '\n</head>', 1)
+        s = s.replace('</body>', mappe.data_tag(_root, _n) + mappe.JS + '\n</body>', 1)
     open(path, 'w', encoding='utf-8').write(s)
 for p in sys.argv[1:]: process(p)
 print('ok', len(sys.argv)-1)

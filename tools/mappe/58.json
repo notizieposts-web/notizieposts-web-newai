@@ -1,0 +1,43 @@
+{
+ "factory": {"root": "Performance Factory di OpenAI", "nodes": [
+  {"id": "reg", "t": "Regressioni di prestazioni", "d": "Una modifica al codice rende ChatGPT più lento anche se funziona: una risposta da mezzo secondo diventa da un secondo.", "at": 0, "i": "🐢", "p": "root", "r": "dà la caccia alle"},
+  {"id": "lat", "t": "Latenza", "d": "Il tempo di risposta. Trovare quale modifica l'ha fatta salire è un lavoro da investigatore.", "at": 0, "i": "⏱", "p": "reg", "r": "si misurano con la"},
+  {"id": "passi", "t": "Sei passi", "d": "Dal lavoro a mano, alle domande guidate a Codex, alla skill condivisa perf-forensics, fino alla fabbrica che lavora da sola.", "at": 1, "i": "🪜", "p": "root", "r": "nasce in"},
+  {"id": "pezzi", "t": "Quattro pezzi", "d": "Registro dei casi con i loro stati, ciclo che avvia i turni di Codex, servizio nel cloud con identità propria, strumenti di osservazione.", "at": 2, "i": "🧩", "p": "root", "r": "è fatta di"},
+  {"id": "avv", "t": "Revisione avversaria", "d": "Una seconda sessione di Codex ha un solo compito: dimostrare che la diagnosi è sbagliata.", "at": 3, "i": "⚖️", "p": "pezzi", "r": "controlla con la"},
+  {"id": "num", "t": "1.700 indagini", "d": "In poco più di tre mesi, circa 17 al giorno, più di 600 cause trovate. Su 100 cause controllate a mano, 70 erano corrette.", "at": 4, "i": "📊", "p": "root", "r": "ha fatto"},
+  {"id": "lim", "t": "Limiti", "d": "Gli agenti a volte si fermano alla prima spiegazione; correggere è più difficile che trovare la causa; ogni correzione la approva una persona.", "at": 5, "i": "🚧", "p": "root", "r": "ha dei"}
+ ], "x": [["avv", "lim", "riduce gli errori descritti nei"], ["num", "avv", "il 30% da rifinire spiega la"]]},
+ "everyday": {"root": "EverydayBench", "nodes": [
+  {"id": "cosa", "t": "Richieste quotidiane", "d": "77 compiti con molte risposte accettabili, come trovare un volo sotto i 200 euro con il bagaglio.", "at": 0, "i": "🧳", "p": "root", "r": "misura le"},
+  {"id": "giud", "t": "Giudizio in tre parti", "d": "Controlli automatici sui vincoli, verifica delle pagine citate riaperte al momento, valutazione della qualità del risultato.", "at": 1, "i": "🔍", "p": "root", "r": "le valuta con un"},
+  {"id": "ris", "t": "54,55% al massimo", "d": "Su 23 combinazioni, in testa Claude Opus 5.5 e Claude Fable 5.1, a pari merito.", "at": 2, "i": "🏁", "p": "root", "r": "trova che i migliori arrivano al"},
+  {"id": "sforzo", "t": "Lo sforzo conta", "d": "GPT-6 Sol passa da 23 a 35 compiti riusciti alzando lo sforzo di ragionamento: più tempo e più costo.", "at": 2, "i": "🧠", "p": "ris", "r": "e mostra che"},
+  {"id": "tipo", "t": "Il tipo di richiesta", "d": "La classifica cambia per tipo di compito: conta più del nome del modello.", "at": 3, "i": "🗂", "p": "ris", "r": "dipende dal"},
+  {"id": "prat", "t": "Una su due", "d": "Anche l'agente migliore sbaglia o lascia a metà quasi una richiesta su due, con un criterio severo.", "at": 3, "i": "⚠️", "p": "root", "r": "insegna che"}
+ ], "x": [["giud", "ris", "rende severo il"]]},
+ "daisyrose": {"root": "DaisyRose-27B", "nodes": [
+  {"id": "pesi", "t": "Pesi aperti", "d": "Circa 27,8 miliardi di parametri, testo e immagini, licenza Apache 2.0: si può usare anche per scopi commerciali.", "at": 0, "i": "🔓", "p": "root", "r": "è un modello a"},
+  {"id": "ver", "t": "Tre versioni", "d": "BF16 circa 52 GB, FP8 circa 29, NVFP4 circa 23 (serve una GPU NVIDIA Blackwell).", "at": 0, "i": "📦", "p": "pesi", "r": "disponibili in"},
+  {"id": "rl", "t": "Apprendimento per rinforzo", "d": "Il modello prova, riceve un punteggio e si corregge, senza la fase di esempi scritti.", "at": 1, "i": "🎯", "p": "root", "r": "addestrato con"},
+  {"id": "comp", "t": "1.200 compiti scelti", "d": "Preparati con Eigent AI tra migliaia: ognuno punta a un errore tipico dei modelli.", "at": 1, "i": "✋", "p": "rl", "r": "su"},
+  {"id": "gpu", "t": "18 giorni di GPU", "d": "128 GPU H200 per i compiti e 16 per gli aggiornamenti, circa 63.000 ore di GPU, addestramento asincrono.", "at": 2, "i": "⚡", "p": "rl", "r": "in"},
+  {"id": "ris", "t": "Terminal-Bench da 5,6 a 12", "d": "Migliora in tutte le prove, ma il raddoppio parte da un numero basso; nella tabella è primo solo su IFBench.", "at": 3, "i": "📈", "p": "root", "r": "risultato:"},
+  {"id": "ricetta", "t": "Una ricetta pubblica", "d": "Pochi compiti ben scelti e poche centinaia di GPU bastano a un gruppo piccolo. Il codice, Miles, è aperto.", "at": 4, "i": "📖", "p": "root", "r": "conta perché è"}
+ ], "x": [["comp", "ricetta", "sono il cuore della"]]},
+ "npu": {"root": "Modelli locali sulla NPU", "nodes": [
+  {"id": "tre", "t": "CPU, GPU e NPU", "d": "La CPU fa un po' di tutto, la GPU calcola in parallelo, la NPU è fatta per le reti neurali e consuma poco.", "at": 0, "i": "🧮", "p": "root", "r": "usa il terzo processore:"},
+  {"id": "uns", "t": "Unsloth Desktop", "d": "L'applicazione senza codice: per la NPU usa Lemonade e FastFlowLM, e offre un'API locale alle altre app.", "at": 1, "i": "🖥", "p": "root", "r": "funziona con"},
+  {"id": "app", "t": "Più di cento app", "d": "Le applicazioni per agenti mandano le richieste all'API locale di Unsloth Desktop.", "at": 1, "i": "🔌", "p": "uns", "r": "serve"},
+  {"id": "mem", "t": "La memoria è il limite", "d": "La NPU usa la memoria del sistema; Windows ne lascia di base la metà. Qwen3.6 35B con tutto il contesto chiede circa 28 GB.", "at": 2, "i": "💾", "p": "root", "r": "ha un limite:"},
+  {"id": "prova", "t": "Come si prova", "d": "Computer con NPU XDNA 2 e Windows, Unsloth Desktop, filtro NPU, Enable NPU, modello compatibile.", "at": 3, "i": "🧪", "p": "root", "r": "si prova così:"}
+ ], "x": [["mem", "prova", "decide quale modello scegliere in"]]},
+ "azure": {"root": "Content Understanding e mutui", "nodes": [
+  {"id": "smist", "t": "Lo smistatore", "d": "prebuilt-mortgage.us classifica ogni documento del fascicolo e lo manda al lettore giusto.", "at": 0, "i": "🔀", "p": "root", "r": "parte dallo"},
+  {"id": "lett", "t": "Cinque lettori", "d": "Analizzatori specializzati per la domanda 1003, la perizia 1004 e gli altri moduli del mutuo.", "at": 0, "i": "📄", "p": "smist", "r": "che instrada a"},
+  {"id": "prezzo", "t": "Document Standard", "d": "Tutti e sei usano lo stesso contatore: circa 1 dollaro ogni 1.000 pagine nell'esempio, senza la tariffa avanzata.", "at": 1, "i": "💶", "p": "root", "r": "costa con"},
+  {"id": "altre", "t": "Pagine di altro tipo", "d": "Buste paga, estratti conto, documenti d'identità: si usa un proprio classificatore con le sue categorie.", "at": 2, "i": "🗃", "p": "root", "r": "deve gestire anche"},
+  {"id": "cons", "t": "contentRange", "d": "Manda solo le pagine utili, per esempio togliendo le foto delle perizie, e paghi solo quelle.", "at": 3, "i": "✂️", "p": "prezzo", "r": "si riduce con"},
+  {"id": "ita", "t": "Moduli americani", "d": "Per una pratica italiana non c'è un analizzatore pronto: classificatore personalizzato e schema dei campi propri.", "at": 3, "i": "🇮🇹", "p": "altre", "r": "attenzione:"}
+ ], "x": []}
+}
