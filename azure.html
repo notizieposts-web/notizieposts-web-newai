@@ -280,6 +280,15 @@ html{scroll-padding-top:6rem}
 .skip-link:focus{top:1rem}
 .tl-dot{width:24px!important;height:24px!important;margin:-10px 0 0 -12px!important}
 .tl-in{min-width:calc(var(--tln,12) * 5rem)!important}
+.tl-line{height:7px!important;margin-top:-2px;background:#7A5230!important;border:1.5px solid #3A2618;border-radius:6px!important}
+.tl-line::before,.tl-line::after{content:"";position:absolute;width:11px;height:11px;border:1.2px solid #3A2618;border-radius:50% 0 50% 0;background:#86BC24;pointer-events:none}
+.tl-line::before{left:29%;top:1px;transform:rotate(30deg)}
+.tl-line::after{left:71%;top:-9px;transform:rotate(-120deg);background:#5E9E4B}
+.tl-dot{border:1.5px solid #3A2618!important;border-radius:50% 0 50% 0!important;background:#5E9E4B!important;transform:rotate(-45deg);transition:transform .2s}
+.tl-dot:not(.n){background:#E3A22E!important}
+.tl-dot[aria-pressed="true"]{transform:rotate(-45deg) scale(1.3)!important;box-shadow:0 0 0 2.5px var(--violet-ink)}
+@media (prefers-reduced-motion:reduce){.tl-dot{transition:none}}
+@media (forced-colors:active){.tl-line{background:CanvasText!important}.tl-dot{background:ButtonText!important}.tl-dot[aria-pressed="true"]{background:Highlight!important}}
 .nav .links a,.btn,.opt,button,select,summary{min-height:24px}
 input[type=range]{min-height:24px}
 .grid2>*,.cards>*,.stats>*{min-width:0}
