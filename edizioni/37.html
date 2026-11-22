@@ -362,12 +362,15 @@ mark.kw-m.on{outline:2px solid var(--violet-ink);outline-offset:1px}
 .kw-card mark.kw-m{background:var(--surface)}
 /* Guida di lettura (line focus): due veli coprono il testo sopra e sotto la finestra di 1, 3 o 5 righe; niente barre laterali */
 .kw-mask{position:fixed;left:0;right:0;z-index:40;pointer-events:none;background:var(--bg);opacity:.86}
+.kw-mask.kw-soft{opacity:.5}
+.kw-band{position:fixed;z-index:40;pointer-events:none;background:rgba(120,120,120,.17);border-radius:6px}
+@media (forced-colors:active){.kw-band{forced-color-adjust:none;background:transparent;outline:3px solid Highlight}}
 .kw-lf{position:fixed;left:50%;transform:translateX(-50%);bottom:max(12px,env(safe-area-inset-bottom));z-index:60;display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;width:max-content;max-width:calc(100vw - 32px);padding:.45rem;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);box-shadow:0 6px 24px rgba(0,0,0,.18)}
 .kw-lf .kw-tool{min-height:44px}
 .kw-lf-hint{flex-basis:100%;text-align:center;font-size:.9rem;line-height:1.35;color:var(--ink)}
 .kw-branch{position:fixed;z-index:41;pointer-events:none;line-height:0}
 .kw-branch svg{display:block;overflow:visible}
-@media print{.kw-mask,.kw-lf,.kw-branch{display:none}}
+@media print{.kw-mask,.kw-lf,.kw-branch,.kw-band{display:none}}
 /* Riga di aiuti del capitolo: Sapio, Leggimi, Testo più comodo */
 .kw-row{display:flex;flex-wrap:wrap;gap:.5rem}
 .kw-row .kw-btn{flex:none}
@@ -438,6 +441,8 @@ html.rt-bg1[data-theme="light"]{--bg:#FBF4E4;--surface:#FFFBF2;--soft:#F3EAD6}ht
 /* Una frase per riga */
 .kw-br{display:none}
 html.rt-fr .kw-br{display:block;height:.55em}
+html.rt-sg .kw-sg{display:inline-block;max-width:100%}
+html.rt-noav svg.rd{display:none!important}
 /* Solo testo */
 html.rt-pl .grid2{grid-template-columns:minmax(0,1fr)!important}
 html.rt-pl .grid2>.stick,html.rt-pl svg.radar,html.rt-pl .tl,html.rt-pl .tl-card{display:none!important}
@@ -1166,7 +1171,11 @@ print(res["status"])
       '<path d="M'+(m+30)+' '+(y+6)+' q9 -5 15 2 q-8 5 -15 -2 z" fill="#5E9E4B" stroke="#3A2618" stroke-width="1"/>'+
       '<path d="M14 '+(y+1)+' q-8 9 -12 10 q0 -9 12 -10 z" fill="#5E9E4B" stroke="#3A2618" stroke-width="1"/>'+
       '<path d="M'+(w-14)+' '+(y-1)+' q4 -8 12 -7 q-3 8 -12 7 z" fill="#5E9E4B" stroke="#3A2618" stroke-width="1"/></svg>';}
+  /* stili della guida (Adobe Research, CHI 2023, 177 lettori: barra grigia la più veloce per chi ha dislessia, finestra la più gradita) */
+  var LFS=['Barra grigia','Finestra','Ombra leggera','Solo sottolineatura'];
   function lfDraw(){if(!LF)return;var L=LF.lines;if(!L.length)return;var a=L[LF.i],z=lfEnd(),pad=6,sy=window.scrollY;
+    var veil=LF.st===1||LF.st===2;[LF.up,LF.dn,LF.lt,LF.rt].forEach(function(m){m.style.display=veil?'':'none';m.classList.toggle('kw-soft',LF.st===2)});
+    var zr0=a.z.getBoundingClientRect();LF.band.style.display=LF.st===0?'':'none';if(LF.st===0){LF.band.style.top=(a.t-pad-sy)+'px';LF.band.style.height=Math.max(0,z.b-a.t+pad*2)+'px';LF.band.style.left=(zr0.left-8)+'px';LF.band.style.width=(zr0.width+16)+'px';}
     var top=a.t-pad-sy,bot=z.b+pad+8-sy;LF.up.style.top='0';LF.up.style.height=Math.max(0,top)+'px';LF.dn.style.top=Math.max(0,bot)+'px';LF.dn.style.bottom='0';
     var zr=a.z.getBoundingClientRect(),h=Math.max(0,bot-top)+'px';LF.lt.style.top=LF.rt.style.top=top+'px';LF.lt.style.height=LF.rt.style.height=h;LF.lt.style.left='0';LF.lt.style.right='auto';LF.lt.style.width=Math.max(0,zr.left-12)+'px';LF.rt.style.left=(zr.right+12)+'px';
     var bw=Math.round(zr.width+16);if(LF.bw!==bw){LF.bw=bw;LF.br.innerHTML=lfBranch(bw);}LF.br.style.left=(zr.left-8)+'px';LF.br.style.top=(bot-12)+'px';}
@@ -1177,16 +1186,17 @@ print(res["status"])
   function lfSay(){LF.live.textContent='Riga '+(LF.i+1)+' di '+LF.lines.length;}
   function lfMove(d){LF.i=Math.max(0,Math.min(LF.lines.length-1,LF.i+d));lfShow();lfSay();}
   function lfAt(y){var L=LF.lines,best=0;for(var k=0;k<L.length;k++){if(L[k].t<=y)best=k;else break;}return best;}
-  function lfStop(back){if(!LF)return;var o=LF;LF=null;o.up.remove();o.dn.remove();o.lt.remove();o.rt.remove();o.br.remove();o.bar.remove();
+  function lfStop(back){if(!LF)return;var o=LF;LF=null;o.band.remove();o.up.remove();o.dn.remove();o.lt.remove();o.rt.remove();o.br.remove();o.bar.remove();
     window.removeEventListener('scroll',o.onScroll);window.removeEventListener('resize',o.onResize);document.removeEventListener('keydown',o.onKey,true);document.removeEventListener('click',o.onClick,true);
     o.btn.setAttribute('aria-pressed','false');if(back)o.btn.focus();if(o.done)o.done();}
   function lfStart(sec,btn,startY,done){lfStop(false);
     var up=document.createElement('div'),dn=document.createElement('div'),lt=document.createElement('div'),rt=document.createElement('div'),br=document.createElement('div'),bar=document.createElement('div');
     [up,dn,lt,rt].forEach(function(m){m.className='kw-mask';m.setAttribute('aria-hidden','true');document.body.appendChild(m);});
     bar.className='kw-lf';bar.setAttribute('role','toolbar');bar.setAttribute('aria-label','Guida di lettura');
-    bar.innerHTML='<button type="button" class="kw-tool" data-m="-1">↑ Riga su</button><button type="button" class="kw-tool" data-m="1">↓ Riga giù</button><button type="button" class="kw-tool" data-m="n">Righe visibili: 3</button><button type="button" class="kw-tool" data-m="x">Esci</button><span class="sr-only" aria-live="polite"></span>';
+    bar.innerHTML='<button type="button" class="kw-tool" data-m="-1">↑ Riga su</button><button type="button" class="kw-tool" data-m="1">↓ Riga giù</button><button type="button" class="kw-tool" data-m="n">Righe visibili: 3</button><button type="button" class="kw-tool" data-m="s">Stile: '+LFS[(RP.lfs|0)%4]+'</button><button type="button" class="kw-tool" data-m="x">Esci</button><span class="sr-only" aria-live="polite"></span>';
     br.className='kw-branch';br.setAttribute('aria-hidden','true');document.body.appendChild(br);document.body.appendChild(bar);
-    LF={sc:matchMedia('(hover: none) and (pointer: coarse)').matches,lock:0,sec:sec,btn:btn,up:up,dn:dn,lt:lt,rt:rt,br:br,bar:bar,live:bar.querySelector('[aria-live]'),n:3,i:0,lines:lineRects(sec),done:done};
+    var band=document.createElement('div');band.className='kw-band';band.setAttribute('aria-hidden','true');document.body.appendChild(band);
+    LF={band:band,st:(RP.lfs|0)%4,sc:matchMedia('(hover: none) and (pointer: coarse)').matches,lock:0,sec:sec,btn:btn,up:up,dn:dn,lt:lt,rt:rt,br:br,bar:bar,live:bar.querySelector('[aria-live]'),n:3,i:0,lines:lineRects(sec),done:done};
     var raf=0;LF.onScroll=function(){if(!raf)raf=requestAnimationFrame(function(){raf=0;if(!LF)return;if(LF.sc&&!LF.lock)LF.i=lfAt(window.scrollY+lfAnchor()+4);lfDraw()})};
     LF.onResize=function(){if(!LF)return;var y=LF.lines[LF.i]?LF.lines[LF.i].t:0,ratio=y/Math.max(1,document.documentElement.scrollHeight);LF.lines=lineRects(sec);LF.i=lfAt(ratio*document.documentElement.scrollHeight);lfDraw();};
     LF.onKey=function(e){if(!LF)return;var t=e.target,tag=t&&t.tagName;if(e.altKey||e.ctrlKey||e.metaKey||/INPUT|TEXTAREA|SELECT/.test(tag)||(t&&t.isContentEditable))return;
@@ -1195,22 +1205,23 @@ print(res["status"])
     bar.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var m=b.getAttribute('data-m');
       if(m==='x'){lfStop(true);return;}
       if(m==='n'){LF.n=LF.n===1?3:LF.n===3?5:1;b.textContent='Righe visibili: '+LF.n;lfShow();return;}
+      if(m==='s'){LF.st=(LF.st+1)%4;RP.lfs=LF.st;rpSave();b.textContent='Stile: '+LFS[LF.st];LF.live.textContent='Stile della guida: '+LFS[LF.st];lfDraw();return;}
       lfMove(+m);});
     window.addEventListener('scroll',LF.onScroll,{passive:true});window.addEventListener('resize',LF.onResize);document.addEventListener('keydown',LF.onKey,true);document.addEventListener('click',LF.onClick,true);
     LF.i=lfAt(startY);if(LF.sc){var hb=bar.querySelectorAll('[data-m="-1"],[data-m="1"]');[].forEach.call(hb,function(x){x.remove()});var hint=document.createElement('span');hint.className='kw-lf-hint';hint.textContent='Scorri con il dito: la finestra avanza da sola';bar.insertBefore(hint,bar.firstChild);}btn.setAttribute('aria-pressed','true');lfShow();lfSay();bar.querySelector('button').focus({preventScroll:true});}
   /* ---------- Testo più comodo (preferenze condivise "radar-read") ---------- */
-  var RP={size:0,sp:0,font:0,bg:0,fr:0,tp:0,pl:0,pz:1,rc:0,ps:0},fontOn=false,RK=['size','sp','font','bg','fr','tp','pl','pz','rc','ps'];
+  var RP={size:0,sp:0,font:0,bg:0,fr:0,tp:0,pl:0,pz:1,rc:0,ps:0,lfs:0,sg:0,noav:0},fontOn=false,RK=['size','sp','font','bg','fr','tp','pl','pz','rc','ps','lfs','sg','noav'];
   function rpLoad(){try{var o=JSON.parse(localStorage.getItem('radar-read')||'{}');RK.forEach(function(k){if(o[k]!=null)RP[k]=+o[k]||0})}catch(e){}}
   function rpSave(){try{var o=JSON.parse(localStorage.getItem('radar-read')||'{}');RK.forEach(function(k){o[k]=RP[k]});localStorage.setItem('radar-read',JSON.stringify(o))}catch(e){}}
-  function rpApply(){var H=document.documentElement;H.classList.toggle('rt-s1',RP.size===1);H.classList.toggle('rt-s2',RP.size===2);H.classList.toggle('rt-sp',!!RP.sp);H.classList.toggle('rt-font',!!RP.font);[1,2,3].forEach(function(i){H.classList.toggle('rt-bg'+i,RP.bg===i)});H.classList.toggle('rt-pl',!!RP.pl);H.classList.toggle('rt-rc',!!RP.rc);H.classList.toggle('rt-ps',!!RP.ps);if(RP.fr)frOn();H.classList.toggle('rt-fr',!!RP.fr);if(started)stepsAll();
+  function rpApply(){var H=document.documentElement;H.classList.toggle('rt-s1',RP.size===1);H.classList.toggle('rt-s2',RP.size===2);H.classList.toggle('rt-sp',!!RP.sp);H.classList.toggle('rt-font',!!RP.font);[1,2,3].forEach(function(i){H.classList.toggle('rt-bg'+i,RP.bg===i)});H.classList.toggle('rt-pl',!!RP.pl);H.classList.toggle('rt-rc',!!RP.rc);H.classList.toggle('rt-ps',!!RP.ps);H.classList.toggle('rt-noav',!!RP.noav);if(RP.sg)sgOn();H.classList.toggle('rt-sg',!!RP.sg);if(RP.fr)frOn();H.classList.toggle('rt-fr',!!RP.fr);if(started)stepsAll();
     if(RP.font&&!fontOn){fontOn=true;var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap';document.head.appendChild(l)}
     if(LF){LF.lines=lineRects(LF.sec);LF.i=Math.min(LF.i,LF.lines.length-1);lfDraw();}}
   var started=false;
   function rpBox(id,ht){return '<div class="kw-rd" id="'+id+'" role="region" aria-label="Testo più comodo: '+esc(ht)+'" hidden>'+
     '<fieldset><legend>Grandezza del testo</legend><div class="kw-opts">'+['Normale','Grande','Molto grande'].map(function(t,i){return '<label><input type="radio" name="'+id+'-s" value="'+i+'"> '+t+'</label>'}).join('')+'</div></fieldset>'+
     '<fieldset><legend>Colore dello sfondo (preferenza personale, tema chiaro)</legend><div class="kw-opts">'+[['Normale','#F6F6F5'],['Crema','#FBF4E4'],['Azzurro','#EAF2F8'],['Verde chiaro','#EDF5E6']].map(function(t,i){return '<label><input type="radio" name="'+id+'-b" value="'+i+'"> <span class="kw-sw" style="background:'+t[1]+'" aria-hidden="true"></span>'+t[0]+'</label>'}).join('')+'</div></fieldset>'+
-    '<fieldset><legend>Leggibilità</legend><div class="kw-opts"><label><input type="checkbox" data-k="sp"> Più spazio tra righe e lettere</label><label><input type="checkbox" data-k="font"> Carattere ad alta leggibilità</label><label><input type="checkbox" data-k="fr"> Una frase per riga</label><label><input type="checkbox" data-k="rc"> Righe corte</label><label><input type="checkbox" data-k="ps"> Parole più semplici accanto a quelle difficili</label></div></fieldset>'+
-    '<fieldset><legend>Concentrazione</legend><div class="kw-opts"><label><input type="checkbox" data-k="tp"> Leggi a tappe</label><label><input type="checkbox" data-k="pl"> Solo testo: nascondi riquadri e animazioni</label><label><input type="checkbox" data-k="pz"> Ricordami una pausa ogni 15 minuti</label></div></fieldset>'+
+    '<fieldset><legend>Leggibilità</legend><div class="kw-opts"><label><input type="checkbox" data-k="sp"> Più spazio tra righe e lettere</label><label><input type="checkbox" data-k="font"> Carattere ad alta leggibilità</label><label><input type="checkbox" data-k="fr"> Una frase per riga</label><label><input type="checkbox" data-k="rc"> Righe corte</label><label><input type="checkbox" data-k="sg"> A capo tra gruppi di parole, mai a metà</label><label><input type="checkbox" data-k="ps"> Parole più semplici accanto a quelle difficili</label></div></fieldset>'+
+    '<fieldset><legend>Concentrazione</legend><div class="kw-opts"><label><input type="checkbox" data-k="tp"> Leggi a tappe</label><label><input type="checkbox" data-k="pl"> Solo testo: nascondi riquadri e animazioni</label><label><input type="checkbox" data-k="pz"> Ricordami una pausa ogni 15 minuti</label><label><input type="checkbox" data-k="noav"> Solo voce e testo: nascondi il disegno di Sapio</label></div></fieldset>'+
     '<div class="kw-tools"><button type="button" class="kw-tool" data-x="test">🦉 Trova le mie impostazioni: prova di lettura</button><button type="button" class="kw-tool" data-x="print">🖨 Stampa questo capitolo</button></div>'+
     '<p class="kw-hint">Vale per tutte le pagine di Sapit e resta salvato in questo browser. I colori di sfondo sono solo una preferenza: gli studi non mostrano che aiutino la dislessia.</p></div>';}
   function rpSync(box){box.querySelectorAll('input[type=radio]').forEach(function(r){r.checked=+r.value===(/-b$/.test(r.name)?RP.bg:RP.size)});box.querySelectorAll('input[data-k]').forEach(function(c){c.checked=!!RP[c.getAttribute('data-k')]});}
@@ -1279,6 +1290,18 @@ print(res["status"])
       nodes.forEach(function(t){var re=/([.!?…;]["»”’)]*)\s+(?=[«"“A-ZÀ-Ý0-9a-zà-ÿ])/g,m,cuts=[];var v=t.nodeValue;
         while((m=re.exec(v))){if(m[1]==='.'&&/(?:\b(?:ecc|es|cfr|pag|vs|dott|p)|\b[A-Z]|\d)$/i.test(v.slice(0,m.index)))continue;if(m[1]!==';'&&!/^\s*[«"“A-ZÀ-Ý0-9]/.test(v.slice(m.index+m[0].length-1)))continue;cuts.push(m.index+m[1].length);}
         for(var k=cuts.length-1;k>=0;k--){var r=t.splitText(cuts[k]);var sp=document.createElement('span');sp.className='kw-br';sp.setAttribute('aria-hidden','true');t.parentNode.insertBefore(sp,r);}});});}
+  /* ---------- A capo tra gruppi di parole: le righe finiscono dove finisce un pezzo di frase
+     (LeVasseur e altri, Applied Psycholinguistics 2006: righe spezzate a fine proposizione = lettura più fluida) ---------- */
+  var sgDone=false,SGW='e|ed|ma|però|perché|poiché|che|quando|mentre|se|oppure|o|come|dove|quindi|cioè|invece|così|anche se|finché|affinché|benché';
+  function sgCuts(v){var c=[],m,re=new RegExp('([,;:])\\s+|\\s+(?=(?:'+SGW+')\\s)','gi'),start=0,last=-1;
+    while((m=re.exec(v))){var at=m[1]?m.index+1:m.index;if(at-start>=18){c.push(at);start=at;}}
+    if(c.length&&v.length-c[c.length-1]<10)c.pop();return c;}
+  function sgOn(){if(sgDone)return;sgDone=true;
+    document.querySelectorAll('section.ch .prose>p, section.ch .prose li, section.ch .ch-head .lead').forEach(function(b){var w=document.createTreeWalker(b,NodeFilter.SHOW_TEXT,{acceptNode:function(n){return n.nodeValue.length<28||n.parentElement.closest('button,.gl-tip,.kw-hd-tip,.sr-only,.kw-sg,script,style')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}}),nodes=[],n;
+      while((n=w.nextNode()))nodes.push(n);
+      nodes.forEach(function(t){var v=t.nodeValue,cuts=sgCuts(v);if(!cuts.length)return;var f=document.createDocumentFragment(),p=0;cuts.concat([v.length]).forEach(function(c){var seg=v.slice(p,c),lead=seg.match(/^\s*/)[0],trail=seg.match(/\s*$/)[0],core=seg.slice(lead.length,seg.length-trail.length);
+          if(lead)f.appendChild(document.createTextNode(lead));if(core){var sp=document.createElement('span');sp.className='kw-sg';sp.textContent=core;f.appendChild(sp);}if(trail&&core)f.appendChild(document.createTextNode(trail));p=c;});
+        t.parentNode.replaceChild(f,t);});});}
   /* ---------- Parole difficili: prima comparsa nel capitolo, se non c'è già nel glossario ---------- */
   var HARD={"asincrono": "Che non aspetta: le parti lavorano ognuna per conto suo, senza fermarsi ad attendere le altre.", "asincrona": "Che non aspetta: le parti lavorano ognuna per conto suo, senza fermarsi ad attendere le altre.", "parametri": "I numeri interni di un modello AI, regolati durante l'addestramento. Più parametri vuol dire, di solito, un modello più grande.", "addestramento": "La fase in cui un modello impara da tantissimi esempi, prima di essere usato.", "addestrato": "Che ha imparato da tantissimi esempi, nella fase chiamata addestramento.", "licenza": "Le regole che dicono cosa si può fare con un software o un modello: usarlo, modificarlo, venderlo.", "sandbox": "Un ambiente chiuso e sicuro dove un programma può fare prove senza toccare il resto del computer.", "GPU": "Il processore grafico: un chip che fa moltissimi calcoli insieme, usato per addestrare e far girare i modelli AI.", "NPU": "Un chip pensato apposta per l'intelligenza artificiale, presente in molti portatili e telefoni recenti.", "CPU": "Il processore principale del computer, quello che esegue i programmi di tutti i giorni.", "token": "Un pezzetto di testo (una parola o parte di parola) che il modello legge e scrive uno alla volta.", "benchmark": "Una prova standard che serve a confrontare modelli o programmi con gli stessi compiti.", "inferenza": "Il momento in cui un modello già addestrato viene usato per rispondere.", "quantizzazione": "Un modo per rendere un modello più leggero salvando i suoi numeri con meno precisione.", "precisione": "Quante cifre si usano per salvare ogni numero: meno precisione, file più piccolo ma risultati un po' meno esatti.", "open source": "Software di cui chiunque può leggere, usare e modificare il codice.", "API": "Una porta di accesso che permette a un programma di usare un servizio, per esempio un modello AI.", "cloud": "Computer potenti di un'azienda, usati via internet invece che sul proprio computer.", "server": "Un computer che lavora per altri, rispondendo alle loro richieste via rete.", "regressione": "Quando una modifica fa peggiorare qualcosa che prima funzionava bene.", "configurazione": "L'insieme delle impostazioni con cui un programma viene fatto funzionare.", "configurazioni": "Gli insiemi di impostazioni con cui un programma viene fatto funzionare.", "algoritmo": "Una sequenza precisa di passi per risolvere un problema.", "dataset": "Una raccolta ordinata di dati, usata per addestrare o provare un modello.", "prompt": "Il testo o la domanda che si scrive a un modello AI per chiedergli qualcosa.", "multimodale": "Che capisce più tipi di contenuto insieme: testo, immagini, audio.", "chatbot": "Un programma con cui si parla scrivendo, che risponde come in una chat.", "codificatore": "La parte di un modello che trasforma un contenuto (per esempio un'immagine) in numeri che il modello capisce.", "latenza": "Il tempo di attesa tra una richiesta e la risposta.", "scalabile": "Che funziona bene anche quando il lavoro o il numero di utenti cresce molto.", "framework": "Un insieme di strumenti già pronti su cui costruire un programma.", "repository": "Lo spazio online dove si conserva il codice di un progetto, con tutta la sua storia.", "firmware": "Il software di base dentro un dispositivo, che lo fa funzionare.", "crittografia": "Tecniche per rendere un messaggio leggibile solo da chi ha la chiave giusta.", "tolleranza": "Il margine di differenza accettato prima di considerare un valore sbagliato.", "pipeline": "Una catena di passaggi automatici, in cui l'uscita di uno è l'ingresso del successivo.", "telemetria": "Dati raccolti in automatico da un programma su come sta funzionando.", "profilazione": "L'analisi di dove un programma spende tempo e risorse, per capire cosa lo rallenta.", "agentico": "Detto di un sistema AI che non si limita a rispondere ma compie azioni da solo, passo dopo passo.", "distillazione": "Insegnare a un modello piccolo a imitare un modello grande, per averne uno più leggero.", "ottimizzazione": "Il lavoro per far andare qualcosa più veloce o con meno risorse.", "interfaccia": "La parte di un programma con cui si interagisce: schermate, pulsanti, comandi.", "classificatore": "Un programma che mette ogni elemento nella categoria giusta, per esempio \"fattura\" o \"contratto\".", "estrazione": "Il recupero automatico di dati precisi da un documento, come importi o date.", "conformità": "Il rispetto di leggi, regole e standard.", "trasparenza": "Il dovere di spiegare in modo chiaro come funziona qualcosa e quali dati usa.", "semiconduttori": "I materiali (come il silicio) con cui si fanno i chip."},SIMPLE={"asincrono": "senza aspettare", "asincrona": "senza aspettare", "parametri": "i numeri interni del modello", "addestramento": "la fase in cui impara", "addestrato": "che ha imparato", "licenza": "le regole d'uso", "sandbox": "uno spazio di prova chiuso", "GPU": "chip per i calcoli", "NPU": "chip per l'AI", "CPU": "processore", "token": "pezzetti di testo", "benchmark": "prova di confronto", "inferenza": "l'uso del modello", "quantizzazione": "alleggerimento", "precisione": "cifre per ogni numero", "open source": "codice aperto", "API": "porta di accesso", "cloud": "computer via internet", "server": "computer di servizio", "regressione": "peggioramento", "configurazione": "impostazioni", "configurazioni": "impostazioni", "algoritmo": "procedimento", "dataset": "raccolta di dati", "prompt": "la richiesta scritta", "multimodale": "testo, immagini e audio", "chatbot": "programma che chatta", "codificatore": "traduttore in numeri", "latenza": "tempo di attesa", "scalabile": "che regge la crescita", "framework": "base di strumenti", "repository": "archivio del codice", "firmware": "software interno", "crittografia": "cifratura", "tolleranza": "margine accettato", "pipeline": "catena di passaggi", "telemetria": "dati di funzionamento", "profilazione": "analisi dei rallentamenti", "agentico": "che agisce da solo", "distillazione": "copia in piccolo", "ottimizzazione": "miglioramento", "interfaccia": "schermate e comandi", "classificatore": "smistatore", "estrazione": "recupero dei dati", "conformità": "rispetto delle regole", "trasparenza": "chiarezza", "semiconduttori": "materiali dei chip"},hid=0;
   function hardWords(sec){var gl={};sec.querySelectorAll('.gl-btn').forEach(function(b){gl[(b.firstChild?b.firstChild.textContent:'').trim().toLowerCase()]=1});
@@ -1329,22 +1352,32 @@ print(res["status"])
   function stepsAll(){document.querySelectorAll('section.ch').forEach(function(sec){if(RP.tp){stepsBuild(sec);stepsDraw(sec);}else if(sec._steps){sec._steps.g.forEach(function(g){g.forEach(function(x){x.classList.remove('kw-hide')})});var o=sec.querySelector('.kw-step');if(o)o.remove();sec._steps=null;}});}
   /* ---------- Domanda lampo: completa la frase con la parola chiave giusta ---------- */
   var ALLKW=[];
+  /* opzioni sbagliate di qualità (ETH Zürich 2026, Drexel 2025): mai una variante della risposta (stessa radice, una dentro l'altra),
+     mai una parola già presente nel testo della domanda o nel capitolo (potrebbe essere giusta anche lei), niente doppioni;
+     prima le parole dello stesso tipo (nome con nome, termine con termine) e di lunghezza simile, così non si indovina per esclusione */
+  function goodWrong(ans,cands,text,chap,n){var a=ans.toLowerCase(),seen={},out=[],t=(text||'').toLowerCase(),ch=(chap||'').toLowerCase(),ak=cands.filter(function(o){return o.d&&o.d.toLowerCase()===a})[0];ak=ak&&ak.kind;
+    var root=function(w){return w.toLowerCase().replace(/[^a-zà-ÿ0-9]/g,'').slice(0,5)};
+    var ok=cands.filter(function(o){var k=(o.d||'').toLowerCase();if(!k||seen[k]||k===a)return false;seen[k]=1;
+      if(k.indexOf(a)>=0||a.indexOf(k)>=0||root(k)===root(a))return false;if(t.indexOf(k)>=0)return false;if(ch&&ch.indexOf(k)>=0)return false;return true;});
+    ok.sort(function(x,y){var sx=(x.kind===ak?0:2)+Math.min(2,Math.abs(x.d.length-ans.length)/6),sy=(y.kind===ak?0:2)+Math.min(2,Math.abs(y.d.length-ans.length)/6);return sx-sy;});
+    return ok.slice(0,n||2).map(function(o){return o.d});}
   function quick(sec,data){var pr=sec.querySelector('.prose');if(!pr)return;var c=data.list.filter(function(o){return o.ctx&&o.d.length>2&&o.kind!=='w'})[0]||data.list.filter(function(o){return o.ctx})[0];if(!c)return;
-    var others=ALLKW.filter(function(d){return d.sec!==sec&&d.d.toLowerCase()!==c.d.toLowerCase()&&c.ctx.toLowerCase().indexOf(d.d.toLowerCase())<0});
-    var seen={},wrong=[];others.forEach(function(d){var k=d.d.toLowerCase();if(!seen[k]&&wrong.length<2){seen[k]=1;wrong.push(d.d)}});if(wrong.length<2)return;
+    var pool=ALLKW.filter(function(d){return d.sec!==sec}).concat([c]),wrong=goodWrong(c.d,pool,c.ctx,pr.textContent);if(wrong.length<2)wrong=goodWrong(c.d,pool,c.ctx,'');if(wrong.length<2)return;
     c.re.lastIndex=0;var blank=esc(c.ctx).replace(new RegExp(c.re.source,'gi'),'<b>_____</b>');c.re.lastIndex=0;if(blank.indexOf('_____')<0)return;
     var opts=[c.d].concat(wrong),seed=sec.id.length;opts.sort(function(a,b){return ((a.length*7+seed)%5)-((b.length*7+seed)%5)||a.localeCompare(b)});
     var box=document.createElement('div');box.className='kw-quick';box.setAttribute('role','group');box.setAttribute('aria-label','Domanda lampo');
     box.innerHTML='<h3><span aria-hidden="true">⚡</span> Domanda lampo</h3><p style="margin:0">Quale parola completa la frase del capitolo?</p><blockquote>'+blank+'</blockquote><div class="kw-opts">'+opts.map(function(o){return '<button type="button" class="kw-tool">'+esc(o)+'</button>'}).join('')+'</div><p class="kw-qres" aria-live="polite"></p>';
     pr.appendChild(box);sec._qi={q:blank,a:c.d,o:opts};
-    box.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||box._done)return;box._done=1;var ok=b.textContent===c.d;
-      box.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-disabled','true');if(x.textContent===c.d)x.classList.add('ok');else if(x===b)x.classList.add('no');});
+    box.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||box._done||b.getAttribute('aria-disabled')==='true')return;var ok=b.textContent===c.d;
+      if(!ok&&!box._try){box._try=1;b.classList.add('no');b.setAttribute('aria-disabled','true');
+        box.querySelector('.kw-qres').innerHTML=OWL_C+'<span>Non è questa. Indizio: la parola giusta inizia con «'+esc(c.d.charAt(0).toUpperCase())+'» e ha '+c.d.replace(/\s/g,'').length+' lettere. Riprova!</span>';return;}
+      box._done=1;box.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-disabled','true');if(x.textContent===c.d)x.classList.add('ok');else if(x===b)x.classList.add('no');});
       rvAdd(sec,{q:blank,a:c.d,o:opts});
-      box.querySelector('.kw-qres').innerHTML=(ok?OWL_F+'<span>Giusto! Hai seguito bene il capitolo.</span>':OWL_C+'<span>Quasi: la parola giusta è «'+esc(c.d)+'». La trovi nel testo con Sapio.</span>');});}
+      box.querySelector('.kw-qres').innerHTML=(ok?OWL_F+'<span>'+(box._try?'Giusto, con l\'indizio ce l\'hai fatta!':'Giusto! Hai seguito bene il capitolo.')+'</span>':OWL_C+'<span>La parola giusta è «'+esc(c.d)+'». La trovi nel testo con Sapio: rileggi la frase e la ritroverai nel ripasso.</span>');});}
   /* ---------- Domande a completamento (tappe, ripasso) ---------- */
   function clozeFrom(text,list,avoid){var cand=list.filter(function(o){o.re.lastIndex=0;var ok=o.re.test(text);o.re.lastIndex=0;return ok&&o.d.length>2});if(!cand.length)return null;
     var c=cand.filter(function(o){return o.kind!=='w'})[0]||cand[0];
-    var wrong=[],seen={};(avoid||[]).concat(list.map(function(o){return o.d})).forEach(function(d){var k=d.toLowerCase();if(seen[k]||k===c.d.toLowerCase()||text.toLowerCase().indexOf(k)>=0||wrong.length>=2)return;seen[k]=1;wrong.push(d);});
+    var wrong=goodWrong(c.d,(avoid||[]).map(function(d){return {d:d}}).concat(list),text);
     if(wrong.length<2)return null;c.re.lastIndex=0;var q=esc(text).replace(new RegExp(c.re.source,'gi'),'<b>_____</b>');c.re.lastIndex=0;if(q.indexOf('_____')<0)return null;
     var opts=[c.d].concat(wrong);opts.sort(function(a,b){return (a.length%3)-(b.length%3)||a.localeCompare(b)});return {q:q,a:c.d,o:opts};}
   function askHtml(it,title){return (title?'<p style="margin:0;font-weight:700">'+title+'</p>':'')+'<blockquote>'+it.q+'</blockquote><div class="kw-opts">'+it.o.map(function(o){return '<button type="button" class="kw-tool" data-ans="1">'+esc(o)+'</button>'}).join('')+'</div><p class="kw-qres" aria-live="polite"></p>';}
@@ -1471,14 +1504,53 @@ print(res["status"])
     if(!sec.querySelector('.prose')||!sec.querySelector('.ch-head h2'))return;
     timeChip(sec);hardWords(sec);
     var n=zones(sec).map(textOf).join(' ').split(' ').length;if(n<250)return;build(sec);
-    try{sec._kw=analyze(sec);sec._kw.list.forEach(function(o){if(o.kind!=='w')ALLKW.push({sec:sec,d:o.d})});secs.push(sec);}catch(e){}});
+    try{sec._kw=analyze(sec);sec._kw.list.forEach(function(o){if(o.kind!=='w')ALLKW.push({sec:sec,d:o.d,kind:o.kind})});secs.push(sec);}catch(e){}});
     secs.forEach(function(sec){try{summary(sec,sec._kw,sec._head);quick(sec,sec._kw);}catch(e){}});
     timeTick();}
   function boot(){rpLoad();rpApply();start();started=true;if(RP.tp)stepsAll();setTimeout(markOffer,600);try{rvOffer()}catch(e){}}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
 </script>
-<script id="mv-js">
+<script id="llm-guard">(function(){if(window.RadarLLM)return;
+var ua=navigator.userAgent||'',ios=/iP(hone|od|ad)/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+var IOS=[['Qwen2.5-0.5B-Instruct-q4f32_1-MLC','Qwen2.5 0,5B · adatto a iPhone e iPad (circa 0,3 GB)']];
+/* dimensione del download, in MB (stima prudente per il controllo dello spazio) */
+var SIZE={'Qwen2.5-0.5B-Instruct-q4f16_1-MLC':330,'Qwen2.5-0.5B-Instruct-q4f32_1-MLC':360,'Qwen2.5-1.5B-Instruct-q4f16_1-MLC':950,'Qwen2.5-3B-Instruct-q4f16_1-MLC':1800,'Llama-3.2-3B-Instruct-q4f16_1-MLC':1800};
+var K='radar-llm-run',KB='radar-llm-blocked',WEEK=7*864e5;
+function rd(k){try{return JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}}
+function wr(k,v){try{if(v==null)localStorage.removeItem(k);else localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+/* all'apertura della pagina: un segnale rimasto vuol dire che la scheda e' stata chiusa a meta' */
+(function(){var r=rd(K);if(r&&r.m&&Date.now()-(r.t||0)<30*6e4){var b=rd(KB)||{};b[r.m]={t:Date.now(),ph:r.ph||'load'};wr(KB,b)}wr(K,null)})();
+function blocked(id){var b=rd(KB)||{},x=b[id];return x&&Date.now()-x.t<WEEK?x:null}
+function unblock(id){var b=rd(KB)||{};delete b[id];wr(KB,b)}
+function mark(id,ph){wr(K,{m:id,t:Date.now(),ph:ph})}
+function clear(){wr(K,null)}
+function models(list){return ios?IOS:list}
+function pick(id,list){list=models(list);return list.some(function(m){return m[0]===id})?id:list[0][0]}
+function chatOpts(){return ios?{context_window_size:3072,prefill_chunk_size:256}:undefined}
+function limit(){return ios?{chars:3600,out:900}:{chars:7000,out:1400}}
+function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(e){return false}}
+function E(msg,code){var e=new Error(msg);e.code=code;e.fallback=true;return e}
+function friendly(e){var m=String(e&&e.message||e||'');if(e&&e.code)return m;
+  if(/quota|QuotaExceeded|storage/i.test(m))return 'Non c’è abbastanza spazio per salvare il modello in questo browser. Libera spazio o usa Gemini.';
+  if(/out of memory|OOM|device was lost|DeviceLost|GPUDevice|allocation/i.test(m))return 'Il dispositivo non ha abbastanza memoria per il modello. Usa Gemini o la mappa dell’edizione.';
+  if(/Cannot fetch|Load failed|NetworkError|Failed to fetch/i.test(m))return 'Il download del modello si è interrotto (rete o spazio). Riprova con il Wi-Fi, oppure usa Gemini.';
+  return m}
+async function load(w,id,progress,note){
+  if(blocked(id))throw E('L’ultima volta il modello ha fatto chiudere la pagina'+(ios?' (su iPhone la memoria per scheda è poca)':'')+': per sicurezza non lo riprovo da solo. Usa Gemini, oppure “Riprova il modello”.','blocked');
+  var cached=false;try{if(w.hasModelInCache)cached=await w.hasModelInCache(id)}catch(e){}
+  if(!cached&&navigator.storage){
+    try{if(navigator.storage.estimate){var q=await navigator.storage.estimate(),free=(q.quota||0)-(q.usage||0),need=(SIZE[id]||1000)*1.15*1048576;
+      if(q.quota&&free<need)throw E('Spazio insufficiente: servono circa '+Math.round(need/1048576)+' MB, ne restano '+Math.max(0,Math.round(free/1048576))+'. Libera spazio o usa Gemini.','quota')}}catch(e){if(e.code)throw e}
+    try{if(navigator.storage.persist){var ok=await navigator.storage.persist();if(!ok&&ios&&!standalone()&&note)note('Consiglio: aggiungi Sapit alla schermata Home (Condividi → Aggiungi alla schermata Home), così iPhone non cancella il modello dopo qualche giorno.')}}catch(e){}}
+  mark(id,'load');var eng;
+  try{eng=await w.CreateMLCEngine(id,{initProgressCallback:progress},chatOpts())}
+  catch(e){clear();var f=friendly(e);var x=new Error(f);x.fallback=/spazio|memoria|download/i.test(f);x.code=/spazio/.test(f)?'quota':'';throw x}
+  clear();return eng}
+addEventListener('pagehide',function(){var r=rd(K);if(r)clear()});
+function generating(id,on){if(on)mark(id,'gen');else clear()}
+window.RadarLLM={ios:ios,models:models,pick:pick,chatOpts:chatOpts,limit:limit,load:load,generating:generating,blocked:blocked,unblock:unblock,friendly:friendly};
+})();</script><script id="mv-js">
 /* Mappa viva (tools/mappe.py) */
 (function(){
   var DATA={};try{var el=document.getElementById('mv-data');if(el)DATA=JSON.parse(el.textContent)}catch(e){}
@@ -1574,6 +1646,7 @@ print(res["status"])
   var WEBLLM='https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.85/+esm',MODELS=[['Qwen2.5-1.5B-Instruct-q4f16_1-MLC','Qwen2.5 1,5B · consigliato'],['Qwen2.5-3B-Instruct-q4f16_1-MLC','Qwen2.5 3B · più preciso, più pesante'],['Qwen2.5-0.5B-Instruct-q4f16_1-MLC','Qwen2.5 0,5B · leggero']];
   var CFG={eng:'web',model:MODELS[0][0],gmodel:'',key:'',remember:false};try{var o=JSON.parse(localStorage.getItem('radar-lab-engine')||'null');if(o)CFG=Object.assign(CFG,o)}catch(e){}
   function saveCfg(){var c=Object.assign({},CFG);if(!c.remember)c.key='';try{localStorage.setItem('radar-lab-engine',JSON.stringify(c))}catch(e){}}
+  var LLM=window.RadarLLM||{ios:false,models:function(l){return l},pick:function(i){return i},limit:function(){return {chars:7000,out:1400}},generating:function(){},blocked:function(){return null},unblock:function(){},friendly:function(e){return String(e&&e.message||e)},load:function(w,id,p){return w.CreateMLCEngine(id,{initProgressCallback:p})}};
   var engine=null,engineModel=null,gList=null,lastSty='';try{lastSty=localStorage.getItem('radar-mv-stile')||''}catch(e){}
   function aiToggle(btn){var f=panel.querySelector('.mv-ai'),o=f.hidden;f.hidden=!o;btn.setAttribute('aria-expanded',o?'true':'false');if(o){aiForm(f);var c=f.querySelector('input:checked')||f.querySelector('input');if(c)c.focus();}}
   function aiForm(f){var hasV='speechSynthesis' in window;
@@ -1582,17 +1655,18 @@ print(res["status"])
       '<label><input type="radio" name="mv-sty" value="free"'+(lastSty&&isNaN(+lastSty)?' checked':'')+'> A modo mio</label></div></fieldset>'+
       '<div class="mv-row"><label for="mv-free" style="flex-basis:100%">Oppure scrivi tu lo stile</label><input type="text" id="mv-free" maxlength="160" placeholder="es. come un messaggio vocale a un amico" value="'+(lastSty&&isNaN(+lastSty)?esc(lastSty):'')+'"></div>'+
       '<fieldset><legend>Chi crea la mappa</legend><div class="mv-chips"><label><input type="radio" name="mv-eng" value="web"'+(CFG.eng!=='gem'?' checked':'')+'> Nel browser · gratis e privato</label><label><input type="radio" name="mv-eng" value="gem"'+(CFG.eng==='gem'?' checked':'')+'> Gemini con la tua chiave</label></div></fieldset>'+
-      '<div class="mv-eng-w"><div class="mv-row"><label for="mv-model">Modello</label><select id="mv-model">'+MODELS.map(function(m){return '<option value="'+m[0]+'"'+(m[0]===CFG.model?' selected':'')+'>'+esc(m[1])+'</option>'}).join('')+'</select></div><p class="mv-note">Gira sulla scheda grafica del tuo dispositivo (serve WebGPU). La prima volta scarica il modello, da 0,9 a 2,5 GB: meglio con il Wi-Fi. Poi resta in memoria.</p></div>'+
+      '<div class="mv-eng-w"><div class="mv-row"><label for="mv-model">Modello</label><select id="mv-model">'+LLM.models(MODELS).map(function(m){return '<option value="'+m[0]+'"'+(m[0]===LLM.pick(CFG.model,MODELS)?' selected':'')+'>'+esc(m[1])+'</option>'}).join('')+'</select></div><p class="mv-note">'+(LLM.ios?'Su iPhone e iPad la memoria per scheda è poca: uso solo il modello più piccolo (circa 0,3 GB da scaricare una volta, meglio con il Wi-Fi). Se la pagina si chiude, al giro dopo passo a Gemini o alla mappa dell\'edizione. Per mappe più ricche scegli Gemini.':'Gira sulla scheda grafica del tuo dispositivo (serve WebGPU). La prima volta scarica il modello, da 0,3 a 1,8 GB: meglio con il Wi-Fi. Poi resta in memoria.')+'</p><p class="mv-note mv-blk" hidden></p></div>'+
       '<div class="mv-eng-g" hidden><div class="mv-row"><label for="mv-key">Chiave Gemini</label><input type="password" id="mv-key" autocomplete="off" value="'+esc(CFG.key)+'"><label style="display:flex;gap:.3rem;align-items:center"><input type="checkbox" id="mv-rem"'+(CFG.remember?' checked':'')+'> Ricorda</label></div><p class="mv-note">Il testo del capitolo (pubblico) va a Google con la tua chiave, che resta nel tuo browser. Si crea gratis su Google AI Studio.</p></div>'+
       (hasV?'<div class="mv-row"><label style="display:flex;gap:.4rem;align-items:center"><input type="checkbox" id="mv-say" checked> Raccontamela ad alta voce mentre la crea</label></div>':'')+
       '<div class="mv-row"><button type="button" class="mv-go2">Crea la mappa</button><button type="button" class="mv-stop" hidden>Ferma</button></div><p class="mv-st" aria-live="polite"></p>';
-    function vis(){var g=f.querySelector('input[name=mv-eng]:checked').value==='gem';f.querySelector('.mv-eng-w').hidden=g;f.querySelector('.mv-eng-g').hidden=!g;}vis();
+    function vis(){var g=f.querySelector('input[name=mv-eng]:checked').value==='gem';f.querySelector('.mv-eng-w').hidden=g;f.querySelector('.mv-eng-g').hidden=!g;blk();}
+    function blk(){var el=f.querySelector('.mv-blk'),id=LLM.pick(CFG.model,MODELS);if(!LLM.blocked(id)){el.hidden=true;return;}el.hidden=false;el.innerHTML='⚠ L\'ultima volta il modello nel browser ha fatto chiudere la pagina, quindi ora non parte da solo. <button type="button" class="mv-retry">Riprova il modello</button>';el.querySelector('.mv-retry').onclick=function(){LLM.unblock(id);blk();f.querySelector('.mv-st').textContent='Ok, al prossimo «Crea la mappa» riprovo il modello nel browser.';};}vis();
     f.querySelectorAll('input[name=mv-eng]').forEach(function(r){r.onchange=function(){CFG.eng=this.value;saveCfg();vis();}});
-    f.querySelector('#mv-model').onchange=function(){CFG.model=this.value;saveCfg()};
+    f.querySelector('#mv-model').onchange=function(){CFG.model=this.value;saveCfg();blk()};
     f.querySelector('#mv-key').onchange=function(){CFG.key=this.value.trim();gList=null;saveCfg()};f.querySelector('#mv-rem').onchange=function(){CFG.remember=this.checked;saveCfg()};
     f.querySelector('#mv-free').oninput=function(){if(this.value.trim())f.querySelector('input[name=mv-sty][value=free]').checked=true;};
     f.querySelector('.mv-go2').onclick=function(){aiRun(f)};f.querySelector('.mv-stop').onclick=function(){aiStop(f,'Fermato.')};}
-  function chapterText(sec){var out=[],L=sec.querySelector('.ch-head .lead');if(L)out.push('[intro] '+clean(L));paras(sec).forEach(function(p,i){out.push('[P'+i+'] '+clean(p))});var t=out.join('\n');return t.length>7000?t.slice(0,7000):t;}
+  function chapterText(sec){var out=[],L=sec.querySelector('.ch-head .lead');if(L)out.push('[intro] '+clean(L));paras(sec).forEach(function(p,i){out.push('[P'+i+'] '+clean(p))});var t=out.join('\n'),mx=LLM.limit().chars;return t.length>mx?t.slice(0,mx):t;}
   function prompt(styleTxt){return 'Sei Sapio, un gufo che crea mappe concettuali per persone con DSA o ADHD. Ricevi il testo di un capitolo tra <capitolo> e </capitolo>, con i paragrafi numerati [P0], [P1]...\n'+
     'Rispondi SOLO con righe JSON, una per riga, senza elenchi, senza ``` e senza altro testo.\n'+
     'Riga 1: {"root":"concetto centrale, massimo 5 parole","intro":"una o due frasi che presentano il capitolo nello stile richiesto"}\n'+
@@ -1603,10 +1677,13 @@ print(res["status"])
   async function webStream(sys,user,onTok,st,sig){if(!navigator.gpu)throw new Error('Questo browser non ha WebGPU: prova Chrome o Edge aggiornati, Safari 26, oppure scegli Gemini.');
     var ad=null;try{ad=await navigator.gpu.requestAdapter()}catch(e){}if(!ad)throw new Error('WebGPU non trova una scheda grafica utilizzabile: scegli Gemini.');
     var w;try{w=await import(new URL('../vendor/web-llm-0.2.85.js',location.href).href)}catch(e){w=await import(WEBLLM)}
-    if(!engine||engineModel!==CFG.model){st('Preparo il modello: la prima volta può volerci qualche minuto…');if(engine){try{await engine.unload()}catch(e){}}
-      engine=await w.CreateMLCEngine(CFG.model,{initProgressCallback:function(r){st('Caricamento del modello: '+Math.round((r.progress||0)*100)+'%')}});engineModel=CFG.model;}
-    st('Sapio sta creando la mappa…');var it=await engine.chat.completions.create({messages:[{role:'system',content:sys},{role:'user',content:user}],temperature:.6,max_tokens:1400,stream:true});
+    var mid=LLM.pick(CFG.model,MODELS);
+    if(!engine||engineModel!==mid){st('Preparo il modello: la prima volta può volerci qualche minuto…');if(engine){try{await engine.unload()}catch(e){}engine=null;}
+      engine=await LLM.load(w,mid,function(r){st('Caricamento del modello: '+Math.round((r.progress||0)*100)+'%')},function(t){var n=document.querySelector('.mv-ai .mv-blk');if(n){n.hidden=false;n.textContent=t;}});engineModel=mid;}
+    st('Sapio sta creando la mappa…');LLM.generating(mid,true);
+    try{var it=await engine.chat.completions.create({messages:[{role:'system',content:sys},{role:'user',content:user}],temperature:.6,max_tokens:LLM.limit().out,stream:true});
     for await(var ch of it){if(sig.stop){try{engine.interruptGenerate()}catch(e){}break;}var d=ch.choices&&ch.choices[0]&&ch.choices[0].delta&&ch.choices[0].delta.content;if(d)onTok(d);}}
+    finally{LLM.generating(mid,false);}}
   async function listG(){var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200',{headers:{'x-goog-api-key':CFG.key}});if(!r.ok)throw new Error('Chiave Gemini non valida o non autorizzata ('+r.status+').');var j=await r.json();
     return (j.models||[]).filter(function(m){return (m.supportedGenerationMethods||[]).indexOf('generateContent')>=0&&/gemini/i.test(m.name)&&!/(tts|image|live|embedding|audio|transcribe)/i.test(m.name)}).map(function(m){return m.name})}
   async function gemStream(sys,user,onTok,st,sig){if(!CFG.key)throw new Error('Inserisci la tua chiave Gemini.');if(!CFG.gmodel){gList=gList||await listG();CFG.gmodel=gList.filter(function(m){return /flash-lite/i.test(m)})[0]||gList.filter(function(m){return /flash/i.test(m)})[0]||gList[0];}
@@ -1633,7 +1710,10 @@ print(res["status"])
       if(cur===sec)render(false);sayQ((node.r?title(M,node.p)+' '+node.r+' '+node.t:node.t)+'. '+node.d);st('Sapio sta creando la mappa… '+n+(n===1?' concetto':' concetti'));}
     function tok(t){if(gen!==my)return;buf+=t;all+=t;var L=buf.split('\n');buf=L.pop();L.forEach(line);}
     try{var sys=prompt(styleTxt),user='<capitolo>\n'+chapterText(sec)+'\n</capitolo>';
-      if(CFG.eng==='gem')await gemStream(sys,user,tok,st,gen.sig);else await webStream(sys,user,tok,st,gen.sig);
+      if(CFG.eng==='gem')await gemStream(sys,user,tok,st,gen.sig);
+      else{try{await webStream(sys,user,tok,st,gen.sig);}catch(e){if(!(e&&e.fallback)||M.nodes.length)throw e;
+        if(!CFG.key)throw new Error(LLM.friendly(e)+' Ti rimetto la mappa dell\'edizione; per la mappa su misura scegli Gemini (con la tua chiave).');
+        st(LLM.friendly(e)+' Passo a Gemini con la tua chiave…');buf='';all='';await gemStream(sys,user,tok,st,gen.sig);}}
       if(gen!==my)return;line(buf);
       if(!M.nodes.length){/* il modello ha risposto con un unico JSON */var t=all.replace(/```json|```/g,''),i=t.indexOf('{'),j=t.lastIndexOf('}');try{var o=JSON.parse(t.slice(i,j+1));if(o.root)line(JSON.stringify({root:o.root,intro:o.intro}));(o.nodes||o.concetti||[]).forEach(function(x){line(JSON.stringify(x))});}catch(e){}}
       if(!M.nodes.length){AION[sec.id]=false;delete AIM[sec.id];render(true);aiStop(f,'Il modello non ha prodotto una mappa leggibile. Riprova, oppure scegli un modello più grande o Gemini.');return;}

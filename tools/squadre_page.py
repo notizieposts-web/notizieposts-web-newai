@@ -47,6 +47,10 @@ CSS = '''<style id="sq-css">
 .board th:nth-child(2),.board td:nth-child(2),.board th:nth-child(3),.board td:nth-child(3){text-align:left}
 .board thead th{background:var(--soft)}
 .board tr.top td{font-weight:700}
+.board tr.mine th,.board tr.mine td{background:var(--violet-soft);font-weight:700}
+.board tr.gapr td{text-align:center;color:var(--muted)}
+.myrank{margin-bottom:.8rem}.myrank p{margin:0 0 .5rem}
+.prog{height:12px;border-radius:999px;background:var(--soft);border:1px solid var(--line);overflow:hidden;margin:.3rem 0 .6rem}.prog span{display:block;height:100%;background:var(--accent)}
 .board .rm{min-width:44px;min-height:44px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-weight:700}
 .online{margin-top:1.4rem;padding:1.2rem 1.3rem;max-width:44rem;border-top:6px solid var(--teal)}.online h3{margin:0 0 .4rem;font-size:1.15rem}.online .frm{margin-top:.8rem}.frm[hidden],.sbtn[hidden]{display:none}
 .steps{counter-reset:s;list-style:none;padding:0;display:grid;gap:.6rem;max-width:44rem}
@@ -170,6 +174,7 @@ $('mf').onsubmit=function(ev){ev.preventDefault();var n=clean($('mn').value,40),
 $('mcopy').onclick=function(){var t=$('mc');if(!t.value){$('mmsg').textContent='Crea prima il codice.';return}t.select();try{navigator.clipboard.writeText(t.value).then(function(){$('mmsg').textContent='Codice copiato.'},function(){document.execCommand('copy');$('mmsg').textContent='Codice copiato.'})}catch(e){document.execCommand('copy');$('mmsg').textContent='Codice copiato.'}};
 /* ---------------- classifica (resta in questo browser) */
 var B=[];try{B=JSON.parse(localStorage.getItem('radar-team')||'[]')||[]}catch(e){B=[]}
+var BV='';try{BV=localStorage.getItem('radar-board-view')||''}catch(e){}
 function keep(){try{localStorage.setItem('radar-team',JSON.stringify(B))}catch(e){}}
 function parse(line){var m=/RS1:([A-Za-z0-9_\-]+)\.([a-z0-9]+)/.exec(line);if(!m||sum(m[1])!==m[2])return null;try{var o=JSON.parse(b64d(m[1]));if(!o||!o.n)return null;
   return {n:clean(o.n,40),t:team(o.t),d:/^\d{4}-\d{2}-\d{2}$/.test(o.d)?o.d:'',pp:Math.max(0,+o.pp||0),lp:Math.max(0,+o.lp||0),ps:(o.pl||[]).reduce(function(a,b){return a+(+b||0)},0),ls:Math.max(0,+o.ls||0)}}catch(e){return null}}
@@ -213,13 +218,21 @@ $('oget').onclick=function(){oget(false)};
 try{$('ot').value=localStorage.getItem('radar-team-codes')||''}catch(e){}
 function draw(){B.sort(function(a,b){return (b.pp+b.lp)-(a.pp+a.lp)||a.n.localeCompare(b.n)});
   if(!B.length){$('bwrap').innerHTML='<p>La classifica è vuota. Incolla qui sopra i codici risultato delle persone.</p>';$('twrap').innerHTML='';return}
-  $('bwrap').innerHTML='<table class="board"><caption>Persone: '+B.length+'</caption><thead><tr><th scope="col">Posto</th><th scope="col">Nome</th><th scope="col">Squadra</th><th scope="col">Palestra</th><th scope="col">Laboratorio</th><th scope="col">Totale</th><th scope="col">Esercizi</th><th scope="col">Sfide</th><th scope="col">Data</th><th scope="col">Togli</th></tr></thead><tbody>'+
-    B.map(function(r,i){return '<tr'+(i<3?' class="top"':'')+'><td>'+(i+1)+'</td><th scope="row">'+esc(r.n)+'</th><td>'+esc(r.t||'—')+'</td><td>'+fmt(r.pp)+'</td><td>'+fmt(r.lp)+'</td><td>'+fmt(r.pp+r.lp)+'</td><td>'+fmt(r.ps)+'</td><td>'+fmt(r.ls)+'</td><td>'+esc(r.d.split('-').reverse().join('/'))+'</td><td><button type="button" class="rm" data-rm="'+i+'" aria-label="Togli '+esc(r.n)+' dalla classifica">✕</button></td></tr>'}).join('')+'</tbody></table>';
+  var mi=-1,mn=((RCloud.me()||{}).n||'').toLowerCase();if(mn)B.forEach(function(r,i){if(mi<0&&r.n.toLowerCase()===mn)mi=i});
+  /* vista relativa (Pickal e altri 2025: il feedback di posizione negativo demotiva più di nessun feedback; Bai e altri 2021: preferita la classifica relativa):
+     i primi 5, la tua posizione con chi ti sta accanto e quanto manca al posto sopra; nessun messaggio di calo */
+  var rel=mi>=0&&BV!=='all',idx=[];if(rel){for(var k=0;k<Math.min(5,B.length);k++)idx.push(k);[mi-1,mi,mi+1].forEach(function(k){if(k>=0&&k<B.length&&idx.indexOf(k)<0)idx.push(k)});idx.sort(function(a,b){return a-b})}else idx=B.map(function(_,i){return i});
+  var me1=mi>=0?B[mi]:null,gap=mi>0?(B[mi-1].pp+B[mi-1].lp)-(me1.pp+me1.lp):0,best=B[0].pp+B[0].lp||1;
+  var head=mi>=0?'<div class="card myrank"><p><b>Sei al posto '+(mi+1)+' su '+B.length+'</b> con '+fmt(me1.pp+me1.lp)+' punti.'+(mi===0?' Sei in testa: continua così!':' Ti mancano '+fmt(gap+1)+' punti per salire di un posto: bastano '+Math.max(1,Math.ceil((gap+1)/40))+' esercizi medi.')+'</p>'+
+    '<div class="prog" role="img" aria-label="I tuoi punti: '+Math.round((me1.pp+me1.lp)/best*100)+' per cento di chi è in testa"><span style="width:'+Math.max(3,Math.round((me1.pp+me1.lp)/best*100))+'%"></span></div>'+
+    '<div class="row"><button type="button" class="sbtn" id="bview" aria-pressed="'+(rel?'false':'true')+'">'+(rel?'Mostra tutta la classifica':'Mostra solo i primi e chi mi sta accanto')+'</button></div></div>':'';
+  $('bwrap').innerHTML=head+'<table class="board"><caption>Persone: '+B.length+(rel?' · vedi i primi 5 e chi ti sta accanto':'')+'</caption><thead><tr><th scope="col">Posto</th><th scope="col">Nome</th><th scope="col">Squadra</th><th scope="col">Palestra</th><th scope="col">Laboratorio</th><th scope="col">Totale</th><th scope="col">Esercizi</th><th scope="col">Sfide</th><th scope="col">Data</th><th scope="col">Togli</th></tr></thead><tbody>'+
+    idx.map(function(i,j){var r=B[i];return (rel&&j>0&&idx[j-1]!==i-1?'<tr class="gapr"><td colspan="10">…</td></tr>':'')+'<tr class="'+(i<3?'top':'')+(i===mi?' mine':'')+'"><td>'+(i+1)+'</td><th scope="row">'+esc(r.n)+'</th><td>'+esc(r.t||'—')+'</td><td>'+fmt(r.pp)+'</td><td>'+fmt(r.lp)+'</td><td>'+fmt(r.pp+r.lp)+'</td><td>'+fmt(r.ps)+'</td><td>'+fmt(r.ls)+'</td><td>'+esc(r.d.split('-').reverse().join('/'))+'</td><td><button type="button" class="rm" data-rm="'+i+'" aria-label="Togli '+esc(r.n)+' dalla classifica">✕</button></td></tr>'}).join('')+'</tbody></table>';
   var T={};B.forEach(function(r){var k=r.t||'—';T[k]=T[k]||{n:0,p:0};T[k].n++;T[k].p+=r.pp+r.lp});var ks=Object.keys(T).sort(function(a,b){return T[b].p-T[a].p});
   $('twrap').innerHTML=ks.length>1?'<table class="board"><caption>Totale per squadra</caption><thead><tr><th scope="col">Posto</th><th scope="col">Squadra</th><th scope="col">Persone</th><th scope="col">Punti totali</th><th scope="col">Media a persona</th></tr></thead><tbody>'+ks.map(function(k,i){return '<tr><td>'+(i+1)+'</td><th scope="row">'+esc(k)+'</th><td style="text-align:right">'+T[k].n+'</td><td>'+fmt(T[k].p)+'</td><td>'+fmt(Math.round(T[k].p/T[k].n))+'</td></tr>'}).join('')+'</tbody></table>':''}
 $('badd').onclick=function(){var ok=0,bad=0;$('bin').value.split(/\n+/).forEach(function(l){l=l.trim();if(!l)return;var r=parse(l);if(!r){bad++;return}B=B.filter(function(x){return !(x.n.toLowerCase()===r.n.toLowerCase()&&x.t===r.t)});B.push(r);ok++});
   keep();draw();if(ok)$('bin').value='';$('bmsg').textContent=(ok?ok+(ok===1?' codice aggiunto.':' codici aggiunti.'):'')+(bad?' '+bad+(bad===1?' riga non è un codice valido':' righe non sono codici validi')+': controlla che siano state copiate per intero.':'')||'Incolla almeno un codice.'};
-$('bwrap').onclick=function(ev){var b=ev.target.closest('[data-rm]');if(!b)return;var r=B[+b.dataset.rm];B.splice(+b.dataset.rm,1);keep();draw();$('bmsg').textContent=r.n+' tolto dalla classifica.';$('bin').focus()};
+$('bwrap').onclick=function(ev){if(ev.target.closest('#bview')){BV=BV==='all'?'':'all';try{localStorage.setItem('radar-board-view',BV)}catch(e){}draw();$('bview').focus();return}var b=ev.target.closest('[data-rm]');if(!b)return;var r=B[+b.dataset.rm];B.splice(+b.dataset.rm,1);keep();draw();$('bmsg').textContent=r.n+' tolto dalla classifica.';$('bin').focus()};
 function clrInit(){var b=$('bclr');b.textContent='Svuota la classifica';var x=$('bclr2');if(x)x.remove();b.onclick=function(){if(!B.length){$('bmsg').textContent='La classifica è già vuota.';return}b.textContent='Sì, svuota tutto';b.insertAdjacentHTML('afterend','<button type="button" class="sbtn" id="bclr2">Annulla</button>');$('bclr2').onclick=function(){clrInit();b.focus()};b.onclick=function(){B=[];keep();draw();clrInit();b.focus();$('bmsg').textContent='Classifica svuotata.'}}}clrInit();
 $('bcsv').onclick=function(){if(!B.length){$('bmsg').textContent='Non c\'è ancora nulla da scaricare.';return}function q(v){v=String(v);if(/^[=+\-@\t\r]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'}
   var rows=[['Posto','Nome','Squadra','Punti Palestra','Punti Laboratorio','Totale','Esercizi risolti','Sfide con punti','Data']].concat(B.map(function(r,i){return [i+1,r.n,r.t,r.pp,r.lp,r.pp+r.lp,r.ps,r.ls,r.d]}));

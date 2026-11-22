@@ -135,6 +135,13 @@ CSS = '''<style id="pal-css">
 .snav{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between;margin-top:1.4rem}
 .ref{font-size:.9rem;color:var(--muted);margin-top:.9rem}
 .empty{margin-top:1.5rem;font-weight:600}
+.soc{margin-top:1rem;border:2px solid var(--violet)}
+.soc h3{margin:0;font-size:1.1rem}
+.soc .soc-l{margin:.6rem 0;padding-left:1.3rem;display:grid;gap:.5rem}
+.soc .soc-l p{margin:.2rem 0}
+.soc .soc-ans{padding:.5rem .7rem;border-radius:10px;background:var(--violet-soft)}
+.soc .soc-a{display:flex;flex-wrap:wrap;gap:.5rem}
+.soc a.pbtn{display:inline-flex;align-items:center;text-decoration:none}
 </style>'''
 
 hero = ('<header class="hero"><div><div class="meta"><span class="chip guide">Esercizi</span><span class="chip l1">Facile: %s</span><span class="chip l2">Media: %s</span><span class="chip l3">Difficile: %s</span></div>'
@@ -237,7 +244,7 @@ function open(id){var e=BY[id];cur=e;$('listview').hidden=true;var S=$('stage');
     '<form class="card ans" id="xf" novalidate>';
   if(e.k==='mcq'){h+='<fieldset><legend>Scegli una risposta</legend>'+e.o.map(function(o,i){return '<label class="opt2"><input type="radio" name="r'+e.id+'" value="'+i+'"'+(SV[e.id]&&SV[e.id].v===i?' checked':'')+'><span>'+o+'</span></label>'}).join('')+'</fieldset>'}
   else{h+='<div class="numrow"><label for="xn">La tua risposta'+(e.u?' ('+e.u+')':'')+'</label><input id="xn" inputmode="decimal" autocomplete="off" aria-describedby="xfb" value="'+(SV[e.id]&&SV[e.id].v!=null?esc(SV[e.id].v):'')+'"></div>'}
-  h+='<div class="acts"><button type="submit" class="vbtn">Verifica</button></div><div class="rd-row"><span id="xface"></span><p class="fb" id="xfb" role="status" aria-live="polite"></p></div></form>'+
+  h+='<div class="acts"><button type="submit" class="vbtn">Verifica</button></div><div class="rd-row"><span id="xface"></span><p class="fb" id="xfb" role="status" aria-live="polite"></p></div></form><section class="card soc" id="xsoc" aria-labelledby="xsoch" hidden></section>'+
     '<section class="help" aria-labelledby="xh"><div class="rd-row">'+T.avatar(64,'ciao')+'<h3 id="xh">Hai bisogno di una mano? Chiedi a <span class="rt-nm">'+T.name()+'</span></h3></div><p class="nop">Gli aiuti non tolgono punti e non c\'è limite di tempo. Parti dal primo e apri il successivo solo se serve.</p><div class="hbtns">'+
     hb.map(function(b){return '<button type="button" class="hbtn" data-h="'+b[0]+'" aria-expanded="false" aria-controls="hp_'+b[0]+'">'+b[1]+'</button>'}).join('')+'</div>'+hb.map(function(b){return '<div class="hpan" id="hp_'+b[0]+'" hidden></div>'}).join('')+'</section>'+
     '<div class="snav"><button type="button" class="pbtn" id="xprev">← Precedente</button><button type="button" class="pbtn" id="xnext">Prossimo da fare →</button></div>'+
@@ -261,7 +268,35 @@ function check(e){var id=e.id,fb=$('xfb'),ok,dir='';tries[id]=(tries[id]||0)+1;
   fb.className='fb '+(ok?'ok':'ko');$('xface').innerHTML=T.avatar(72,ok?'felice':'coraggio');
   if(ok){var first=!done[id];if(first){done[id]=1;save();var k=document.querySelector('#stage .kicker');if(k&&!k.querySelector('.done'))k.insertAdjacentHTML('beforeend','<span class="chip done">✓ Risolto</span>')}
     fb.textContent='✓ Giusto!'+(first?' +'+PT[e.l]+' punti.':' Era già risolto: i punti li avevi già.')+' Puoi passare al prossimo.'}
-  else fb.textContent='✗ Non ancora.'+dir+' Nessun problema: riprova, oppure apri un aiuto qui sotto.'}
+  else{fb.textContent='✗ Non ancora.'+dir+' Nessun problema: ragioniamoci insieme qui sotto, oppure apri un aiuto.';soc(e)}
+  if(ok&&$('xsoc')&&!$('xsoc').hidden){$('xsoc').querySelector('.soc-end')||$('xsoc').insertAdjacentHTML('beforeend','<p class="soc-end"><b>Ce l\'hai fatta ragionando da solo: è il modo in cui si impara di più.</b></p>')}}
+/* ---------------- dopo un errore: domande guida, senza dare la risposta
+   (LearnLM ed Eedi, RCT 2025: tutor che fa domande invece di dare la soluzione, errore corretto al secondo tentativo 93% contro 65%;
+   massimo 2-3 domande, poi la spiegazione, poi un esercizio simile) */
+function socQs(e){var q=qparts(e),out=[];
+  out.push(['Partiamo dalla domanda: che cosa ti chiede di trovare, esattamente?','Devi trovare questo: '+q.ask.join(' ')+(e.u?' Il risultato è in '+unit(e)+'.':'')]);
+  if(e.k==='mcq'&&e.o.length>=3){var wr=-1;e.o.forEach(function(o,i){if(wr<0&&i!==e.c&&!(SV[e.id]&&SV[e.id].v===i))wr=i});
+    out.push(['Guarda le risposte una per una: ce n\'è una che non c\'entra con quello che chiede la domanda?',wr>=0?'Una che puoi escludere: «'+plain(e.o[wr])+'». Tra le altre, quale risponde proprio alla domanda?':'Rileggi le risposte cercando le parole della domanda.']);}
+  else{var n=(plain(e.q).match(/\d[\d.,]*/g)||[]).filter(function(x){return /\d/.test(x)}).slice(0,6);
+    out.push(['Quali numeri del testo ti servono, e quale ti fa da punto di partenza?',n.length?'I numeri nel testo sono: '+n.join(' · ')+'. Non servono per forza tutti: quale si collega a ciò che devi trovare?':'Cerca nel testo le quantità che si collegano a ciò che devi trovare.']);}
+  var m=mask(e);if(m.length)out.push(['Qual è il primo passaggio che faresti?','Un modo di partire: '+m[0]+' Prova a continuare da qui.']);
+  return out.slice(0,3)}
+function soc(e){var box=$('xsoc');if(!box)return;var n=tries[e.id]||1;
+  if(box.hidden||box.getAttribute('data-id')!==String(e.id)){box.setAttribute('data-id',e.id);box.dataset.i='0';box.hidden=false;
+    box.innerHTML='<div class="rd-row">'+T.avatar(56,'coraggio')+'<h3 id="xsoch">Ragioniamoci insieme</h3></div><p class="nop">Sbagliare fa parte dell\'esercizio. Ti faccio qualche domanda, senza dirti la risposta: pensaci, poi premi il pulsante.</p><ol class="soc-l"></ol><div class="acts soc-a"></div>';}
+  socStep(e,box);if(n>=4)socEnd(e,box)}
+function socStep(e,box){var Q=socQs(e),i=+box.dataset.i,l=box.querySelector('.soc-l'),a=box.querySelector('.soc-a');
+  if(i>=Q.length){socEnd(e,box);return}
+  l.insertAdjacentHTML('beforeend','<li><p><b>'+esc(Q[i][0])+'</b></p><p class="soc-ans" hidden>'+T.nums(esc(Q[i][1]))+'</p></li>');var li=l.lastElementChild;
+  a.innerHTML='<button type="button" class="pbtn" id="xsoc1">Ci ho pensato: dammi uno spunto</button>';
+  $('xsoc1').onclick=function(){li.querySelector('.soc-ans').hidden=false;box.dataset.i=String(i+1);
+    a.innerHTML='<button type="button" class="vbtn" id="xsoc2">Riprovo a rispondere</button>'+(i+1<Q.length?'<button type="button" class="pbtn" id="xsoc3">Un\'altra domanda</button>':'<button type="button" class="pbtn" id="xsoc3">Mostrami la spiegazione</button>');
+    $('xsoc2').onclick=function(){var f=document.querySelector('#xf input:not([disabled])');if(f)f.focus()};
+    $('xsoc3').onclick=function(){if(i+1<Q.length)socStep(e,box);else socEnd(e,box)};
+    if(T.prefs&&T.prefs.auto)T.say('',[Q[i][1]],{play:true});li.querySelector('.soc-ans').setAttribute('tabindex','-1');li.querySelector('.soc-ans').focus()};}
+function socEnd(e,box){var a=box.querySelector('.soc-a');if(box.querySelector('.soc-x'))return;var x=sibling(e);
+  a.innerHTML='<button type="button" class="pbtn soc-x" id="xsoc4">✅ Vedi la soluzione passo passo</button>'+(x?'<a class="pbtn" href="#ex'+x.id+'">Prova uno simile →</a>':'');
+  $('xsoc4').onclick=function(){var b=document.querySelector('.hbtn[data-h="h3"]');if(b){if(b.getAttribute('aria-expanded')!=='true')b.click();$('hp_h3').scrollIntoView({block:'start'})}}}
 function route(){var m=/^#ex(\d+)$/.exec(location.hash);if(m&&BY[+m[1]]){open(+m[1])}else{var back=cur;cur=null;T.stop();$('stage').hidden=true;$('stage').innerHTML='';$('listview').hidden=false;
   if(back){var L=list(),i=L.indexOf(back);if(i>=0)st.page=Math.floor(i/PER)+1}render();if(back&&$('lx'+back.id))$('lx'+back.id).focus()}}
 /* ---------------- comandi dell'elenco */

@@ -55,6 +55,7 @@ html.rt-sp main p,html.rt-sp main li{max-width:40rem}
 html.rt-font body,html.rt-font main h1,html.rt-font main h2,html.rt-font main h3,html.rt-font main button,html.rt-font main input,html.rt-font main select,html.rt-font main textarea,html.rt-font .rt-panel,html.rt-font .rt-panel button{font-family:"Atkinson Hyperlegible",Verdana,Tahoma,sans-serif!important}
 .rt-ruler{position:fixed;left:0;right:0;top:40%;height:3rem;z-index:9400;pointer-events:none;background:var(--violet);opacity:.13;border-top:2px solid var(--violet);border-bottom:2px solid var(--violet)}
 .rt-ruler[hidden]{display:none}
+html.rt-noav svg.rd,html.rt-noav .rt-face{display:none!important}
 .rt-say{display:inline-flex;align-items:center;gap:.4rem;min-height:40px;padding:.3rem .9rem .3rem .35rem;border-radius:999px;border:1px solid var(--violet);background:var(--surface);color:var(--ink);font:700 .92rem var(--head,system-ui);cursor:pointer}
 </style>''' + rada.CSS
 
@@ -67,11 +68,11 @@ function av(px,ex){var A=AV[ch()];return (A[ex]||A.ciao).replace(/width="\d+" he
 function swapAll(){document.querySelectorAll('svg.rd[data-rd]').forEach(function(s){if(s.closest('#rt-panel,#rt-fab'))return;var w=+s.getAttribute('width')||48,t=document.createElement('span');t.innerHTML=av(w,s.getAttribute('data-rd'));s.replaceWith(t.firstChild)});
   document.querySelectorAll('.rt-nm').forEach(function(n){n.textContent=name()});if(panel){face='';setFace(state==='play'?'parla':'ciao');panel.querySelector('#rt-h').textContent=name()+', '+NM[ch()][1]+' che ti guida';fab.querySelector('.rt-lab').textContent=name()+' ti aiuta';cap.setAttribute('aria-label','Quello che dice '+name())}}
 var face='';function setFace(ex){if(face===ex||!panel)return;face=ex;panel.querySelector('.rt-face').innerHTML=av(64,ex);fab.querySelector('.rt-face').innerHTML=av(44,ex)}
-var P={size:0,sp:0,font:0,ruler:0,num:0,auto:0,rate:1,ch:'saggio'};
+var P={size:0,sp:0,font:0,ruler:0,num:0,auto:0,rate:1,ch:'saggio',noav:0};
 try{var sv=JSON.parse(localStorage.getItem('radar-read')||'{}');for(var k in P)if(sv[k]!=null)P[k]=sv[k]}catch(e){}
-function keep(){try{localStorage.setItem('radar-read',JSON.stringify(P))}catch(e){}}
+function keep(){try{var o=JSON.parse(localStorage.getItem('radar-read')||'{}')||{};for(var k in P)o[k]=P[k];localStorage.setItem('radar-read',JSON.stringify(o))}catch(e){}}
 var H=document.documentElement,ruler=null,fontLoaded=false;
-function apply(){H.classList.toggle('rt-s1',+P.size===1);H.classList.toggle('rt-s2',+P.size===2);H.classList.toggle('rt-sp',!!P.sp);H.classList.toggle('rt-font',!!P.font);H.classList.toggle('rt-num',!!P.num);
+function apply(){H.classList.toggle('rt-s1',+P.size===1);H.classList.toggle('rt-s2',+P.size===2);H.classList.toggle('rt-sp',!!P.sp);H.classList.toggle('rt-font',!!P.font);H.classList.toggle('rt-num',!!P.num);H.classList.toggle('rt-noav',!!P.noav);
   if(P.font&&!fontLoaded){fontLoaded=true;var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap';document.head.appendChild(l)}
   if(ruler)ruler.hidden=!P.ruler}
 apply();
@@ -117,6 +118,7 @@ function build(){
     '<label class="rt-opt"><input type="checkbox" id="rt-ruler"> Righello che segue la riga che leggi</label>'+
     '<label class="rt-opt"><input type="checkbox" id="rt-num"> Numeri in evidenza</label>'+
     '<label class="rt-opt"><input type="checkbox" id="rt-auto"> Leggi ad alta voce appena apro un aiuto</label>'+
+    '<label class="rt-opt"><input type="checkbox" id="rt-noav"> Solo voce e testo: nascondi il disegno della guida</label>'+
     '</fieldset><p class="hint">Le scelte restano in questo browser. Negli esercizi non c\'è limite di tempo e gli aiuti non tolgono punti nella Palestra.</p></details>';
   ruler=document.createElement('div');ruler.className='rt-ruler';ruler.hidden=!P.ruler;ruler.setAttribute('aria-hidden','true');
   document.body.appendChild(ruler);document.body.appendChild(panel);document.body.appendChild(fab);cap=panel.querySelector('#rt-cap');
@@ -128,7 +130,7 @@ function build(){
   var r=panel.querySelector('#rt-rate');r.value=String(P.rate);if(!r.value)r.value='1';r.onchange=function(){P.rate=+r.value;keep();if(state==='play'){var at=qi;try{syn.cancel()}catch(e){}qi=at;state='play';setTimeout(next,60)}};
   var cs=panel.querySelector('#rt-ch');cs.value=ch();cs.onchange=function(){P.ch=cs.value;keep();swapAll();cs.focus()};
   var z=panel.querySelector('#rt-size');z.value=String(P.size);z.onchange=function(){P.size=+z.value;keep();apply()};
-  [['sp','rt-sp'],['font','rt-font'],['ruler','rt-ruler'],['num','rt-num'],['auto','rt-auto']].forEach(function(o){var c=panel.querySelector('#'+o[1]);c.checked=!!P[o[0]];c.onchange=function(){P[o[0]]=c.checked?1:0;keep();apply()}});
+  [['sp','rt-sp'],['font','rt-font'],['ruler','rt-ruler'],['num','rt-num'],['auto','rt-auto'],['noav','rt-noav']].forEach(function(o){var c=panel.querySelector('#'+o[1]);c.checked=!!P[o[0]];c.onchange=function(){P[o[0]]=c.checked?1:0;keep();apply()}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!panel.hidden&&!e.defaultPrevented){hide()}});
   function mv(y){if(P.ruler)ruler.style.top=Math.max(0,y-ruler.offsetHeight/2)+'px'}
   document.addEventListener('mousemove',function(e){mv(e.clientY)},{passive:true});document.addEventListener('touchmove',function(e){if(e.touches[0])mv(e.touches[0].clientY)},{passive:true});

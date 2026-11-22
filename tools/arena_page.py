@@ -5,7 +5,7 @@ e genera azure-laboratorio.html (hub), lab-estrai.html, lab-trasforma.html, lab-
 """
 import sys, os, json, glob
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import argomenti, graph, bench, store, tutor, cloud
+import argomenti, graph, bench, store, tutor, cloud, llmguard
 
 TOOLS = os.path.dirname(os.path.abspath(__file__))
 PACKS = [json.load(open(p, encoding='utf-8')) for p in sorted(glob.glob(os.path.join(TOOLS, 'arena', 'packs', '*.json')))]
@@ -247,7 +247,7 @@ def main(root):
               .replace('__LAST__', json.dumps(LAST)).replace('__DAY__', json.dumps([{'id': c['id'], 'tr': c['track'], 'd': c['d'], 'p': c['pts']} for c in CH if c['giorno'] == LAST], separators=(',', ':'))).replace('__TRACKS__', json.dumps([t[:4] for t in TRACKS], ensure_ascii=False))
               .replace('__PROVA_DOC__', json.dumps(bench_text(first) if first else '', ensure_ascii=False)).replace('__PROVA_SCHEMA__', json.dumps(first['schema'] if first else '{}', ensure_ascii=False)))
         h = (head.replace('<title>Laboratorio · Sapit</title>', '<title>%s · Sapit</title>' % title) + argomenti.NAV('azure-laboratorio.html', eds) + hero_html +
-             '<main class="wrap">' + body_html + '</main><div class="toast" id="toast" role="status" aria-live="polite"></div>' + argomenti.FOOT + argomenti.JS + store.JS + tutor.JS + cloud.JS + bench.JS + js + '\n</body>\n</html>\n')
+             '<main class="wrap">' + body_html + '</main><div class="toast" id="toast" role="status" aria-live="polite"></div>' + argomenti.FOOT + argomenti.JS + store.JS + tutor.JS + cloud.JS + llmguard.JS + bench.JS + js + '\n</body>\n</html>\n')
         open(os.path.join(root, fname), 'w', encoding='utf-8').write(h); return len(h)
     GBAR = ('<div class="gbar"><div class="card gstat"><div class="k">Livello</div><div class="v" id="glv">Apprendista</div><div class="xpbar" aria-hidden="true"><i id="gxpbar"></i></div><div class="s" id="gnext"></div></div>'
             '<div class="card gstat"><div class="k">Punti</div><div class="v" id="gxp">0</div><div class="s">il punteggio migliore di ogni sfida</div></div>'

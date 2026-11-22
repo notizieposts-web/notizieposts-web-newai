@@ -194,6 +194,7 @@ JS = r'''<script id="mv-js">
   var WEBLLM='https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.85/+esm',MODELS=[['Qwen2.5-1.5B-Instruct-q4f16_1-MLC','Qwen2.5 1,5B · consigliato'],['Qwen2.5-3B-Instruct-q4f16_1-MLC','Qwen2.5 3B · più preciso, più pesante'],['Qwen2.5-0.5B-Instruct-q4f16_1-MLC','Qwen2.5 0,5B · leggero']];
   var CFG={eng:'web',model:MODELS[0][0],gmodel:'',key:'',remember:false};try{var o=JSON.parse(localStorage.getItem('radar-lab-engine')||'null');if(o)CFG=Object.assign(CFG,o)}catch(e){}
   function saveCfg(){var c=Object.assign({},CFG);if(!c.remember)c.key='';try{localStorage.setItem('radar-lab-engine',JSON.stringify(c))}catch(e){}}
+  var LLM=window.RadarLLM||{ios:false,models:function(l){return l},pick:function(i){return i},limit:function(){return {chars:7000,out:1400}},generating:function(){},blocked:function(){return null},unblock:function(){},friendly:function(e){return String(e&&e.message||e)},load:function(w,id,p){return w.CreateMLCEngine(id,{initProgressCallback:p})}};
   var engine=null,engineModel=null,gList=null,lastSty='';try{lastSty=localStorage.getItem('radar-mv-stile')||''}catch(e){}
   function aiToggle(btn){var f=panel.querySelector('.mv-ai'),o=f.hidden;f.hidden=!o;btn.setAttribute('aria-expanded',o?'true':'false');if(o){aiForm(f);var c=f.querySelector('input:checked')||f.querySelector('input');if(c)c.focus();}}
   function aiForm(f){var hasV='speechSynthesis' in window;
@@ -202,17 +203,18 @@ JS = r'''<script id="mv-js">
       '<label><input type="radio" name="mv-sty" value="free"'+(lastSty&&isNaN(+lastSty)?' checked':'')+'> A modo mio</label></div></fieldset>'+
       '<div class="mv-row"><label for="mv-free" style="flex-basis:100%">Oppure scrivi tu lo stile</label><input type="text" id="mv-free" maxlength="160" placeholder="es. come un messaggio vocale a un amico" value="'+(lastSty&&isNaN(+lastSty)?esc(lastSty):'')+'"></div>'+
       '<fieldset><legend>Chi crea la mappa</legend><div class="mv-chips"><label><input type="radio" name="mv-eng" value="web"'+(CFG.eng!=='gem'?' checked':'')+'> Nel browser · gratis e privato</label><label><input type="radio" name="mv-eng" value="gem"'+(CFG.eng==='gem'?' checked':'')+'> Gemini con la tua chiave</label></div></fieldset>'+
-      '<div class="mv-eng-w"><div class="mv-row"><label for="mv-model">Modello</label><select id="mv-model">'+MODELS.map(function(m){return '<option value="'+m[0]+'"'+(m[0]===CFG.model?' selected':'')+'>'+esc(m[1])+'</option>'}).join('')+'</select></div><p class="mv-note">Gira sulla scheda grafica del tuo dispositivo (serve WebGPU). La prima volta scarica il modello, da 0,9 a 2,5 GB: meglio con il Wi-Fi. Poi resta in memoria.</p></div>'+
+      '<div class="mv-eng-w"><div class="mv-row"><label for="mv-model">Modello</label><select id="mv-model">'+LLM.models(MODELS).map(function(m){return '<option value="'+m[0]+'"'+(m[0]===LLM.pick(CFG.model,MODELS)?' selected':'')+'>'+esc(m[1])+'</option>'}).join('')+'</select></div><p class="mv-note">'+(LLM.ios?'Su iPhone e iPad la memoria per scheda è poca: uso solo il modello più piccolo (circa 0,3 GB da scaricare una volta, meglio con il Wi-Fi). Se la pagina si chiude, al giro dopo passo a Gemini o alla mappa dell\'edizione. Per mappe più ricche scegli Gemini.':'Gira sulla scheda grafica del tuo dispositivo (serve WebGPU). La prima volta scarica il modello, da 0,3 a 1,8 GB: meglio con il Wi-Fi. Poi resta in memoria.')+'</p><p class="mv-note mv-blk" hidden></p></div>'+
       '<div class="mv-eng-g" hidden><div class="mv-row"><label for="mv-key">Chiave Gemini</label><input type="password" id="mv-key" autocomplete="off" value="'+esc(CFG.key)+'"><label style="display:flex;gap:.3rem;align-items:center"><input type="checkbox" id="mv-rem"'+(CFG.remember?' checked':'')+'> Ricorda</label></div><p class="mv-note">Il testo del capitolo (pubblico) va a Google con la tua chiave, che resta nel tuo browser. Si crea gratis su Google AI Studio.</p></div>'+
       (hasV?'<div class="mv-row"><label style="display:flex;gap:.4rem;align-items:center"><input type="checkbox" id="mv-say" checked> Raccontamela ad alta voce mentre la crea</label></div>':'')+
       '<div class="mv-row"><button type="button" class="mv-go2">Crea la mappa</button><button type="button" class="mv-stop" hidden>Ferma</button></div><p class="mv-st" aria-live="polite"></p>';
-    function vis(){var g=f.querySelector('input[name=mv-eng]:checked').value==='gem';f.querySelector('.mv-eng-w').hidden=g;f.querySelector('.mv-eng-g').hidden=!g;}vis();
+    function vis(){var g=f.querySelector('input[name=mv-eng]:checked').value==='gem';f.querySelector('.mv-eng-w').hidden=g;f.querySelector('.mv-eng-g').hidden=!g;blk();}
+    function blk(){var el=f.querySelector('.mv-blk'),id=LLM.pick(CFG.model,MODELS);if(!LLM.blocked(id)){el.hidden=true;return;}el.hidden=false;el.innerHTML='⚠ L\'ultima volta il modello nel browser ha fatto chiudere la pagina, quindi ora non parte da solo. <button type="button" class="mv-retry">Riprova il modello</button>';el.querySelector('.mv-retry').onclick=function(){LLM.unblock(id);blk();f.querySelector('.mv-st').textContent='Ok, al prossimo «Crea la mappa» riprovo il modello nel browser.';};}vis();
     f.querySelectorAll('input[name=mv-eng]').forEach(function(r){r.onchange=function(){CFG.eng=this.value;saveCfg();vis();}});
-    f.querySelector('#mv-model').onchange=function(){CFG.model=this.value;saveCfg()};
+    f.querySelector('#mv-model').onchange=function(){CFG.model=this.value;saveCfg();blk()};
     f.querySelector('#mv-key').onchange=function(){CFG.key=this.value.trim();gList=null;saveCfg()};f.querySelector('#mv-rem').onchange=function(){CFG.remember=this.checked;saveCfg()};
     f.querySelector('#mv-free').oninput=function(){if(this.value.trim())f.querySelector('input[name=mv-sty][value=free]').checked=true;};
     f.querySelector('.mv-go2').onclick=function(){aiRun(f)};f.querySelector('.mv-stop').onclick=function(){aiStop(f,'Fermato.')};}
-  function chapterText(sec){var out=[],L=sec.querySelector('.ch-head .lead');if(L)out.push('[intro] '+clean(L));paras(sec).forEach(function(p,i){out.push('[P'+i+'] '+clean(p))});var t=out.join('\n');return t.length>7000?t.slice(0,7000):t;}
+  function chapterText(sec){var out=[],L=sec.querySelector('.ch-head .lead');if(L)out.push('[intro] '+clean(L));paras(sec).forEach(function(p,i){out.push('[P'+i+'] '+clean(p))});var t=out.join('\n'),mx=LLM.limit().chars;return t.length>mx?t.slice(0,mx):t;}
   function prompt(styleTxt){return 'Sei Sapio, un gufo che crea mappe concettuali per persone con DSA o ADHD. Ricevi il testo di un capitolo tra <capitolo> e </capitolo>, con i paragrafi numerati [P0], [P1]...\n'+
     'Rispondi SOLO con righe JSON, una per riga, senza elenchi, senza ``` e senza altro testo.\n'+
     'Riga 1: {"root":"concetto centrale, massimo 5 parole","intro":"una o due frasi che presentano il capitolo nello stile richiesto"}\n'+
@@ -223,10 +225,13 @@ JS = r'''<script id="mv-js">
   async function webStream(sys,user,onTok,st,sig){if(!navigator.gpu)throw new Error('Questo browser non ha WebGPU: prova Chrome o Edge aggiornati, Safari 26, oppure scegli Gemini.');
     var ad=null;try{ad=await navigator.gpu.requestAdapter()}catch(e){}if(!ad)throw new Error('WebGPU non trova una scheda grafica utilizzabile: scegli Gemini.');
     var w;try{w=await import(new URL('../vendor/web-llm-0.2.85.js',location.href).href)}catch(e){w=await import(WEBLLM)}
-    if(!engine||engineModel!==CFG.model){st('Preparo il modello: la prima volta può volerci qualche minuto…');if(engine){try{await engine.unload()}catch(e){}}
-      engine=await w.CreateMLCEngine(CFG.model,{initProgressCallback:function(r){st('Caricamento del modello: '+Math.round((r.progress||0)*100)+'%')}});engineModel=CFG.model;}
-    st('Sapio sta creando la mappa…');var it=await engine.chat.completions.create({messages:[{role:'system',content:sys},{role:'user',content:user}],temperature:.6,max_tokens:1400,stream:true});
+    var mid=LLM.pick(CFG.model,MODELS);
+    if(!engine||engineModel!==mid){st('Preparo il modello: la prima volta può volerci qualche minuto…');if(engine){try{await engine.unload()}catch(e){}engine=null;}
+      engine=await LLM.load(w,mid,function(r){st('Caricamento del modello: '+Math.round((r.progress||0)*100)+'%')},function(t){var n=document.querySelector('.mv-ai .mv-blk');if(n){n.hidden=false;n.textContent=t;}});engineModel=mid;}
+    st('Sapio sta creando la mappa…');LLM.generating(mid,true);
+    try{var it=await engine.chat.completions.create({messages:[{role:'system',content:sys},{role:'user',content:user}],temperature:.6,max_tokens:LLM.limit().out,stream:true});
     for await(var ch of it){if(sig.stop){try{engine.interruptGenerate()}catch(e){}break;}var d=ch.choices&&ch.choices[0]&&ch.choices[0].delta&&ch.choices[0].delta.content;if(d)onTok(d);}}
+    finally{LLM.generating(mid,false);}}
   async function listG(){var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200',{headers:{'x-goog-api-key':CFG.key}});if(!r.ok)throw new Error('Chiave Gemini non valida o non autorizzata ('+r.status+').');var j=await r.json();
     return (j.models||[]).filter(function(m){return (m.supportedGenerationMethods||[]).indexOf('generateContent')>=0&&/gemini/i.test(m.name)&&!/(tts|image|live|embedding|audio|transcribe)/i.test(m.name)}).map(function(m){return m.name})}
   async function gemStream(sys,user,onTok,st,sig){if(!CFG.key)throw new Error('Inserisci la tua chiave Gemini.');if(!CFG.gmodel){gList=gList||await listG();CFG.gmodel=gList.filter(function(m){return /flash-lite/i.test(m)})[0]||gList.filter(function(m){return /flash/i.test(m)})[0]||gList[0];}
@@ -253,7 +258,10 @@ JS = r'''<script id="mv-js">
       if(cur===sec)render(false);sayQ((node.r?title(M,node.p)+' '+node.r+' '+node.t:node.t)+'. '+node.d);st('Sapio sta creando la mappa… '+n+(n===1?' concetto':' concetti'));}
     function tok(t){if(gen!==my)return;buf+=t;all+=t;var L=buf.split('\n');buf=L.pop();L.forEach(line);}
     try{var sys=prompt(styleTxt),user='<capitolo>\n'+chapterText(sec)+'\n</capitolo>';
-      if(CFG.eng==='gem')await gemStream(sys,user,tok,st,gen.sig);else await webStream(sys,user,tok,st,gen.sig);
+      if(CFG.eng==='gem')await gemStream(sys,user,tok,st,gen.sig);
+      else{try{await webStream(sys,user,tok,st,gen.sig);}catch(e){if(!(e&&e.fallback)||M.nodes.length)throw e;
+        if(!CFG.key)throw new Error(LLM.friendly(e)+' Ti rimetto la mappa dell\'edizione; per la mappa su misura scegli Gemini (con la tua chiave).');
+        st(LLM.friendly(e)+' Passo a Gemini con la tua chiave…');buf='';all='';await gemStream(sys,user,tok,st,gen.sig);}}
       if(gen!==my)return;line(buf);
       if(!M.nodes.length){/* il modello ha risposto con un unico JSON */var t=all.replace(/```json|```/g,''),i=t.indexOf('{'),j=t.lastIndexOf('}');try{var o=JSON.parse(t.slice(i,j+1));if(o.root)line(JSON.stringify({root:o.root,intro:o.intro}));(o.nodes||o.concetti||[]).forEach(function(x){line(JSON.stringify(x))});}catch(e){}}
       if(!M.nodes.length){AION[sec.id]=false;delete AIM[sec.id];render(true);aiStop(f,'Il modello non ha prodotto una mappa leggibile. Riprova, oppure scegli un modello più grande o Gemini.');return;}
