@@ -1578,6 +1578,13 @@ Non leggere mai il testo di message.</pre><button class="btn copy" data-c="l5">C
     ['📋','Solo l\'essenziale','in modo asciutto: solo i fatti chiave, frasi brevissime']];
   var WEBLLM='https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.85/+esm',MODELS=[['Qwen2.5-1.5B-Instruct-q4f16_1-MLC','Qwen2.5 1,5B · consigliato'],['Qwen2.5-3B-Instruct-q4f16_1-MLC','Qwen2.5 3B · più preciso, più pesante'],['Qwen2.5-0.5B-Instruct-q4f16_1-MLC','Qwen2.5 0,5B · leggero']];
   var CFG={eng:'web',model:MODELS[0][0],gmodel:'',key:'',remember:false};try{var o=JSON.parse(localStorage.getItem('radar-lab-engine')||'null');if(o)CFG=Object.assign(CFG,o)}catch(e){}
+  /* telefoni e tablet (iPhone/iPad soprattutto): Safari dà poca memoria a una scheda, i modelli da 1,5B e 3B arrivano al 100% e poi falliscono */
+  var IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),LOWMEM=IOS||(navigator.deviceMemory&&navigator.deviceMemory<=4);
+  if(LOWMEM){MODELS.sort(function(a,b){return /0\.5B/.test(b[0])-/0\.5B/.test(a[0])});MODELS.forEach(function(m){m[1]=m[1].replace(' · consigliato','');if(/0\.5B/.test(m[0]))m[1]='Qwen2.5 0,5B · consigliato su telefono';if(/3B/.test(m[0]))m[1]+=' (troppo pesante per il telefono)';});if(!CFG.pick)CFG.model=MODELS[0][0];}
+  function errIt(e){var m=(e&&e.message)||String(e||'Errore');
+    if(/load failed|failed to fetch|networkerror|network error|fetch/i.test(m))return 'Il download del modello si è interrotto (connessione o spazio sul dispositivo). Riprova con il Wi-Fi, oppure scegli il modello leggero 0,5B o Gemini.';
+    if(/internal|device.*lost|lost.*device|out of memory|memory|allocat|createbuffer|quota|abort/i.test(m))return 'Il dispositivo ha finito la memoria per questo modello. Scegli Qwen2.5 0,5B (leggero) oppure Gemini, e chiudi le altre schede.';
+    return m;}
   function saveCfg(){var c=Object.assign({},CFG);if(!c.remember)c.key='';try{localStorage.setItem('radar-lab-engine',JSON.stringify(c))}catch(e){}}
   var engine=null,engineModel=null,gList=null,lastSty='';try{lastSty=localStorage.getItem('radar-mv-stile')||''}catch(e){}
   function aiToggle(btn){var f=panel.querySelector('.mv-ai'),o=f.hidden;f.hidden=!o;btn.setAttribute('aria-expanded',o?'true':'false');if(o){aiForm(f);var c=f.querySelector('input:checked')||f.querySelector('input');if(c)c.focus();}}
@@ -1593,7 +1600,7 @@ Non leggere mai il testo di message.</pre><button class="btn copy" data-c="l5">C
       '<div class="mv-row"><button type="button" class="mv-go2">Crea la mappa</button><button type="button" class="mv-stop" hidden>Ferma</button></div><p class="mv-st" aria-live="polite"></p>';
     function vis(){var g=f.querySelector('input[name=mv-eng]:checked').value==='gem';f.querySelector('.mv-eng-w').hidden=g;f.querySelector('.mv-eng-g').hidden=!g;}vis();
     f.querySelectorAll('input[name=mv-eng]').forEach(function(r){r.onchange=function(){CFG.eng=this.value;saveCfg();vis();}});
-    f.querySelector('#mv-model').onchange=function(){CFG.model=this.value;saveCfg()};
+    f.querySelector('#mv-model').onchange=function(){CFG.model=this.value;CFG.pick=1;saveCfg()};
     f.querySelector('#mv-key').onchange=function(){CFG.key=this.value.trim();gList=null;saveCfg()};f.querySelector('#mv-rem').onchange=function(){CFG.remember=this.checked;saveCfg()};
     f.querySelector('#mv-free').oninput=function(){if(this.value.trim())f.querySelector('input[name=mv-sty][value=free]').checked=true;};
     f.querySelector('.mv-go2').onclick=function(){aiRun(f)};f.querySelector('.mv-stop').onclick=function(){aiStop(f,'Fermato.')};}
@@ -1609,7 +1616,7 @@ Non leggere mai il testo di message.</pre><button class="btn copy" data-c="l5">C
     var ad=null;try{ad=await navigator.gpu.requestAdapter()}catch(e){}if(!ad)throw new Error('WebGPU non trova una scheda grafica utilizzabile: scegli Gemini.');
     var w;try{w=await import(new URL('../vendor/web-llm-0.2.85.js',location.href).href)}catch(e){w=await import(WEBLLM)}
     if(!engine||engineModel!==CFG.model){st('Preparo il modello: la prima volta può volerci qualche minuto…');if(engine){try{await engine.unload()}catch(e){}}
-      engine=await w.CreateMLCEngine(CFG.model,{initProgressCallback:function(r){st('Caricamento del modello: '+Math.round((r.progress||0)*100)+'%')}});engineModel=CFG.model;}
+      try{engine=await w.CreateMLCEngine(CFG.model,{appConfig:IOS&&w.prebuiltAppConfig?Object.assign({},w.prebuiltAppConfig,{useIndexedDBCache:true}):undefined,initProgressCallback:function(r){st('Caricamento del modello: '+Math.round((r.progress||0)*100)+'%')}});}catch(e){engine=null;engineModel=null;throw new Error(errIt(e));}engineModel=CFG.model;}
     st('Sapio sta creando la mappa…');var it=await engine.chat.completions.create({messages:[{role:'system',content:sys},{role:'user',content:user}],temperature:.6,max_tokens:1400,stream:true});
     for await(var ch of it){if(sig.stop){try{engine.interruptGenerate()}catch(e){}break;}var d=ch.choices&&ch.choices[0]&&ch.choices[0].delta&&ch.choices[0].delta.content;if(d)onTok(d);}}
   async function listG(){var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200',{headers:{'x-goog-api-key':CFG.key}});if(!r.ok)throw new Error('Chiave Gemini non valida o non autorizzata ('+r.status+').');var j=await r.json();
@@ -1643,7 +1650,7 @@ Non leggere mai il testo di message.</pre><button class="btn copy" data-c="l5">C
       if(!M.nodes.length){/* il modello ha risposto con un unico JSON */var t=all.replace(/```json|```/g,''),i=t.indexOf('{'),j=t.lastIndexOf('}');try{var o=JSON.parse(t.slice(i,j+1));if(o.root)line(JSON.stringify({root:o.root,intro:o.intro}));(o.nodes||o.concetti||[]).forEach(function(x){line(JSON.stringify(x))});}catch(e){}}
       if(!M.nodes.length){AION[sec.id]=false;delete AIM[sec.id];render(true);aiStop(f,'Il modello non ha prodotto una mappa leggibile. Riprova, oppure scegli un modello più grande o Gemini.');return;}
       aiStop(null);f.querySelector('.mv-go2').hidden=false;f.querySelector('.mv-stop').hidden=true;f.querySelector('.mv-go2').textContent='Rifalla';f.querySelector('.mv-st').textContent=('Fatto: '+M.nodes.length+' concetti, stile «'+label+'». Ricorda: l\'ha scritta un\'AI, controllala con il testo.');
-    }catch(e){if(gen!==my)return;if(!M.nodes.length){AION[sec.id]=false;delete AIM[sec.id];render(true);}aiStop(f,'⚠ '+(e&&e.message?e.message:'Errore'));}}
+    }catch(e){if(gen!==my)return;if(!M.nodes.length){AION[sec.id]=false;delete AIM[sec.id];render(true);}aiStop(f,'⚠ '+errIt(e));}}
   /* ---------- Raccontami ---------- */
   function tell(){var m=mapOf(cur),V=visible(m);if(!V.length)return;var btn=panel.querySelector('[data-a=tell]');btn.setAttribute('aria-pressed','true');btn.textContent='⏹ Ferma';
     narr={i:-1,V:V,tok:0};var hasV='speechSynthesis' in window;
