@@ -41,4 +41,4 @@ Il sapere oggi passa dall'intelligenza artificiale e cambia ogni giorno. Sapit �
 ## Da fare
 
 - Verifiche prima di registrarlo: marchio (UIBM, EUIPO), dominio e profili social.
-- Email della newsletter e testi audio dicono ancora «Radar AI»: il modello dell'email si cambia solo con approvazione.
+- Email della newsletter: dal 22 novembre 2026 si chiama Sapit (oggetto «🦉 Sapit · …», mittente «Sapit») e usa i colori del sito. I testi audio dicono ancora «Radar AI».

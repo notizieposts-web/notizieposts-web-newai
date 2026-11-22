@@ -12,7 +12,7 @@ Pubblicata con GitHub Pages.
 
 ## Palette: "Verde Deloitte"
 
-Scelta il 12 novembre 2026. Il documento di riferimento, con tutti i colori, le misure di contrasto e le fonti ufficiali, è [`docs/palette.md`](docs/palette.md). Stato: applicata a tutto il sito (l'email ha ancora i suoi colori).
+Scelta il 12 novembre 2026. Il documento di riferimento, con tutti i colori, le misure di contrasto e le fonti ufficiali, è [`docs/palette.md`](docs/palette.md). Stato: applicata a tutto il sito (dal 22 novembre 2026 anche l'email).
 
 - **Base neutra grafite**: fondo `#F6F6F5` e testo `#1C1D1F` in chiaro; fondo `#121212` e testo `#EDEDED` in scuro.
 - **Pulsante principale**: verde scuro `#3F7A12` con testo bianco, identico nei due temi (5,24:1 sul testo, WCAG 2.2 AA).
