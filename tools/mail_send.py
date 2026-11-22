@@ -1,4 +1,4 @@
-"""Radar AI: invia l'email dell'edizione via SMTP di Gmail (usato dal workflow "Invio email" del repository privato radar-ai-invio).
+"""Sapit (prima Radar AI): invia l'email dell'edizione via SMTP di Gmail (usato dal workflow "Invio email" del repository privato radar-ai-invio).
 
 Perche' non il connettore Gmail: send_message fa passare l'HTML dal filtro di Gmail, che riscrive i link
 in https://www.google.com/url?q=... (chi apre vede "vuoi essere reindirizzato?") e toglie gli sfondi.
@@ -29,7 +29,7 @@ def addrs(name):
 def plain(u, html):
     n = int(u['n'])
     site = mail_build.SITE
-    lines = ['Radar AI · %s' % u['titolo'], '', u['descrizione'], '',
+    lines = ['Sapit · %s' % u['titolo'], '', u['descrizione'], '',
              'Leggi l\'edizione: %sedizioni/%02d.html' % (site, n)]
     m = re.search(r'href="([^"]+radar-ai-%d\.mp3)"' % n, html)
     if m:
@@ -40,7 +40,7 @@ def plain(u, html):
 def message(sender, to, subject, html, text):
     msg = MIMEMultipart('alternative')
     msg['Subject'] = subject
-    msg['From'] = formataddr(('Radar AI', sender))
+    msg['From'] = formataddr(('Sapit', sender))
     msg['To'] = to
     msg['Date'] = formatdate(localtime=False)
     msg['Message-ID'] = make_msgid(domain=sender.split('@')[1])
@@ -60,7 +60,7 @@ def main():
     html_prev, _ = mail_build.build('.', precedente=True)
     if mode != 'prova' and u['data'] != today.isoformat():
         raise SystemExit('::error::tools/ultima.json e\' del %s, non di oggi: edizione non pronta' % u['data'])
-    subject = '\U0001F4E1 Radar AI · ' + u['titolo']
+    subject = mail_build.SUBJ + u['titolo']
     jobs = []
     if mode == 'prova':
         jobs = [(a, html_std) for a in (addrs('MAIL_TEST') or [sender])]  # senza MAIL_TEST la prova va al mittente

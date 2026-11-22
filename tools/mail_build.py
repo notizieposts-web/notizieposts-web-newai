@@ -1,4 +1,4 @@
-"""Radar AI: costruisce l'email dell'edizione dal modello tools/mail_template_teaser.html e da tools/ultima.json.
+"""Sapit (prima Radar AI): costruisce l'email dell'edizione dal modello tools/mail_template_teaser.html e da tools/ultima.json.
 
 Uso:
   python3 tools/mail_build.py OUT.html                 # email standard
@@ -16,6 +16,7 @@ REPO = 'https://github.com/notizieposts-web/notizieposts-web-newai'
 MESI = ['GENNAIO', 'FEBBRAIO', 'MARZO', 'APRILE', 'MAGGIO', 'GIUGNO', 'LUGLIO', 'AGOSTO',
         'SETTEMBRE', 'OTTOBRE', 'NOVEMBRE', 'DICEMBRE']
 WPM = 145
+SUBJ = '\U0001F989 Sapit · '
 
 def e(s):
     return html.escape(str(s), quote=False)
@@ -96,7 +97,7 @@ def build(root, audio=None, precedente=False):
         t = block(t, 'PRECEDENTE', lambda b: '')
     t = fill(t, {'TITOLO': e(u['titolo']), 'DESCRIZIONE': e(u['descrizione']), 'DOMANDA': e(u['domanda']), 'CHIPS': chips_txt,
                  'N': str(n), 'DATA_LUNGA': '%d %s %s' % (int(d), MESI_L[int(m) - 1], y), 'URL_ED': url_ed,
-                 'URL_ED_TESTO': url_ed.replace('https://', ''), 'URL_SITO': SITE, 'MINUTI_LETTURA': str(reading_minutes(root, n))})
+                 'URL_ED_TESTO': url_ed.replace('https://', ''), 'URL_SITO': SITE, 'URL_PALESTRA': SITE + 'azure-esercizi.html', 'URL_LAB': SITE + 'azure-laboratorio.html', 'MINUTI_LETTURA': str(reading_minutes(root, n))})
     check(t, n)
     return t, u
 
@@ -121,4 +122,4 @@ if __name__ == '__main__':
     t, u = build('.', audio=audio, precedente='--precedente' in args)
     open(out, 'w', encoding='utf-8').write(t)
     print('ok', out, 'edizione', u['n'], 'audio', 'si' if 'radar-ai-%d.mp3' % int(u['n']) in t else 'no',
-          'oggetto:', '\U0001F4E1 Radar AI · ' + u['titolo'])
+          'oggetto:', SUBJ + u['titolo'])

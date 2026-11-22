@@ -2,7 +2,7 @@
 
 Documento di riferimento per i colori del sito, scelto il 12 novembre 2026. Ogni modifica ai colori parte da qui.
 
-Stato: **applicata a tutto il sito il 12 novembre 2026** (`tools/inject.py`). Resta escluso il modello dell'email, che ha ancora i suoi colori.
+Stato: **applicata a tutto il sito il 12 novembre 2026** (`tools/inject.py`). Dal 22 novembre 2026 la usa anche il modello dell'email.
 
 ## Principi
 
@@ -75,6 +75,6 @@ WCAG 2.2 è la norma in vigore (testo almeno 4,5:1, livello AA; 7:1 livello AAA;
 
 - `tools/inject.py`, righe `:root`: tutti i colori del sito, per i temi chiaro e scuro. Variabili: `--violet` = pulsante verde `#3F7A12` (il nome resta per compatibilità), `--on-violet` = testo bianco sopra il verde, `--violet-ink` = verde per i testi (`#3F7A12` in chiaro, `#9CD84A` in scuro), `--accent` / `--on-accent` = `#86BC24` con testo nero (badge «AI» del logo), `--teal`, `--sun`, `--red` con le loro tinte `-soft` per gli stati. Subito sotto, un blocco forza il testo bianco su tutti i componenti con fondo verde.
 - `tools/logo.py` (logo e favicon) e `tools/site_meta.py` (immagini di anteprima e pagina 404).
-- `tools/mail_template_teaser.html`: il modello dell'email ha ancora i suoi colori e si cambia solo con un'approvazione a parte.
+- `tools/mail_template_teaser.html`: il modello dell'email usa la palette (contrasti verificati: testo su verde chiaro 5,6:1, pulsante 5,24:1, testi scuri 6,4:1 o più).
 
 Dopo ogni modifica: rigenera le pagine, poi `python3 tools/audit3.py "$(pwd)"` e `python3 tools/reflow.py "$(pwd)"`, che devono stampare nulla.
