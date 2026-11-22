@@ -384,7 +384,7 @@ JS_TMPL = r"""<script id="kw-js">
   function hardWords(sec){var gl={};sec.querySelectorAll('.gl-btn').forEach(function(b){gl[(b.firstChild?b.firstChild.textContent:'').trim().toLowerCase()]=1});
     var keys=Object.keys(HARD).filter(function(k){return !gl[k.toLowerCase()]}).sort(function(a,b){return b.length-a.length});if(!keys.length)return;
     var re=new RegExp('(?<!['+LD+'])('+keys.map(rx).join('|')+')(?!['+LD+'])','i'),used={};
-    zones(sec).forEach(function(z){var w=document.createTreeWalker(z,NodeFilter.SHOW_TEXT,{acceptNode:function(n){return n.parentElement.closest(SKIP+',a,mark,.gl,h3,h4,summary,label,details:not([open])')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}}),nodes=[],n;
+    zones(sec).forEach(function(z){var w=document.createTreeWalker(z,NodeFilter.SHOW_TEXT,{acceptNode:function(n){return n.parentElement.closest(SKIP+',a,mark,.gl,h3,h4,summary,label,.example,details:not([open])')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}}),nodes=[],n;
       while((n=w.nextNode()))nodes.push(n);
       nodes.forEach(function(t){var m=re.exec(t.nodeValue);if(!m)return;var key=Object.keys(HARD).filter(function(k){return k.toLowerCase()===m[1].toLowerCase()})[0];if(!key||used[HARD[key]])return;used[HARD[key]]=1;
         var mid=t.splitText(m.index);mid.splitText(m[1].length);var id='kwhd-'+(++hid);

@@ -1,0 +1,63 @@
+Radar AI. Edizione del ventidue novembre 2026. Questa è la versione da ascoltare: dura circa dieci minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: le richieste che finivano nelle mani sbagliate, un modello da portatile e i pesi scritti a mano.
+
+Una nota prima di cominciare. Tra i segnali c'è una notizia che riguarda un matematico di Anthropic e Claude, e questa edizione è preparata da Claude, un modello di Anthropic. La riporto come notizia non verificata, e dico che cosa non ho potuto leggere.
+
+Il periodo in breve. Un fine settimana in cui la notizia più importante riguarda la strada che fanno le nostre richieste. Un esperimento con esche ha mostrato che alcuni fornitori che fanno girare i modelli per conto d'altri lasciavano uscire i dati, e OpenRouter ne ha tolti tre. Intanto Thinking Machines porta un modello aperto sul portatile, e due studi provano a programmare i modelli scrivendo direttamente nei loro numeri.
+
+Capitolo uno. OpenRouter e le esche di Dragos.
+
+Domenica ventidue novembre OpenRouter, il servizio che smista le richieste verso decine di fornitori di modelli, ha annunciato di aver escluso tre fornitori e di aver tolto centoventicinque servizi dalla garanzia di non conservare i dati.
+
+Per capire perché, bisogna sapere chi c'è tra noi e il modello. Quando un'applicazione usa un modello aperto, spesso si appoggia a un fornitore di inferenza: un'azienda che ha le schede grafiche, carica il modello e vende le risposte. Sopra i fornitori ci sono i router, come OpenRouter, che mandano ogni richiesta al fornitore più conveniente. Il testo che scriviamo passa quindi per più aziende, e a volte per rivenditori che stanno in mezzo.
+
+HD Moore, ricercatore di sicurezza dell'azienda Dragos, ha voluto controllare questa catena. Da luglio a novembre ha mandato circa due milioni di richieste, piene di esche tracciabili: indirizzi web unici e finte chiavi di accesso al cloud di Amazon, che servono solo a far scattare un allarme se qualcuno le usa.
+
+Il risultato, pubblicato il diciannove novembre, è preoccupante. I dati di almeno tre fornitori sono arrivati ad attaccanti. Un paio di centinaia di finte chiavi sono state usate per decine di migliaia di chiamate, anche per provare ad attivare il servizio di modelli di Amazon a spese altrui. Alcuni rivenditori registravano le richieste dei clienti. E la promessa di non conservare i dati, in alcuni casi, non era rispettata.
+
+OpenRouter dice che i suoi sistemi non sono stati violati, che il problema era nei fornitori a valle, e che d'ora in poi farà prove continue e chiederà prove prima di ridare la garanzia. Non nomina in modo esplicito i tre fornitori esclusi. Il consiglio di Dragos vale per tutti: meno passaggi tra noi e il modello, e qualche esca nei propri flussi di lavoro per accorgersi se qualcosa esce.
+
+Prova a chiederti: quante aziende leggono, senza che tu lo sappia, i testi che mandi a un assistente?
+
+Capitolo due. Thinking Machines e Inkling 2 Mini.
+
+Venerdì venti novembre Thinking Machines Lab, l'azienda fondata da Mira Murati, ha pubblicato Inkling 2 Mini, il fratello piccolo di Inkling 2 Small di cui avevamo parlato due settimane fa. Ha ventisei virgola quattro miliardi di parametri, ma per ogni parola ne usa solo tre virgola quattro: è un modello a esperti, dove in ogni strato lavorano otto piccole reti specializzate su centoventotto.
+
+C'è un'altra idea: i dodici strati centrali vengono ripassati tre volte con gli stessi pesi, come uno studente che rilegge il paragrafo difficile. I pesi sono aperti, con licenza Apache 2.0, che permette anche l'uso commerciale. Il modello sta in un solo file di circa venti gigabyte, e secondo l'azienda basta un computer con trentadue gigabyte di memoria. Nella dimostrazione ufficiale gira su un portatile Apple senza internet.
+
+Nelle prove di programmazione supera modelli aperti di taglia simile, come Qwen tre punto otto da ventisette miliardi: per esempio settantasette virgola nove per cento contro settantatré virgola otto su una prova difficile di correzione del codice. Non vince ovunque: inventa risposte più spesso del rivale. La scheda tecnica è franca sui limiti: è più debole nelle lingue diverse dall'inglese, può dire cose sbagliate con sicurezza e, usato come agente, può fare azioni distruttive senza chiedere conferma. Tutti i numeri sono dell'azienda, e al ventidue novembre nessuno li ha ancora ripetuti.
+
+Prova a chiederti: quali lavori faresti fare a un modello che vive solo sul tuo computer, e quali no?
+
+Capitolo tre. Scrivere nei pesi senza addestrare.
+
+Due studi pubblicati su arXiv, e molto discussi nel fine settimana, provano a cambiare un modello senza il solito addestramento. Di solito, per insegnare qualcosa a un modello, gli si mostrano molti esempi e un algoritmo sposta un po' tutti i suoi numeri, i pesi. Il risultato è approssimato: il modello impara a fare le somme di solito bene, non sempre.
+
+Il primo studio, firmato da Tanmay Sah e inviato il diciannove novembre, fa un'altra cosa: scrive circuiti aritmetici esatti, come quelli di un processore, direttamente nei pesi di un modello già pronto, toccandone meno di un millesimo. Sulle operazioni a sei cifre i modelli modificati rispondono giusto nel novantanove e nel cento per cento dei casi, mentre un addestramento leggero sugli stessi modelli si ferma tra il quaranta e il sessanta per cento.
+
+Il secondo studio fa modificare a un modello aperto da ventisette miliardi di parametri i propri pesi, in base ai propri errori. Guadagna sei virgola sei punti su problemi nuovi e migliora a ogni sessione. Ma la capacità compare solo nel modello più grande della famiglia: i più piccoli non riescono o si rompono da soli.
+
+Nessuno dei due studi è stato revisionato, e nessuno dei due ha pubblicato il codice. C'è anche un rovescio della medaglia: se si può scrivere un circuito esatto toccando pochissimi pesi, si può nascondere anche un comportamento malevolo. Un motivo in più per scaricare i modelli solo da fonti affidabili.
+
+Prova a chiederti: preferiresti un modello che impara tutto da solo, o uno con dentro pezzi scritti a mano che puoi controllare?
+
+Capitolo quattro. La rubrica Azure Content Understanding, cinquantacinquesima puntata: i moduli fiscali americani.
+
+Content Understanding ha una famiglia di analizzatori pronti per i moduli fiscali degli Stati Uniti: la dichiarazione dei redditi e i suoi allegati, quasi trenta varianti dei moduli con cui banche e clienti comunicano i redditi, il modulo delle buste paga e altri. C'è anche uno smistatore che li riconosce in un fascicolo misto e li manda al lettore giusto.
+
+Qualche puntata fa avevamo scritto che i moduli fiscali costano il triplo. Oggi lo precisiamo: il triplo riguarda solo una voce, la preparazione del testo per il modello, e solo per alcuni moduli, tre dollari invece di uno ogni mille pagine. L'estrazione del testo costa uguale per tutti e i token del modello si pagano a parte, quindi il conto totale cresce molto meno. In cambio, secondo Microsoft, la qualità migliora e il modello consuma meno token.
+
+I consigli: se sai già che modulo hai, chiama direttamente il suo lettore e non lo smistatore; usa le chiamate asincrone; manda solo le pagine utili; controlla nel rapporto di ogni analisi quanto hai consumato davvero. E attenzione: la documentazione non elenca i campi, che stanno negli schemi pubblicati a parte, e la descrizione di un modulo sembra sbagliata. Per i documenti fiscali italiani serve un analizzatore con il proprio schema.
+
+Prova a chiederti: nei tuoi documenti, quali pagine paghi senza averne bisogno?
+
+Prova tu. Nella pagina trovi cinque esperimenti: mettere un'esca innocua nelle tue richieste, preparare le domande da fare a un fornitore di modelli, fare il conto della memoria per un modello locale, mettere alla prova i conti a mente del tuo assistente e progettare lo schema dei campi per la Certificazione Unica.
+
+I segnali, tutti ancora da verificare. Secondo la stampa, Levent Alpöge, matematico di Anthropic, avrebbe annunciato una dimostrazione dell'ipotesi di Riemann generalizzata ottenuta lavorando con Claude, mentre da Stanford sarebbe arrivata una bozza rivale, poi contestata; non ho letto la nota originale e non c'è nessuna revisione. La Cina preparerebbe norme per misurare e fatturare i token dell'intelligenza artificiale. Alla conferenza dell'ONU di Ginevra sulle armi autonome non si sarebbe arrivati a un divieto. Attaccanti avrebbero usato un sistema di agenti per sfruttare una falla in un programma per le immagini mediche. E Google avrebbe ridotto gli ordini dei suoi chip per il duemilaventisette.
+
+La domanda del giorno: perché una promessa di non conservare i dati non basta, da sola, a proteggerli?
+
+Perché è una dichiarazione, non qualcosa che il cliente può vedere. Tra noi e il modello ci possono essere più aziende, e basta che una sbagli o menta perché il testo esca. Una promessa si verifica solo con prove, come le esche, o con controlli indipendenti.
+
+È tutto per oggi. Esempi, fonti, quiz ed esperimenti ti aspettano nella pagina dell'edizione cinquantanove di Radar AI. A domani.

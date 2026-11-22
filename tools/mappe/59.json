@@ -1,0 +1,35 @@
+{
+ "openrouter": {"root": "OpenRouter e le esche di Dragos", "nodes": [
+  {"id": "forn", "t": "Fornitori di inferenza", "d": "Aziende che fanno girare i modelli aperti e vendono le risposte; sopra di loro i router smistano le richieste.", "at": 0, "i": "🏭", "p": "root", "r": "riguarda i"},
+  {"id": "esche", "t": "Due milioni di esche", "d": "Da luglio a novembre HD Moore di Dragos ha mandato richieste con link e finte chiavi uniche, su circa duemila percorsi.", "at": 1, "i": "🪤", "p": "root", "r": "nasce da"},
+  {"id": "aws", "t": "Finte chiavi AWS usate", "d": "Un paio di centinaia di chiavi esca usate per decine di migliaia di chiamate, anche per attivare Bedrock.", "at": 2, "i": "🔑", "p": "esche", "r": "hanno mostrato"},
+  {"id": "zdr", "t": "ZDR non rispettata", "d": "La promessa di non conservare i dati: in alcuni casi gli indirizzi esca venivano aperti più volte.", "at": 2, "i": "📭", "p": "esche", "r": "e anche"},
+  {"id": "risp", "t": "Tre fornitori esclusi", "d": "OpenRouter toglie anche 125 servizi dalla garanzia ZDR e chiederà prove prima di ridarla.", "at": 3, "i": "🚫", "p": "root", "r": "porta a"},
+  {"id": "cat", "t": "Catena di fornitura", "d": "Più passaggi tra te e il modello, più punti in cui un testo può essere letto o rubato.", "at": 4, "i": "⛓", "p": "root", "r": "insegna a guardare la"}
+ ], "x": [["zdr", "risp", "spiega la"]]},
+ "inkling": {"root": "Inkling 2 Mini", "nodes": [
+  {"id": "pesi", "t": "Pesi aperti Apache 2.0", "d": "Scaricabili da Hugging Face, uso anche commerciale; legge testo e immagini.", "at": 0, "i": "🔓", "p": "root", "r": "è un modello a"},
+  {"id": "moe", "t": "8 esperti su 128", "d": "Per ogni parola lavorano pochi esperti: 3,4 miliardi di parametri attivi su 26,4.", "at": 1, "i": "🧩", "p": "root", "r": "usa"},
+  {"id": "loop", "t": "Strati ripassati tre volte", "d": "I 12 strati centrali si ripetono con gli stessi pesi: 48 passaggi da 24 strati.", "at": 1, "i": "🔁", "p": "moe", "r": "e in più"},
+  {"id": "mem", "t": "20 GB, 32 di memoria", "d": "Un file compresso in NVFP4 e MXFP8; gira su Mac con 32 GB o su schede con 32 GB.", "at": 2, "i": "💻", "p": "root", "r": "occupa"},
+  {"id": "ris", "t": "Vince sul codice", "d": "77,9 per cento su SWE-bench Pro v2 Hard contro 73,8 di Qwen3.8-27B.", "at": 3, "i": "📈", "p": "root", "r": "nei risultati"},
+  {"id": "inv", "t": "Inventa più spesso", "d": "63,4 per cento di risposte senza invenzioni contro 71,4: va controllato.", "at": 3, "i": "⚠️", "p": "ris", "r": "ma"},
+  {"id": "lim", "t": "Limiti dichiarati", "d": "Più debole fuori dall'inglese, può fare azioni distruttive senza conferma.", "at": 4, "i": "🚧", "p": "root", "r": "ha"}
+ ], "x": [["inv", "lim", "si aggiunge ai"]]},
+ "pesi": {"root": "Scrivere nei pesi", "nodes": [
+  {"id": "solito", "t": "Addestramento e LoRA", "d": "Il modo solito: esempi e gradienti, con risultati approssimati.", "at": 0, "i": "🎓", "p": "root", "r": "è diverso da"},
+  {"id": "cpu", "t": "Una CPU nel modello", "d": "Circuiti aritmetici esatti scritti nei pesi congelati, senza gradienti.", "at": 1, "i": "🧮", "p": "root", "r": "primo studio:"},
+  {"id": "cent", "t": "99,17 e 100 per cento", "d": "Operazioni a sei cifre su Granite 4.2 3B e Qwen 3.5 4B, contro 42,2 e 61,7 della LoRA.", "at": 2, "i": "🎯", "p": "cpu", "r": "ottiene"},
+  {"id": "auto", "t": "Il modello si riscrive", "d": "Un modello da 27 miliardi propone come cambiare i propri pesi: più 6,6 punti.", "at": 3, "i": "🔧", "p": "root", "r": "secondo studio:"},
+  {"id": "grande", "t": "Solo il più grande", "d": "I modelli più piccoli non fanno modifiche utili o si rompono.", "at": 4, "i": "🐘", "p": "auto", "r": "funziona"},
+  {"id": "back", "t": "Rischio backdoor", "d": "Se si scrive un circuito toccando lo 0,05 per cento dei pesi, si può nascondere anche altro.", "at": 5, "i": "🕳", "p": "root", "r": "apre un"}
+ ], "x": [["cent", "back", "la stessa precisione vale per una"]]},
+ "azure": {"root": "Content Understanding e moduli fiscali", "nodes": [
+  {"id": "smist", "t": "prebuilt-tax.us", "d": "Lo smistatore riconosce il modulo e lo manda al lettore giusto.", "at": 0, "i": "🔀", "p": "root", "r": "parte dallo"},
+  {"id": "fam", "t": "1040, 1099, W-2", "d": "Dichiarazione e allegati, quasi trenta varianti del 1099, 1098, 1095, W-2 e W-4.", "at": 0, "i": "📄", "p": "smist", "r": "che instrada a"},
+  {"id": "triplo", "t": "Il triplo solo qui", "d": "La contestualizzazione avanzata costa 3 dollari ogni 1.000 pagine invece di 1, solo per alcuni moduli.", "at": 1, "i": "💶", "p": "root", "r": "costa"},
+  {"id": "perche", "t": "Meno token del modello", "d": "La preparazione avanzata migliora la qualità e riduce i token del modello generativo.", "at": 2, "i": "⚖️", "p": "triplo", "r": "in cambio di"},
+  {"id": "cons", "t": "Lettore diretto e range", "d": "Se conosci il modulo, salta lo smistatore; manda solo le pagine utili.", "at": 3, "i": "✂️", "p": "root", "r": "si risparmia con"},
+  {"id": "avv", "t": "Schemi e 1099-DA", "d": "I campi sono negli schemi su GitHub; la descrizione del 1099-DA sembra sbagliata.", "at": 4, "i": "🔎", "p": "root", "r": "attenzione a"}
+ ], "x": [["triplo", "cons", "si riduce con"]]}
+}

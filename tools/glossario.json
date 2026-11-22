@@ -1206,5 +1206,39 @@
   "vedi": [
    "rtl"
   ]
+ },
+ "fornitore-di-inferenza": {
+  "t": "fornitore di inferenza",
+  "spiega": "Un'azienda che fa girare un modello di AI sui propri computer e vende le risposte, di solito a tanto per milione di token.",
+  "esempio": "Un'app usa un modello aperto come Qwen senza avere schede grafiche: manda le richieste a un fornitore di inferenza che lo ha già caricato.",
+  "approfondisci": "Molti modelli aperti si usano così, perché farli girare in casa richiede hardware costoso. Tra chi usa il modello e il fornitore ci possono essere router e rivenditori. Ogni passaggio vede il testo delle richieste, quindi conta come tratta i dati.",
+  "vedi": [
+   "token",
+   "pesi-aperti",
+   "zdr"
+  ]
+ },
+ "canary-token": {
+  "t": "esca tracciabile",
+  "esteso": "canary token",
+  "spiega": "Un dato finto e unico, come un link o una chiave di accesso inventata, nascosto in un testo o in un sistema: se qualcuno lo usa, scatta un allarme.",
+  "esempio": "Metti in un documento riservato un link unico a una pagina del tuo sito: se un giorno quella pagina viene aperta, sai che qualcuno ha letto il documento.",
+  "approfondisci": "Il nome viene dai canarini che i minatori portavano in miniera per accorgersi dei gas. Ogni esca è diversa, quindi dice anche da dove è uscito il dato. Non danneggia nessuno: scatta solo se qualcuno legge e usa ciò che non dovrebbe.",
+  "vedi": [
+   "supply-chain",
+   "credenziali"
+  ]
+ },
+ "zdr": {
+  "t": "ZDR",
+  "esteso": "Zero Data Retention",
+  "spiega": "La promessa di un fornitore di non conservare le richieste e le risposte dopo averle elaborate.",
+  "esempio": "Un'azienda manda contratti a un modello con ZDR: il fornitore dichiara che dopo la risposta non resta copia del testo sui suoi server.",
+  "approfondisci": "È un impegno contrattuale, non qualcosa che il cliente può vedere. Per questo si verifica con audit o con prove come le esche tracciabili. Nel novembre 2026 un esperimento ha mostrato servizi che non la rispettavano.",
+  "vedi": [
+   "fornitore-di-inferenza",
+   "canary-token",
+   "minimizzazione-dei-dati"
+  ]
  }
 }

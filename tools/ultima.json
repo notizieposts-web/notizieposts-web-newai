@@ -1,46 +1,14 @@
 {
- "n": 58,
- "data": "2026-11-21",
- "titolo": "Gli agenti che tengono veloce ChatGPT, EverydayBench e DaisyRose",
- "descrizione": "OpenAI racconta gli agenti che cercano da soli perché ChatGPT rallenta, uno studio misura quante richieste di tutti i giorni gli agenti portano a termine, una piccola azienda pubblica un modello aperto addestrato con pochi compiti scelti con cura, AMD porta i modelli sul chip per l'AI dei portatili e la rubrica Azure spiega le pratiche di mutuo.",
- "chips": [
-  "Ricerca",
-  "Valutazione",
-  "Pesi aperti",
-  "Hardware",
-  "Azure"
- ],
+ "n": 59,
+ "data": "2026-11-22",
+ "titolo": "OpenRouter e le esche, Inkling 2 Mini e i pesi scritti a mano",
+ "descrizione": "Un esperimento con richieste esca scopre fornitori di modelli che lasciavano uscire i dati e OpenRouter ne esclude tre, Thinking Machines pubblica un modello aperto che gira su un portatile, due studi scrivono funzioni esatte dentro i modelli e la rubrica Azure spiega i moduli fiscali americani.",
+ "chips": ["Sicurezza", "Pesi aperti", "Ricerca", "Costi", "Azure"],
  "items": [
-  [
-   "🛠",
-   "OpenAI",
-   "Gli agenti di OpenAI cercano da soli perché ChatGPT rallenta",
-   "In tre mesi hanno seguito oltre 1.700 casi di rallentamento e ne hanno spiegati più di 600, proponendo le correzioni che poi gli ingegneri approvano."
-  ],
-  [
-   "🧾",
-   "EverydayBench",
-   "Le richieste di tutti i giorni restano difficili anche per i migliori agenti",
-   "Su 77 compiti quotidiani svolti sul web vero, come scegliere un prodotto o pianificare un viaggio, i migliori agenti ne completano bene poco più della metà."
-  ],
-  [
-   "🌼",
-   "RadixArk",
-   "Un modello aperto migliorato con 1.200 compiti scelti a mano",
-   "DaisyRose-27B si può scaricare e usare anche per lavoro, e raddoppia il punteggio del modello di partenza su una prova difficile per agenti, pur restando dietro ad altri."
-  ],
-  [
-   "💻",
-   "AMD",
-   "I modelli locali girano sul chip per l'AI dei portatili Ryzen",
-   "Con il programma gratuito Unsloth Desktop, più di cento applicazioni possono usare un modello sul portatile consumando meno batteria, se c'è abbastanza memoria."
-  ],
-  [
-   "☁",
-   "Azure",
-   "Le pratiche di mutuo lette pagina per pagina con Content Understanding",
-   "La rubrica spiega come un solo servizio riconosce i cinque moduli di un mutuo americano, quanto costa e come pagare solo le pagine utili."
-  ]
+  ["🪤", "OpenRouter", "Alcune richieste agli assistenti finivano nelle mani sbagliate", "Dopo un esperimento con due milioni di richieste piene di esche, OpenRouter ha escluso tre fornitori che lasciavano uscire i dati degli utenti o non rispettavano la promessa di non conservarli."],
+  ["💻", "Thinking Machines", "Un modello aperto che gira su un portatile", "Inkling 2 Mini si scarica gratis, si può usare anche per lavoro e, secondo l'azienda, batte modelli aperti più grandi nella programmazione, ma inventa risposte più spesso."],
+  ["🧮", "Ricerca", "Una calcolatrice esatta scritta dentro un modello", "Due studi non ancora revisionati cambiano i modelli senza addestrarli: uno inserisce circuiti che fanno i conti senza errori, l'altro fa correggere a un modello i propri numeri."],
+  ["☁", "Azure", "I moduli fiscali americani letti da Content Understanding", "La rubrica spiega come un solo servizio riconosce decine di moduli fiscali e chiarisce che solo una voce del conto costa il triplo, e solo per alcuni moduli."]
  ],
- "domanda": "Perché un agente che supera solo poco più della metà dei compiti quotidiani può essere comunque utile?"
+ "domanda": "Perché una promessa di non conservare i dati non basta, da sola, a proteggerli?"
 }
