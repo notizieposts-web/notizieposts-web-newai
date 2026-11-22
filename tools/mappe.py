@@ -197,6 +197,7 @@ JS = r'''<script id="mv-js">
   var IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),LOWMEM=IOS||(navigator.deviceMemory&&navigator.deviceMemory<=4);
   if(LOWMEM){MODELS.sort(function(a,b){return /0\.5B/.test(b[0])-/0\.5B/.test(a[0])});MODELS.forEach(function(m){m[1]=m[1].replace(' · consigliato','');if(/0\.5B/.test(m[0]))m[1]='Qwen2.5 0,5B · consigliato su telefono';if(/3B/.test(m[0]))m[1]+=' (troppo pesante per il telefono)';});if(!CFG.pick)CFG.model=MODELS[0][0];}
   function errIt(e){var m=(e&&e.message)||String(e||'Errore');
+    if(/cannot fetch/i.test(m))return 'Il browser ha scaricato il modello ma non è riuscito a salvarlo (spazio del sito pieno o navigazione privata). Ricarica la pagina e riprova: ora il modello si salva in un altro archivio. Se non va, scegli 0,5B o Gemini.';
     if(/load failed|failed to fetch|networkerror|network error|fetch/i.test(m))return 'Il download del modello si è interrotto (connessione o spazio sul dispositivo). Riprova con il Wi-Fi, oppure scegli il modello leggero 0,5B o Gemini.';
     if(/internal|device.*lost|lost.*device|out of memory|memory|allocat|createbuffer|quota|abort/i.test(m))return 'Il dispositivo ha finito la memoria per questo modello. Scegli Qwen2.5 0,5B (leggero) oppure Gemini, e chiudi le altre schede.';
     return m;}
