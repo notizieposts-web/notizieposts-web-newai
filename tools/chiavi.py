@@ -58,12 +58,15 @@ mark.kw-m.on{outline:2px solid var(--violet-ink);outline-offset:1px}
 .kw-card mark.kw-m{background:var(--surface)}
 /* Guida di lettura (line focus): due veli coprono il testo sopra e sotto la finestra di 1, 3 o 5 righe; niente barre laterali */
 .kw-mask{position:fixed;left:0;right:0;z-index:40;pointer-events:none;background:var(--bg);opacity:.86}
+.kw-mask.kw-soft{opacity:.5}
+.kw-band{position:fixed;z-index:40;pointer-events:none;background:rgba(120,120,120,.17);border-radius:6px}
+@media (forced-colors:active){.kw-band{forced-color-adjust:none;background:transparent;outline:3px solid Highlight}}
 .kw-lf{position:fixed;left:50%;transform:translateX(-50%);bottom:max(12px,env(safe-area-inset-bottom));z-index:60;display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;width:max-content;max-width:calc(100vw - 32px);padding:.45rem;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);box-shadow:0 6px 24px rgba(0,0,0,.18)}
 .kw-lf .kw-tool{min-height:44px}
 .kw-lf-hint{flex-basis:100%;text-align:center;font-size:.9rem;line-height:1.35;color:var(--ink)}
 .kw-branch{position:fixed;z-index:41;pointer-events:none;line-height:0}
 .kw-branch svg{display:block;overflow:visible}
-@media print{.kw-mask,.kw-lf,.kw-branch{display:none}}
+@media print{.kw-mask,.kw-lf,.kw-branch,.kw-band{display:none}}
 /* Riga di aiuti del capitolo: Sapio, Leggimi, Testo più comodo */
 .kw-row{display:flex;flex-wrap:wrap;gap:.5rem}
 .kw-row .kw-btn{flex:none}
@@ -134,6 +137,8 @@ html.rt-bg1[data-theme="light"]{--bg:#FBF4E4;--surface:#FFFBF2;--soft:#F3EAD6}ht
 /* Una frase per riga */
 .kw-br{display:none}
 html.rt-fr .kw-br{display:block;height:.55em}
+html.rt-sg .kw-sg{display:inline-block;max-width:100%}
+html.rt-noav svg.rd{display:none!important}
 /* Solo testo */
 html.rt-pl .grid2{grid-template-columns:minmax(0,1fr)!important}
 html.rt-pl .grid2>.stick,html.rt-pl svg.radar,html.rt-pl .tl,html.rt-pl .tl-card{display:none!important}
@@ -266,7 +271,11 @@ JS_TMPL = r"""<script id="kw-js">
       '<path d="M'+(m+30)+' '+(y+6)+' q9 -5 15 2 q-8 5 -15 -2 z" fill="#5E9E4B" stroke="#3A2618" stroke-width="1"/>'+
       '<path d="M14 '+(y+1)+' q-8 9 -12 10 q0 -9 12 -10 z" fill="#5E9E4B" stroke="#3A2618" stroke-width="1"/>'+
       '<path d="M'+(w-14)+' '+(y-1)+' q4 -8 12 -7 q-3 8 -12 7 z" fill="#5E9E4B" stroke="#3A2618" stroke-width="1"/></svg>';}
+  /* stili della guida (Adobe Research, CHI 2023, 177 lettori: barra grigia la più veloce per chi ha dislessia, finestra la più gradita) */
+  var LFS=['Barra grigia','Finestra','Ombra leggera','Solo sottolineatura'];
   function lfDraw(){if(!LF)return;var L=LF.lines;if(!L.length)return;var a=L[LF.i],z=lfEnd(),pad=6,sy=window.scrollY;
+    var veil=LF.st===1||LF.st===2;[LF.up,LF.dn,LF.lt,LF.rt].forEach(function(m){m.style.display=veil?'':'none';m.classList.toggle('kw-soft',LF.st===2)});
+    var zr0=a.z.getBoundingClientRect();LF.band.style.display=LF.st===0?'':'none';if(LF.st===0){LF.band.style.top=(a.t-pad-sy)+'px';LF.band.style.height=Math.max(0,z.b-a.t+pad*2)+'px';LF.band.style.left=(zr0.left-8)+'px';LF.band.style.width=(zr0.width+16)+'px';}
     var top=a.t-pad-sy,bot=z.b+pad+8-sy;LF.up.style.top='0';LF.up.style.height=Math.max(0,top)+'px';LF.dn.style.top=Math.max(0,bot)+'px';LF.dn.style.bottom='0';
     var zr=a.z.getBoundingClientRect(),h=Math.max(0,bot-top)+'px';LF.lt.style.top=LF.rt.style.top=top+'px';LF.lt.style.height=LF.rt.style.height=h;LF.lt.style.left='0';LF.lt.style.right='auto';LF.lt.style.width=Math.max(0,zr.left-12)+'px';LF.rt.style.left=(zr.right+12)+'px';
     var bw=Math.round(zr.width+16);if(LF.bw!==bw){LF.bw=bw;LF.br.innerHTML=lfBranch(bw);}LF.br.style.left=(zr.left-8)+'px';LF.br.style.top=(bot-12)+'px';}
@@ -277,16 +286,17 @@ JS_TMPL = r"""<script id="kw-js">
   function lfSay(){LF.live.textContent='Riga '+(LF.i+1)+' di '+LF.lines.length;}
   function lfMove(d){LF.i=Math.max(0,Math.min(LF.lines.length-1,LF.i+d));lfShow();lfSay();}
   function lfAt(y){var L=LF.lines,best=0;for(var k=0;k<L.length;k++){if(L[k].t<=y)best=k;else break;}return best;}
-  function lfStop(back){if(!LF)return;var o=LF;LF=null;o.up.remove();o.dn.remove();o.lt.remove();o.rt.remove();o.br.remove();o.bar.remove();
+  function lfStop(back){if(!LF)return;var o=LF;LF=null;o.band.remove();o.up.remove();o.dn.remove();o.lt.remove();o.rt.remove();o.br.remove();o.bar.remove();
     window.removeEventListener('scroll',o.onScroll);window.removeEventListener('resize',o.onResize);document.removeEventListener('keydown',o.onKey,true);document.removeEventListener('click',o.onClick,true);
     o.btn.setAttribute('aria-pressed','false');if(back)o.btn.focus();if(o.done)o.done();}
   function lfStart(sec,btn,startY,done){lfStop(false);
     var up=document.createElement('div'),dn=document.createElement('div'),lt=document.createElement('div'),rt=document.createElement('div'),br=document.createElement('div'),bar=document.createElement('div');
     [up,dn,lt,rt].forEach(function(m){m.className='kw-mask';m.setAttribute('aria-hidden','true');document.body.appendChild(m);});
     bar.className='kw-lf';bar.setAttribute('role','toolbar');bar.setAttribute('aria-label','Guida di lettura');
-    bar.innerHTML='<button type="button" class="kw-tool" data-m="-1">↑ Riga su</button><button type="button" class="kw-tool" data-m="1">↓ Riga giù</button><button type="button" class="kw-tool" data-m="n">Righe visibili: 3</button><button type="button" class="kw-tool" data-m="x">Esci</button><span class="sr-only" aria-live="polite"></span>';
+    bar.innerHTML='<button type="button" class="kw-tool" data-m="-1">↑ Riga su</button><button type="button" class="kw-tool" data-m="1">↓ Riga giù</button><button type="button" class="kw-tool" data-m="n">Righe visibili: 3</button><button type="button" class="kw-tool" data-m="s">Stile: '+LFS[(RP.lfs|0)%4]+'</button><button type="button" class="kw-tool" data-m="x">Esci</button><span class="sr-only" aria-live="polite"></span>';
     br.className='kw-branch';br.setAttribute('aria-hidden','true');document.body.appendChild(br);document.body.appendChild(bar);
-    LF={sc:matchMedia('(hover: none) and (pointer: coarse)').matches,lock:0,sec:sec,btn:btn,up:up,dn:dn,lt:lt,rt:rt,br:br,bar:bar,live:bar.querySelector('[aria-live]'),n:3,i:0,lines:lineRects(sec),done:done};
+    var band=document.createElement('div');band.className='kw-band';band.setAttribute('aria-hidden','true');document.body.appendChild(band);
+    LF={band:band,st:(RP.lfs|0)%4,sc:matchMedia('(hover: none) and (pointer: coarse)').matches,lock:0,sec:sec,btn:btn,up:up,dn:dn,lt:lt,rt:rt,br:br,bar:bar,live:bar.querySelector('[aria-live]'),n:3,i:0,lines:lineRects(sec),done:done};
     var raf=0;LF.onScroll=function(){if(!raf)raf=requestAnimationFrame(function(){raf=0;if(!LF)return;if(LF.sc&&!LF.lock)LF.i=lfAt(window.scrollY+lfAnchor()+4);lfDraw()})};
     LF.onResize=function(){if(!LF)return;var y=LF.lines[LF.i]?LF.lines[LF.i].t:0,ratio=y/Math.max(1,document.documentElement.scrollHeight);LF.lines=lineRects(sec);LF.i=lfAt(ratio*document.documentElement.scrollHeight);lfDraw();};
     LF.onKey=function(e){if(!LF)return;var t=e.target,tag=t&&t.tagName;if(e.altKey||e.ctrlKey||e.metaKey||/INPUT|TEXTAREA|SELECT/.test(tag)||(t&&t.isContentEditable))return;
@@ -295,22 +305,23 @@ JS_TMPL = r"""<script id="kw-js">
     bar.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var m=b.getAttribute('data-m');
       if(m==='x'){lfStop(true);return;}
       if(m==='n'){LF.n=LF.n===1?3:LF.n===3?5:1;b.textContent='Righe visibili: '+LF.n;lfShow();return;}
+      if(m==='s'){LF.st=(LF.st+1)%4;RP.lfs=LF.st;rpSave();b.textContent='Stile: '+LFS[LF.st];LF.live.textContent='Stile della guida: '+LFS[LF.st];lfDraw();return;}
       lfMove(+m);});
     window.addEventListener('scroll',LF.onScroll,{passive:true});window.addEventListener('resize',LF.onResize);document.addEventListener('keydown',LF.onKey,true);document.addEventListener('click',LF.onClick,true);
     LF.i=lfAt(startY);if(LF.sc){var hb=bar.querySelectorAll('[data-m="-1"],[data-m="1"]');[].forEach.call(hb,function(x){x.remove()});var hint=document.createElement('span');hint.className='kw-lf-hint';hint.textContent='Scorri con il dito: la finestra avanza da sola';bar.insertBefore(hint,bar.firstChild);}btn.setAttribute('aria-pressed','true');lfShow();lfSay();bar.querySelector('button').focus({preventScroll:true});}
   /* ---------- Testo più comodo (preferenze condivise "radar-read") ---------- */
-  var RP={size:0,sp:0,font:0,bg:0,fr:0,tp:0,pl:0,pz:1,rc:0,ps:0},fontOn=false,RK=['size','sp','font','bg','fr','tp','pl','pz','rc','ps'];
+  var RP={size:0,sp:0,font:0,bg:0,fr:0,tp:0,pl:0,pz:1,rc:0,ps:0,lfs:0,sg:0,noav:0},fontOn=false,RK=['size','sp','font','bg','fr','tp','pl','pz','rc','ps','lfs','sg','noav'];
   function rpLoad(){try{var o=JSON.parse(localStorage.getItem('radar-read')||'{}');RK.forEach(function(k){if(o[k]!=null)RP[k]=+o[k]||0})}catch(e){}}
   function rpSave(){try{var o=JSON.parse(localStorage.getItem('radar-read')||'{}');RK.forEach(function(k){o[k]=RP[k]});localStorage.setItem('radar-read',JSON.stringify(o))}catch(e){}}
-  function rpApply(){var H=document.documentElement;H.classList.toggle('rt-s1',RP.size===1);H.classList.toggle('rt-s2',RP.size===2);H.classList.toggle('rt-sp',!!RP.sp);H.classList.toggle('rt-font',!!RP.font);[1,2,3].forEach(function(i){H.classList.toggle('rt-bg'+i,RP.bg===i)});H.classList.toggle('rt-pl',!!RP.pl);H.classList.toggle('rt-rc',!!RP.rc);H.classList.toggle('rt-ps',!!RP.ps);if(RP.fr)frOn();H.classList.toggle('rt-fr',!!RP.fr);if(started)stepsAll();
+  function rpApply(){var H=document.documentElement;H.classList.toggle('rt-s1',RP.size===1);H.classList.toggle('rt-s2',RP.size===2);H.classList.toggle('rt-sp',!!RP.sp);H.classList.toggle('rt-font',!!RP.font);[1,2,3].forEach(function(i){H.classList.toggle('rt-bg'+i,RP.bg===i)});H.classList.toggle('rt-pl',!!RP.pl);H.classList.toggle('rt-rc',!!RP.rc);H.classList.toggle('rt-ps',!!RP.ps);H.classList.toggle('rt-noav',!!RP.noav);if(RP.sg)sgOn();H.classList.toggle('rt-sg',!!RP.sg);if(RP.fr)frOn();H.classList.toggle('rt-fr',!!RP.fr);if(started)stepsAll();
     if(RP.font&&!fontOn){fontOn=true;var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap';document.head.appendChild(l)}
     if(LF){LF.lines=lineRects(LF.sec);LF.i=Math.min(LF.i,LF.lines.length-1);lfDraw();}}
   var started=false;
   function rpBox(id,ht){return '<div class="kw-rd" id="'+id+'" role="region" aria-label="Testo più comodo: '+esc(ht)+'" hidden>'+
     '<fieldset><legend>Grandezza del testo</legend><div class="kw-opts">'+['Normale','Grande','Molto grande'].map(function(t,i){return '<label><input type="radio" name="'+id+'-s" value="'+i+'"> '+t+'</label>'}).join('')+'</div></fieldset>'+
     '<fieldset><legend>Colore dello sfondo (preferenza personale, tema chiaro)</legend><div class="kw-opts">'+[['Normale','#F6F6F5'],['Crema','#FBF4E4'],['Azzurro','#EAF2F8'],['Verde chiaro','#EDF5E6']].map(function(t,i){return '<label><input type="radio" name="'+id+'-b" value="'+i+'"> <span class="kw-sw" style="background:'+t[1]+'" aria-hidden="true"></span>'+t[0]+'</label>'}).join('')+'</div></fieldset>'+
-    '<fieldset><legend>Leggibilità</legend><div class="kw-opts"><label><input type="checkbox" data-k="sp"> Più spazio tra righe e lettere</label><label><input type="checkbox" data-k="font"> Carattere ad alta leggibilità</label><label><input type="checkbox" data-k="fr"> Una frase per riga</label><label><input type="checkbox" data-k="rc"> Righe corte</label><label><input type="checkbox" data-k="ps"> Parole più semplici accanto a quelle difficili</label></div></fieldset>'+
-    '<fieldset><legend>Concentrazione</legend><div class="kw-opts"><label><input type="checkbox" data-k="tp"> Leggi a tappe</label><label><input type="checkbox" data-k="pl"> Solo testo: nascondi riquadri e animazioni</label><label><input type="checkbox" data-k="pz"> Ricordami una pausa ogni 15 minuti</label></div></fieldset>'+
+    '<fieldset><legend>Leggibilità</legend><div class="kw-opts"><label><input type="checkbox" data-k="sp"> Più spazio tra righe e lettere</label><label><input type="checkbox" data-k="font"> Carattere ad alta leggibilità</label><label><input type="checkbox" data-k="fr"> Una frase per riga</label><label><input type="checkbox" data-k="rc"> Righe corte</label><label><input type="checkbox" data-k="sg"> A capo tra gruppi di parole, mai a metà</label><label><input type="checkbox" data-k="ps"> Parole più semplici accanto a quelle difficili</label></div></fieldset>'+
+    '<fieldset><legend>Concentrazione</legend><div class="kw-opts"><label><input type="checkbox" data-k="tp"> Leggi a tappe</label><label><input type="checkbox" data-k="pl"> Solo testo: nascondi riquadri e animazioni</label><label><input type="checkbox" data-k="pz"> Ricordami una pausa ogni 15 minuti</label><label><input type="checkbox" data-k="noav"> Solo voce e testo: nascondi il disegno di Sapio</label></div></fieldset>'+
     '<div class="kw-tools"><button type="button" class="kw-tool" data-x="test">🦉 Trova le mie impostazioni: prova di lettura</button><button type="button" class="kw-tool" data-x="print">🖨 Stampa questo capitolo</button></div>'+
     '<p class="kw-hint">Vale per tutte le pagine di Sapit e resta salvato in questo browser. I colori di sfondo sono solo una preferenza: gli studi non mostrano che aiutino la dislessia.</p></div>';}
   function rpSync(box){box.querySelectorAll('input[type=radio]').forEach(function(r){r.checked=+r.value===(/-b$/.test(r.name)?RP.bg:RP.size)});box.querySelectorAll('input[data-k]').forEach(function(c){c.checked=!!RP[c.getAttribute('data-k')]});}
@@ -379,6 +390,18 @@ JS_TMPL = r"""<script id="kw-js">
       nodes.forEach(function(t){var re=/([.!?…;]["»”’)]*)\s+(?=[«"“A-ZÀ-Ý0-9a-zà-ÿ])/g,m,cuts=[];var v=t.nodeValue;
         while((m=re.exec(v))){if(m[1]==='.'&&/(?:\b(?:ecc|es|cfr|pag|vs|dott|p)|\b[A-Z]|\d)$/i.test(v.slice(0,m.index)))continue;if(m[1]!==';'&&!/^\s*[«"“A-ZÀ-Ý0-9]/.test(v.slice(m.index+m[0].length-1)))continue;cuts.push(m.index+m[1].length);}
         for(var k=cuts.length-1;k>=0;k--){var r=t.splitText(cuts[k]);var sp=document.createElement('span');sp.className='kw-br';sp.setAttribute('aria-hidden','true');t.parentNode.insertBefore(sp,r);}});});}
+  /* ---------- A capo tra gruppi di parole: le righe finiscono dove finisce un pezzo di frase
+     (LeVasseur e altri, Applied Psycholinguistics 2006: righe spezzate a fine proposizione = lettura più fluida) ---------- */
+  var sgDone=false,SGW='e|ed|ma|però|perché|poiché|che|quando|mentre|se|oppure|o|come|dove|quindi|cioè|invece|così|anche se|finché|affinché|benché';
+  function sgCuts(v){var c=[],m,re=new RegExp('([,;:])\\s+|\\s+(?=(?:'+SGW+')\\s)','gi'),start=0,last=-1;
+    while((m=re.exec(v))){var at=m[1]?m.index+1:m.index;if(at-start>=18){c.push(at);start=at;}}
+    if(c.length&&v.length-c[c.length-1]<10)c.pop();return c;}
+  function sgOn(){if(sgDone)return;sgDone=true;
+    document.querySelectorAll('section.ch .prose>p, section.ch .prose li, section.ch .ch-head .lead').forEach(function(b){var w=document.createTreeWalker(b,NodeFilter.SHOW_TEXT,{acceptNode:function(n){return n.nodeValue.length<28||n.parentElement.closest('button,.gl-tip,.kw-hd-tip,.sr-only,.kw-sg,script,style')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}}),nodes=[],n;
+      while((n=w.nextNode()))nodes.push(n);
+      nodes.forEach(function(t){var v=t.nodeValue,cuts=sgCuts(v);if(!cuts.length)return;var f=document.createDocumentFragment(),p=0;cuts.concat([v.length]).forEach(function(c){var seg=v.slice(p,c),lead=seg.match(/^\s*/)[0],trail=seg.match(/\s*$/)[0],core=seg.slice(lead.length,seg.length-trail.length);
+          if(lead)f.appendChild(document.createTextNode(lead));if(core){var sp=document.createElement('span');sp.className='kw-sg';sp.textContent=core;f.appendChild(sp);}if(trail&&core)f.appendChild(document.createTextNode(trail));p=c;});
+        t.parentNode.replaceChild(f,t);});});}
   /* ---------- Parole difficili: prima comparsa nel capitolo, se non c'è già nel glossario ---------- */
   var HARD=__HARD__,SIMPLE=__SIMPLE__,hid=0;
   function hardWords(sec){var gl={};sec.querySelectorAll('.gl-btn').forEach(function(b){gl[(b.firstChild?b.firstChild.textContent:'').trim().toLowerCase()]=1});
@@ -429,22 +452,32 @@ JS_TMPL = r"""<script id="kw-js">
   function stepsAll(){document.querySelectorAll('section.ch').forEach(function(sec){if(RP.tp){stepsBuild(sec);stepsDraw(sec);}else if(sec._steps){sec._steps.g.forEach(function(g){g.forEach(function(x){x.classList.remove('kw-hide')})});var o=sec.querySelector('.kw-step');if(o)o.remove();sec._steps=null;}});}
   /* ---------- Domanda lampo: completa la frase con la parola chiave giusta ---------- */
   var ALLKW=[];
+  /* opzioni sbagliate di qualità (ETH Zürich 2026, Drexel 2025): mai una variante della risposta (stessa radice, una dentro l'altra),
+     mai una parola già presente nel testo della domanda o nel capitolo (potrebbe essere giusta anche lei), niente doppioni;
+     prima le parole dello stesso tipo (nome con nome, termine con termine) e di lunghezza simile, così non si indovina per esclusione */
+  function goodWrong(ans,cands,text,chap,n){var a=ans.toLowerCase(),seen={},out=[],t=(text||'').toLowerCase(),ch=(chap||'').toLowerCase(),ak=cands.filter(function(o){return o.d&&o.d.toLowerCase()===a})[0];ak=ak&&ak.kind;
+    var root=function(w){return w.toLowerCase().replace(/[^a-zà-ÿ0-9]/g,'').slice(0,5)};
+    var ok=cands.filter(function(o){var k=(o.d||'').toLowerCase();if(!k||seen[k]||k===a)return false;seen[k]=1;
+      if(k.indexOf(a)>=0||a.indexOf(k)>=0||root(k)===root(a))return false;if(t.indexOf(k)>=0)return false;if(ch&&ch.indexOf(k)>=0)return false;return true;});
+    ok.sort(function(x,y){var sx=(x.kind===ak?0:2)+Math.min(2,Math.abs(x.d.length-ans.length)/6),sy=(y.kind===ak?0:2)+Math.min(2,Math.abs(y.d.length-ans.length)/6);return sx-sy;});
+    return ok.slice(0,n||2).map(function(o){return o.d});}
   function quick(sec,data){var pr=sec.querySelector('.prose');if(!pr)return;var c=data.list.filter(function(o){return o.ctx&&o.d.length>2&&o.kind!=='w'})[0]||data.list.filter(function(o){return o.ctx})[0];if(!c)return;
-    var others=ALLKW.filter(function(d){return d.sec!==sec&&d.d.toLowerCase()!==c.d.toLowerCase()&&c.ctx.toLowerCase().indexOf(d.d.toLowerCase())<0});
-    var seen={},wrong=[];others.forEach(function(d){var k=d.d.toLowerCase();if(!seen[k]&&wrong.length<2){seen[k]=1;wrong.push(d.d)}});if(wrong.length<2)return;
+    var pool=ALLKW.filter(function(d){return d.sec!==sec}).concat([c]),wrong=goodWrong(c.d,pool,c.ctx,pr.textContent);if(wrong.length<2)wrong=goodWrong(c.d,pool,c.ctx,'');if(wrong.length<2)return;
     c.re.lastIndex=0;var blank=esc(c.ctx).replace(new RegExp(c.re.source,'gi'),'<b>_____</b>');c.re.lastIndex=0;if(blank.indexOf('_____')<0)return;
     var opts=[c.d].concat(wrong),seed=sec.id.length;opts.sort(function(a,b){return ((a.length*7+seed)%5)-((b.length*7+seed)%5)||a.localeCompare(b)});
     var box=document.createElement('div');box.className='kw-quick';box.setAttribute('role','group');box.setAttribute('aria-label','Domanda lampo');
     box.innerHTML='<h3><span aria-hidden="true">⚡</span> Domanda lampo</h3><p style="margin:0">Quale parola completa la frase del capitolo?</p><blockquote>'+blank+'</blockquote><div class="kw-opts">'+opts.map(function(o){return '<button type="button" class="kw-tool">'+esc(o)+'</button>'}).join('')+'</div><p class="kw-qres" aria-live="polite"></p>';
     pr.appendChild(box);sec._qi={q:blank,a:c.d,o:opts};
-    box.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||box._done)return;box._done=1;var ok=b.textContent===c.d;
-      box.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-disabled','true');if(x.textContent===c.d)x.classList.add('ok');else if(x===b)x.classList.add('no');});
+    box.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||box._done||b.getAttribute('aria-disabled')==='true')return;var ok=b.textContent===c.d;
+      if(!ok&&!box._try){box._try=1;b.classList.add('no');b.setAttribute('aria-disabled','true');
+        box.querySelector('.kw-qres').innerHTML=OWL_C+'<span>Non è questa. Indizio: la parola giusta inizia con «'+esc(c.d.charAt(0).toUpperCase())+'» e ha '+c.d.replace(/\s/g,'').length+' lettere. Riprova!</span>';return;}
+      box._done=1;box.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-disabled','true');if(x.textContent===c.d)x.classList.add('ok');else if(x===b)x.classList.add('no');});
       rvAdd(sec,{q:blank,a:c.d,o:opts});
-      box.querySelector('.kw-qres').innerHTML=(ok?OWL_F+'<span>Giusto! Hai seguito bene il capitolo.</span>':OWL_C+'<span>Quasi: la parola giusta è «'+esc(c.d)+'». La trovi nel testo con Sapio.</span>');});}
+      box.querySelector('.kw-qres').innerHTML=(ok?OWL_F+'<span>'+(box._try?'Giusto, con l\'indizio ce l\'hai fatta!':'Giusto! Hai seguito bene il capitolo.')+'</span>':OWL_C+'<span>La parola giusta è «'+esc(c.d)+'». La trovi nel testo con Sapio: rileggi la frase e la ritroverai nel ripasso.</span>');});}
   /* ---------- Domande a completamento (tappe, ripasso) ---------- */
   function clozeFrom(text,list,avoid){var cand=list.filter(function(o){o.re.lastIndex=0;var ok=o.re.test(text);o.re.lastIndex=0;return ok&&o.d.length>2});if(!cand.length)return null;
     var c=cand.filter(function(o){return o.kind!=='w'})[0]||cand[0];
-    var wrong=[],seen={};(avoid||[]).concat(list.map(function(o){return o.d})).forEach(function(d){var k=d.toLowerCase();if(seen[k]||k===c.d.toLowerCase()||text.toLowerCase().indexOf(k)>=0||wrong.length>=2)return;seen[k]=1;wrong.push(d);});
+    var wrong=goodWrong(c.d,(avoid||[]).map(function(d){return {d:d}}).concat(list),text);
     if(wrong.length<2)return null;c.re.lastIndex=0;var q=esc(text).replace(new RegExp(c.re.source,'gi'),'<b>_____</b>');c.re.lastIndex=0;if(q.indexOf('_____')<0)return null;
     var opts=[c.d].concat(wrong);opts.sort(function(a,b){return (a.length%3)-(b.length%3)||a.localeCompare(b)});return {q:q,a:c.d,o:opts};}
   function askHtml(it,title){return (title?'<p style="margin:0;font-weight:700">'+title+'</p>':'')+'<blockquote>'+it.q+'</blockquote><div class="kw-opts">'+it.o.map(function(o){return '<button type="button" class="kw-tool" data-ans="1">'+esc(o)+'</button>'}).join('')+'</div><p class="kw-qres" aria-live="polite"></p>';}
@@ -571,7 +604,7 @@ JS_TMPL = r"""<script id="kw-js">
     if(!sec.querySelector('.prose')||!sec.querySelector('.ch-head h2'))return;
     timeChip(sec);hardWords(sec);
     var n=zones(sec).map(textOf).join(' ').split(' ').length;if(n<250)return;build(sec);
-    try{sec._kw=analyze(sec);sec._kw.list.forEach(function(o){if(o.kind!=='w')ALLKW.push({sec:sec,d:o.d})});secs.push(sec);}catch(e){}});
+    try{sec._kw=analyze(sec);sec._kw.list.forEach(function(o){if(o.kind!=='w')ALLKW.push({sec:sec,d:o.d,kind:o.kind})});secs.push(sec);}catch(e){}});
     secs.forEach(function(sec){try{summary(sec,sec._kw,sec._head);quick(sec,sec._kw);}catch(e){}});
     timeTick();}
   function boot(){rpLoad();rpApply();start();started=true;if(RP.tp)stepsAll();setTimeout(markOffer,600);try{rvOffer()}catch(e){}}
