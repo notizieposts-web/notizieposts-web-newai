@@ -1,14 +1,46 @@
 {
- "n": 59,
- "data": "2026-11-22",
- "titolo": "OpenRouter e le esche, Inkling 2 Mini e i pesi scritti a mano",
- "descrizione": "Un esperimento con richieste esca scopre fornitori di modelli che lasciavano uscire i dati e OpenRouter ne esclude tre, Thinking Machines pubblica un modello aperto che gira su un portatile, due studi scrivono funzioni esatte dentro i modelli e la rubrica Azure spiega i moduli fiscali americani.",
- "chips": ["Sicurezza", "Pesi aperti", "Ricerca", "Costi", "Azure"],
- "items": [
-  ["🪤", "OpenRouter", "Alcune richieste agli assistenti finivano nelle mani sbagliate", "Dopo un esperimento con due milioni di richieste piene di esche, OpenRouter ha escluso tre fornitori che lasciavano uscire i dati degli utenti o non rispettavano la promessa di non conservarli."],
-  ["💻", "Thinking Machines", "Un modello aperto che gira su un portatile", "Inkling 2 Mini si scarica gratis, si può usare anche per lavoro e, secondo l'azienda, batte modelli aperti più grandi nella programmazione, ma inventa risposte più spesso."],
-  ["🧮", "Ricerca", "Una calcolatrice esatta scritta dentro un modello", "Due studi non ancora revisionati cambiano i modelli senza addestrarli: uno inserisce circuiti che fanno i conti senza errori, l'altro fa correggere a un modello i propri numeri."],
-  ["☁", "Azure", "I moduli fiscali americani letti da Content Understanding", "La rubrica spiega come un solo servizio riconosce decine di moduli fiscali e chiarisce che solo una voce del conto costa il triplo, e solo per alcuni moduli."]
+ "n": 60,
+ "data": "2026-11-23",
+ "titolo": "La dimostrazione controllata dal computer, le richieste rubate e il numero che misura l'intelligenza",
+ "descrizione": "Le comunità di Lean dicono di aver controllato la dimostrazione dell'ipotesi di Riemann scritta con Claude, Together AI spiega come sono uscite richieste dei clienti, OpenAI propone un metro comune per i modelli, Sarvam pubblica un modello aperto e la rubrica Azure spiega che cosa succede ai volti nei video.",
+ "chips": [
+  "Ricerca",
+  "Sicurezza",
+  "Valutazione",
+  "Pesi aperti",
+  "Azure"
  ],
- "domanda": "Perché una promessa di non conservare i dati non basta, da sola, a proteggerli?"
+ "items": [
+  [
+   "🔢",
+   "Matematica",
+   "Un programma ha controllato la dimostrazione dell'ipotesi di Riemann",
+   "Le comunità che sviluppano Lean, un linguaggio per verificare le dimostrazioni al computer, dicono di avere piena fiducia nella dimostrazione scritta da un matematico di Anthropic con Claude, anche se nessuno l'ha ancora spiegata."
+  ],
+  [
+   "🔑",
+   "Together AI",
+   "Una chiave pubblicata per errore ha fatto uscire richieste dei clienti",
+   "Together AI racconta che un'intelligenza artificiale che scrive codice ha messo in vista una chiave, e qualcuno l'ha usata per scaricare campioni di richieste inviate al servizio in estate."
+  ],
+  [
+   "📉",
+   "OpenAI",
+   "OpenAI propone un numero per confrontare i laboratori",
+   "Il capo scienziato di OpenAI suggerisce di usare la perplessità, cioè quanto bene un modello prevede la parola successiva, per fissare limiti comuni da non superare."
+  ],
+  [
+   "🧩",
+   "Sarvam",
+   "Un modello aperto indiano per gli assistenti clienti, a basso prezzo",
+   "La startup indiana Sarvam pubblica un grande modello scaricabile e utilizzabile anche a fini commerciali, che gira su una sola scheda grafica e costa una frazione dei concorrenti."
+  ],
+  [
+   "🎥",
+   "Azure",
+   "Che cosa succede ai volti quando un'AI analizza i video",
+   "Nella rubrica su Azure Content Understanding: perché i volti vengono sfocati, quando si può cambiare e quanto costa analizzare un'ora di video."
+  ]
+ ],
+ "domanda": "Perché, in una verifica fatta al computer, la cosa più importante è controllare l'enunciato?"
 }

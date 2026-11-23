@@ -57,6 +57,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (53,'57','azure','costi','Bollette e buste paga: standard o avanzata'),
     (54,'58','azure','pipeline','Fascicoli di mutuo: lo smistatore e i cinque lettori'),
     (55,'59','azure','costi','Moduli fiscali: dove si paga il triplo'),
+    (56,'60','azure','sicurezza','Volti nei video: sfocatura e accesso limitato'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']

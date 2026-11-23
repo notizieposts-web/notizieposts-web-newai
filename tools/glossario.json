@@ -1240,5 +1240,21 @@
    "canary-token",
    "minimizzazione-dei-dati"
   ]
+ },
+ "perplessita": {
+  "t": "perplessità",
+  "spiega": "Una misura di quanto un modello linguistico è sorpreso, in media, dal token che arriva davvero dopo quelli che ha letto. Più è bassa, meglio il modello prevede il testo.",
+  "esempio": "Dopo «La capitale della Francia è» quasi ogni modello si aspetta «Parigi»: sorpresa minima. Dopo «Domani forse» le continuazioni possibili sono tante, e la sorpresa è più alta.",
+  "approfondisci": "Si calcola su testi che il modello non ha visto durante l'addestramento. Il suo logaritmo coincide con la perdita (cross-entropy) che si minimizza addestrando il modello. È utile per confrontare versioni dello stesso modello sugli stessi dati, ma tra laboratori diversi il confronto è difficile perché dipende dai testi usati per misurarla. Non dice da sola se un modello sa svolgere un compito preciso.",
+  "vedi": [
+   "token",
+   "benchmark"
+  ]
+ },
+ "accesso-limitato": {
+  "t": "raggruppamento dei volti",
+  "spiega": "Una funzione che trova i volti in un video e mette insieme quelli che sembrano della stessa persona, senza dare un nome. Nei servizi Microsoft è ad accesso limitato: si usa solo dopo una domanda approvata.",
+  "esempio": "In un video di una riunione il servizio indica «persona 1» e «persona 2» e i momenti in cui compaiono, ma non dice chi sono.",
+  "approfondisci": "Microsoft classifica le funzioni di riconoscimento facciale come Limited Access: sono riservate a clienti e partner gestiti, per gli usi dichiarati nella domanda, e vietate a o per conto dei dipartimenti di polizia degli Stati Uniti. Il semplice rilevamento e l'oscuramento dei volti non richiedono registrazione. In Europa i dati del volto usati per identificare una persona sono dati biometrici, con regole più severe."
  }
 }

@@ -1,0 +1,377 @@
+{
+ "riemann": {
+  "root": "Riemann controllata in Lean",
+  "nodes": [
+   {
+    "id": "ipo",
+    "t": "Ipotesi di Riemann",
+    "d": "Dal 1859: tutti gli zeri interessanti della funzione zeta starebbero su una stessa retta.",
+    "at": 0,
+    "i": "🔢",
+    "p": "root",
+    "r": "riguarda l'"
+   },
+   {
+    "id": "lib",
+    "t": "17 milioni di righe",
+    "d": "Il 20 novembre Alpöge diffonde la nota e la libreria Lean, ottenuta lavorando con Claude.",
+    "at": 1,
+    "i": "📚",
+    "p": "root",
+    "r": "nasce da"
+   },
+   {
+    "id": "cla",
+    "t": "Ruolo di Claude",
+    "d": "Secondo l'autore Claude verso la fine lo ha superato di molto e ha fatto scelte chiave.",
+    "at": 1,
+    "i": "🤖",
+    "p": "lib",
+    "r": "dichiara il"
+   },
+   {
+    "id": "enu",
+    "t": "Enunciato di Mathlib",
+    "d": "Il teorema dimostrato è proprio RiemannHypothesis della libreria comune Mathlib.",
+    "at": 2,
+    "i": "🎯",
+    "p": "root",
+    "r": "è controllata sull'"
+   },
+   {
+    "id": "ver",
+    "t": "Più verificatori",
+    "d": "Decine di compilazioni uguali e verificatori indipendenti hanno accettato la prova.",
+    "at": 2,
+    "i": "✅",
+    "p": "enu",
+    "r": "e da"
+   },
+   {
+    "id": "manca",
+    "t": "Manca la spiegazione",
+    "d": "Nessuno ha ancora letto e capito la dimostrazione: la spiegazione è promessa.",
+    "at": 3,
+    "i": "❓",
+    "p": "root",
+    "r": "ma"
+   },
+   {
+    "id": "met",
+    "t": "Controllare non è capire",
+    "d": "Se regge, il lavoro passa da «è giusto?» a «perché funziona?».",
+    "at": 4,
+    "i": "🧭",
+    "p": "manca",
+    "r": "apre la domanda"
+   }
+  ],
+  "x": [
+   [
+    "cla",
+    "manca",
+    "contrasta con"
+   ]
+  ]
+ },
+ "together": {
+  "root": "La fuga di Together AI",
+  "nodes": [
+   {
+    "id": "camp",
+    "t": "Campioni di richieste",
+    "d": "Richieste di giugno e luglio a tre modelli, salvate per i test su Hugging Face.",
+    "at": 0,
+    "i": "🗂",
+    "p": "root",
+    "r": "riguarda i"
+   },
+   {
+    "id": "ag",
+    "t": "Agente di programmazione",
+    "d": "Ha inserito la chiave dell'archivio in un progetto pubblico su GitHub.",
+    "at": 0,
+    "i": "🤖",
+    "p": "root",
+    "r": "parte da un"
+   },
+   {
+    "id": "att",
+    "t": "Attaccante",
+    "d": "Ha scaricato i campioni e provato le altre chiavi trovate dentro.",
+    "at": 0,
+    "i": "🕵",
+    "p": "ag",
+    "r": "apre la porta a un"
+   },
+   {
+    "id": "esc",
+    "t": "Cinque esche di Dragos",
+    "d": "Alcune chiavi provate erano esche: l'allarme è suonato.",
+    "at": 1,
+    "i": "🪤",
+    "p": "att",
+    "r": "viene scoperto dalle"
+   },
+   {
+    "id": "ign",
+    "t": "Dati personali in analisi",
+    "d": "Together non sa ancora se c'erano dati sensibili né quanti clienti sono coinvolti.",
+    "at": 2,
+    "i": "⏳",
+    "p": "root",
+    "r": "resta aperta l'"
+   },
+   {
+    "id": "zdr",
+    "t": "ZDR predefinita",
+    "d": "Chiavi brevi e limitate, controlli sul codice, ZDR per i nuovi account.",
+    "at": 3,
+    "i": "🛡",
+    "p": "root",
+    "r": "porta a"
+   },
+   {
+    "id": "chi",
+    "t": "Chiavi che valgono poco",
+    "d": "Dare agli agenti chiavi con pochi permessi e breve durata riduce il danno.",
+    "at": 4,
+    "i": "🔑",
+    "p": "zdr",
+    "r": "insegna a usare"
+   }
+  ],
+  "x": [
+   [
+    "esc",
+    "zdr",
+    "conferma il valore della"
+   ]
+  ]
+ },
+ "openai": {
+  "root": "La perplessità di Pachocki",
+  "nodes": [
+   {
+    "id": "def",
+    "t": "Sorpresa media",
+    "d": "La perplessità misura quanto il modello è sorpreso dal token successivo.",
+    "at": 0,
+    "i": "🎲",
+    "p": "root",
+    "r": "è una"
+   },
+   {
+    "id": "num",
+    "t": "Da 0,99 a 0,91",
+    "d": "GPT-3.5 e GPT-4 sull'archivio interno di codice di OpenAI.",
+    "at": 1,
+    "i": "📉",
+    "p": "root",
+    "r": "mostra"
+   },
+   {
+    "id": "soglia",
+    "t": "Sotto 0,8",
+    "d": "Compaiono capacità nuove in sicurezza informatica e matematica.",
+    "at": 1,
+    "i": "🚪",
+    "p": "num",
+    "r": "fino a"
+   },
+   {
+    "id": "prev",
+    "t": "0,68-0,70 e il 2027",
+    "d": "La prossima finestra e una possibile valanga di progressi.",
+    "at": 1,
+    "i": "🔮",
+    "p": "soglia",
+    "r": "prevede"
+   },
+   {
+    "id": "lim",
+    "t": "Limiti comuni",
+    "d": "Soglie condivise da non superare finché non ci sono garanzie.",
+    "at": 2,
+    "i": "🤝",
+    "p": "root",
+    "r": "propone"
+   },
+   {
+    "id": "cau",
+    "t": "Confronti difficili",
+    "d": "Dati diversi tra laboratori, lontano dai compiti reali, dati interni.",
+    "at": 3,
+    "i": "⚠",
+    "p": "root",
+    "r": "ha"
+   },
+   {
+    "id": "reg",
+    "t": "Utile a chi fa regole",
+    "d": "Regno Unito, California e Congresso cercano misure semplici.",
+    "at": 4,
+    "i": "🏛",
+    "p": "lim",
+    "r": "interessa"
+   }
+  ],
+  "x": [
+   [
+    "cau",
+    "lim",
+    "indebolisce i"
+   ]
+  ]
+ },
+ "sarvam": {
+  "root": "Sarvam-105B-1711",
+  "nodes": [
+   {
+    "id": "moe",
+    "t": "10,3 miliardi attivi",
+    "d": "Modello a esperti da 105 miliardi, ne usa 10,3 per ogni parola.",
+    "at": 0,
+    "i": "🧩",
+    "p": "root",
+    "r": "è un modello con"
+   },
+   {
+    "id": "fp4",
+    "t": "NVFP4 da 65 GB",
+    "d": "La versione compressa entra in una sola RTX PRO 6000 da 96 GB.",
+    "at": 0,
+    "i": "💾",
+    "p": "moe",
+    "r": "in versione"
+   },
+   {
+    "id": "lic",
+    "t": "Apache 2.0",
+    "d": "Pesi aperti su Hugging Face, uso commerciale permesso.",
+    "at": 0,
+    "i": "📜",
+    "p": "root",
+    "r": "ha licenza"
+   },
+   {
+    "id": "pun",
+    "t": "Da 42,6 a 73,9",
+    "d": "Media su otto prove per agenti, dichiarata da Sarvam.",
+    "at": 1,
+    "i": "📈",
+    "p": "root",
+    "r": "dichiara"
+   },
+   {
+    "id": "prz",
+    "t": "15 centesimi",
+    "d": "Per milione di token, contro 85 di Gemini 3.5 Flash-Lite.",
+    "at": 1,
+    "i": "💶",
+    "p": "pun",
+    "r": "a un prezzo di"
+   },
+   {
+    "id": "cau",
+    "t": "Numeri da controllare",
+    "d": "Prove fatte in proprio, incoerenze tra blog e scheda, il 56B non spiegato.",
+    "at": 3,
+    "i": "🔍",
+    "p": "root",
+    "r": "ha"
+   },
+   {
+    "id": "uso",
+    "t": "Dati in casa",
+    "d": "Per gli agenti conta il costo per richiesta e poter tenere i dati in casa.",
+    "at": 4,
+    "i": "🏠",
+    "p": "root",
+    "r": "serve a"
+   }
+  ],
+  "x": [
+   [
+    "fp4",
+    "uso",
+    "rende possibile"
+   ]
+  ]
+ },
+ "azure": {
+  "root": "Volti nei video",
+  "nodes": [
+   {
+    "id": "sfo",
+    "t": "Sfocatura automatica",
+    "d": "I volti sono sfocati prima del modello: niente deduzioni sulle emozioni.",
+    "at": 0,
+    "i": "🌫",
+    "p": "root",
+    "r": "parte dalla"
+   },
+   {
+    "id": "ctx",
+    "t": "Indizi del contesto",
+    "d": "Il modello può riconoscere una persona da maglia e numero.",
+    "at": 0,
+    "i": "👕",
+    "p": "sfo",
+    "r": "non ferma gli"
+   },
+   {
+    "id": "int",
+    "t": "disableFaceBlurring",
+    "d": "L'interruttore che spegne la sfocatura, da usare solo con una ragione scritta.",
+    "at": 1,
+    "i": "🔘",
+    "p": "root",
+    "r": "si cambia con"
+   },
+   {
+    "id": "gdpr",
+    "t": "Dati biometrici",
+    "d": "In Europa un volto usato per identificare ha regole più severe.",
+    "at": 1,
+    "i": "⚖",
+    "p": "int",
+    "r": "tocca i"
+   },
+   {
+    "id": "grp",
+    "t": "Raggruppamento",
+    "d": "Solo nei video e solo con accesso limitato approvato da Microsoft.",
+    "at": 2,
+    "i": "👥",
+    "p": "root",
+    "r": "offre il"
+   },
+   {
+    "id": "cost",
+    "t": "3,33 dollari all'ora",
+    "d": "Estrazione, contestualizzazione e token del modello per un'ora di video.",
+    "at": 3,
+    "i": "💰",
+    "p": "root",
+    "r": "costa circa"
+   },
+   {
+    "id": "tips",
+    "t": "Prova su 10 minuti",
+    "d": "Leggi l'oggetto usage prima di lanciare un archivio grande.",
+    "at": 4,
+    "i": "🧪",
+    "p": "cost",
+    "r": "si stima con una"
+   }
+  ],
+  "x": [
+   [
+    "gdpr",
+    "grp",
+    "vale anche per il"
+   ]
+  ]
+ }
+}
