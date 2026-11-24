@@ -60,6 +60,7 @@ EDX = {
  '56': (None, 'GPT-6.2 Astra, Gemini 4 Neon e il test del GAO sui chatbot', 'OpenAI e Google lanciano due modelli puntando sul costo per compito, e il GAO mostra che quattro chatbot cedono in meno di dodici ore.'),
  '57': (None, 'Anthropic in borsa, i chip di OpenAI e i sette modelli MAI', 'Anthropic debutta al Nasdaq a 83 dollari, i modelli di OpenAI ridisegnano i chip e Microsoft lancia sette modelli venduti sul prezzo.'),
  '60': (None, 'Riemann in Lean, la chiave di Together e la perplessità di OpenAI', 'Lean controlla la dimostrazione di Riemann fatta con Claude, Together spiega la fuga di richieste, OpenAI propone la perplessità e Sarvam apre un modello.'),
+ '61': (None, 'Huang torna in NVIDIA, i circuiti quantistici in Lean e Shirudo', 'NVIDIA reintegra Jensen Huang, DeepMind verifica in Lean algoritmi quantistici più economici, Z.ai presenta GLM-5.4 e OpenAI con Cisco apre Shirudo.'),
  '59': (None, 'OpenRouter e le esche, Inkling 2 Mini e i pesi scritti', 'OpenRouter esclude tre fornitori dopo le esche di Dragos, Thinking Machines apre Inkling 2 Mini e due studi scrivono funzioni nei pesi.'),
  '58': (None, 'Gli agenti che tengono veloce ChatGPT, EverydayBench e DaisyRose', 'OpenAI fa indagare gli agenti sui rallentamenti di ChatGPT, EverydayBench misura le richieste quotidiane e RadixArk apre DaisyRose-27B.'),
  '29': (None, "Agenti all'attacco, Flint sul portatile, skill per tutti", "Gli agenti di Storm-0940 contro i clienti di ConnectWise, Flint di Recursive per programmare in locale, le Agent Skills a una fondazione, JOLT."),

@@ -1,46 +1,46 @@
 {
- "n": 60,
- "data": "2026-11-23",
- "titolo": "La dimostrazione controllata dal computer, le richieste rubate e il numero che misura l'intelligenza",
- "descrizione": "Le comunità di Lean dicono di aver controllato la dimostrazione dell'ipotesi di Riemann scritta con Claude, Together AI spiega come sono uscite richieste dei clienti, OpenAI propone un metro comune per i modelli, Sarvam pubblica un modello aperto e la rubrica Azure spiega che cosa succede ai volti nei video.",
+ "n": 61,
+ "data": "2026-11-24",
+ "titolo": "Huang torna alla guida di NVIDIA, gli agenti che dimostrano i circuiti quantistici e lo scudo per i server",
+ "descrizione": "NVIDIA riporta Jensen Huang alla guida dopo dodici giorni, DeepMind fa controllare al computer gli algoritmi quantistici migliorati dagli agenti, Z.ai presenta un modello che ripassa due volte, OpenAI e Cisco pubblicano uno scudo per Linux e la rubrica Azure spiega come leggere gli atti anagrafici.",
  "chips": [
+  "Hardware",
   "Ricerca",
+  "Grandi modelli",
   "Sicurezza",
-  "Valutazione",
-  "Pesi aperti",
   "Azure"
  ],
  "items": [
   [
-   "🔢",
-   "Matematica",
-   "Un programma ha controllato la dimostrazione dell'ipotesi di Riemann",
-   "Le comunità che sviluppano Lean, un linguaggio per verificare le dimostrazioni al computer, dicono di avere piena fiducia nella dimostrazione scritta da un matematico di Anthropic con Claude, anche se nessuno l'ha ancora spiegata."
+   "🔌",
+   "NVIDIA",
+   "Jensen Huang torna alla guida di NVIDIA",
+   "Il consiglio di amministrazione lo ha reintegrato all'unanimità dodici giorni dopo le dimissioni, dicendo di aver avuto dal governo americano la rassicurazione che non ci sono rischi per la sicurezza nazionale."
   ],
   [
-   "🔑",
-   "Together AI",
-   "Una chiave pubblicata per errore ha fatto uscire richieste dei clienti",
-   "Together AI racconta che un'intelligenza artificiale che scrive codice ha messo in vista una chiave, e qualcuno l'ha usata per scaricare campioni di richieste inviate al servizio in estate."
+   "⚛️",
+   "DeepMind",
+   "Agenti che migliorano gli algoritmi quantistici, con la prova",
+   "Squadre di agenti di Google hanno reso molto più economici cinque calcoli per i futuri computer quantistici, e un programma ha controllato che ogni miglioramento sia corretto."
   ],
   [
-   "📉",
-   "OpenAI",
-   "OpenAI propone un numero per confrontare i laboratori",
-   "Il capo scienziato di OpenAI suggerisce di usare la perplessità, cioè quanto bene un modello prevede la parola successiva, per fissare limiti comuni da non superare."
+   "🔁",
+   "Z.ai",
+   "Un modello che rilegge due volte il proprio lavoro",
+   "La cinese Z.ai presenta GLM-5.4, che fa passare il testo due volte negli stessi strati per ragionare più a fondo senza diventare più grande."
   ],
   [
-   "🧩",
-   "Sarvam",
-   "Un modello aperto indiano per gli assistenti clienti, a basso prezzo",
-   "La startup indiana Sarvam pubblica un grande modello scaricabile e utilizzabile anche a fini commerciali, che gira su una sola scheda grafica e costa una frazione dei concorrenti."
+   "🛡️",
+   "Shirudo",
+   "Uno scudo per i server mentre si aspetta la correzione",
+   "OpenAI e Cisco pubblicano un programma gratuito per Linux che blocca un attacco a una falla nota senza fermare il servizio, solo dopo l'approvazione di una persona."
   ],
   [
-   "🎥",
+   "📜",
    "Azure",
-   "Che cosa succede ai volti quando un'AI analizza i video",
-   "Nella rubrica su Azure Content Understanding: perché i volti vengono sfocati, quando si può cambiare e quanto costa analizzare un'ora di video."
+   "Leggere con l'AI certificati di matrimonio e atti anagrafici",
+   "Nella rubrica su Azure Content Understanding: lo strumento pronto per i certificati americani, come costruirne uno per gli atti italiani e quando si paga il triplo."
   ]
  ],
- "domanda": "Perché, in una verifica fatta al computer, la cosa più importante è controllare l'enunciato?"
+ "domanda": "Perché DeepMind fa dimostrare al computer ogni miglioramento dei circuiti quantistici, invece di provarli e basta?"
 }

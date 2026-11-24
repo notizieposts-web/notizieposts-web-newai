@@ -1256,5 +1256,35 @@
   "spiega": "Una funzione che trova i volti in un video e mette insieme quelli che sembrano della stessa persona, senza dare un nome. Nei servizi Microsoft è ad accesso limitato: si usa solo dopo una domanda approvata.",
   "esempio": "In un video di una riunione il servizio indica «persona 1» e «persona 2» e i momenti in cui compaiono, ma non dice chi sono.",
   "approfondisci": "Microsoft classifica le funzioni di riconoscimento facciale come Limited Access: sono riservate a clienti e partner gestiti, per gli usi dichiarati nella domanda, e vietate a o per conto dei dipartimenti di polizia degli Stati Uniti. Il semplice rilevamento e l'oscuramento dei volti non richiedono registrazione. In Europa i dati del volto usati per identificare una persona sono dati biometrici, con regole più severe."
+ },
+ "qubit": {
+  "t": "qubit",
+  "spiega": "L'unità di informazione di un computer quantistico: come un bit, ma può trovarsi in una combinazione di 0 e 1 finché non viene misurato. I qubit \"corretti\" sono gruppi di qubit fisici che insieme correggono gli errori.",
+  "esempio": "Un algoritmo che richiede 4.300 qubit corretti ha bisogno di una macchina molto più grande di quelle di oggi, che ne hanno al massimo poche decine.",
+  "approfondisci": "I qubit fisici sono fragili: rumore e calore ne alterano lo stato in frazioni di secondo. Per questo i computer quantistici utili useranno qubit logici, ciascuno fatto da molti qubit fisici che si controllano a vicenda. Quando un articolo stima il costo di un algoritmo, di solito conta i qubit logici e le operazioni più costose da eseguire con la correzione degli errori, come le porte T.",
+  "vedi": [
+   "verifica-formale"
+  ]
+ },
+ "ebpf": {
+  "t": "eBPF",
+  "esteso": "extended Berkeley Packet Filter",
+  "spiega": "Una tecnologia di Linux che permette di far girare piccoli programmi controllati dentro il sistema operativo, in punti precisi, senza riavviarlo.",
+  "esempio": "Un programma eBPF può guardare ogni richiesta che arriva a un servizio e scartare quelle con un formato pericoloso, mentre il servizio continua a funzionare.",
+  "approfondisci": "Prima di essere caricato, ogni programma eBPF passa da un verificatore del kernel che controlla che non possa bloccare il sistema o leggere memoria che non gli spetta. È usato per monitorare reti e prestazioni e, sempre di più, per la sicurezza. Shirudo lo usa per mettere protezioni temporanee sui servizi.",
+  "vedi": [
+   "tpm",
+   "exploit"
+  ]
+ },
+ "tpm": {
+  "t": "TPM",
+  "esteso": "Trusted Platform Module",
+  "spiega": "Un piccolo chip di sicurezza nel computer che conserva chiavi e tiene un registro affidabile di che cosa è stato caricato sulla macchina.",
+  "esempio": "Se qualcuno carica una protezione su un server, il TPM ne registra l'impronta: dopo si può dimostrare che cosa girava e quando.",
+  "approfondisci": "Il TPM 2.0 è presente in molti computer e server moderni ed è richiesto, per esempio, da Windows 11. Le sue registrazioni non si possono cancellare dal software, per questo servono a dimostrare a un terzo lo stato della macchina.",
+  "vedi": [
+   "ebpf"
+  ]
  }
 }

@@ -1,0 +1,63 @@
+Radar AI. Edizione del ventiquattro novembre 2026. Questa è la versione da ascoltare: dura circa dieci minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: Huang torna alla guida di NVIDIA, gli agenti che dimostrano i circuiti quantistici e lo scudo per i server.
+
+Una nota prima di cominciare. Tra i segnali c'è una novità di Anthropic, e questa edizione è preparata da Claude, un modello di Anthropic. La riporto come la descrive l'azienda.
+
+Il periodo in breve. Un lunedì in cui quasi tutto è successo nello stesso giorno, il ventitré novembre. NVIDIA rimette al suo posto il fondatore. Google DeepMind mostra che degli agenti possono migliorare algoritmi difficili, se un programma controlla ogni passo. Dalla Cina arriva un modello che pensa più a fondo senza diventare più grande. E dagli Stati Uniti uno strumento per difendere i server nelle ore in cui una falla è nota ma la correzione non è pronta.
+
+Capitolo uno. NVIDIA richiama Jensen Huang.
+
+Lunedì ventitré novembre il consiglio di amministrazione di NVIDIA ha votato all'unanimità per riportare Jensen Huang alla presidenza esecutiva, alla guida dell'azienda e nel consiglio, con effetto immediato. L'undici novembre, appena dodici giorni prima, lo stesso consiglio aveva accettato le sue dimissioni, e la direttrice finanziaria Colette Kress aveva preso la guida ad interim.
+
+Il comunicato dice che il consiglio, dopo una serie di colloqui, è soddisfatto della franchezza di Huang e della sua capacità di guidare l'azienda. E aggiunge un dettaglio insolito: ha ricevuto indicazioni dai livelli più alti del governo americano, che lo portano a ritenere che il ritorno di Huang non crei rischi per la sicurezza nazionale. Il comunicato ricorda le notizie di stampa su un'operazione di un servizio segreto straniero che lo avrebbe preso di mira. L'indagine interna, affidata ad amministratori indipendenti, continua fino alla fine.
+
+Cambiano anche alcune regole. Kress torna a fare la direttrice finanziaria. C'è un comitato per la sicurezza nazionale e le esportazioni dei chip, e NVIDIA cerca un nuovo responsabile della conformità, che risponderà a un comitato del consiglio e non all'amministratore delegato. Il comunicato non spiega che cosa sia emerso nei colloqui, né quali indicazioni abbia dato il governo. Nella pagina trovi un esempio su come separare, in un comunicato, i fatti dai giudizi.
+
+Prova a chiederti: quando un'azienda scrive di essere soddisfatta, che prova ti servirebbe per esserlo anche tu?
+
+Capitolo due. DeepMind, gli agenti e i circuiti quantistici verificati.
+
+Il ventitré novembre Google DeepMind e Google Quantum AI hanno raccontato un esperimento. I computer quantistici utili, quelli che correggono i propri errori, non esistono ancora. Chi progetta algoritmi per loro stima quanti qubit, cioè le unità di informazione quantistica, servono, e quante operazioni costose bisogna eseguire. Il prodotto delle due cose è il costo da ridurre.
+
+Squadre di agenti basati su Gemini 4 hanno lavorato su cinque problemi. Ogni idea entrava nel lavoro comune solo dopo essere stata dimostrata corretta in Lean, il linguaggio che controlla le dimostrazioni passo per passo. Ogni quattro ore gli agenti delle diverse squadre si incontravano in una specie di convegno virtuale per scambiarsi le idee migliori.
+
+I risultati: un calcolo per la fusione nucleare costa circa undici volte meno. La simulazione di una molecola sensibile alla luce, circa otto volte meno. Un enzima che conta per il metabolismo dei farmaci, due volte e mezza. Una versione dell'algoritmo di ricerca di Grover, poco più di due volte e mezza. E una funzione chiamata arcoseno, che serve a caricare numeri negli stati quantistici, duecentonovanta volte meno.
+
+Il punto vero è la fiducia: questi circuiti sono troppo grandi per provarli su un computer di oggi, e la prova in Lean permette a chiunque di ricontrollarli. DeepMind ha pubblicato la libreria e le soluzioni. I limiti, scritti dagli autori: anche così servono macchine molto più grandi delle prime previste, il paper non è ancora revisionato, e blog e paper non danno sempre gli stessi numeri.
+
+Prova a chiederti: in quali lavori accetteresti il risultato di un agente solo se arriva con una prova che puoi ricontrollare?
+
+Capitolo tre. GLM-5.4, il modello che ripassa due volte.
+
+Il ventitré novembre la cinese Z.ai, nota anche come Zhipu, ha presentato GLM-5.4, il suo nuovo modello di punta. È il primo costruito su quella che chiama architettura Loop Transformer. Un transformer è una pila di strati che rielaborano il testo uno dopo l'altro. Qui un gruppo di ventotto strati del modello di base viene percorso due volte: il risultato del primo passaggio rientra negli stessi strati e viene raffinato. La profondità aumenta senza aggiungere parametri.
+
+Per non raddoppiare la memoria, il secondo passaggio riusa gran parte della memoria del contesto creata dal primo e aggiunge solo una piccola finestra locale. Il modello legge fino a un milione di token. Z.ai dichiara un livello paragonabile a modelli da duemila o tremila miliardi di parametri, ma nella pagina mostra i risultati solo in grafici.
+
+Mancano molte cose: i parametri totali, i prezzi, la licenza e se i pesi saranno scaricabili. Per ora il modello è disponibile solo per chi ha il piano GLM Coding, e le API arriveranno dopo una valutazione di sicurezza. Z.ai stessa segnala un difetto: il modello tende a perdersi in maratone di ragionamento troppo lunghe.
+
+Prova a chiederti: quando rileggi un tuo lavoro, come capisci che è il momento di smettere e consegnare?
+
+Capitolo quattro. Shirudo, lo scudo per Linux.
+
+Il ventitré novembre OpenAI e Cisco hanno presentato Shirudo, che in giapponese vuol dire scudo. È un programma open source per Linux pensato per il periodo scoperto tra la scoperta di una falla e la sua correzione. Usa una tecnologia di Linux, chiamata eBPF, che permette di far girare piccoli programmi dentro il sistema operativo. Uno scudo è uno di questi programmi: blocca la strada che l'attacco deve percorrere, lasciando passare le richieste normali, senza riavviare il servizio.
+
+Gli scudi possono essere scritti da agenti, ma prima si guardano in sola osservazione, e vanno in funzione solo dopo l'approvazione di una persona. Ogni scudo è firmato, e un chip di sicurezza, il TPM, registra ogni protezione caricata o tolta. Nell'esempio di OpenAI, Codex ha scritto uno scudo che ha bloccato un attacco su un motore di ricerca in funzione, senza riavvio.
+
+Il limite: il progetto è dichiarato pre-release. Per la produzione servono modifiche al kernel di Linux non ancora ufficiali e un chip TPM recente, e alcune funzioni sono ancora in progettazione. Lo scudo non sostituisce la correzione: la fa aspettare con meno rischi.
+
+Prova a chiederti: se domani si scoprisse una falla nel servizio che usi di più, chi dovrebbe avere l'ultima parola sulla protezione da mettere?
+
+La rubrica Azure Content Understanding, puntata cinquantasette: gli atti anagrafici. Tra gli analizzatori pronti c'è quello per i certificati di matrimonio degli Stati Uniti. Usa l'estrazione standard, con riconoscimento del testo e del layout, e la preparazione del contesto standard, circa un dollaro ogni mille pagine, più i costi del modello. Per gli atti italiani un analizzatore pronto non c'è: si costruisce su misura, con uno schema di campi ben descritti. Attenzione al prezzo: se lo addestri con esempi etichettati, la preparazione del contesto costa il triplo. I file nati digitali costano molto meno, perché non serve leggere un'immagine. E gli atti contengono dati personali, anche di familiari: accesso ristretto e conservazione minima.
+
+Prova a chiederti: nel tuo archivio, quanti documenti sono davvero scansioni, e quanti sono file digitali che stai pagando come immagini?
+
+Nel laboratorio trovi cinque esperimenti: per separare fatti e giudizi in un comunicato, per accorciare un calcolo dimostrando che il risultato non cambia, per far rileggere una risposta al tuo assistente, per progettare a parole una protezione temporanea e per scrivere lo schema di un estratto di matrimonio.
+
+I segnali. Anthropic presenta Claude Ship, con due agenti in prova che sistemano e approvano le modifiche al codice secondo le regole del team. Gli Stati Uniti aggiungono sette società di Malesia, Singapore e Thailandia alla lista nera dei chip. Ancora da verificare: nel Regno Unito sarebbe partita una grande sperimentazione dell'intelligenza artificiale nelle mammografie; GPT-6.2 Sol sarebbe arrivato in ChatGPT; e Amazon avrebbe concordato l'acquisto della tecnologia di Decart.
+
+La domanda del giorno: perché DeepMind fa dimostrare in Lean ogni miglioramento dei circuiti, invece di provarli e basta?
+
+Perché quei circuiti sono troppo grandi per essere eseguiti sui computer di oggi, classici o quantistici. Non si possono provare: si può solo dimostrare che sono corretti. E con la prova in Lean chiunque può ricontrollarli, senza fidarsi degli agenti.
+
+È tutto per oggi. Esempi, fonti, quiz ed esperimenti ti aspettano nella pagina dell'edizione sessantuno di Radar AI. A domani.

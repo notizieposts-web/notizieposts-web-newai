@@ -1,0 +1,351 @@
+{
+ "nvidia": {
+  "root": "Huang torna in NVIDIA",
+  "nodes": [
+   {
+    "id": "voto",
+    "t": "Voto all'unanimità",
+    "d": "Il 23 novembre il consiglio riporta Huang alla guida, con effetto immediato.",
+    "at": 0,
+    "i": "🗳️",
+    "p": "root",
+    "r": "nasce da un"
+   },
+   {
+    "id": "gov",
+    "t": "Indicazioni del governo",
+    "d": "Il consiglio cita indicazioni dai livelli più alti del governo americano.",
+    "at": 0,
+    "i": "🏛️",
+    "p": "voto",
+    "r": "pesano le"
+   },
+   {
+    "id": "dim",
+    "t": "Dimissioni dell'11 novembre",
+    "d": "Dodici giorni prima il consiglio aveva accettato le dimissioni di Huang.",
+    "at": 1,
+    "i": "📉",
+    "p": "root",
+    "r": "segue le"
+   },
+   {
+    "id": "ind",
+    "t": "Indagine interna",
+    "d": "Un comitato di amministratori indipendenti indaga e andrà avanti fino alla fine.",
+    "at": 1,
+    "i": "🔍",
+    "p": "dim",
+    "r": "resta aperta l'"
+   },
+   {
+    "id": "kress",
+    "t": "Kress direttrice finanziaria",
+    "d": "Colette Kress lascia l'interim e torna al suo ruolo.",
+    "at": 2,
+    "i": "💼",
+    "p": "root",
+    "r": "riporta"
+   },
+   {
+    "id": "conf",
+    "t": "Nuovo responsabile conformità",
+    "d": "Risponderà al comitato per le nomine, non all'amministratore delegato.",
+    "at": 2,
+    "i": "🛡️",
+    "p": "root",
+    "r": "introduce un"
+   },
+   {
+    "id": "chip",
+    "t": "Chip e sicurezza nazionale",
+    "d": "Chi guida NVIDIA pesa su forniture e rapporti con la Cina.",
+    "at": 3,
+    "i": "🔌",
+    "p": "root",
+    "r": "conta per"
+   }
+  ]
+ },
+ "deepmind": {
+  "root": "Algoritmi quantistici verificati",
+  "nodes": [
+   {
+    "id": "costo",
+    "t": "Qubit per porte T",
+    "d": "Il costo da ridurre è il prodotto di qubit e operazioni costose.",
+    "at": 0,
+    "i": "💰",
+    "p": "root",
+    "r": "riduce il"
+   },
+   {
+    "id": "sq",
+    "t": "Squadre di agenti",
+    "d": "Più squadre di agenti Gemini 4 lavorano in parallelo sullo stesso problema.",
+    "at": 1,
+    "i": "🤖",
+    "p": "root",
+    "r": "nasce da"
+   },
+   {
+    "id": "conv",
+    "t": "Convegno ogni 4 ore",
+    "d": "Gli agenti delle squadre si scambiano le idee migliori.",
+    "at": 1,
+    "i": "🗣️",
+    "p": "sq",
+    "r": "si incontrano in un"
+   },
+   {
+    "id": "lean",
+    "t": "Prova in Lean",
+    "d": "Solo le idee dimostrate entrano nel quaderno comune.",
+    "at": 3,
+    "i": "✅",
+    "p": "root",
+    "r": "è garantito dalla"
+   },
+   {
+    "id": "fus",
+    "t": "Fusione 11,8 volte",
+    "d": "Il calcolo per la fusione costa circa 11,8 volte meno secondo il blog.",
+    "at": 2,
+    "i": "⚛️",
+    "p": "costo",
+    "r": "scende per la"
+   },
+   {
+    "id": "arc",
+    "t": "Arcoseno 290 volte",
+    "d": "Il pezzo che carica i numeri negli stati quantistici costa 290 volte meno.",
+    "at": 2,
+    "i": "📐",
+    "p": "costo",
+    "r": "e per l'"
+   },
+   {
+    "id": "lib",
+    "t": "Libreria aperta",
+    "d": "Libreria Lean, specifiche e soluzioni sono su GitHub.",
+    "at": 3,
+    "i": "📂",
+    "p": "lean",
+    "r": "con una"
+   },
+   {
+    "id": "lim",
+    "t": "Ancora troppo grandi",
+    "d": "Servono macchine molto più grandi delle prime previste.",
+    "at": 4,
+    "i": "⚠️",
+    "p": "root",
+    "r": "ma i circuiti restano"
+   }
+  ]
+ },
+ "glm": {
+  "root": "GLM-5.4 a due giri",
+  "nodes": [
+   {
+    "id": "ciclo",
+    "t": "Strati riusati",
+    "d": "Un gruppo di strati viene percorso due volte, senza nuovi parametri.",
+    "at": 0,
+    "i": "🔁",
+    "p": "root",
+    "r": "si basa su"
+   },
+   {
+    "id": "28",
+    "t": "28 strati di GLM-5",
+    "d": "Parte dal modello di base già addestrato e prosegue l'addestramento.",
+    "at": 1,
+    "i": "🧱",
+    "p": "ciclo",
+    "r": "usa"
+   },
+   {
+    "id": "porte",
+    "t": "Porte per parola",
+    "d": "Decidono quanto ogni passaggio cambia il testo interno.",
+    "at": 1,
+    "i": "🚪",
+    "p": "ciclo",
+    "r": "regolati da"
+   },
+   {
+    "id": "kv",
+    "t": "Cache ibrida",
+    "d": "Il secondo giro aggiunge solo una finestra locale di memoria.",
+    "at": 1,
+    "i": "🧠",
+    "p": "ciclo",
+    "r": "con una"
+   },
+   {
+    "id": "mil",
+    "t": "Un milione di token",
+    "d": "Contesto lunghissimo e risposte fino a 128.000 token.",
+    "at": 2,
+    "i": "📜",
+    "p": "root",
+    "r": "legge fino a"
+   },
+   {
+    "id": "piano",
+    "t": "Solo GLM Coding",
+    "d": "Per ora nel piano GLM Coding; API dopo la valutazione di sicurezza.",
+    "at": 2,
+    "i": "🔒",
+    "p": "root",
+    "r": "è disponibile"
+   },
+   {
+    "id": "mar",
+    "t": "Maratone di ragionamento",
+    "d": "Z.ai segnala che il modello tende a pensare troppo a lungo.",
+    "at": 3,
+    "i": "🏃",
+    "p": "root",
+    "r": "ha un difetto:"
+   }
+  ]
+ },
+ "shirudo": {
+  "root": "Shirudo, lo scudo per Linux",
+  "nodes": [
+   {
+    "id": "fin",
+    "t": "Finestra scoperta",
+    "d": "Tra scoperta della falla e correzione chi attacca può usare un exploit.",
+    "at": 0,
+    "i": "⏳",
+    "p": "root",
+    "r": "copre la"
+   },
+   {
+    "id": "ebpf",
+    "t": "Programmi eBPF",
+    "d": "Piccoli programmi nel sistema operativo bloccano la strada dell'attacco.",
+    "at": 1,
+    "i": "🧩",
+    "p": "root",
+    "r": "usa"
+   },
+   {
+    "id": "oss",
+    "t": "Sola osservazione",
+    "d": "Prima di attivarlo si guarda che cosa farebbe lo scudo.",
+    "at": 1,
+    "i": "👀",
+    "p": "ebpf",
+    "r": "si provano in"
+   },
+   {
+    "id": "app",
+    "t": "Approvazione umana",
+    "d": "Lo scudo entra in funzione solo dopo il sì di una persona.",
+    "at": 1,
+    "i": "🙋",
+    "p": "oss",
+    "r": "e poi serve l'"
+   },
+   {
+    "id": "firma",
+    "t": "Firma e TPM",
+    "d": "Gli scudi sono firmati e il TPM registra ogni caricamento.",
+    "at": 1,
+    "i": "🔏",
+    "p": "root",
+    "r": "è protetto da"
+   },
+   {
+    "id": "codex",
+    "t": "Esempio con Codex",
+    "d": "Uno scudo scritto da Codex ha bloccato un attacco su Elasticsearch.",
+    "at": 2,
+    "i": "☕",
+    "p": "root",
+    "r": "si vede nell'"
+   },
+   {
+    "id": "pre",
+    "t": "Pre-release",
+    "d": "Servono un kernel modificato e un TPM 2.0: non è pronto per la produzione.",
+    "at": 3,
+    "i": "🚧",
+    "p": "root",
+    "r": "è ancora"
+   }
+  ]
+ },
+ "azure": {
+  "root": "Atti anagrafici in Content Understanding",
+  "nodes": [
+   {
+    "id": "usa",
+    "t": "marriageCertificate.us",
+    "d": "Analizzatore pronto per i certificati di matrimonio americani.",
+    "at": 0,
+    "i": "🇺🇸",
+    "p": "root",
+    "r": "offre"
+   },
+   {
+    "id": "cont",
+    "t": "Document Standard",
+    "d": "Estrazione con OCR e layout per i documenti scansionati.",
+    "at": 1,
+    "i": "🧾",
+    "p": "usa",
+    "r": "usa il contatore"
+   },
+   {
+    "id": "ctx",
+    "t": "Contestualizzazione standard",
+    "d": "Circa 1 dollaro ogni mille pagine alla tariffa standard.",
+    "at": 1,
+    "i": "💵",
+    "p": "usa",
+    "r": "e la"
+   },
+   {
+    "id": "ita",
+    "t": "Analizzatore su misura",
+    "d": "Per gli atti italiani si parte da prebuilt-document con uno schema proprio.",
+    "at": 2,
+    "i": "🇮🇹",
+    "p": "root",
+    "r": "richiede un"
+   },
+   {
+    "id": "esempi",
+    "t": "Esempi etichettati",
+    "d": "Fanno scattare la contestualizzazione avanzata, il triplo.",
+    "at": 2,
+    "i": "🏷️",
+    "p": "ita",
+    "r": "costa di più con"
+   },
+   {
+    "id": "dig",
+    "t": "File digitali",
+    "d": "Word o PDF nati al computer usano il contatore minimo.",
+    "at": 3,
+    "i": "💻",
+    "p": "root",
+    "r": "risparmia con i"
+   },
+   {
+    "id": "priv",
+    "t": "Dati personali",
+    "d": "Gli atti contengono dati di familiari: accesso ristretto e conservazione minima.",
+    "at": 3,
+    "i": "🔐",
+    "p": "root",
+    "r": "impone cura sui"
+   }
+  ]
+ }
+}
