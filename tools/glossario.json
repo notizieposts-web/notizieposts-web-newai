@@ -1286,5 +1286,35 @@
   "vedi": [
    "ebpf"
   ]
+ },
+ "circuito-aritmetico": {
+  "t": "circuito aritmetico",
+  "spiega": "Una ricetta di calcolo fatta solo di somme e moltiplicazioni, scritta come una rete di passaggi: ogni passaggio, detto porta, combina i risultati dei precedenti. La sua dimensione è il numero di porte.",
+  "esempio": "Per calcolare (x+y) per (x+y) basta un circuito di due porte: una somma e una moltiplicazione, invece delle quattro moltiplicazioni dello sviluppo completo.",
+  "approfondisci": "I circuiti aritmetici sono il modello con cui la teoria della complessità algebrica misura quanto è difficile calcolare un polinomio. A differenza dei circuiti logici, che lavorano su zeri e uni, devono calcolare il polinomio come oggetto matematico. La congettura di Valiant del 1979, VP diverso da VNP, chiede se il permanente di una tabella abbia bisogno di circuiti aritmetici molto grandi. Nel novembre 2026 Anthropic e OpenAI hanno pubblicato dimostrazioni di questa congettura, controllate in Lean e in attesa di revisione degli esperti.",
+  "vedi": [
+   "lean",
+   "verifica-formale"
+  ]
+ },
+ "kms": {
+  "t": "KMS",
+  "esteso": "Key Management Service",
+  "spiega": "Il servizio di AWS che crea e custodisce le chiavi con cui si cifrano i dati. Chi controlla la chiave decide chi può leggere i dati cifrati.",
+  "esempio": "Se un'azienda cifra il suo archivio con una chiave KMS e poi revoca il permesso a un fornitore, il fornitore non può più leggere quei file.",
+  "approfondisci": "Con una chiave gestita dal cliente, l'azienda può decidere in ogni momento chi la usa, e ogni uso viene registrato. È il meccanismo su cui si basa Enterprise Frontier Safeguards su Amazon Bedrock: i registri delle conversazioni stanno nell'archivio del cliente, cifrati con la sua chiave, e se l'accesso viene tolto Bedrock smette di servire i modelli coperti dopo 24 ore.",
+  "vedi": [
+   "zdr"
+  ]
+ },
+ "fmri": {
+  "t": "risonanza magnetica funzionale",
+  "esteso": "fMRI, functional Magnetic Resonance Imaging",
+  "spiega": "Un esame che misura come cambia il flusso di sangue nelle diverse zone del cervello, e quindi quali zone lavorano di più mentre una persona svolge un compito. Non è invasivo e non usa radiazioni.",
+  "esempio": "Se una persona ascolta una storia dentro lo scanner, la risonanza funzionale mostra che si attivano soprattutto alcune zone del lato sinistro del cervello, la rete del linguaggio.",
+  "approfondisci": "La risonanza funzionale misura un segnale lento, che segue l'attività dei neuroni con qualche secondo di ritardo. Per questo negli studi sul linguaggio si confrontano le risposte a frasi intere o a brani. Negli ultimi anni i ricercatori usano le rappresentazioni interne dei modelli linguistici per prevedere queste risposte: se la previsione funziona, le rappresentazioni del modello catturano qualcosa di simile a ciò che fa il cervello.",
+  "vedi": [
+   "embedding"
+  ]
  }
 }

@@ -1,0 +1,387 @@
+{
+ "vpvnp": {
+  "root": "VP diverso da VNP",
+  "nodes": [
+   {
+    "id": "perm",
+    "t": "Permanente",
+    "d": "Come il determinante, ma con tutti i prodotti col segno più.",
+    "at": 0,
+    "i": "🧮",
+    "p": "root",
+    "r": "riguarda il"
+   },
+   {
+    "id": "circ",
+    "t": "Circuito aritmetico",
+    "d": "Solo somme e moltiplicazioni: il permanente non ne avrà mai uno piccolo.",
+    "at": 0,
+    "i": "🔗",
+    "p": "perm",
+    "r": "non ha un piccolo"
+   },
+   {
+    "id": "lim",
+    "t": "Limite superpolinomiale",
+    "d": "Servono più porte di qualunque potenza del lato della tabella.",
+    "at": 1,
+    "i": "📈",
+    "p": "root",
+    "r": "dimostra un"
+   },
+   {
+    "id": "car2",
+    "t": "Caratteristica 2 esclusa",
+    "d": "Lì il meno coincide con il più e permanente e determinante sono uguali.",
+    "at": 1,
+    "i": "➗",
+    "p": "lim",
+    "r": "con un'eccezione:"
+   },
+   {
+    "id": "pnp",
+    "t": "Non è P contro NP",
+    "d": "Il lavoro riguarda circuiti algebrici, non porte logiche su zeri e uni.",
+    "at": 2,
+    "i": "🚫",
+    "p": "root",
+    "r": "non risolve"
+   },
+   {
+    "id": "lean",
+    "t": "Prova in Lean",
+    "d": "Il programma accetta ogni passaggio, ma non controlla la traduzione dell'enunciato.",
+    "at": 3,
+    "i": "✅",
+    "p": "root",
+    "r": "è controllato da"
+   },
+   {
+    "id": "enun",
+    "t": "Enunciato da rivedere",
+    "d": "Nessun esperto ha confermato che il file dica ciò che chiedeva Valiant.",
+    "at": 3,
+    "i": "🔍",
+    "p": "lean",
+    "r": "lascia aperto l'"
+   },
+   {
+    "id": "indip",
+    "t": "Verifiche indipendenti",
+    "d": "Kim Morrison rifà il controllo con due nuclei diversi.",
+    "at": 4,
+    "i": "🧪",
+    "p": "lean",
+    "r": "è ripetuta con"
+   },
+   {
+    "id": "openai",
+    "t": "Seconda prova di OpenAI",
+    "d": "Secondo Aaronson, OpenAI pubblica lo stesso giorno un risultato simile.",
+    "at": 4,
+    "i": "🏁",
+    "p": "root",
+    "r": "è affiancato dalla"
+   }
+  ]
+ },
+ "bedrock": {
+  "root": "Accesso controllato a Claude",
+  "nodes": [
+   {
+    "id": "rischio",
+    "t": "Modelli a doppio uso",
+    "d": "Aiutano chi difende, ma anche chi attacca.",
+    "at": 0,
+    "i": "⚖️",
+    "p": "root",
+    "r": "nasce dai"
+   },
+   {
+    "id": "zdr",
+    "t": "Conservazione zero",
+    "d": "Molte aziende vietano che il fornitore conservi le conversazioni.",
+    "at": 0,
+    "i": "🗄️",
+    "p": "rischio",
+    "r": "si scontra con la"
+   },
+   {
+    "id": "s3",
+    "t": "Archivio del cliente",
+    "d": "Richieste e risposte restano in un archivio S3 del cliente.",
+    "at": 1,
+    "i": "📦",
+    "p": "root",
+    "r": "tiene i dati nell'"
+   },
+   {
+    "id": "kms",
+    "t": "Chiave del cliente",
+    "d": "L'archivio è cifrato con una chiave KMS gestita dal cliente.",
+    "at": 1,
+    "i": "🔑",
+    "p": "s3",
+    "r": "è cifrato con la"
+   },
+   {
+    "id": "stop",
+    "t": "Stop dopo 24 ore",
+    "d": "Senza accesso a chiave o archivio, Bedrock smette di servire i modelli.",
+    "at": 1,
+    "i": "⏱️",
+    "p": "kms",
+    "r": "se revocata porta allo"
+   },
+   {
+    "id": "api",
+    "t": "Trusted Access API",
+    "d": "L'interfaccia per chiedere l'accesso, ora disponibile a tutti.",
+    "at": 2,
+    "i": "🚪",
+    "p": "root",
+    "r": "si apre con la"
+   },
+   {
+    "id": "prev",
+    "t": "Anteprima limitata",
+    "d": "Iscrizione tramite AWS, solo account di prova senza dati regolamentati.",
+    "at": 2,
+    "i": "🧪",
+    "p": "api",
+    "r": "affianca un'"
+   },
+   {
+    "id": "clienti",
+    "t": "Oltre cento clienti",
+    "d": "Numero dichiarato da AWS, non verificato da altri.",
+    "at": 3,
+    "i": "🏢",
+    "p": "root",
+    "r": "conta"
+   }
+  ]
+ },
+ "gemini": {
+  "root": "File a fette in Gemini",
+  "nodes": [
+   {
+    "id": "tok",
+    "t": "Si paga ogni token",
+    "d": "Prima il modello riceveva tutte le pagine, anche quelle inutili.",
+    "at": 0,
+    "i": "💸",
+    "p": "root",
+    "r": "risolve il problema che"
+   },
+   {
+    "id": "pag",
+    "t": "Pagine e risoluzione",
+    "d": "Per i documenti: inizio, fine, risoluzione e strati di testo o immagine.",
+    "at": 1,
+    "i": "📄",
+    "p": "root",
+    "r": "lascia scegliere"
+   },
+   {
+    "id": "fogli",
+    "t": "Fogli e celle visibili",
+    "d": "Per i fogli di calcolo si sceglie il foglio e le celle visibili.",
+    "at": 1,
+    "i": "📊",
+    "p": "pag",
+    "r": "vale anche per"
+   },
+   {
+    "id": "video",
+    "t": "Minuti e fotogrammi",
+    "d": "Per video e audio si indicano inizio, fine e fotogrammi al secondo.",
+    "at": 1,
+    "i": "🎬",
+    "p": "pag",
+    "r": "vale anche per"
+   },
+   {
+    "id": "server",
+    "t": "Taglio sul server",
+    "d": "Si invia il file intero una volta e si chiedono parti diverse.",
+    "at": 1,
+    "i": "🖥️",
+    "p": "root",
+    "r": "funziona con il"
+   },
+   {
+    "id": "partner",
+    "t": "Risparmi dei partner",
+    "d": "Vercel e LiteLLM dichiarano meno token: dati non indipendenti.",
+    "at": 2,
+    "i": "📉",
+    "p": "root",
+    "r": "promette"
+   },
+   {
+    "id": "azure",
+    "t": "Come contentRange",
+    "d": "È la stessa idea vista nella rubrica Azure: solo le pagine che servono.",
+    "at": 3,
+    "i": "🔁",
+    "p": "root",
+    "r": "ricorda"
+   }
+  ]
+ },
+ "cervello": {
+  "root": "Un codice per 21 lingue",
+  "nodes": [
+   {
+    "id": "fmri",
+    "t": "Risonanza funzionale",
+    "d": "Misura la rete del linguaggio mentre si ascoltano brani.",
+    "at": 0,
+    "i": "🧠",
+    "p": "root",
+    "r": "si misura con la"
+   },
+   {
+    "id": "alice",
+    "t": "Alice nel paese delle meraviglie",
+    "d": "Il testo ascoltato dai nove gruppi linguistici nuovi.",
+    "at": 0,
+    "i": "📖",
+    "p": "fmri",
+    "r": "usa come brano"
+   },
+   {
+    "id": "cod",
+    "t": "Modello di codifica",
+    "d": "Usa le rappresentazioni di un modello multilingue per prevedere il cervello.",
+    "at": 0,
+    "i": "🤖",
+    "p": "root",
+    "r": "si basa su un"
+   },
+   {
+    "id": "prev",
+    "t": "Previsione in 21 lingue",
+    "d": "Secondo il MIT, la previsione riesce in tutte le lingue studiate.",
+    "at": 1,
+    "i": "🌍",
+    "p": "cod",
+    "r": "ottiene una"
+   },
+   {
+    "id": "trasf",
+    "t": "Dal francese al vietnamita",
+    "d": "Addestrato su una lingua, prevede le risposte in un'altra.",
+    "at": 1,
+    "i": "🔀",
+    "p": "prev",
+    "r": "regge anche il"
+   },
+   {
+    "id": "sign",
+    "t": "Componente del significato",
+    "d": "La parte comune è legata al significato più che a suoni e grammatica.",
+    "at": 1,
+    "i": "💡",
+    "p": "trasf",
+    "r": "rivela una"
+   },
+   {
+    "id": "diff",
+    "t": "Le lingue restano diverse",
+    "d": "Le caratteristiche delle singole lingue non spariscono.",
+    "at": 2,
+    "i": "🧩",
+    "p": "root",
+    "r": "non cancella che"
+   },
+   {
+    "id": "strum",
+    "t": "L'AI come strumento",
+    "d": "Qui il modello linguistico è uno strumento di misura, non il prodotto.",
+    "at": 3,
+    "i": "🔬",
+    "p": "root",
+    "r": "mostra"
+   }
+  ]
+ },
+ "azure": {
+  "root": "Lo schema proposto dall'AI",
+  "nodes": [
+   {
+    "id": "fs",
+    "t": "documentFieldSchema",
+    "d": "Analizza un documento e propone uno schema di campi.",
+    "at": 0,
+    "i": "🧭",
+    "p": "root",
+    "r": "si ottiene con"
+   },
+   {
+    "id": "df",
+    "t": "documentFields",
+    "d": "Estrae coppie chiave-valore così come sono scritte.",
+    "at": 0,
+    "i": "🏷️",
+    "p": "root",
+    "r": "si affianca a"
+   },
+   {
+    "id": "camp",
+    "t": "Campione di 5-10 documenti",
+    "d": "Un solo documento ha campi vuoti o insoliti.",
+    "at": 1,
+    "i": "🗂️",
+    "p": "fs",
+    "r": "va usato su un"
+   },
+   {
+    "id": "corr",
+    "t": "Correggere le descrizioni",
+    "d": "Le descrizioni generate sono generiche e vanno rese precise.",
+    "at": 1,
+    "i": "✏️",
+    "p": "camp",
+    "r": "porta a"
+   },
+   {
+    "id": "cong",
+    "t": "Congelare lo schema",
+    "d": "Gli analizzatori pronti cambiano tra versioni: serve una copia tua.",
+    "at": 1,
+    "i": "🧊",
+    "p": "corr",
+    "r": "finisce col"
+   },
+   {
+    "id": "costi",
+    "t": "Tre voci di costo",
+    "d": "Estrazione, contestualizzazione e token del modello.",
+    "at": 2,
+    "i": "💶",
+    "p": "root",
+    "r": "si paga con"
+   },
+   {
+    "id": "lim",
+    "t": "Fino a 1.000 campi",
+    "d": "Ogni sottocampo conta; categorie da classificare al massimo 300.",
+    "at": 2,
+    "i": "📏",
+    "p": "costi",
+    "r": "ha un limite di"
+   },
+   {
+    "id": "prog",
+    "t": "Progettazione, non produzione",
+    "d": "Farlo girare su ogni documento costa mille volte di più.",
+    "at": 3,
+    "i": "⚠️",
+    "p": "root",
+    "r": "va usato per la"
+   }
+  ]
+ }
+}

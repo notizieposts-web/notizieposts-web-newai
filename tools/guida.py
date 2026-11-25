@@ -59,6 +59,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (55,'59','azure','costi','Moduli fiscali: dove si paga il triplo'),
     (56,'60','azure','sicurezza','Volti nei video: sfocatura e accesso limitato'),
     (57,'61','azure','casi','Atti anagrafici: certificati USA e atti italiani'),
+    (58,'62','azure','qualita','Lo schema proposto dall\'AI: documentFieldSchema'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']

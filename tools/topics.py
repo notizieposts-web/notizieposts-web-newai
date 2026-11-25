@@ -59,6 +59,7 @@ MAP = {
  '57':{'anthropic':'Anthropic','chip':'OpenAI','mai':'Microsoft','genie':'Google'},
  '60':{'riemann':'Lean','together':'Together','openai':'OpenAI','sarvam':'Sarvam'},
  '61':{'nvidia':'NVIDIA','deepmind':'DeepMind','glm':'GLM','shirudo':'Shirudo'},
+ '62':{'vpvnp':'Anthropic','bedrock':'Bedrock','gemini':'Gemini','cervello':'MIT'},
  '59':{'openrouter':'OpenRouter','inkling':'Inkling','pesi':'arXiv'},
  '58':{'factory':'OpenAI','everyday':'EverydayBench','daisyrose':'RadixArk','npu':'AMD'},
  '29':{'microsoft':'Microsoft','flint':'Flint','skills':'Anthropic','jolt':'Perplexity'},

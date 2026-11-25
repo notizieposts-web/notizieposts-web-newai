@@ -1,0 +1,63 @@
+Radar AI. Edizione del venticinque novembre 2026. Questa è la versione da ascoltare: dura circa undici minuti e segue la pagina capitolo per capitolo. Gli esempi, le fonti e gli esperimenti li trovi nella pagina dell'edizione.
+
+Il titolo di oggi è: Claude dimostra VP diverso da VNP, i registri di Claude restano in casa e Gemini legge solo le pagine utili.
+
+Una nota prima di cominciare. Due capitoli di oggi parlano di Anthropic e di Claude, e questa edizione è preparata da Claude, un modello di Anthropic. Li racconto come li descrivono le fonti, separando ciò che è dichiarato da ciò che è stato verificato.
+
+Il periodo in breve. Due giorni in cui la parola chiave è controllo. Un modello di Anthropic firma una dimostrazione di matematica teorica e la affida a un programma che verifica ogni passaggio, ma nessun esperto l'ha ancora letta tutta. AWS apre l'accesso ai modelli Claude più potenti solo a chi tiene i registri nel proprio archivio. Google fa decidere quali pagine di un file far leggere al modello. E al MIT i modelli linguistici diventano uno strumento per guardare dentro il cervello.
+
+Capitolo uno. Anthropic e la dimostrazione che VP è diverso da VNP.
+
+La sera del ventitré novembre Anthropic ha pubblicato nel suo repository su GitHub un articolo di circa settanta pagine e una dimostrazione formale di una congettura aperta dal 1979, proposta dall'informatico Leslie Valiant. Secondo il repository, la prova è stata trovata da un modello Claude interno di ricerca, e sia l'articolo sia la parte formale sono stati scritti da modelli.
+
+Di che cosa parla? Tutti conoscono il determinante di una tabella di numeri: si moltiplicano i numeri lungo certi percorsi e si sommano i prodotti, alcuni con il segno più e altri con il segno meno. Il permanente è quasi identico, ma con tutti i segni più. Il determinante si calcola in fretta anche per tabelle enormi; per il permanente nessuno conosce un metodo veloce. La congettura dice che il permanente non avrà mai una ricetta di calcolo piccola fatta di sole somme e moltiplicazioni, cioè un circuito aritmetico di dimensione ragionevole.
+
+Attenzione al titolo che gira. Questo lavoro non risolve il famoso problema P contro NP, e lo scrivono gli stessi autori. È la sua versione algebrica, vicina e considerata più accessibile.
+
+La prova è scritta in Lean, un programma che accetta una dimostrazione solo se ogni passaggio segue dai precedenti. Il controllo automatico è passato la sera stessa. Il giorno dopo Kim Morrison, uno degli sviluppatori di Lean, ha ripetuto il controllo con due programmi di verifica indipendenti, e un altro repository ha ricostruito tutto da zero. Ma Lean controlla la prova dell'enunciato scritto nel file: se quell'enunciato traduce male la domanda di Valiant, la prova può essere perfetta e dimostrare un'altra cosa. Ed è proprio la parte che nessun esperto ha ancora confermato. Secondo il blog dell'informatico Scott Aaronson, lo stesso giorno anche OpenAI ha pubblicato una dimostrazione simile: non l'ho letta, e la trovi tra i segnali. Nella pagina trovi un esempio con una tabella due per due e un calcolatore che confronta determinante e permanente.
+
+Prova a chiederti: quando un risultato è controllato da un programma, di chi ti fidi davvero, del programma o di chi ha scritto la domanda?
+
+Capitolo due. AWS apre l'accesso controllato ai modelli Claude più potenti.
+
+Il ventitré novembre AWS ha reso disponibile a tutti la Trusted Access API di Amazon Bedrock, la porta d'ingresso per chiedere l'accesso ai modelli più capaci, e ha aperto in anteprima due servizi di Anthropic: Enterprise Frontier Safeguards ed Enterprise Data Controls. Riguardano Claude Fable, Claude Mythos, e Opus e Sonnet cinque punto cinque nel programma per la sicurezza informatica.
+
+Il problema è questo. I modelli più potenti possono aiutare chi difende, ma anche chi attacca, quindi qualcuno deve poter riconoscere gli usi pericolosi. Molte aziende però non vogliono che il fornitore conservi le loro conversazioni. La soluzione di AWS: richieste e risposte restano in un archivio del cliente, cifrato con una chiave che gestisce il cliente stesso. Il controllo automatico lavora lì, e la revisione umana dei contenuti la fa solo il cliente. Se il cliente toglie l'accesso alla chiave o all'archivio, dopo ventiquattro ore Bedrock smette di servire i modelli coperti.
+
+L'anteprima passa dal proprio referente AWS ed è limitata ad account di prova senza dati regolamentati. Il controllo automatico gira anche in Europa, in Irlanda. Secondo la documentazione, i due servizi non hanno un costo a parte: si pagano l'archivio e le chiavi. AWS dice che il servizio è già usato da oltre cento clienti: è un numero dichiarato, non verificato da altri.
+
+Prova a chiederti: preferiresti che il fornitore custodisse i tuoi dati promettendo di proteggerli, o custodirli tu sapendo che lui può controllarli?
+
+Capitolo tre. Gemini e i file a fette.
+
+Il ventitré novembre Google ha aggiunto all'interfaccia di programmazione di Gemini il cosiddetto file slicing. Quando invii un documento, un foglio di calcolo, un video o un audio, puoi dire al server quale parte usare e con quale dettaglio. Per i documenti: pagina di inizio e di fine, risoluzione, e se usare il testo, l'immagine della pagina o entrambi. Per i fogli: quale foglio e se considerare solo le celle visibili. Per video e audio: inizio, fine e quanti fotogrammi al secondo guardare. Da ora si caricano anche direttamente i file di Word, Excel e OpenDocument. Vale per tutti i modelli Gemini quattro.
+
+Perché conta? Un modello trasforma ogni pagina in token, e ogni token si paga. Prima, per chiedere chi ha firmato un contratto di duecento pagine, il modello le riceveva tutte. Ora si paga solo ciò che viene esaminato. Google riporta i risparmi di due aziende partner, Vercel e LiteLLM, ma sono numeri loro, non misure indipendenti. È la stessa idea che nella rubrica Azure abbiamo chiamato solo le pagine che servono. Nella pagina trovi un calcolatore per provare con i tuoi numeri.
+
+Prova a chiederti: nei documenti che usi ogni giorno, quale parte serve davvero per rispondere alle domande che fai più spesso?
+
+Capitolo quattro. Ventuno lingue, un solo codice del significato.
+
+Il ventitré novembre il MIT ha presentato uno studio pubblicato sulla rivista Nature Neuroscience, guidato da Andrea Gregor de Varda ed Evelina Fedorenko. I ricercatori hanno misurato con la risonanza magnetica funzionale il cervello di persone che ascoltavano brani in ventuno lingue diverse; nove gruppi nuovi hanno ascoltato Alice nel paese delle meraviglie. Poi hanno usato le rappresentazioni interne di modelli linguistici multilingue per prevedere quell'attività.
+
+Secondo il MIT, la previsione riesce in tutte e ventuno le lingue. E c'è di più: un modello addestrato sui dati di chi ascoltava in francese ha previsto le risposte di chi ascoltava in vietnamita, senza aver mai visto dati in vietnamita. Gli autori collegano questa parte comune al significato. Ma avvertono che le caratteristiche delle singole lingue restano diverse, e che per il marathi e il lituano i dati erano pochi. Qui l'AI non è il prodotto: è lo strumento di misura.
+
+Prova a chiederti: quando pensi a una cosa in italiano o in un'altra lingua che conosci, ti sembra davvero lo stesso pensiero?
+
+Capitolo cinque. La rubrica Azure Content Understanding, cinquantottesima puntata: lo schema proposto dall'AI.
+
+Davanti a un tipo di documento mai visto, la parte più lenta è decidere quali campi estrarre. Content Understanding ha due analizzatori di servizio. Il primo, document field schema, analizza un documento e propone uno schema di campi. Il secondo, document fields, estrae coppie di etichette e valori così come sono scritte.
+
+Il flusso consigliato ha quattro passi. Far girare il primo su un campione di cinque o dieci documenti diversi. Unire le proposte e correggerle a mano, rendendo precise le descrizioni, che per il modello sono istruzioni. Scegliere per ogni campo il tipo e il metodo. E infine congelare lo schema in un analizzatore proprio, perché quelli pronti possono cambiare tra una versione e l'altra. Si pagano l'estrazione per pagina, la contestualizzazione e i token del modello; lo schema può avere al massimo mille campi. Il consiglio più importante: è uno strumento di progettazione, non di produzione. Usarlo su ogni documento di un archivio costa mille volte di più e dà schemi diversi per documenti simili. Nella pagina trovi l'esempio di un'impresa con trentamila verbali di collaudo.
+
+Prova a chiederti: se un'AI ti propone l'elenco dei campi, chi nella tua squadra dovrebbe decidere quali tenere?
+
+Nel laboratorio di oggi trovi cinque esperimenti da copiare nel tuo assistente: calcolare a mano determinante e permanente, scovare un enunciato tradotto male, ragionare su chi custodisce i registri, scegliere le pagine giuste di un contratto e confrontare lo stesso significato in tre lingue.
+
+Tra i segnali: la dimostrazione di OpenAI raccontata da Scott Aaronson, i nuovi test MLPerf sugli agenti, in cui NVIDIA dichiara il primo posto con un risultato ancora provvisorio, e alcune notizie di stampa su Cloudflare, Nscale e Applied Digital, che non ho potuto verificare.
+
+E ora la domanda del giorno. Perché il fatto che Lean accetti la dimostrazione di VP diverso da VNP non basta ancora per dire che la congettura di Valiant è risolta?
+
+La risposta. Perché Lean controlla che la prova dimostri l'enunciato scritto nel file. Resta da verificare, da parte di esperti, che quell'enunciato traduca fedelmente la domanda di Valiant, e che gli argomenti dell'articolo siano corretti. Finché questo non accade, è una dimostrazione molto promettente, non ancora un risultato accettato.
+
+È tutto per oggi. Il quiz, le fonti e gli esperimenti ti aspettano nella pagina dell'edizione. Grazie per l'ascolto, e a domani con Radar AI.
