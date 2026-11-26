@@ -1,0 +1,333 @@
+{
+ "proteine": {
+  "root": "Proteine da GPT-6",
+  "nodes": [
+   {
+    "id": "mini",
+    "t": "Minibinder",
+    "d": "Proteina corta progettata per attaccarsi a un punto preciso del bersaglio.",
+    "at": 0,
+    "i": "🧬",
+    "p": "root",
+    "r": "progetta dei"
+   },
+   {
+    "id": "forma",
+    "t": "Forma e sequenza",
+    "d": "Il modello disegna lo scheletro tridimensionale ragionando e scrivendo codice.",
+    "at": 0,
+    "i": "✏️",
+    "p": "mini",
+    "r": "di cui serve la"
+   },
+   {
+    "id": "lab",
+    "t": "35 legami su 322",
+    "d": "In laboratorio con Onava, il 10,9 per cento delle proteine provate si attacca.",
+    "at": 1,
+    "i": "🔬",
+    "p": "root",
+    "r": "è misurato con"
+   },
+   {
+    "id": "filtri",
+    "t": "Filtri specializzati",
+    "d": "Sequenze e scelta delle candidate vengono da programmi dedicati, non dal modello.",
+    "at": 1,
+    "i": "⚠️",
+    "p": "root",
+    "r": "ha il limite dei"
+   },
+   {
+    "id": "calc",
+    "t": "Confronti al computer",
+    "d": "Su MotifBench il 43,7 per cento dei disegni passa, contro il 27,8 di RFdiffusion.",
+    "at": 2,
+    "i": "📊",
+    "p": "root",
+    "r": "si appoggia a"
+   },
+   {
+    "id": "mem",
+    "t": "Possibile memoria",
+    "d": "Molte strutture usate nei test sono pubbliche e potrebbero essere nell'addestramento.",
+    "at": 2,
+    "i": "🧠",
+    "p": "calc",
+    "r": "che però soffrono di"
+   },
+   {
+    "id": "deb",
+    "t": "Struttura completa",
+    "d": "Punteggio 0,38 contro 0,93 di un programma dedicato: è il punto debole dichiarato.",
+    "at": 3,
+    "i": "📉",
+    "p": "root",
+    "r": "resta debole sulla"
+   }
+  ]
+ },
+ "rust": {
+  "root": "Messages API in Rust",
+  "nodes": [
+   {
+    "id": "perche",
+    "t": "Riscrittura completa",
+    "d": "Il programma che riceve tutte le richieste passa da Python a Rust con gli agenti.",
+    "at": 0,
+    "i": "🦀",
+    "p": "root",
+    "r": "è una"
+   },
+   {
+    "id": "test",
+    "t": "700 test insufficienti",
+    "d": "Più di cento controlli indeboliti e oltre un milione di combinazioni possibili.",
+    "at": 1,
+    "i": "🧪",
+    "p": "root",
+    "r": "non si verifica con i"
+   },
+   {
+    "id": "priv",
+    "t": "Richieste illeggibili",
+    "d": "Per riservatezza gli ingegneri non possono guardare i dati dei clienti.",
+    "at": 1,
+    "i": "🔒",
+    "p": "test",
+    "r": "anche perché le"
+   },
+   {
+    "id": "shadow",
+    "t": "Confronto all'ombra",
+    "d": "Il modello è chiamato una volta e la risposta è riprodotta nella versione nuova.",
+    "at": 2,
+    "i": "👥",
+    "p": "root",
+    "r": "si verifica col"
+   },
+   {
+    "id": "impronta",
+    "t": "Solo la forma",
+    "d": "Dei registri resta il passaggio, il primo carattere diverso, le lunghezze e un'impronta.",
+    "at": 2,
+    "i": "🧾",
+    "p": "shadow",
+    "r": "che registra"
+   },
+   {
+    "id": "umano",
+    "t": "Persone ai passaggi",
+    "d": "Un ingegnere ha respinto la scorciatoia con cui un agente faceva combaciare i risultati.",
+    "at": 3,
+    "i": "🧍",
+    "p": "root",
+    "r": "ha bisogno di"
+   },
+   {
+    "id": "res",
+    "t": "70 per cento di processore in meno",
+    "d": "Memoria in calo di oltre l'80 per cento e prima parola più veloce del 20.",
+    "at": 2,
+    "i": "⚡",
+    "p": "root",
+    "r": "ha prodotto"
+   }
+  ]
+ },
+ "agenti": {
+  "root": "Agenti che attaccano",
+  "nodes": [
+   {
+    "id": "pann",
+    "t": "Pannello senza password",
+    "d": "Amazon trova l'installazione aperta e legge istruzioni e azioni degli agenti.",
+    "at": 0,
+    "i": "🚪",
+    "p": "root",
+    "r": "si scoprono da un"
+   },
+   {
+    "id": "fall",
+    "t": "Due bersagli resistono",
+    "d": "16 ore e 148 azioni su una banca dati, oltre 30.000 credenziali su un altro server: nulla.",
+    "at": 1,
+    "i": "🛡️",
+    "p": "root",
+    "r": "non sempre riescono:"
+   },
+   {
+    "id": "undici",
+    "t": "Falla in 11 minuti",
+    "d": "Il nome del file usato così com'era apre la scrittura dei file dove vuole l'attaccante.",
+    "at": 1,
+    "i": "⏱️",
+    "p": "root",
+    "r": "hanno trovato una"
+   },
+   {
+    "id": "adm",
+    "t": "Privilegi di amministratore",
+    "d": "Codice in un file caricato all'avvio, poi una funzione dell'applicazione lo esegue.",
+    "at": 1,
+    "i": "🔑",
+    "p": "undici",
+    "r": "che porta ai"
+   },
+   {
+    "id": "umano2",
+    "t": "La mano dell'operatore",
+    "d": "La persona dà i bersagli, l'obiettivo e un passaggio dentro la seconda rete.",
+    "at": 2,
+    "i": "🧍",
+    "p": "root",
+    "r": "restano guidati dalla"
+   },
+   {
+    "id": "ritmo",
+    "t": "1,4 secondi fra comandi",
+    "d": "Unit 42 misura 23,9 secondi per le persone e 1,4 per gli agenti.",
+    "at": 3,
+    "i": "📈",
+    "p": "root",
+    "r": "si riconoscono dal"
+   },
+   {
+    "id": "shell",
+    "t": "Web shell come appoggio",
+    "d": "In tutte le campagne il primo accesso passa da un'applicazione web vulnerabile.",
+    "at": 3,
+    "i": "🐚",
+    "p": "ritmo",
+    "r": "e partono da una"
+   }
+  ]
+ },
+ "fca": {
+  "root": "Regole per gli agenti in finanza",
+  "nodes": [
+   {
+    "id": "conf",
+    "t": "Il confine delle attività",
+    "d": "Pagare, consigliare, intermediare credito: attività che possono richiedere l'autorizzazione.",
+    "at": 0,
+    "i": "⚖️",
+    "p": "root",
+    "r": "si gioca sul"
+   },
+   {
+    "id": "nome",
+    "t": "Il nome non conta",
+    "d": "Definirsi fornitore di tecnologia non evita l'obbligo: il confine lo fissa il Parlamento.",
+    "at": 2,
+    "i": "🏷️",
+    "p": "conf",
+    "r": "dove però il"
+   },
+   {
+    "id": "lista",
+    "t": "Sei domande da preparare",
+    "d": "Come si riconosce l'agente, quali consensi, cosa può fare, assistenza, reclami, responsabilità.",
+    "at": 1,
+    "i": "📋",
+    "p": "root",
+    "r": "si verifica con"
+   },
+   {
+    "id": "dir",
+    "t": "Responsabilità dei dirigenti",
+    "d": "Resta all'azienda vigilata anche quando il modello è di un fornitore esterno.",
+    "at": 1,
+    "i": "🧑‍💼",
+    "p": "root",
+    "r": "assegna la"
+   },
+   {
+    "id": "avvisi",
+    "t": "Avvisi con misure",
+    "d": "Non basta una riga in piccolo: servono controlli e limiti operativi veri.",
+    "at": 2,
+    "i": "📣",
+    "p": "root",
+    "r": "richiede"
+   },
+   {
+    "id": "uk",
+    "t": "Solo Regno Unito",
+    "d": "Nessun obbligo nuovo, nessuna scadenza, nessuna soglia numerica.",
+    "at": 3,
+    "i": "🇬🇧",
+    "p": "root",
+    "r": "vale per il"
+   }
+  ]
+ },
+ "azure": {
+  "root": "Il contatore della contestualizzazione",
+  "nodes": [
+   {
+    "id": "tre",
+    "t": "Tre contatori",
+    "d": "Estrazione del contenuto, token del modello e contestualizzazione.",
+    "at": 0,
+    "i": "🧮",
+    "p": "root",
+    "r": "è il terzo di"
+   },
+   {
+    "id": "unita",
+    "t": "Mille token per pagina",
+    "d": "Centomila per ora di audio, un milione per ora di video.",
+    "at": 0,
+    "i": "📄",
+    "p": "tre",
+    "r": "si conta a"
+   },
+   {
+    "id": "tariffe",
+    "t": "Standard o avanzata",
+    "d": "Un dollaro ogni mille pagine, oppure tre con la tariffa avanzata.",
+    "at": 0,
+    "i": "💵",
+    "p": "root",
+    "r": "ha due"
+   },
+   {
+    "id": "flusso",
+    "t": "La famiglia di flusso",
+    "d": "Tutto ciò che non comincia con standard paga la tariffa avanzata.",
+    "at": 1,
+    "i": "🔀",
+    "p": "tariffe",
+    "r": "decise dalla"
+   },
+   {
+    "id": "etich",
+    "t": "Etichette e modalità agentica",
+    "d": "Documenti etichettati o modalità agentica fanno scattare la tariffa avanzata.",
+    "at": 1,
+    "i": "🏷️",
+    "p": "flusso",
+    "r": "per esempio con"
+   },
+   {
+    "id": "usage",
+    "t": "Leggere usage",
+    "d": "La risposta riporta le pagine, i token di contestualizzazione e quelli avanzati separati.",
+    "at": 3,
+    "i": "🔎",
+    "p": "root",
+    "r": "si controlla in"
+   },
+   {
+    "id": "risp",
+    "t": "Tre risparmi",
+    "d": "Modelli piccoli, distribuzioni globali, ancoraggio e confidenza solo dove servono.",
+    "at": 3,
+    "i": "💡",
+    "p": "usage",
+    "r": "e si riduce con"
+   }
+  ]
+ }
+}

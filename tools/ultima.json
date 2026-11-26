@@ -1,46 +1,46 @@
 {
- "n": 62,
- "data": "2026-11-25",
- "titolo": "Claude dimostra VP diverso da VNP, i registri di Claude restano in casa e Gemini legge solo le pagine utili",
- "descrizione": "Un modello di Anthropic pubblica una dimostrazione matematica controllata da un programma, AWS apre i modelli Claude più potenti tenendo i registri presso il cliente, Gemini legge solo le parti utili dei file, il MIT trova un codice comune a 21 lingue nel cervello e la rubrica Azure spiega come farsi proporre i campi da estrarre.",
+ "n": 63,
+ "data": "2026-11-26",
+ "titolo": "Proteine progettate da GPT-6, l'API di Anthropic riscritta in Rust e i primi attacchi guidati dagli agenti",
+ "descrizione": "OpenAI porta i numeri di laboratorio delle proteine disegnate dai suoi modelli, Anthropic racconta come ha riscritto con gli agenti il programma che risponde ai clienti, Amazon e Palo Alto Networks pubblicano i rapporti sugli attacchi condotti da agenti autonomi, l'autorità britannica della finanza fissa le sue aspettative e la rubrica Azure spiega il terzo contatore della bolletta.",
  "chips": [
   "Ricerca",
   "Sicurezza",
+  "Regole",
   "Costi",
-  "Grandi modelli",
   "Azure"
  ],
  "items": [
   [
-   "🧮",
+   "🧬",
+   "OpenAI",
+   "Proteine disegnate ragionando: 35 legami su 322 provate",
+   "OpenAI dice che i suoi modelli progettano proteine nuove senza strumenti di biologia e porta i numeri di un laboratorio, precisando però che la scelta delle candidate è passata da programmi specializzati."
+  ],
+  [
+   "🦀",
    "Anthropic",
-   "Un modello Claude dimostra un problema aperto dal 1979",
-   "Anthropic pubblica una dimostrazione della versione algebrica del problema P contro NP, controllata passo per passo da un programma, che nessun matematico ha ancora verificato per intero."
+   "Il programma che risponde ai clienti, riscritto dagli agenti",
+   "Anthropic ha fatto riscrivere in un altro linguaggio il servizio che riceve tutte le richieste ai suoi modelli: dichiara il 70 per cento di processore in meno, e racconta che la parte difficile è stata controllare il lavoro, non scriverlo."
   ],
   [
-   "🔐",
-   "Bedrock",
-   "I modelli Claude più potenti, con i registri tenuti dal cliente",
-   "Amazon apre alle aziende l'accesso controllato ai modelli più capaci di Claude: le conversazioni restano in un archivio cifrato del cliente, dove un controllo automatico cerca gli usi pericolosi."
+   "🛡️",
+   "Amazon",
+   "Agenti che attaccano: una falla sconosciuta trovata in undici minuti",
+   "Amazon pubblica il racconto di un attacco guidato da agenti che hanno trovato da soli un difetto mai segnalato, e Palo Alto Networks conta più di dieci campagne simili misurando quanto sono più rapidi di una persona."
   ],
   [
-   "✂️",
-   "Gemini",
-   "Gemini legge solo le pagine che servono",
-   "Google permette di indicare quali pagine, fogli o minuti di un file far leggere al modello, così si paga solo quella parte, e accetta direttamente i file di Word ed Excel."
+   "⚖️",
+   "FCA",
+   "Chi muove soldi con un agente può aver bisogno dell'autorizzazione",
+   "L'autorità britannica della finanza scrive che cosa si aspetta da chi offre agenti ai clienti: chiamarsi fornitore di tecnologia non evita gli obblighi, e la responsabilità resta all'azienda anche quando il modello è di altri."
   ],
   [
-   "🧠",
-   "MIT",
-   "Ventuno lingue, un solo codice del significato nel cervello",
-   "Usando modelli linguistici che conoscono molte lingue, ricercatori del MIT prevedono l'attività del cervello di chi ascolta in 21 lingue e trovano una parte comune legata al significato."
-  ],
-  [
-   "🧭",
+   "🧾",
    "Azure",
-   "Farsi proporre dall'AI i campi da estrarre",
-   "Nella rubrica su Azure Content Understanding: come usare lo strumento che suggerisce quali dati leggere da un documento nuovo, quanto costa e perché lo schema va sempre corretto a mano."
+   "Il terzo contatore della bolletta",
+   "Nella rubrica su Azure Content Understanding: che cos'è la contestualizzazione, quando si paga il triplo senza averlo chiesto e come controllare il consumo prima di mettere in produzione."
   ]
  ],
- "domanda": "Perché il fatto che il programma Lean accetti la dimostrazione di VP diverso da VNP non basta ancora per dire che il problema è risolto?"
+ "domanda": "Perché i 35 legami misurati in laboratorio non bastano a dire che un modello generico possa sostituire i programmi specializzati di biologia?"
 }
