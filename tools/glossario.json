@@ -1358,5 +1358,35 @@
    "cve",
    "exploit"
   ]
+ },
+ "mfa": {
+  "t": "MFA",
+  "esteso": "Multi-Factor Authentication",
+  "spiega": "L'autenticazione a più fattori: per entrare non basta la password, serve una seconda prova, come un codice sul telefono, una chiavetta o l'impronta.",
+  "esempio": "Anche se un agente indovina la password della tua posta web, senza il codice che arriva sul tuo telefono non entra.",
+  "approfondisci": "I fattori sono di tre tipi: qualcosa che sai (la password), qualcosa che hai (il telefono, una chiavetta), qualcosa che sei (impronta, volto). Combinarne due rende inutile una password rubata o indovinata. Non tutti i secondi fattori sono uguali: i codici via SMS si possono intercettare, mentre passkey e chiavette fisiche resistono anche alle pagine di accesso false. Per questo molte autorità chiedono metodi resistenti al phishing almeno per gli amministratori.",
+  "vedi": [
+   "password-spraying",
+   "otp"
+  ]
+ },
+ "honeypot": {
+  "t": "honeypot",
+  "spiega": "Un sistema esca: sembra un server o un file vero, ma esiste solo per attirare chi attacca e far scattare l'allarme.",
+  "esempio": "Un finto archivio di password messo in una cartella che nessun dipendente usa: chiunque lo apra è quasi certamente un intruso.",
+  "approfondisci": "Un honeypot non contiene nulla di prezioso e nessun utente legittimo ha motivo di toccarlo, quindi ogni accesso è un segnale affidabile. Contro gli agenti AI funziona bene perché un agente prova tutto ciò che trova e insiste finché non riesce. Le varianti sono le esche singole (un file, una credenziale finta), i rallentatori che fanno perdere tempo e le «false vittorie» che fanno credere all'attaccante di aver finito. Vanno isolate dai dati veri, perché un'esca che apre davvero qualcosa diventa un varco.",
+  "vedi": [
+   "canary-token",
+   "red-team"
+  ]
+ },
+ "calcolo-sovrano": {
+  "t": "calcolo sovrano",
+  "spiega": "Potenza di calcolo per l'AI che resta sotto il controllo di un Paese: macchine e dati sul territorio, e un'azienda di proprietà nazionale che decide lì.",
+  "esempio": "In Canada un fornitore è sovrano se ha i server nel Paese, conserva lì i dati ed è di proprietà canadese; la filiale canadese di un cloud americano no.",
+  "approfondisci": "Non c'è una definizione unica: ogni governo fissa i suoi criteri. Di solito si guardano dove stanno le macchine, dove vengono trattati i dati, dove è registrata l'azienda, chi la possiede e dove si prendono le decisioni. Il motivo è ridurre la dipendenza da fornitori stranieri e dalle leggi di altri Paesi che potrebbero chiedere l'accesso ai dati. Il rischio è pagare di più per meno capacità, se i fornitori nazionali sono piccoli.",
+  "vedi": [
+   "tenant"
+  ]
  }
 }

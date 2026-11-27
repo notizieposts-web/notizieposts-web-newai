@@ -1,10 +1,9 @@
 {
- "n": 63,
- "data": "2026-11-26",
- "titolo": "Proteine progettate da GPT-6, l'API di Anthropic riscritta in Rust e i primi attacchi guidati dagli agenti",
- "descrizione": "OpenAI porta i numeri di laboratorio delle proteine disegnate dai suoi modelli, Anthropic racconta come ha riscritto con gli agenti il programma che risponde ai clienti, Amazon e Palo Alto Networks pubblicano i rapporti sugli attacchi condotti da agenti autonomi, l'autorità britannica della finanza fissa le sue aspettative e la rubrica Azure spiega il terzo contatore della bolletta.",
+ "n": 64,
+ "data": "2026-11-27",
+ "titolo": "Gli agenti d'attacco arrivano in Svizzera, Microsoft svela le trappole contro ARTEX e il Canada paga il calcolo di casa",
+ "descrizione": "L'ufficio svizzero per la cibersicurezza conferma i primi attacchi riusciti condotti con agenti AI, Microsoft spiega come riconoscere e ingannare il programma ARTEX che li coordina, il Canada rimborsa fino all'80 per cento del calcolo alle piccole imprese che scelgono fornitori canadesi e la rubrica Azure legge le tessere sanitarie.",
  "chips": [
-  "Ricerca",
   "Sicurezza",
   "Regole",
   "Costi",
@@ -12,35 +11,29 @@
  ],
  "items": [
   [
-   "🧬",
-   "OpenAI",
-   "Proteine disegnate ragionando: 35 legami su 322 provate",
-   "OpenAI dice che i suoi modelli progettano proteine nuove senza strumenti di biologia e porta i numeri di un laboratorio, precisando però che la scelta delle candidate è passata da programmi specializzati."
+   "🇨🇭",
+   "Svizzera",
+   "I primi attacchi con agenti AI confermati in Svizzera",
+   "L'ufficio federale per la cibersicurezza conferma attacchi condotti con agenti AI contro aziende e infrastrutture critiche, tutti riusciti, e chiede sei misure, fra cui installare gli aggiornamenti critici entro 24 ore."
   ],
   [
-   "🦀",
-   "Anthropic",
-   "Il programma che risponde ai clienti, riscritto dagli agenti",
-   "Anthropic ha fatto riscrivere in un altro linguaggio il servizio che riceve tutte le richieste ai suoi modelli: dichiara il 70 per cento di processore in meno, e racconta che la parte difficile è stata controllare il lavoro, non scriverlo."
+   "🪤",
+   "Microsoft",
+   "Come riconoscere e ingannare gli agenti d'attacco",
+   "Microsoft pubblica una guida sul programma ARTEX, che coordina squadre di agenti d'attacco: chi lo usa, come si riconosce dal ritmo a velocità di macchina e quali trappole lo allontanano dai sistemi veri."
   ],
   [
-   "🛡️",
-   "Amazon",
-   "Agenti che attaccano: una falla sconosciuta trovata in undici minuti",
-   "Amazon pubblica il racconto di un attacco guidato da agenti che hanno trovato da soli un difetto mai segnalato, e Palo Alto Networks conta più di dieci campagne simili misurando quanto sono più rapidi di una persona."
+   "🍁",
+   "Canada",
+   "Un miliardo per il calcolo, e un premio a chi resta in casa",
+   "Il governo canadese aggiunge 700 milioni al fondo che paga la potenza di calcolo alle piccole imprese, e rimborsa fino all'80 per cento a chi la compra da fornitori canadesi, contro il 50 per gli altri."
   ],
   [
-   "⚖️",
-   "FCA",
-   "Chi muove soldi con un agente può aver bisogno dell'autorizzazione",
-   "L'autorità britannica della finanza scrive che cosa si aspetta da chi offre agenti ai clienti: chiamarsi fornitore di tecnologia non evita gli obblighi, e la responsabilità resta all'azienda anche quando il modello è di altri."
-  ],
-  [
-   "🧾",
+   "💳",
    "Azure",
-   "Il terzo contatore della bolletta",
-   "Nella rubrica su Azure Content Understanding: che cos'è la contestualizzazione, quando si paga il triplo senza averlo chiesto e come controllare il consumo prima di mettere in produzione."
+   "Le tessere sanitarie, americane e italiane",
+   "Nella rubrica su Azure Content Understanding: come leggere la tessera dell'assicurazione sanitaria americana, quanto costa e come trattare la nostra tessera sanitaria, che contiene dati delicati."
   ]
  ],
- "domanda": "Perché i 35 legami misurati in laboratorio non bastano a dire che un modello generico possa sostituire i programmi specializzati di biologia?"
+ "domanda": "Le sei misure chieste dall'ufficio svizzero non sono nuove: perché l'arrivo degli agenti d'attacco le rende più urgenti?"
 }

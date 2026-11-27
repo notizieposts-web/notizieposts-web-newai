@@ -1,0 +1,67 @@
+Radar AI. Edizione del ventisette novembre 2026. Questa è la versione da ascoltare: dura circa otto minuti e mezzo e segue la pagina capitolo per capitolo. Esempi, fonti ed esperimenti sono nella pagina dell'edizione.
+
+Il titolo di oggi è: gli agenti d'attacco arrivano in Svizzera, Microsoft svela le trappole contro ARTEX, e il Canada paga il calcolo di casa.
+
+Il periodo in breve. Tre giorni in cui gli agenti d'attacco smettono di essere un'ipotesi da laboratorio anche in Europa. Un'autorità pubblica conferma i primi casi, un grande fornitore spiega come riconoscerli e ingannarli, e un governo usa un fondo pubblico per spostare la domanda di calcolo verso i fornitori del proprio Paese.
+
+Capitolo uno. La Svizzera e i primi attacchi con agenti confermati.
+
+Il ventiquattro novembre il Centro nazionale per la cibersicurezza della Confederazione svizzera ha scritto di aver ricevuto, nei giorni precedenti, le prime segnalazioni di attacchi informatici condotti con l'aiuto di un agente AI contro organizzazioni del Paese. In tutti i casi noti all'ufficio l'attacco è riuscito. Colpiti diversi enti e gestori di infrastrutture critiche, in almeno due settori che la pagina non nomina.
+
+L'ufficio parla di programmi in cui gli agenti cercano da soli le debolezze, scelgono gli strumenti, valutano il risultato e decidono il passo successivo. Sono strumenti a doppio uso: servono per i test di intrusione autorizzati, cioè gli attacchi su commissione per trovare le falle, e per gli attacchi veri. Nei casi svizzeri gli agenti non hanno inventato nulla: hanno sfruttato password predefinite o facili da indovinare e falle già note in programmi esposti su internet, e quando le difese reagivano cambiavano strada.
+
+Il punto che preoccupa è la velocità. Un agente impiega spesso una frazione del tempo di una persona. E l'offerta cresce: gli agenti d'attacco raggiungibili su internet sono quasi raddoppiati da ottobre.
+
+L'ufficio chiede sei misure senza indugio. Meno sistemi esposti su internet. Aggiornamenti critici installati entro ventiquattro ore dall'uscita. Autenticazione a più fattori, cioè una seconda prova oltre alla password, su posta web e rete privata, senza eccezioni. Permessi minimi. Attenzione ai cambiamenti di comportamento. Test di intrusione regolari.
+
+Un limite da tenere presente: la pagina ufficiale non dice quanti siano gli attacchi. La stampa parla di cinque, quattro riusciti; il testo che ho letto non dà numeri. Nella pagina trovi un esempio sulla falla corretta di venerdì sera.
+
+Prova a chiederti: nella tua organizzazione, quanto tempo passa davvero fra l'uscita di un aggiornamento critico e la sua installazione?
+
+Capitolo due. Microsoft spiega ARTEX ai difensori.
+
+Il venticinque novembre la squadra di intelligence sulle minacce di Microsoft ha pubblicato una guida lunga su ARTEX, il programma cinese che coordina squadre di agenti per i test di intrusione e che da mesi compare negli attacchi veri. Ne abbiamo parlato più volte; oggi ci sono tre fatti nuovi.
+
+Il primo è la storia. ARTEX è uscito come codice aperto a luglio, è stato ritirato dall'autore a ottobre ma è sopravvissuto nelle copie, e a novembre l'azienda di sicurezza cinese ThreatBook ne ha rivendicato la proprietà e vende una versione a pagamento.
+
+Il secondo è l'elenco di chi lo usa: sei gruppi, fra cui alcuni che Microsoft collega alla Cina e alla Corea del Nord.
+
+Il funzionamento è quello di una squadra. Un agente pianificatore guarda una mappa delle scoperte ed emette brevi direttive; gli agenti esecutori le eseguono con veri strumenti d'attacco e aggiornano la mappa; alla fine un agente relatore scrive il rapporto. Se un modello fallisce, il programma passa a un altro.
+
+Come si riconosce? Non dal nome o dall'indirizzo, che cambiano. Dal ritmo: raffiche di attività a velocità di macchina, più attacchi in parallelo, nuovi tentativi per altre strade appena una viene chiusa.
+
+Il terzo fatto nuovo sono le trappole. Un agente insiste finché non riesce, e per questo esche, finti sistemi, rallentatori e false vittorie, che gli fanno credere di aver finito, possono deviarlo. Microsoft scrive che queste misure hanno ridotto il traffico d'attacco arrivato ai sistemi veri, ma non pubblica numeri. Nella pagina trovi un esempio su come costruire una falsa vittoria.
+
+Prova a chiederti: c'è nei tuoi sistemi un posto che nessun utente legittimo dovrebbe mai toccare, e che potrebbe diventare un allarme?
+
+Capitolo tre. Il Canada e il calcolo di casa.
+
+Il ventisei novembre, a Toronto, il ministro canadese dell'intelligenza artificiale Evan Solomon ha annunciato settecento milioni di dollari canadesi in più per il fondo che rimborsa alle piccole e medie imprese una parte della potenza di calcolo. Il totale arriva a un miliardo.
+
+La regola nuova è la più interessante. Chi compra il calcolo da un fornitore sovrano, cioè con macchine, dati, sede, proprietà e decisioni in Canada, può farsi coprire fino all'ottanta per cento dei costi. Chi lo compra da un fornitore soltanto basato in Canada, come la filiale di una multinazionale, fino al cinquanta.
+
+Il fondo è per chi ha meno di cinquecento dipendenti e un prodotto di AI da portare sul mercato, con progetti fra centomila dollari e cinque milioni. Il primo bando è su salute e scienze della vita: manifestazione d'interesse entro il diciassette dicembre, domanda completa su invito entro il quattro gennaio.
+
+Il ministro lo dice chiaramente: le idee canadesi hanno bisogno di potenza di calcolo canadese. È uno dei primi casi in cui un governo usa un sussidio per creare la domanda per i fornitori nazionali. Resta da vedere se quei fornitori avranno abbastanza capacità: il comunicato non porta dati. Nella pagina trovi un esempio con lo stesso progetto e due fornitori diversi.
+
+Prova a chiederti: quanto saresti disposto a pagare in più perché i tuoi dati e i tuoi modelli restino in un'azienda del tuo Paese?
+
+La rubrica su Azure Content Understanding, puntata sessanta: le tessere sanitarie.
+
+Fra gli analizzatori già pronti ce n'è uno per la tessera dell'assicurazione sanitaria americana, quella che si mostra in ogni studio medico e farmacia. Legge una foto o una scansione e restituisce assicuratore, iscritto, familiari, numeri di gruppo, i codici per la farmacia, il piano e i dati dei programmi pubblici americani.
+
+Costa poco. Usa il contatore più economico dell'estrazione, quello che legge il testo senza analizzare l'impaginazione, e la contestualizzazione standard: con la tariffa di esempio, un dollaro ogni mille immagini, più l'estrazione e i token del modello. Fronte e retro contano due unità.
+
+Per la tessera sanitaria italiana non c'è un analizzatore pronto. La strada è uno schema personalizzato di pochi campi: codice fiscale, cognome, nome, scadenza. Il carattere di controllo del codice fiscale conviene verificarlo nel proprio codice, non chiederlo al modello.
+
+E il costo vero sono i dati: in Europa quelli sulla salute sono una categoria particolare. Regione europea, accesso privato, e soprattutto pochi campi: meno dati da proteggere, e meno token da pagare.
+
+Prova a chiederti: dei campi che estrai dai documenti dei tuoi clienti, quanti usi davvero?
+
+La domanda di oggi. Le sei misure chieste dall'ufficio svizzero non sono nuove: perché allora l'arrivo degli agenti d'attacco le rende più urgenti?
+
+Una pausa per pensarci.
+
+La risposta. Perché cambia il tempo a disposizione. Gli agenti usano varchi vecchi, password deboli e falle note, ma li provano su migliaia di sistemi in poche ore e cambiano strada da soli quando trovano una difesa. Una falla nota che contro una persona poteva restare aperta per settimane, contro un agente diventa un ingresso in un giorno. Per questo l'ufficio fissa ventiquattro ore per gli aggiornamenti critici.
+
+Questo è tutto per oggi. Nella pagina trovi gli esempi, le fonti con le date, cinque esperimenti, i segnali e otto domande per mettersi alla prova. A domani.

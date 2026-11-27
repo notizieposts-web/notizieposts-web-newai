@@ -1,0 +1,283 @@
+{
+ "svizzera": {
+  "root": "Attacchi con agenti in Svizzera",
+  "nodes": [
+   {
+    "id": "casi",
+    "t": "Primi casi confermati",
+    "d": "Il 24 novembre l'ufficio federale conferma attacchi condotti con agenti AI, tutti riusciti.",
+    "at": 0,
+    "i": "🇨🇭",
+    "p": "root",
+    "r": "segnala i"
+   },
+   {
+    "id": "varchi",
+    "t": "Password e falle note",
+    "d": "Gli agenti hanno sfruttato password predefinite e falle già conosciute.",
+    "at": 0,
+    "i": "🔓",
+    "p": "casi",
+    "r": "passati da"
+   },
+   {
+    "id": "vel",
+    "t": "Velocità di macchina",
+    "d": "Un agente impiega una frazione del tempo di una persona.",
+    "at": 1,
+    "i": "⚡",
+    "p": "root",
+    "r": "preoccupa per la"
+   },
+   {
+    "id": "doppi",
+    "t": "Agenti raddoppiati",
+    "d": "Gli agenti d'attacco raggiungibili su internet sono quasi raddoppiati da ottobre.",
+    "at": 1,
+    "i": "📈",
+    "p": "vel",
+    "r": "aggravata dagli"
+   },
+   {
+    "id": "misure",
+    "t": "Sei misure",
+    "d": "Esposizione, aggiornamenti, più fattori, permessi, anomalie, test.",
+    "at": 2,
+    "i": "🛡️",
+    "p": "root",
+    "r": "chiede"
+   },
+   {
+    "id": "h24",
+    "t": "Aggiornamenti in 24 ore",
+    "d": "Le correzioni critiche dei sistemi esposti vanno installate entro 24 ore.",
+    "at": 2,
+    "i": "⏱️",
+    "p": "misure",
+    "r": "fra cui gli"
+   },
+   {
+    "id": "mfa",
+    "t": "Più fattori ovunque",
+    "d": "Posta web e rete privata con autenticazione a più fattori, senza eccezioni.",
+    "at": 2,
+    "i": "🔑",
+    "p": "misure",
+    "r": "e l'"
+   },
+   {
+    "id": "buchi",
+    "t": "Nessuna cifra",
+    "d": "Il testo ufficiale non dice quanti attacchi né quali settori.",
+    "at": 4,
+    "i": "❓",
+    "p": "root",
+    "r": "ha il limite di"
+   }
+  ]
+ },
+ "artex": {
+  "root": "ARTEX secondo Microsoft",
+  "nodes": [
+   {
+    "id": "storia",
+    "t": "Codice aperto, poi venduto",
+    "d": "Pubblicato a luglio, ritirato a ottobre, rivendicato da ThreatBook a novembre.",
+    "at": 0,
+    "i": "📦",
+    "p": "root",
+    "r": "ha una"
+   },
+   {
+    "id": "squadra",
+    "t": "Pianificatore ed esecutori",
+    "d": "Un agente emette intenti, altri li eseguono e aggiornano la mappa.",
+    "at": 1,
+    "i": "🧩",
+    "p": "root",
+    "r": "lavora con"
+   },
+   {
+    "id": "gruppi",
+    "t": "Sei gruppi",
+    "d": "Storm-0940, Storm-3358, Onyx Sleet, Pearl Sleet, Crystal Typhoon, Salt Typhoon.",
+    "at": 2,
+    "i": "👥",
+    "p": "root",
+    "r": "è usato da"
+   },
+   {
+    "id": "ritmo",
+    "t": "Il ritmo",
+    "d": "Raffiche a velocità di macchina e tentativi ripetuti per strade nuove.",
+    "at": 3,
+    "i": "📊",
+    "p": "root",
+    "r": "si riconosce dal"
+   },
+   {
+    "id": "shell",
+    "t": "Web shell numerate",
+    "d": "Script nuovi nelle cartelle di caricamento, con nomi in sequenza.",
+    "at": 3,
+    "i": "🐚",
+    "p": "ritmo",
+    "r": "e dalle"
+   },
+   {
+    "id": "trappole",
+    "t": "Le trappole",
+    "d": "Esche, rallentatori e false vittorie allontanano gli agenti.",
+    "at": 4,
+    "i": "🪤",
+    "p": "root",
+    "r": "si inganna con"
+   },
+   {
+    "id": "classiche",
+    "t": "Difese classiche",
+    "d": "Più fattori, aggiornamenti, firewall applicativo, uscite limitate.",
+    "at": 5,
+    "i": "🛡️",
+    "p": "root",
+    "r": "si ferma con"
+   }
+  ]
+ },
+ "canada": {
+  "root": "Fondo canadese per il calcolo",
+  "nodes": [
+   {
+    "id": "mld",
+    "t": "Un miliardo",
+    "d": "700 milioni in più ai 300 iniziali.",
+    "at": 0,
+    "i": "💰",
+    "p": "root",
+    "r": "arriva a"
+   },
+   {
+    "id": "bandi",
+    "t": "Bandi per settore",
+    "d": "Il primo bando è su salute e scienze della vita.",
+    "at": 0,
+    "i": "🏥",
+    "p": "mld",
+    "r": "distribuito con"
+   },
+   {
+    "id": "pmi",
+    "t": "Meno di 500 dipendenti",
+    "d": "Aziende e enti registrati in Canada con un prodotto di AI.",
+    "at": 1,
+    "i": "🏢",
+    "p": "root",
+    "r": "è per chi ha"
+   },
+   {
+    "id": "prog",
+    "t": "Da 100.000 a 5 milioni",
+    "d": "I costi ammissibili del progetto, entro marzo 2030.",
+    "at": 1,
+    "i": "📏",
+    "p": "pmi",
+    "r": "con progetti"
+   },
+   {
+    "id": "sov",
+    "t": "Fornitore sovrano",
+    "d": "Macchine, dati, sede, proprietà e decisioni in Canada.",
+    "at": 2,
+    "i": "🍁",
+    "p": "root",
+    "r": "premia il"
+   },
+   {
+    "id": "80",
+    "t": "80 contro 50",
+    "d": "Rimborso massimo con fornitore sovrano o solo basato in Canada.",
+    "at": 2,
+    "i": "⚖️",
+    "p": "sov",
+    "r": "con un rimborso di"
+   },
+   {
+    "id": "scad",
+    "t": "17 dicembre e 4 gennaio",
+    "d": "Manifestazione d'interesse, poi domanda completa su invito.",
+    "at": 3,
+    "i": "📅",
+    "p": "root",
+    "r": "ha le scadenze del"
+   }
+  ]
+ },
+ "azure": {
+  "root": "Tessere sanitarie in Content Understanding",
+  "nodes": [
+   {
+    "id": "an",
+    "t": "healthInsuranceCard.us",
+    "d": "L'analizzatore pronto per le tessere americane.",
+    "at": 0,
+    "i": "💳",
+    "p": "root",
+    "r": "si leggono con"
+   },
+   {
+    "id": "campi",
+    "t": "Iscritto, gruppo, farmacia",
+    "d": "Assicuratore, iscritto, familiari, numeri, codici per la farmacia, piano.",
+    "at": 0,
+    "i": "📋",
+    "p": "an",
+    "r": "che estrae"
+   },
+   {
+    "id": "basic",
+    "t": "Document Basic",
+    "d": "Estrazione del solo testo, il contatore più economico.",
+    "at": 1,
+    "i": "💲",
+    "p": "root",
+    "r": "costa con"
+   },
+   {
+    "id": "ctx",
+    "t": "Mille tessere, un dollaro",
+    "d": "Contestualizzazione standard a mille token per pagina o immagine.",
+    "at": 1,
+    "i": "🧮",
+    "p": "basic",
+    "r": "più la"
+   },
+   {
+    "id": "ita",
+    "t": "Tessera italiana",
+    "d": "Nessun analizzatore pronto: schema personalizzato di pochi campi.",
+    "at": 2,
+    "i": "🇮🇹",
+    "p": "root",
+    "r": "non copre la"
+   },
+   {
+    "id": "cf",
+    "t": "Controllo del codice fiscale",
+    "d": "Il carattere finale si verifica nel codice, non col modello.",
+    "at": 2,
+    "i": "✅",
+    "p": "ita",
+    "r": "con il"
+   },
+   {
+    "id": "gdpr",
+    "t": "Dati sanitari",
+    "d": "Categoria particolare: regione europea, rete privata, pochi campi.",
+    "at": 3,
+    "i": "🔒",
+    "p": "root",
+    "r": "tratta"
+   }
+  ]
+ }
+}
