@@ -1,39 +1,39 @@
 {
- "n": 64,
- "data": "2026-11-27",
- "titolo": "Gli agenti d'attacco arrivano in Svizzera, Microsoft svela le trappole contro ARTEX e il Canada paga il calcolo di casa",
- "descrizione": "L'ufficio svizzero per la cibersicurezza conferma i primi attacchi riusciti condotti con agenti AI, Microsoft spiega come riconoscere e ingannare il programma ARTEX che li coordina, il Canada rimborsa fino all'80 per cento del calcolo alle piccole imprese che scelgono fornitori canadesi e la rubrica Azure legge le tessere sanitarie.",
+ "n": 65,
+ "data": "2026-11-28",
+ "titolo": "Google chiude la porta di servizio agli agenti, un'AI stima il rischio di tumore al seno a cinque anni e llama.cpp misura le Radeon",
+ "descrizione": "Google obbliga gli agenti AI a entrare in Gmail, Drive e Calendar solo da ingressi dedicati, l'autorità americana autorizza un programma che dalla mammografia stima il rischio di tumore a cinque anni, un progetto aperto misura ogni settimana la velocità dei modelli sulle schede AMD e la rubrica Azure legge gli assegni.",
  "chips": [
-  "Sicurezza",
   "Regole",
-  "Costi",
+  "Salute",
+  "Hardware",
   "Azure"
  ],
  "items": [
   [
-   "🇨🇭",
-   "Svizzera",
-   "I primi attacchi con agenti AI confermati in Svizzera",
-   "L'ufficio federale per la cibersicurezza conferma attacchi condotti con agenti AI contro aziende e infrastrutture critiche, tutti riusciti, e chiede sei misure, fra cui installare gli aggiornamenti critici entro 24 ore."
+   "🚪",
+   "Google",
+   "Gli agenti entreranno in Workspace solo da una porta dedicata",
+   "Dal 1° febbraio 2027 gli agenti AI che lavorano su Gmail, Drive, Calendar e le altre app di Google dovranno usare i nuovi ingressi ufficiali, con controlli per gli amministratori e una fascia gratuita."
   ],
   [
-   "🪤",
-   "Microsoft",
-   "Come riconoscere e ingannare gli agenti d'attacco",
-   "Microsoft pubblica una guida sul programma ARTEX, che coordina squadre di agenti d'attacco: chi lo usa, come si riconosce dal ritmo a velocità di macchina e quali trappole lo allontanano dai sistemi veri."
+   "🩺",
+   "DeepHealth",
+   "Un'AI stima il rischio di tumore al seno nei prossimi cinque anni",
+   "L'autorità sanitaria americana ha autorizzato Mammo Risk, che legge una mammografia 3D già fatta e stima il rischio futuro di ammalarsi, ma l'azienda non ha pubblicato le misure di precisione."
   ],
   [
-   "🍁",
-   "Canada",
-   "Un miliardo per il calcolo, e un premio a chi resta in casa",
-   "Il governo canadese aggiunge 700 milioni al fondo che paga la potenza di calcolo alle piccole imprese, e rimborsa fino all'80 per cento a chi la compra da fornitori canadesi, contro il 50 per gli altri."
+   "⏱️",
+   "llama.cpp",
+   "Un cronometro pubblico per i modelli aperti sulle schede AMD",
+   "Il progetto che fa girare i modelli sui computer di tutti i giorni misura ogni settimana quanto sono veloci a leggere e a scrivere su due schede grafiche Radeon, con i dati liberi da scaricare."
   ],
   [
-   "💳",
+   "🧾",
    "Azure",
-   "Le tessere sanitarie, americane e italiane",
-   "Nella rubrica su Azure Content Understanding: come leggere la tessera dell'assicurazione sanitaria americana, quanto costa e come trattare la nostra tessera sanitaria, che contiene dati delicati."
+   "Leggere gli assegni, americani e italiani",
+   "Nella rubrica su Azure Content Understanding: che cosa legge l'analizzatore per gli assegni americani, quanto costa e quali controlli fare, a partire dall'importo in cifre contro quello in lettere."
   ]
  ],
- "domanda": "Le sei misure chieste dall'ufficio svizzero non sono nuove: perché l'arrivo degli agenti d'attacco le rende più urgenti?"
+ "domanda": "Perché Google vuole che gli agenti entrino in Workspace da una porta dedicata, invece che dalle stesse interfacce delle app normali?"
 }

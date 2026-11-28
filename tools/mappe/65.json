@@ -1,0 +1,238 @@
+{
+ "workspace": {
+  "root": "Agenti in Google Workspace",
+  "nodes": [
+   {
+    "id": "ingressi",
+    "t": "Due ingressi ufficiali",
+    "d": "Server MCP per otto app e la riga di comando di Workspace, disponibili per tutti.",
+    "at": 0,
+    "i": "🚪",
+    "p": "root",
+    "r": "apre"
+   },
+   {
+    "id": "feb",
+    "t": "1° febbraio 2027",
+    "d": "Da questa data gli agenti AI non potranno più chiamare direttamente le interfacce tradizionali.",
+    "at": 1,
+    "i": "📅",
+    "p": "ingressi",
+    "r": "obbligatori dal"
+   },
+   {
+    "id": "fasce",
+    "t": "Standard e Scaled",
+    "d": "Una fascia gratuita con limiti pubblicati e una con limiti più alti.",
+    "at": 2,
+    "i": "📊",
+    "p": "root",
+    "r": "introduce le fasce"
+   },
+   {
+    "id": "apr",
+    "t": "Pagamento dal 1° aprile",
+    "d": "Nella Scaled si paga solo l'uso oltre la quota gratuita giornaliera.",
+    "at": 2,
+    "i": "💶",
+    "p": "fasce",
+    "r": "con"
+   },
+   {
+    "id": "admin",
+    "t": "Controlli per gli amministratori",
+    "d": "Agenti ammessi, conferme umane, registri delle azioni, regole DLP.",
+    "at": 4,
+    "i": "🛡️",
+    "p": "root",
+    "r": "dà"
+   },
+   {
+    "id": "aperte",
+    "t": "Domande aperte",
+    "d": "Quote, prezzi e definizione di agente non sono nel post.",
+    "at": 5,
+    "i": "❓",
+    "p": "root",
+    "r": "lascia"
+   }
+  ]
+ },
+ "deephealth": {
+  "root": "Mammo Risk di DeepHealth",
+  "nodes": [
+   {
+    "id": "stima",
+    "t": "Rischio a cinque anni",
+    "d": "Stima il rischio di tumore al seno a tre, quattro e cinque anni dalla mammografia 3D.",
+    "at": 0,
+    "i": "🩺",
+    "p": "root",
+    "r": "calcola il"
+   },
+   {
+    "id": "fda",
+    "t": "Autorizzazione 510(k)",
+    "d": "L'autorità americana lo autorizza il 23 novembre.",
+    "at": 1,
+    "i": "✅",
+    "p": "root",
+    "r": "ottiene l'"
+   },
+   {
+    "id": "studio",
+    "t": "65.000 mammografie",
+    "d": "Studio su più centri in dieci strutture americane.",
+    "at": 2,
+    "i": "🔬",
+    "p": "root",
+    "r": "si basa su"
+   },
+   {
+    "id": "manca",
+    "t": "Nessuna metrica",
+    "d": "Il comunicato non pubblica misure di precisione del programma.",
+    "at": 3,
+    "i": "⚠️",
+    "p": "studio",
+    "r": "ma senza"
+   },
+   {
+    "id": "vecchio",
+    "t": "Il 2,4 della versione prima",
+    "d": "L'unico numero di efficacia viene dallo studio del 2022 sulla generazione precedente.",
+    "at": 3,
+    "i": "📜",
+    "p": "manca",
+    "r": "l'unico numero è"
+   },
+   {
+    "id": "uso",
+    "t": "Screening su misura",
+    "d": "Esami aggiuntivi per le donne a rischio più alto.",
+    "at": 4,
+    "i": "🎯",
+    "p": "root",
+    "r": "serve a"
+   }
+  ]
+ },
+ "llamacpp": {
+  "root": "Cruscotto llama.cpp per AMD",
+  "nodes": [
+   {
+    "id": "cosa",
+    "t": "Velocità per versione",
+    "d": "Tiene traccia dei token al secondo versione dopo versione.",
+    "at": 0,
+    "i": "⏱️",
+    "p": "root",
+    "r": "misura la"
+   },
+   {
+    "id": "pp",
+    "t": "PP512: lettura",
+    "d": "Velocità di lettura di un testo di 512 token.",
+    "at": 1,
+    "i": "📖",
+    "p": "cosa",
+    "r": "con"
+   },
+   {
+    "id": "tg",
+    "t": "TG128: scrittura",
+    "d": "Velocità di scrittura di 128 token.",
+    "at": 1,
+    "i": "✍️",
+    "p": "cosa",
+    "r": "e con"
+   },
+   {
+    "id": "hw",
+    "t": "Due schede Radeon",
+    "d": "Radeon 8060S e Radeon AI Pro R9700S.",
+    "at": 2,
+    "i": "🖥️",
+    "p": "root",
+    "r": "prova"
+   },
+   {
+    "id": "viste",
+    "t": "Tre viste",
+    "d": "Quantizzazioni, storia delle versioni, contesto che cresce.",
+    "at": 3,
+    "i": "📈",
+    "p": "root",
+    "r": "offre"
+   },
+   {
+    "id": "limiti",
+    "t": "Limiti",
+    "d": "Due schede, due misure fisse, nessun numero nel post.",
+    "at": 4,
+    "i": "⚠️",
+    "p": "root",
+    "r": "ha"
+   }
+  ]
+ },
+ "azure": {
+  "root": "Assegni in Content Understanding",
+  "nodes": [
+   {
+    "id": "campi",
+    "t": "Tredici campi",
+    "d": "Persone, data, importo in cifre e lettere, banca, causale.",
+    "at": 0,
+    "i": "🧾",
+    "p": "root",
+    "r": "estrae"
+   },
+   {
+    "id": "micr",
+    "t": "Riga MICR",
+    "d": "Codice della banca, conto e numero dell'assegno.",
+    "at": 0,
+    "i": "🔢",
+    "p": "campi",
+    "r": "compresa la"
+   },
+   {
+    "id": "firme",
+    "t": "Firme",
+    "d": "Firmata, non firmata o assente; non l'autenticità.",
+    "at": 0,
+    "i": "✍️",
+    "p": "campi",
+    "r": "e lo stato delle"
+   },
+   {
+    "id": "costo",
+    "t": "Basic più standard",
+    "d": "Estrazione Document Basic e contestualizzazione standard.",
+    "at": 2,
+    "i": "💶",
+    "p": "root",
+    "r": "costa con"
+   },
+   {
+    "id": "controllo",
+    "t": "Cifre contro lettere",
+    "d": "Il confronto fra i due importi si fa nel proprio codice.",
+    "at": 4,
+    "i": "✅",
+    "p": "root",
+    "r": "richiede"
+   },
+   {
+    "id": "ita",
+    "t": "Assegni italiani",
+    "d": "Serve un analizzatore personalizzato con pochi campi.",
+    "at": 5,
+    "i": "🇮🇹",
+    "p": "root",
+    "r": "per i nostri"
+   }
+  ]
+ }
+}

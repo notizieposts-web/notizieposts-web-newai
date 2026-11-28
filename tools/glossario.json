@@ -1388,5 +1388,27 @@
   "vedi": [
    "tenant"
   ]
+ },
+ "510k": {
+  "t": "510(k)",
+  "spiega": "La procedura con cui l'autorità americana per i farmaci e i dispositivi medici (FDA) autorizza un dispositivo dimostrando che è sostanzialmente equivalente a uno già sul mercato. Non è una prova clinica completa come quella dei farmaci.",
+  "esempio": "Un'azienda che crea un nuovo programma per leggere le radiografie lo confronta con uno già autorizzato: se è equivalente per uso e sicurezza, ottiene il 510(k) e può venderlo negli Stati Uniti."
+ },
+ "micr": {
+  "t": "MICR",
+  "esteso": "Magnetic Ink Character Recognition",
+  "spiega": "La riga di numeri stampata in basso sugli assegni con un inchiostro magnetico, che le macchine delle banche leggono in modo affidabile. Negli assegni americani contiene codice della banca, numero di conto e numero dell'assegno.",
+  "esempio": "Quando un assegno passa nella macchina della banca, la riga MICR dice in un attimo da quale banca e da quale conto devono uscire i soldi."
+ },
+ "gguf": {
+  "t": "GGUF",
+  "spiega": "Il formato di file usato da llama.cpp per salvare un modello linguistico in un solo file, di solito già compresso a pochi bit per numero. Così il modello si scarica e si carica facilmente su un computer normale.",
+  "esempio": "Su Hugging Face lo stesso modello compare in più file GGUF, per esempio Q4_K_M e Q8_0: il primo è più piccolo e veloce, il secondo più fedele all'originale."
+ },
+ "dlp": {
+  "t": "DLP",
+  "esteso": "Data Loss Prevention",
+  "spiega": "Le regole che impediscono ai dati riservati di uscire dall'organizzazione, per esempio bloccando l'invio di un documento con numeri di carte di credito. Si applicano in automatico a email, file e condivisioni.",
+  "esempio": "Un dipendente prova a inviare all'esterno un foglio con i codici fiscali dei clienti: la regola DLP blocca l'email e avvisa l'amministratore."
  }
 }

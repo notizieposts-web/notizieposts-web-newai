@@ -62,6 +62,7 @@ EP = [  # (puntata, edizione, sezione, gruppo, titolo breve)
     (58,'62','azure','qualita','Lo schema proposto dall\'AI: documentFieldSchema'),
     (59,'63','azure','costi','Il contatore della contestualizzazione: standard, avanzata, agentica'),
     (60,'64','azure','casi','Tessere sanitarie: la carta americana e la nostra'),
+    (61,'65','azure','casi','Assegni: quelli americani e i nostri'),
 ]
 import json as _json
 _MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']

@@ -1,0 +1,59 @@
+Radar AI. Edizione del ventotto novembre 2026. Questa è la versione da ascoltare: dura circa otto minuti e segue la pagina capitolo per capitolo. Esempi, fonti ed esperimenti sono nella pagina dell'edizione.
+
+Il titolo di oggi è: Google chiude la porta di servizio agli agenti, un'AI stima il rischio di tumore al seno a cinque anni, e llama.cpp misura le schede Radeon.
+
+Il periodo in breve. Quattro giorni, dal ventitré al ventisei novembre, in cui tre organizzazioni diverse mettono regole e misure dove prima c'era improvvisazione. Una piattaforma fissa da dove gli agenti possono entrare. Un'autorità sanitaria autorizza un programma che guarda al futuro di una paziente. Un progetto aperto mette un cronometro pubblico sulle schede grafiche.
+
+Capitolo uno. Google e la nuova porta per gli agenti.
+
+Il ventiquattro novembre Google ha annunciato sul blog ufficiale di Workspace che i suoi server MCP e la riga di comando ufficiale di Workspace sono disponibili per tutti. MCP è il protocollo aperto che permette agli assistenti AI di collegarsi a strumenti e dati in modo standard. I server coprono Gmail, Drive, Documenti, Fogli, Presentazioni, Calendar, Chat e Tasks. Keep arriverà più avanti.
+
+Il cambio importante è una data. Dal primo febbraio 2027 gli agenti AI dovranno passare da questi due ingressi, e non potranno più chiamare direttamente le interfacce di programmazione tradizionali di Gmail, Drive e Calendar.
+
+Arrivano anche due fasce d'uso. La Standard è gratuita, con limiti pubblicati. La Scaled ha limiti più alti, e dal primo aprile 2027 si paga solo la parte che supera una quota gratuita giornaliera. Google scrive che oltre il novantanove per cento degli sviluppatori attivi sta già nella fascia gratuita. I progetti usati solo dentro l'organizzazione possono essere segnati come interni e conservano i limiti alti.
+
+Per gli amministratori ci sono nuovi controlli: scegliere quali agenti entrano, chiedere una conferma umana prima di certe azioni, leggere i registri di ciò che gli agenti hanno fatto. Le regole contro la fuga di dati valgono in automatico anche per loro.
+
+Che cosa manca: il post non dà le quote in numeri né i prezzi, e non spiega come Google distinguerà un agente da un programma tradizionale. Nella pagina trovi un esempio su un agente che fa le note spese.
+
+Prova a chiederti: se un agente lavorasse sulla tua posta, quali azioni vorresti confermare tu, ogni volta, prima che le faccia?
+
+Capitolo due. Mammo Risk e il rischio di tumore al seno a cinque anni.
+
+Il ventitré novembre la FDA, l'autorità americana per i farmaci e i dispositivi medici, ha autorizzato Mammo Risk di DeepHealth, società del gruppo di radiologia RadNet. L'azienda lo ha annunciato il giorno dopo.
+
+Il programma legge una mammografia 3D già fatta e stima il rischio che quella donna sviluppi un tumore al seno nei tre, quattro o cinque anni successivi. Non è una diagnosi: la ricerca di un tumore già presente resta il compito della mammografia e del radiologo. Non servono esami in più. L'autorizzazione è arrivata con la procedura chiamata cinquecentodieci k, che si basa sull'equivalenza con dispositivi già sul mercato.
+
+Secondo l'azienda, il programma è stato addestrato su duecentoventimila esami e provato in uno studio su più di sessantacinquemila mammografie in dieci centri americani, con risultati coerenti anche per le donne nere e per quelle con seno denso.
+
+Qui serve attenzione. Il comunicato non pubblica nessuna misura di precisione di Mammo Risk. L'unico numero di efficacia, una sensibilità circa due virgola quattro volte quella di un modello di rischio tradizionale, viene da uno studio del 2022 sulla generazione precedente della tecnologia. Restano aperte le domande sulle donne classificate ad alto rischio che non si ammaleranno: esami in più, ansia, costi.
+
+Prova a chiederti: se un programma ti dicesse che il tuo rischio è alto, quali numeri vorresti conoscere prima di fare un esame in più?
+
+Capitolo tre. llama.cpp mette il cronometro sulle Radeon.
+
+Il ventisei novembre gli sviluppatori di llama.cpp, il programma aperto che fa girare i modelli linguistici sui computer di tutti i giorni, hanno presentato sul blog di Hugging Face un cruscotto pubblico. Ogni settimana, con l'infrastruttura fornita da AMD, misura la velocità dei modelli aperti su due schede: la Radeon ottomilasessanta S, la grafica integrata di alcuni processori Ryzen, e la Radeon AI Pro novemilasettecento S.
+
+Le misure sono due. Quanto in fretta il programma legge un testo di cinquecentododici token, e quanto in fretta ne scrive centoventotto. Un token è un pezzetto di parola. Ogni prova si ripete dieci volte e nel grafico va la media. I modelli sono Inkling 2 Mini, Qwen, Gemma, gpt-oss e LFM, in diverse versioni compresse.
+
+Il cruscotto mostra anche la storia delle versioni: se un aggiornamento rallenta i modelli, si vede come un gradino nella linea. I dati grezzi sono pubblici. I limiti: solo due schede, due misure fisse, e il post non riporta nessun numero. Nella pagina trovi un esempio per calcolare quanto aspetti una risposta, e un calcolatore.
+
+Prova a chiederti: quando usi un'AI, ti pesa di più l'attesa prima che inizi a rispondere, o la lentezza con cui scrive?
+
+Capitolo quattro. La rubrica su Azure Content Understanding, puntata sessantuno: gli assegni.
+
+Negli Stati Uniti l'assegno è ancora un modo comune di pagare. Content Understanding ha un analizzatore pronto per leggerlo. Restituisce tredici campi: chi paga e il suo indirizzo, chi riceve, data, importo in cifre e in lettere, banca, causale, la riga in inchiostro magnetico in basso con il codice della banca, il numero di conto e il numero dell'assegno, e per ogni riga di firma se è firmata, non firmata o assente.
+
+Costa poco: usa l'estrazione di base, quella del solo riconoscimento del testo, più la contestualizzazione standard, circa un dollaro ogni mille pagine con la tariffa d'esempio, più i token del modello. Fronte e retro si pagano due volte.
+
+Il consiglio della puntata: il confronto fra importo in cifre e importo in lettere va fatto nel proprio codice, e se non coincidono l'assegno va a una persona. Il servizio dice se c'è una firma, non se è autentica. Per gli assegni italiani non c'è un analizzatore pronto: serve uno personalizzato con pochi campi e gli stessi controlli.
+
+Prova a chiederti: nei documenti che tratti tu, quale dato è scritto due volte e potrebbe servire da controllo?
+
+Nella pagina trovi poi cinque esperimenti da copiare e incollare, fra cui uno per decidere quali azioni di un agente vanno confermate e uno per scrivere lo schema degli assegni italiani. Ci sono anche cinque segnali da tenere d'occhio, fra cui un nuovo banco di prova per agenti che progettano ali di aereo, e l'elenco di che cosa è cambiato e che cosa ho escluso.
+
+La domanda del giorno: perché Google vuole che gli agenti entrino in Workspace da una porta dedicata, invece che dalle stesse interfacce delle app normali?
+
+La risposta: perché un agente che entra da un ingresso dedicato si riconosce, si conta e si controlla. Gli amministratori possono decidere quali agenti ammettere, chiedere conferme prima delle azioni delicate e leggere i registri, e Google può applicare quote e prezzi solo a quel tipo di traffico.
+
+Questa era l'edizione del ventotto novembre di Radar AI. Le fonti, gli esempi e il quiz sono nella pagina dell'edizione. A domani.
